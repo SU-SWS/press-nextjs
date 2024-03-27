@@ -1,6 +1,6 @@
 
 additionalRepositories:
-  - url: https://github.com/SU-SWS/acsf-cardinalsites-public
+  - url: https://github.com/SU-SWS/ace-stanfordlagunita/
     checkoutLocation: back
 checkoutLocation: front
 ports:
@@ -37,14 +37,12 @@ tasks:
       mkdir -p blt &&
       cp .gitpod/blt.yml blt/local.blt.yml &&
       find docroot/sites/ -name 'local*' | xargs rm -rf &&
-      cp .gitpod/global.settings.php docroot/sites/settings/global.settings.php &&
-      cp .gitpod/default.local.services.yml docroot/sites/local.services.yml &&
       export NEXT_PUBLIC_DRUPAL_BASE_URL=`gp url 8001` &&
       export PREVIEW_URL=${NEXT_PUBLIC_DRUPAL_BASE_URL#"https://"} &&
       blt blt:telemetry:disable --no-interaction &&
       blt settings &&
-      blt drupal:install -n &&
-      drush cset system.theme default claro -y &&
+      blt drupal:install --site=supress -n &&
+      drush @supress.local cset system.theme default stanford_profile_admin_theme -y &&
       cd /workspace/front &&
       cp .env.example .env.local &&
       sed -i 's/#DRUPAL_REVALIDATE_SECRET/DRUPAL_REVALIDATE_SECRET/' .env.local &&
@@ -59,38 +57,37 @@ tasks:
       find docroot -name 'local.drush.yml' | xargs rm &&
       export NEXT_PUBLIC_DRUPAL_BASE_URL=`gp url 8001` &&
       export PREVIEW_URL=${NEXT_PUBLIC_DRUPAL_BASE_URL#"https://"} &&
+      echo "<?php \$sites['$PREVIEW_URL'] = 'supress';" > docroot/sites/local.sites.php &&
       blt blt:telemetry:disable --no-interaction &&
       echo 'Establishing Settings' &&
       blt settings &&
       echo 'Logging Into Drupal' &&
-      drush uli --uri=$NEXT_PUBLIC_DRUPAL_BASE_URL &&
-      drush uli --uri=$NEXT_PUBLIC_DRUPAL_BASE_URL | xargs gp preview --external &&
+      drush @supress.local uli --uri=$NEXT_PUBLIC_DRUPAL_BASE_URL &&
+      drush @supress.local uli --uri=$NEXT_PUBLIC_DRUPAL_BASE_URL | xargs gp preview --external &&
       git config core.fileMode false &&
       echo 'Connecting Drupal to Frontend' &&
-      drush su-next-connect "$(gp url 3000)" --preview-secret=DRUPAL_PREVIEW_SECRET --revalidation-secret=DRUPAL_REVALIDATION_SECRET &&
+      drush @supress.local su-next-connect "$(gp url 3000)" --preview-secret=DRUPAL_PREVIEW_SECRET --revalidation-secret=DRUPAL_REVALIDATION_SECRET &&
       cd /workspace/front &&
       yarn install &&
+      yarn config set --home enableTelemetry 0 &&
+      yarn next telemetry disable &&
       sed -i -r "s|NEXT_PUBLIC_DRUPAL_BASE_URL.*|NEXT_PUBLIC_DRUPAL_BASE_URL=$NEXT_PUBLIC_DRUPAL_BASE_URL|g" .env.local &&
       yarn dev &
       gp ports await 3000 &&
       gp url 3000 | xargs gp preview --external
   - name: SSH Keys
     command: |
-      rm -rf ~/.ssh/id_rsa &&
-      rm -rf ~/.ssh/id_rsa.pub &&
-      eval $(command gp env -e) &&
-      mkdir -p ~/.ssh &&
-      [[ ! -z $SSH_PUBLIC_KEY  ]] &&
-      echo $SSH_PUBLIC_KEY | base64 -d > ~/.ssh/id_rsa.pub &&
-      chmod 644 ~/.ssh/id_rsa.pub &&
-      [[ ! -z $SSH_PRIVATE_KEY  ]] &&
-      echo $SSH_PRIVATE_KEY | base64 -d > ~/.ssh/id_rsa &&
-      chmod 600 ~/.ssh/id_rsa &&
-      cd /workspace/front &&
-      [[ ! -z $GITCONFIG  ]] &&
-      echo $GITCONFIG | base64 -d > ~/.gitconfig &&
-      chmod 644 ~/.gitconfig
       git remote set-url origin $(echo $GITPOD_WORKSPACE_CONTEXT | jq -r .repository.cloneUrl | sed -E 's|^.*.com/(.*)$|git@github.com:\1|')
+      mkdir -p ~/.ssh
+      if [[ ! -z $SSH_PUBLIC_KEY  ]]; then
+          echo $SSH_PUBLIC_KEY | base64 -d > ~/.ssh/id_rsa.pub && chmod 644 ~/.ssh/id_rsa.pub
+      fi
+      if [[ ! -z $SSH_PRIVATE_KEY ]]; then
+          echo $SSH_PRIVATE_KEY | base64 -d > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+      fi
+      if [[ ! -z $GITCONFIG ]]; then
+          echo $GITCONFIG | base64 -d > ~/.gitconfig && chmod 644 ~/.gitconfig
+      fi
 
 vscode:
   extensions:
