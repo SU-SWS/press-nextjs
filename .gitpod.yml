@@ -1,6 +1,6 @@
 
 additionalRepositories:
-  - url: https://github.com/SU-SWS/acsf-cardinalsites-public
+  - url: https://github.com/SU-SWS/ace-stanfordlagunita/
     checkoutLocation: back
 checkoutLocation: front
 ports:
