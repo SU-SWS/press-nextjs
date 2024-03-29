@@ -1,5 +1,5 @@
 {
-  "name": "press-nextjs",
+  "name": "decoupled-cardinalsites",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -20,9 +20,9 @@
     "@next/third-parties": "^14.1.4",
     "@tailwindcss/container-queries": "^0.1.1",
     "@types/node": "^20.11.30",
-    "@types/react": "^18.2.73",
+    "@types/react": "^18.2.72",
     "@types/react-dom": "^18.2.22",
-    "algoliasearch": "^4.23.2",
+    "algoliasearch": "^4.23.1",
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
     "clsx": "^2.1.0",
@@ -35,7 +35,7 @@
     "graphql-tag": "^2.12.6",
     "html-entities": "^2.5.2",
     "html-react-parser": "^5.1.9",
-    "next": "^14.2.0-canary.45",
+    "next": "^14.2.0-canary.43",
     "next-drupal": "^1.6.0",
     "postcss": "^8.4.38",
     "qs": "^6.12.0",
@@ -47,7 +47,7 @@
     "react-tiny-oembed": "^1.1.0",
     "sharp": "^0.33.3",
     "tailwind-merge": "^2.2.2",
-    "tailwindcss": "^3.4.3",
+    "tailwindcss": "^3.4.1",
     "typescript": "^5.4.3",
     "usehooks-ts": "^3.0.2"
   },
