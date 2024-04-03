@@ -1,7 +1,4 @@
 
-additionalRepositories:
-  - url: https://github.com/SU-SWS/ace-stanfordlagunita/
-    checkoutLocation: back
 checkoutLocation: front
 ports:
   - name: database
@@ -29,8 +26,9 @@ tasks:
   - name: Drupal Prep
     init: >
       eval $(gp env -e APACHE_DOCROOT_IN_REPO=../back/docroot) &&
-      cd /workspace/back &&
-      git checkout 2.x &&
+      cd /workspace/ &&
+      git clone https://github.com/SU-SWS/ace-stanfordlagunita.git back &&
+      cd back &&
       rm -rf config/default &&
       mkdir -p config/default &&
       touch config/default/core.extension.yml &&
