@@ -55,7 +55,7 @@ tasks:
       eval $(gp env -e APACHE_DOCROOT_IN_REPO=../back/docroot) &&
       apache2ctl restart &&
       gp ports await 8001 &&
-      find docroot -name 'local.drush.yml' | xargs rm &&
+      find docroot -name 'local.drush.yml' | xargs rm -rf &&
       export NEXT_PUBLIC_DRUPAL_BASE_URL=`gp url 8001` &&
       export PREVIEW_URL=${NEXT_PUBLIC_DRUPAL_BASE_URL#"https://"} &&
       echo "<?php \$sites['$PREVIEW_URL'] = 'supress';" > docroot/sites/local.sites.php &&
@@ -75,10 +75,10 @@ tasks:
       sed -i -r "s|NEXT_PUBLIC_DRUPAL_BASE_URL.*|NEXT_PUBLIC_DRUPAL_BASE_URL=$NEXT_PUBLIC_DRUPAL_BASE_URL|g" .env.local &&
       yarn dev &
       gp ports await 3000 &&
-      gp url 3000 | xargs gp preview --external
+      gp url 3000 | xargs gp preview --external &&
+      git remote set-url origin $(echo $GITPOD_WORKSPACE_CONTEXT | jq -r .repository.cloneUrl | sed -E 's|^.*.com/(.*)$|git@github.com:\1|')
   - name: SSH Keys
     before: |
-      git remote set-url origin $(echo $GITPOD_WORKSPACE_CONTEXT | jq -r .repository.cloneUrl | sed -E 's|^.*.com/(.*)$|git@github.com:\1|')
       mkdir -p ~/.ssh
       if [[ ! -z $SSH_PUBLIC_KEY  ]]; then
           echo $SSH_PUBLIC_KEY | base64 -d > ~/.ssh/id_rsa.pub && chmod 644 ~/.ssh/id_rsa.pub
