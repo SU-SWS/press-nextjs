@@ -19,6 +19,7 @@ import {H2} from "@components/elements/headers";
 import TwitterIcon from "@components/elements/icons/TwitterIcon";
 import YoutubeIcon from "@components/elements/icons/YoutubeIcon";
 import FacebookIcon from "@components/elements/icons/FacebookIcon";
+import InstagramIcon from "@components/elements/icons/InstagramIcon";
 import { Maybe, StanfordLocalFooter} from "@lib/gql/__generated__/drupal.d";
 import {buildUrl} from "@lib/drupal/utils";
 
@@ -59,19 +60,35 @@ const LocalFooter = ({
   }
 
   return (
-    <div className="local-footer bg-foggy-light py-20">
+    <div className="local-footer bg-foggy-light rs-py-6 bg-stone-dark">
       <div className="centered">
-        <div className="mb-20">
+        <div className="rs-mb-6">
           <FooterLockup {...lockupProps} />
         </div>
 
         <div
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-32 [&_a]:font-normal [&_a]:no-underline [&_a:hover]:underline [&_a:hover]:text-black [&_a:focus]:underline [&_a:focus]:text-black [&_a]:transition">
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-32 [&_a]:font-normal [&_a]:underline [&_a]:text-white [&_a]:decoration-fog-dark [&_a:hover]:underline [&_a:hover]:text-fog-dark [&_a:focus]:underline [&_a:focus]:text-fog-dark [&_a]:transition">
           <div>
 
-            {suLocalFootAddress &&
-              <Address {...suLocalFootAddress}/>
+          {suLocalFootSocial &&
+              <ul className="list-unstyled flex gap-2">
+                {suLocalFootSocial.map((link, index) => {
+                  if (!link.url) return;
+                  return (
+                    <li key={`footer-action-link-${index}`}>
+                      <Link href={link.url}>
+                        <SocialIcon url={link.url}/>
+                        <span className="sr-only">{link.title}</span>
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
             }
+
+            {/* {suLocalFootAddress &&
+              <Address {...suLocalFootAddress}/>
+            } */}
 
             {suLocalFootAction &&
               <ul className="list-unstyled">
@@ -81,22 +98,6 @@ const LocalFooter = ({
                     <li key={`footer-action-link-${index}`}>
                       <Link href={link.url}>
                         {link.title}
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-            }
-
-            {suLocalFootSocial &&
-              <ul className="list-unstyled flex gap-2">
-                {suLocalFootSocial.map((link, index) => {
-                  if (!link.url) return;
-                  return (
-                    <li key={`footer-action-link-${index}`}>
-                      <Link href={link.url}>
-                        <SocialIcon url={link.url}/>
-                        <span className="sr-only">{link.title}</span>
                       </Link>
                     </li>
                   )
@@ -160,9 +161,10 @@ const LocalFooter = ({
 }
 
 const SocialIcon = ({url}: { url: string }) => {
-  if (url.includes("twitter.com")) return <TwitterIcon/>
-  if (url.includes("youtube.com")) return <YoutubeIcon/>
-  if (url.includes("facebook")) return <FacebookIcon/>
+  if (url.includes('facebook')) return <FacebookIcon/>
+  if (url.includes('twitter.com')) return <TwitterIcon/>
+  if (url.includes('youtube.com')) return <YoutubeIcon/>
+  if (url.includes('instagram')) return <InstagramIcon/>
   return null;
 }
 
@@ -183,10 +185,10 @@ const FooterLockup = ({useDefault = true, siteName, lockupOption, ...props}: Foo
     ...props
   }
 
-  lockupOption = useDefault ? "default" : lockupOption
+  lockupOption = useDefault ? 'default' : lockupOption
 
   switch (lockupOption) {
-    case "none":
+    case 'none':
       return (
         <div className="py-10">
           <Link href="/"
@@ -196,40 +198,40 @@ const FooterLockup = ({useDefault = true, siteName, lockupOption, ...props}: Foo
         </div>
       )
 
-    case "a":
+    case 'a':
       return <LockupA {...lockupProps}/>;
 
-    case "b":
+    case 'b':
       return <LockupB {...lockupProps}/>;
 
-    case "d":
+    case 'd':
       return <LockupD {...lockupProps}/>;
 
-    case "e":
+    case 'e':
       return <LockupE {...lockupProps}/>;
 
-    case "h":
+    case 'h':
       return <LockupH {...lockupProps}/>;
 
-    case "i":
+    case 'i':
       return <LockupI {...lockupProps}/>;
 
-    case "m":
+    case 'm':
       return <LockupM {...lockupProps}/>;
 
-    case "o":
+    case 'o':
       return <LockupO {...lockupProps}/>;
 
-    case "p":
+    case 'p':
       return <LockupP {...lockupProps}/>;
 
-    case "r":
+    case 'r':
       return <LockupR {...lockupProps}/>;
 
-    case "s":
+    case 's':
       return <LockupS {...lockupProps}/>;
 
-    case "t":
+    case 't':
       return <LockupT {...lockupProps}/>;
   }
 
