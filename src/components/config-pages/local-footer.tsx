@@ -60,18 +60,18 @@ const LocalFooter = ({
   }
 
   return (
-    <div className="local-footer bg-foggy-light rs-py-6 bg-stone-dark">
+    <div className="local-footer rs-py-6 bg-stone-dark">
       <div className="centered">
         <div className="rs-mb-6">
           <FooterLockup {...lockupProps} />
         </div>
 
         <div
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-32 [&_a]:font-normal [&_a]:underline [&_a]:text-white [&_a]:decoration-fog-dark [&_a:hover]:underline [&_a:hover]:text-fog-dark [&_a:focus]:underline [&_a:focus]:text-fog-dark [&_a]:transition">
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-32 [&_a]:font-normal [&_a]:decoration-1 [&_a]:text-white [&_a]:decoration-white [&_a:hover]:decoration-2 [&_a:hover]:decoration-bay-light  [&_a:hover]:text-bay-light  [&_a:focus]:text-bay-light [&_a]:transition">
           <div>
 
           {suLocalFootSocial &&
-              <ul className="list-unstyled flex gap-2">
+              <ul className="list-unstyled flex gap-2 rs-mb-0">
                 {suLocalFootSocial.map((link, index) => {
                   if (!link.url) return;
                   return (
@@ -85,10 +85,6 @@ const LocalFooter = ({
                 })}
               </ul>
             }
-
-            {/* {suLocalFootAddress &&
-              <Address {...suLocalFootAddress}/>
-            } */}
 
             {suLocalFootAction &&
               <ul className="list-unstyled">
@@ -105,7 +101,7 @@ const LocalFooter = ({
               </ul>
             }
 
-            <Wysiwyg html={suLocalFootPrCo?.processed}/>
+            <Wysiwyg html={suLocalFootPrCo?.processed} className="list-unstyled rs-ml-4 rs-mr-3 rs-mt-2"/>
           </div>
 
           <div>
@@ -125,7 +121,7 @@ const LocalFooter = ({
                 })}
               </ul>
             }
-            <Wysiwyg html={suLocalFootSeCo?.processed}/>
+            <Wysiwyg html={suLocalFootSeCo?.processed} className="list-unstyled rs-ml-4 rs-mr-3 rs-mt-2"/>
 
           </div>
 
@@ -148,13 +144,16 @@ const LocalFooter = ({
               </ul>
             }
 
-            <Wysiwyg html={suLocalFootTr2Co?.processed}/>
+            <Wysiwyg html={suLocalFootTr2Co?.processed} className="list-unstyled rs-ml-4 rs-mr-3 rs-mt-2"/>
 
           </div>
 
-          <Wysiwyg html={suLocalFootTrCo?.processed}/>
+          <Wysiwyg html={suLocalFootTrCo?.processed} className="list-unstyled rs-ml-4 rs-mr-3 rs-mt-2"/>
 
         </div>
+      </div>
+      <div className="text-white text-21 text-center lg:text-left lg:centered">
+         © 2024 Stanford University Press. All rights reserved.
       </div>
     </div>
   )

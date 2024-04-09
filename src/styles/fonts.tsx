@@ -1,6 +1,6 @@
-import {Source_Sans_3} from "next/font/google";
+import {Montserrat} from "next/font/google";
 
-export const sourceSans3 = Source_Sans_3({
+export const sourceSans3 = Montserrat({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
