@@ -83,7 +83,7 @@ const LocalFooter = ({
           </ul>
         }
         <div
-          className="grid 2xl:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-16 [&_a]:font-normal [&_a]:decoration-1 [&_a]:text-white [&_a]:decoration-white [&_a:hover]:decoration-2 [&_a:hover]:decoration-bay-light  [&_a:hover]:text-bay-light  [&_a:focus]:text-bay-light [&_a]:transition">
+          className="grid 2xl:grid-cols-4 sm:grid-cols-2 grid-cols-1 2xl:gap-16 [&_a]:font-normal [&_a]:decoration-1 [&_a]:text-white [&_a]:decoration-white [&_a:hover]:decoration-2 [&_a:hover]:decoration-bay-light  [&_a:hover]:text-bay-light  [&_a:focus]:text-bay-light [&_a]:transition">
           <div className="list-unstyled rs-ml-4 rs-mr-3 sm:border-r  sm:border-fog-dark">
             {/* Content block 1 */}
             <Wysiwyg html={suLocalFootPrCo?.processed}/>
@@ -151,7 +151,7 @@ const LocalFooter = ({
 
           </div>
 
-          <div className="list-unstyled rs-ml-4 rs-mr-3 order-4">
+          <div className="list-unstyled rs-ml-4 rs-mr-3 order-4 sm:border-r  sm:border-fog-dark 2xl:border-0">
             {/* Content block 4 */}
             <Wysiwyg html={suLocalFootTrCo?.processed}/>
           </div>
