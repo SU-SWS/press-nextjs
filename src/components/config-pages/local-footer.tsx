@@ -68,11 +68,11 @@ const LocalFooter = ({
 
         {/* Social Links */}
         {suLocalFootSocial &&
-          <ul className="list-unstyled flex gap-2 rs-mb-0">
+          <ul className="list-unstyled flex rs-mb-0 [&_a]:text-white [&_a:hover]:text-bay-light">
             {suLocalFootSocial.map((link, index) => {
               if (!link.url) return;
               return (
-                <li key={`footer-action-link-${index}`}>
+                <li key={`footer-action-link-${index}`} className="rs-mr-0">
                   <Link href={link.url}>
                     <SocialIcon url={link.url}/>
                     <span className="sr-only">{link.title}</span>
@@ -84,7 +84,7 @@ const LocalFooter = ({
         }
         <div
           className="grid 2xl:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-16 [&_a]:font-normal [&_a]:decoration-1 [&_a]:text-white [&_a]:decoration-white [&_a:hover]:decoration-2 [&_a:hover]:decoration-bay-light  [&_a:hover]:text-bay-light  [&_a:focus]:text-bay-light [&_a]:transition">
-          <div className="list-unstyled rs-ml-4 rs-mr-3">
+          <div className="list-unstyled rs-ml-4 rs-mr-3 sm:border-r  sm:border-fog-dark">
             {/* Content block 1 */}
             <Wysiwyg html={suLocalFootPrCo?.processed}/>
 
@@ -105,7 +105,7 @@ const LocalFooter = ({
             }
           </div>
 
-          <div className="list-unstyled rs-ml-4 rs-mr-3 sm:order-4">
+          <div className="list-unstyled rs-ml-4 rs-mr-3 sm:order-4 sm:border-r  sm:border-fog-dark">
             {/* Content block 3 */}
             <Wysiwyg html={suLocalFootTr2Co?.processed}/>
             {/* Primary Links */}
@@ -127,7 +127,7 @@ const LocalFooter = ({
             }
           </div>
 
-          <div className="list-unstyled rs-ml-4 rs-mr-3">
+          <div className="list-unstyled rs-ml-4 rs-mr-3 sm:border-r  sm:border-fog-dark">
             {/* Content block 2 */}
             <Wysiwyg html={suLocalFootSeCo?.processed}/>
             {/* Secondary links */}
@@ -157,7 +157,7 @@ const LocalFooter = ({
           </div>
         </div>
       </div>
-      <div className="text-white text-21 text-center lg:text-left lg:centered">
+      <div className="text-white text-21 text-center lg:text-left lg:centered rs-mt-8 rs-mb-6">
          © 2024 Stanford University Press. All rights reserved.
       </div>
     </div>
@@ -168,7 +168,7 @@ const SocialIcon = ({url}: { url: string }) => {
   if (url.includes('facebook')) return <FacebookIcon/>
   if (url.includes('twitter.com')) return <TwitterIcon/>
   if (url.includes('youtube.com')) return <YoutubeIcon/>
-  if (url.includes('instagram')) return <InstagramIcon/>
+  if (url.includes('instagram.com')) return <InstagramIcon/>
   return null;
 }
 
