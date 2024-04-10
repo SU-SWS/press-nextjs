@@ -65,7 +65,7 @@ const LocalFooter = ({
 
             {/* Action Links */}
             {suLocalFootAction &&
-              <ul className="list-unstyled">
+              <ul className="list-unstyled rs-pt-4">
                 {suLocalFootAction.map((link, index) => {
                   if (!link.url) return;
                   return (
@@ -85,7 +85,7 @@ const LocalFooter = ({
             <Wysiwyg html={suLocalFootTr2Co?.processed} className="max-w-[250px]"/>
             {/* Primary Links */}
             {suLocalFootPrimeH &&
-              <H2 className="text-m1">{suLocalFootPrimeH}</H2>}
+              <H2 className="text-m1 text-white rs-pt-4">{suLocalFootPrimeH}</H2>}
             {suLocalFootPrimary &&
               <ul className="list-unstyled">
                 {suLocalFootPrimary.map((link, index) => {
@@ -107,7 +107,7 @@ const LocalFooter = ({
             <Wysiwyg html={suLocalFootSeCo?.processed} className="max-w-[250px]"/>
             {/* Secondary links */}
             {suLocalFootSecondH &&
-              <H2 className="text-m1">{suLocalFootSecondH}</H2>}
+              <H2 className="text-m1 text-white  rs-pt-4">{suLocalFootSecondH}</H2>}
 
             {suLocalFootSecond &&
               <ul className="list-unstyled">
@@ -149,12 +149,11 @@ const SocialIcon = ({url}: { url: string }) => {
 
 export interface FooterLockupProps {
   useDefault?: Maybe<boolean>
-  siteName?: Maybe<string>
   lockupOption?: Maybe<string>
   logoUrl?: Maybe<string>
 }
 
-const FooterLockup = ({useDefault = true, siteName, lockupOption, ...props}: FooterLockupProps): JSX.Element => {
+const FooterLockup = ({useDefault = true, lockupOption, ...props}: FooterLockupProps): JSX.Element => {
   const lockupProps = {
     ...props
   }
