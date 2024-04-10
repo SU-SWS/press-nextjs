@@ -5,6 +5,12 @@ module.exports = function () {
       ".local-footer": {
         "h2": {
           fontSize: "1.2em",
+          "a": {
+            "&:hover": {
+              color: "#8AB8A7",
+              textDecorationThickness: "2px",
+            },
+          }
         },
         "h3": {
           fontSize: "1.3em",

@@ -66,26 +66,29 @@ const LocalFooter = ({
           <FooterLockup {...lockupProps} />
         </div>
 
+        {/* Social Links */}
+        {suLocalFootSocial &&
+          <ul className="list-unstyled flex gap-2 rs-mb-0">
+            {suLocalFootSocial.map((link, index) => {
+              if (!link.url) return;
+              return (
+                <li key={`footer-action-link-${index}`}>
+                  <Link href={link.url}>
+                    <SocialIcon url={link.url}/>
+                    <span className="sr-only">{link.title}</span>
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        }
         <div
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-32 [&_a]:font-normal [&_a]:decoration-1 [&_a]:text-white [&_a]:decoration-white [&_a:hover]:decoration-2 [&_a:hover]:decoration-bay-light  [&_a:hover]:text-bay-light  [&_a:focus]:text-bay-light [&_a]:transition">
-          <div>
+          className="grid 2xl:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-16 [&_a]:font-normal [&_a]:decoration-1 [&_a]:text-white [&_a]:decoration-white [&_a:hover]:decoration-2 [&_a:hover]:decoration-bay-light  [&_a:hover]:text-bay-light  [&_a:focus]:text-bay-light [&_a]:transition">
+          <div className="list-unstyled rs-ml-4 rs-mr-3">
+            {/* Content block 1 */}
+            <Wysiwyg html={suLocalFootPrCo?.processed}/>
 
-          {suLocalFootSocial &&
-              <ul className="list-unstyled flex gap-2 rs-mb-0">
-                {suLocalFootSocial.map((link, index) => {
-                  if (!link.url) return;
-                  return (
-                    <li key={`footer-action-link-${index}`}>
-                      <Link href={link.url}>
-                        <SocialIcon url={link.url}/>
-                        <span className="sr-only">{link.title}</span>
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-            }
-
+            {/* Action Links */}
             {suLocalFootAction &&
               <ul className="list-unstyled">
                 {suLocalFootAction.map((link, index) => {
@@ -100,11 +103,12 @@ const LocalFooter = ({
                 })}
               </ul>
             }
-
-            <Wysiwyg html={suLocalFootPrCo?.processed} className="list-unstyled rs-ml-4 rs-mr-3 rs-mt-2"/>
           </div>
 
-          <div>
+          <div className="list-unstyled rs-ml-4 rs-mr-3 sm:order-4">
+            {/* Content block 3 */}
+            <Wysiwyg html={suLocalFootTr2Co?.processed}/>
+            {/* Primary Links */}
             {suLocalFootPrimeH &&
               <H2 className="text-m1">{suLocalFootPrimeH}</H2>}
             {suLocalFootPrimary &&
@@ -121,11 +125,12 @@ const LocalFooter = ({
                 })}
               </ul>
             }
-            <Wysiwyg html={suLocalFootSeCo?.processed} className="list-unstyled rs-ml-4 rs-mr-3 rs-mt-2"/>
-
           </div>
 
-          <div>
+          <div className="list-unstyled rs-ml-4 rs-mr-3">
+            {/* Content block 2 */}
+            <Wysiwyg html={suLocalFootSeCo?.processed}/>
+            {/* Secondary links */}
             {suLocalFootSecondH &&
               <H2 className="text-m1">{suLocalFootSecondH}</H2>}
 
@@ -144,12 +149,12 @@ const LocalFooter = ({
               </ul>
             }
 
-            <Wysiwyg html={suLocalFootTr2Co?.processed} className="list-unstyled rs-ml-4 rs-mr-3 rs-mt-2"/>
-
           </div>
 
-          <Wysiwyg html={suLocalFootTrCo?.processed} className="list-unstyled rs-ml-4 rs-mr-3 rs-mt-2"/>
-
+          <div className="list-unstyled rs-ml-4 rs-mr-3 order-4">
+            {/* Content block 4 */}
+            <Wysiwyg html={suLocalFootTrCo?.processed}/>
+          </div>
         </div>
       </div>
       <div className="text-white text-21 text-center lg:text-left lg:centered">
