@@ -5,7 +5,7 @@ type Props = HtmlHTMLAttributes<SVGSVGElement> & {
   width?: number
 }
 
-const PressFooterLogoLg = ({height = 91, width = 426, ...props}: Props) => {
+const PressFooterLogoLg = ({height = 89, width = 579, ...props}: Props) => {
   if (height != 91 && width == 426) {
     width *= height / 91
   }

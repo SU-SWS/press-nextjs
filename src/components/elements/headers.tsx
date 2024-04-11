@@ -3,7 +3,7 @@ import {twMerge} from "tailwind-merge";
 
 type Props = HtmlHTMLAttributes<HTMLHeadingElement>
 
-const headingLinkClasses = "[&_a]:text-digital-red [&_a]:hocus:text-black [&_a]:hocus:underline";
+const headingLinkClasses = "[&_a]:hocus:underline";
 
 export const H1 = ({children, className, ...props}: Props) => {
   return (
