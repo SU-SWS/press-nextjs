@@ -2,7 +2,7 @@ import {Maybe} from "@lib/gql/__generated__/drupal.d";
 import PressFooterLogoLg from "@components/images/logo-lg";
 import PressFooterLogoXs from "@components/images/logo-xs";
 
-const LockupLogo = ({logoUrl, siteName = ""}: { logoUrl?: Maybe<string>, siteName?: Maybe<string> }) => {
+const LockupLogo = ({logoUrl}: { logoUrl?: Maybe<string>, siteName?: Maybe<string> }) => {
 
   return (
     <>
