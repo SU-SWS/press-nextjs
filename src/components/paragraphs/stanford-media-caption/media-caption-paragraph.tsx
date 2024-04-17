@@ -32,7 +32,7 @@ const MediaCaptionParagraph = ({paragraph, ...props}: Props) => {
       }
       {videoUrl && <Oembed url={videoUrl}/>}
 
-      <figcaption className="text-m0">
+      <figcaption className="text-archway-dark">
         {paragraph.suMediaCaptionLink?.url &&
           <Link href={paragraph.suMediaCaptionLink.url} className="link--action">
             {paragraph.suMediaCaptionLink.title}

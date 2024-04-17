@@ -45,6 +45,10 @@ module.exports = {
         '-100': '-1'
       }
     },
+    colors: {
+      'press-indigo': '#003D69',
+      'press-grass': '#00593E'
+    },
   },
   plugins: [
     ...decanter.plugins,
