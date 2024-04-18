@@ -16,7 +16,6 @@ export const Lockup = ({
     siteName: suSiteName || "Stanford",
     logoUrl: logoUrl,
   }
-
   
   return (
     <div className="py-10">

@@ -3,7 +3,7 @@ import BackToTop from "@components/elements/back-to-top";
 import PageFooter from "@components/global/page-footer";
 import PageHeader from "@components/global/page-header";
 import {Icon} from "next/dist/lib/metadata/types/metadata-types";
-import {sourceSans3} from "../src/styles/fonts";
+import {montserrat} from "../src/styles/fonts";
 import DrupalWindowSync from "@components/elements/drupal-window-sync";
 import {isPreviewMode} from "@lib/drupal/utils";
 import UserAnalytics from "@components/elements/user-analytics";
@@ -45,7 +45,7 @@ export const revalidate = false;
 const RootLayout = ({children, modal}: { children: React.ReactNode, modal: React.ReactNode }) => {
   const isPreview = isPreviewMode();
   return (
-    <html lang="en" className={sourceSans3.className}>
+    <html lang="en" className={montserrat.className}>
     {/* Add Google Analytics and SiteImprove when not in preview mode. */}
     {!isPreview &&
       <UserAnalytics/>
