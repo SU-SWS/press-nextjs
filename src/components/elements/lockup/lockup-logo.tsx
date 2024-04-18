@@ -1,21 +1,21 @@
 import {Maybe} from "@lib/gql/__generated__/drupal.d";
-import StanfordWordMark from "@components/images/stanford-wordmark";
+import PressFooterLogoLg from "@components/images/logo-lg";
+import PressFooterLogoXs from "@components/images/logo-xs";
 
-const LockupLogo = ({logoUrl, siteName = ""}: { logoUrl?: Maybe<string>, siteName?: Maybe<string> }) => {
+const LockupLogo = ({logoUrl}: { logoUrl?: Maybe<string>, siteName?: Maybe<string> }) => {
+
   return (
     <>
-      {logoUrl &&
-        <picture>
-          <img
-            src={logoUrl}
-            alt={`${siteName} Logo`}
-            className="object-contain max-w-[400px] max-h-[35px] h-auto"
-          />
-        </picture>
-      }
-      {!logoUrl &&
-        <StanfordWordMark className="block text-cardinal-red no-underline max-h-[30px] w-auto"/>
-      }
+      <div className="hidden sm:block">
+        {!logoUrl &&
+          <PressFooterLogoLg/>
+        }
+      </div>
+      <div className="sm:hidden">
+        {!logoUrl &&
+          <PressFooterLogoXs/>
+        }
+      </div>
     </>
   )
 }
