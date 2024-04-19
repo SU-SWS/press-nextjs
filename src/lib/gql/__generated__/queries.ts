@@ -407,6 +407,35 @@ export const FragmentParagraphStanfordLayoutFragmentDoc = gql`
   ...FragmentParagraphInterface
 }
     ${FragmentParagraphInterfaceFragmentDoc}`;
+export const FragmentParagraphSupPreBuiltFragmentDoc = gql`
+    fragment FragmentParagraphSupPreBuilt on ParagraphSupPreBuilt {
+  ...FragmentParagraphInterface
+  supPrebuiltComponent
+}
+    ${FragmentParagraphInterfaceFragmentDoc}`;
+export const FragmentParagraphSupCarouselSlideFragmentDoc = gql`
+    fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
+  ...FragmentParagraphInterface
+}
+    ${FragmentParagraphInterfaceFragmentDoc}`;
+export const FragmentParagraphSupCarouselFragmentDoc = gql`
+    fragment FragmentParagraphSupCarousel on ParagraphSupCarousel {
+  ...FragmentParagraphInterface
+  supCarouselSlides {
+    ...FragmentParagraphSupCarouselSlide
+  }
+}
+    ${FragmentParagraphInterfaceFragmentDoc}
+${FragmentParagraphSupCarouselSlideFragmentDoc}`;
+export const FragmentParagraphSupFileListFragmentDoc = gql`
+    fragment FragmentParagraphSupFileList on ParagraphSupFileList {
+  ...FragmentParagraphInterface
+  supFileListFiles {
+    ...FragmentMediaFile
+  }
+}
+    ${FragmentParagraphInterfaceFragmentDoc}
+${FragmentMediaFileFragmentDoc}`;
 export const FragmentParagraphUnionFragmentDoc = gql`
     fragment FragmentParagraphUnion on ParagraphUnion {
   ...FragmentParagraphInterface
@@ -420,6 +449,9 @@ export const FragmentParagraphUnionFragmentDoc = gql`
   ...FragmentParagraphStanfordSpacer
   ...FragmentParagraphStanfordWysiwyg
   ...FragmentParagraphStanfordLayout
+  ...FragmentParagraphSupPreBuilt
+  ...FragmentParagraphSupCarousel
+  ...FragmentParagraphSupFileList
 }
     ${FragmentParagraphInterfaceFragmentDoc}
 ${FragmentParagraphStanfordAccordionFragmentDoc}
@@ -431,7 +463,10 @@ ${FragmentParagraphStanfordListFragmentDoc}
 ${FragmentParagraphStanfordMediaCaptionFragmentDoc}
 ${FragmentParagraphStanfordSpacerFragmentDoc}
 ${FragmentParagraphStanfordWysiwygFragmentDoc}
-${FragmentParagraphStanfordLayoutFragmentDoc}`;
+${FragmentParagraphStanfordLayoutFragmentDoc}
+${FragmentParagraphSupPreBuiltFragmentDoc}
+${FragmentParagraphSupCarouselFragmentDoc}
+${FragmentParagraphSupFileListFragmentDoc}`;
 export const FragmentSmartDateTypeFragmentDoc = gql`
     fragment FragmentSmartDateType on SmartDateType {
   value
