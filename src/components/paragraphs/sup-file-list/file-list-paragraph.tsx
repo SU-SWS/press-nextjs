@@ -1,32 +1,19 @@
-"use client";
-
-import {HtmlHTMLAttributes, useState} from "react";
+import {HtmlHTMLAttributes} from "react";
 import {ParagraphSupFileList} from "@lib/gql/__generated__/drupal.d";
-import SelectList from "@components/elements/select-list";
-import Link from "@components/elements/link";
+import FileListSelection from "@components/paragraphs/sup-file-list/file-list-selection";
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphSupFileList
 }
 
 const FileListParagraph = ({paragraph, ...props}: Props) => {
-  const [chosenFile, setChosenFile] = useState<string|null>(null)
-  const fileOptions = paragraph.supFileListFiles.map(media => ({value: media.id, label: media.name}))
-
-  const chosenItem = paragraph.supFileListFiles.find(media => media.id === chosenFile);
+  const fileOptions = paragraph.supFileListFiles.map(media => ({
+    value: media.id,
+    label: media.name,
+    url: media.mediaFile.url
+  }))
   return (
-    <div {...props}>
-      <div className="mb-10">
-        <SelectList
-          options={fileOptions}
-          label="Choose a file"
-          onChange={(_e, v) => setChosenFile(v as string)}
-        />
-      </div>
-      {chosenItem &&
-        <Link className="button" href={chosenItem.mediaFile.url} download prefetch={false}>Download</Link>
-      }
-    </div>
+    <FileListSelection fileOptions={fileOptions} {...props}/>
   )
 }
 export default FileListParagraph
