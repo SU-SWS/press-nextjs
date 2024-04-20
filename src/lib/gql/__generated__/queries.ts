@@ -871,12 +871,12 @@ ${FragmentNodeStanfordPublicationFragmentDoc}`;
 export const FragmentNodeSupBookTeaserFragmentDoc = gql`
     fragment FragmentNodeSupBookTeaser on NodeSupBook {
   ...FragmentNodeInterface
-  supBookImage {
-    ...FragmentMediaImage
+  supBookAuthors {
+    ...FragmentNameType
   }
 }
     ${FragmentNodeInterfaceFragmentDoc}
-${FragmentMediaImageFragmentDoc}`;
+${FragmentNameTypeFragmentDoc}`;
 export const FragmentNodeStanfordCourseTeaserFragmentDoc = gql`
     fragment FragmentNodeStanfordCourseTeaser on NodeStanfordCourse {
   ...FragmentNodeInterface

@@ -365,9 +365,8 @@ fragment FragmentNodeUnion on NodeUnion {
 
 fragment FragmentNodeSupBookTeaser on NodeSupBook {
     ...FragmentNodeInterface
-
-    supBookImage {
-        ...FragmentMediaImage
+    supBookAuthors {
+        ...FragmentNameType
     }
 }
 
