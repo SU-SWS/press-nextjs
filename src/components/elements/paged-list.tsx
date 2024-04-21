@@ -1,6 +1,6 @@
 "use client";
 
-import {useLayoutEffect, useRef, HtmlHTMLAttributes, useEffect} from "react";
+import {useLayoutEffect, useRef, HtmlHTMLAttributes, useEffect, useId} from "react";
 import Button from "@components/elements/button";
 import {useAutoAnimate} from "@formkit/auto-animate/react";
 import {useBoolean, useCounter} from "usehooks-ts";
@@ -28,8 +28,8 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 }
 
 const PagedList = ({children, ulProps, liProps, itemsPerPage = 10, pageKey = "page", ...props}: Props) => {
+  const id = useId();
   const items = Array.isArray(children) ? children : [children]
-
   const router = useRouter();
   const searchParams = useSearchParams()
 
@@ -75,7 +75,7 @@ const PagedList = ({children, ulProps, liProps, itemsPerPage = 10, pageKey = "pa
       <ul {...ulProps} ref={animationParent}>
         {items.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((item, i) =>
           <li
-            key={`pager--${i}`}
+            key={`pager-${id}-${i}`}
             ref={i === 0 ? focusItemRef : null}
             tabIndex={i === 0 && focusOnElement ? 0 : undefined}
             onBlur={disableFocusElement}

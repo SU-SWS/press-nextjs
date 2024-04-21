@@ -28,8 +28,7 @@ const PreBuiltAuthorList = async ({...props}: Props) => {
         const authorName = ([author.family, author.given + " " + author.middle].filter(a => !!a).join(", ") + ` [${author.credentials}]`).trim()
 
         const authorsBooks = authors.get(authorName) || [];
-        authors.set(authorName, [...authorsBooks,
-          <Link key={book.id} prefetch={false} href={book.path}>{book.title}</Link>]);
+        authors.set(authorName, [...authorsBooks, <Link key={book.id} prefetch={false} href={book.path}>{book.title}</Link>]);
       }
     })
   })

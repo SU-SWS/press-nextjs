@@ -1,9 +1,11 @@
 "use client";
 
 import {twMerge} from "tailwind-merge";
-import {HTMLAttributes, JSX, useEffect, useMemo, useState} from "react";
+import {HTMLAttributes, JSX, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
 import PagedList from "@components/elements/paged-list";
 import {useRouter, useSearchParams} from "next/navigation";
+import useFocusOnRender from "@lib/hooks/useFocusOnRender";
+import {useBoolean} from "usehooks-ts";
 
 type Props = HTMLAttributes<HTMLDivElement> & {
   authors: Map<string, JSX.Element[]>
@@ -11,6 +13,8 @@ type Props = HTMLAttributes<HTMLDivElement> & {
 const FilteringAuthorList = ({authors, ...props}: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const focusItemRef = useRef<HTMLDivElement>(null);
+  const {value: focusOnElement, setTrue: enableFocusElement, setFalse: disableFocusElement} = useBoolean(false)
   const [alphaChosen, setAlphaChosen] = useState<string>(searchParams.get("author") || "A")
 
   const displayedAuthors = useMemo(() => {
@@ -44,17 +48,29 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
     router.replace(`?${params.toString()}`, {scroll: false})
   }, [router, searchParams, alphaChosen]);
 
+  const setFocusOnItem = useFocusOnRender(focusItemRef, false);
+
+  useLayoutEffect(() => {
+    if (focusOnElement) setFocusOnItem()
+  }, [focusOnElement, setFocusOnItem]);
+
   return (
     <div {...props} className={twMerge("flex justify-between", props?.className)}>
       <div className="sr-only" aria-live="polite">Showing authors that start with {alphaChosen}</div>
       <a href="#author-filter" className="skiplink">Skip to filter</a>
 
       <PagedList itemsPerPage={50} ulProps={{className: "list-unstyled"}} pageKey={false} key={alphaChosen}>
-        {[...displayedAuthors.keys()].sort().map(authorName =>
-          <span key={authorName} className="flex flex-wrap gap-2">
+        {[...displayedAuthors.keys()].sort().map((authorName, i) =>
+          <div
+            key={authorName}
+            className="flex flex-wrap gap-2"
+            ref={i === 0 ? focusItemRef : null}
+            tabIndex={i === 0 && focusOnElement ? 0 : undefined}
+            onBlur={disableFocusElement}
+          >
             <span>{authorName}</span>
             {authors.get(authorName)}
-          </span>
+          </div>
         )}
       </PagedList>
       <nav id="author-filter" aria-label="Author name filtering">
@@ -63,7 +79,12 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
             <li key={choice}>
               <button
                 className="hocus:underline"
-                onClick={() => setAlphaChosen(choice)} aria-label={"Show authors that start with " + choice}
+                onClick={() => {
+                  setAlphaChosen(choice)
+                  enableFocusElement();
+                }}
+                aria-label={`Show authors that start with ${choice}`}
+                aria-current={alphaChosen === choice}
               >
                 {choice}
               </button>
