@@ -368,6 +368,7 @@ fragment FragmentNodeSupBookTeaser on NodeSupBook {
     supBookAuthors {
         ...FragmentNameType
     }
+    supBookWorkIdNumber
 }
 
 fragment FragmentNodeStanfordCourseTeaser on NodeStanfordCourse {

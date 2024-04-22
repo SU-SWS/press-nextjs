@@ -14,7 +14,7 @@ const PreBuiltAuthorList = async ({...props}: Props) => {
   let books: NodeSupBook[] = [];
 
   while (fetchMore) {
-    query = await graphqlClient({next: {tags: ["paths"]}}).Books({after: afterCursor})
+    query = await graphqlClient({next: {tags: ["views:sup_books"]}}).Books({after: afterCursor})
     fetchMore = query.nodeSupBooks.pageInfo.hasNextPage
     afterCursor = query.nodeSupBooks.pageInfo.endCursor;
     books = [...books, ...query.nodeSupBooks.nodes as NodeSupBook[]];

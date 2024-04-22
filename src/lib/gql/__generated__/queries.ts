@@ -874,6 +874,7 @@ export const FragmentNodeSupBookTeaserFragmentDoc = gql`
   supBookAuthors {
     ...FragmentNameType
   }
+  supBookWorkIdNumber
 }
     ${FragmentNodeInterfaceFragmentDoc}
 ${FragmentNameTypeFragmentDoc}`;
