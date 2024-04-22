@@ -27,8 +27,8 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_IE",
-    url: "https://somesite.stanford.edu",
-    siteName: "[Stanford University]",
+    url: "https://sup.org",
+    siteName: "Stanford University Press",
   },
   twitter: {
     card: "summary_large_image",

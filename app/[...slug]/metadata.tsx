@@ -4,7 +4,7 @@ import {decode} from "html-entities";
 
 export const getNodeMetadata = (node: NodeUnion): Metadata => {
   const defaultData = {
-    title: node.title,
+    title: node.title + " | Stanford University Press",
     other: {}
   }
   switch (node.__typename) {
