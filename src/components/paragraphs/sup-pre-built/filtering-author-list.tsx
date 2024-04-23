@@ -14,7 +14,7 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
   const [alphaChosen, setAlphaChosen] = useState<string>(searchParams.get("author") || "")
 
   const displayedAuthors = useMemo(() => {
-    if(alphaChosen === "") return authors;
+    if (alphaChosen === "") return authors;
     const displayedAuthorMap = new Map<string, JSX.Element[]>();
     [...authors.keys()].map(authorName => {
       let firstLetter = authorName.charAt(0).toUpperCase()
@@ -62,32 +62,44 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
       <form role="search" id="author-filter" aria-label="Author name filtering">
         <fieldset className="list-unstyled">
           <legend className="sr-only">Filter by first letter</legend>
-          <label className="flex">
-            <input
-              type="radio"
-              defaultChecked={alphaChosen === ""}
-              name="alpha"
-              value={""}
-              onChange={() => setAlphaChosen("")}
-            />
-            All
-          </label>
+
+          <RadioOption
+            value="All"
+            defaultChecked={alphaChosen === ""}
+            onChange={() => setAlphaChosen("")}
+          />
 
           {alphaChoices.map(choice =>
-            <label key={choice} className="flex">
-              <input
-                type="radio"
-                defaultChecked={alphaChosen === choice}
-                name="alpha"
-                value={choice}
-                onChange={() => setAlphaChosen(choice)}
-              />
-              {choice}
-            </label>
+            <RadioOption
+              key={choice}
+              value={choice}
+              defaultChecked={alphaChosen === choice}
+              onChange={() => setAlphaChosen(choice)}
+            />
           )}
         </fieldset>
       </form>
     </div>
   )
 }
+
+const RadioOption = ({value, defaultChecked, onChange}: {
+  value: string,
+  defaultChecked?: boolean,
+  onChange: () => void
+}) => {
+  return (
+    <label className="flex mb-2">
+      <input
+        type="radio"
+        defaultChecked={defaultChecked}
+        name="alpha"
+        value={value}
+        onChange={onChange}
+      />
+      {value}
+    </label>
+  )
+}
+
 export default FilteringAuthorList
