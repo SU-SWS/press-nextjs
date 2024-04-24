@@ -5,6 +5,7 @@ import {HtmlHTMLAttributes} from "react";
 import {NodeStanfordPage} from "@lib/gql/__generated__/drupal.d";
 import BannerParagraph from "@components/paragraphs/stanford-banner/banner-paragraph";
 import PageTitleBannerParagraph from "@components/paragraphs/stanford-page-title-banner/page-title-banner-paragraph";
+import SupCarouselParagraph from "@components/paragraphs/sup-carousel/sup-carousel-paragraph";
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordPage
@@ -23,6 +24,9 @@ const StanfordPagePage = ({node, ...props}: Props) => {
           }
           {node.suPageBanner.__typename === "ParagraphStanfordPageTitleBanner" &&
             <PageTitleBannerParagraph paragraph={node.suPageBanner} pageTitle={node.title}/>
+          }
+          {node.suPageBanner.__typename === "ParagraphSupCarousel" &&
+            <SupCarouselParagraph paragraph={node.suPageBanner} isTopBanner/>
           }
         </header>
       }

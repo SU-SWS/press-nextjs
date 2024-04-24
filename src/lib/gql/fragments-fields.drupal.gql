@@ -35,6 +35,11 @@ fragment FragmentSupAward on SupAward {
     supYear
 }
 
+fragment FragmentLink on Link {
+    title
+    url
+}
+
 fragment FragmentNameType on NameType {
     title
     given

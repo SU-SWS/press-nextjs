@@ -19,16 +19,6 @@ const PageHeader = async () => {
 
   return (
     <header className="shadow-lg">
-      <div className="bg-cardinal-red">
-        <div className="centered py-3">
-          <a
-            className="font-stanford no-underline font-regular text-20 hocus:underline text-white hocus:text-white leading-none"
-            href="https://www.stanford.edu"
-          >
-            Stanford University
-          </a>
-        </div>
-      </div>
       {globalMessageConfig && <GlobalMessage {...globalMessageConfig}/>}
       <div className="relative shadow">
         <div className="centered min-h-50 pr-24 lg:pr-0">

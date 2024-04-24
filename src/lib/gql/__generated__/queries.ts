@@ -413,17 +413,57 @@ export const FragmentParagraphSupPreBuiltFragmentDoc = gql`
   supPrebuiltComponent
 }
     ${FragmentParagraphInterfaceFragmentDoc}`;
+export const FragmentLinkFragmentDoc = gql`
+    fragment FragmentLink on Link {
+  title
+  url
+}
+    `;
 export const FragmentParagraphSupCarouselSlideFragmentDoc = gql`
     fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   ...FragmentParagraphInterface
+  supSlideBody {
+    processed
+  }
+  supSlideBodySize
+  supSlideBook {
+    ... on NodeSupBook {
+      id
+      title
+      path
+      supBookAuthors {
+        ...FragmentNameType
+      }
+      supBookImage {
+        ...FragmentMediaImage
+      }
+    }
+  }
+  supSlideButton {
+    ...FragmentLink
+  }
+  supSlideColor
+  supSlideEyebrow
+  supSlideHide
+  supSlideOrientation
+  supSlideSubtitle
+  supSlideTitle
+  supSlideTitleSize
+  supSupImage {
+    ...FragmentMediaImage
+  }
 }
-    ${FragmentParagraphInterfaceFragmentDoc}`;
+    ${FragmentParagraphInterfaceFragmentDoc}
+${FragmentNameTypeFragmentDoc}
+${FragmentMediaImageFragmentDoc}
+${FragmentLinkFragmentDoc}`;
 export const FragmentParagraphSupCarouselFragmentDoc = gql`
     fragment FragmentParagraphSupCarousel on ParagraphSupCarousel {
   ...FragmentParagraphInterface
   supCarouselSlides {
     ...FragmentParagraphSupCarouselSlide
   }
+  supCarouselTopHero
 }
     ${FragmentParagraphInterfaceFragmentDoc}
 ${FragmentParagraphSupCarouselSlideFragmentDoc}`;
@@ -452,6 +492,7 @@ export const FragmentParagraphUnionFragmentDoc = gql`
   ...FragmentParagraphSupPreBuilt
   ...FragmentParagraphSupCarousel
   ...FragmentParagraphSupFileList
+  ...FragmentParagraphSupCarouselSlide
 }
     ${FragmentParagraphInterfaceFragmentDoc}
 ${FragmentParagraphStanfordAccordionFragmentDoc}
@@ -466,7 +507,8 @@ ${FragmentParagraphStanfordWysiwygFragmentDoc}
 ${FragmentParagraphStanfordLayoutFragmentDoc}
 ${FragmentParagraphSupPreBuiltFragmentDoc}
 ${FragmentParagraphSupCarouselFragmentDoc}
-${FragmentParagraphSupFileListFragmentDoc}`;
+${FragmentParagraphSupFileListFragmentDoc}
+${FragmentParagraphSupCarouselSlideFragmentDoc}`;
 export const FragmentSmartDateTypeFragmentDoc = gql`
     fragment FragmentSmartDateType on SmartDateType {
   value
@@ -691,6 +733,7 @@ export const FragmentNodeStanfordPageFragmentDoc = gql`
   suPageBanner {
     ...FragmentParagraphStanfordBanner
     ...FragmentParagraphStanfordPageTitleBanner
+    ...FragmentParagraphSupCarousel
   }
   suPageComponents {
     ...FragmentParagraphUnion
@@ -704,6 +747,7 @@ export const FragmentNodeStanfordPageFragmentDoc = gql`
 ${FragmentTermInterfaceFragmentDoc}
 ${FragmentParagraphStanfordBannerFragmentDoc}
 ${FragmentParagraphStanfordPageTitleBannerFragmentDoc}
+${FragmentParagraphSupCarouselFragmentDoc}
 ${FragmentParagraphUnionFragmentDoc}
 ${FragmentMediaUnionFragmentDoc}`;
 export const FragmentNodeStanfordPersonFragmentDoc = gql`

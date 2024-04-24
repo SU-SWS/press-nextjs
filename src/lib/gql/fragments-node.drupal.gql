@@ -116,6 +116,7 @@ fragment FragmentNodeStanfordPage on NodeStanfordPage {
     suPageBanner {
         ...FragmentParagraphStanfordBanner
         ...FragmentParagraphStanfordPageTitleBanner
+        ...FragmentParagraphSupCarousel
     }
     suPageComponents {
         ...FragmentParagraphUnion

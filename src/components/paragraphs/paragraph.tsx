@@ -11,6 +11,7 @@ import {ParagraphUnion} from "@lib/gql/__generated__/drupal.d";
 import {Suspense} from "react";
 import PreBuiltParagraph from "@components/paragraphs/sup-pre-built/pre-built-paragraph";
 import FileListParagraph from "@components/paragraphs/sup-file-list/file-list-paragraph";
+import SupCarouselParagraph from "@components/paragraphs/sup-carousel/sup-carousel-paragraph";
 
 type Props = {
   /**
@@ -49,6 +50,8 @@ const Paragraph = async ({paragraph}: Props) => {
       return <FileListParagraph paragraph={paragraph} {...itemProps}/>
     case "ParagraphSupPreBuilt":
       return <PreBuiltParagraph paragraph={paragraph} {...itemProps}/>
+    case "ParagraphSupCarousel":
+      return <SupCarouselParagraph paragraph={paragraph} {...itemProps}/>
   }
   console.warn(`Unknown paragraph ${paragraph.__typename}. Item ${paragraph.id}.`);
 }
