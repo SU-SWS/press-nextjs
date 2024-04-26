@@ -407,6 +407,75 @@ export const FragmentParagraphStanfordLayoutFragmentDoc = gql`
   ...FragmentParagraphInterface
 }
     ${FragmentParagraphInterfaceFragmentDoc}`;
+export const FragmentParagraphSupPreBuiltFragmentDoc = gql`
+    fragment FragmentParagraphSupPreBuilt on ParagraphSupPreBuilt {
+  ...FragmentParagraphInterface
+  supPrebuiltComponent
+}
+    ${FragmentParagraphInterfaceFragmentDoc}`;
+export const FragmentLinkFragmentDoc = gql`
+    fragment FragmentLink on Link {
+  title
+  url
+}
+    `;
+export const FragmentParagraphSupCarouselSlideFragmentDoc = gql`
+    fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
+  ...FragmentParagraphInterface
+  supSlideBody {
+    processed
+  }
+  supSlideBodySize
+  supSlideBook {
+    ... on NodeSupBook {
+      id
+      title
+      path
+      supBookAuthors {
+        ...FragmentNameType
+      }
+      supBookImage {
+        ...FragmentMediaImage
+      }
+    }
+  }
+  supSlideButton {
+    ...FragmentLink
+  }
+  supSlideColor
+  supSlideEyebrow
+  supSlideHide
+  supSlideOrientation
+  supSlideSubtitle
+  supSlideTitle
+  supSlideTitleSize
+  supSupImage {
+    ...FragmentMediaImage
+  }
+}
+    ${FragmentParagraphInterfaceFragmentDoc}
+${FragmentNameTypeFragmentDoc}
+${FragmentMediaImageFragmentDoc}
+${FragmentLinkFragmentDoc}`;
+export const FragmentParagraphSupCarouselFragmentDoc = gql`
+    fragment FragmentParagraphSupCarousel on ParagraphSupCarousel {
+  ...FragmentParagraphInterface
+  supCarouselSlides {
+    ...FragmentParagraphSupCarouselSlide
+  }
+  supCarouselTopHero
+}
+    ${FragmentParagraphInterfaceFragmentDoc}
+${FragmentParagraphSupCarouselSlideFragmentDoc}`;
+export const FragmentParagraphSupFileListFragmentDoc = gql`
+    fragment FragmentParagraphSupFileList on ParagraphSupFileList {
+  ...FragmentParagraphInterface
+  supFileListFiles {
+    ...FragmentMediaFile
+  }
+}
+    ${FragmentParagraphInterfaceFragmentDoc}
+${FragmentMediaFileFragmentDoc}`;
 export const FragmentParagraphUnionFragmentDoc = gql`
     fragment FragmentParagraphUnion on ParagraphUnion {
   ...FragmentParagraphInterface
@@ -420,6 +489,10 @@ export const FragmentParagraphUnionFragmentDoc = gql`
   ...FragmentParagraphStanfordSpacer
   ...FragmentParagraphStanfordWysiwyg
   ...FragmentParagraphStanfordLayout
+  ...FragmentParagraphSupPreBuilt
+  ...FragmentParagraphSupCarousel
+  ...FragmentParagraphSupFileList
+  ...FragmentParagraphSupCarouselSlide
 }
     ${FragmentParagraphInterfaceFragmentDoc}
 ${FragmentParagraphStanfordAccordionFragmentDoc}
@@ -431,7 +504,11 @@ ${FragmentParagraphStanfordListFragmentDoc}
 ${FragmentParagraphStanfordMediaCaptionFragmentDoc}
 ${FragmentParagraphStanfordSpacerFragmentDoc}
 ${FragmentParagraphStanfordWysiwygFragmentDoc}
-${FragmentParagraphStanfordLayoutFragmentDoc}`;
+${FragmentParagraphStanfordLayoutFragmentDoc}
+${FragmentParagraphSupPreBuiltFragmentDoc}
+${FragmentParagraphSupCarouselFragmentDoc}
+${FragmentParagraphSupFileListFragmentDoc}
+${FragmentParagraphSupCarouselSlideFragmentDoc}`;
 export const FragmentSmartDateTypeFragmentDoc = gql`
     fragment FragmentSmartDateType on SmartDateType {
   value
@@ -656,6 +733,7 @@ export const FragmentNodeStanfordPageFragmentDoc = gql`
   suPageBanner {
     ...FragmentParagraphStanfordBanner
     ...FragmentParagraphStanfordPageTitleBanner
+    ...FragmentParagraphSupCarousel
   }
   suPageComponents {
     ...FragmentParagraphUnion
@@ -669,6 +747,7 @@ export const FragmentNodeStanfordPageFragmentDoc = gql`
 ${FragmentTermInterfaceFragmentDoc}
 ${FragmentParagraphStanfordBannerFragmentDoc}
 ${FragmentParagraphStanfordPageTitleBannerFragmentDoc}
+${FragmentParagraphSupCarouselFragmentDoc}
 ${FragmentParagraphUnionFragmentDoc}
 ${FragmentMediaUnionFragmentDoc}`;
 export const FragmentNodeStanfordPersonFragmentDoc = gql`
@@ -836,12 +915,13 @@ ${FragmentNodeStanfordPublicationFragmentDoc}`;
 export const FragmentNodeSupBookTeaserFragmentDoc = gql`
     fragment FragmentNodeSupBookTeaser on NodeSupBook {
   ...FragmentNodeInterface
-  supBookImage {
-    ...FragmentMediaImage
+  supBookAuthors {
+    ...FragmentNameType
   }
+  supBookWorkIdNumber
 }
     ${FragmentNodeInterfaceFragmentDoc}
-${FragmentMediaImageFragmentDoc}`;
+${FragmentNameTypeFragmentDoc}`;
 export const FragmentNodeStanfordCourseTeaserFragmentDoc = gql`
     fragment FragmentNodeStanfordCourseTeaser on NodeStanfordCourse {
   ...FragmentNodeInterface
@@ -1646,6 +1726,24 @@ export const StanfordSharedTagsDocument = gql`
 }
     ${FragmentNodeTeaserUnionFragmentDoc}
 ${FragmentViewPageInfoFragmentDoc}`;
+export const SupBooksDocument = gql`
+    query supBooks($filters: SupBooksViewContextualFilterInput, $pageSize: Int = 3, $page: Int, $offset: Int) {
+  supBooksView(
+    contextualFilter: $filters
+    pageSize: $pageSize
+    page: $page
+    offset: $offset
+  ) {
+    results {
+      ...FragmentNodeSupBookTeaser
+    }
+    pageInfo {
+      ...FragmentViewPageInfo
+    }
+  }
+}
+    ${FragmentNodeSupBookTeaserFragmentDoc}
+${FragmentViewPageInfoFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -1746,6 +1844,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     stanfordSharedTags(variables?: DrupalTypes.StanfordSharedTagsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.StanfordSharedTagsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.StanfordSharedTagsQuery>(StanfordSharedTagsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'stanfordSharedTags', 'query', variables);
+    },
+    supBooks(variables?: DrupalTypes.SupBooksQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.SupBooksQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.SupBooksQuery>(SupBooksDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'supBooks', 'query', variables);
     }
   };
 }

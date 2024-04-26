@@ -147,3 +147,14 @@ query stanfordSharedTags($filters: StanfordSharedTagsContextualFilterInput, $pag
         }
     }
 }
+
+query supBooks($filters: SupBooksViewContextualFilterInput, $pageSize: Int = 3, $page: Int $offset: Int) {
+    supBooksView(contextualFilter: $filters, pageSize: $pageSize, page: $page, offset: $offset) {
+        results {
+            ...FragmentNodeSupBookTeaser
+        }
+        pageInfo {
+            ...FragmentViewPageInfo
+        }
+    }
+}

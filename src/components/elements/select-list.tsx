@@ -18,7 +18,7 @@ import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import {useIsClient} from "usehooks-ts";
 import {Maybe} from "@lib/gql/__generated__/drupal.d";
 
-interface OptionProps {
+type OptionProps = {
   rootRef: RefObject<HTMLUListElement>
   children?: ReactNode;
   value: string;
@@ -81,7 +81,7 @@ function CustomOption(props: OptionProps) {
   );
 }
 
-interface Props {
+type Props = {
   options: SelectOptionDefinition<string>[];
   label?: Maybe<string>
   ariaLabelledby?: Maybe<string>

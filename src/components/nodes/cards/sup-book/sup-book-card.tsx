@@ -17,17 +17,11 @@ const SupBookCard = ({node, headingLevel, ...props}: Props) => {
       aria-labelledby={node.id}
       isArticle
     >
-
-      <div className="flex flex-col">
-        <Heading className="text-m2 order-last [&_a]:text-black [&_a]:hocus:text-digital-red" id={node.id}>
-          <Link href={node.path}>
-            {node.title}
-          </Link>
-        </Heading>
-        <div className="font-bold order-first">
-          Publication
-        </div>
-      </div>
+      <Heading className="text-m2 order-last [&_a]:text-black [&_a]:hocus:text-digital-red" id={node.id}>
+        <Link href={node.path}>
+          {node.title}
+        </Link>
+      </Heading>
     </ImageCard>
   )
 }

@@ -6,7 +6,7 @@ import {cache, ElementType, HtmlHTMLAttributes} from "react";
 import {
   Maybe,
   NodeStanfordCourse, NodeStanfordEvent, NodeStanfordNews,
-  NodeStanfordPage, NodeStanfordPerson, NodeStanfordPublication,
+  NodeStanfordPage, NodeStanfordPerson, NodeStanfordPublication, NodeSupBook,
   NodeUnion,
   ParagraphStanfordList
 } from "@lib/gql/__generated__/drupal.d";
@@ -125,6 +125,10 @@ const getViewPagedItems = cache(async (viewId: string, displayId: string, contex
     case "stanford_publications--chicago_list":
       tags.push("views:stanford_publication");
       break
+
+    case "sup_books--book_list":
+      tags.push("views:sup_book");
+      break
   }
 
   const headers = await buildHeaders();
@@ -180,6 +184,12 @@ const getViewPagedItems = cache(async (viewId: string, displayId: string, contex
         filters = getViewFilters(["term_node_taxonomy_name_depth", "type"], contextualFilter)
         graphqlResponse = await client.stanfordSharedTags({filters, ...queryVariables});
         items = graphqlResponse.stanfordSharedTags?.results as unknown as NodeUnion[]
+        break
+
+      case "sup_books--book_list":
+        filters = getViewFilters(["term_node_taxonomy_name_depth", "sup_book_work_id_number_value"], contextualFilter)
+        graphqlResponse = await client.supBooks({filters, ...queryVariables});
+        items = graphqlResponse.supBooksView?.results as unknown as NodeSupBook[]
         break
 
       default:

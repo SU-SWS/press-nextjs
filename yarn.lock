@@ -1781,16 +1781,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.24.0":
-  version: 7.24.0
-  resolution: "@babel/runtime@npm:7.24.0"
-  dependencies:
-    regenerator-runtime: "npm:^0.14.0"
-  checksum: 10c0/3495eed727bf4a4f84c35bb51ab53317ae38f4bbc3b1d0a8303751f9dfa0ce6f5fb2afced72b76c3dd0d8bb2ccb84787559a4dee9886291a36b26f02f0f759b4
-  languageName: node
-  linkType: hard
-
-"@babel/runtime@npm:^7.24.4":
+"@babel/runtime@npm:^7.24.1, @babel/runtime@npm:^7.24.4":
   version: 7.24.4
   resolution: "@babel/runtime@npm:7.24.4"
   dependencies:
@@ -8711,14 +8702,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decanter@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "decanter@npm:7.2.0"
+"decanter@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "decanter@npm:7.3.0"
   dependencies:
     "@tailwindcss/aspect-ratio": "npm:^0.4.2"
     "@tailwindcss/forms": "npm:^0.5.7"
     tailwindcss: "npm:^3.4.1"
-  checksum: 10c0/5e05e16c3cb8389be9ec6d72946810e300bf6da4db1ee0c2194add5571405bb336a49809866db6f82c10f3443e4788034b228511fe27cbea7b8639dfd13a57f6
+  checksum: 10c0/179e7bb4af0ae39cd5674c9b8bc03e7c5ac0649897e3b4904fec2c44a03e6f1937dbccef901186723a8c79d03516438b63be8be711328761e7b9120a4b421b1a
   languageName: node
   linkType: hard
 
@@ -8764,7 +8755,7 @@ __metadata:
     axios: "npm:^1.6.8"
     clsx: "npm:^2.1.0"
     concurrently: "npm:^8.2.2"
-    decanter: "npm:^7.2.0"
+    decanter: "npm:^7.3.0"
     drupal-jsonapi-params: "npm:^2.3.1"
     encoding: "npm:^0.1.13"
     eslint: "npm:^8.57.0"
@@ -8784,14 +8775,14 @@ __metadata:
     react: "npm:^18.2.0"
     react-docgen: "npm:^7.0.3"
     react-dom: "npm:^18.2.0"
-    react-focus-lock: "npm:^2.11.3"
+    react-focus-lock: "npm:^2.12.0"
     react-instantsearch: "npm:^7.7.2"
     react-instantsearch-nextjs: "npm:^0.2.1"
     react-slick: "npm:^0.30.2"
     react-tiny-oembed: "npm:^1.1.0"
     sharp: "npm:^0.33.3"
     storybook: "npm:^8.0.8"
-    tailwind-merge: "npm:^2.2.2"
+    tailwind-merge: "npm:^2.3.0"
     tailwindcss: "npm:^3.4.3"
     tsconfig-paths-webpack-plugin: "npm:^4.1.0"
     typescript: "npm:^5.4.5"
@@ -14844,9 +14835,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-focus-lock@npm:^2.11.3":
-  version: 2.11.3
-  resolution: "react-focus-lock@npm:2.11.3"
+"react-focus-lock@npm:^2.12.0":
+  version: 2.12.0
+  resolution: "react-focus-lock@npm:2.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.0.0"
     focus-lock: "npm:^1.3.5"
@@ -14860,7 +14851,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10c0/98502b84a90cf6a57bc30cdbc382e12bab4ed9d11a87926309b3cdb62fd245a90243d0f28baa82454938906a215bc8d80675657600d1dde385c7ae9c81a28f04
+  checksum: 10c0/5a8f109edfd90332df5f2d4644ee779a94c1d05c46a868c7684aa141d35624ff6b304ffb6b9adfd96da19e3c6b64346c3507c9c1bd67f771465958708ea40b52
   languageName: node
   linkType: hard
 
@@ -16584,12 +16575,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-merge@npm:^2.2.2":
-  version: 2.2.2
-  resolution: "tailwind-merge@npm:2.2.2"
+"tailwind-merge@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "tailwind-merge@npm:2.3.0"
   dependencies:
-    "@babel/runtime": "npm:^7.24.0"
-  checksum: 10c0/68a5e199848a467aed4f8d1a8d7b6a5b583ff72f1d2801e018bf245eaa41e6564b63ead9e2b708a214cefbd843970c5e0a21754d5f2a20e2c1238e25955685ce
+    "@babel/runtime": "npm:^7.24.1"
+  checksum: 10c0/5ea308e23c3ab1cf4c3f35f0a471753f4d3ed232d63dd7c09151a74428737321902203d90e9f0cb76ea5c3978e71b0adbc503dc455e56cda967a7674ae4b94b5
   languageName: node
   linkType: hard
 
