@@ -9,8 +9,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        // Allow any stanford domain for images, but require https.
-        protocol: 'https',
+        // Allow any stanford domain for images.
         hostname: '**.stanford.edu',
       },
       {

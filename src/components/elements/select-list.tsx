@@ -160,7 +160,7 @@ const SelectList = ({
             </div>
           }
 
-          <ChevronDownIcon width={20} className="flex-shrink-0"/>
+          <ChevronDownIcon width={20} className="ml-auto flex-shrink-0"/>
         </div>
       </button>
 

@@ -1,16 +1,20 @@
 "use client";
 
 import algoliasearch from "algoliasearch/lite";
-import {useHits, useSearchBox} from "react-instantsearch";
+import {useHits, useSearchBox, useCurrentRefinements, useRefinementList, Snippet, useRange, useClearRefinements} from "react-instantsearch";
 import {InstantSearchNext} from "react-instantsearch-nextjs";
 import Link from "@components/elements/link";
 import {H2} from "@components/elements/headers";
 import Image from "next/image";
-import {useRef} from "react";
+import {useEffect, useId, useRef, useState} from "react";
 import Button from "@components/elements/button";
 import {UseSearchBoxProps} from "react-instantsearch";
 import {useRouter, useSearchParams} from "next/navigation";
-import {UseHitsProps} from "react-instantsearch-core/dist/es/connectors/useHits";
+import {Hit as HitType} from "instantsearch.js";
+import SelectList from "@components/elements/select-list";
+import {SelectOptionDefinition} from "@mui/base/useSelect";
+import {RangeBoundaries} from "instantsearch.js/es/connectors/range/connectRange";
+import {IndexUiState} from "instantsearch.js/es/types/ui-state";
 
 type Props = {
   appId: string
@@ -22,27 +26,188 @@ const AlgoliaSearch = ({appId, searchIndex, searchApiKey}: Props) => {
   const searchClient = algoliasearch(appId, searchApiKey);
   const searchParams = useSearchParams();
 
+  const initialUiState: IndexUiState = {}
+  if (searchParams.get("q")) initialUiState.query = searchParams.get("q") as string
+  if (searchParams.get("subjects")) {
+    initialUiState.refinementList = {book_subject: searchParams.get("subjects")?.split(",") as string[]}
+  }
+  if (searchParams.get("books")) {
+    initialUiState.refinementList = {book_type: ["book"]}
+  }
+  if (searchParams.get("published-min") || searchParams.get("published-max")) {
+    initialUiState.range = {book_published: (searchParams.get("published-min") || "0" as string) + ":" + (searchParams.get("published-max") || "3000" as string)}
+  }
+
   return (
     <div>
       <InstantSearchNext
         indexName={searchIndex}
         searchClient={searchClient}
-        initialUiState={{
-          [searchIndex]: {query: searchParams.get("q") || ""},
-        }}
+        initialUiState={{[searchIndex]: initialUiState}}
         future={{preserveSharedStateOnUnmount: true}}
       >
         <div className="space-y-10">
           <SearchBox/>
-          <HitList/>
+          <div className="flex gap-24">
+            <div className="w-1/4">
+              <FacetFilters/>
+            </div>
+            <div className="flex-grow">
+              <HitList/>
+            </div>
+          </div>
         </div>
       </InstantSearchNext>
     </div>
   )
 }
 
-const HitList = (props: UseHitsProps) => {
-  const {hits} = useHits(props);
+const FacetFilters = () => {
+  const router = useRouter()
+  const searchParams = useSearchParams();
+
+  const {
+    items: bookSubjectRefinementList,
+    refine: refineBookSubjects,
+    canToggleShowMore: canShowMoreRefinements,
+    toggleShowMore: showMoreRefinements
+  } = useRefinementList({attribute: "book_subject"});
+
+  const {refine: refineBookType} = useRefinementList({attribute: "book_type"});
+
+  const {items: currentRefinements, canRefine: canRefineCurrent, refine: removeRefinement} = useCurrentRefinements({});
+
+  const {range, canRefine: canRefineRange, refine: refineRange} = useRange({attribute: "book_published"});
+  const {min: minYear, max: maxYear} = range;
+  const [rangeChoices, setRangeChoices] = useState<RangeBoundaries>([parseInt(searchParams.get("published-min") || "1000"), parseInt(searchParams.get("published-max") || "3000")]);
+  const [subjectChoices, setSubjectChoices] = useState(searchParams.get("subjects")?.split(",") || [])
+
+  const {refine: clearRefinements} = useClearRefinements({});
+
+  const yearOptions: SelectOptionDefinition<string>[] = [];
+  for (let i = (maxYear || new Date().getFullYear()); i >= (minYear || 1990); i--) {
+    yearOptions.push({value: `${i}`, label: `${i}`});
+  }
+
+  const id = useId();
+
+  useEffect(() => {
+    const rangeFrom = rangeChoices[0] && minYear && rangeChoices[0] > minYear ? rangeChoices[0] : minYear
+    const rangeTo = rangeChoices[1] && maxYear && rangeChoices[1] < maxYear ? rangeChoices[1] : maxYear
+    refineRange([rangeFrom, rangeTo]);
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (rangeFrom && minYear && rangeFrom > minYear) {
+      params.set("published-min", `${rangeFrom}`)
+    } else {
+      params.delete("published-min")
+    }
+
+    if (rangeTo && maxYear && rangeTo < maxYear) {
+      params.set("published-max", `${rangeTo}`)
+    } else {
+      params.delete("published-max")
+    }
+
+    if (subjectChoices.length > 0) {
+      params.set("subjects", subjectChoices.join(","))
+    } else {
+      params.delete("subjects")
+    }
+
+    router.replace(`?${params.toString()}`, {scroll: false})
+  }, [rangeChoices, router, searchParams, maxYear, minYear, refineRange, subjectChoices]);
+
+  return (
+    <div>
+      <H2>Filter by</H2>
+
+      <ul className="list-unstyled" aria-live="polite">
+        {currentRefinements.filter(refinement => refinement.attribute === "book_subject").map(refinement => {
+          return refinement.refinements.map((item, i) =>
+            <li key={`refinement-${i}`}>
+              {item.value}
+              <button aria-labelledby={`${id}-i`} disabled={!canRefineCurrent} onClick={() => removeRefinement(item)}>
+                Clear
+              </button>
+            </li>
+          )
+        })}
+
+        {canShowMoreRefinements &&
+          <Button buttonElem onClick={showMoreRefinements}>Show more options</Button>
+        }
+      </ul>
+
+      <div>
+        <label className="flex items-center justify-between">
+          Search only books
+          <input type="checkbox" onChange={() => refineBookType("book")}/>
+        </label>
+      </div>
+
+      <fieldset>
+        <legend>Subject</legend>
+        {bookSubjectRefinementList.map(refinementOption =>
+          <label key={refinementOption.value} className="flex items-center gap-5">
+            <input
+              type="checkbox"
+              checked={refinementOption.isRefined}
+              onChange={() => {
+                refineBookSubjects(refinementOption.value)
+                const newSubjectChoices = [...subjectChoices]
+                if (newSubjectChoices.includes(refinementOption.value)) {
+                  newSubjectChoices.splice(newSubjectChoices.indexOf(refinementOption.value), 1);
+                } else {
+                  newSubjectChoices.push(refinementOption.value)
+                }
+                setSubjectChoices(newSubjectChoices);
+              }}
+            />
+            {refinementOption.value}
+          </label>
+        )}
+      </fieldset>
+
+      <fieldset>
+        <legend>Published Date</legend>
+
+        <div className="flex gap-5 items-center">
+          <div className="flex-grow flex-1">
+            <div id={`${id}-min-year`}><span className="sr-only">Minimum&nbps;</span>Year</div>
+            <SelectList
+              options={yearOptions.filter(option => parseInt(option.value) <= (rangeChoices[1] || new Date().getFullYear()))}
+              value={(!rangeChoices[0] || !minYear || rangeChoices[0] < minYear) ? undefined : `${rangeChoices[0]}`}
+              ariaLabelledby={`${id}-min-year`}
+              disabled={!canRefineRange}
+              onChange={(_e, value) => setRangeChoices((prevState) => [parseInt(value as string) || minYear, prevState[1]])}
+            />
+          </div>
+          <span>-</span>
+          <div className="flex-grow flex-1">
+            <div id={`${id}-max-year`}><span className="sr-only">Minimum&nbps;</span>Year</div>
+            <SelectList
+              options={yearOptions.filter(option => parseInt(option.value) >= (rangeChoices[0] || 1900))}
+              value={(!rangeChoices[1] || !maxYear || rangeChoices[1] > maxYear) ? undefined : `${rangeChoices[1]}`}
+              ariaLabelledby={`${id}-max-year`}
+              disabled={!canRefineRange}
+              onChange={(_e, value) => setRangeChoices((prevState) => [prevState[0], parseInt(value as string) || maxYear])}
+            />
+          </div>
+        </div>
+      </fieldset>
+
+      <Button buttonElem onClick={() => {
+        clearRefinements()
+        setSubjectChoices([]);
+        setRangeChoices([minYear, maxYear]);
+      }}>Reset</Button>
+    </div>
+  )
+}
+
+const HitList = () => {
+  const {hits,results} = useHits<HitType<AlgoliaHit>>({});
   if (hits.length === 0) {
     return (
       <p>No results for your search. Please try another search.</p>
@@ -50,13 +215,19 @@ const HitList = (props: UseHitsProps) => {
   }
 
   return (
-    <ul className="list-unstyled">
-      {hits.map(hit =>
-        <li key={hit.objectID} className="border-b border-gray-300 last:border-0">
-          <Hit hit={hit as unknown as AlgoliaHit}/>
-        </li>
-      )}
-    </ul>
+    <div>
+      {results?.nbHits &&
+        <div>{results.nbHits} {results.nbHits > 1 ? "Results" : "Result"}</div>
+      }
+      <ul className="list-unstyled">
+        {hits.map(hit =>
+          <li key={hit.objectID} className="border-b border-gray-300 last:border-0">
+            <Hit hit={hit}/>
+          </li>
+        )}
+      </ul>
+
+    </div>
   )
 }
 
@@ -66,9 +237,12 @@ type AlgoliaHit = {
   summary?: string
   photo?: string
   updated?: number
+  html?: string
+  book_published?: number
+  book_authors?: string
 }
 
-const Hit = ({hit}: { hit: AlgoliaHit }) => {
+const Hit = ({hit}: { hit: HitType<AlgoliaHit> }) => {
   const hitUrl = new URL(hit.url);
 
   return (
@@ -79,26 +253,30 @@ const Hit = ({hit}: { hit: AlgoliaHit }) => {
             {hit.title}
           </Link>
         </H2>
-        <p>{hit.summary}</p>
 
-        {hit.updated &&
-          <div className="text-2xl">
-            Last Updated: {new Date(hit.updated * 1000).toLocaleDateString("en-us", {
-            month: "long",
-            day: "numeric",
-            year: "numeric"
-          })}
-          </div>
+        {hit.summary &&
+          <p>{hit.summary}</p>
         }
+        {(hit.html && !hit.summary) &&
+          <Snippet hit={hit} attribute="html"/>
+        }
+
+        <div>
+          {hit.book_authors}
+        </div>
+        <div>
+          {hit.book_published}
+        </div>
       </div>
 
       {hit.photo &&
         <div className="hidden @6xl:block relative shrink-0 aspect-1 h-[150px] w-[150px]">
           <Image
             className="object-cover"
-            src={hit.photo.replace(hitUrl.origin, `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}`)}
+            src={hit.photo}
             alt=""
             fill
+            sizes="300px"
           />
         </div>
       }
@@ -108,35 +286,19 @@ const Hit = ({hit}: { hit: AlgoliaHit }) => {
 
 
 const SearchBox = (props?: UseSearchBoxProps) => {
-  const router = useRouter();
-  const {query, refine} = useSearchBox(props);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  if (query) {
-    router.replace(`?q=${query}`, {scroll: false})
-  }
+  const {query, refine} = useSearchBox(props);
 
   return (
     <form
       className="flex flex-col gap-10"
-      action=""
       role="search"
       noValidate
       onSubmit={(e) => {
         e.preventDefault();
-        e.stopPropagation();
+
         inputRef.current?.blur();
         refine(inputRef.current?.value || "");
-      }}
-      onReset={(event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        refine("");
-
-        if (inputRef.current) {
-          inputRef.current.value = "";
-          inputRef.current.focus();
-        }
       }}
     >
       <div className="flex flex-col">
@@ -160,14 +322,7 @@ const SearchBox = (props?: UseSearchBoxProps) => {
       </div>
       <div className="flex gap-10">
         <Button type="submit">
-          Submit
-        </Button>
-        <Button
-          secondary
-          type="reset"
-          className={query.length === 0 ? "hidden" : undefined}
-        >
-          Reset
+          Search
         </Button>
       </div>
       <div className="sr-only" aria-live="polite" aria-atomic>Showing results for {query}</div>
