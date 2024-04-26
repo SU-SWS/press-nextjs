@@ -15,6 +15,7 @@ import SelectList from "@components/elements/select-list";
 import {SelectOptionDefinition} from "@mui/base/useSelect";
 import {RangeBoundaries} from "instantsearch.js/es/connectors/range/connectRange";
 import {IndexUiState} from "instantsearch.js/es/types/ui-state";
+import {useBoolean} from "usehooks-ts";
 
 type Props = {
   appId: string
@@ -31,7 +32,7 @@ const AlgoliaSearch = ({appId, searchIndex, searchApiKey}: Props) => {
   if (searchParams.get("subjects")) {
     initialUiState.refinementList = {book_subject: searchParams.get("subjects")?.split(",") as string[]}
   }
-  if (searchParams.get("books")) {
+  if (!!searchParams.get("books")) {
     initialUiState.refinementList = {book_type: ["book"]}
   }
   if (searchParams.get("published-min") || searchParams.get("published-max")) {
@@ -66,23 +67,21 @@ const FacetFilters = () => {
   const router = useRouter()
   const searchParams = useSearchParams();
 
+  const {refine: clearRefinements} = useClearRefinements({});
   const {
     items: bookSubjectRefinementList,
     refine: refineBookSubjects,
     canToggleShowMore: canShowMoreRefinements,
     toggleShowMore: showMoreRefinements
-  } = useRefinementList({attribute: "book_subject"});
-
+  } = useRefinementList({attribute: "book_subject", limit: 100});
   const {refine: refineBookType} = useRefinementList({attribute: "book_type"});
-
-  const {items: currentRefinements, canRefine: canRefineCurrent, refine: removeRefinement} = useCurrentRefinements({});
-
   const {range, canRefine: canRefineRange, refine: refineRange} = useRange({attribute: "book_published"});
   const {min: minYear, max: maxYear} = range;
+  const {items: currentRefinements, canRefine: canRefineCurrent, refine: removeRefinement} = useCurrentRefinements({});
+
   const [rangeChoices, setRangeChoices] = useState<RangeBoundaries>([parseInt(searchParams.get("published-min") || "1000"), parseInt(searchParams.get("published-max") || "3000")]);
   const [subjectChoices, setSubjectChoices] = useState(searchParams.get("subjects")?.split(",") || [])
-
-  const {refine: clearRefinements} = useClearRefinements({});
+  const {value: onlyBooks, toggle: toggleOnlyBooks} = useBoolean(!!searchParams.get("books"))
 
   const yearOptions: SelectOptionDefinition<string>[] = [];
   for (let i = (maxYear || new Date().getFullYear()); i >= (minYear || 1990); i--) {
@@ -115,8 +114,14 @@ const FacetFilters = () => {
       params.delete("subjects")
     }
 
+    if (onlyBooks) {
+      params.set("books", "1")
+    } else {
+      params.delete("books")
+    }
+
     router.replace(`?${params.toString()}`, {scroll: false})
-  }, [rangeChoices, router, searchParams, maxYear, minYear, refineRange, subjectChoices]);
+  }, [rangeChoices, router, searchParams, maxYear, minYear, refineRange, subjectChoices, onlyBooks]);
 
   return (
     <div>
@@ -142,7 +147,14 @@ const FacetFilters = () => {
       <div>
         <label className="flex items-center justify-between">
           Search only books
-          <input type="checkbox" onChange={() => refineBookType("book")}/>
+          <input
+            type="checkbox"
+            checked={onlyBooks}
+            onChange={() => {
+              refineBookType("book")
+              toggleOnlyBooks()
+            }}
+          />
         </label>
       </div>
 
@@ -176,11 +188,11 @@ const FacetFilters = () => {
           <div className="flex-grow flex-1">
             <div id={`${id}-min-year`}><span className="sr-only">Minimum&nbps;</span>Year</div>
             <SelectList
-              options={yearOptions.filter(option => parseInt(option.value) <= (rangeChoices[1] || new Date().getFullYear()))}
+              options={yearOptions.reverse().filter(option => parseInt(option.value) <= (rangeChoices[1] || new Date().getFullYear()))}
               value={(!rangeChoices[0] || !minYear || rangeChoices[0] < minYear) ? undefined : `${rangeChoices[0]}`}
               ariaLabelledby={`${id}-min-year`}
               disabled={!canRefineRange}
-              onChange={(_e, value) => setRangeChoices((prevState) => [parseInt(value as string) || minYear, prevState[1]])}
+              onChange={(_e, value) => setRangeChoices((prevState) => [parseInt(value as string) || undefined, prevState[1]])}
             />
           </div>
           <span>-</span>
@@ -191,7 +203,7 @@ const FacetFilters = () => {
               value={(!rangeChoices[1] || !maxYear || rangeChoices[1] > maxYear) ? undefined : `${rangeChoices[1]}`}
               ariaLabelledby={`${id}-max-year`}
               disabled={!canRefineRange}
-              onChange={(_e, value) => setRangeChoices((prevState) => [prevState[0], parseInt(value as string) || maxYear])}
+              onChange={(_e, value) => setRangeChoices((prevState) => [prevState[0], parseInt(value as string) || undefined])}
             />
           </div>
         </div>
@@ -207,7 +219,7 @@ const FacetFilters = () => {
 }
 
 const HitList = () => {
-  const {hits,results} = useHits<HitType<AlgoliaHit>>({});
+  const {hits, results} = useHits<HitType<AlgoliaHit>>({});
   if (hits.length === 0) {
     return (
       <p>No results for your search. Please try another search.</p>
