@@ -1,7 +1,7 @@
 "use client";
 
 import algoliasearch from "algoliasearch/lite";
-import {useHits, useSearchBox, useCurrentRefinements, useRefinementList, Snippet, useRange, useClearRefinements} from "react-instantsearch";
+import {useHits, useSearchBox, useCurrentRefinements, useRefinementList, Snippet, useRange, useClearRefinements, usePagination} from "react-instantsearch";
 import {InstantSearchNext} from "react-instantsearch-nextjs";
 import Link from "@components/elements/link";
 import {H2} from "@components/elements/headers";
@@ -49,7 +49,10 @@ const SearchForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const {refine} = useSearchBox({});
   const {refine: clearRefinements} = useClearRefinements({});
-  const {items: bookSubjectRefinementList, refine: refineBookSubjects} = useRefinementList({attribute: "book_subject", limit: 100});
+  const {items: bookSubjectRefinementList, refine: refineBookSubjects} = useRefinementList({
+    attribute: "book_subject",
+    limit: 100
+  });
   const {refine: refineBookType} = useRefinementList({attribute: "book_type"});
   const {range, canRefine: canRefineRange, refine: refineRange} = useRange({attribute: "book_published"});
   const {min: minYear, max: maxYear} = range;
@@ -148,7 +151,8 @@ const SearchForm = () => {
               <ul className="list-unstyled mb-16" aria-live="polite">
                 {currentRefinements.filter(refinement => refinement.attribute === "book_subject").map(refinement => {
                   return refinement.refinements.map((item, i) =>
-                    <li key={`refinement-${i}`} className="w-fit flex items-center gap-24 border border-black p-5 mb-5 last:mb-0">
+                    <li key={`refinement-${i}`}
+                        className="w-fit flex items-center gap-24 border border-black p-5 mb-5 last:mb-0">
                       {item.value}
                       <button
                         aria-labelledby={`${id}-i`}
@@ -250,7 +254,8 @@ const SearchForm = () => {
 }
 
 const HitList = () => {
-  const {hits, results} = useHits<HitType<AlgoliaHit>>({});
+  const {hits} = useHits<HitType<AlgoliaHit>>({});
+  const {pages, nbPages, nbHits, refine: goToPage} = usePagination({padding: 2})
   if (hits.length === 0) {
     return (
       <p>No results for your search. Please try another search.</p>
@@ -259,8 +264,8 @@ const HitList = () => {
 
   return (
     <div>
-      {results?.nbHits &&
-        <div>{results.nbHits} {results.nbHits > 1 ? "Results" : "Result"}</div>
+      {nbHits &&
+        <div>{nbHits} {nbHits > 1 ? "Results" : "Result"}</div>
       }
       <ul className="list-unstyled">
         {hits.map(hit =>
@@ -270,6 +275,27 @@ const HitList = () => {
         )}
       </ul>
 
+      {pages.length > 1 &&
+        <nav className="flex justify-between" aria-label="Search results pages">
+          {pages[0] > 0 &&
+            <button onClick={() => goToPage(0)}>
+              First
+            </button>
+          }
+
+          {pages.map(pageNum =>
+            <button key={`page-${pageNum}`} onClick={() => goToPage(pageNum)}>
+              {pageNum + 1}
+            </button>
+          )}
+
+          {pages[pages.length - 1] !== nbPages &&
+            <button onClick={() => goToPage(nbPages -1)}>
+              Last
+            </button>
+          }
+        </nav>
+      }
     </div>
   )
 }
@@ -304,12 +330,16 @@ const Hit = ({hit}: { hit: HitType<AlgoliaHit> }) => {
           <Snippet hit={hit} attribute="html"/>
         }
 
-        <div>
-          {hit.book_authors}
-        </div>
-        <div>
-          {hit.book_published}
-        </div>
+        {hit.book_authors &&
+          <div>
+            {hit.book_authors}
+          </div>
+        }
+        {hit.book_published &&
+          <div>
+            {hit.book_published}
+          </div>
+        }
       </div>
 
       {hit.photo &&
