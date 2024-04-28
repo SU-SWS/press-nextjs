@@ -114,6 +114,7 @@ const SelectList = ({
   const labelId = useId();
   const labeledBy = ariaLabelledby || labelId;
 
+  const listboxContainerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null);
   const listboxRef = useRef<HTMLUListElement>(null);
   const [listboxVisible, setListboxVisible] = useState<boolean>(false);
@@ -128,12 +129,15 @@ const SelectList = ({
     ...props
   });
 
-  useEffect(() => listboxRef.current?.focus(), [listboxVisible]);
+  useEffect(() => {
+    listboxRef.current?.focus()
+    listboxContainerRef.current?.scroll(0, 0)
+  }, [listboxVisible]);
 
   useLayoutEffect(() => {
-    const parentContainer = listboxRef.current?.parentElement?.getBoundingClientRect();
+    const parentContainer = listboxContainerRef.current?.getBoundingClientRect();
     if (parentContainer && (parentContainer.bottom > window.innerHeight)) {
-      listboxRef.current?.parentElement?.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+      listboxRef.current?.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
     }
   }, [listboxVisible, value])
 
@@ -167,7 +171,7 @@ const SelectList = ({
         </div>
       </button>
 
-      <div className={clsx("absolute z-[10] w-full top-full left-0 max-h-[300px] pb-5 overflow-y-scroll shadow-lg border border-black-20 bg-white", {"hidden": !listboxVisible})}>
+      <div ref={listboxContainerRef} className={clsx("absolute z-[10] w-full top-full left-0 max-h-[300px] pb-5 overflow-y-scroll shadow-lg border border-black-20 bg-white", {"hidden": !listboxVisible})}>
         <ul
           {...getListboxProps()}
           className={clsx("list-unstyled", {"hidden": !listboxVisible})}
