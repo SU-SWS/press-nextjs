@@ -17,6 +17,8 @@ import {
 import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import {useIsClient} from "usehooks-ts";
 import {Maybe} from "@lib/gql/__generated__/drupal.d";
+import {twMerge} from "tailwind-merge";
+import {clsx} from "clsx";
 
 type OptionProps = {
   rootRef: RefObject<HTMLUListElement>
@@ -47,8 +49,6 @@ function CustomOption(props: OptionProps) {
   const {getRootProps, highlighted, selected} = useOption({rootRef: rootRef, value, disabled, label: children});
 
   const {id, ...otherProps}: { id: string } = getRootProps();
-  const selectedStyles = "bg-archway text-white " + (highlighted ? "underline" : "")
-  const highlightedStyles = "bg-black-10 text-black underline"
 
   useEffect(() => {
     if (highlighted && id && rootRef?.current?.parentElement) {
@@ -74,7 +74,10 @@ function CustomOption(props: OptionProps) {
     <li
       {...otherProps}
       id={id}
-      className={"m-0 mb-2 py-2 px-10 cursor-pointer hocus:underline overflow-hidden " + (selected ? selectedStyles : (highlighted ? highlightedStyles : "hocus:bg-black-10 hocus:text-black"))}
+      className={twMerge(clsx("m-0 mb-2 py-2 px-10 cursor-pointer hocus:underline overflow-hidden hocus:bg-black-10 hocus:text-black", {
+        "bg-archway text-white": selected,
+        "bg-black-10 text-black underline": !selected && highlighted,
+      }))}
     >
       {children}
     </li>
@@ -129,7 +132,7 @@ const SelectList = ({
 
   useLayoutEffect(() => {
     const parentContainer = listboxRef.current?.parentElement?.getBoundingClientRect();
-    if (parentContainer && (parentContainer.bottom > window.innerHeight || parentContainer.top < 0)) {
+    if (parentContainer && (parentContainer.bottom > window.innerHeight)) {
       listboxRef.current?.parentElement?.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
     }
   }, [listboxVisible, value])
@@ -148,7 +151,7 @@ const SelectList = ({
       >
         <div className="flex justify-between flex-wrap">
           {label &&
-            <div className={"relative " + (optionChosen ? "text-m0 top-[-15px] w-full" : "text-m1")}>
+            <div className={clsx("relative", {"text-m0 top-[-15px] w-full": optionChosen, "text-m1": !optionChosen})}>
               <div id={labelId} className="bg-white w-fit px-5">
                 {label}
               </div>
@@ -164,11 +167,10 @@ const SelectList = ({
         </div>
       </button>
 
-      <div
-        className={"absolute z-[10] w-full top-full left-0 max-h-[300px] pb-5 overflow-y-scroll shadow-lg border border-black-20 bg-white " + (listboxVisible ? "" : "hidden")}>
+      <div className={clsx("absolute z-[10] w-full top-full left-0 max-h-[300px] pb-5 overflow-y-scroll shadow-lg border border-black-20 bg-white", {"hidden": !listboxVisible})}>
         <ul
           {...getListboxProps()}
-          className={"list-unstyled " + (listboxVisible ? "" : "hidden")}
+          className={clsx("list-unstyled", {"hidden": !listboxVisible})}
           aria-hidden={!listboxVisible}
           aria-labelledby={labeledBy}
         >
