@@ -1,7 +1,7 @@
 "use client";
 
 import algoliasearch from "algoliasearch/lite";
-import {useHits, useSearchBox, useCurrentRefinements, useRefinementList, Snippet, useRange, useClearRefinements, usePagination} from "react-instantsearch";
+import {useHits, useSearchBox, useCurrentRefinements, useRefinementList, Snippet, useRange, useClearRefinements, usePagination, useSortBy} from "react-instantsearch";
 import {InstantSearchNext} from "react-instantsearch-nextjs";
 import Link from "@components/elements/link";
 import {H2} from "@components/elements/headers";
@@ -35,13 +35,13 @@ const AlgoliaSearch = ({appId, searchIndex, searchApiKey, initialUiState = {}}: 
         initialUiState={{[searchIndex]: initialUiState}}
         future={{preserveSharedStateOnUnmount: true}}
       >
-        <SearchForm/>
+        <SearchForm searchIndex={searchIndex}/>
       </InstantSearchNext>
     </div>
   )
 }
 
-const SearchForm = () => {
+const SearchForm = ({searchIndex}: { searchIndex: string }) => {
 
   const router = useRouter()
   const searchParams = useSearchParams();
@@ -70,6 +70,17 @@ const SearchForm = () => {
   }
 
   const id = useId();
+
+  const toggleSubject = (subject:string) => {
+    const newSubjectChoices = [...subjectChoices]
+
+    if (newSubjectChoices.includes(subject)) {
+      newSubjectChoices.splice(newSubjectChoices.indexOf(subject), 1);
+    } else {
+      newSubjectChoices.push(subject)
+    }
+    setSubjectChoices(newSubjectChoices);
+  }
 
   useEffect(() => {
     const rangeFrom = rangeChoices[0] && minYear && rangeChoices[0] > minYear ? rangeChoices[0] : minYear
@@ -151,13 +162,18 @@ const SearchForm = () => {
               <ul className="list-unstyled mb-16" aria-live="polite">
                 {currentRefinements.filter(refinement => refinement.attribute === "book_subject").map(refinement => {
                   return refinement.refinements.map((item, i) =>
-                    <li key={`refinement-${i}`}
-                        className="w-fit flex items-center gap-24 border border-black p-5 mb-5 last:mb-0">
+                    <li
+                      key={`refinement-${i}`}
+                      className="w-fit flex items-center gap-24 border border-black p-5 mb-5 last:mb-0"
+                    >
                       {item.value}
                       <button
                         aria-labelledby={`${id}-i`}
                         disabled={!canRefineCurrent}
-                        onClick={() => removeRefinement(item)}
+                        onClick={() => {
+                          removeRefinement(item)
+                          toggleSubject(item.value as string)
+                        }}
                       >
                         <span className="sr-only">Clear</span>
                         <XMarkIcon width={30}/>
@@ -192,14 +208,7 @@ const SearchForm = () => {
                   checked={refinementOption.isRefined}
                   onChange={() => {
                     refineBookSubjects(refinementOption.value)
-                    const newSubjectChoices = [...subjectChoices]
-
-                    if (newSubjectChoices.includes(refinementOption.value)) {
-                      newSubjectChoices.splice(newSubjectChoices.indexOf(refinementOption.value), 1);
-                    } else {
-                      newSubjectChoices.push(refinementOption.value)
-                    }
-                    setSubjectChoices(newSubjectChoices);
+                    toggleSubject(refinementOption.value)
                   }}
                 />
                 {refinementOption.value}
@@ -247,15 +256,22 @@ const SearchForm = () => {
       </form>
 
       <div className="lg:float-right lg:ml-20 lg:w-[calc(75%-5rem)]">
-        <HitList/>
+        <HitList searchIndex={searchIndex}/>
       </div>
     </div>
   )
 }
 
-const HitList = () => {
+const HitList = ({searchIndex}: { searchIndex: string }) => {
   const {hits} = useHits<HitType<AlgoliaHit>>({});
   const {pages, nbPages, nbHits, refine: goToPage} = usePagination({padding: 2})
+  const {options: sortOptions, refine: sortBy, currentRefinement: currentSort} = useSortBy({
+    items: [
+      {label: "Relevance", value: searchIndex},
+      {label: "Authors A-Z", value: `${searchIndex}_authors_asc`},
+      {label: "Authors Z-A", value: `${searchIndex}_authors_desc`},
+    ]
+  })
   if (hits.length === 0) {
     return (
       <p>No results for your search. Please try another search.</p>
@@ -264,9 +280,25 @@ const HitList = () => {
 
   return (
     <div>
-      {nbHits &&
-        <div>{nbHits} {nbHits > 1 ? "Results" : "Result"}</div>
-      }
+      <div className="flex justify-between items-center">
+        {nbHits &&
+          <div>{nbHits} {nbHits > 1 ? "Results" : "Result"}</div>
+        }
+
+        <div className="flex items-center gap-3 w-1/2">
+          <div id="sort-by">Sort By</div>
+          <div className="flex-grow">
+            <SelectList
+              ariaLabelledby="sort-by"
+              options={sortOptions}
+              value={currentSort}
+              required
+              onChange={(_e, value) => sortBy(value as string)}
+            />
+          </div>
+        </div>
+      </div>
+
       <ul className="list-unstyled">
         {hits.map(hit =>
           <li key={hit.objectID} className="border-b border-gray-300 last:border-0">
@@ -290,7 +322,7 @@ const HitList = () => {
           )}
 
           {pages[pages.length - 1] !== nbPages &&
-            <button onClick={() => goToPage(nbPages -1)}>
+            <button onClick={() => goToPage(nbPages - 1)}>
               Last
             </button>
           }
@@ -324,10 +356,12 @@ const Hit = ({hit}: { hit: HitType<AlgoliaHit> }) => {
         </H2>
 
         {hit.summary &&
-          <p>{hit.summary}</p>
+          <p className="mb-10">{hit.summary}</p>
         }
         {(hit.html && !hit.summary) &&
-          <Snippet hit={hit} attribute="html"/>
+          <p className="mb-10">
+            <Snippet hit={hit} attribute="html"/>
+          </p>
         }
 
         {hit.book_authors &&
