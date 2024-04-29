@@ -137,7 +137,7 @@ const SearchForm = ({searchIndex}: { searchIndex: string }) => {
           <div className="border-b border-black-30">
             <H2>Filter by</H2>
             {currentRefinements.filter(refinement => refinement.attribute === "book_subject").length > 0 &&
-              <ul className="list-unstyled mb-16" aria-live="polite">
+              <ul className="list-unstyled mb-16">
                 {currentRefinements.filter(refinement => refinement.attribute === "book_subject").map(refinement => {
                   return refinement.refinements.map((item, i) =>
                     <li
@@ -238,8 +238,8 @@ const HitList = ({searchIndex}: { searchIndex: string }) => {
   const {options: sortOptions, refine: sortBy, currentRefinement: currentSort} = useSortBy({
     items: [
       {label: "Relevance", value: searchIndex},
-      {label: "Authors A-Z", value: `${searchIndex}_authors_asc`},
-      {label: "Authors Z-A", value: `${searchIndex}_authors_desc`},
+      {label: "Last Name, A-Z", value: `${searchIndex}_authors_asc`},
+      {label: "Last Name, Z-A", value: `${searchIndex}_authors_desc`},
     ]
   })
   if (hits.length === 0) {
@@ -251,18 +251,17 @@ const HitList = ({searchIndex}: { searchIndex: string }) => {
   return (
     <div>
       <div className="flex justify-between items-center">
-        {nbHits &&
-          <div>{nbHits} {nbHits > 1 ? "Results" : "Result"}</div>
-        }
+        <div aria-live="polite">{nbHits} {nbHits > 1 ? "Results" : "Result"}</div>
 
         <div className="flex items-center gap-3 w-1/2">
-          <div id="sort-by">Sort By</div>
+          <div id="sort-by">Sort By:</div>
           <div className="flex-grow">
             <SelectList
               ariaLabelledby="sort-by"
               options={sortOptions}
               value={currentSort}
               required
+              borderless
               onChange={(_e, value) => sortBy(value as string)}
             />
           </div>

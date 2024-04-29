@@ -15,7 +15,6 @@ import {
   useState
 } from "react";
 import {ChevronDownIcon} from "@heroicons/react/20/solid";
-import {useIsClient} from "usehooks-ts";
 import {Maybe} from "@lib/gql/__generated__/drupal.d";
 import {twMerge} from "tailwind-merge";
 import {clsx} from "clsx";
@@ -97,6 +96,7 @@ type Props = {
   emptyValue?: Maybe<string>
   emptyLabel?: Maybe<string>
   name?: Maybe<string>
+  borderless?: boolean
 }
 
 const SelectList = ({
@@ -109,6 +109,7 @@ const SelectList = ({
   name,
   emptyValue,
   emptyLabel = "- None -",
+  borderless = false,
   ...props
 }: Props) => {
   const labelId = useId();
@@ -118,7 +119,6 @@ const SelectList = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const listboxRef = useRef<HTMLUListElement>(null);
   const [listboxVisible, setListboxVisible] = useState<boolean>(false);
-  const isClient = useIsClient()
 
   const {getButtonProps, getListboxProps, contextValue, value} = useSelect<string, boolean>({
     listboxRef,
@@ -143,14 +143,11 @@ const SelectList = ({
 
   const optionChosen = (multiple && value) ? value.length > 0 : !!value;
 
-  // With Mui and Next.js 14, an error occurs on the server rendering. To avoid that issue, only render the component on the client.
-  if (!isClient) return null;
-
   return (
     <div className="relative h-fit">
       <button
         {...getButtonProps()}
-        className="w-full border border-black-40 rounded text-left p-5"
+        className={clsx("w-full text-left p-5", {"border border-black-40 rounded": !borderless})}
         aria-labelledby={labeledBy}
       >
         <div className="flex justify-between flex-wrap">
