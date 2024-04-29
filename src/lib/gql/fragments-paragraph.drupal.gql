@@ -167,12 +167,6 @@ fragment FragmentParagraphStanfordPageTitleBanner on ParagraphStanfordPageTitleB
     }
 }
 
-
-fragment FragmentParagraphSupPreBuilt on ParagraphSupPreBuilt {
-    ...FragmentParagraphInterface
-    supPrebuiltComponent
-}
-
 fragment FragmentParagraphSupFileList on ParagraphSupFileList {
     ...FragmentParagraphInterface
     supFileListFiles {
@@ -222,6 +216,44 @@ fragment FragmentParagraphSupCarousel on ParagraphSupCarousel {
     supCarouselTopHero
 }
 
+fragment FragmentParagraphSupAuthorList on ParagraphSupAuthorList {
+    ...FragmentParagraphInterface
+}
+
+fragment FragmentParagraphSupSearchForm on ParagraphSupSearchForm {
+    ...FragmentParagraphInterface
+    supSearchBooksOnly
+    supSearchSubject {
+        ... on TermInterface {
+            id
+            name
+        }
+    }
+}
+
+fragment FragmentParagraphSupBlog on ParagraphSupBlog {
+    ...FragmentParagraphInterface
+    supBlogBody
+    supBlogImage {
+        ...FragmentMediaImage
+    }
+    supBlogTitle
+    supBlogUrl {
+        ...FragmentLink
+    }
+}
+
+fragment FragmentParagraphSupBlogTeaser on ParagraphSupBlogTeaser {
+    ...FragmentParagraphInterface
+    supBlogTeaserHeader
+    supBlogTeaserItems {
+        ...FragmentParagraphSupBlog
+    }
+    supBlogTeaserLink {
+        ...FragmentLink
+    }
+}
+
 fragment FragmentParagraphUnion on ParagraphUnion {
     ...FragmentParagraphInterface
     ...FragmentParagraphStanfordAccordion
@@ -234,8 +266,10 @@ fragment FragmentParagraphUnion on ParagraphUnion {
     ...FragmentParagraphStanfordSpacer
     ...FragmentParagraphStanfordWysiwyg
     ...FragmentParagraphStanfordLayout
-    ...FragmentParagraphSupPreBuilt
     ...FragmentParagraphSupCarousel
     ...FragmentParagraphSupFileList
     ...FragmentParagraphSupCarouselSlide
+    ...FragmentParagraphSupAuthorList
+    ...FragmentParagraphSupSearchForm
+    ...FragmentParagraphSupBlogTeaser
 }

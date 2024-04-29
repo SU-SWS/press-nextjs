@@ -2,11 +2,11 @@ import {HTMLAttributes, JSX} from "react";
 import {graphqlClient} from "@lib/gql/gql-client";
 import {BooksQuery, NodeSupBook} from "@lib/gql/__generated__/drupal";
 import Link from "@components/elements/link";
-import FilteringAuthorList from "@components/paragraphs/sup-pre-built/filtering-author-list";
+import FilteringAuthorList from "@components/paragraphs/sup-author-list/filtering-author-list";
 
 type Props = HTMLAttributes<HTMLDivElement>;
 
-const PreBuiltAuthorList = async ({...props}: Props) => {
+const SupAuthorListParagraph = async ({...props}: Props) => {
   // Fetch all the books, sort by authors, and then build pagination and side alpha selection.
   let fetchMore = true;
   let query: BooksQuery;
@@ -37,4 +37,4 @@ const PreBuiltAuthorList = async ({...props}: Props) => {
     <FilteringAuthorList authors={authors} {...props}/>
   )
 }
-export default PreBuiltAuthorList;
+export default SupAuthorListParagraph;

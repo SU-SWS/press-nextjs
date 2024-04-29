@@ -407,12 +407,6 @@ export const FragmentParagraphStanfordLayoutFragmentDoc = gql`
   ...FragmentParagraphInterface
 }
     ${FragmentParagraphInterfaceFragmentDoc}`;
-export const FragmentParagraphSupPreBuiltFragmentDoc = gql`
-    fragment FragmentParagraphSupPreBuilt on ParagraphSupPreBuilt {
-  ...FragmentParagraphInterface
-  supPrebuiltComponent
-}
-    ${FragmentParagraphInterfaceFragmentDoc}`;
 export const FragmentLinkFragmentDoc = gql`
     fragment FragmentLink on Link {
   title
@@ -476,6 +470,52 @@ export const FragmentParagraphSupFileListFragmentDoc = gql`
 }
     ${FragmentParagraphInterfaceFragmentDoc}
 ${FragmentMediaFileFragmentDoc}`;
+export const FragmentParagraphSupAuthorListFragmentDoc = gql`
+    fragment FragmentParagraphSupAuthorList on ParagraphSupAuthorList {
+  ...FragmentParagraphInterface
+}
+    ${FragmentParagraphInterfaceFragmentDoc}`;
+export const FragmentParagraphSupSearchFormFragmentDoc = gql`
+    fragment FragmentParagraphSupSearchForm on ParagraphSupSearchForm {
+  ...FragmentParagraphInterface
+  supSearchBooksOnly
+  supSearchSubject {
+    ... on TermInterface {
+      id
+      name
+    }
+  }
+}
+    ${FragmentParagraphInterfaceFragmentDoc}`;
+export const FragmentParagraphSupBlogFragmentDoc = gql`
+    fragment FragmentParagraphSupBlog on ParagraphSupBlog {
+  ...FragmentParagraphInterface
+  supBlogBody
+  supBlogImage {
+    ...FragmentMediaImage
+  }
+  supBlogTitle
+  supBlogUrl {
+    ...FragmentLink
+  }
+}
+    ${FragmentParagraphInterfaceFragmentDoc}
+${FragmentMediaImageFragmentDoc}
+${FragmentLinkFragmentDoc}`;
+export const FragmentParagraphSupBlogTeaserFragmentDoc = gql`
+    fragment FragmentParagraphSupBlogTeaser on ParagraphSupBlogTeaser {
+  ...FragmentParagraphInterface
+  supBlogTeaserHeader
+  supBlogTeaserItems {
+    ...FragmentParagraphSupBlog
+  }
+  supBlogTeaserLink {
+    ...FragmentLink
+  }
+}
+    ${FragmentParagraphInterfaceFragmentDoc}
+${FragmentParagraphSupBlogFragmentDoc}
+${FragmentLinkFragmentDoc}`;
 export const FragmentParagraphUnionFragmentDoc = gql`
     fragment FragmentParagraphUnion on ParagraphUnion {
   ...FragmentParagraphInterface
@@ -489,10 +529,12 @@ export const FragmentParagraphUnionFragmentDoc = gql`
   ...FragmentParagraphStanfordSpacer
   ...FragmentParagraphStanfordWysiwyg
   ...FragmentParagraphStanfordLayout
-  ...FragmentParagraphSupPreBuilt
   ...FragmentParagraphSupCarousel
   ...FragmentParagraphSupFileList
   ...FragmentParagraphSupCarouselSlide
+  ...FragmentParagraphSupAuthorList
+  ...FragmentParagraphSupSearchForm
+  ...FragmentParagraphSupBlogTeaser
 }
     ${FragmentParagraphInterfaceFragmentDoc}
 ${FragmentParagraphStanfordAccordionFragmentDoc}
@@ -505,10 +547,12 @@ ${FragmentParagraphStanfordMediaCaptionFragmentDoc}
 ${FragmentParagraphStanfordSpacerFragmentDoc}
 ${FragmentParagraphStanfordWysiwygFragmentDoc}
 ${FragmentParagraphStanfordLayoutFragmentDoc}
-${FragmentParagraphSupPreBuiltFragmentDoc}
 ${FragmentParagraphSupCarouselFragmentDoc}
 ${FragmentParagraphSupFileListFragmentDoc}
-${FragmentParagraphSupCarouselSlideFragmentDoc}`;
+${FragmentParagraphSupCarouselSlideFragmentDoc}
+${FragmentParagraphSupAuthorListFragmentDoc}
+${FragmentParagraphSupSearchFormFragmentDoc}
+${FragmentParagraphSupBlogTeaserFragmentDoc}`;
 export const FragmentSmartDateTypeFragmentDoc = gql`
     fragment FragmentSmartDateType on SmartDateType {
   value
