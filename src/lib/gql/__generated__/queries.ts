@@ -122,6 +122,7 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   }
   supBookInPrintStatus
   supBookInstructorRecommended
+  supBookIntlCart
   supBookIsbn13Alt
   supBookIsbn13Cloth
   supBookIsbn13Digital
