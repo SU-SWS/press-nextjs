@@ -762,6 +762,7 @@ export const FragmentParagraphStanfordPageTitleBannerFragmentDoc = gql`
   suTitleBannerImage {
     ...FragmentMediaImage
   }
+  supTitleBannerColor
 }
     ${FragmentParagraphInterfaceFragmentDoc}
 ${FragmentMediaImageFragmentDoc}`;

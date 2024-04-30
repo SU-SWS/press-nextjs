@@ -165,6 +165,7 @@ fragment FragmentParagraphStanfordPageTitleBanner on ParagraphStanfordPageTitleB
     suTitleBannerImage {
         ...FragmentMediaImage
     }
+    supTitleBannerColor
 }
 
 fragment FragmentParagraphSupFileList on ParagraphSupFileList {
