@@ -167,7 +167,16 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   supBookStatusDigital
   supBookStatusPaper
   supBookSubjects {
-    ...FragmentTermInterface
+    __typename
+    id
+    name
+    weight
+    parent {
+      ... on TermInterface {
+        id
+        name
+      }
+    }
   }
   supBookSubtitle
   supBookTableOfContents {
