@@ -1,0 +1,59 @@
+fragment FragmentMediaInterface on MediaInterface {
+    __typename
+    id
+    name
+}
+
+fragment FragmentMediaFile on MediaFile {
+    ...FragmentMediaInterface
+    mediaFile {
+        url
+    }
+}
+
+fragment FragmentMediaEmbeddable on MediaEmbeddable {
+    ...FragmentMediaInterface
+    mediaEmbeddableCode
+    mediaEmbeddableOembed
+}
+
+fragment FragmentMediaGoogleForm on MediaGoogleForm {
+    ...FragmentMediaInterface
+    mediaGoogleForm
+    mediaGoogleForm
+}
+
+fragment FragmentMediaImage on MediaImage {
+    ...FragmentMediaInterface
+    mediaImage {
+        url
+        alt
+        height
+        width
+    }
+}
+
+fragment FragmentMediaStanfordGalleryImage on MediaStanfordGalleryImage {
+    ...FragmentMediaInterface
+    suGalleryCaption
+    suGalleryImage {
+        url
+        alt
+        height
+        width
+    }
+}
+
+fragment FragmentMediaVideo on MediaVideo {
+    ...FragmentMediaInterface
+    mediaOembedVideo
+}
+
+fragment FragmentMediaUnion on MediaUnion {
+    ...FragmentMediaEmbeddable
+    ...FragmentMediaFile
+    ...FragmentMediaGoogleForm
+    ...FragmentMediaImage
+    ...FragmentMediaStanfordGalleryImage
+    ...FragmentMediaVideo
+}

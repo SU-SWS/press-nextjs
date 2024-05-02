@@ -9,6 +9,11 @@ import ListParagraph from "@components/paragraphs/stanford-lists/list-paragraph"
 import {isPreviewMode} from "@lib/drupal/utils";
 import {ParagraphUnion} from "@lib/gql/__generated__/drupal.d";
 import {Suspense} from "react";
+import FileListParagraph from "@components/paragraphs/sup-file-list/file-list-paragraph";
+import SupCarouselParagraph from "@components/paragraphs/sup-carousel/sup-carousel-paragraph";
+import SupAuthorListParagraph from "@components/paragraphs/sup-author-list/sup-author-list-paragraph";
+import SupSearchFormParagraph from "@components/paragraphs/sup-search-form/sup-search-form-paragraph";
+import SupBlogTeaserParagraph from "@components/paragraphs/sup-blog-teaser/sup-blog-teaser-paragraph";
 
 type Props = {
   /**
@@ -43,6 +48,16 @@ const Paragraph = async ({paragraph}: Props) => {
       return <WysiwygParagraph paragraph={paragraph} {...itemProps}/>
     case "ParagraphStanfordList":
       return <Suspense><ListParagraph paragraph={paragraph} {...itemProps}/></Suspense>
+    case "ParagraphSupFileList":
+      return <FileListParagraph paragraph={paragraph} {...itemProps}/>
+    case "ParagraphSupCarousel":
+      return <SupCarouselParagraph paragraph={paragraph} {...itemProps}/>
+    case "ParagraphSupAuthorList":
+      return <SupAuthorListParagraph {...itemProps}/>
+    case "ParagraphSupSearchForm":
+      return <SupSearchFormParagraph paragraph={paragraph} {...itemProps}/>
+    case "ParagraphSupBlogTeaser":
+      return <SupBlogTeaserParagraph paragraph={paragraph} {...itemProps}/>
   }
   console.warn(`Unknown paragraph ${paragraph.__typename}. Item ${paragraph.id}.`);
 }

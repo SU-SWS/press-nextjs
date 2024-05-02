@@ -8,6 +8,7 @@ import StanfordCoursePage from "@components/nodes/pages/stanford-course/stanford
 import StanfordEventSeriesPage from "@components/nodes/pages/stanford-event-series/stanford-event-series-page";
 import {isPreviewMode} from "@lib/drupal/utils";
 import {NodeUnion} from "@lib/gql/__generated__/drupal.d";
+import SupBookPage from "@components/nodes/pages/sup-book/sup-book-page";
 
 const NodePage = ({node}: { node: NodeUnion }) => {
   const previewMode = isPreviewMode();
@@ -35,6 +36,8 @@ const NodePage = ({node}: { node: NodeUnion }) => {
       return <StanfordPolicyPage node={node} {...itemProps}/>
     case "NodeStanfordPublication":
       return <StanfordPublicationPage node={node} {...itemProps}/>
+    case "NodeSupBook":
+      return <SupBookPage node={node} {...itemProps}/>
   }
 }
 export default NodePage;

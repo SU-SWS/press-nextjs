@@ -1,0 +1,82 @@
+
+fragment FragmentSuPolicyLog on SuPolicyLog {
+    __typename
+    id
+    suPolicyDate {
+        ...FragmentDateTime
+    }
+    suPolicyNotes
+    suPolicyPublic
+    suPolicyTitle
+}
+
+fragment FragmentTermInterface on TermInterface {
+    __typename
+    id
+    name
+    path
+    weight
+    parent {
+        ... on TermInterface {
+            id
+        }
+    }
+}
+
+fragment FragmentSupAward on SupAward {
+    id
+    supAssociation
+    supDescription {
+        processed
+    }
+    supPlace
+    supRank
+    supWorkId
+    supYear
+}
+
+fragment FragmentLink on Link {
+    title
+    url
+}
+
+fragment FragmentNameType on NameType {
+    title
+    given
+    middle
+    family
+    generational
+    credentials
+}
+
+fragment FragmentDateTime on DateTime {
+    timezone
+    time
+}
+
+fragment FragmentSmartDateType on SmartDateType {
+    value
+    end_value
+    timezone
+    rrule_index
+    rrule
+}
+
+fragment FragmentAddressType on Address {
+    langcode
+    country {
+        name
+        code
+    }
+    givenName
+    additionalName
+    familyName
+    organization
+    addressLine1
+    addressLine2
+    postalCode
+    sortingCode
+    dependentLocality
+    locality
+    administrativeArea
+}

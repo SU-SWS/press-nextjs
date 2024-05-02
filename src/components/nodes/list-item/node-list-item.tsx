@@ -10,6 +10,7 @@ import StanfordPublicationListItem
   from "@components/nodes/list-item/stanford-publication/stanford-publication-list-item";
 import {isPreviewMode} from "@lib/drupal/utils";
 import {NodeUnion} from "@lib/gql/__generated__/drupal.d";
+import SupBookListItem from "@components/nodes/list-item/sup-book/sup-book-list-item";
 
 type Props = {
   /**
@@ -47,6 +48,8 @@ const NodeListItem = ({node, headingLevel}: Props) => {
       return <StanfordPolicyListItem node={node} headingLevel={headingLevel} {...itemProps}/>
     case "NodeStanfordPublication":
       return <StanfordPublicationListItem node={node} headingLevel={headingLevel} {...itemProps}/>
+    case "NodeSupBook":
+      return <SupBookListItem node={node} headingLevel={headingLevel} {...itemProps}/>
   }
 }
 export default NodeListItem;

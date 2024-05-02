@@ -1,10 +1,10 @@
-import {Maybe, NodeStanfordEvent, NodeStanfordNews, NodeStanfordPage, NodeStanfordPerson, NodeStanfordPolicy, NodeUnion, ParagraphStanfordWysiwyg, ParagraphUnion} from "@lib/gql/__generated__/drupal.d";
+import {Maybe, NodeStanfordEvent, NodeStanfordNews, NodeStanfordPage, NodeStanfordPerson, NodeStanfordPolicy, NodeSupBook, NodeUnion, ParagraphStanfordWysiwyg, ParagraphUnion} from "@lib/gql/__generated__/drupal.d";
 import {Metadata} from "next";
 import {decode} from "html-entities";
 
 export const getNodeMetadata = (node: NodeUnion): Metadata => {
   const defaultData = {
-    title: node.title,
+    title: node.title + " | Stanford University Press",
     other: {}
   }
   switch (node.__typename) {
@@ -37,9 +37,36 @@ export const getNodeMetadata = (node: NodeUnion): Metadata => {
         ...getPolicyMetaData(node),
         ...defaultData
       }
+
+    case "NodeSupBook":
+      return {
+        ...getBookMetaData(node),
+        ...defaultData
+      }
   }
 
   return defaultData;
+}
+
+const getBookMetaData = (node: NodeSupBook) => {
+  const image = node.supBookImage?.mediaImage;
+  const description = getCleanDescription(node.supBookDescription?.processed);
+
+  return {
+    description: description,
+    openGraph: {
+      type: "book",
+      title: node.title,
+      isbn: node.supBookIsbn13Isw || node.supBookIsbn13Paper || node.supBookIsbn13Cloth || node.supBookIsbn13Alt,
+      authors: node.supBookAuthors?.map(author => ({
+        "profile:first_name": author.given,
+        "profile:last_name": author.family
+      })),
+      releaseDate: node.supBookPubYearFirst,
+      description: description,
+      images: image ? getOpenGraphImage(image.url, image.alt || "") : []
+    }
+  }
 }
 
 const getBasicPageMetaData = (node: NodeStanfordPage) => {
@@ -141,7 +168,7 @@ const getFirstText = (components?: Maybe<ParagraphUnion[]>) => {
 
 const getCleanDescription = (description: string | undefined): string | undefined => {
   if (description) {
-    const text: string = description.replace(/(<([^>]+)>)/gi, " ").replace("/ +/", " ").split(".").slice(0, 1).join(".") + ".";
+    const text: string = description.replace(/(<([^>]+)>)/gi, " ").replace("/ +/", " ").split(".").slice(0, 2).join(".") + ".";
     return text?.length > 1 ? decode(text) : undefined;
   }
 }
