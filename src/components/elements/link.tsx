@@ -12,7 +12,7 @@ type Props = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement> & LinkPro
   href: string
 }
 
-const DrupalLink = ({href, className, children, ...props}: Props) => {
+const DrupalLink = ({href, children, ...props}: Props) => {
   // Make sure all links have a href.
   href = href || "#"
   const drupalBase: string = (process.env.NEXT_PUBLIC_DRUPAL_BASE_URL || "").replace(/\/$/, "");
@@ -21,7 +21,7 @@ const DrupalLink = ({href, className, children, ...props}: Props) => {
     href = href.replace(drupalBase, "").replace("<front>", "/");
   }
 
-  if (className?.includes("link--action")) {
+  if (props.className?.includes("link--action")) {
     return (
       <ActionLink href={href} {...props}>
         {children}
@@ -29,12 +29,12 @@ const DrupalLink = ({href, className, children, ...props}: Props) => {
     )
   }
 
-  if (className?.includes("button")) {
+  if (props.className?.includes("button")) {
     return (
       <Button
         href={href}
-        big={className.includes("--big")}
-        secondary={className.includes("--secondary")}
+        big={props.className.includes("--big")}
+        secondary={props.className.includes("--secondary")}
         {...props}
       >
         {children}
@@ -43,7 +43,7 @@ const DrupalLink = ({href, className, children, ...props}: Props) => {
   }
 
   return (
-    <Link href={href} className={className} {...props}>
+    <Link href={href} className={props.className} {...props}>
       {children}
       {href.startsWith("mailto") &&
         <EnvelopeIcon width={20} className="ml-4 inline-block"/>

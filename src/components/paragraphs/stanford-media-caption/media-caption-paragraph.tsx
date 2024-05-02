@@ -32,14 +32,14 @@ const MediaCaptionParagraph = ({paragraph, ...props}: Props) => {
       }
       {videoUrl && <Oembed url={videoUrl}/>}
 
-      <figcaption className="text-archway-dark">
+      <figcaption>
         {paragraph.suMediaCaptionLink?.url &&
-          <Link href={paragraph.suMediaCaptionLink.url} className="link--action">
+          <Link href={paragraph.suMediaCaptionLink.url} className="link--action text-stone-dark hocus:text-archway-dark">
             {paragraph.suMediaCaptionLink.title}
           </Link>
         }
 
-        <Wysiwyg html={paragraph.suMediaCaptionCaption?.processed}/>
+        <Wysiwyg html={paragraph.suMediaCaptionCaption?.processed} className="text-archway-dark"/>
 
       </figcaption>
     </figure>
