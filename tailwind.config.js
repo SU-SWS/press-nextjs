@@ -42,8 +42,12 @@ module.exports = {
         '15xl': '150rem',
       },
       scale: {
-        '-100': '-1'
-      }
+        '-100': '-1',
+      },
+      colors: {
+        'press-indigo': '#003D69',
+        'press-grass': '#00593E',
+      },
     },
   },
   plugins: [
