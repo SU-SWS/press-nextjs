@@ -27,13 +27,8 @@ export const getStoryBookImage = (imageUrl?: string): MediaImage => {
       width: 1500,
       alt: "Placeholder Image",
       size: 123,
-<<<<<<< HEAD
-      focalX: 50,
-      focalY: 50
-=======
       focalY: 50,
       focalX: 50,
->>>>>>> 1.x
     }
   }
 }
