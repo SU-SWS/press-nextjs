@@ -48,6 +48,8 @@ module.exports = {
     colors: {
       'press-indigo': '#003D69',
       'press-grass': '#00593E',
+      'press-bay-light-light': '#a0d2bf',
+      'press-sand': '#9c9286'
     },
   },
   plugins: [
