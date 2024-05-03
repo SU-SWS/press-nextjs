@@ -80,7 +80,7 @@ export const Button = ({
   return (
     <Link
       href={href}
-      className={twMerge(standardClasses, className)}
+      className={twMerge(standardClasses, className?.replace("button", ""))}
       {...props}
     >
       {children}
