@@ -25,6 +25,7 @@ fragment FragmentTermInterface on TermInterface {
 
 fragment FragmentSupAward on SupAward {
     id
+    name
     supAssociation
     supDescription {
         processed

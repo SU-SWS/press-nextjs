@@ -1,5 +1,6 @@
 "use client";
 
+import {JSX} from "react";
 import {useSelect, SelectOptionDefinition, SelectProvider, SelectValue} from "@mui/base/useSelect";
 import {useOption} from "@mui/base/useOption";
 import {
@@ -97,6 +98,7 @@ type Props = {
   emptyLabel?: Maybe<string>
   name?: Maybe<string>
   borderless?: boolean
+  downIcon?: JSX.Element
 }
 
 const SelectList = ({
@@ -110,6 +112,7 @@ const SelectList = ({
   emptyValue,
   emptyLabel = "- None -",
   borderless = false,
+  downIcon,
   ...props
 }: Props) => {
   const labelId = useId();
@@ -150,22 +153,27 @@ const SelectList = ({
         className={clsx("w-full text-left p-5", {"border border-black-40 rounded": !borderless})}
         aria-labelledby={labeledBy}
       >
-        <div className="flex justify-between flex-wrap">
-          {label &&
-            <div className={clsx("relative", {"text-m0 top-[-15px] w-full": optionChosen, "text-m1": !optionChosen})}>
-              <div id={labelId} className="bg-white w-fit px-5">
-                {label}
-              </div>
+        {label &&
+          <div className={clsx("relative  max-w-[calc(100%-30px)]", {
+            "text-m0 top-[-15px] w-full": optionChosen,
+            "text-m1": !optionChosen
+          })}>
+            <div id={labelId} className={clsx("bg-white w-fit px-5", {"bg-black-20": props.disabled})}>
+              {label}
             </div>
-          }
-          {optionChosen &&
-            <div className="overflow-hidden max-w-[calc(100%-30px)]">
-              {renderSelectedValue(value, options)}
-            </div>
-          }
+          </div>
+        }
 
-          <ChevronDownIcon width={20} className="ml-auto flex-shrink-0"/>
-        </div>
+
+        {optionChosen &&
+          <div className="overflow-hidden max-w-[calc(100%-30px)]">
+            {renderSelectedValue(value, options)}
+          </div>
+        }
+
+        <span className="absolute top-0 right-5 h-full flex items-center">
+           {downIcon || <ChevronDownIcon width={20}/>}
+        </span>
       </button>
 
       <div ref={listboxContainerRef} className={clsx("absolute z-[10] w-full top-full left-0 max-h-[300px] pb-5 overflow-y-scroll shadow-lg border border-black-20 bg-white", {"hidden": !listboxVisible})}>

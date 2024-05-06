@@ -39,6 +39,9 @@ fragment FragmentNodeSupBook on NodeSupBook {
         processed
     }
     supBookDigitalCompLink
+    supBookExcerpts {
+        ...FragmentParagraphUnion
+    }
     supBookHtmlPageTitle
     supBookIllustrations
     supBookImage {

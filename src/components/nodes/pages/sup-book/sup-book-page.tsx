@@ -6,20 +6,26 @@ import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs";
 import Wysiwyg from "@components/elements/wysiwyg";
 import BookPrecart from "@components/nodes/pages/sup-book/book-precart";
 import {formatCurrency} from "@lib/utils/format-currency";
-import {BookmarkIcon, BookOpenIcon} from "@heroicons/react/24/outline";
+import {BookmarkIcon, BookOpenIcon, ClipboardIcon} from "@heroicons/react/24/outline";
+import Link from "@components/elements/link";
+import {getPlaceholderImage} from "@lib/utils/placeholder-image";
+import LoadMoreList from "@components/elements/load-more-list";
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
 }
-const SupBookPage = ({node, ...props}: Props) => {
+const SupBookPage = async ({node, ...props}: Props) => {
   const lowestPrice = Math.min(node.supBookClothSalePrice || 9999, node.supBookPaperSalePrice || 9999, node.supBookPriceCloth || 9999, node.supBookPriceDigital || 9999, node.supBookPricePaper || 9999)
+  const placeholderImage = node.supBookImage?.mediaImage.url && await getPlaceholderImage(node.supBookImage.mediaImage.url)
+
+  const awards = node.supBookAwards?.sort((a, b) => a.supRank && b.supRank && a.supRank < b.supRank ? -1 : 1);
 
   return (
     <article className="centered pt-32" {...props}>
       <div className="flex flex-col lg:flex-row gap-20 mb-20">
         <div className="lg:w-2/3 flex flex-col lg:flex-row  gap-20">
           <div className="lg:w-1/2">
-            <div className="flex flex-col gap-10 border-b-2 border-black-20 pb-20 mb-20">
+            <div className="flex flex-col gap-10 border-b border-black-20 pb-20 mb-20">
               <H1>
                 {node.title}
               </H1>
@@ -35,10 +41,30 @@ const SupBookPage = ({node, ...props}: Props) => {
               {node.supBookAuthorsFull &&
                 <div>{node.supBookAuthorsFull}</div>
               }
+
+              {awards &&
+                <div className="">
+                  <H2 className="flex items-center bg-fog p-3 w-fit gap-2 -text-m1 font-semibold">
+                    <BookmarkIcon width={20} className="fill-archway"/>
+                    Award Winner
+                  </H2>
+
+                  <LoadMoreList itemsPerPage={3} ulProps={{className: "list-unstyled"}}>
+                    {awards.map(award =>
+                      <div key={award.id}>
+                        {award.name}
+                      </div>
+                    )}
+                  </LoadMoreList>
+                </div>
+              }
+
             </div>
 
-            <div className="flex flex-col gap-10 border-b-2 border-black-20 pb-20 mb-20">
-              <H2>Book details</H2>
+            <div className="flex flex-col gap-2 border-b border-black-20 pb-20 mb-20">
+              {node.supBookImprint &&
+                <div className="font-semibold">Imprint: {node.supBookImprint.name}</div>
+              }
 
               {node.supBookCopublisherName &&
                 <div>{node.supBookCopublisherName}</div>
@@ -84,47 +110,44 @@ const SupBookPage = ({node, ...props}: Props) => {
           <div className="order-first lg:w-1/2">
             {node.supBookImage?.mediaImage &&
               <div className="relative">
-                {(node.supBookAwards || true) &&
-                  <div className="absolute top-0 left-0 bg-stone-400 p-3">
-                    <span className="flex items-center"><BookmarkIcon width={20} className="fill-archway"/> Award Winner</span>
-                  </div>
-                }
                 <Image
                   src={node.supBookImage.mediaImage.url}
                   alt={node.supBookImage.mediaImage.alt || ""}
                   height={node.supBookImage.mediaImage.height}
                   width={node.supBookImage.mediaImage.width}
+                  placeholder={placeholderImage ? "blur" : undefined}
+                  blurDataURL={placeholderImage}
+                  loading="eager"
                 />
               </div>
             }
 
-            <div className="text-center">
-              <h2 className="flex items-center text-m0 justify-center"><BookOpenIcon width={20}/> Excerpts + more</h2>
-
-              <a href="/" className="block">React an Excerpt</a>
-              <a href="/" className="block">See Table of Contents</a>
-
-              <a href="/" className="block">Figure out what this area does</a>
-            </div>
+            {node.supBookExcerpts &&
+              <Link href={`${node.path}/excerpts`} className="flex justify-center items-center gap-3">
+                <BookOpenIcon width={20}/> Excerpts + more
+              </Link>
+            }
           </div>
         </div>
 
         <div className="lg:w-1/3">
-          <BookPrecart
-            bookTitle={node.title}
-            usClothPrice={node.supBookPriceCloth}
-            usClothSalePrice={node.supBookClothSalePrice}
-            usClothSaleDiscount={node.supBookClothSalePercent}
-            usPaperPrice={node.supBookPricePaper}
-            usPaperSalePrice={node.supBookPaperSalePrice}
-            usPaperSaleDiscount={node.supBookPaperSalePercent}
-            usDigitalPrice={node.supBookPriceDigital}
-            clothIsbn={node.supBookIsbn13Cloth}
-            paperIsbn={node.supBookIsbn13Paper}
-            digitalIsbn={node.supBookIsbn13Digital}
-          />
+          <div className="border-b border-black-20 mb-10 pb-10">
+            <BookPrecart
+              bookTitle={node.title}
+              usClothPrice={node.supBookPriceCloth}
+              usClothSalePrice={node.supBookClothSalePrice}
+              usClothSaleDiscount={node.supBookClothSalePercent}
+              usPaperPrice={node.supBookPricePaper}
+              usPaperSalePrice={node.supBookPaperSalePrice}
+              usPaperSaleDiscount={node.supBookPaperSalePercent}
+              usDigitalPrice={node.supBookPriceDigital}
+              clothIsbn={node.supBookIsbn13Cloth}
+              paperIsbn={node.supBookIsbn13Paper}
+              digitalIsbn={node.supBookIsbn13Digital}
+            />
+          </div>
 
-          <div>
+          <div className="border-b border-black-20 mb-10 pb-10">
             Also Available from<br/>
             .... need to figure this part out.
             <ul className="list-unstyled">
@@ -134,13 +157,17 @@ const SupBookPage = ({node, ...props}: Props) => {
               <li><a href="https://itunes.apple.com/us/book/">Apple Books</a></li>
             </ul>
           </div>
+
+          <Link href={node.path + "/desk-examination-copy-requests"} className="flex items-center gap-3">
+            <ClipboardIcon width={20}/> Desk, Examination, or Review Copy Requests
+          </Link>
         </div>
 
       </div>
 
 
       <Tabs>
-        <div className="border-b-2 border-black-20 mb-20">
+        <div className="border-b border-black-20 mb-20">
           <TabsList className="max-w-5xl mx-auto">
             {node.supBookDescription?.processed &&
               <Tab>

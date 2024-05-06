@@ -10,12 +10,24 @@ const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
 
   const sitemap: MetadataRoute.Sitemap = [];
 
-  nodes.map(node => sitemap.push({
-    url: `https://sup.org${node.path}`,
-    lastModified: new Date(node.changed.time),
-    priority: node.__typename === "NodeStanfordPage" ? 1 : .8,
-    changeFrequency: node.__typename === "NodeStanfordPage" ? "weekly": "monthly"
-  }));
+  nodes.map(node => {
+    sitemap.push({
+      url: `https://sup.org${node.path}`,
+      lastModified: new Date(node.changed.time),
+      priority: node.__typename === "NodeStanfordPage" ? 1 : .8,
+      changeFrequency: node.__typename === "NodeStanfordPage" ? "weekly" : "monthly"
+    })
+
+    // Add excerpts page for each book as appropriate.
+    if (node.__typename === "NodeSupBook" && node.supBookExcerpts) {
+      sitemap.push({
+        url: `https://sup.org${node.path}/excerpts`,
+        lastModified: new Date(node.changed.time),
+        priority: .8,
+        changeFrequency: "monthly"
+      })
+    }
+  });
 
   return sitemap;
 }
