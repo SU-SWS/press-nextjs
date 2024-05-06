@@ -44,12 +44,13 @@ module.exports = {
       scale: {
         '-100': '-1',
       },
-    },
-    colors: {
-      'press-indigo': '#003D69',
-      'press-grass': '#00593E',
-      'press-bay-light-light': '#a0d2bf',
-      'press-sand': '#9c9286',
+      colors: {
+        ...decanter.theme.extend.colors,
+        'press-indigo': '#003D69',
+        'press-grass': '#00593E',
+        'press-bay-light-light': '#a0d2bf',
+        'press-sand': '#9c9286',
+      },
     },
   },
   plugins: [
