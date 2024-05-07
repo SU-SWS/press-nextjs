@@ -170,6 +170,7 @@ fragment FragmentParagraphStanfordPageTitleBanner on ParagraphStanfordPageTitleB
 
 fragment FragmentParagraphSupFileList on ParagraphSupFileList {
     ...FragmentParagraphInterface
+    supFileListLabel
     supFileListFiles {
         ...FragmentMediaFile
     }

@@ -1,7 +1,6 @@
 "use client";
 
 import {useLayoutEffect, useRef, HtmlHTMLAttributes, useEffect, useId} from "react";
-import Button from "@components/elements/button";
 import {useAutoAnimate} from "@formkit/auto-animate/react";
 import {useBoolean, useCounter} from "usehooks-ts";
 import {useRouter, useSearchParams} from "next/navigation";
@@ -25,9 +24,21 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
    * URL parameter used to save the users page position.
    */
   pageKey?: string | false
+  /**
+   * Number of sibling pager buttons.
+   */
+  pagerSiblingCount?: number
 }
 
-const PagedList = ({children, ulProps, liProps, itemsPerPage = 10, pageKey = "page", ...props}: Props) => {
+const PagedList = ({
+  children,
+  ulProps,
+  liProps,
+  itemsPerPage = 10,
+  pageKey = "page",
+  pagerSiblingCount = 2,
+  ...props
+}: Props) => {
   const id = useId();
   const items = Array.isArray(children) ? children : [children]
   const router = useRouter();
@@ -56,7 +67,7 @@ const PagedList = ({children, ulProps, liProps, itemsPerPage = 10, pageKey = "pa
   }, [focusOnElement, setFocusOnItem]);
 
   useEffect(() => {
-    if(!pageKey) return;
+    if (!pageKey) return;
 
     // Use search params to retain any other parameters.
     const params = new URLSearchParams(searchParams.toString());
@@ -68,7 +79,7 @@ const PagedList = ({children, ulProps, liProps, itemsPerPage = 10, pageKey = "pa
 
     router.replace(`?${params.toString()}`, {scroll: false})
   }, [router, currentPage, pageKey, searchParams]);
-  const paginationButtons = usePagination(items.length, currentPage, itemsPerPage, 2);
+  const paginationButtons = usePagination(items.length, currentPage, itemsPerPage, pagerSiblingCount);
 
   return (
     <div {...props}>
@@ -87,8 +98,8 @@ const PagedList = ({children, ulProps, liProps, itemsPerPage = 10, pageKey = "pa
       </ul>
 
       {paginationButtons.length > 1 &&
-        <nav aria-label="Pager">
-          <ul className="list-unstyled flex justify-between">
+        <nav aria-label="Pager" className="mx-auto w-fit">
+          <ul className="list-unstyled flex gap-5">
             {paginationButtons.map((pageNum, i) => (
               <PaginationButton
                 key={`page-button-${pageNum}--${i}`}
@@ -119,17 +130,17 @@ const PaginationButton = ({page, currentPage, total, onClick}: {
       </li>
     )
   }
-
+  const isCurrent = page == currentPage;
   return (
     <li>
-      <Button
-        className={page === currentPage ? "bg-black text-white" : ""}
+      <button
+        className="font-medium hocus:underline text-m2"
         onClick={onClick}
-        aria-current={page == currentPage || undefined}
+        aria-current={isCurrent}
       >
         <span className="sr-only">Go to page {page} of {total}</span>
-        <span aria-hidden>{page}</span>
-      </Button>
+        <span aria-hidden className={(isCurrent ? "text-stone-dark border-stone-dark" : "text-cardinal-red border-transparent") + " border-b-2 px-4"}>{page}</span>
+      </button>
     </li>
   )
 }

@@ -30,6 +30,7 @@ module.exports = {
       ...decanter.theme.extend,
       screens: {
         "3xl": "1600px",
+        "4xl": "1800px",
       },
       gridTemplateColumns: {...twoColumn, ...threeColumn},
       containers: {
@@ -47,9 +48,15 @@ module.exports = {
       colors: {
         ...decanter.theme.extend.colors,
         'press-indigo': '#003D69',
-        'press-grass': '#00593E',
-        'press-bay-light-light': '#a0d2bf',
-        'press-sand': '#9c9286',
+        'press-grass': '#00593e',
+        'press-bay': {
+          DEFAULT: "#6FA287",
+          lite: '#a0d2bf'
+        },
+        'press-sand': {
+          DEFAULT: '#9c9286',
+          dark: '#7e7267',
+        },
       },
     },
   },

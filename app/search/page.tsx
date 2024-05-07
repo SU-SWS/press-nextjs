@@ -20,13 +20,13 @@ const Page = async ({searchParams}: { searchParams?: { [_key: string]: string } 
 
   const siteSettingsConfig = await getConfigPage<StanfordBasicSiteSetting>("StanfordBasicSiteSetting")
 
-  const initialState: IndexUiState = {}
+  const initialState: IndexUiState = {refinementList: {}}
   if (searchParams?.q) initialState.query = searchParams.q as string
-  if (searchParams?.subjects) {
-    initialState.refinementList = {book_subject: searchParams.subjects.split(",")}
+  if (searchParams?.subjects && initialState.refinementList) {
+    initialState.refinementList.book_subject = searchParams.subjects.split(",")
   }
-  if (!!searchParams?.books) {
-    initialState.refinementList = {book_type: ["book"]}
+  if (!!searchParams?.books && initialState.refinementList) {
+    initialState.refinementList.book_type = ["book"]
   }
   if (searchParams?.["published-min"] || searchParams?.["published-max"]) {
     initialState.range = {book_published: (searchParams["published-min"] || "0") + ":" + (searchParams["published-max"] || "3000")}

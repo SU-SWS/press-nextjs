@@ -9,7 +9,7 @@ import {formatCurrency} from "@lib/utils/format-currency";
 import {BookmarkIcon, BookOpenIcon, ClipboardIcon} from "@heroicons/react/24/outline";
 import Link from "@components/elements/link";
 import {getPlaceholderImage} from "@lib/utils/placeholder-image";
-import LoadMoreList from "@components/elements/load-more-list";
+import BookAwards from "@components/nodes/pages/sup-book/book-awards";
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -22,94 +22,93 @@ const SupBookPage = async ({node, ...props}: Props) => {
 
   return (
     <article className="centered pt-32" {...props}>
-      <div className="flex flex-col lg:flex-row gap-20 mb-20">
-        <div className="lg:w-2/3 flex flex-col lg:flex-row  gap-20">
-          <div className="lg:w-1/2">
-            <div className="flex flex-col gap-10 border-b border-black-20 pb-20 mb-20">
-              <H1>
+      <div className="flex flex-col lg:flex-row gap-24 mb-20">
+        <div className="xl:w-2/3 flex flex-col lg:flex-row gap-24">
+          <div className="xl:w-7/12">
+            <div className="flex flex-col gap-10 border-b border-fog pb-20 mb-20">
+              <H1 className="font-medium text-stone-dark">
                 {node.title}
               </H1>
+
               {node.supBookSubjects &&
                 <div className="order-first">
                   {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
                 </div>
               }
+
               {node.supBookSubtitle &&
-                <div>{node.supBookSubtitle}</div>
+                <div className="text-m3 font-medium text-stone-dark">{node.supBookSubtitle}</div>
               }
 
               {node.supBookAuthorsFull &&
-                <div>{node.supBookAuthorsFull}</div>
+                <div className="text-m2 text-stone">{node.supBookAuthorsFull}</div>
               }
 
               {awards &&
-                <div className="">
+                <div className="border-t border-fog">
                   <H2 className="flex items-center bg-fog p-3 w-fit gap-2 -text-m1 font-semibold">
                     <BookmarkIcon width={20} className="fill-archway"/>
                     Award Winner
                   </H2>
-
-                  <LoadMoreList itemsPerPage={3} ulProps={{className: "list-unstyled"}}>
-                    {awards.map(award =>
-                      <div key={award.id}>
-                        {award.name}
-                      </div>
-                    )}
-                  </LoadMoreList>
+                  <BookAwards>
+                    {awards.map(award => <div key={award.id}>{award.name}</div>)}
+                  </BookAwards>
                 </div>
               }
 
             </div>
 
-            <div className="flex flex-col gap-2 border-b border-black-20 pb-20 mb-20">
+            <div className="flex flex-col gap-2 border-b border-fog pb-20 mb-20">
               {node.supBookImprint &&
-                <div className="font-semibold">Imprint: {node.supBookImprint.name}</div>
+                <div className="font-semibold text-stone">Imprint: {node.supBookImprint.name}</div>
               }
 
+              <H2 className="font-normal -text-m1"><span className="text-stone-dark">Book Details</span></H2>
+
               {node.supBookCopublisherName &&
-                <div>{node.supBookCopublisherName}</div>
+                <div className="text-stone">{node.supBookCopublisherName}</div>
               }
 
               {node.supBookPubDateCloth?.time &&
-                <div>{new Date(node.supBookPubDateCloth.time).toLocaleDateString("en-us", {
+                <div className="text-stone">{new Date(node.supBookPubDateCloth.time).toLocaleDateString("en-us", {
                   month: "long",
                   year: "numeric"
                 })}</div>
               }
 
               {node.supBookPages &&
-                <div>{node.supBookPages} Pages</div>
+                <div className="text-stone">{node.supBookPages} Pages</div>
               }
 
               {lowestPrice &&
-                <div>From {formatCurrency(lowestPrice)}</div>
+                <div className="text-stone">From {formatCurrency(lowestPrice)}</div>
               }
 
               {node.supBookSeries?.name &&
-                <div>Series<br/>{node.supBookSeries?.name}</div>
+                <div className="text-stone-dark">Series<br/>{node.supBookSeries?.name}</div>
               }
             </div>
 
             {node.supBookIsbn13Cloth &&
-              <div>
+              <div className="text-stone-dark">
                 Hardcover ISBN: {node.supBookIsbn13Cloth}
               </div>
             }
             {node.supBookIsbn13Paper &&
-              <div>
+              <div className="text-stone-dark">
                 Paperback ISBN: {node.supBookIsbn13Paper}
               </div>
             }
             {node.supBookIsbn13Digital &&
-              <div>
+              <div className="text-stone-dark">
                 Ebook ISBN: {node.supBookIsbn13Digital}
               </div>
             }
           </div>
 
-          <div className="order-first lg:w-1/2">
+          <div className="order-first xl:w-5/12">
             {node.supBookImage?.mediaImage &&
-              <div className="relative">
+              <div className="relative mb-16">
                 <Image
                   src={node.supBookImage.mediaImage.url}
                   alt={node.supBookImage.mediaImage.alt || ""}
@@ -123,15 +122,16 @@ const SupBookPage = async ({node, ...props}: Props) => {
             }
 
             {node.supBookExcerpts &&
-              <Link href={`${node.path}/excerpts`} className="flex justify-center items-center gap-3">
-                <BookOpenIcon width={20}/> Excerpts + more
+              <Link href={`${node.path}/excerpts`} className="flex justify-center items-center gap-3 text-stone-dark font-normal">
+                <BookOpenIcon width={20} className="text-fog-dark"/>
+                <span>Excerpts + more</span>
               </Link>
             }
           </div>
         </div>
 
-        <div className="lg:w-1/3">
-          <div className="border-b border-black-20 mb-10 pb-10">
+        <div className="xl:w-1/3">
+          <div className="border-b border-fog mb-10 pb-10">
             <BookPrecart
               bookTitle={node.title}
               usClothPrice={node.supBookPriceCloth}
@@ -147,10 +147,10 @@ const SupBookPage = async ({node, ...props}: Props) => {
             />
           </div>
 
-          <div className="border-b border-black-20 mb-10 pb-10">
-            Also Available from<br/>
+          <div className="border-b border-fog mb-10 pb-10">
+            <span className="text-stone-dark">Also Available from</span><br/>
             .... need to figure this part out.
-            <ul className="list-unstyled">
+            <ul className="list-unstyled [&_a]:text-digital-red [&_a]:font-normal">
               <li><a href="https://www.barnesandnoble.com/b/nook-devices">Barnes and Noble Nook</a></li>
               <li><a href="https://play.google.com/store/books/details">Google Play</a></li>
               <li><a href="https://www.amazon.com/dp">Amazon Kindle</a></li>
@@ -158,8 +158,8 @@ const SupBookPage = async ({node, ...props}: Props) => {
             </ul>
           </div>
 
-          <Link href={node.path + "/desk-examination-copy-requests"} className="flex items-center gap-3">
-            <ClipboardIcon width={20}/> Desk, Examination, or Review Copy Requests
+          <Link href={node.path + "/desk-examination-copy-requests"} className="flex items-center gap-3 text-stone-dark font-normal">
+            <ClipboardIcon width={20} className="text-stone"/> Desk, Examination, or Review Copy Requests
           </Link>
         </div>
 
@@ -167,20 +167,20 @@ const SupBookPage = async ({node, ...props}: Props) => {
 
 
       <Tabs>
-        <div className="border-b border-black-20 mb-20">
+        <div className="border-b border-fog mb-20">
           <TabsList className="max-w-5xl mx-auto">
             {node.supBookDescription?.processed &&
-              <Tab>
+              <Tab className="p-10">
                 Description
               </Tab>
             }
             {node.supBookReviews &&
-              <Tab>
+              <Tab className="p-10">
                 Reviews
               </Tab>
             }
             {node.supBookAuthorInfo &&
-              <Tab>
+              <Tab className="p-10">
                 About the Author
               </Tab>
             }

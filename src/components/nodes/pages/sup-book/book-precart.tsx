@@ -72,7 +72,7 @@ const BookPreCart = ({
   }
 
   return (
-    <form onSubmit={onFormSubmit}>
+    <form className="@container" onSubmit={onFormSubmit}>
       <fieldset className="mb-5">
         <legend className="sr-only">Format</legend>
         {!isIntl &&
@@ -196,10 +196,16 @@ const UsFormatChoices = ({
             htmlFor={`${id}-cloth`}
             className="flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline hover:underline cursor-pointer"
           >
-          <span className="flex w-full items-center justify-between">
-            <span>Hardcover</span> <span className="flex items-center"> US/CAN {formatCurrency(clothPrice)}
-            <BookmarkIcon width={30}/></span>
-          </span>
+            <span className="flex w-full items-center">
+              <span className="flex w-full flex-col @lg:flex-row justify-between">
+                <span className="font-semibold text-stone-dark">Hardcover</span>
+                <span className="flex items-center">
+                  <span className="text-press-sand-dark">US/CAN</span>
+                  <span className="text-stone-dark">{formatCurrency(clothPrice)}</span>
+                </span>
+              </span>
+              <BookmarkIcon width={30} className="text-fog-dark"/>
+            </span>
           </label>
         </div>
       }
@@ -218,10 +224,16 @@ const UsFormatChoices = ({
             htmlFor={`${id}-paper`}
             className="flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline hover:underline cursor-pointer"
           >
-          <span className="flex w-full items-center justify-between">
-            <span>Paperback</span> <span className="flex items-center"> US/CAN {formatCurrency(paperPrice)}
-            <BookOpenIcon width={30}/></span>
-          </span>
+            <span className="flex w-full items-center">
+              <span className="flex w-full flex-col @lg:flex-row justify-between">
+                <span className="font-semibold text-stone-dark">Paperback</span>
+                <span className="flex items-center">
+                  <span className="text-press-sand-dark">US/CAN</span>
+                  <span className="text-stone-dark">{formatCurrency(paperPrice)}</span>
+                </span>
+              </span>
+              <BookOpenIcon width={30} className="text-fog-dark"/>
+            </span>
           </label>
         </div>
       }
@@ -240,10 +252,16 @@ const UsFormatChoices = ({
             htmlFor={`${id}-digital`}
             className="flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline hover:underline cursor-pointer"
           >
-          <span className="flex w-full items-center justify-between">
-            <span>eBook</span> <span className="flex items-center"> US/CAN {formatCurrency(digitalPrice)}
-            <DeviceTabletIcon width={30}/></span>
-          </span>
+            <span className="flex w-full items-center">
+              <span className="flex w-full flex-col @lg:flex-row justify-between">
+                <span className="font-semibold text-stone-dark">eBook</span>
+                <span className="flex items-center">
+                  <span className="text-press-sand-dark">US/CAN</span>
+                  <span className="text-stone-dark">{formatCurrency(digitalPrice)}</span>
+                </span>
+              </span>
+              <DeviceTabletIcon width={30} className="text-fog-dark"/>
+            </span>
           </label>
         </div>
       }
@@ -279,7 +297,10 @@ const IntlFormatChoices = ({
             htmlFor={`${id}-cloth`}
             className="flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline hover:underline cursor-pointer"
           >
-            <span className="flex w-full items-center justify-between">Hardcover <BookmarkIcon width={30}/></span>
+            <span className="flex w-full items-center justify-between font-semibold">
+              <span className="text-stone-dark">Hardcover</span>
+              <BookmarkIcon width={30} className="text-fog-dark"/>
+            </span>
           </label>
         </div>
       }
@@ -298,7 +319,10 @@ const IntlFormatChoices = ({
             htmlFor={`${id}-paper`}
             className="flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline hover:underline cursor-pointer"
           >
-            <span className="flex w-full items-center justify-between">Paperback <BookOpenIcon width={30}/></span>
+            <span className="flex w-full items-center justify-between font-semibold">
+              <span className="text-stone-dark">Paperback</span>
+              <BookOpenIcon width={30} className="text-fog-dark"/>
+            </span>
           </label>
         </div>
       }

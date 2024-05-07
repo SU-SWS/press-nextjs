@@ -25,7 +25,6 @@ type Props = {
 
 const AlgoliaSearch = ({appId, searchIndex, searchApiKey, initialUiState = {}}: Props) => {
   const searchClient = useMemo(() => algoliasearch(appId, searchApiKey), [appId, searchApiKey])
-
   return (
     <div>
       <InstantSearchNext
@@ -193,7 +192,7 @@ const SearchForm = ({searchIndex}: { searchIndex: string }) => {
               <div className="flex-grow flex-1">
                 <div id={`${id}-min-year`}><span className="sr-only">Minimum&nbps;</span>Year</div>
                 <SelectList
-                  options={yearOptions.filter(option => parseInt(option.value) < (rangeChoices[1] || 3000) &&  parseInt(option.value) > (minYear || 0))}
+                  options={yearOptions.filter(option => parseInt(option.value) < (rangeChoices[1] || 3000) && parseInt(option.value) > (minYear || 0))}
                   value={(!rangeChoices[0] || !minYear || rangeChoices[0] <= minYear) ? null : `${rangeChoices[0]}`}
                   ariaLabelledby={`${id}-min-year`}
                   disabled={!canRefinePubYear}
@@ -234,7 +233,7 @@ const SearchForm = ({searchIndex}: { searchIndex: string }) => {
 
 const HitList = ({searchIndex}: { searchIndex: string }) => {
   const {hits} = useHits<HitType<AlgoliaHit>>({});
-  const {pages, nbPages, nbHits, refine: goToPage} = usePagination({padding: 2})
+  const {currentRefinement: currentPage, pages, nbPages, nbHits, refine: goToPage} = usePagination({padding: 2})
   const {options: sortOptions, refine: sortBy, currentRefinement: currentSort} = useSortBy({
     items: [
       {label: "Relevance", value: searchIndex},
@@ -277,24 +276,32 @@ const HitList = ({searchIndex}: { searchIndex: string }) => {
       </ul>
 
       {pages.length > 1 &&
-        <nav className="flex justify-between" aria-label="Search results pages">
-          {pages[0] > 0 &&
-            <button onClick={() => goToPage(0)}>
-              First
-            </button>
-          }
+        <nav aria-label="Search results pager">
+          <ul className="list-unstyled flex justify-between">
+            {pages[0] > 0 &&
+              <li>
+                <button onClick={() => goToPage(0)}>
+                  First
+                </button>
+              </li>
+            }
 
-          {pages.map(pageNum =>
-            <button key={`page-${pageNum}`} onClick={() => goToPage(pageNum)}>
-              {pageNum + 1}
-            </button>
-          )}
+            {pages.map(pageNum =>
+              <li key={`page-${pageNum}`} aria-current={currentPage === pageNum}>
+                <button onClick={() => goToPage(pageNum)}>
+                  {pageNum + 1}
+                </button>
+              </li>
+            )}
 
-          {pages[pages.length - 1] !== nbPages &&
-            <button onClick={() => goToPage(nbPages - 1)}>
-              Last
-            </button>
-          }
+            {pages[pages.length - 1] !== nbPages &&
+              <li>
+                <button onClick={() => goToPage(nbPages - 1)}>
+                  Last
+                </button>
+              </li>
+            }
+          </ul>
         </nav>
       }
     </div>

@@ -1,32 +1,37 @@
 "use client";
 
-import {HtmlHTMLAttributes, useState} from "react";
+import {HtmlHTMLAttributes, useId, useState} from "react";
 
 import SelectList from "@components/elements/select-list";
-import Link from "@components/elements/link";
 import {SelectOptionDefinition} from "@mui/base/useSelect";
+import {DocumentArrowDownIcon} from "@heroicons/react/24/outline";
+import Button from "@components/elements/button";
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
-  fileOptions: (SelectOptionDefinition<string> & {url: string})[]
+  fileOptions: (SelectOptionDefinition<string> & { url: string })[]
+  label: string
 }
 
-const FileListSelection = ({fileOptions, ...props}: Props) => {
-  const [chosenFile, setChosenFile] = useState<string|null>(null)
+const FileListSelection = ({fileOptions, label, ...props}: Props) => {
+  const id = useId();
+  const [chosenFile, setChosenFile] = useState<string | null>(null)
 
   const chosenItem = fileOptions.find(option => option.value === chosenFile);
   return (
     <div {...props}>
       <div className="mb-10">
+        <div id={id} className="text-m1 mb-3">{label}</div>
         <SelectList
           options={fileOptions}
-          label="Choose a file"
+          ariaLabelledby={id}
+          emptyLabel="Choose"
           onChange={(_e, v) => setChosenFile(v as string)}
         />
       </div>
       {chosenItem &&
-        <Link className="button" href={chosenItem.url} download prefetch={false}>
-          Download&nbsp;<span className="sr-only">{chosenItem.label}</span>
-        </Link>
+        <Button href={chosenItem.url} prefetch={false} className="flex items-center gap-5">
+          Download {chosenItem.label} <DocumentArrowDownIcon width={30}/>
+        </Button>
       }
     </div>
   )

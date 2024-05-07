@@ -327,6 +327,7 @@ ${FragmentParagraphSupCarouselSlideFragmentDoc}`;
 export const FragmentParagraphSupFileListFragmentDoc = gql`
     fragment FragmentParagraphSupFileList on ParagraphSupFileList {
   ...FragmentParagraphInterface
+  supFileListLabel
   supFileListFiles {
     ...FragmentMediaFile
   }
@@ -978,6 +979,7 @@ export const FragmentNodeSupBookTeaserFragmentDoc = gql`
   supBookAuthors {
     ...FragmentNameType
   }
+  supBookSubtitle
   supBookWorkIdNumber
 }
     ${FragmentNodeInterfaceFragmentDoc}

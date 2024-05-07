@@ -164,6 +164,13 @@ const SelectList = ({
           </div>
         }
 
+        {(!label && emptyLabel && !optionChosen) &&
+          <div className={clsx("relative  max-w-[calc(100%-30px)] text-m1")}>
+            <div id={labelId} className={clsx("bg-white w-fit px-5", {"bg-black-20": props.disabled})}>
+              {emptyLabel}
+            </div>
+          </div>
+        }
 
         {optionChosen &&
           <div className="overflow-hidden max-w-[calc(100%-30px)]">
