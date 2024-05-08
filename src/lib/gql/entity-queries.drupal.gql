@@ -91,7 +91,11 @@ query AllNodes($first: Int = 1000, $nodeSupBooks: Cursor, $nodeStanfordCourses: 
 query Books($first: Int = 1000, $after: Cursor) {
     nodeSupBooks(first: $first, after: $after, sortKey: CREATED_AT) {
         nodes {
-            ...FragmentNodeSupBookTeaser
+            ...FragmentNodeInterface
+            supBookAuthors {
+                ...FragmentNameType
+            }
+            supBookWorkIdNumber
         }
         pageInfo {
             ...FragmentPageInfo

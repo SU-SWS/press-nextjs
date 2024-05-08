@@ -206,7 +206,10 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
     supSlideSubtitle
     supSlideTitle
     supSlideTitleSize
-    supSupImage {
+    supSlideImage {
+        ...FragmentMediaImage
+    }
+    supSlideBgImage {
         ...FragmentMediaImage
     }
 }
@@ -271,7 +274,6 @@ fragment FragmentParagraphUnion on ParagraphUnion {
     ...FragmentParagraphStanfordLayout
     ...FragmentParagraphSupCarousel
     ...FragmentParagraphSupFileList
-    ...FragmentParagraphSupCarouselSlide
     ...FragmentParagraphSupAuthorList
     ...FragmentParagraphSupSearchForm
     ...FragmentParagraphSupBlogTeaser

@@ -307,7 +307,10 @@ export const FragmentParagraphSupCarouselSlideFragmentDoc = gql`
   supSlideSubtitle
   supSlideTitle
   supSlideTitleSize
-  supSupImage {
+  supSlideImage {
+    ...FragmentMediaImage
+  }
+  supSlideBgImage {
     ...FragmentMediaImage
   }
 }
@@ -396,7 +399,6 @@ export const FragmentParagraphUnionFragmentDoc = gql`
   ...FragmentParagraphStanfordLayout
   ...FragmentParagraphSupCarousel
   ...FragmentParagraphSupFileList
-  ...FragmentParagraphSupCarouselSlide
   ...FragmentParagraphSupAuthorList
   ...FragmentParagraphSupSearchForm
   ...FragmentParagraphSupBlogTeaser
@@ -414,7 +416,6 @@ ${FragmentParagraphStanfordWysiwygFragmentDoc}
 ${FragmentParagraphStanfordLayoutFragmentDoc}
 ${FragmentParagraphSupCarouselFragmentDoc}
 ${FragmentParagraphSupFileListFragmentDoc}
-${FragmentParagraphSupCarouselSlideFragmentDoc}
 ${FragmentParagraphSupAuthorListFragmentDoc}
 ${FragmentParagraphSupSearchFormFragmentDoc}
 ${FragmentParagraphSupBlogTeaserFragmentDoc}`;
@@ -1220,14 +1221,19 @@ export const BooksDocument = gql`
     query Books($first: Int = 1000, $after: Cursor) {
   nodeSupBooks(first: $first, after: $after, sortKey: CREATED_AT) {
     nodes {
-      ...FragmentNodeSupBookTeaser
+      ...FragmentNodeInterface
+      supBookAuthors {
+        ...FragmentNameType
+      }
+      supBookWorkIdNumber
     }
     pageInfo {
       ...FragmentPageInfo
     }
   }
 }
-    ${FragmentNodeSupBookTeaserFragmentDoc}
+    ${FragmentNodeInterfaceFragmentDoc}
+${FragmentNameTypeFragmentDoc}
 ${FragmentPageInfoFragmentDoc}`;
 export const CoursesDocument = gql`
     query Courses($first: Int = 1000, $after: Cursor) {

@@ -35,11 +35,20 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
 }
 
 const Slide = ({slideParagraph}: { slideParagraph: ParagraphSupCarouselSlide }) => {
+  const bgImage = slideParagraph.supSlideBgImage.mediaImage;
   const slideTitle = slideParagraph.supSlideTitle || slideParagraph.supSlideBook?.title
-  const image = slideParagraph.supSupImage?.mediaImage || slideParagraph.supSlideBook?.supBookImage?.mediaImage;
+  const image = slideParagraph.supSlideImage?.mediaImage || slideParagraph.supSlideBook?.supBookImage?.mediaImage;
 
   return (
-    <article aria-labelledby={slideParagraph.id} className="centered-container">
+    <article aria-labelledby={slideParagraph.id} className="relative centered-container">
+      <Image
+        className="object-cover"
+        src={bgImage.url}
+        alt={""}
+        fill
+        sizes="100vw"
+      />
+
       <div className="xl:flex gap-10 xl:w-2/3 mx-auto">
         {image &&
           <div className="relative aspect-[9/16] w-1/3">
