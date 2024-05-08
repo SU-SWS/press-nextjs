@@ -14,7 +14,7 @@ const SupBookExcerptPage = ({node, ...props}: Props) => {
   return (
     <div className="centered flex flex-col gap-10">
       <article className="pt-32 order-last" {...props}>
-        <H1 className="font-medium mb-32">
+        <H1 className="mb-32">
           Excerpts + More
         </H1>
         <div className="flex flex-col md:flex-row gap-20 mb-36">

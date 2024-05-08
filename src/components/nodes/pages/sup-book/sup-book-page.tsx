@@ -26,7 +26,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
         <div className="xl:w-2/3 flex flex-col lg:flex-row gap-24">
           <div className="xl:w-7/12">
             <div className="flex flex-col gap-10 border-b border-fog pb-20 mb-20">
-              <H1 className="font-medium text-stone-dark">
+              <H1 className="text-stone-dark">
                 {node.title}
               </H1>
 

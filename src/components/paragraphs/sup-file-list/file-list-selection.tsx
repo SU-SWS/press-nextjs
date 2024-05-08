@@ -19,7 +19,7 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
   const chosenItem = fileOptions.find(option => option.value === chosenFile);
   return (
     <div {...props}>
-      <div className="mb-10">
+      <div className="max-w-4xl mb-10">
         <div id={id} className="text-m1 mb-3">{label}</div>
         <SelectList
           options={fileOptions}

@@ -4,7 +4,7 @@ import Link from "@components/elements/link";
 import SiteSearchForm from "@components/search/site-search-form";
 import useActiveTrail from "@lib/hooks/useActiveTrail";
 import useOutsideClick from "@lib/hooks/useOutsideClick";
-import {ChevronDownIcon} from "@heroicons/react/20/solid";
+import {ChevronDownIcon, MagnifyingGlassIcon} from "@heroicons/react/20/solid";
 import {MenuItem as MenuItemType} from "@lib/gql/__generated__/drupal.d";
 import {clsx} from "clsx";
 import {useBoolean, useEventListener} from "usehooks-ts";
@@ -42,24 +42,28 @@ const MainMenu = ({menuItems}: Props) => {
   useEventListener("keydown", handleEscape, menuRef);
 
   return (
-    <nav id={navId} aria-label="Main Navigation" className="lg:centered" ref={menuRef}>
-      <button ref={buttonRef} className="flex flex-col items-center lg:hidden absolute top-5 right-10 group" onClick={toggleMenu} aria-expanded={menuOpen} aria-labelledby={navId}>
+    <nav id={navId} aria-label="Main Navigation" ref={menuRef}>
+      <button ref={buttonRef} className="w-0 flex flex-col items-center lg:hidden group" onClick={toggleMenu} aria-expanded={menuOpen} aria-labelledby={navId}>
         <span className="flex flex-col justify-center items-center w-[30px] h-[30px]">
-          <span className={clsx("bg-black-true block transition-all duration-300 ease-out h-[3px] w-full rounded-sm", {"rotate-45 translate-y-4": menuOpen, "-translate-y-0.5": !menuOpen})}/>
-          <span className={clsx("bg-black-true block transition-all duration-300 ease-out h-[3px] w-full rounded-sm my-3",{"opacity-0" :menuOpen , "opacity-100": !menuOpen})}/>
-          <span className={clsx("bg-black-true block transition-all duration-300 ease-out h-[3px] w-full rounded-sm", {"-rotate-45 -translate-y-4": menuOpen, "translate-y-0.5": !menuOpen})}/>
+          <span className={clsx("bg-stone-dark block transition-all duration-300 ease-out h-[3px] w-full rounded-sm", {"rotate-45 translate-y-4": menuOpen, "-translate-y-0.5": !menuOpen})}/>
+          <span className={clsx("bg-stone-dark block transition-all duration-300 ease-out h-[3px] w-full rounded-sm my-3",{"opacity-0" :menuOpen , "opacity-100": !menuOpen})}/>
+          <span className={clsx("bg-stone-dark block transition-all duration-300 ease-out h-[3px] w-full rounded-sm", {"-rotate-45 -translate-y-4": menuOpen, "translate-y-0.5": !menuOpen})}/>
         </span>
         <span className="group-hocus:underline" aria-hidden>{menuOpen ? "Close" : "Menu"}</span>
       </button>
 
-      <div
-        className={(menuOpen ? "block" : "hidden") + " lg:block bg-black lg:bg-transparent absolute top-100 lg:relative z-10 w-full"}>
+      <div className={(menuOpen ? "block" : "hidden") + " lg:flex items-center bg-black lg:bg-transparent absolute left-0 top-full lg:relative z-10 w-full"}>
         <SiteSearchForm className="px-10 lg:hidden"/>
-        <ul className="list-unstyled lg:flex lg:justify-end flex-wrap m-0 p-0">
+        <ul className="list-unstyled lg:flex lg:justify-end flex-wrap ml-auto m-0 p-0">
           {menuItems.map(item =>
             <MenuItem key={item.id} {...item} activeTrail={activeTrail} level={0}/>
           )}
         </ul>
+
+        <a href="/search" className="hidden lg:block ml-24 group">
+          <span className="sr-only">Search Site</span>
+          <MagnifyingGlassIcon width={25} className="text-stone-dark border-b border-transparent group-hocus:border-b-stone-dark"/>
+        </a>
       </div>
     </nav>
   )
@@ -110,7 +114,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
   const inTrail = activeTrail.includes(id) && !isCurrent;
 
   const linkStyles = clsx(
-    "w-full relative inline-block text-white lg:text-digital-red hocus:text-white lg:hocus:text-black no-underline hocus:underline py-5 lg:pl-0 border-l-[6px]",
+    "font-normal w-full relative inline-block text-white lg:text-stone-dark hocus:text-white lg:hocus:text-stone-dark no-underline hocus:underline py-5 lg:pl-0 border-l-[6px]",
     leftPadding[level],
     // Top menu item styles.
     {

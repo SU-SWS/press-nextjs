@@ -220,6 +220,7 @@ export const FragmentParagraphStanfordListFragmentDoc = gql`
     fragment FragmentParagraphStanfordList on ParagraphStanfordList {
   ...FragmentParagraphInterface
   suListHeadline
+  supListEyebrow
   suListDescription {
     processed
   }
@@ -979,11 +980,20 @@ export const FragmentNodeSupBookTeaserFragmentDoc = gql`
   supBookAuthors {
     ...FragmentNameType
   }
+  supBookAwards {
+    ...FragmentSupAward
+  }
   supBookSubtitle
   supBookWorkIdNumber
+  supBookAuthorsFull
+  supBookImage {
+    ...FragmentMediaImage
+  }
 }
     ${FragmentNodeInterfaceFragmentDoc}
-${FragmentNameTypeFragmentDoc}`;
+${FragmentNameTypeFragmentDoc}
+${FragmentSupAwardFragmentDoc}
+${FragmentMediaImageFragmentDoc}`;
 export const FragmentNodeStanfordCourseTeaserFragmentDoc = gql`
     fragment FragmentNodeStanfordCourseTeaser on NodeStanfordCourse {
   ...FragmentNodeInterface
