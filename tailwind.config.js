@@ -54,7 +54,8 @@ module.exports = {
         },
         'press-bay': {
           DEFAULT: "#6FA287",
-          light: '#a0d2bf'
+          light: '#a0d2bf',
+          dark: "#417865",
         },
         'press-sand': {
           DEFAULT: '#9c9286',

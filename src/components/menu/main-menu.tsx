@@ -2,7 +2,6 @@
 
 import Link from "@components/elements/link";
 import SiteSearchForm from "@components/search/site-search-form";
-import useActiveTrail from "@lib/hooks/useActiveTrail";
 import useOutsideClick from "@lib/hooks/useOutsideClick";
 import {ChevronDownIcon, MagnifyingGlassIcon} from "@heroicons/react/20/solid";
 import {MenuItem as MenuItemType} from "@lib/gql/__generated__/drupal.d";
@@ -11,6 +10,7 @@ import {useBoolean, useEventListener} from "usehooks-ts";
 import {useCallback, useEffect, useId, useLayoutEffect, useRef, useState} from "react";
 import {usePathname} from "next/navigation";
 import usePageHasTopBanner from "@lib/hooks/usePageHasTopBanner";
+import getActiveTrail from "@lib/utils/get-active-trail";
 
 const menuLevelsToShow = 2;
 
@@ -28,7 +28,7 @@ const MainMenu = ({menuItems}: Props) => {
 
   const {value: menuOpen, setFalse: closeMenu, toggle: toggleMenu} = useBoolean(false)
   const browserUrl = usePathname()
-  const activeTrail = useActiveTrail(menuItems, usePathname() || "");
+  const activeTrail = getActiveTrail(menuItems, usePathname() || "");
 
   useOutsideClick(menuRef, closeMenu);
 

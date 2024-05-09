@@ -3,8 +3,8 @@ import SideNav from "@components/menu/side-nav";
 import {HtmlHTMLAttributes} from "react";
 import {isPreviewMode} from "@lib/drupal/utils";
 import {MenuAvailable} from "@lib/gql/__generated__/drupal.d";
-import useActiveTrail from "@lib/hooks/useActiveTrail";
 import {twMerge} from "tailwind-merge";
+import getActiveTrail from "@lib/utils/get-active-trail";
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -15,7 +15,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 
 const InteriorPage = async ({children, currentPath, ...props}: Props) => {
   const menu = await getMenu(MenuAvailable.Main, isPreviewMode());
-  const activeTrail: string[] = useActiveTrail(menu, currentPath);
+  const activeTrail: string[] = getActiveTrail(menu, currentPath);
 
   // Peel off the menu items from the parent.
   const topMenuItem = activeTrail.length > 0 ? menu.find(item => item.id === activeTrail[0]) : undefined;

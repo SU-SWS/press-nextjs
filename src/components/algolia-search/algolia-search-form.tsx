@@ -163,7 +163,7 @@ const Form = ({searchIndex}: { searchIndex: string }) => {
           </div>
 
           <div className="border-b border-black-30 pb-16 mb-14">
-            <label className="flex items-center justify-between gap-15">
+            <label className="flex items-center justify-between gap-10">
               <span className="text-stone-dark">Search only books</span>
 
               <div className="relative">
@@ -174,7 +174,7 @@ const Form = ({searchIndex}: { searchIndex: string }) => {
                   onChange={() => refineBookType("book")}
                 />
                 <div
-                  className="w-16 h-6 bg-press-sand-light peer-checked:bg-press-grass-light rounded-full shadow-inner"/>
+                  className="w-16 h-6 bg-press-sand-light peer-checked:bg-press-bay-light rounded-full shadow-inner"/>
                 <div
                   className="absolute w-10 h-10 bg-white peer-checked:bg-press-grass rounded-full shadow border border-fog-dark -left-1 -top-2 transition peer-checked:translate-x-full peer-focus-visible:outline outline-press-grass-light"
                 />
@@ -194,8 +194,8 @@ const Form = ({searchIndex}: { searchIndex: string }) => {
                     name="subject"
                     onChange={() => refineBookSubjects(refinementOption.value)}
                   />
-                  <div className="peer-focus-visible:bg-press-grass-light w-14 h-14 rounded-full"/>
-                  <div className="absolute left-3 top-3 w-8 h-8 border-2 border-press-sand-light rounded peer-focus-visible:border-press-grass peer-checked:bg-press-grass-light peer-checked:border-press-grass"/>
+                  <div className="peer-focus-visible:bg-press-bay w-14 h-14 rounded-full"/>
+                  <div className="absolute left-3 top-3 w-8 h-8 border-2 border-press-sand-light rounded peer-focus-visible:border-press-grass peer-checked:bg-press-grass-light peer-checked:border-press-bay-dark"/>
                   <CheckIcon width={15} className="text-white absolute left-4 top-4 hidden peer-checked:block"/>
                 </div>
                 <span className="text-stone-dark">{refinementOption.value}</span>

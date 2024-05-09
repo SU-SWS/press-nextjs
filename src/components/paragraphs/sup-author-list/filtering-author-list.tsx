@@ -51,6 +51,7 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
       <a href="#author-filter" className="skiplink">Skip to filter</a>
 
       <PagedList
+        className="flex-grow"
         itemsPerPage={50}
         ulProps={{className: "list-unstyled mb-36"}}
         pageKey={false}

@@ -4,6 +4,7 @@ import {EnvelopeIcon} from "@heroicons/react/24/outline";
 import ActionLink from "@components/elements/action-link";
 import Button from "@components/elements/button";
 import {LinkProps} from "next/dist/client/link";
+import {twMerge} from "tailwind-merge";
 
 type Props = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement> & LinkProps & {
   /**
@@ -43,7 +44,7 @@ const DrupalLink = ({href, children, ...props}: Props) => {
   }
 
   return (
-    <Link href={href} {...props}>
+    <Link href={href} {...props} className={twMerge("text-stone-dark hocus:text-archway-dark", props.className)}>
       {children}
       {href.startsWith("mailto") &&
         <EnvelopeIcon width={20} className="ml-4 inline-block"/>
