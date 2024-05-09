@@ -1,11 +1,9 @@
 "use client";
 
 import algoliasearch from "algoliasearch/lite";
-import {useHits, useSearchBox, useCurrentRefinements, useRefinementList, Snippet, useRange, useClearRefinements, usePagination, useSortBy} from "react-instantsearch";
+import {useHits, useSearchBox, useCurrentRefinements, useRefinementList, useRange, useClearRefinements, usePagination, useSortBy} from "react-instantsearch";
 import {InstantSearchNext} from "react-instantsearch-nextjs";
-import Link from "@components/elements/link";
 import {H2} from "@components/elements/headers";
-import Image from "next/image";
 import {useEffect, useId, useMemo, useRef, useState} from "react";
 import Button from "@components/elements/button";
 import {useRouter, useSearchParams} from "next/navigation";
@@ -15,6 +13,8 @@ import {SelectOptionDefinition} from "@mui/base/useSelect";
 import {RangeBoundaries} from "instantsearch.js/es/connectors/range/connectRange";
 import {IndexUiState} from "instantsearch.js/es/types/ui-state";
 import {MagnifyingGlassIcon, XMarkIcon} from "@heroicons/react/20/solid";
+import DefaultHit, {AlgoliaHit} from "@components/algolia-search/hits/default";
+import {CheckIcon} from "@heroicons/react/20/solid";
 
 type Props = {
   appId: string
@@ -23,7 +23,7 @@ type Props = {
   initialUiState?: IndexUiState
 }
 
-const AlgoliaSearch = ({appId, searchIndex, searchApiKey, initialUiState = {}}: Props) => {
+const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey, initialUiState = {}}: Props) => {
   const searchClient = useMemo(() => algoliasearch(appId, searchApiKey), [appId, searchApiKey])
   return (
     <div>
@@ -33,13 +33,13 @@ const AlgoliaSearch = ({appId, searchIndex, searchApiKey, initialUiState = {}}: 
         initialUiState={{[searchIndex]: initialUiState}}
         future={{preserveSharedStateOnUnmount: true}}
       >
-        <SearchForm searchIndex={searchIndex}/>
+        <Form searchIndex={searchIndex}/>
       </InstantSearchNext>
     </div>
   )
 }
 
-const SearchForm = ({searchIndex}: { searchIndex: string }) => {
+const Form = ({searchIndex}: { searchIndex: string }) => {
 
   const router = useRouter()
   const searchParams = useSearchParams();
@@ -111,7 +111,7 @@ const SearchForm = ({searchIndex}: { searchIndex: string }) => {
           </label>
           <input
             id="search-input"
-            className="flex-grow border-0 border-b border-black-30 text-m2"
+            className="flex-grow border-0 border-b border-black-30 text-m2 placeholder:-text-m1"
             ref={inputRef}
             autoComplete="on"
             autoCorrect="on"
@@ -133,15 +133,18 @@ const SearchForm = ({searchIndex}: { searchIndex: string }) => {
         </div>
 
         <div className="hidden lg:block float-left w-1/4">
-          <div className="border-b border-black-30">
-            <H2>Filter by</H2>
+          <div className="border-b border-black-30 pb-20 mb-16">
+            <H2 className="text-m1">
+              <span className="text-stone-dark">Filter by</span>
+            </H2>
+
             {currentRefinements.filter(refinement => refinement.attribute === "book_subject").length > 0 &&
               <ul className="list-unstyled mb-16">
                 {currentRefinements.filter(refinement => refinement.attribute === "book_subject").map(refinement => {
                   return refinement.refinements.map((item, i) =>
                     <li
                       key={`refinement-${i}`}
-                      className="w-fit flex items-center gap-24 border border-black p-5 mb-5 last:mb-0"
+                      className="w-fit flex items-center gap-8 border-2 border-press-sand p-5 text-stone-dark"
                     >
                       {item.value}
                       <button
@@ -159,38 +162,55 @@ const SearchForm = ({searchIndex}: { searchIndex: string }) => {
             }
           </div>
 
-          <div className="border-b border-black-30 py-16 mb-16">
-            <label className="flex items-center justify-between">
-              Search only books
-              <input
-                type="checkbox"
-                checked={!!bookTypeRefinmenItems.find(item => item.isRefined)}
-                onChange={() => refineBookType("book")}
-              />
+          <div className="border-b border-black-30 pb-16 mb-14">
+            <label className="flex items-center justify-between gap-15">
+              <span className="text-stone-dark">Search only books</span>
+
+              <div className="relative">
+                <input
+                  className="sr-only peer"
+                  type="checkbox"
+                  checked={!!bookTypeRefinmenItems.find(item => item.isRefined)}
+                  onChange={() => refineBookType("book")}
+                />
+                <div
+                  className="w-16 h-6 bg-press-sand-light peer-checked:bg-press-grass-light rounded-full shadow-inner"/>
+                <div
+                  className="absolute w-10 h-10 bg-white peer-checked:bg-press-grass rounded-full shadow border border-fog-dark -left-1 -top-2 transition peer-checked:translate-x-full peer-focus-visible:outline outline-press-grass-light"
+                />
+              </div>
             </label>
           </div>
 
-          <fieldset className="border-b border-black-30 pb-16 mb-16">
-            <legend>Subject</legend>
+          <fieldset className="border-b border-black-30 pb-16 mb-12">
+            <legend className="text-stone-dark font-medium text-m1 mb-6">Subject</legend>
             {bookSubjectRefinementList.map(refinementOption =>
-              <label key={refinementOption.value} className="flex items-center gap-5 mb-5 last:mb-0">
-                <input
-                  type="checkbox"
-                  checked={refinementOption.isRefined}
-                  name="subject"
-                  onChange={() => refineBookSubjects(refinementOption.value)}
-                />
-                {refinementOption.value}
+              <label key={refinementOption.value} className="flex items-center gap-5 mt-5 mb-8">
+                <div className="relative">
+                  <input
+                    className="sr-only peer"
+                    type="checkbox"
+                    checked={refinementOption.isRefined}
+                    name="subject"
+                    onChange={() => refineBookSubjects(refinementOption.value)}
+                  />
+                  <div className="peer-focus-visible:bg-press-grass-light w-14 h-14 rounded-full"/>
+                  <div className="absolute left-3 top-3 w-8 h-8 border-2 border-press-sand-light rounded peer-focus-visible:border-press-grass peer-checked:bg-press-grass-light peer-checked:border-press-grass"/>
+                  <CheckIcon width={15} className="text-white absolute left-4 top-4 hidden peer-checked:block"/>
+                </div>
+                <span className="text-stone-dark">{refinementOption.value}</span>
               </label>
             )}
           </fieldset>
 
           <fieldset>
-            <legend>Published Date</legend>
+            <legend className="text-stone-dark font-medium text-m1 mb-6">Published Date</legend>
 
             <div className="flex gap-5 items-center">
               <div className="flex-grow flex-1">
-                <div id={`${id}-min-year`}><span className="sr-only">Minimum&nbps;</span>Year</div>
+                <div id={`${id}-min-year`} className="text-stone">
+                  <span className="sr-only">Minimum&nbps;</span>Year
+                </div>
                 <SelectList
                   options={yearOptions.filter(option => parseInt(option.value) < (rangeChoices[1] || 3000) && parseInt(option.value) > (minYear || 0))}
                   value={(!rangeChoices[0] || !minYear || rangeChoices[0] <= minYear) ? null : `${rangeChoices[0]}`}
@@ -200,9 +220,11 @@ const SearchForm = ({searchIndex}: { searchIndex: string }) => {
                   onChange={(_e, value) => setRangeChoices((prevState) => [parseInt(value as string) || undefined, prevState[1]])}
                 />
               </div>
-              <span aria-hidden>to</span>
+              <span aria-hidden className="relative top-5">to</span>
               <div className="flex-grow flex-1">
-                <div id={`${id}-max-year`}><span className="sr-only">Minimum&nbps;</span>Year</div>
+                <div id={`${id}-max-year`} className="text-stone">
+                  <span className="sr-only">Minimum&nbps;</span>Year
+                </div>
                 <SelectList
                   options={yearOptions.filter(option => parseInt(option.value) > (rangeChoices[0] || 0) && parseInt(option.value) < (maxYear || 3000))}
                   value={(!rangeChoices[1] || !maxYear || rangeChoices[1] >= maxYear) ? null : `${rangeChoices[1]}`}
@@ -224,7 +246,7 @@ const SearchForm = ({searchIndex}: { searchIndex: string }) => {
         </div>
       </form>
 
-      <div className="lg:float-right lg:ml-20 lg:w-[calc(75%-5rem)]">
+      <div className="lg:float-right lg:ml-20 lg:w-[calc(70%-5rem)]">
         <HitList searchIndex={searchIndex}/>
       </div>
     </div>
@@ -253,7 +275,7 @@ const HitList = ({searchIndex}: { searchIndex: string }) => {
         <div aria-live="polite">{nbHits} {nbHits > 1 ? "Results" : "Result"}</div>
 
         <div className="flex items-center gap-3 w-1/2">
-          <div id="sort-by">Sort By:</div>
+          <div id="sort-by" className="text-stone">Sort By:</div>
           <div className="flex-grow">
             <SelectList
               ariaLabelledby="sort-by"
@@ -270,7 +292,7 @@ const HitList = ({searchIndex}: { searchIndex: string }) => {
       <ul className="list-unstyled">
         {hits.map(hit =>
           <li key={hit.objectID} className="border-b border-gray-300 last:border-0">
-            <Hit hit={hit}/>
+            <DefaultHit hit={hit}/>
           </li>
         )}
       </ul>
@@ -308,64 +330,4 @@ const HitList = ({searchIndex}: { searchIndex: string }) => {
   )
 }
 
-type AlgoliaHit = {
-  url: string
-  title: string
-  summary?: string
-  photo?: string
-  updated?: number
-  html?: string
-  book_published?: number
-  book_authors?: string
-}
-
-const Hit = ({hit}: { hit: HitType<AlgoliaHit> }) => {
-  const hitUrl = new URL(hit.url);
-
-  return (
-    <article className="@container flex justify-between gap-20 py-12">
-      <div>
-        <H2 className="text-m2">
-          <Link href={hit.url.replace(hitUrl.origin, "")}>
-            {hit.title}
-          </Link>
-        </H2>
-
-        {hit.summary &&
-          <p className="mb-10">{hit.summary}</p>
-        }
-        {(hit.html && !hit.summary) &&
-          <p className="mb-10">
-            <Snippet hit={hit} attribute="html"/>
-          </p>
-        }
-
-        {hit.book_authors &&
-          <div>
-            {hit.book_authors}
-          </div>
-        }
-        {hit.book_published &&
-          <div>
-            {hit.book_published}
-          </div>
-        }
-      </div>
-
-      {hit.photo &&
-        <div className="relative shrink-0 aspect-[2/3] w-[150px]">
-          <Image
-            className="object-cover"
-            src={hit.photo}
-            alt=""
-            fill
-            sizes="300px"
-          />
-        </div>
-      }
-    </article>
-  )
-}
-
-
-export default AlgoliaSearch;
+export default AlgoliaSearchForm;

@@ -48,13 +48,17 @@ module.exports = {
       colors: {
         ...decanter.theme.extend.colors,
         'press-indigo': '#003D69',
-        'press-grass': '#00593e',
+        'press-grass': {
+          DEFAULT: '#00593e',
+          light: "#6FA287"
+        },
         'press-bay': {
           DEFAULT: "#6FA287",
-          lite: '#a0d2bf'
+          light: '#a0d2bf'
         },
         'press-sand': {
           DEFAULT: '#9c9286',
+          light: "#C5BEB2",
           dark: '#7e7267',
         },
       },

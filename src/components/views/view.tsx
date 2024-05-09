@@ -118,6 +118,7 @@ const View = async ({viewId, displayId, items, headingLevel = "h3"}: Props) => {
       />
 
     case "sup_books--book_list":
+    case "sup_books--award_winners":
       return <BookListView
         items={items as NodeSupBook[]}
         headingLevel={headingLevel}

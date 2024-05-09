@@ -289,11 +289,12 @@ export const FragmentParagraphSupCarouselSlideFragmentDoc = gql`
       id
       title
       path
-      supBookAuthors {
-        ...FragmentNameType
-      }
+      supBookAuthorsFull
       supBookImage {
         ...FragmentMediaImage
+      }
+      supBookLocalWebBlurb {
+        processed
       }
     }
   }
@@ -315,7 +316,6 @@ export const FragmentParagraphSupCarouselSlideFragmentDoc = gql`
   }
 }
     ${FragmentParagraphInterfaceFragmentDoc}
-${FragmentNameTypeFragmentDoc}
 ${FragmentMediaImageFragmentDoc}
 ${FragmentLinkFragmentDoc}`;
 export const FragmentParagraphSupCarouselFragmentDoc = gql`
@@ -1825,6 +1825,24 @@ export const SupBooksDocument = gql`
 }
     ${FragmentNodeSupBookTeaserFragmentDoc}
 ${FragmentViewPageInfoFragmentDoc}`;
+export const SupBooksAwardWinnersDocument = gql`
+    query supBooksAwardWinners($filters: SupBooksAwardWinnersContextualFilterInput, $pageSize: Int = 3, $page: Int, $offset: Int) {
+  supBooksAwardWinners(
+    contextualFilter: $filters
+    pageSize: $pageSize
+    page: $page
+    offset: $offset
+  ) {
+    results {
+      ...FragmentNodeSupBookTeaser
+    }
+    pageInfo {
+      ...FragmentViewPageInfo
+    }
+  }
+}
+    ${FragmentNodeSupBookTeaserFragmentDoc}
+${FragmentViewPageInfoFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -1928,6 +1946,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     supBooks(variables?: DrupalTypes.SupBooksQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.SupBooksQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.SupBooksQuery>(SupBooksDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'supBooks', 'query', variables);
+    },
+    supBooksAwardWinners(variables?: DrupalTypes.SupBooksAwardWinnersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.SupBooksAwardWinnersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.SupBooksAwardWinnersQuery>(SupBooksAwardWinnersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'supBooksAwardWinners', 'query', variables);
     }
   };
 }

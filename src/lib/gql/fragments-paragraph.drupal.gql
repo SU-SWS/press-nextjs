@@ -188,11 +188,12 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
             id
             title
             path
-            supBookAuthors {
-                ...FragmentNameType
-            }
+            supBookAuthorsFull
             supBookImage {
                 ...FragmentMediaImage
+            }
+            supBookLocalWebBlurb {
+                processed
             }
         }
     }

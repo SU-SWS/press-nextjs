@@ -150,11 +150,11 @@ const SelectList = ({
     <div className="relative h-fit">
       <button
         {...getButtonProps()}
-        className={clsx("w-full text-left p-5", {"border border-black-40 rounded": !borderless})}
+        className={clsx("text-stone w-full text-left p-5", {"border border-black-40 rounded": !borderless})}
         aria-labelledby={labeledBy}
       >
         {label &&
-          <div className={clsx("relative  max-w-[calc(100%-30px)]", {
+          <div className={clsx("relative max-w-[calc(100%-30px)]", {
             "text-m0 top-[-15px] w-full": optionChosen,
             "text-m1": !optionChosen
           })}>
@@ -165,7 +165,7 @@ const SelectList = ({
         }
 
         {(!label && emptyLabel && !optionChosen) &&
-          <div className={clsx("relative  max-w-[calc(100%-30px)] text-m1")}>
+          <div className={clsx("relative max-w-[calc(100%-30px)] text-m1")}>
             <div id={labelId} className={clsx("bg-white w-fit px-5", {"bg-black-20": props.disabled})}>
               {emptyLabel}
             </div>

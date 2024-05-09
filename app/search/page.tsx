@@ -1,8 +1,8 @@
 import {H1} from "@components/elements/headers";
 import {getConfigPage} from "@lib/gql/gql-queries";
 import {StanfordBasicSiteSetting} from "@lib/gql/__generated__/drupal.d";
-import AlgoliaSearch from "./algolia-search";
 import {IndexUiState} from "instantsearch.js/es/types/ui-state";
+import AlgoliaSearchForm from "@components/algolia-search/algolia-search-form";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
 export const revalidate = false;
@@ -34,12 +34,12 @@ const Page = async ({searchParams}: { searchParams?: { [_key: string]: string } 
 
   return (
     <div className="centered mt-32">
-      <div className="lg:w-4/5 mx-auto">
+      <div className="lg:w-9/12 mx-auto">
         <H1 className="mb-44" id="page-title">Search</H1>
 
         {(siteSettingsConfig?.suSiteAlgoliaId && siteSettingsConfig?.suSiteAlgoliaIndex && siteSettingsConfig?.suSiteAlgoliaSearch) &&
           <>
-            <AlgoliaSearch
+            <AlgoliaSearchForm
               appId={siteSettingsConfig.suSiteAlgoliaId}
               searchIndex={siteSettingsConfig.suSiteAlgoliaIndex}
               searchApiKey={siteSettingsConfig.suSiteAlgoliaSearch}

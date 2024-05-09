@@ -141,6 +141,7 @@ const getViewPagedItems = cache(async (viewId: string, displayId: string, contex
       break
 
     case "sup_books--book_list":
+    case "sup_books--award_winners":
       tags.push("views:sup_book");
       break
   }
@@ -201,10 +202,16 @@ const getViewPagedItems = cache(async (viewId: string, displayId: string, contex
         break
 
       case "sup_books--book_list":
-        filters = getViewFilters(["term_node_taxonomy_name_depth", "sup_book_work_id_number_value"], contextualFilter)
+        filters = getViewFilters(["term_node_taxonomy_name_depth", "term_node_taxonomy_name_depth_1", "sup_book_work_id_number_value"], contextualFilter)
         graphqlResponse = await client.supBooks({filters, ...queryVariables});
         items = graphqlResponse.supBooksView?.results as unknown as NodeSupBook[]
         break
+
+      case "sup_books--award_winners":
+        filters = getViewFilters(["term_node_taxonomy_name_depth", "term_node_taxonomy_name_depth_1", "sup_book_work_id_number_value"], contextualFilter)
+        graphqlResponse = await client.supBooksAwardWinners({filters, ...queryVariables});
+        items = graphqlResponse.supBooksAwardWinners?.results as unknown as NodeSupBook[]
+        break;
 
       default:
         console.warn(`Unable to find query for view: ${viewId} display: ${displayId}`)
