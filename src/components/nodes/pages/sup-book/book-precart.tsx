@@ -109,7 +109,7 @@ const BookPreCart = ({
               />
               <label
                 htmlFor="us-region"
-                className="block text-center p-5 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline hover:underline hover:bg-fog-light"
+                className="block text-center p-5 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline hover:underline hover:bg-fog-light hover:cursor-pointer"
               >
                 US/Canada
               </label>
@@ -126,7 +126,7 @@ const BookPreCart = ({
               />
               <label
                 htmlFor="intl-region"
-                className="block text-center p-5 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline hover:underline hover:bg-fog-light"
+                className="block text-center p-5 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline hover:underline hover:bg-fog-light hover:cursor-pointer"
               >
                 International
               </label>
@@ -194,7 +194,7 @@ const UsFormatChoices = ({
           />
           <label
             htmlFor={`${id}-cloth`}
-            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light"
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light hover:cursor-pointer"
           >
             <span className="flex w-full items-center">
               <span className="flex w-full flex-col @lg:flex-row justify-between">
@@ -222,7 +222,7 @@ const UsFormatChoices = ({
           />
           <label
             htmlFor={`${id}-paper`}
-            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light"
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light hover:cursor-pointer"
           >
             <span className="flex w-full items-center">
               <span className="flex w-full flex-col @lg:flex-row justify-between">
@@ -250,7 +250,7 @@ const UsFormatChoices = ({
           />
           <label
             htmlFor={`${id}-digital`}
-            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light"
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light hover:cursor-pointer"
           >
             <span className="flex w-full items-center">
               <span className="flex w-full flex-col @lg:flex-row justify-between">
@@ -295,7 +295,7 @@ const IntlFormatChoices = ({
           />
           <label
             htmlFor={`${id}-cloth`}
-            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light"
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light hover:cursor-pointer"
           >
             <span className="flex w-full items-center justify-between font-semibold">
               <span className="group-hover:underline">Hardcover</span>
@@ -317,7 +317,7 @@ const IntlFormatChoices = ({
           />
           <label
             htmlFor={`${id}-paper`}
-            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light"
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light hover:cursor-pointer"
           >
             <span className="flex w-full items-center justify-between font-semibold">
               <span className="group-hover:underline">Paperback</span>

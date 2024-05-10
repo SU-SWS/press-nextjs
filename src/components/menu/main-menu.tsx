@@ -11,6 +11,7 @@ import {useCallback, useEffect, useId, useLayoutEffect, useRef, useState} from "
 import {usePathname} from "next/navigation";
 import usePageHasTopBanner from "@lib/hooks/usePageHasTopBanner";
 import getActiveTrail from "@lib/utils/get-active-trail";
+import {ShoppingCartIcon} from "@heroicons/react/24/outline";
 
 const menuLevelsToShow = 2;
 
@@ -66,7 +67,10 @@ const MainMenu = ({menuItems}: Props) => {
           <span className="sr-only">Search Site</span>
           <MagnifyingGlassIcon
             width={25}
-            className={clsx(" border-b border-transparent ", {"text-white group-hocus:border-b-white": pageHasBanner, "text-stone-dark group-hocus:border-b-stone-dark": !pageHasBanner})}
+            className={clsx("border-b border-transparent", {
+              "text-white group-hocus:border-b-white": pageHasBanner,
+              "text-stone-dark group-hocus:border-b-stone-dark": !pageHasBanner
+            })}
           />
         </a>
       </div>
@@ -130,8 +134,8 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
       "border-transparent lg:border-foggy-dark": !pageHasBanner && level === 0 && !isCurrent && inTrail,
       "lg:border-white": pageHasBanner && level === 0 && isCurrent,
       "lg:border-fog": pageHasBanner && level === 0 && !isCurrent && inTrail,
-
       "border-transparent": level === 0 && !isCurrent && !inTrail,
+      "flex items-center gap-5": title === "Cart",
     },
     // Child menu item styles.
     {
@@ -167,6 +171,9 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
           aria-current={isCurrent ? "true" : undefined}
         >
           {title}
+          {title === "Cart" &&
+            <ShoppingCartIcon width={30} className={clsx({"text-stone": !pageHasBanner})}/>
+          }
         </Link>
 
         {(children.length > 0 && level < menuLevelsToShow) &&
