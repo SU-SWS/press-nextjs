@@ -26,7 +26,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
         <div className="xl:w-2/3 flex flex-col lg:flex-row gap-24">
           <div className="xl:w-7/12">
             <div className="flex flex-col gap-10 border-b border-fog pb-20 mb-20">
-              <H1 className="text-stone-dark">
+              <H1>
                 {node.title}
               </H1>
 
@@ -37,7 +37,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
               }
 
               {node.supBookSubtitle &&
-                <div className="text-m3 font-medium text-stone-dark">{node.supBookSubtitle}</div>
+                <div className="text-m3 font-medium">{node.supBookSubtitle}</div>
               }
 
               {node.supBookAuthorsFull &&
@@ -63,7 +63,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
                 <div className="font-semibold text-stone">Imprint: {node.supBookImprint.name}</div>
               }
 
-              <H2 className="font-normal -text-m1"><span className="text-stone-dark">Book Details</span></H2>
+              <H2 className="font-normal -text-m1">Book Details</H2>
 
               {node.supBookCopublisherName &&
                 <div className="text-stone">{node.supBookCopublisherName}</div>
@@ -85,44 +85,45 @@ const SupBookPage = async ({node, ...props}: Props) => {
               }
 
               {node.supBookSeries?.name &&
-                <div className="text-stone-dark">Series<br/>{node.supBookSeries?.name}</div>
+                <div>Series<br/>{node.supBookSeries?.name}</div>
               }
             </div>
 
             {node.supBookIsbn13Cloth &&
-              <div className="text-stone-dark">
+              <div>
                 Hardcover ISBN: {node.supBookIsbn13Cloth}
               </div>
             }
             {node.supBookIsbn13Paper &&
-              <div className="text-stone-dark">
+              <div>
                 Paperback ISBN: {node.supBookIsbn13Paper}
               </div>
             }
             {node.supBookIsbn13Digital &&
-              <div className="text-stone-dark">
+              <div>
                 Ebook ISBN: {node.supBookIsbn13Digital}
               </div>
             }
           </div>
 
           <div className="order-first xl:w-5/12">
-            {node.supBookImage?.mediaImage &&
-              <div className="relative mb-16">
-                <Image
-                  src={node.supBookImage.mediaImage.url}
-                  alt={node.supBookImage.mediaImage.alt || ""}
-                  height={node.supBookImage.mediaImage.height}
-                  width={node.supBookImage.mediaImage.width}
-                  placeholder={placeholderImage ? "blur" : undefined}
-                  blurDataURL={placeholderImage}
-                  loading="eager"
-                />
-              </div>
-            }
+            <Image
+              className="mb-16"
+              src={node.supBookImage?.mediaImage.url || "/default-book-image.jpg"}
+              alt={node.supBookImage?.mediaImage.alt || ""}
+              height={node.supBookImage?.mediaImage.height || 600}
+              width={node.supBookImage?.mediaImage.width || 400}
+              placeholder={placeholderImage ? "blur" : undefined}
+              blurDataURL={placeholderImage}
+              sizes="400px"
+              loading="eager"
+            />
 
             {node.supBookExcerpts &&
-              <Link href={`${node.path}/excerpts`} className="flex justify-center items-center gap-3 text-stone-dark font-normal">
+              <Link
+                href={`${node.path}/excerpts`}
+                className="flex justify-center items-center gap-3 font-normal"
+              >
                 <BookOpenIcon width={20} className="text-fog-dark"/>
                 <span>Excerpts + more</span>
               </Link>
@@ -148,7 +149,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
           </div>
 
           <div className="border-b border-fog mb-10 pb-10">
-            <span className="text-stone-dark">Also Available from</span><br/>
+            <span>Also Available from</span><br/>
             .... need to figure this part out.
             <ul className="list-unstyled [&_a]:text-digital-red [&_a]:font-normal">
               <li><a href="https://www.barnesandnoble.com/b/nook-devices">Barnes and Noble Nook</a></li>

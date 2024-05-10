@@ -105,7 +105,7 @@ const Form = ({searchIndex}: { searchIndex: string }) => {
   return (
     <div>
       <form role="search" aria-labelledby="page-title" onSubmit={(e) => e.preventDefault()}>
-        <div className="lg:w-2/3 mx-auto mb-20 flex gap-5 items-center">
+        <div className="md:w-2/3 mx-auto mb-20 flex gap-5 items-center">
           <label className="sr-only" htmlFor="search-input">
             Keywords Search
           </label>
@@ -132,10 +132,10 @@ const Form = ({searchIndex}: { searchIndex: string }) => {
           </button>
         </div>
 
-        <div className="hidden lg:block float-left w-1/4">
+        <div className="hidden md:block float-left w-1/4">
           <div className="border-b border-black-30 pb-20 mb-16">
             <H2 className="text-m1">
-              <span className="text-stone-dark">Filter by</span>
+              Filter by
             </H2>
 
             {currentRefinements.filter(refinement => refinement.attribute === "book_subject").length > 0 &&
@@ -144,7 +144,7 @@ const Form = ({searchIndex}: { searchIndex: string }) => {
                   return refinement.refinements.map((item, i) =>
                     <li
                       key={`refinement-${i}`}
-                      className="w-fit flex items-center gap-8 border-2 border-press-sand p-5 text-stone-dark"
+                      className="w-fit flex items-center gap-8 border-2 border-press-sand p-5"
                     >
                       {item.value}
                       <button
@@ -164,7 +164,7 @@ const Form = ({searchIndex}: { searchIndex: string }) => {
 
           <div className="border-b border-black-30 pb-16 mb-14">
             <label className="flex items-center justify-between gap-10">
-              <span className="text-stone-dark">Search only books</span>
+              <span>Search only books</span>
 
               <div className="relative">
                 <input
@@ -183,7 +183,7 @@ const Form = ({searchIndex}: { searchIndex: string }) => {
           </div>
 
           <fieldset className="border-b border-black-30 pb-16 mb-12">
-            <legend className="text-stone-dark font-medium text-m1 mb-6">Subject</legend>
+            <legend className="font-medium text-m1 mb-6">Subject</legend>
             {bookSubjectRefinementList.map(refinementOption =>
               <label key={refinementOption.value} className="flex items-center gap-5 mt-5 mb-8">
                 <div className="relative">
@@ -198,13 +198,13 @@ const Form = ({searchIndex}: { searchIndex: string }) => {
                   <div className="absolute left-3 top-3 w-8 h-8 border-2 border-press-sand-light rounded peer-focus-visible:border-press-grass peer-checked:bg-press-grass-light peer-checked:border-press-bay-dark"/>
                   <CheckIcon width={15} className="text-white absolute left-4 top-4 hidden peer-checked:block"/>
                 </div>
-                <span className="text-stone-dark">{refinementOption.value}</span>
+                <span>{refinementOption.value}</span>
               </label>
             )}
           </fieldset>
 
           <fieldset>
-            <legend className="text-stone-dark font-medium text-m1 mb-6">Published Date</legend>
+            <legend className="font-medium text-m1 mb-6">Published Date</legend>
 
             <div className="flex gap-5 items-center">
               <div className="flex-grow flex-1">
@@ -246,7 +246,7 @@ const Form = ({searchIndex}: { searchIndex: string }) => {
         </div>
       </form>
 
-      <div className="lg:float-right lg:ml-20 lg:w-[calc(70%-5rem)]">
+      <div className="md:float-right md:ml-20 md:w-[calc(70%-5rem)]">
         <HitList searchIndex={searchIndex}/>
       </div>
     </div>

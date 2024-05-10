@@ -43,7 +43,7 @@ const BookAwards = ({children}: { children: JSX.Element[] }) => {
         }
       </ul>
 
-      {(bottom && !showingMore) &&
+      {(bottom.length > 0 && !showingMore) &&
         <button
           className="flex items-center gap-3"
           onClick={() => {

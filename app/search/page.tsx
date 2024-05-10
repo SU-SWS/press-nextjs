@@ -34,7 +34,7 @@ const Page = async ({searchParams}: { searchParams?: { [_key: string]: string } 
 
   return (
     <div className="centered mt-32">
-      <div className="lg:w-9/12 mx-auto">
+      <div className="3xl:w-10/12 mx-auto">
         <H1 className="mb-44" id="page-title">Search</H1>
 
         {(siteSettingsConfig?.suSiteAlgoliaId && siteSettingsConfig?.suSiteAlgoliaIndex && siteSettingsConfig?.suSiteAlgoliaSearch) &&

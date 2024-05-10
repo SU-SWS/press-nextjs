@@ -22,12 +22,12 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
         <div className="flex flex-col md:flex-row gap-20 mb-36">
 
           <div className="flex flex-col gap-10">
-            <div className="font-medium text-stone-dark text-m4">
+            <div className="font-medium text-m4">
               {node.title}
             </div>
 
             {node.supBookSubtitle &&
-              <div className="font-medium text-stone-dark text-m3">{node.supBookSubtitle}</div>
+              <div className="font-medium text-m3">{node.supBookSubtitle}</div>
             }
 
             {node.supBookAuthorsFull &&
@@ -189,7 +189,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
 
       <Link href={node.path} className="pt-20 flex items-center gap-5 w-fit">
         <ArrowLeftIcon width={20} className="text-fog-dark"/>
-        <span className="text-stone-dark">Back to {node.title}</span>
+        <span>Back to {node.title}</span>
       </Link>
     </div>
   )
