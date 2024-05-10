@@ -536,6 +536,9 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   supBookWebCodeCloth
   supBookWebCodePaper
   supBookWorkIdNumber
+  supBookERetailers {
+    ...FragmentLink
+  }
 }
     ${FragmentNodeInterfaceFragmentDoc}
 ${FragmentNameTypeFragmentDoc}
@@ -543,7 +546,8 @@ ${FragmentSupAwardFragmentDoc}
 ${FragmentParagraphUnionFragmentDoc}
 ${FragmentMediaImageFragmentDoc}
 ${FragmentTermInterfaceFragmentDoc}
-${FragmentDateTimeFragmentDoc}`;
+${FragmentDateTimeFragmentDoc}
+${FragmentLinkFragmentDoc}`;
 export const FragmentNodeStanfordCourseFragmentDoc = gql`
     fragment FragmentNodeStanfordCourse on NodeStanfordCourse {
   ...FragmentNodeInterface
