@@ -8,7 +8,6 @@ import Button from "@components/elements/button";
 import ImageCard from "@components/patterns/image-card";
 import BackgroundImageCard from "@components/patterns/background-image-card";
 import {clsx} from "clsx";
-import {ChevronRightIcon} from "@heroicons/react/16/solid";
 import {twMerge} from "tailwind-merge";
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -23,7 +22,7 @@ const CardParagraph = ({paragraph, ...props}: Props) => {
 
   const headerTagChoice = (behaviors.su_card_styles?.heading || "h2").split(".", 2);
   const headerTag = headerTagChoice[0]
-  const headerClasses = headerTagChoice[1]?.replace(".", " ").replace("su-font-splash", "text-m2 font-bold")
+  const headerClasses = headerTagChoice[1]?.replace(".", " ").replace("su-font-splash", "text-m2 font-medium")
 
   const hideHeader = behaviors.su_card_styles?.hide_heading;
   const Component = behaviors.su_card_styles?.card_style === "bg-image" ? BackgroundImageCard : ImageCard;
@@ -40,9 +39,8 @@ const CardParagraph = ({paragraph, ...props}: Props) => {
       {paragraph.suCardHeader &&
         <div id={paragraph.id} className={clsx("order-2", {"sr-only": hideHeader})}>
           {headerTag === "h2" &&
-            <H2 className={twMerge("flex items-center", headerClasses)}>
+            <H2 className={twMerge("flex items-center mb-0", headerClasses)}>
               {paragraph.suCardHeader}
-              <ChevronRightIcon width={50} className="text-digital-red"/>
             </H2>
           }
           {headerTag === "h3" &&
@@ -64,12 +62,12 @@ const CardParagraph = ({paragraph, ...props}: Props) => {
         </div>
       }
 
-      <Wysiwyg html={paragraph.suCardBody?.processed} className="order-3"/>
+      <Wysiwyg html={paragraph.suCardBody?.processed} className="order-3 *:text-21 rs-pb-2"/>
 
       {paragraph.suCardLink?.url &&
         <div className="order-4">
           {behaviors.su_card_styles?.link_style === "action" &&
-            <ActionLink href={paragraph.suCardLink.url}>
+            <ActionLink href={paragraph.suCardLink.url} className="font-normal no-underline hocus:underline">
               {paragraph.suCardLink.title}
             </ActionLink>
           }
