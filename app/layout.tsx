@@ -51,7 +51,7 @@ const RootLayout = ({children, modal}: { children: React.ReactNode, modal: React
       <UserAnalytics/>
     }
     <DrupalWindowSync/>
-    <body>
+    <body className="text-stone-dark">
     <nav aria-label="Skip Links">
       <a href="#main-content" className="skiplink">Skip to main content</a>
     </nav>

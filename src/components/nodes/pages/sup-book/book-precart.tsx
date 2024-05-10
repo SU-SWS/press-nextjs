@@ -96,8 +96,8 @@ const BookPreCart = ({
       {hasIntlCart &&
         <fieldset>
           <legend className="font-semibold">Region</legend>
-          <div className="flex border-2 border-black-40 p-1 mb-5">
-            <div className="flex-1">
+          <div className="flex flex-wrap border-2 border-black-40 p-1 mb-5">
+            <div className="flex-1 min-w-fit">
               <input
                 id="us-region"
                 className="sr-only peer"
@@ -109,12 +109,12 @@ const BookPreCart = ({
               />
               <label
                 htmlFor="us-region"
-                className="block text-center p-5 peer-checked:bg-cardinal-red-dark peer-checked:text-white cursor-pointer peer-focus-visible:underline hover:underline"
+                className="block text-center p-5 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline hover:underline hover:bg-fog-light"
               >
                 US/Canada
               </label>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-fit">
               <input
                 id="intl-region"
                 className="sr-only peer"
@@ -126,7 +126,7 @@ const BookPreCart = ({
               />
               <label
                 htmlFor="intl-region"
-                className="block text-center p-5 peer-checked:bg-cardinal-red-dark peer-checked:text-white cursor-pointer peer-focus-visible:underline hover:underline"
+                className="block text-center p-5 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline hover:underline hover:bg-fog-light"
               >
                 International
               </label>
@@ -194,14 +194,14 @@ const UsFormatChoices = ({
           />
           <label
             htmlFor={`${id}-cloth`}
-            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline cursor-pointer"
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light"
           >
             <span className="flex w-full items-center">
               <span className="flex w-full flex-col @lg:flex-row justify-between">
-                <span className="font-semibold text-stone-dark group-hover:underline">Hardcover</span>
+                <span className="font-semibold group-hover:underline">Hardcover</span>
                 <span className="flex items-center">
                   <span className="text-press-sand-dark">US/CAN</span>
-                  <span className="text-stone-dark">{formatCurrency(clothPrice)}</span>
+                  <span>{formatCurrency(clothPrice)}</span>
                 </span>
               </span>
               <BookmarkIcon width={30} className="text-fog-dark"/>
@@ -222,14 +222,14 @@ const UsFormatChoices = ({
           />
           <label
             htmlFor={`${id}-paper`}
-            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline cursor-pointer"
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light"
           >
             <span className="flex w-full items-center">
               <span className="flex w-full flex-col @lg:flex-row justify-between">
-                <span className="font-semibold text-stone-dark group-hover:underline">Paperback</span>
+                <span className="font-semibold group-hover:underline">Paperback</span>
                 <span className="flex items-center">
                   <span className="text-press-sand-dark">US/CAN</span>
-                  <span className="text-stone-dark">{formatCurrency(paperPrice)}</span>
+                  <span>{formatCurrency(paperPrice)}</span>
                 </span>
               </span>
               <BookOpenIcon width={30} className="text-fog-dark"/>
@@ -250,14 +250,14 @@ const UsFormatChoices = ({
           />
           <label
             htmlFor={`${id}-digital`}
-            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline cursor-pointer"
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light"
           >
             <span className="flex w-full items-center">
               <span className="flex w-full flex-col @lg:flex-row justify-between">
-                <span className="font-semibold text-stone-dark group-hover:underline">eBook</span>
+                <span className="font-semibold group-hover:underline">eBook</span>
                 <span className="flex items-center">
                   <span className="text-press-sand-dark">US/CAN</span>
-                  <span className="text-stone-dark">{formatCurrency(digitalPrice)}</span>
+                  <span>{formatCurrency(digitalPrice)}</span>
                 </span>
               </span>
               <DeviceTabletIcon width={30} className="text-fog-dark"/>
@@ -295,10 +295,10 @@ const IntlFormatChoices = ({
           />
           <label
             htmlFor={`${id}-cloth`}
-            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline cursor-pointer"
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light"
           >
             <span className="flex w-full items-center justify-between font-semibold">
-              <span className="text-stone-dark group-hover:underline">Hardcover</span>
+              <span className="group-hover:underline">Hardcover</span>
               <BookmarkIcon width={30} className="text-fog-dark"/>
             </span>
           </label>
@@ -317,10 +317,10 @@ const IntlFormatChoices = ({
           />
           <label
             htmlFor={`${id}-paper`}
-            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline cursor-pointer"
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline peer-focus-visible:bg-fog-light hover:bg-fog-light"
           >
             <span className="flex w-full items-center justify-between font-semibold">
-              <span className="text-stone-dark group-hover:underline">Paperback</span>
+              <span className="group-hover:underline">Paperback</span>
               <BookOpenIcon width={30} className="text-fog-dark"/>
             </span>
           </label>

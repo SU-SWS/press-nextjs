@@ -34,12 +34,12 @@ const MediaCaptionParagraph = ({paragraph, ...props}: Props) => {
 
       <figcaption>
         {paragraph.suMediaCaptionLink?.url &&
-          <Link href={paragraph.suMediaCaptionLink.url} className="link--action text-stone-dark hocus:text-archway-dark">
+          <Link href={paragraph.suMediaCaptionLink.url} className="link--action font-normal">
             {paragraph.suMediaCaptionLink.title}
           </Link>
         }
 
-        <Wysiwyg html={paragraph.suMediaCaptionCaption?.processed} className="text-archway-dark children:text-18 rs-mb-4"/>
+        <Wysiwyg html={paragraph.suMediaCaptionCaption?.processed} className="children:text-18 rs-mb-4"/>
 
       </figcaption>
     </figure>
