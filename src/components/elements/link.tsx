@@ -4,7 +4,11 @@ import {EnvelopeIcon} from "@heroicons/react/24/outline";
 import ActionLink from "@components/elements/action-link";
 import Button from "@components/elements/button";
 import {LinkProps} from "next/dist/client/link";
+<<<<<<< HEAD
 import clsx from "clsx";
+=======
+import {twMerge} from "tailwind-merge";
+>>>>>>> 1.x
 
 type Props = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement> & LinkProps & {
   /**

@@ -3,6 +3,7 @@ import {ParagraphSupBlogTeaser} from "@lib/gql/__generated__/drupal";
 import {H2, H3} from "@components/elements/headers";
 import Link from "@components/elements/link";
 import Image from "next/image";
+import {ArrowRightIcon} from "@heroicons/react/16/solid";
 
 type Props = HTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphSupBlogTeaser
@@ -11,14 +12,17 @@ type Props = HTMLAttributes<HTMLDivElement> & {
 const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
   return (
     <div {...props}>
-      {paragraph.supBlogTeaserHeader &&
-        <H2>{paragraph.supBlogTeaserHeader}</H2>
-      }
-      {paragraph.supBlogTeaserLink?.url &&
-        <Link href={paragraph.supBlogTeaserLink.url}>
-          {paragraph.supBlogTeaserLink.title}
-        </Link>
-      }
+      <div className="flex items-center justify-between">
+        {paragraph.supBlogTeaserHeader &&
+          <H2>{paragraph.supBlogTeaserHeader}</H2>
+        }
+        {paragraph.supBlogTeaserLink?.url &&
+          <Link href={paragraph.supBlogTeaserLink.url} className="text-archway-dark font-normal flex gap-5 items-center no-underline group">
+            <span className="group-hocus:underline">{paragraph.supBlogTeaserLink.title}</span>
+            <ArrowRightIcon width={20}/>
+          </Link>
+        }
+      </div>
 
       {paragraph.supBlogTeaserItems &&
         <ul className="list-unstyled grid @7xl:grid-cols-2 gap-10">
@@ -32,20 +36,25 @@ const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
                   fill
                 />
               }
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black-true from-60% to-black-40 opacity-70"/>
 
               <div className="absolute top-0 h-full w-full p-20 overflow-y-scroll">
-                <H3 id={blogItem.id}>
-                  {blogItem.supBlogTitle}
-                </H3>
-                <p>{blogItem.supBlogBody}</p>
 
-                {blogItem.supBlogUrl.url &&
-                  <Link
-                    href={blogItem.supBlogUrl.url}
-                    className="stretched-link"
-                    aria-labelledby={blogItem.id}
-                  />
-                }
+                {/* URL will always be populated. */}
+                <Link
+                  href={blogItem.supBlogUrl.url || "#"}
+                  className="stretched-link no-underline group"
+                  aria-labelledby={blogItem.id}
+                >
+                  <H3 id={blogItem.id} className="text-white border-t border-white pt-10 group-hocus:underline">
+                    {blogItem.supBlogTitle}
+                  </H3>
+                </Link>
+
+
+
+                <p className="text-white">{blogItem.supBlogBody}</p>
+
               </div>
             </li>
           )}

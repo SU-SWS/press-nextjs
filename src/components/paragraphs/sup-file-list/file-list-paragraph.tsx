@@ -13,7 +13,7 @@ const FileListParagraph = ({paragraph, ...props}: Props) => {
     url: media.mediaFile.url
   }))
   return (
-    <FileListSelection fileOptions={fileOptions} {...props}/>
+    <FileListSelection fileOptions={fileOptions} label={paragraph.supFileListLabel} {...props}/>
   )
 }
 export default FileListParagraph

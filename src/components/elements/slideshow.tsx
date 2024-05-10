@@ -2,7 +2,7 @@
 
 import {HTMLAttributes, JSX} from "react";
 import Slider, {CustomArrowProps, Settings} from "react-slick";
-import {ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/16/solid";
+import {ArrowLongRightIcon, ArrowLongLeftIcon} from "@heroicons/react/16/solid";
 import {twMerge} from "tailwind-merge";
 import {clsx} from "clsx";
 
@@ -11,12 +11,12 @@ const NextArrow = ({className, onClick}: CustomArrowProps) => {
   const slickDisabled = !!(className && className?.indexOf("slick-disabled") > 0);
   return (
     <button
-      className="absolute top-1/3 right-1 z-50"
+      className="absolute top-1/2 right-20  z-50 w-20 h-20"
       onClick={onClick}
       aria-label="Next"
       disabled={slickDisabled}
     >
-      <ArrowRightIcon className={twMerge(clsx("w-50 text-black-true bg-teal rounded-full p-10", {"text-black-50": slickDisabled}))}/>
+      <ArrowLongRightIcon className={twMerge("text-white", clsx({"text-fog-dark": slickDisabled}))}/>
     </button>
   );
 };
@@ -25,12 +25,12 @@ const PrevArrow = ({className, onClick}: CustomArrowProps) => {
   const slickDisabled = !!(className && className?.indexOf("slick-disabled") > 0);
   return (
     <button
-      className="absolute top-1/3 left-1 z-50"
+      className="absolute top-1/2 left-20 z-50 w-20 h-20"
       onClick={onClick}
       aria-label="Previous"
       disabled={slickDisabled}
     >
-      <ArrowLeftIcon className={twMerge(clsx("w-50 text-black-true bg-teal rounded-full p-10", {"text-black-50": slickDisabled}))}/>
+      <ArrowLongLeftIcon className={twMerge("text-white", clsx({"text-fog-dark": slickDisabled}))}/>
     </button>
   );
 };
@@ -44,7 +44,7 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
   const settings: Settings = {
     autoplay: false,
     centerMode: false,
-    className: "overflow-hidden pb-8 [&_.slick-slide]:float-left [&_.slick-slide]:px-5",
+    className: "[&_.slick-track]:flex [&_.slick-slider]:relative",
     dots: false,
     infinite: false,
     initialSlide: 0,
@@ -66,7 +66,7 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
     ...slideshowProps,
   };
   return (
-    <div {...props} className={twMerge("relative w-full", props.className)}>
+    <div {...props} className={twMerge("relative", props.className)}>
       <Slider {...settings}>
         {children}
       </Slider>

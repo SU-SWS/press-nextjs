@@ -2,10 +2,9 @@
 
 import useIsInternational from "@lib/hooks/useIsInternational";
 import Button from "@components/elements/button";
-import {FormEvent, useState} from "react";
+import {FormEvent, useId, useState} from "react";
 import {ArrowRightIcon,} from "@heroicons/react/16/solid";
 import {Maybe} from "@lib/gql/__generated__/drupal";
-import LocationSelection from "@components/elements/location-selection";
 import {BookmarkIcon, BookOpenIcon, DeviceTabletIcon} from "@heroicons/react/24/outline";
 import {useRouter} from "next/navigation";
 import {formatCurrency} from "@lib/utils/format-currency";
@@ -44,7 +43,7 @@ const BookPreCart = ({
   const defaultChoice = usClothPrice ? "cloth" : usPaperPrice ? "paper" : "digital"
   const [formatChoice, setFormatChoice] = useState(defaultChoice)
 
-  const [isIntl] = useIsInternational()
+  const [isIntl, setIntl] = useIsInternational()
 
   const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -73,8 +72,8 @@ const BookPreCart = ({
   }
 
   return (
-    <form onSubmit={onFormSubmit}>
-      <fieldset>
+    <form className="@container" onSubmit={onFormSubmit}>
+      <fieldset className="mb-5">
         <legend className="sr-only">Format</legend>
         {!isIntl &&
           <UsFormatChoices
@@ -95,7 +94,52 @@ const BookPreCart = ({
       </fieldset>
 
       {hasIntlCart &&
-        <LocationSelection className="grid grid-cols-2 gap-5"/>
+        <fieldset>
+          <legend className="font-semibold">Region</legend>
+          <div className="flex border-2 border-black-40 p-1 mb-5">
+            <div className="flex-1">
+              <input
+                id="us-region"
+                className="sr-only peer"
+                type="radio"
+                name="intl"
+                value="us"
+                checked={!isIntl}
+                onChange={() => setIntl(false)}
+              />
+              <label
+                htmlFor="us-region"
+                className="block text-center p-5 peer-checked:bg-cardinal-red-dark peer-checked:text-white cursor-pointer peer-focus-visible:underline hover:underline"
+              >
+                US/Canada
+              </label>
+            </div>
+            <div className="flex-1">
+              <input
+                id="intl-region"
+                className="sr-only peer"
+                type="radio"
+                name="intl"
+                value="intl"
+                checked={isIntl}
+                onChange={() => setIntl(true)}
+              />
+              <label
+                htmlFor="intl-region"
+                className="block text-center p-5 peer-checked:bg-cardinal-red-dark peer-checked:text-white cursor-pointer peer-focus-visible:underline hover:underline"
+              >
+                International
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      }
+
+      {isIntl &&
+        <p>
+          For customer shipments outside the US and Canada, please use the button below to order from our partner,
+          Combine Academic Publishers.
+        </p>
       }
 
       <div>
@@ -104,15 +148,15 @@ const BookPreCart = ({
         </Button>
       </div>
 
-      {(formatChoice==="cloth" && !isIntl && usClothPrice && usClothSalePrice) &&
-        <div>
+      {(formatChoice === "cloth" && !isIntl && usClothPrice && usClothSalePrice) &&
+        <div className="my-5">
           <div>List Price: <span className="line-through">{formatCurrency(usClothPrice)}</span></div>
           <div>Save {formatCurrency(usClothPrice - usClothSalePrice)} ({usClothSaleDiscount}%)</div>
         </div>
       }
 
-      {(formatChoice==="paper" && !isIntl && usPaperPrice && usPaperSalePrice) &&
-        <div>
+      {(formatChoice === "paper" && !isIntl && usPaperPrice && usPaperSalePrice) &&
+        <div className="my-5">
           <div>List Price: <span className="line-through">{formatCurrency(usPaperPrice)}</span></div>
           <div>Save {formatCurrency(usPaperPrice - usPaperSalePrice)} ({usPaperSaleDiscount}%)</div>
         </div>
@@ -134,35 +178,92 @@ const UsFormatChoices = ({
   onChange: (_format: string) => void
 }) => {
   const defaultChoice = clothPrice ? "cloth" : paperPrice ? "paper" : "digital"
-
+  const id = useId();
   return (
     <>
       {clothPrice &&
-        <label className="flex items-center">
-          <input type="radio" name="format" value="cloth" defaultChecked={defaultChoice === "cloth"} onChange={() => onChange("cloth")}/>
-          <span className="flex w-full items-center justify-between">
-            <span>Hardcover</span> <span className="flex items-center"> US/CAN {formatCurrency(clothPrice)}
-            <BookmarkIcon width={30}/></span>
-          </span>
-        </label>
+        <div className="mb-3">
+          <input
+            className="sr-only peer"
+            id={`${id}-cloth`}
+            type="radio"
+            name="format"
+            value="cloth"
+            defaultChecked={defaultChoice === "cloth"}
+            onChange={() => onChange("cloth")}
+          />
+          <label
+            htmlFor={`${id}-cloth`}
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline cursor-pointer"
+          >
+            <span className="flex w-full items-center">
+              <span className="flex w-full flex-col @lg:flex-row justify-between">
+                <span className="font-semibold text-stone-dark group-hover:underline">Hardcover</span>
+                <span className="flex items-center">
+                  <span className="text-press-sand-dark">US/CAN</span>
+                  <span className="text-stone-dark">{formatCurrency(clothPrice)}</span>
+                </span>
+              </span>
+              <BookmarkIcon width={30} className="text-fog-dark"/>
+            </span>
+          </label>
+        </div>
       }
       {paperPrice &&
-        <label className="flex items-center">
-          <input type="radio" name="format" value="paper" defaultChecked={defaultChoice === "paper"} onChange={() => onChange("paper")}/>
-          <span className="flex w-full items-center justify-between">
-            <span>Paperback</span> <span className="flex items-center"> US/CAN {formatCurrency(paperPrice)}
-            <BookOpenIcon width={30}/></span>
-          </span>
-        </label>
+        <div className="mb-3">
+          <input
+            className="sr-only peer"
+            id={`${id}-paper`}
+            type="radio"
+            name="format"
+            value="paper"
+            defaultChecked={defaultChoice === "paper"}
+            onChange={() => onChange("paper")}
+          />
+          <label
+            htmlFor={`${id}-paper`}
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline cursor-pointer"
+          >
+            <span className="flex w-full items-center">
+              <span className="flex w-full flex-col @lg:flex-row justify-between">
+                <span className="font-semibold text-stone-dark group-hover:underline">Paperback</span>
+                <span className="flex items-center">
+                  <span className="text-press-sand-dark">US/CAN</span>
+                  <span className="text-stone-dark">{formatCurrency(paperPrice)}</span>
+                </span>
+              </span>
+              <BookOpenIcon width={30} className="text-fog-dark"/>
+            </span>
+          </label>
+        </div>
       }
       {digitalPrice &&
-        <label className="flex items-center">
-          <input type="radio" name="format" value="digital" defaultChecked={defaultChoice === "digital"} onChange={() => onChange("digital")}/>
-          <span className="flex w-full items-center justify-between">
-            <span>eBook</span> <span className="flex items-center"> US/CAN {formatCurrency(digitalPrice)}
-            <DeviceTabletIcon width={30}/></span>
-          </span>
-        </label>
+        <div>
+          <input
+            className="sr-only peer"
+            id={`${id}-digital`}
+            type="radio"
+            name="format"
+            value="digital"
+            defaultChecked={defaultChoice === "digital"}
+            onChange={() => onChange("digital")}
+          />
+          <label
+            htmlFor={`${id}-digital`}
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline cursor-pointer"
+          >
+            <span className="flex w-full items-center">
+              <span className="flex w-full flex-col @lg:flex-row justify-between">
+                <span className="font-semibold text-stone-dark group-hover:underline">eBook</span>
+                <span className="flex items-center">
+                  <span className="text-press-sand-dark">US/CAN</span>
+                  <span className="text-stone-dark">{formatCurrency(digitalPrice)}</span>
+                </span>
+              </span>
+              <DeviceTabletIcon width={30} className="text-fog-dark"/>
+            </span>
+          </label>
+        </div>
       }
     </>
   )
@@ -178,19 +279,52 @@ const IntlFormatChoices = ({
   onChange: (_format: string) => void
 }) => {
   const defaultChoice = clothIsbn ? "cloth" : "paper"
+  const id = useId();
   return (
     <>
       {clothIsbn &&
-        <label className="flex items-center">
-          <input type="radio" name="format" value="cloth" defaultChecked={defaultChoice === "cloth"} onChange={() => onChange("cloth")}/>
-          <span className="flex w-full items-center justify-between">Hardcover <BookmarkIcon width={30}/></span>
-        </label>
+        <div className="mb-3">
+          <input
+            className="sr-only peer"
+            id={`${id}-cloth`}
+            type="radio"
+            name="format"
+            value="cloth"
+            defaultChecked={defaultChoice === "cloth"}
+            onChange={() => onChange("cloth")}
+          />
+          <label
+            htmlFor={`${id}-cloth`}
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline cursor-pointer"
+          >
+            <span className="flex w-full items-center justify-between font-semibold">
+              <span className="text-stone-dark group-hover:underline">Hardcover</span>
+              <BookmarkIcon width={30} className="text-fog-dark"/>
+            </span>
+          </label>
+        </div>
       }
       {paperIsbn &&
-        <label className="flex items-center">
-          <input type="radio" name="format" value="paper" defaultChecked={defaultChoice === "paper"} onChange={() => onChange("paper")}/>
-          <span className="flex w-full items-center justify-between">Paperback <BookOpenIcon width={30}/></span>
-        </label>
+        <div>
+          <input
+            className="sr-only peer"
+            id={`${id}-paper`}
+            type="radio"
+            name="format"
+            value="paper"
+            defaultChecked={defaultChoice === "paper"}
+            onChange={() => onChange("paper")}
+          />
+          <label
+            htmlFor={`${id}-paper`}
+            className="group flex items-center p-5 border-3 peer-checked:border-cardinal-red-dark peer-focus-visible:underline cursor-pointer"
+          >
+            <span className="flex w-full items-center justify-between font-semibold">
+              <span className="text-stone-dark group-hover:underline">Paperback</span>
+              <BookOpenIcon width={30} className="text-fog-dark"/>
+            </span>
+          </label>
+        </div>
       }
     </>
   )

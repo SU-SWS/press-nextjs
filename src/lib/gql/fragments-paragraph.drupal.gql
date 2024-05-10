@@ -81,6 +81,7 @@ fragment FragmentParagraphStanfordGallery on ParagraphStanfordGallery {
 fragment FragmentParagraphStanfordList on ParagraphStanfordList {
     ...FragmentParagraphInterface
     suListHeadline
+    supListEyebrow
     suListDescription {
         processed
     }
@@ -170,6 +171,7 @@ fragment FragmentParagraphStanfordPageTitleBanner on ParagraphStanfordPageTitleB
 
 fragment FragmentParagraphSupFileList on ParagraphSupFileList {
     ...FragmentParagraphInterface
+    supFileListLabel
     supFileListFiles {
         ...FragmentMediaFile
     }
@@ -186,11 +188,12 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
             id
             title
             path
-            supBookAuthors {
-                ...FragmentNameType
-            }
+            supBookAuthorsFull
             supBookImage {
                 ...FragmentMediaImage
+            }
+            supBookLocalWebBlurb {
+                processed
             }
         }
     }
@@ -204,7 +207,10 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
     supSlideSubtitle
     supSlideTitle
     supSlideTitleSize
-    supSupImage {
+    supSlideImage {
+        ...FragmentMediaImage
+    }
+    supSlideBgImage {
         ...FragmentMediaImage
     }
 }
@@ -269,7 +275,6 @@ fragment FragmentParagraphUnion on ParagraphUnion {
     ...FragmentParagraphStanfordLayout
     ...FragmentParagraphSupCarousel
     ...FragmentParagraphSupFileList
-    ...FragmentParagraphSupCarouselSlide
     ...FragmentParagraphSupAuthorList
     ...FragmentParagraphSupSearchForm
     ...FragmentParagraphSupBlogTeaser

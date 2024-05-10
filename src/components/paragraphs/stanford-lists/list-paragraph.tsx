@@ -1,5 +1,4 @@
 import Wysiwyg from "@components/elements/wysiwyg";
-import Button from "@components/elements/button";
 import View from "@components/views/view";
 import {H2} from "@components/elements/headers";
 import {cache, ElementType, HtmlHTMLAttributes} from "react";
@@ -14,6 +13,8 @@ import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behavi
 import {graphqlClient} from "@lib/gql/gql-client";
 import {buildHeaders} from "@lib/drupal/utils";
 import {twMerge} from "tailwind-merge";
+import Link from "@components/elements/link";
+import {ArrowRightIcon} from "@heroicons/react/16/solid";
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordList
@@ -32,37 +33,50 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
   return (
     <ListWrapper
       {...props}
-      className={twMerge("centered lg:max-w-[980px] flex flex-col gap-10 mb-20", props.className)}
+      className={twMerge("centered flex flex-col gap-10 mb-20 border-t border-press-sand-dark pt-14", props.className)}
       aria-labelledby={ListWrapper === "section" ? paragraph.id : undefined}
     >
-      {ListWrapper === "section" &&
-        <H2
-          id={paragraph.id}
-          className={twMerge("text-center", behaviors.list_paragraph?.heading_behavior === "hide" && "sr-only")}
-        >
-          {paragraph.suListHeadline}
-        </H2>
-      }
+      <div className="flex flex-col @3xl:flex-row justify-between w-full">
+        <div className="flex flex-col">
+          {ListWrapper === "section" &&
+            <H2
+              id={paragraph.id}
+              className={twMerge("font-medium mb-0 pb-0", behaviors.list_paragraph?.heading_behavior === "hide" && "sr-only")}
+            >
+              {paragraph.suListHeadline}
+            </H2>
+          }
+
+          {paragraph.supListEyebrow &&
+            <div className="text-m1 text-stone order-first">
+              {paragraph.supListEyebrow}
+            </div>
+          }
+        </div>
+
+        {paragraph.suListButton?.url &&
+          <Link href={paragraph.suListButton.url} className="mt-auto flex items-center gap-5 text-archway-dark">
+            {paragraph.suListButton.title}
+            <ArrowRightIcon width={20}/>
+          </Link>
+        }
+      </div>
 
       <Wysiwyg html={paragraph.suListDescription?.processed}/>
 
       {(viewId && displayId && viewItems) &&
-        <View
-          viewId={viewId}
-          displayId={displayId}
-          items={viewItems}
-          headingLevel={paragraph.suListHeadline ? "h3" : "h2"}
-        />
+        <div className="max-w-[1600px] mx-auto">
+          <View
+            viewId={viewId}
+            displayId={displayId}
+            items={viewItems}
+            headingLevel={paragraph.suListHeadline ? "h3" : "h2"}
+          />
+        </div>
       }
 
       {(viewItems.length === 0 && behaviors.list_paragraph?.empty_message) &&
         <p>{behaviors.list_paragraph.empty_message}</p>
-      }
-
-      {paragraph.suListButton?.url &&
-        <Button centered href={paragraph.suListButton.url}>
-          {paragraph.suListButton.title}
-        </Button>
       }
     </ListWrapper>
   )
@@ -127,6 +141,7 @@ const getViewPagedItems = cache(async (viewId: string, displayId: string, contex
       break
 
     case "sup_books--book_list":
+    case "sup_books--award_winners":
       tags.push("views:sup_book");
       break
   }
@@ -187,10 +202,16 @@ const getViewPagedItems = cache(async (viewId: string, displayId: string, contex
         break
 
       case "sup_books--book_list":
-        filters = getViewFilters(["term_node_taxonomy_name_depth", "sup_book_work_id_number_value"], contextualFilter)
+        filters = getViewFilters(["term_node_taxonomy_name_depth", "term_node_taxonomy_name_depth_1", "sup_book_work_id_number_value"], contextualFilter)
         graphqlResponse = await client.supBooks({filters, ...queryVariables});
         items = graphqlResponse.supBooksView?.results as unknown as NodeSupBook[]
         break
+
+      case "sup_books--award_winners":
+        filters = getViewFilters(["term_node_taxonomy_name_depth", "term_node_taxonomy_name_depth_1", "sup_book_work_id_number_value"], contextualFilter)
+        graphqlResponse = await client.supBooksAwardWinners({filters, ...queryVariables});
+        items = graphqlResponse.supBooksAwardWinners?.results as unknown as NodeSupBook[]
+        break;
 
       default:
         console.warn(`Unable to find query for view: ${viewId} display: ${displayId}`)

@@ -11,21 +11,20 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 }
 
 const PageTitleBannerParagraph = ({paragraph, pageTitle, ...props}: Props) => {
-
+  const color = paragraph.supTitleBannerColor;
   return (
     <div
       {...props}
       className={twMerge("@container md:min-h-[400px] rs-mb-5 flex flex-col items-center", props.className)}
     >
       <div className={clsx("aspect-[16/9] @6xl:aspect-auto relative @6xl:absolute w-full @6xl:h-full ", {
-        "mix-blend-hue": !!paragraph.supTitleBannerColor,
-        "bg-pink-300": paragraph.supTitleBannerColor === "magenta",
-        "bg-black-300": paragraph.supTitleBannerColor === "steel",
-        "bg-green-600": paragraph.supTitleBannerColor === "grass",
-        "bg-indigo-600": paragraph.supTitleBannerColor === "indigo",
+        "bg-plum": color === "magenta",
+        "bg-press-grass": color === "grass",
+        "bg-black-true bg-opacity-70": color === "steel",
+        "bg-press-indigo": color === "indigo"
       })}>
         <Image
-          className={clsx("object-cover mix-blend-darken", )}
+          className="object-cover mix-blend-multiply"
           src={paragraph.suTitleBannerImage.mediaImage.url}
           alt={paragraph.suTitleBannerImage.mediaImage.alt || ""}
           loading="eager"

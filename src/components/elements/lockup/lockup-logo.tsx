@@ -1,20 +1,19 @@
-import {Maybe} from "@lib/gql/__generated__/drupal.d";
-import PressFooterLogoLg from "@components/images/logo-lg";
-import PressFooterLogoXs from "@components/images/logo-xs";
 
-const LockupLogo = ({logoUrl}: { logoUrl?: Maybe<string>, siteName?: Maybe<string> }) => {
+import {HTMLAttributes} from "react";
+import FooterLogoLg from "@components/images/footer-logo-lg";
+import FooterLogoXs from "@components/images/footer-logo-xs";
+
+type Props = HTMLAttributes<HTMLOrSVGElement>
+
+const LockupLogo = ({...props}: Props) => {
 
   return (
     <>
       <div className="hidden sm:block">
-        {!logoUrl &&
-          <PressFooterLogoLg/>
-        }
+        <FooterLogoLg {...props}/>
       </div>
       <div className="sm:hidden">
-        {!logoUrl &&
-          <PressFooterLogoXs/>
-        }
+        <FooterLogoXs {...props}/>
       </div>
     </>
   )

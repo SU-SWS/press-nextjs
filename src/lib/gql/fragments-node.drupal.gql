@@ -39,6 +39,9 @@ fragment FragmentNodeSupBook on NodeSupBook {
         processed
     }
     supBookDigitalCompLink
+    supBookExcerpts {
+        ...FragmentParagraphUnion
+    }
     supBookHtmlPageTitle
     supBookIllustrations
     supBookImage {
@@ -379,7 +382,15 @@ fragment FragmentNodeSupBookTeaser on NodeSupBook {
     supBookAuthors {
         ...FragmentNameType
     }
+    supBookAwards {
+        ...FragmentSupAward
+    }
+    supBookSubtitle
     supBookWorkIdNumber
+    supBookAuthorsFull
+    supBookImage {
+        ...FragmentMediaImage
+    }
 }
 
 fragment FragmentNodeStanfordCourseTeaser on NodeStanfordCourse {

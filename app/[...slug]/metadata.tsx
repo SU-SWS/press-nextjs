@@ -2,7 +2,7 @@ import {Maybe, NodeStanfordEvent, NodeStanfordNews, NodeStanfordPage, NodeStanfo
 import {Metadata} from "next";
 import {decode} from "html-entities";
 
-export const getNodeMetadata = (node: NodeUnion): Metadata => {
+export const getNodeMetadata = (node: NodeUnion, page: "excerpt" | "copy-requests" | "detail" = "detail"): Metadata => {
   const defaultData = {
     title: node.title + " | Stanford University Press",
     other: {}
@@ -40,19 +40,30 @@ export const getNodeMetadata = (node: NodeUnion): Metadata => {
 
     case "NodeSupBook":
       return {
-        ...getBookMetaData(node),
-        ...defaultData
+        ...defaultData,
+        ...getBookMetaData(node, page),
       }
   }
 
   return defaultData;
 }
 
-const getBookMetaData = (node: NodeSupBook) => {
+const getBookMetaData = (node: NodeSupBook, page: "excerpt" | "copy-requests" | "detail") => {
   const image = node.supBookImage?.mediaImage;
-  const description = getCleanDescription(node.supBookDescription?.processed);
+  let description = getCleanDescription(node.supBookDescription?.processed);
+
+  let title = node.title;
+  if (page === "excerpt") {
+    title += ": Excerpt & More"
+    description = getFirstText(node.supBookExcerpts);
+  }
+  if (page === "copy-requests") {
+    title += ": Copy Requests"
+    description = `Instructions to get copy requests of the book "${node.title}"`
+  }
 
   return {
+    title: title,
     description: description,
     openGraph: {
       type: "book",

@@ -158,3 +158,15 @@ query supBooks($filters: SupBooksViewContextualFilterInput, $pageSize: Int = 3, 
         }
     }
 }
+
+query supBooksAwardWinners($filters: SupBooksAwardWinnersContextualFilterInput, $pageSize: Int = 3, $page: Int $offset: Int) {
+    supBooksAwardWinners(contextualFilter: $filters, pageSize: $pageSize, page: $page, offset: $offset) {
+        results {
+            ...FragmentNodeSupBookTeaser
+        }
+        pageInfo {
+            ...FragmentViewPageInfo
+        }
+    }
+}
+

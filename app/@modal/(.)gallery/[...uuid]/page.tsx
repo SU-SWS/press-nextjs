@@ -4,14 +4,14 @@ import Link from "@components/elements/link";
 import {ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d";
 import {graphqlClient} from "@lib/gql/gql-client";
 import {notFound} from "next/navigation";
-import {useId} from "react";
+import crypto from "crypto";
 
 type Props = {
   params: { uuid: string[] }
 }
 
 const Page = async ({params: {uuid}}: Props) => {
-  const captionId = useId();
+  const captionId = crypto.randomBytes(4).toString("hex")
   const [paragraphId, mediaUuid] = uuid
 
   const paragraphQuery = await graphqlClient().Paragraph({uuid: paragraphId});

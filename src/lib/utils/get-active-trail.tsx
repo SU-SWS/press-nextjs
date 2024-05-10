@@ -8,9 +8,9 @@ import {MenuItem} from "@lib/gql/__generated__/drupal.d";
  * @param currentPath
  *   Current page url.
  */
-const useActiveTrail = (menuItems: MenuItem[], currentPath?: string) => {
+const getActiveTrail = (menuItems: MenuItem[], currentPath?: string) => {
 
-  const getActiveTrail = (menuItems: MenuItem[], trail: string[] = []): string[]  => {
+  const getActiveTrailInternal = (menuItems: MenuItem[], trail: string[] = []): string[]  => {
     let childTrail, currentTrail;
     for (let i = 0; i < menuItems.length; i++) {
       currentTrail = [...trail];
@@ -23,7 +23,7 @@ const useActiveTrail = (menuItems: MenuItem[], currentPath?: string) => {
       const childrenItems = menuItems[i].children;
 
       if (childrenItems) {
-        childTrail = getActiveTrail(childrenItems, [...currentTrail]);
+        childTrail = getActiveTrailInternal(childrenItems, [...currentTrail]);
         if (childTrail.length > 0) {
           return childTrail;
         }
@@ -33,7 +33,7 @@ const useActiveTrail = (menuItems: MenuItem[], currentPath?: string) => {
     return [];
   };
 
-  return getActiveTrail(menuItems);
+  return getActiveTrailInternal(menuItems);
 }
 
-export default useActiveTrail;
+export default getActiveTrail;

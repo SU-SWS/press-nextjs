@@ -10,16 +10,16 @@ const SupSearchFormParagraph = ({paragraph, ...props}: Props) => {
   const inputId = useId();
   return (
     <div {...props}>
-      <form aria-label="Site Search" action="/search">
-        <div className="relative mt-10">
+      <form className="max-w-6xl mx-auto" aria-label="Site Search" action="/search">
+        <div className="flex items-center gap-5 mt-10">
           <label htmlFor={inputId} className="sr-only">
-            Search this site
+            Search all books by title, author, subject, keywords, or ISBNs
           </label>
 
           <input
-            className="h-32 w-full lg:w-100 text-24 lg:border-black-20"
+            className="h-32 w-full lg:w-100 text-24 border-0 border-b border-stone placeholder:-text-m1"
             type="text"
-            placeholder="Search this site"
+            placeholder="Search all books by title, author, subject, keywords, ISBNs..."
             id={inputId}
             name="q"
             required
@@ -32,8 +32,8 @@ const SupSearchFormParagraph = ({paragraph, ...props}: Props) => {
             <input type="hidden" name="books" value="1"/>
           }
 
-          <button type="submit" className="absolute top-2 right-5">
-            <MagnifyingGlassIcon width={25} className="text-digital-red"/>
+          <button type="submit" className="shrink-0 bg-digital-red rounded-full w-[45px] h-[45px] flex items-center justify-center">
+            <MagnifyingGlassIcon width={25} className="text-white"/>
             <span className="sr-only">Submit Search</span>
           </button>
         </div>
