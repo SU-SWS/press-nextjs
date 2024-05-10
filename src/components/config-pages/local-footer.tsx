@@ -32,12 +32,12 @@ const LocalFooter = ({
 
         {/* Social Links */}
         {suLocalFootSocial &&
-          <ul className="list-unstyled flex rs-mb-0 [&_a]:text-white [&_a:hover]:text-bay-light">
+          <ul className="list-unstyled flex rs-mb-0">
             {suLocalFootSocial.map((link, index) => {
               if (!link.url) return;
               return (
                 <li key={`footer-action-link-${index}`} className="rs-mr-0">
-                  <Link href={link.url}>
+                  <Link href={link.url} className="text-white hocus:text-bay-light">
                     <SocialIcon url={link.url}/>
                     <span className="sr-only">{link.title}</span>
                   </Link>
