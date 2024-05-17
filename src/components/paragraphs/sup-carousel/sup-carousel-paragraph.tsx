@@ -65,32 +65,33 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
   return (
     <article
       aria-labelledby={slideParagraph.id}
-      className={twMerge("relative centered-container text-white", clsx({
+      className={twMerge("relative centered-container text-white w-full", clsx({
         "text-center": !leftImage,
         "text-center lg:text-left": leftImage,
         "lg:pt-[300px] lg:mb-[-300px]": isTopHero
       }))}
     >
-
+      <figure className="absolute top-0 left-0 h-full w-full overflow-hidden">
+        <Image
+            className="relative object-cover"
+            src={bgImage.url}
+            alt=""
+            fill
+            sizes="100vw"
+          />
+      </figure>
       <div
-        className={clsx("-z-10 absolute h-full w-full top-0 left-0", {
+        className={clsx("absolute top-0 left-0 block h-full w-full bg-opacity-80", {
           "bg-plum": color === "magenta",
           "bg-press-grass": color === "grass",
-          "bg-black-true bg-opacity-70": color === "steel",
+          "bg-black-true": color === "steel",
           "bg-press-indigo": color === "indigo"
         })}
       >
-        <Image
-          className="object-cover mix-blend-multiply"
-          src={bgImage.url}
-          alt=""
-          fill
-          sizes="100vw"
-        />
       </div>
 
       <div
-        className={twMerge("py-32 max-w-1200 mx-auto", clsx({
+        className={twMerge("relative py-32 max-w-1200 mx-auto", clsx({
           "flex flex-col lg:flex-row items-center gap-20 py-32 max-w-1200 mx-auto": leftImage
         }))}
       >
