@@ -96,9 +96,9 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
           "flex flex-col lg:flex-row items-center gap-20 py-32 max-w-1200 mx-auto": leftImage
         }))}
       >
-        <div className={clsx({
+        <div className={clsx("rs-px-8 lg:px-0",{
           "max-w-[800px]" : !leftImage,
-          "flex flex-col items-start rs-px-8 lg:px-0" : leftImage,
+          "flex flex-col items-start" : leftImage,
         })}>
           <div className="flex flex-col text-left">
 
@@ -120,14 +120,14 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
             }
 
             {subtitle &&
-              <div className="type-2 mb-10">
+              <div className="type-2 rs-mb-3">
                 {subtitle}
               </div>
             }
 
             <div className="order-first">
               {(!leftImage && image) &&
-                <div className="mx-auto relative aspect-1 max-w-3xl mb-12 w-[200px]">
+                <div className="mx-auto relative aspect-1 max-w-3xl rs-mb-3 w-[200px]">
                   <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="200px"/>
                 </div>
               }
@@ -142,11 +142,11 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
 
           <Wysiwyg
             html={body}
-            className={clsx("text-left mb-10", {"[&_p]:-text-m1": slideParagraph.supSlideBodySize === "small"})}
+            className={clsx("text-left rs-mb-3", {"[&_p]:-text-m1": slideParagraph.supSlideBodySize === "small"})}
           />
 
           {slideParagraph.supSlideButton?.url &&
-            <div className={clsx({"border-t pt-12": !leftImage})}>
+            <div className={clsx({"border-t rs-pt-3": !leftImage})}>
               <Link
                 className={clsx("text-white border flex items-center gap-5 w-fit p-6 hocus:text-white no-underline group", {"mx-auto": !leftImage})}
                 href={slideParagraph.supSlideButton.url}
