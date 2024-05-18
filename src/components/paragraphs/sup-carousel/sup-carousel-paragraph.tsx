@@ -65,13 +65,13 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
   return (
     <article
       aria-labelledby={slideParagraph.id}
-      className={twMerge("relative centered-container text-white w-full", clsx({
+      className={twMerge("relative centered-container text-white w-full h-full min-h-full lg:min-h-screen", clsx({
         "text-center": !leftImage,
         "text-center lg:text-left": leftImage,
         "lg:pt-[300px] lg:mb-[-300px]": isTopHero
       }))}
     >
-      <figure className="absolute top-0 left-0 h-full w-full overflow-hidden">
+      <figure className="absolute top-0 left-0 w-full h-full overflow-hidden">
         <Image
             className="relative object-cover"
             src={bgImage.url}
@@ -92,24 +92,27 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
 
       <div
         className={twMerge("relative py-32 max-w-1200 mx-auto", clsx({
+          "flex flex-col items-center": !leftImage,
           "flex flex-col lg:flex-row items-center gap-20 py-32 max-w-1200 mx-auto": leftImage
         }))}
       >
-        <div>
-          <div className="flex flex-col mb-10">
+        <div className={clsx({
+          "max-w-[800px]" : !leftImage,
+          "flex flex-col items-start rs-px-8 lg:px-0" : leftImage,
+        })}>
+          <div className="flex flex-col text-left">
 
             {slideParagraph.supSlideBook?.path &&
-
               <H2 className={clsx({"text-m1": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
                 <Link
-                  className="text-white hocus:text-white no-underline hocus:underline"
+                  className="font-medium text-white hocus:text-white no-underline hocus:underline"
                   href={slideParagraph.supSlideBook.path}
                 >
                   {slideTitle}
                 </Link>
               </H2>
-
             }
+
             {!slideParagraph.supSlideBook?.path &&
               <H2 className={clsx({"text-m1": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
                 {slideTitle}
@@ -117,20 +120,20 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
             }
 
             {subtitle &&
-              <div>
+              <div className="type-2 mb-10">
                 {subtitle}
               </div>
             }
 
             <div className="order-first">
               {(!leftImage && image) &&
-                <div className="mx-auto relative aspect-1 w-full max-w-3xl mb-12">
-                  <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="500px"/>
+                <div className="mx-auto relative aspect-1 max-w-3xl mb-12 w-[200px]">
+                  <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="200px"/>
                 </div>
               }
 
               {eyebrow &&
-                <div className="mb-5">
+                <div className="mb-5 type-1">
                   {eyebrow}
                 </div>
               }
@@ -139,7 +142,7 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
 
           <Wysiwyg
             html={body}
-            className={clsx("mb-10", {"[&_p]:-text-m1": slideParagraph.supSlideBodySize === "small"})}
+            className={clsx("text-left mb-10", {"[&_p]:-text-m1": slideParagraph.supSlideBodySize === "small"})}
           />
 
           {slideParagraph.supSlideButton?.url &&
