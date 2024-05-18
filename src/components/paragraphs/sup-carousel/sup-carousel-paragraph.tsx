@@ -91,7 +91,7 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
       </div>
 
       <div
-        className={twMerge("relative py-32 max-w-1200 mx-auto", clsx({
+        className={twMerge("relative rs-py-6 max-w-1200 mx-auto", clsx({
           "flex flex-col items-center": !leftImage,
           "flex flex-col lg:flex-row items-center gap-20 py-32 max-w-1200 mx-auto": leftImage
         }))}
