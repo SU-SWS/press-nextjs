@@ -100,7 +100,7 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
           "max-w-[800px]" : !leftImage,
           "flex flex-col items-start" : leftImage,
         })}>
-          <div className="flex flex-col text-left">
+          <div className={clsx("flex flex-col", {"text-left" : leftImage, "text-center" : !leftImage})}>
 
             {slideParagraph.supSlideBook?.path &&
               <H2 className={clsx({"text-m1": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
@@ -142,7 +142,7 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
 
           <Wysiwyg
             html={body}
-            className={clsx("text-left rs-mb-3", {"[&_p]:-text-m1": slideParagraph.supSlideBodySize === "small"})}
+            className={clsx("rs-mb-3", {"[&_p]:-text-m1": slideParagraph.supSlideBodySize === "small", "text-left" : leftImage, "text-center" : !leftImage})}
           />
 
           {slideParagraph.supSlideButton?.url &&
