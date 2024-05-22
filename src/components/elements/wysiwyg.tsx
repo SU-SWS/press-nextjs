@@ -22,7 +22,7 @@ const Wysiwyg = ({html, className, ...props}: Props) => {
 
   const addMathJax = html.match(/\$\$.*\$\$/) || html.match(/\\\[.*\\\]/) || html.match(/\\\(.*\\\)/);
   return (
-    <div className={twMerge("wysiwyg", className)} {...props}>
+    <div className={twMerge("wysiwyg [&_a]:text-digital-red hocus:[&_a]:text-archway-dark", className)} {...props}>
       {addMathJax && <Mathjax/>}
       {formatHtml(html)}
     </div>

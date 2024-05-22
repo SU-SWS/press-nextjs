@@ -34,7 +34,7 @@ const MediaCaptionParagraph = ({paragraph, ...props}: Props) => {
 
       <figcaption>
         {paragraph.suMediaCaptionLink?.url &&
-          <Link href={paragraph.suMediaCaptionLink.url} className="link--action font-normal">
+          <Link href={paragraph.suMediaCaptionLink.url} className="link--action font-normal text-stone-dark *:text-stone-dark hocus:text-archway-dark *:hocus:text-archway-dark">
             {paragraph.suMediaCaptionLink.title}
           </Link>
         }
