@@ -44,7 +44,7 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
   const settings: Settings = {
     autoplay: false,
     centerMode: false,
-    className: "[&_.slick-track]:flex [&_.slick-slider]:relative",
+    className: "[&_.slick-track]:flex [&_.slick-slider]:relative [&_.slick-slide>div]:h-full [&_.slick-slide>div>div]:h-full",
     dots: false,
     infinite: false,
     initialSlide: 0,

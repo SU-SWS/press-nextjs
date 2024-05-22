@@ -42,7 +42,7 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
         >
           {paragraph.supCarouselSlides.map(slide =>
             <div key={slide.id}>
-              <Slide key={slide.id} slideParagraph={slide}/>
+              <Slide key={slide.id} slideParagraph={slide} isTopHero={isTopHero}/>
             </div>
           )}
         </Slideshow>
@@ -65,7 +65,7 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
   return (
     <article
       aria-labelledby={slideParagraph.id}
-      className={twMerge("relative centered-container text-white w-full h-full min-h-full lg:min-h-screen", clsx({
+      className={twMerge("relative centered-container text-white w-full h-full min-h-full", clsx({
         "text-center": !leftImage,
         "text-center lg:text-left": leftImage,
         "lg:pt-[300px] lg:mb-[-300px]": isTopHero
