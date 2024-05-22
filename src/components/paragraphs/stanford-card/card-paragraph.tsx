@@ -67,7 +67,7 @@ const CardParagraph = ({paragraph, ...props}: Props) => {
       {paragraph.suCardLink?.url &&
         <div className="order-4">
           {behaviors.su_card_styles?.link_style === "action" &&
-            <ActionLink href={paragraph.suCardLink.url} className="font-normal no-underline hocus:underline">
+            <ActionLink href={paragraph.suCardLink.url} className="font-normal text-stone-dark *:text-stone-dark no-underline hocus:underline">
               {paragraph.suCardLink.title}
             </ActionLink>
           }
