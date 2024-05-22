@@ -175,6 +175,7 @@ fragment FragmentParagraphSupFileList on ParagraphSupFileList {
     supFileListFiles {
         ...FragmentMediaFile
     }
+    supFileListDisplay
 }
 
 fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {

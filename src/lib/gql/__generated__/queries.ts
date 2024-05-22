@@ -335,6 +335,7 @@ export const FragmentParagraphSupFileListFragmentDoc = gql`
   supFileListFiles {
     ...FragmentMediaFile
   }
+  supFileListDisplay
 }
     ${FragmentParagraphInterfaceFragmentDoc}
 ${FragmentMediaFileFragmentDoc}`;

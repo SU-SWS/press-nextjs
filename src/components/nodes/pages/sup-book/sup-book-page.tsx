@@ -6,7 +6,7 @@ import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs";
 import Wysiwyg from "@components/elements/wysiwyg";
 import BookPrecart from "@components/nodes/pages/sup-book/book-precart";
 import {formatCurrency} from "@lib/utils/format-currency";
-import {BookmarkIcon, BookOpenIcon, ClipboardIcon} from "@heroicons/react/24/outline";
+import {BookmarkIcon, ClipboardIcon, DocumentDuplicateIcon} from "@heroicons/react/24/outline";
 import Link from "@components/elements/link";
 import {getPlaceholderImage} from "@lib/utils/placeholder-image";
 import BookAwards from "@components/nodes/pages/sup-book/book-awards";
@@ -119,13 +119,13 @@ const SupBookPage = async ({node, ...props}: Props) => {
               loading="eager"
             />
 
-            {node.supBookExcerpts &&
+            {(node.supBookExcerpts || node.supBookTableOfContents) &&
               <Link
                 href={`${node.path}/excerpts`}
-                className="flex justify-center items-center gap-3 font-normal"
+                className="flex justify-center items-center gap-3 font-normal border border-press-sand p-10 no-underline hocus:underline w-fit mx-auto text-stone-dark"
               >
-                <BookOpenIcon width={20} className="text-fog-dark"/>
                 <span>Excerpts + more</span>
+                <DocumentDuplicateIcon width={20} className="text-stone-dark"/>
               </Link>
             }
           </div>

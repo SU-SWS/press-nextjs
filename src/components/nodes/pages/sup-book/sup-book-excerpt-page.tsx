@@ -1,10 +1,11 @@
 import {NodeSupBook} from "@lib/gql/__generated__/drupal";
-import {H1} from "@components/elements/headers";
+import {H1, H2} from "@components/elements/headers";
 import {HTMLAttributes} from "react";
 import Rows from "@components/paragraphs/rows/rows";
 import Link from "@components/elements/link";
 import Image from "next/image";
 import {ArrowLeftIcon} from "@heroicons/react/16/solid";
+import Wysiwyg from "@components/elements/wysiwyg";
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -45,6 +46,14 @@ const SupBookExcerptPage = ({node, ...props}: Props) => {
           }
         </div>
         <Rows components={node.supBookExcerpts}/>
+
+        {node.supBookTableOfContents &&
+          <div className="centered lg:max-w-[980px]">
+            <H2>Contents</H2>
+            <Wysiwyg html={node.supBookTableOfContents.processed}/>
+          </div>
+        }
+
       </article>
 
       <Link href={node.path} className="pt-20 flex items-center gap-5 w-fit">
