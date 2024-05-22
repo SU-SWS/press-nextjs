@@ -116,6 +116,9 @@ fragment FragmentNodeSupBook on NodeSupBook {
     supBookWebCodeCloth
     supBookWebCodePaper
     supBookWorkIdNumber
+    supBookERetailers {
+        ...FragmentLink
+    }
 }
 
 fragment FragmentNodeStanfordPage on NodeStanfordPage {

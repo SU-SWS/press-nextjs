@@ -148,18 +148,21 @@ const SupBookPage = async ({node, ...props}: Props) => {
             />
           </div>
 
-          <div className="border-b border-fog mb-10 pb-10">
-            <span>Also Available from</span><br/>
-            .... need to figure this part out.
-            <ul className="list-unstyled [&_a]:text-digital-red [&_a]:font-normal">
-              <li><a href="https://www.barnesandnoble.com/b/nook-devices">Barnes and Noble Nook</a></li>
-              <li><a href="https://play.google.com/store/books/details">Google Play</a></li>
-              <li><a href="https://www.amazon.com/dp">Amazon Kindle</a></li>
-              <li><a href="https://itunes.apple.com/us/book/">Apple Books</a></li>
-            </ul>
-          </div>
+          {node.supBookERetailers &&
+            <div className="border-b border-fog mb-10 pb-10">
+              <div className="mb-8">Also Available from</div>
+              <ul className="list-unstyled [&_a]:text-digital-red [&_a]:font-normal">
+                {node.supBookERetailers.map((link, i) =>
+                  <li key={`e-book-retailer-${i}`} className="mb-0">
+                    <a href={link.url || "#"}>{link.title}</a>
+                  </li>
+                )}
+              </ul>
+            </div>
+          }
 
-          <Link href={node.path + "/desk-examination-copy-requests"} className="flex items-center gap-3 text-stone-dark font-normal">
+          <Link href={node.path + "/desk-examination-copy-requests"}
+                className="flex items-center gap-3 text-stone-dark font-normal">
             <ClipboardIcon width={20} className="text-stone"/> Desk, Examination, or Review Copy Requests
           </Link>
         </div>

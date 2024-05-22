@@ -11,7 +11,7 @@ const NextArrow = ({className, onClick}: CustomArrowProps) => {
   const slickDisabled = !!(className && className?.indexOf("slick-disabled") > 0);
   return (
     <button
-      className="absolute top-1/2 right-20  z-50 w-20 h-20"
+      className="absolute top-1/2 right-5 lg:right-20 z-50 w-20 h-20"
       onClick={onClick}
       aria-label="Next"
       disabled={slickDisabled}
@@ -25,7 +25,7 @@ const PrevArrow = ({className, onClick}: CustomArrowProps) => {
   const slickDisabled = !!(className && className?.indexOf("slick-disabled") > 0);
   return (
     <button
-      className="absolute top-1/2 left-20 z-50 w-20 h-20"
+      className="absolute top-1/2 left-5 lg:left-20 z-50 w-20 h-20"
       onClick={onClick}
       aria-label="Previous"
       disabled={slickDisabled}
@@ -44,7 +44,7 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
   const settings: Settings = {
     autoplay: false,
     centerMode: false,
-    className: "[&_.slick-track]:flex [&_.slick-slider]:relative",
+    className: "[&_.slick-track]:flex [&_.slick-slider]:relative [&_.slick-slide>div]:h-full [&_.slick-slide>div>div]:h-full",
     dots: false,
     infinite: false,
     initialSlide: 0,

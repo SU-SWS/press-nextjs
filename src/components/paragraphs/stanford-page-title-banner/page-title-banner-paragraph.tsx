@@ -15,9 +15,9 @@ const PageTitleBannerParagraph = ({paragraph, pageTitle, ...props}: Props) => {
   return (
     <div
       {...props}
-      className={twMerge("@container md:min-h-[400px] rs-mb-5 flex flex-col items-center", props.className)}
+      className={twMerge("@container min-h-[200px] md:min-h-[400px] rs-mb-5 flex flex-col items-center", props.className)}
     >
-      <div className={clsx("aspect-[16/9] @6xl:aspect-auto relative @6xl:absolute w-full @6xl:h-full ", {
+      <div className={clsx("aspect-[16/9] @6xl:aspect-auto absolute w-full h-full ", {
         "bg-plum": color === "magenta",
         "bg-press-grass": color === "grass",
         "bg-black-true bg-opacity-70": color === "steel",
@@ -34,7 +34,7 @@ const PageTitleBannerParagraph = ({paragraph, pageTitle, ...props}: Props) => {
       </div>
 
 
-      <div className="relative @6xl:text-white z-10 text-center flex-grow flex items-center">
+      <div className="text-white z-10 text-center flex-grow flex items-center">
         <H1>
           {pageTitle}
         </H1>

@@ -42,7 +42,7 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
         >
           {paragraph.supCarouselSlides.map(slide =>
             <div key={slide.id}>
-              <Slide key={slide.id} slideParagraph={slide}/>
+              <Slide key={slide.id} slideParagraph={slide} isTopHero={isTopHero}/>
             </div>
           )}
         </Slideshow>
@@ -65,50 +65,54 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
   return (
     <article
       aria-labelledby={slideParagraph.id}
-      className={twMerge("relative centered-container text-white", clsx({
+      className={twMerge("relative flex centered-container text-white w-full h-full min-h-full", clsx({
         "text-center": !leftImage,
         "text-center lg:text-left": leftImage,
         "lg:pt-[300px] lg:mb-[-300px]": isTopHero
       }))}
     >
-
+      <figure className="absolute top-0 left-0 w-full h-full overflow-hidden">
+        <Image
+            className="relative object-cover"
+            src={bgImage.url}
+            alt=""
+            fill
+            sizes="100vw"
+          />
+      </figure>
       <div
-        className={clsx("-z-10 absolute h-full w-full top-0 left-0", {
+        className={clsx("absolute top-0 left-0 block h-full w-full bg-opacity-80", {
           "bg-plum": color === "magenta",
           "bg-press-grass": color === "grass",
-          "bg-black-true bg-opacity-70": color === "steel",
+          "bg-black-true": color === "steel",
           "bg-press-indigo": color === "indigo"
         })}
       >
-        <Image
-          className="object-cover mix-blend-multiply"
-          src={bgImage.url}
-          alt=""
-          fill
-          sizes="100vw"
-        />
       </div>
 
       <div
-        className={twMerge("py-32 max-w-1200 mx-auto", clsx({
+        className={twMerge("relative rs-py-6 max-w-1200 mx-auto", clsx({
+          "flex flex-col items-center": !leftImage,
           "flex flex-col lg:flex-row items-center gap-20 py-32 max-w-1200 mx-auto": leftImage
         }))}
       >
-        <div>
-          <div className="flex flex-col mb-10">
+        <div className={clsx("rs-px-8 lg:px-0",{
+          "max-w-[800px]" : !leftImage,
+          "flex flex-col items-start" : leftImage,
+        })}>
+          <div className={clsx("flex flex-col", {"text-left" : leftImage, "text-center" : !leftImage})}>
 
             {slideParagraph.supSlideBook?.path &&
-
               <H2 className={clsx({"text-m1": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
                 <Link
-                  className="text-white hocus:text-white no-underline hocus:underline"
+                  className="font-medium text-white hocus:text-white no-underline hocus:underline"
                   href={slideParagraph.supSlideBook.path}
                 >
                   {slideTitle}
                 </Link>
               </H2>
-
             }
+
             {!slideParagraph.supSlideBook?.path &&
               <H2 className={clsx({"text-m1": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
                 {slideTitle}
@@ -116,20 +120,20 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
             }
 
             {subtitle &&
-              <div>
+              <div className="type-2 rs-mb-3">
                 {subtitle}
               </div>
             }
 
             <div className="order-first">
               {(!leftImage && image) &&
-                <div className="mx-auto relative aspect-1 w-full max-w-3xl mb-12">
-                  <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="500px"/>
+                <div className="mx-auto relative aspect-1 max-w-3xl rs-mb-3 w-[200px]">
+                  <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="200px"/>
                 </div>
               }
 
               {eyebrow &&
-                <div className="mb-5">
+                <div className="mb-5 type-1">
                   {eyebrow}
                 </div>
               }
@@ -138,11 +142,11 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
 
           <Wysiwyg
             html={body}
-            className={clsx("mb-10", {"[&_p]:-text-m1": slideParagraph.supSlideBodySize === "small"})}
+            className={clsx("rs-mb-3", {"[&_p]:-text-m1": slideParagraph.supSlideBodySize === "small", "text-left" : leftImage, "text-center" : !leftImage})}
           />
 
           {slideParagraph.supSlideButton?.url &&
-            <div className={clsx({"border-t pt-12": !leftImage})}>
+            <div className={clsx({"border-t rs-pt-3": !leftImage})}>
               <Link
                 className={clsx("text-white border flex items-center gap-5 w-fit p-6 hocus:text-white no-underline group", {"mx-auto": !leftImage})}
                 href={slideParagraph.supSlideButton.url}
