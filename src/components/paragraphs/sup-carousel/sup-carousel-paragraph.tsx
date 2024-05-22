@@ -65,7 +65,7 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
   return (
     <article
       aria-labelledby={slideParagraph.id}
-      className={twMerge("relative centered-container text-white w-full h-full min-h-full", clsx({
+      className={twMerge("relative flex centered-container text-white w-full h-full min-h-full", clsx({
         "text-center": !leftImage,
         "text-center lg:text-left": leftImage,
         "lg:pt-[300px] lg:mb-[-300px]": isTopHero
