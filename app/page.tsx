@@ -5,7 +5,7 @@ import {NodeStanfordPage, NodeUnion, StanfordBasicSiteSetting} from "@lib/gql/__
 import {isPreviewMode} from "@lib/drupal/utils";
 import {Metadata} from "next";
 import {getNodeMetadata} from "./[...slug]/metadata";
-import BannerParagraph from "@components/paragraphs/stanford-banner/banner-paragraph";
+import SupCarouselParagraph from "@components/paragraphs/sup-carousel/sup-carousel-paragraph";
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
 export const revalidate = false;
@@ -19,11 +19,12 @@ const Home = async () => {
 
   return (
     <article>
-      {entity.suPageBanner?.__typename === "ParagraphStanfordBanner" &&
+      {entity.suPageBanner?.__typename==="ParagraphSupCarousel" &&
         <header aria-label="Home Page banner">
-          <BannerParagraph paragraph={entity.suPageBanner} eagerLoadImage/>
+          <SupCarouselParagraph paragraph={entity.suPageBanner} isTopBanner/>
         </header>
       }
+
       {entity.suPageComponents &&
         <Rows components={entity.suPageComponents}/>
       }

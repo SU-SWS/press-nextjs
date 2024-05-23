@@ -78,6 +78,7 @@ const Slide = ({slideParagraph, isTopHero}: { slideParagraph: ParagraphSupCarous
             alt=""
             fill
             sizes="100vw"
+            loading="eager"
           />
       </figure>
       <div
