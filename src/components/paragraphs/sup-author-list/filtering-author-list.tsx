@@ -1,7 +1,7 @@
 "use client";
 
 import {twMerge} from "tailwind-merge";
-import {HTMLAttributes, JSX, useEffect, useId, useMemo, useState} from "react";
+import {HTMLAttributes, JSX, useCallback, useEffect, useId, useMemo, useState} from "react";
 import PagedList from "@components/elements/paged-list";
 import {useRouter, useSearchParams} from "next/navigation";
 
@@ -45,6 +45,16 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
     router.replace(`?${params.toString()}`, {scroll: false})
   }, [router, searchParams, alphaChosen]);
 
+  const loadPage =useCallback(async (page: number) => {
+    return (
+      <>
+        {[...displayedAuthors.keys()].sort().slice(page * 25, (page + 1) * 25).map(authorName =>
+          <AuthorItem key={authorName} authorName={authorName} books={authors.get(authorName)}/>
+        )}
+      </>
+    )
+  }, [displayedAuthors, authors])
+
   return (
     <div {...props} className={twMerge("flex justify-between", props?.className)}>
       <div className="sr-only" aria-live="polite">Showing authors that start with {alphaChosen}</div>
@@ -52,17 +62,15 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
 
       <PagedList
         className="flex-grow"
-        itemsPerPage={50}
+        totalPages={Math.ceil([...displayedAuthors.keys()].length / 25)}
         ulProps={{className: "list-unstyled mb-36"}}
         pageKey={false}
         key={alphaChosen}
         pagerSiblingCount={1}
+        loadPage={loadPage}
       >
-        {[...displayedAuthors.keys()].sort().map(authorName =>
-          <div key={authorName}>
-            <div className="pr-4">{authorName},</div>
-            <div className="ml-20">{authors.get(authorName)}</div>
-          </div>
+        {[...displayedAuthors.keys()].sort().slice(0, 25).map(authorName =>
+          <AuthorItem key={authorName} authorName={authorName} books={authors.get(authorName)}/>
         )}
       </PagedList>
 
@@ -86,6 +94,15 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
           )}
         </fieldset>
       </form>
+    </div>
+  )
+}
+
+const AuthorItem = ({authorName, books}: {authorName: string, books?: JSX.Element[]}) => {
+  return (
+    <div>
+      <div className="pr-4">{authorName},</div>
+      <div className="ml-20">{books}</div>
     </div>
   )
 }

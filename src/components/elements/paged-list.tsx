@@ -1,6 +1,6 @@
 "use client";
 
-import {useLayoutEffect, useRef, HtmlHTMLAttributes, useEffect, useId} from "react";
+import {useLayoutEffect, useRef, HtmlHTMLAttributes, useEffect, useId, JSX, useState} from "react";
 import {useAutoAnimate} from "@formkit/auto-animate/react";
 import {useBoolean, useCounter} from "usehooks-ts";
 import {useRouter, useSearchParams} from "next/navigation";
@@ -17,10 +17,6 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
    */
   liProps?: HtmlHTMLAttributes<HTMLLIElement>,
   /**
-   * The number of items per page.
-   */
-  itemsPerPage?: number
-  /**
    * URL parameter used to save the users page position.
    */
   pageKey?: string | false
@@ -28,34 +24,47 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
    * Number of sibling pager buttons.
    */
   pagerSiblingCount?: number
+  /**
+   * Total number of pages to build the pager.
+   */
+  totalPages: number
+  /**
+   * Server action to load a page.
+   */
+  loadPage?: (_page: number) => Promise<JSX.Element>
 }
 
 const PagedList = ({
   children,
   ulProps,
   liProps,
-  itemsPerPage = 10,
   pageKey = "page",
+  totalPages,
   pagerSiblingCount = 2,
+  loadPage,
   ...props
 }: Props) => {
+
   const id = useId();
-  const items = Array.isArray(children) ? children : [children]
+  const [items, setItems] = useState<JSX.Element[]>(Array.isArray(children) ? children : [children])
   const router = useRouter();
   const searchParams = useSearchParams()
 
   // Use the GET param for page, but make sure that it is between 1 and the last page. If it's a string or a number
   // outside the range, fix the value, so it works as expected.
-  const {
-    count: currentPage,
-    setCount: setPage
-  } = useCounter(Math.max(1, Math.min(Math.ceil(items.length / itemsPerPage), parseInt(searchParams.get(pageKey || "") || "") || 1)))
+  const {count: currentPage, setCount: setPage} = useCounter(Math.max(1, parseInt(searchParams.get(pageKey || "") || "") || 1))
+
   const {value: focusOnElement, setTrue: enableFocusElement, setFalse: disableFocusElement} = useBoolean(false)
 
   const focusItemRef = useRef<HTMLLIElement>(null);
   const [animationParent] = useAutoAnimate<HTMLUListElement>();
 
-  const goToPage = (page: number) => {
+  const goToPage = async (page: number) => {
+    if (loadPage) {
+      const newView = await loadPage(page - 1)
+      setItems(newView.props.children)
+    }
+
     enableFocusElement();
     setPage(page);
   }
@@ -67,7 +76,7 @@ const PagedList = ({
   }, [focusOnElement, setFocusOnItem]);
 
   useEffect(() => {
-    if (!pageKey) return;
+    if (!pageKey || !loadPage) return;
 
     // Use search params to retain any other parameters.
     const params = new URLSearchParams(searchParams.toString());
@@ -78,13 +87,28 @@ const PagedList = ({
     }
 
     router.replace(`?${params.toString()}`, {scroll: false})
-  }, [router, currentPage, pageKey, searchParams]);
-  const paginationButtons = usePagination(items.length, currentPage, itemsPerPage, pagerSiblingCount);
+  }, [loadPage, router, currentPage, pageKey, searchParams]);
+
+  useEffect(() => {
+
+    const updateInitialContents = async (initialPage: number) => {
+      if (loadPage) {
+        const newView = await loadPage(initialPage - 1)
+        setItems(newView.props.children)
+      }
+    }
+
+    const initialPage = parseInt(searchParams.get(pageKey || "") || "");
+    if (initialPage > 1) updateInitialContents(initialPage)
+  }, [searchParams, pageKey, loadPage])
+
+
+  const paginationButtons = usePagination(totalPages * items.length, currentPage, items.length, pagerSiblingCount);
 
   return (
     <div {...props}>
       <ul {...ulProps} ref={animationParent}>
-        {items.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((item, i) =>
+        {items.map((item, i) =>
           <li
             key={`pager-${id}-${i}`}
             ref={i === 0 ? focusItemRef : null}
@@ -97,7 +121,7 @@ const PagedList = ({
         )}
       </ul>
 
-      {paginationButtons.length > 1 &&
+      {(loadPage && paginationButtons.length > 1) &&
         <nav aria-label="Pager" className="mx-auto w-fit">
           <ul className="list-unstyled flex gap-5">
             {paginationButtons.map((pageNum, i) => (
@@ -105,7 +129,7 @@ const PagedList = ({
                 key={`page-button-${pageNum}--${i}`}
                 page={pageNum}
                 currentPage={currentPage}
-                total={Math.ceil(items.length / itemsPerPage)}
+                total={items.length * totalPages}
                 onClick={() => goToPage(pageNum)}
               />
             ))}
