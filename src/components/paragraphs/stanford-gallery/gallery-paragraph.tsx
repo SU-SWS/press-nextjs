@@ -17,7 +17,7 @@ const GalleryParagraph = ({paragraph, ...props}: Props) => {
   return (
     <GalleryWrapper
       {...props}
-      className={twMerge("@container centered lg:max-w-[980px] flex flex-col gap-10 mb-20", props.className)}
+      className={twMerge("@container centered lg:max-w-1200 flex flex-col gap-10 mb-20", props.className)}
       aria-labelledby={paragraph.suGalleryHeadline ? paragraph.id : undefined}
     >
       {paragraph.suGalleryHeadline &&

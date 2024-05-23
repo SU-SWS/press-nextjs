@@ -4,6 +4,7 @@ import {H2, H3} from "@components/elements/headers";
 import Link from "@components/elements/link";
 import Image from "next/image";
 import {ArrowRightIcon} from "@heroicons/react/16/solid";
+import {twMerge} from "tailwind-merge";
 
 type Props = HTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphSupBlogTeaser
@@ -11,7 +12,7 @@ type Props = HTMLAttributes<HTMLDivElement> & {
 
 const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
   return (
-    <div {...props}>
+    <div {...props} className={twMerge("centered lg:max-w-1200", props.className)}>
       <div className="flex items-center justify-between">
         {paragraph.supBlogTeaserHeader &&
           <H2>{paragraph.supBlogTeaserHeader}</H2>

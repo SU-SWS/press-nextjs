@@ -20,7 +20,7 @@ const Home = async () => {
   return (
     <article>
       {entity.suPageBanner?.__typename==="ParagraphSupCarousel" &&
-        <header aria-label="Home Page banner">
+        <header aria-label="Home Page banner" className="mb-32">
           <SupCarouselParagraph paragraph={entity.suPageBanner} isTopBanner/>
         </header>
       }
