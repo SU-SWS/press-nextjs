@@ -1,6 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 import {cache as nodeCache} from "@lib/drupal/get-cache";
 import {revalidateTag} from "next/cache";
+import {getEntityFromPath} from "@lib/gql/gql-queries";
 
 export const revalidate = 0;
 
@@ -14,6 +15,11 @@ export const GET = async (request: NextRequest) => {
 
   const tagsInvalidated = ["paths", `paths:${path}`];
   if (path.startsWith("/tags/")) path.substring(6).split("/").map(tag => tagsInvalidated.push(tag))
+
+  // When the home page is saved, it's url slug might be like `/home`. If the home page matches the slug, invalidate
+  // the home page path.
+  const {entity} = await getEntityFromPath("/")
+  if (entity?.path === path) tagsInvalidated.push("paths:/")
 
   tagsInvalidated.map(tag => revalidateTag(tag));
   nodeCache.del(tagsInvalidated)

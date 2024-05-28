@@ -1,6 +1,5 @@
 import {stringify} from "qs"
-import {AccessToken} from "next-drupal";
-import {getAccessToken} from "@lib/drupal/get-access-token";
+import {getAccessToken, AccessToken} from "@lib/drupal/get-access-token";
 import {cookies} from "next/headers";
 
 /*

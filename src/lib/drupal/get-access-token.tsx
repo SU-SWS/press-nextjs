@@ -1,6 +1,6 @@
 import {cache} from "@lib/drupal/get-cache"
 
-type AccessToken = {
+export type AccessToken = {
   token_type: string
   expires_in: number
   access_token: string
@@ -16,7 +16,7 @@ export const getAccessToken = async (previewMode: boolean = false): Promise<Acce
   const cached = cache.get<AccessToken | false>(CACHE_KEY)
   if (cached && cached?.access_token) return cached
 
-  // An empty cache would be undefined. False indicates the first attempt failed, so we shouldn"t try again.
+  // An empty cache would be undefined. False indicates the first attempt failed, so we shouldn't try again.
   if (cached === false) return
 
   // Basic auth credentials.
