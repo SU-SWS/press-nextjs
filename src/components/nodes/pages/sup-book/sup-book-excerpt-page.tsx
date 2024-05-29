@@ -13,8 +13,8 @@ type Props = HTMLAttributes<HTMLElement> & {
 
 const SupBookExcerptPage = ({node, ...props}: Props) => {
   return (
-    <div className="centered flex flex-col gap-10">
-      <article className="pt-32 order-last" {...props}>
+    <div className="centered flex flex-col">
+      <article className="pt-32 order-last gap-10 max-w-900 mx-auto" {...props}>
         <H1 className="mb-32">
           Excerpts + More
         </H1>
@@ -35,7 +35,7 @@ const SupBookExcerptPage = ({node, ...props}: Props) => {
           </div>
 
           {node.supBookImage?.mediaImage &&
-            <div className="relative order-first w-full md:w-1/3 shrink-0">
+            <div className="relative order-first w-full md:max-w-400 shrink-0">
               <Image
                 src={node.supBookImage.mediaImage.url}
                 alt={node.supBookImage.mediaImage.alt || ""}
@@ -45,7 +45,7 @@ const SupBookExcerptPage = ({node, ...props}: Props) => {
             </div>
           }
         </div>
-        <Rows components={node.supBookExcerpts}/>
+        <Rows components={node.supBookExcerpts} className="px-5"/>
 
         {node.supBookTableOfContents &&
           <div className="centered lg:max-w-[980px]">

@@ -85,7 +85,11 @@ const SupBookPage = async ({node, ...props}: Props) => {
               }
 
               {node.supBookSeries?.name &&
-                <div>Series<br/>{node.supBookSeries?.name}</div>
+                <div>Series<br/>
+                  <a href={`/search?q=${node.supBookSeries.name}`} className="text-stone-dark font-normal">
+                    {node.supBookSeries.name}
+                  </a>
+                </div>
               }
             </div>
 
@@ -170,7 +174,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
       </div>
 
 
-      <Tabs>
+      <Tabs className="border-b border-fog mb-20 pb-20">
         <div className="border-b border-fog mb-20">
           <TabsList className="max-w-5xl mx-auto">
             {node.supBookDescription?.processed &&
@@ -208,6 +212,31 @@ const SupBookPage = async ({node, ...props}: Props) => {
           }
         </div>
       </Tabs>
+
+      {node.supBookSubjects &&
+        <div className="max-w-5xl mx-auto">
+          <H2 className="text-m1 font-bold">Related Subjects</H2>
+          <ul className="list-unstyled flex flex-wrap">
+            {node.supBookSubjects.map(subject => {
+              const linkParams = new URLSearchParams();
+              if (subject.parent?.name) {
+                linkParams.set("subjects", subject.parent.name)
+                linkParams.set("q", subject.name)
+              } else {
+                linkParams.set("subjects", subject.name)
+              }
+
+              return (
+                <li key={subject.id} className="flex-1 min-w-fit">
+                  <a href={`/search?${linkParams.toString()}`} className="font-normal text-stone-dark">
+                    {subject.parent?.name && `${subject.parent.name} / `}{subject.name}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      }
     </article>
   )
 }
