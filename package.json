@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "next lint && tsc",
     "storybook": "storybook dev -p 6006",
-    "graphql": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen --config codegen.ts -r dotenv/config"
+    "graphql": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen --config codegen.ts -r dotenv/config",
+    "postinstall": "git config --local core.hooksPath .githooks/"
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.2",
@@ -73,6 +74,8 @@
     "eslint-plugin-deprecation": "^2.0.0",
     "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-unused-imports": "^4.0.0",
+    "prettier": "^3.3.0",
+    "prettier-plugin-tailwindcss": "^0.6.1",
     "react-docgen": "^7.0.3",
     "storybook": "^8.1.4",
     "tsconfig-paths-webpack-plugin": "^4.1.0"
