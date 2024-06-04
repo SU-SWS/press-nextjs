@@ -1,282 +1,282 @@
-
 fragment FragmentParagraphInterface on ParagraphInterface {
-    __typename
-    id
-    behaviors
+  __typename
+  id
+  behaviors
 }
 
 fragment FragmentParagraphStanfordAccordion on ParagraphStanfordAccordion {
-    ...FragmentParagraphInterface
-    suAccordionBody {
-        processed
-    }
-    suAccordionTitle
+  ...FragmentParagraphInterface
+  suAccordionBody {
+    processed
+  }
+  suAccordionTitle
 }
 
 fragment FragmentParagraphStanfordBanner on ParagraphStanfordBanner {
-    ...FragmentParagraphInterface
-    suBannerHeader
-    suBannerBody {
-        processed
-    }
-    suBannerSupHeader
-    suBannerButton {
-        url
-        title
-    }
-    suBannerImage {
-        ...FragmentMediaImage
-    }
+  ...FragmentParagraphInterface
+  suBannerHeader
+  suBannerBody {
+    processed
+  }
+  suBannerSupHeader
+  suBannerButton {
+    url
+    title
+  }
+  suBannerImage {
+    ...FragmentMediaImage
+  }
 }
 
 fragment FragmentParagraphStanfordCard on ParagraphStanfordCard {
-    ...FragmentParagraphInterface
-    suCardHeader
-    suCardSuperHeader
-    suCardBody {
-        processed
-    }
-    suCardLink {
-        url
-        title
-    }
-    suCardMedia {
-        ...FragmentMediaUnion
-    }
+  ...FragmentParagraphInterface
+  suCardHeader
+  suCardSuperHeader
+  suCardBody {
+    processed
+  }
+  suCardLink {
+    url
+    title
+  }
+  suCardMedia {
+    ...FragmentMediaUnion
+  }
 }
 
 fragment FragmentParagraphStanfordEntity on ParagraphStanfordEntity {
-    ...FragmentParagraphInterface
-    suEntityHeadline
-    suEntityDescription {
-        processed
+  ...FragmentParagraphInterface
+  suEntityHeadline
+  suEntityDescription {
+    processed
+  }
+  suEntityButton {
+    url
+    title
+  }
+  suEntityItem {
+    ... on NodeInterface {
+      id
+      path
     }
-    suEntityButton {
-        url
-        title
-    }
-    suEntityItem {
-        ... on NodeInterface {
-            id
-            path
-        }
-    }
+  }
 }
 
 fragment FragmentParagraphStanfordGallery on ParagraphStanfordGallery {
-    ...FragmentParagraphInterface
-    suGalleryHeadline
-    suGalleryDescription {
-        processed
-    }
-    suGalleryButton {
-        url
-        title
-    }
-    suGalleryImages {
-        ...FragmentMediaStanfordGalleryImage
-    }
+  ...FragmentParagraphInterface
+  suGalleryHeadline
+  suGalleryDescription {
+    processed
+  }
+  suGalleryButton {
+    url
+    title
+  }
+  suGalleryImages {
+    ...FragmentMediaStanfordGalleryImage
+  }
 }
 
 fragment FragmentParagraphStanfordList on ParagraphStanfordList {
-    ...FragmentParagraphInterface
-    suListHeadline
-    supListEyebrow
-    suListDescription {
-        processed
-    }
-    suListButton {
-        url
-        title
-    }
-    suListView {
-        view
-        display
-        contextualFilter
-        pageSize
-    }
+  ...FragmentParagraphInterface
+  suListHeadline
+  supListEyebrow
+  suListDescription {
+    processed
+  }
+  suListButton {
+    url
+    title
+  }
+  suListView {
+    view
+    display
+    contextualFilter
+    pageSize
+  }
 }
 
 fragment FragmentParagraphStanfordMediaCaption on ParagraphStanfordMediaCaption {
-    ...FragmentParagraphInterface
-    suMediaCaptionMedia {
-        ...FragmentMediaUnion
-    }
-    suMediaCaptionLink {
-        url
-        title
-    }
-    suMediaCaptionCaption {
-        processed
-    }
+  ...FragmentParagraphInterface
+  suMediaCaptionMedia {
+    ...FragmentMediaUnion
+  }
+  suMediaCaptionLink {
+    url
+    title
+  }
+  suMediaCaptionCaption {
+    processed
+  }
 }
 
 fragment FragmentParagraphStanfordPersonCtum on ParagraphStanfordPersonCtum {
-    ...FragmentParagraphInterface
-    suPersonCtaName
-    suPersonCtaTitle
-    suPersonCtaLink {
-        url
-        title
-    }
-    suPersonCtaImage {
-        ...FragmentMediaImage
-    }
+  ...FragmentParagraphInterface
+  suPersonCtaName
+  suPersonCtaTitle
+  suPersonCtaLink {
+    url
+    title
+  }
+  suPersonCtaImage {
+    ...FragmentMediaImage
+  }
 }
 
 fragment FragmentParagraphStanfordSchedule on ParagraphStanfordSchedule {
-    ...FragmentParagraphInterface
-    suScheduleHeadline
-    suScheduleDescription {
-        processed
-    }
-    suScheduleDateTime {
-        ...FragmentSmartDateType
-    }
-    suScheduleLocation {
-        ...FragmentAddressType
-    }
-    suScheduleUrl {
-        url
-        title
-    }
-    suScheduleSpeaker {
-        ...FragmentParagraphStanfordPersonCtum
-    }
+  ...FragmentParagraphInterface
+  suScheduleHeadline
+  suScheduleDescription {
+    processed
+  }
+  suScheduleDateTime {
+    ...FragmentSmartDateType
+  }
+  suScheduleLocation {
+    ...FragmentAddressType
+  }
+  suScheduleUrl {
+    url
+    title
+  }
+  suScheduleSpeaker {
+    ...FragmentParagraphStanfordPersonCtum
+  }
 }
 
 fragment FragmentParagraphStanfordLayout on ParagraphStanfordLayout {
-    ...FragmentParagraphInterface
+  ...FragmentParagraphInterface
 }
 
 fragment FragmentParagraphStanfordSpacer on ParagraphStanfordSpacer {
-    ...FragmentParagraphInterface
-    suSpacerSize
+  ...FragmentParagraphInterface
+  suSpacerSize
 }
 
 fragment FragmentParagraphStanfordWysiwyg on ParagraphStanfordWysiwyg {
-    ...FragmentParagraphInterface
-    suWysiwygText {
-        processed
-    }
+  ...FragmentParagraphInterface
+  suWysiwygText {
+    processed
+  }
 }
 
 fragment FragmentParagraphStanfordPageTitleBanner on ParagraphStanfordPageTitleBanner {
-    ...FragmentParagraphInterface
-    suTitleBannerImage {
-        ...FragmentMediaImage
-    }
-    supTitleBannerColor
+  ...FragmentParagraphInterface
+  suTitleBannerImage {
+    ...FragmentMediaImage
+  }
+  supTitleBannerColor
 }
 
 fragment FragmentParagraphSupFileList on ParagraphSupFileList {
-    ...FragmentParagraphInterface
-    supFileListLabel
-    supFileListFiles {
-        ...FragmentMediaFile
-    }
-    supFileListDisplay
+  ...FragmentParagraphInterface
+  supFileListLabel
+  supFileListFiles {
+    ...FragmentMediaFile
+    ...FragmentMediaSupProtectedFile
+  }
+  supFileListDisplay
 }
 
 fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
-    ...FragmentParagraphInterface
-    supSlideBody {
+  ...FragmentParagraphInterface
+  supSlideBody {
+    processed
+  }
+  supSlideBodySize
+  supSlideBook {
+    ... on NodeSupBook {
+      id
+      title
+      path
+      supBookAuthorsFull
+      supBookImage {
+        ...FragmentMediaImage
+      }
+      supBookLocalWebBlurb {
         processed
+      }
     }
-    supSlideBodySize
-    supSlideBook {
-        ... on NodeSupBook {
-            id
-            title
-            path
-            supBookAuthorsFull
-            supBookImage {
-                ...FragmentMediaImage
-            }
-            supBookLocalWebBlurb {
-                processed
-            }
-        }
-    }
-    supSlideButton {
-        ...FragmentLink
-    }
-    supSlideColor
-    supSlideEyebrow
-    supSlideHide
-    supSlideOrientation
-    supSlideSubtitle
-    supSlideTitle
-    supSlideTitleSize
-    supSlideImage {
-        ...FragmentMediaImage
-    }
-    supSlideBgImage {
-        ...FragmentMediaImage
-    }
+  }
+  supSlideButton {
+    ...FragmentLink
+  }
+  supSlideColor
+  supSlideEyebrow
+  supSlideHide
+  supSlideOrientation
+  supSlideSubtitle
+  supSlideTitle
+  supSlideTitleSize
+  supSlideImage {
+    ...FragmentMediaImage
+  }
+  supSlideBgImage {
+    ...FragmentMediaImage
+  }
 }
 
 fragment FragmentParagraphSupCarousel on ParagraphSupCarousel {
-    ...FragmentParagraphInterface
-    supCarouselSlides {
-        ...FragmentParagraphSupCarouselSlide
-    }
-    supCarouselTopHero
+  ...FragmentParagraphInterface
+  supCarouselSlides {
+    ...FragmentParagraphSupCarouselSlide
+  }
+  supCarouselTopHero
 }
 
 fragment FragmentParagraphSupAuthorList on ParagraphSupAuthorList {
-    ...FragmentParagraphInterface
+  ...FragmentParagraphInterface
 }
 
 fragment FragmentParagraphSupSearchForm on ParagraphSupSearchForm {
-    ...FragmentParagraphInterface
-    supSearchBooksOnly
-    supSearchSubject {
-        ... on TermInterface {
-            id
-            name
-        }
+  ...FragmentParagraphInterface
+  supSearchBooksOnly
+  supSearchSubject {
+    ... on TermInterface {
+      id
+      name
     }
+  }
 }
 
 fragment FragmentParagraphSupBlog on ParagraphSupBlog {
-    ...FragmentParagraphInterface
-    supBlogBody
-    supBlogImage {
-        ...FragmentMediaImage
-    }
-    supBlogTitle
-    supBlogUrl {
-        ...FragmentLink
-    }
+  ...FragmentParagraphInterface
+  supBlogBody
+  supBlogImage {
+    ...FragmentMediaImage
+  }
+  supBlogTitle
+  supBlogUrl {
+    ...FragmentLink
+  }
 }
 
 fragment FragmentParagraphSupBlogTeaser on ParagraphSupBlogTeaser {
-    ...FragmentParagraphInterface
-    supBlogTeaserHeader
-    supBlogTeaserItems {
-        ...FragmentParagraphSupBlog
-    }
-    supBlogTeaserLink {
-        ...FragmentLink
-    }
+  ...FragmentParagraphInterface
+  supBlogTeaserHeader
+  supBlogTeaserItems {
+    ...FragmentParagraphSupBlog
+  }
+  supBlogTeaserLink {
+    ...FragmentLink
+  }
 }
 
 fragment FragmentParagraphUnion on ParagraphUnion {
-    ...FragmentParagraphInterface
-    ...FragmentParagraphStanfordAccordion
-    ...FragmentParagraphStanfordBanner
-    ...FragmentParagraphStanfordCard
-    ...FragmentParagraphStanfordEntity
-    ...FragmentParagraphStanfordGallery
-    ...FragmentParagraphStanfordList
-    ...FragmentParagraphStanfordMediaCaption
-    ...FragmentParagraphStanfordSpacer
-    ...FragmentParagraphStanfordWysiwyg
-    ...FragmentParagraphStanfordLayout
-    ...FragmentParagraphSupCarousel
-    ...FragmentParagraphSupFileList
-    ...FragmentParagraphSupAuthorList
-    ...FragmentParagraphSupSearchForm
-    ...FragmentParagraphSupBlogTeaser
+  ...FragmentParagraphInterface
+  ...FragmentParagraphStanfordAccordion
+  ...FragmentParagraphStanfordBanner
+  ...FragmentParagraphStanfordCard
+  ...FragmentParagraphStanfordEntity
+  ...FragmentParagraphStanfordGallery
+  ...FragmentParagraphStanfordList
+  ...FragmentParagraphStanfordMediaCaption
+  ...FragmentParagraphStanfordSpacer
+  ...FragmentParagraphStanfordWysiwyg
+  ...FragmentParagraphStanfordLayout
+  ...FragmentParagraphSupCarousel
+  ...FragmentParagraphSupFileList
+  ...FragmentParagraphSupAuthorList
+  ...FragmentParagraphSupSearchForm
+  ...FragmentParagraphSupBlogTeaser
 }

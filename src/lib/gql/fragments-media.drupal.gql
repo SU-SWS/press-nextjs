@@ -1,59 +1,66 @@
 fragment FragmentMediaInterface on MediaInterface {
-    __typename
-    id
-    name
+  __typename
+  id
+  name
 }
 
 fragment FragmentMediaFile on MediaFile {
-    ...FragmentMediaInterface
-    mediaFile {
-        url
-    }
+  ...FragmentMediaInterface
+  mediaFile {
+    url
+  }
+}
+
+fragment FragmentMediaSupProtectedFile on MediaSupProtectedFile {
+  ...FragmentMediaInterface
+  supMediaFile {
+    url
+  }
 }
 
 fragment FragmentMediaEmbeddable on MediaEmbeddable {
-    ...FragmentMediaInterface
-    mediaEmbeddableCode
-    mediaEmbeddableOembed
+  ...FragmentMediaInterface
+  mediaEmbeddableCode
+  mediaEmbeddableOembed
 }
 
 fragment FragmentMediaGoogleForm on MediaGoogleForm {
-    ...FragmentMediaInterface
-    mediaGoogleForm
-    mediaGoogleForm
+  ...FragmentMediaInterface
+  mediaGoogleForm
+  mediaGoogleForm
 }
 
 fragment FragmentMediaImage on MediaImage {
-    ...FragmentMediaInterface
-    mediaImage {
-        url
-        alt
-        height
-        width
-    }
+  ...FragmentMediaInterface
+  mediaImage {
+    url
+    alt
+    height
+    width
+  }
 }
 
 fragment FragmentMediaStanfordGalleryImage on MediaStanfordGalleryImage {
-    ...FragmentMediaInterface
-    suGalleryCaption
-    suGalleryImage {
-        url
-        alt
-        height
-        width
-    }
+  ...FragmentMediaInterface
+  suGalleryCaption
+  suGalleryImage {
+    url
+    alt
+    height
+    width
+  }
 }
 
 fragment FragmentMediaVideo on MediaVideo {
-    ...FragmentMediaInterface
-    mediaOembedVideo
+  ...FragmentMediaInterface
+  mediaOembedVideo
 }
 
 fragment FragmentMediaUnion on MediaUnion {
-    ...FragmentMediaEmbeddable
-    ...FragmentMediaFile
-    ...FragmentMediaGoogleForm
-    ...FragmentMediaImage
-    ...FragmentMediaStanfordGalleryImage
-    ...FragmentMediaVideo
+  ...FragmentMediaEmbeddable
+  ...FragmentMediaFile
+  ...FragmentMediaGoogleForm
+  ...FragmentMediaImage
+  ...FragmentMediaStanfordGalleryImage
+  ...FragmentMediaVideo
 }
