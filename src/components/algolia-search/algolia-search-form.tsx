@@ -280,6 +280,8 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
 
 const HitList = ({searchIndex}: {searchIndex: string}) => {
   const {items: hits} = useHits<HitType<AlgoliaHit>>({})
+  const {query} = useSearchBox({})
+
   const {currentRefinement: currentPage, pages, nbPages, nbHits, refine: goToPage} = usePagination({padding: 2})
   const {
     options: sortOptions,
@@ -290,8 +292,15 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
       {label: "Relevance", value: searchIndex},
       {label: "Last Name, A-Z", value: `${searchIndex}_authors_asc`},
       {label: "Last Name, Z-A", value: `${searchIndex}_authors_desc`},
+      {label: "Published Year, Asc", value: `${searchIndex}_published_asc`},
+      {label: "Published Year, Desc", value: `${searchIndex}_published_desc`},
     ],
   })
+
+  useEffect(() => {
+    if (query) sortBy(searchIndex)
+  }, [sortBy, searchIndex, query])
+
   if (hits.length === 0) {
     return <p>No results for your search. Please try another search.</p>
   }
