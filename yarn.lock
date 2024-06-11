@@ -3629,103 +3629,103 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:^14.2.3":
-  version: 14.2.3
-  resolution: "@next/bundle-analyzer@npm:14.2.3"
+"@next/bundle-analyzer@npm:^14.2.4":
+  version: 14.2.4
+  resolution: "@next/bundle-analyzer@npm:14.2.4"
   dependencies:
     webpack-bundle-analyzer: "npm:4.10.1"
-  checksum: 10c0/f219e372ca211b161a530fcbcc7395e049e9dc039c37279cae56eed1ddfc678e8f28b12813548f0901276b932dee591067f4683b8502e03156ce1c79ff3a50a4
+  checksum: 10c0/971a3d8042edb8180dc87bb7d2b68c38855e060ccb51a4e42d9c42dad2a8efc610571dd3b3d48f139348ff9830abc20bfdb91dc414cf25d2a843cd88b96b14a8
   languageName: node
   linkType: hard
 
-"@next/env@npm:14.2.3":
-  version: 14.2.3
-  resolution: "@next/env@npm:14.2.3"
-  checksum: 10c0/25ab3ac2739c8e5ce35e1f50373238c5c428ab6b01d448ba78a6068dcdef88978b64f9a92790c324b2926ccc41390a67107154a0b0fee32fe980a485f4ef20d8
+"@next/env@npm:14.2.4":
+  version: 14.2.4
+  resolution: "@next/env@npm:14.2.4"
+  checksum: 10c0/cc284e3dd0666df04d8321645d8409c10cb8e325884c226abbb2e7bea20f0a4232f988216aa506a9d0457b46f28b594a61179d1e978c0ca22497cd8cab8196c7
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:14.2.3":
-  version: 14.2.3
-  resolution: "@next/eslint-plugin-next@npm:14.2.3"
+"@next/eslint-plugin-next@npm:14.2.4":
+  version: 14.2.4
+  resolution: "@next/eslint-plugin-next@npm:14.2.4"
   dependencies:
     glob: "npm:10.3.10"
-  checksum: 10c0/de9af2c7465cce4eb4cb50654aa2548d4d2af788c8992d02e2b863b1bf4f99e3b6604d1f0775f8e50aca6a53cf30d51f4ac56810d1625d401548267ca5f1d883
+  checksum: 10c0/077584c9ee12a82940c64a5cc48295e919c74fc352a9bedf41a6b44f2f4e71aea2aa95826957de042a8649e058888d3b27ea7f9ca72e67798e89d14b62f733c1
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-arm64@npm:14.2.3":
-  version: 14.2.3
-  resolution: "@next/swc-darwin-arm64@npm:14.2.3"
+"@next/swc-darwin-arm64@npm:14.2.4":
+  version: 14.2.4
+  resolution: "@next/swc-darwin-arm64@npm:14.2.4"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-x64@npm:14.2.3":
-  version: 14.2.3
-  resolution: "@next/swc-darwin-x64@npm:14.2.3"
+"@next/swc-darwin-x64@npm:14.2.4":
+  version: 14.2.4
+  resolution: "@next/swc-darwin-x64@npm:14.2.4"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-gnu@npm:14.2.3":
-  version: 14.2.3
-  resolution: "@next/swc-linux-arm64-gnu@npm:14.2.3"
+"@next/swc-linux-arm64-gnu@npm:14.2.4":
+  version: 14.2.4
+  resolution: "@next/swc-linux-arm64-gnu@npm:14.2.4"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-musl@npm:14.2.3":
-  version: 14.2.3
-  resolution: "@next/swc-linux-arm64-musl@npm:14.2.3"
+"@next/swc-linux-arm64-musl@npm:14.2.4":
+  version: 14.2.4
+  resolution: "@next/swc-linux-arm64-musl@npm:14.2.4"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-gnu@npm:14.2.3":
-  version: 14.2.3
-  resolution: "@next/swc-linux-x64-gnu@npm:14.2.3"
+"@next/swc-linux-x64-gnu@npm:14.2.4":
+  version: 14.2.4
+  resolution: "@next/swc-linux-x64-gnu@npm:14.2.4"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-musl@npm:14.2.3":
-  version: 14.2.3
-  resolution: "@next/swc-linux-x64-musl@npm:14.2.3"
+"@next/swc-linux-x64-musl@npm:14.2.4":
+  version: 14.2.4
+  resolution: "@next/swc-linux-x64-musl@npm:14.2.4"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@next/swc-win32-arm64-msvc@npm:14.2.3":
-  version: 14.2.3
-  resolution: "@next/swc-win32-arm64-msvc@npm:14.2.3"
+"@next/swc-win32-arm64-msvc@npm:14.2.4":
+  version: 14.2.4
+  resolution: "@next/swc-win32-arm64-msvc@npm:14.2.4"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@next/swc-win32-ia32-msvc@npm:14.2.3":
-  version: 14.2.3
-  resolution: "@next/swc-win32-ia32-msvc@npm:14.2.3"
+"@next/swc-win32-ia32-msvc@npm:14.2.4":
+  version: 14.2.4
+  resolution: "@next/swc-win32-ia32-msvc@npm:14.2.4"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@next/swc-win32-x64-msvc@npm:14.2.3":
-  version: 14.2.3
-  resolution: "@next/swc-win32-x64-msvc@npm:14.2.3"
+"@next/swc-win32-x64-msvc@npm:14.2.4":
+  version: 14.2.4
+  resolution: "@next/swc-win32-x64-msvc@npm:14.2.4"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@next/third-parties@npm:^14.2.3":
-  version: 14.2.3
-  resolution: "@next/third-parties@npm:14.2.3"
+"@next/third-parties@npm:^14.2.4":
+  version: 14.2.4
+  resolution: "@next/third-parties@npm:14.2.4"
   dependencies:
     third-party-capital: "npm:1.0.20"
   peerDependencies:
     next: ^13.0.0 || ^14.0.0
     react: ^18.2.0
-  checksum: 10c0/22afcd981a926efc8e88c5fecf6515e6aac031d0ea8671bf1956e690c56b7e9ff865fb15ef9e49f4b4e527c6e1db469b42fbfb68f4763adbe699b8c68d50d309
+  checksum: 10c0/92dc2f1d507d0f5a8c208d0ede355a5084cbc242e46348da0f042522968811b62bb360d78fbbfc53f603c1f875dd4610bc492cd0024ee4a1402541d94287a73f
   languageName: node
   linkType: hard
 
@@ -8849,8 +8849,8 @@ __metadata:
     "@heroicons/react": "npm:^2.1.3"
     "@js-temporal/polyfill": "npm:^0.4.4"
     "@mui/base": "npm:^5.0.0-dev.20240529-082515-213b5e33ab"
-    "@next/bundle-analyzer": "npm:^14.2.3"
-    "@next/third-parties": "npm:^14.2.3"
+    "@next/bundle-analyzer": "npm:^14.2.4"
+    "@next/third-parties": "npm:^14.2.4"
     "@storybook/addon-essentials": "npm:^8.1.6"
     "@storybook/addon-interactions": "npm:^8.1.6"
     "@storybook/addon-links": "npm:^8.1.6"
@@ -8872,7 +8872,7 @@ __metadata:
     drupal-jsonapi-params: "npm:^2.3.1"
     encoding: "npm:^0.1.13"
     eslint: "npm:^8.57.0"
-    eslint-config-next: "npm:^14.2.3"
+    eslint-config-next: "npm:^14.2.4"
     eslint-plugin-deprecation: "npm:^3.0.0"
     eslint-plugin-storybook: "npm:^0.8.0"
     eslint-plugin-unused-imports: "npm:^4.0.0"
@@ -8881,19 +8881,19 @@ __metadata:
     graphql-tag: "npm:^2.12.6"
     html-entities: "npm:^2.5.2"
     html-react-parser: "npm:^5.1.10"
-    next: "npm:^14.2.3"
+    next: "npm:^14.2.4"
     node-cache: "npm:^5.1.2"
     plaiceholder: "npm:^3.0.0"
     postcss: "npm:^8.4.38"
-    prettier: "npm:^3.3.1"
-    prettier-plugin-tailwindcss: "npm:^0.6.2"
+    prettier: "npm:^3.3.2"
+    prettier-plugin-tailwindcss: "npm:^0.6.3"
     qs: "npm:^6.12.1"
     react: "npm:^18.3.1"
     react-docgen: "npm:^7.0.3"
     react-dom: "npm:^18.3.1"
     react-focus-lock: "npm:^2.12.1"
-    react-instantsearch: "npm:^7.11.0"
-    react-instantsearch-nextjs: "npm:^0.3.1"
+    react-instantsearch: "npm:^7.11.1"
+    react-instantsearch-nextjs: "npm:^0.3.2"
     react-slick: "npm:^0.30.2"
     react-tiny-oembed: "npm:^1.1.0"
     sharp: "npm:^0.33.4"
@@ -9921,11 +9921,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:^14.2.3":
-  version: 14.2.3
-  resolution: "eslint-config-next@npm:14.2.3"
+"eslint-config-next@npm:^14.2.4":
+  version: 14.2.4
+  resolution: "eslint-config-next@npm:14.2.4"
   dependencies:
-    "@next/eslint-plugin-next": "npm:14.2.3"
+    "@next/eslint-plugin-next": "npm:14.2.4"
     "@rushstack/eslint-patch": "npm:^1.3.3"
     "@typescript-eslint/parser": "npm:^5.4.2 || ^6.0.0 || 7.0.0 - 7.2.0"
     eslint-import-resolver-node: "npm:^0.3.6"
@@ -9940,7 +9940,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/52a3d48bb783d3e8d76a571a3636f658e4789e1a4a51ebbd14d184b7f6f5dd91281b71d99e49a7bb7e3ab32a2dddd321285110005ca0969a471be5ab2e579887
+  checksum: 10c0/c1bd52a2fc3e5d7094586117a230205ff20dd9acdc8d1f85abe89bc07e2b015bb39bfed87ef9d79af99a6fb2b9666538d8cce4f9f6402fc52ec0ffc329d11ce8
   languageName: node
   linkType: hard
 
@@ -11758,9 +11758,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"instantsearch.js@npm:4.71.0":
-  version: 4.71.0
-  resolution: "instantsearch.js@npm:4.71.0"
+"instantsearch.js@npm:4.71.1":
+  version: 4.71.1
+  resolution: "instantsearch.js@npm:4.71.1"
   dependencies:
     "@algolia/events": "npm:^4.0.1"
     "@types/dom-speech-recognition": "npm:^0.0.1"
@@ -11776,7 +11776,7 @@ __metadata:
     search-insights: "npm:^2.13.0"
   peerDependencies:
     algoliasearch: ">= 3.1 < 6"
-  checksum: 10c0/6686f59aafd7ad45cc89dd6ba1421bac9a6de4e9ea74c130b3f537e1fb91590b8a8da0422615002fc8153a027c1249c3b4b9b1e7086aa4c9b3685a193ef04f6c
+  checksum: 10c0/3703cdeaf3095168109e9eb29f87f952769c62536d72014a7ec9e5224e751fa725e66770d2f07fbf90b6bff29fec1c0ec63eef61ee20c005af74b6c7114ba04c
   languageName: node
   linkType: hard
 
@@ -13322,20 +13322,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:^14.2.3":
-  version: 14.2.3
-  resolution: "next@npm:14.2.3"
+"next@npm:^14.2.4":
+  version: 14.2.4
+  resolution: "next@npm:14.2.4"
   dependencies:
-    "@next/env": "npm:14.2.3"
-    "@next/swc-darwin-arm64": "npm:14.2.3"
-    "@next/swc-darwin-x64": "npm:14.2.3"
-    "@next/swc-linux-arm64-gnu": "npm:14.2.3"
-    "@next/swc-linux-arm64-musl": "npm:14.2.3"
-    "@next/swc-linux-x64-gnu": "npm:14.2.3"
-    "@next/swc-linux-x64-musl": "npm:14.2.3"
-    "@next/swc-win32-arm64-msvc": "npm:14.2.3"
-    "@next/swc-win32-ia32-msvc": "npm:14.2.3"
-    "@next/swc-win32-x64-msvc": "npm:14.2.3"
+    "@next/env": "npm:14.2.4"
+    "@next/swc-darwin-arm64": "npm:14.2.4"
+    "@next/swc-darwin-x64": "npm:14.2.4"
+    "@next/swc-linux-arm64-gnu": "npm:14.2.4"
+    "@next/swc-linux-arm64-musl": "npm:14.2.4"
+    "@next/swc-linux-x64-gnu": "npm:14.2.4"
+    "@next/swc-linux-x64-musl": "npm:14.2.4"
+    "@next/swc-win32-arm64-msvc": "npm:14.2.4"
+    "@next/swc-win32-ia32-msvc": "npm:14.2.4"
+    "@next/swc-win32-x64-msvc": "npm:14.2.4"
     "@swc/helpers": "npm:0.5.5"
     busboy: "npm:1.6.0"
     caniuse-lite: "npm:^1.0.30001579"
@@ -13376,7 +13376,7 @@ __metadata:
       optional: true
   bin:
     next: dist/bin/next
-  checksum: 10c0/2c409154720846d07a7a995cc3bfba24b9ee73c87360ce3266528c8a217f5f1ab6f916cffbe1be83509b4e8d7b1d713921bb5c69338b4ecaa57df3212f79a8c5
+  checksum: 10c0/630c2a197b57c1f29caf4672a0f8fb74dbb048e77e4513f567279467332212f3eebcb68279885f1d525d7aaebbb452f522b02c0b5cd3ca66f385341e4b4eac67
   languageName: node
   linkType: hard
 
@@ -14454,9 +14454,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-tailwindcss@npm:^0.6.2":
-  version: 0.6.2
-  resolution: "prettier-plugin-tailwindcss@npm:0.6.2"
+"prettier-plugin-tailwindcss@npm:^0.6.3":
+  version: 0.6.3
+  resolution: "prettier-plugin-tailwindcss@npm:0.6.3"
   peerDependencies:
     "@ianvs/prettier-plugin-sort-imports": "*"
     "@prettier/plugin-pug": "*"
@@ -14505,7 +14505,7 @@ __metadata:
       optional: true
     prettier-plugin-svelte:
       optional: true
-  checksum: 10c0/e2cd438c2f1433b61ebb5764c4c58efcd04e56bf15498c0dce974ab3d7559b7293d15eec3a5f2de9f1646a381551f3ec47bd2ea57ced7c7e8d69f62555128ac1
+  checksum: 10c0/1912a5c68e3326c5abe8603c44f1bc05ae2321e677124149b74a66db1d7845eeeb555c7711aaedc8cf5c399011eb147af196c4db9e177d078c9c834df2f2eac3
   languageName: node
   linkType: hard
 
@@ -14518,12 +14518,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "prettier@npm:3.3.1"
+"prettier@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "prettier@npm:3.3.2"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/c25a709c9f0be670dc6bcb190b622347e1dbeb6c3e7df8b0711724cb64d8647c60b839937a4df4df18e9cfb556c2b08ca9d24d9645eb5488a7fc032a2c4d5cb3
+  checksum: 10c0/39ed27d17f0238da6dd6571d63026566bd790d3d0edac57c285fbab525982060c8f1e01955fe38134ab10f0951a6076da37f015db8173c02f14bc7f0803a384c
   languageName: node
   linkType: hard
 
@@ -14906,44 +14906,44 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-instantsearch-core@npm:7.11.0":
-  version: 7.11.0
-  resolution: "react-instantsearch-core@npm:7.11.0"
+"react-instantsearch-core@npm:7.11.1":
+  version: 7.11.1
+  resolution: "react-instantsearch-core@npm:7.11.1"
   dependencies:
     "@babel/runtime": "npm:^7.1.2"
     algoliasearch-helper: "npm:3.21.0"
-    instantsearch.js: "npm:4.71.0"
+    instantsearch.js: "npm:4.71.1"
     use-sync-external-store: "npm:^1.0.0"
   peerDependencies:
     algoliasearch: ">= 3.1 < 5"
     react: ">= 16.8.0 < 19"
-  checksum: 10c0/2508cf745e91e14104aef2e5b4fbecc8e91e718a14448fa1f27b1c85a040ff90c1dbe7d61869e2c381749728f67ca48a032c5030af97882a322f0f61bfcf7dfc
+  checksum: 10c0/1d06f33b31bb958f26b6d498abf7296ef17041bb392eab5f00bcc968f42777a869f4a196ec9a9b2d13080c95a685007a8c9deb33b61c1efc87a11abfed4361dd
   languageName: node
   linkType: hard
 
-"react-instantsearch-nextjs@npm:^0.3.1":
-  version: 0.3.1
-  resolution: "react-instantsearch-nextjs@npm:0.3.1"
+"react-instantsearch-nextjs@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "react-instantsearch-nextjs@npm:0.3.2"
   peerDependencies:
     next: "*"
     react-instantsearch: "*"
-  checksum: 10c0/8f541b1f6c9cdf5c20b1acf5a8e83b8798782bc027e1fb75cffff61bdac8c42011700fedee6129c7cb253eb481beca87ef42cfa27e69e88b449442bc260c4853
+  checksum: 10c0/9dbdddfa1d0c1c823d3f87d9c2d357739e442c10fcf15aac4eb91e4048ffcef0578242e7a22480d24658cb39931e7dc1f6b961d688f7344f14f92f28db113752
   languageName: node
   linkType: hard
 
-"react-instantsearch@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "react-instantsearch@npm:7.11.0"
+"react-instantsearch@npm:^7.11.1":
+  version: 7.11.1
+  resolution: "react-instantsearch@npm:7.11.1"
   dependencies:
     "@babel/runtime": "npm:^7.1.2"
     instantsearch-ui-components: "npm:0.6.0"
-    instantsearch.js: "npm:4.71.0"
-    react-instantsearch-core: "npm:7.11.0"
+    instantsearch.js: "npm:4.71.1"
+    react-instantsearch-core: "npm:7.11.1"
   peerDependencies:
     algoliasearch: ">= 3.1 < 5"
     react: ">= 16.8.0 < 19"
     react-dom: ">= 16.8.0 < 19"
-  checksum: 10c0/4635c12646395cf2758c867a6e252de847cf69cdcd61b6560a932ea96f705c8101e013fa04bd683fea8d1a37bda5be21af9efb09089d4804236a92694890af81
+  checksum: 10c0/538ada2bd78f1d6dcd4e2478d159cf985598bfbfd93a26b678e67dd40a6416919293d0a4d66905a58dac44b7474ba2ff1eeca50eb141066bc69bf870d535cbd8
   languageName: node
   linkType: hard
 

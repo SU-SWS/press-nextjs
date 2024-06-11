@@ -50,7 +50,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     attribute: "book_subject",
     limit: 100,
   })
-  const {items: bookTypeRefinmenItems, refine: refineBookType} = useRefinementList({attribute: "book_type"})
+  const {items: bookTypeRefinementItems, refine: refineBookType} = useRefinementList({attribute: "book_type"})
   const {start: pubYearRange, range: pubYearRangeBounds, refine: refineRange, canRefine: canRefinePubYear} = useRange({attribute: "book_published"})
   const {min: minYear, max: maxYear} = pubYearRangeBounds
   const {items: currentRefinements, canRefine: canRefineCurrent, refine: removeRefinement} = useCurrentRefinements({})
@@ -152,7 +152,13 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                       >
                         {item.value}
                         <button
-                          aria-labelledby={`${id}-i`}
+                          aria-labelledby={
+                            "subject-" +
+                            item.value
+                              .toString()
+                              .toLowerCase()
+                              .replaceAll(/[^a-z0-9]/g, "-")
+                          }
                           disabled={!canRefineCurrent}
                           onClick={() => removeRefinement(item)}
                         >
@@ -167,14 +173,14 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           </div>
 
           <div className="mb-14 border-b border-black-30 pb-16">
-            <label className="flex items-center justify-between gap-10">
+            <label className="flex cursor-pointer items-center justify-between gap-10">
               <span>Search only books</span>
 
               <div className="relative">
                 <input
                   className="peer sr-only"
                   type="checkbox"
-                  checked={!!bookTypeRefinmenItems.find(item => item.isRefined)}
+                  checked={!!bookTypeRefinementItems.find(item => item.isRefined)}
                   onChange={() => refineBookType("book")}
                 />
                 <div className="h-6 w-16 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
@@ -188,7 +194,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             {bookSubjectRefinementList.map(refinementOption => (
               <label
                 key={refinementOption.value}
-                className="mb-8 mt-5 flex items-center gap-5"
+                className="mb-8 mt-5 flex cursor-pointer items-center gap-5"
               >
                 <div className="relative">
                   <input
@@ -205,7 +211,17 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                     className="absolute left-4 top-4 hidden text-white peer-checked:block"
                   />
                 </div>
-                <span>{refinementOption.value}</span>
+                <span
+                  id={
+                    "subject-" +
+                    refinementOption.value
+                      .toString()
+                      .toLowerCase()
+                      .replaceAll(/[^a-z0-9]/g, "-")
+                  }
+                >
+                  {refinementOption.value}
+                </span>
               </label>
             ))}
           </fieldset>
