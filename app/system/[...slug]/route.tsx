@@ -16,5 +16,14 @@ export const GET = async (request: NextRequest) => {
   if (!res.ok) {
     return NextResponse.json({message: "Unauthorized"}, {status: 401})
   }
-  return new NextResponse(await res.blob(), {status: 200, statusText: "OK", headers: res.headers})
+
+  const filename = request.nextUrl.pathname.split("/").pop()
+  return new NextResponse(await res.blob(), {
+    status: 200,
+    statusText: "OK",
+    headers: {
+      "Content-Disposition": `attachment; filename=${filename}`,
+      "Content-Type": res.headers.get("Content-Type") || "application/octet-stream",
+    },
+  })
 }
