@@ -4,7 +4,7 @@
 
 export type LayoutParagraphBehaviors = {
   layout: "layout_paragraphs_1_column" | "layout_paragraphs_2_column" | "layout_paragraphs_3_column" | string
-  config: { label?: string }
+  config: {label?: string}
   parent_uuid?: string
   region?: string
 }

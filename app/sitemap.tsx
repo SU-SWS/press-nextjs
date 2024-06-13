@@ -1,21 +1,21 @@
-import {MetadataRoute} from "next";
-import {getAllNodes} from "@lib/gql/gql-queries";
+import {MetadataRoute} from "next"
+import {getAllNodes} from "@lib/gql/gql-queries"
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
-export const revalidate = false;
-export const dynamic = "force-static";
+export const revalidate = false
+export const dynamic = "force-static"
 
 const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
-  const nodes = await getAllNodes();
+  const nodes = await getAllNodes()
 
-  const sitemap: MetadataRoute.Sitemap = [];
+  const sitemap: MetadataRoute.Sitemap = []
 
   nodes.map(node => {
     sitemap.push({
       url: `https://sup.org${node.path}`,
       lastModified: new Date(node.changed.time),
-      priority: node.__typename === "NodeStanfordPage" ? 1 : .8,
-      changeFrequency: node.__typename === "NodeStanfordPage" ? "weekly" : "monthly"
+      priority: node.__typename === "NodeStanfordPage" ? 1 : 0.8,
+      changeFrequency: node.__typename === "NodeStanfordPage" ? "weekly" : "monthly",
     })
 
     // Add excerpts page for each book as appropriate.
@@ -23,14 +23,13 @@ const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
       sitemap.push({
         url: `https://sup.org${node.path}/excerpts`,
         lastModified: new Date(node.changed.time),
-        priority: .8,
-        changeFrequency: "monthly"
+        priority: 0.8,
+        changeFrequency: "monthly",
       })
     }
-  });
+  })
 
-  return sitemap;
+  return sitemap
 }
 
-
-export default Sitemap;
+export default Sitemap

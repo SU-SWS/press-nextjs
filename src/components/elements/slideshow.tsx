@@ -1,43 +1,42 @@
-"use client";
+"use client"
 
-import {HTMLAttributes, JSX} from "react";
-import Slider, {CustomArrowProps, Settings} from "react-slick";
-import {ArrowLongRightIcon, ArrowLongLeftIcon} from "@heroicons/react/16/solid";
-import {twMerge} from "tailwind-merge";
-import {clsx} from "clsx";
-
+import {HTMLAttributes, JSX} from "react"
+import Slider, {CustomArrowProps, Settings} from "react-slick"
+import {ArrowLongRightIcon, ArrowLongLeftIcon} from "@heroicons/react/16/solid"
+import {twMerge} from "tailwind-merge"
+import {clsx} from "clsx"
 
 const NextArrow = ({className, onClick}: CustomArrowProps) => {
-  const slickDisabled = !!(className && className?.indexOf("slick-disabled") > 0);
+  const slickDisabled = !!(className && className?.indexOf("slick-disabled") > 0)
   return (
     <button
-      className="absolute top-1/2 right-5 lg:right-20 z-50 w-20 h-20"
+      className="absolute right-5 top-1/2 z-50 h-20 w-20 lg:right-20"
       onClick={onClick}
       aria-label="Next"
       disabled={slickDisabled}
     >
-      <ArrowLongRightIcon className={twMerge("text-white", clsx({"text-fog-dark": slickDisabled}))}/>
+      <ArrowLongRightIcon className={twMerge("text-white", clsx({"text-fog-dark": slickDisabled}))} />
     </button>
-  );
-};
+  )
+}
 
 const PrevArrow = ({className, onClick}: CustomArrowProps) => {
-  const slickDisabled = !!(className && className?.indexOf("slick-disabled") > 0);
+  const slickDisabled = !!(className && className?.indexOf("slick-disabled") > 0)
   return (
     <button
-      className="absolute top-1/2 left-5 lg:left-20 z-50 w-20 h-20"
+      className="absolute left-5 top-1/2 z-50 h-20 w-20 lg:left-20"
       onClick={onClick}
       aria-label="Previous"
       disabled={slickDisabled}
     >
-      <ArrowLongLeftIcon className={twMerge("text-white", clsx({"text-fog-dark": slickDisabled}))}/>
+      <ArrowLongLeftIcon className={twMerge("text-white", clsx({"text-fog-dark": slickDisabled}))} />
     </button>
-  );
-};
+  )
+}
 
 type SlideshowProps = HTMLAttributes<HTMLDivElement> & {
-  children: JSX.Element | JSX.Element[];
-  slideshowProps?: Omit<Settings, "children">;
+  children: JSX.Element | JSX.Element[]
+  slideshowProps?: Omit<Settings, "children">
 }
 
 const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
@@ -48,8 +47,8 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
     dots: false,
     infinite: false,
     initialSlide: 0,
-    nextArrow: <NextArrow/>,
-    prevArrow: <PrevArrow/>,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     slidesToScroll: 1,
     slidesToShow: 3,
     speed: 500,
@@ -64,14 +63,15 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
       },
     ],
     ...slideshowProps,
-  };
+  }
   return (
-    <div {...props} className={twMerge("relative", props.className)}>
-      <Slider {...settings}>
-        {children}
-      </Slider>
+    <div
+      {...props}
+      className={twMerge("relative", props.className)}
+    >
+      <Slider {...settings}>{children}</Slider>
     </div>
-  );
-};
+  )
+}
 
-export default Slideshow;
+export default Slideshow

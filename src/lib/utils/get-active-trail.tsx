@@ -1,4 +1,4 @@
-import {MenuItem} from "@lib/gql/__generated__/drupal.d";
+import {MenuItem} from "@lib/gql/__generated__/drupal.d"
 
 /**
  * Get an array of menu item ids representing the current page"s location in the main menu.
@@ -9,31 +9,29 @@ import {MenuItem} from "@lib/gql/__generated__/drupal.d";
  *   Current page url.
  */
 const getActiveTrail = (menuItems: MenuItem[], currentPath?: string) => {
-
-  const getActiveTrailInternal = (menuItems: MenuItem[], trail: string[] = []): string[]  => {
-    let childTrail, currentTrail;
+  const getActiveTrailInternal = (menuItems: MenuItem[], trail: string[] = []): string[] => {
+    let childTrail, currentTrail
     for (let i = 0; i < menuItems.length; i++) {
-      currentTrail = [...trail];
-      currentTrail.push(menuItems[i].id);
+      currentTrail = [...trail]
+      currentTrail.push(menuItems[i].id)
 
       if (currentPath === menuItems[i].url) {
-        return currentTrail;
+        return currentTrail
       }
 
-      const childrenItems = menuItems[i].children;
+      const childrenItems = menuItems[i].children
 
       if (childrenItems) {
-        childTrail = getActiveTrailInternal(childrenItems, [...currentTrail]);
+        childTrail = getActiveTrailInternal(childrenItems, [...currentTrail])
         if (childTrail.length > 0) {
-          return childTrail;
+          return childTrail
         }
       }
-
     }
-    return [];
-  };
+    return []
+  }
 
-  return getActiveTrailInternal(menuItems);
+  return getActiveTrailInternal(menuItems)
 }
 
-export default getActiveTrail;
+export default getActiveTrail

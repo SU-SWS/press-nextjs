@@ -1,11 +1,11 @@
-import {H1} from "@components/elements/headers";
-import {getConfigPage} from "@lib/gql/gql-queries";
-import {StanfordBasicSiteSetting} from "@lib/gql/__generated__/drupal.d";
-import {IndexUiState} from "instantsearch.js/es/types/ui-state";
-import AlgoliaSearchForm from "@components/algolia-search/algolia-search-form";
+import {H1} from "@components/elements/headers"
+import {getConfigPage} from "@lib/gql/gql-queries"
+import {StanfordBasicSiteSetting} from "@lib/gql/__generated__/drupal.d"
+import {IndexUiState} from "instantsearch.js/es/types/ui-state"
+import AlgoliaSearchForm from "@components/algolia-search/algolia-search-form"
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
-export const revalidate = false;
+export const revalidate = false
 
 export const metadata = {
   title: "Search",
@@ -14,10 +14,9 @@ export const metadata = {
     index: false,
     follow: false,
     noarchive: true,
-  }
+  },
 }
-const Page = async ({searchParams}: { searchParams?: { [_key: string]: string } }) => {
-
+const Page = async ({searchParams}: {searchParams?: {[_key: string]: string}}) => {
   const siteSettingsConfig = await getConfigPage<StanfordBasicSiteSetting>("StanfordBasicSiteSetting")
 
   const initialState: IndexUiState = {refinementList: {}}
@@ -34,10 +33,15 @@ const Page = async ({searchParams}: { searchParams?: { [_key: string]: string } 
 
   return (
     <div className="centered mt-32">
-      <div className="3xl:w-10/12 mx-auto">
-        <H1 className="mb-44" id="page-title">Search</H1>
+      <div className="mx-auto 3xl:w-10/12">
+        <H1
+          className="mb-44"
+          id="page-title"
+        >
+          Search
+        </H1>
 
-        {(siteSettingsConfig?.suSiteAlgoliaId && siteSettingsConfig?.suSiteAlgoliaIndex && siteSettingsConfig?.suSiteAlgoliaSearch) &&
+        {siteSettingsConfig?.suSiteAlgoliaId && siteSettingsConfig?.suSiteAlgoliaIndex && siteSettingsConfig?.suSiteAlgoliaSearch && (
           <>
             <AlgoliaSearchForm
               appId={siteSettingsConfig.suSiteAlgoliaId}
@@ -47,10 +51,10 @@ const Page = async ({searchParams}: { searchParams?: { [_key: string]: string } 
             />
             <noscript>Please enable javascript to view search results</noscript>
           </>
-        }
+        )}
       </div>
     </div>
   )
 }
 
-export default Page;
+export default Page

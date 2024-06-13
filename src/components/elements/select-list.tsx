@@ -1,70 +1,57 @@
-"use client";
+"use client"
 
-import {JSX} from "react";
-import {useSelect, SelectOptionDefinition, SelectProvider, SelectValue} from "@mui/base/useSelect";
-import {useOption} from "@mui/base/useOption";
-import {
-  FocusEvent,
-  KeyboardEvent,
-  MouseEvent,
-  ReactNode,
-  RefObject,
-  useEffect,
-  useId,
-  useLayoutEffect,
-  useRef,
-  useState
-} from "react";
-import {CheckIcon, ChevronDownIcon} from "@heroicons/react/20/solid";
-import {Maybe} from "@lib/gql/__generated__/drupal.d";
-import {twMerge} from "tailwind-merge";
-import {clsx} from "clsx";
+import {JSX} from "react"
+import {useSelect, SelectOptionDefinition, SelectProvider, SelectValue} from "@mui/base/useSelect"
+import {useOption} from "@mui/base/useOption"
+import {FocusEvent, KeyboardEvent, MouseEvent, ReactNode, RefObject, useEffect, useId, useLayoutEffect, useRef, useState} from "react"
+import {CheckIcon, ChevronDownIcon} from "@heroicons/react/20/solid"
+import {Maybe} from "@lib/gql/__generated__/drupal.d"
+import {twMerge} from "tailwind-merge"
+import {clsx} from "clsx"
 
 type OptionProps = {
   rootRef: RefObject<HTMLUListElement>
-  children?: ReactNode;
-  value: string;
-  disabled?: boolean;
+  children?: ReactNode
+  value: string
+  disabled?: boolean
 }
 
 const renderSelectedValue = (value: SelectValue<string, boolean>, options: SelectOptionDefinition<string>[]) => {
-
   if (Array.isArray(value)) {
-    return value.map(item =>
+    return value.map(item => (
       <span
         key={item}
-        className="block bg-archway text-white rounded p-5 mb-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-full"
+        className="mb-2 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap rounded bg-archway p-5 text-white"
       >
         {renderSelectedValue(item, options)}
       </span>
-    );
+    ))
   }
-  const selectedOption = options.find((option) => option.value === value);
-  return selectedOption ? selectedOption.label : null;
+  const selectedOption = options.find(option => option.value === value)
+  return selectedOption ? selectedOption.label : null
 }
 
 function CustomOption(props: OptionProps) {
+  const {children, value, rootRef, disabled = false} = props
+  const {getRootProps, highlighted, selected} = useOption({rootRef: rootRef, value, disabled, label: children})
 
-  const {children, value, rootRef, disabled = false} = props;
-  const {getRootProps, highlighted, selected} = useOption({rootRef: rootRef, value, disabled, label: children});
-
-  const {id, ...otherProps}: { id: string } = getRootProps();
+  const {id, ...otherProps}: {id: string} = getRootProps()
 
   useEffect(() => {
     if (highlighted && id && rootRef?.current?.parentElement) {
-      const item = document.getElementById(id);
+      const item = document.getElementById(id)
       if (item) {
-        const itemTop = item?.offsetTop;
-        const itemHeight = item?.offsetHeight;
+        const itemTop = item?.offsetTop
+        const itemHeight = item?.offsetHeight
         const parentScrollTop = rootRef.current.parentElement.scrollTop
-        const parentHeight = rootRef.current.parentElement.offsetHeight;
+        const parentHeight = rootRef.current.parentElement.offsetHeight
 
         if (itemTop < parentScrollTop) {
-          rootRef.current.parentElement.scrollTop = itemTop;
+          rootRef.current.parentElement.scrollTop = itemTop
         }
 
-        if ((itemTop + itemHeight) > parentScrollTop + parentHeight) {
-          rootRef.current.parentElement.scrollTop = itemTop - parentHeight + itemHeight;
+        if (itemTop + itemHeight > parentScrollTop + parentHeight) {
+          rootRef.current.parentElement.scrollTop = itemTop - parentHeight + itemHeight
         }
       }
     }
@@ -74,25 +61,31 @@ function CustomOption(props: OptionProps) {
     <li
       {...otherProps}
       id={id}
-      className={twMerge("flex items-center rounded-full mx-5 mb-5 py-2 px-5 cursor-pointer hocus:underline overflow-hidden hocus:bg-press-bay-light hocus:text-black", clsx({
-        "bg-press-bay-light text-black": selected,
-        "bg-press-bay-light text-black underline": !selected && highlighted,
-      }))}
+      className={twMerge(
+        "mx-5 mb-5 flex cursor-pointer items-center overflow-hidden rounded-full px-5 py-2 hocus:bg-press-bay-light hocus:text-black hocus:underline",
+        clsx({
+          "bg-press-bay-light text-black": selected,
+          "bg-press-bay-light text-black underline": !selected && highlighted,
+        })
+      )}
     >
       {children}
-      {selected &&
-        <CheckIcon width={20} className="text-stone-dark"/>
-      }
+      {selected && (
+        <CheckIcon
+          width={20}
+          className="text-stone-dark"
+        />
+      )}
     </li>
-  );
+  )
 }
 
 type Props = {
-  options: SelectOptionDefinition<string>[];
+  options: SelectOptionDefinition<string>[]
   label?: Maybe<string>
   ariaLabelledby?: Maybe<string>
   defaultValue?: SelectValue<string, boolean>
-  onChange?: (_event: MouseEvent | KeyboardEvent | FocusEvent | null, _value: SelectValue<string, boolean>) => void;
+  onChange?: (_event: MouseEvent | KeyboardEvent | FocusEvent | null, _value: SelectValue<string, boolean>) => void
   multiple?: boolean
   disabled?: boolean
   value?: SelectValue<string, boolean>
@@ -104,27 +97,14 @@ type Props = {
   downIcon?: JSX.Element
 }
 
-const SelectList = ({
-  options = [],
-  label,
-  multiple,
-  ariaLabelledby,
-  required,
-  defaultValue,
-  name,
-  emptyValue,
-  emptyLabel = "- None -",
-  borderless = false,
-  downIcon,
-  ...props
-}: Props) => {
-  const labelId = useId();
-  const labeledBy = ariaLabelledby || labelId;
+const SelectList = ({options = [], label, multiple, ariaLabelledby, required, defaultValue, name, emptyValue, emptyLabel = "- None -", borderless = false, downIcon, ...props}: Props) => {
+  const labelId = useId()
+  const labeledBy = ariaLabelledby || labelId
 
   const listboxContainerRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null);
-  const listboxRef = useRef<HTMLUListElement>(null);
-  const [listboxVisible, setListboxVisible] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null)
+  const listboxRef = useRef<HTMLUListElement>(null)
+  const [listboxVisible, setListboxVisible] = useState<boolean>(false)
 
   const {getButtonProps, getListboxProps, contextValue, value} = useSelect<string, boolean>({
     listboxRef,
@@ -132,93 +112,106 @@ const SelectList = ({
     open: listboxVisible,
     defaultValue,
     multiple,
-    ...props
-  });
+    ...props,
+  })
 
   useEffect(() => {
     listboxRef.current?.focus()
     listboxContainerRef.current?.scroll(0, 0)
-  }, [listboxVisible]);
+  }, [listboxVisible])
 
   useLayoutEffect(() => {
-    const parentContainer = listboxContainerRef.current?.getBoundingClientRect();
-    if (parentContainer && (parentContainer.bottom > window.innerHeight)) {
-      listboxRef.current?.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+    const parentContainer = listboxContainerRef.current?.getBoundingClientRect()
+    if (parentContainer && parentContainer.bottom > window.innerHeight) {
+      listboxRef.current?.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
     }
   }, [listboxVisible, value])
 
-  const optionChosen = (multiple && value) ? value.length > 0 : !!value;
+  const optionChosen = multiple && value ? value.length > 0 : !!value
 
   return (
     <div className="relative h-fit">
       <button
         {...getButtonProps()}
-        className={clsx("w-full text-left p-5", {"border border-black-40 rounded": !borderless, "bg-black-30": props.disabled})}
+        className={clsx("w-full p-5 text-left", {"rounded border border-black-40": !borderless, "bg-black-30": props.disabled})}
         aria-labelledby={labeledBy}
       >
-        {label &&
-          <div className={clsx("relative max-w-[calc(100%-30px)]", {
-            "text-m0 top-[-15px] w-full": optionChosen,
-            "text-m1": !optionChosen
-          })}>
-            <div id={labelId} className={clsx("bg-white w-fit px-5", {"bg-black-30": props.disabled})}>
+        {label && (
+          <div
+            className={clsx("relative max-w-[calc(100%-30px)]", {
+              "top-[-15px] w-full text-m0": optionChosen,
+              "text-m1": !optionChosen,
+            })}
+          >
+            <div
+              id={labelId}
+              className={clsx("w-fit bg-white px-5", {"bg-black-30": props.disabled})}
+            >
               {label}
             </div>
           </div>
-        }
+        )}
 
-        {(!label && emptyLabel && !optionChosen) &&
+        {!label && emptyLabel && !optionChosen && (
           <div className={clsx("relative max-w-[calc(100%-30px)] text-m1")}>
-            <div id={labelId} className={clsx("bg-white w-fit px-5", {"bg-black-30": props.disabled})}>
+            <div
+              id={labelId}
+              className={clsx("w-fit bg-white px-5", {"bg-black-30": props.disabled})}
+            >
               {emptyLabel}
             </div>
           </div>
-        }
+        )}
 
-        {optionChosen &&
-          <div className="overflow-hidden max-w-[calc(100%-30px)]">
-            {renderSelectedValue(value, options)}
-          </div>
-        }
+        {optionChosen && <div className="max-w-[calc(100%-30px)] overflow-hidden">{renderSelectedValue(value, options)}</div>}
 
-        <span className="absolute top-0 right-5 h-full flex items-center">
-           {downIcon || <ChevronDownIcon width={20}/>}
-        </span>
+        <span className="absolute right-5 top-0 flex h-full items-center">{downIcon || <ChevronDownIcon width={20} />}</span>
       </button>
 
       <div
         ref={listboxContainerRef}
-        className={twMerge("absolute z-[10] w-full top-full left-0 max-h-[300px] pb-5 overflow-y-scroll shadow-lg border border-black-20 bg-white", clsx({"hidden": !listboxVisible}))}
+        className={twMerge("absolute left-0 top-full z-[10] max-h-[300px] w-full overflow-y-scroll border border-black-20 bg-white pb-5 shadow-lg", clsx({hidden: !listboxVisible}))}
       >
         <ul
           {...getListboxProps()}
-          className={clsx("list-unstyled my-5", {"hidden": !listboxVisible})}
+          className={clsx("list-unstyled my-5", {hidden: !listboxVisible})}
           aria-hidden={!listboxVisible}
           aria-labelledby={labeledBy}
         >
           <SelectProvider value={contextValue}>
-            {(!required && !multiple) &&
-              <CustomOption value={emptyValue || ""} rootRef={listboxRef}>
+            {!required && !multiple && (
+              <CustomOption
+                value={emptyValue || ""}
+                rootRef={listboxRef}
+              >
                 {emptyLabel}
               </CustomOption>
-            }
+            )}
 
-            {options.map((option) => {
+            {options.map(option => {
               return (
-                <CustomOption key={option.value} value={option.value} rootRef={listboxRef}>
+                <CustomOption
+                  key={option.value}
+                  value={option.value}
+                  rootRef={listboxRef}
+                >
                   {option.label}
                 </CustomOption>
-              );
+              )
             })}
           </SelectProvider>
         </ul>
       </div>
-      {name &&
-        <input ref={inputRef} name={name} type="hidden" value={value || ""}/>
-      }
+      {name && (
+        <input
+          ref={inputRef}
+          name={name}
+          type="hidden"
+          value={value || ""}
+        />
+      )}
     </div>
-  );
+  )
 }
 
-
-export default SelectList;
+export default SelectList

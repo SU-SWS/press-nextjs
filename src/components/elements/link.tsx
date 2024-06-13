@@ -1,30 +1,34 @@
-import {HtmlHTMLAttributes} from "react";
-import Link from "next/link";
-import {EnvelopeIcon} from "@heroicons/react/24/outline";
-import ActionLink from "@components/elements/action-link";
-import Button from "@components/elements/button";
-import {LinkProps} from "next/dist/client/link";
-import clsx from "clsx";
+import {HtmlHTMLAttributes} from "react"
+import Link from "next/link"
+import {EnvelopeIcon} from "@heroicons/react/24/outline"
+import ActionLink from "@components/elements/action-link"
+import Button from "@components/elements/button"
+import {LinkProps} from "next/dist/client/link"
+import clsx from "clsx"
 
-type Props = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement> & LinkProps & {
-  /**
-   * Link URL.
-   */
-  href: string
-}
+type Props = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement> &
+  LinkProps & {
+    /**
+     * Link URL.
+     */
+    href: string
+  }
 
 const DrupalLink = ({href, children, ...props}: Props) => {
   // Make sure all links have a href.
   href = href || "#"
-  const drupalBase: string = (process.env.NEXT_PUBLIC_DRUPAL_BASE_URL || "").replace(/\/$/, "");
+  const drupalBase: string = (process.env.NEXT_PUBLIC_DRUPAL_BASE_URL || "").replace(/\/$/, "")
 
   if (!href.indexOf("/files/")) {
-    href = href.replace(drupalBase, "").replace("<front>", "/");
+    href = href.replace(drupalBase, "").replace("<front>", "/")
   }
 
   if (props.className?.includes("link--action")) {
     return (
-      <ActionLink href={href} {...props}>
+      <ActionLink
+        href={href}
+        {...props}
+      >
         {children}
       </ActionLink>
     )
@@ -44,13 +48,20 @@ const DrupalLink = ({href, children, ...props}: Props) => {
   }
 
   return (
-    <Link href={href} className={clsx("text-digital-red *:text-digital-red hocus:text-archway-dark *:hocus:text-archway-dark", props.className)} {...props}>
+    <Link
+      href={href}
+      className={clsx("text-digital-red *:text-digital-red hocus:text-archway-dark *:hocus:text-archway-dark", props.className)}
+      {...props}
+    >
       {children}
-      {href.startsWith("mailto") &&
-        <EnvelopeIcon width={20} className="ml-4 inline-block"/>
-      }
+      {href.startsWith("mailto") && (
+        <EnvelopeIcon
+          width={20}
+          className="ml-4 inline-block"
+        />
+      )}
     </Link>
   )
 }
 
-export default DrupalLink as typeof Link;
+export default DrupalLink as typeof Link

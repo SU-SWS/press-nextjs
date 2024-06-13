@@ -1,9 +1,9 @@
-import {twMerge} from "tailwind-merge";
-import Image from "next/image";
-import Oembed from "@components/elements/ombed";
-import {ElementType, HTMLAttributes} from "react";
-import {Maybe} from "@lib/gql/__generated__/drupal";
-import {clsx} from "clsx";
+import {twMerge} from "tailwind-merge"
+import Image from "next/image"
+import Oembed from "@components/elements/ombed"
+import {ElementType, HTMLAttributes} from "react"
+import {Maybe} from "@lib/gql/__generated__/drupal"
+import {clsx} from "clsx"
 
 type Props = HTMLAttributes<HTMLElement | HTMLDivElement> & {
   /**
@@ -29,22 +29,22 @@ type Props = HTMLAttributes<HTMLElement | HTMLDivElement> & {
 }
 
 const BackgroundImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children, color, ...props}: Props) => {
-  const CardWrapper: ElementType = isArticle ? "article" : "div";
+  const CardWrapper: ElementType = isArticle ? "article" : "div"
 
   return (
     <CardWrapper
       {...props}
-      className={twMerge("relative centered lg:max-w-[980px] w-full shadow-lg border border-black-10", props.className)}
+      className={twMerge("centered relative w-full border border-black-10 shadow-lg lg:max-w-[980px]", props.className)}
     >
       <div
-        className={clsx("-z-10 absolute h-full w-full top-0 left-0", {
+        className={clsx("absolute left-0 top-0 -z-10 h-full w-full", {
           "bg-plum": color === "magenta",
           "bg-press-grass": color === "grass",
           "bg-black-true bg-opacity-70": color === "steel",
-          "bg-press-indigo": color === "indigo"
+          "bg-press-indigo": color === "indigo",
         })}
       >
-        {imageUrl &&
+        {imageUrl && (
           <Image
             className="object-cover mix-blend-multiply"
             src={imageUrl}
@@ -52,19 +52,14 @@ const BackgroundImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children,
             fill
             sizes="(max-width: 768px) 100vw, 1000px"
           />
-        }
+        )}
       </div>
 
+      {videoUrl && <Oembed url={videoUrl} />}
 
-      {videoUrl &&
-        <Oembed url={videoUrl}/>
-      }
-
-      <div className={clsx("p-20", {"text-white": !!color})}>
-        {children}
-      </div>
+      <div className={clsx("p-20", {"text-white": !!color})}>{children}</div>
     </CardWrapper>
   )
 }
 
-export default BackgroundImageCard;
+export default BackgroundImageCard
