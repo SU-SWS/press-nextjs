@@ -1,4 +1,4 @@
-import {AllNodesQuery, AllNodesQueryVariables, ConfigPagesQuery, ConfigPagesUnion, MenuAvailable, MenuItem, NodeUnion, Redirect, RedirectsQuery, RedirectsQueryVariables, RouteQuery, RouteRedirect, TermUnion} from "@lib/gql/__generated__/drupal.d"
+import {NodeSupBookAncillary, AllNodesQuery, AllNodesQueryVariables, ConfigPagesQuery, ConfigPagesUnion, MenuAvailable, MenuItem, NodeUnion, Redirect, RedirectsQuery, RedirectsQueryVariables, RouteQuery, RouteRedirect, TermUnion} from "@lib/gql/__generated__/drupal.d"
 import {cache} from "react"
 import {buildHeaders} from "@lib/drupal/utils"
 import {cache as nodeCache} from "@lib/drupal/get-cache"
@@ -107,6 +107,11 @@ export const getAllNodes = cache(async () => {
 
   return nodes
 })
+
+export const getBookAncillaryContents = async (uuid: string): Promise<NodeSupBookAncillary[]> => {
+  const ancillaryPages = await graphqlClient().supBookAncillary({filters: {uuid}})
+  return (ancillaryPages.supBookAncillary?.results as NodeSupBookAncillary[]) || []
+}
 
 export const getAllRedirects = async (): Promise<Redirect[]> => {
   "use server"

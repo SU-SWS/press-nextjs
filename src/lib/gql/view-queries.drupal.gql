@@ -170,3 +170,10 @@ query supBooksAwardWinners($filters: SupBooksAwardWinnersContextualFilterInput, 
     }
 }
 
+query supBookAncillary($filters: SupBookAncillaryContextualFilterInput) {
+    supBookAncillary(contextualFilter: $filters) {
+        results {
+            ...FragmentNodeInterface
+        }
+    }
+}

@@ -1,23 +1,23 @@
 import {NodeSupBook} from "@lib/gql/__generated__/drupal"
 import {H1, H2} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
-import Image from "next/image"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
 import Wysiwyg from "@components/elements/wysiwyg"
 import BookPrecart from "@components/nodes/pages/sup-book/book-precart"
 import {formatCurrency} from "@lib/utils/format-currency"
 import {BookmarkIcon, ClipboardIcon, DocumentDuplicateIcon} from "@heroicons/react/24/outline"
 import Link from "@components/elements/link"
-import {getPlaceholderImage} from "@lib/utils/placeholder-image"
 import BookAwards from "@components/nodes/pages/sup-book/book-awards"
+import {getBookAncillaryContents} from "@lib/gql/gql-queries"
+import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
 }
 const SupBookPage = async ({node, ...props}: Props) => {
-  const lowestPrice = Math.min(node.supBookClothSalePrice || 9999, node.supBookPaperSalePrice || 9999, node.supBookPriceCloth || 9999, node.supBookPriceDigital || 9999, node.supBookPricePaper || 9999)
-  const placeholderImage = node.supBookImage?.mediaImage.url && (await getPlaceholderImage(node.supBookImage.mediaImage.url))
+  const hasExcerptAndMore = node.supBookExcerpts || node.supBookTableOfContents || !!(await getBookAncillaryContents(node.id)).length
 
+  const lowestPrice = Math.min(node.supBookClothSalePrice || 9999, node.supBookPaperSalePrice || 9999, node.supBookPriceCloth || 9999, node.supBookPriceDigital || 9999, node.supBookPricePaper || 9999)
   const awards = node.supBookAwards?.sort((a, b) => (a.supRank && b.supRank && a.supRank < b.supRank ? -1 : 1))
 
   return (
@@ -95,19 +95,9 @@ const SupBookPage = async ({node, ...props}: Props) => {
           </div>
 
           <div className="order-first xl:w-5/12">
-            <Image
-              className="mb-16"
-              src={node.supBookImage?.mediaImage.url || "/default-book-image.jpg"}
-              alt={node.supBookImage?.mediaImage.alt || ""}
-              height={node.supBookImage?.mediaImage.height || 600}
-              width={node.supBookImage?.mediaImage.width || 400}
-              placeholder={placeholderImage ? "blur" : undefined}
-              blurDataURL={placeholderImage}
-              sizes="400px"
-              loading="eager"
-            />
+            <BookPageImage node={node} />
 
-            {(node.supBookExcerpts || node.supBookTableOfContents) && (
+            {hasExcerptAndMore && (
               <Link
                 href={`${node.path}/excerpts`}
                 className="mx-auto flex w-fit items-center justify-center gap-3 border border-press-sand p-10 font-normal text-stone-dark no-underline hocus:underline"

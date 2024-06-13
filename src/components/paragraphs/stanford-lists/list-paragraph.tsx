@@ -9,13 +9,14 @@ import {buildHeaders} from "@lib/drupal/utils"
 import {twMerge} from "tailwind-merge"
 import Link from "@components/elements/link"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
+import {ListParagraphBehaviors} from "@lib/drupal/drupal-jsonapi.d"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordList
 }
 
 const ListParagraph = async ({paragraph, ...props}: Props) => {
-  const behaviors = getParagraphBehaviors(paragraph)
+  const behaviors = getParagraphBehaviors<ListParagraphBehaviors>(paragraph)
   const viewId = paragraph.suListView?.view
   const displayId = paragraph.suListView?.display
   const {items: viewItems, totalItems} = viewId && displayId ? await getViewItems(viewId, displayId, paragraph.suListView?.contextualFilter, 0, paragraph.suListView?.pageSize) : {items: [], totalItems: 0}

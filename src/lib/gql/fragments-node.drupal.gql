@@ -13,9 +13,24 @@ fragment FragmentNodeInterface on NodeInterface {
     }
 }
 
+fragment FragmentNodeSupBookAncillary on NodeSupBookAncillary {
+    ...FragmentNodeInterface
+    supAncillaryBook {
+        ...FragmentNodeInterface
+        supBookSubtitle
+        supBookAuthorsFull
+        supBookImage {
+            ...FragmentMediaImage
+        }
+
+    }
+    supAncillaryParagraphs {
+        ...FragmentParagraphUnion
+    }
+}
+
 fragment FragmentNodeSupBook on NodeSupBook {
     ...FragmentNodeInterface
-
     supBookAuthorInfo {
         processed
     }
@@ -378,6 +393,7 @@ fragment FragmentNodeUnion on NodeUnion {
     ...FragmentNodeStanfordPerson
     ...FragmentNodeStanfordPolicy
     ...FragmentNodeStanfordPublication
+    ...FragmentNodeSupBookAncillary
 }
 
 fragment FragmentNodeSupBookTeaser on NodeSupBook {

@@ -8,13 +8,14 @@ import {twMerge} from "tailwind-merge"
 import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behaviors"
 import {getEntityFromPath} from "@lib/gql/gql-queries"
 import {ImageCardSkeleton} from "@components/patterns/image-card"
+import {TeaserParagraphBehaviors} from "@lib/drupal/drupal-jsonapi.d"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordEntity
 }
 
 const EntityParagraph = async ({paragraph, ...props}: Props) => {
-  const behaviors = getParagraphBehaviors(paragraph)
+  const behaviors = getParagraphBehaviors<TeaserParagraphBehaviors>(paragraph)
   const entities = paragraph.suEntityItem || []
   const gridCols = ["lg:grid-cols-3", "lg:grid-cols-1", "lg:grid-cols-2"]
   const gridClass = gridCols[entities.length >= 3 ? 0 : entities.length % 3]

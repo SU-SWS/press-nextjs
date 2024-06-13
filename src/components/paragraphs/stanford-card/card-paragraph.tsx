@@ -9,13 +9,14 @@ import ImageCard from "@components/patterns/image-card"
 import BackgroundImageCard from "@components/patterns/background-image-card"
 import {clsx} from "clsx"
 import {twMerge} from "tailwind-merge"
+import {CardParagraphBehaviors} from "@lib/drupal/drupal-jsonapi.d"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordCard
 }
 
 const CardParagraph = ({paragraph, ...props}: Props) => {
-  const behaviors = getParagraphBehaviors(paragraph)
+  const behaviors = getParagraphBehaviors<CardParagraphBehaviors>(paragraph)
 
   const image = paragraph.suCardMedia?.__typename === "MediaImage" ? paragraph.suCardMedia.mediaImage : undefined
   const videoUrl = paragraph.suCardMedia?.__typename === "MediaVideo" ? paragraph.suCardMedia.mediaOembedVideo : undefined
