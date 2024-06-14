@@ -3,15 +3,21 @@ import {H1, H2} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import Rows from "@components/paragraphs/rows/rows"
 import Link from "@components/elements/link"
-import Image from "next/image"
 import {ArrowLeftIcon} from "@heroicons/react/16/solid"
 import Wysiwyg from "@components/elements/wysiwyg"
+import {getBookAncillaryContents} from "@lib/gql/gql-queries"
+import {notFound} from "next/navigation"
+import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
 }
 
-const SupBookExcerptPage = ({node, ...props}: Props) => {
+const SupBookExcerptPage = async ({node, ...props}: Props) => {
+  const ancillaryPages = await getBookAncillaryContents(node.id)
+  const hasExcerptAndMore = node.supBookExcerpts || node.supBookTableOfContents || !!ancillaryPages.length
+  if (!hasExcerptAndMore) notFound()
+
   return (
     <div className="centered flex flex-col">
       <article
@@ -26,16 +32,20 @@ const SupBookExcerptPage = ({node, ...props}: Props) => {
             {node.supBookSubtitle && <div className="text-m3 font-medium">{node.supBookSubtitle}</div>}
 
             {node.supBookAuthorsFull && <div className="text-m2 text-stone">{node.supBookAuthorsFull}</div>}
+
+            {ancillaryPages.map(page => (
+              <Link
+                key={page.id}
+                href={page.path}
+              >
+                {page.title}
+              </Link>
+            ))}
           </div>
 
           {node.supBookImage?.mediaImage && (
             <div className="relative order-first w-full shrink-0 md:max-w-400">
-              <Image
-                src={node.supBookImage.mediaImage.url}
-                alt={node.supBookImage.mediaImage.alt || ""}
-                height={node.supBookImage.mediaImage.height}
-                width={node.supBookImage.mediaImage.width}
-              />
+              <BookPageImage node={node} />
             </div>
           )}
         </div>

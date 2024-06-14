@@ -28,7 +28,7 @@ const FileListParagraph = ({paragraph, ...props}: Props) => {
 
   return (
     <div {...props}>
-      <H2>{paragraph.supFileListLabel}</H2>
+      {paragraph.supFileListLabel && <H2>{paragraph.supFileListLabel}</H2>}
       <ul className="list-unstyled">
         {fileOptions.map(media => (
           <li key={media.value}>

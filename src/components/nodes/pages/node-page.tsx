@@ -9,6 +9,7 @@ import StanfordEventSeriesPage from "@components/nodes/pages/stanford-event-seri
 import {isPreviewMode} from "@lib/drupal/utils"
 import {NodeUnion} from "@lib/gql/__generated__/drupal.d"
 import SupBookPage from "@components/nodes/pages/sup-book/sup-book-page"
+import SupBookAncillaryPage from "@components/nodes/pages/sup-book-ancilary/sup-book-ancillary-page"
 
 const NodePage = ({node}: {node: NodeUnion}) => {
   const previewMode = isPreviewMode()
@@ -79,6 +80,13 @@ const NodePage = ({node}: {node: NodeUnion}) => {
     case "NodeSupBook":
       return (
         <SupBookPage
+          node={node}
+          {...itemProps}
+        />
+      )
+    case "NodeSupBookAncillary":
+      return (
+        <SupBookAncillaryPage
           node={node}
           {...itemProps}
         />

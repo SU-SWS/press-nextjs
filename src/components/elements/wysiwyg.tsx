@@ -1,4 +1,3 @@
-import Link from "@components/elements/link"
 import parse, {HTMLReactParserOptions, Element, domToReact, attributesToProps, DOMNode} from "html-react-parser"
 import Image from "next/image"
 import Oembed from "@components/elements/ombed"
@@ -7,6 +6,7 @@ import {H2, H3, H4, H5, H6} from "@components/elements/headers"
 import {twMerge} from "tailwind-merge"
 import {Maybe} from "@lib/gql/__generated__/drupal.d"
 import Mathjax from "@components/tools/mathjax"
+import Script from "next/script"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -46,20 +46,22 @@ const options: HTMLReactParserOptions = {
           delete nodeProps["data-entity-type"]
           delete nodeProps["data-entity-uuid"]
 
-          return (
-            <Link
-              href={nodeProps.href as string}
-              prefetch={false}
-              {...nodeProps}
-            >
-              {domToReact(children, options)}
-            </Link>
-          )
+          return <a {...nodeProps}>{domToReact(children, options)}</a>
 
         case "div":
+        case "article":
           delete nodeProps.role
-          if (nodeProps.className && !!nodeProps.className.indexOf("media-entity-wrapper")) {
-            return cleanMediaMarkup(domNode)
+          if (nodeProps.className) {
+            if (nodeProps.className.indexOf("media-entity-wrapper") >= 0) {
+              return cleanMediaMarkup(domNode)
+            }
+            if (nodeProps.className.indexOf("trigger") >= 0) {
+              return <></>
+            }
+
+            if (nodeProps.className.indexOf("chapnumandtitle") >= 0) {
+              return <H3>{domToReact(children, options)}</H3>
+            }
           }
           return <NodeName {...nodeProps}>{domToReact(children, options)}</NodeName>
 
@@ -71,7 +73,7 @@ const options: HTMLReactParserOptions = {
           return <NodeName {...nodeProps}>{domToReact(children, options)}</NodeName>
 
         case "script":
-          return <></>
+          return <Script {...nodeProps}>{domToReact(children, options)}</Script>
 
         case "h2":
           return <H2 {...nodeProps}>{domToReact(children, options)}</H2>
@@ -83,40 +85,9 @@ const options: HTMLReactParserOptions = {
           return <H5 {...nodeProps}>{domToReact(children, options)}</H5>
         case "h6":
           return <H6 {...nodeProps}>{domToReact(children, options)}</H6>
-        case "b":
-        case "cite":
-        case "dt":
-        case "pre":
-        case "code":
-        case "dl":
-        case "dd":
-        case "i":
-        case "aside":
-        case "abbr":
-        case "span":
-        case "blockquote":
-        case "ul":
-        case "ol":
-        case "li":
-        case "table":
-        case "tbody":
-        case "th":
-        case "td":
-        case "tr":
-        case "strong":
-        case "em":
-        case "s":
-        case "sub":
-        case "sup":
-        case "thead":
-        case "tfoot":
-        case "caption":
-          return <NodeName {...nodeProps}>{domToReact(children, options)}</NodeName>
 
-        // Void element tags like <br>, <hr>, <source>, etc.
-        // @see https://developer.mozilla.org/en-US/docs/Glossary/Void_element
         default:
-          return <NodeName {...nodeProps} />
+          return null
       }
     }
   },
@@ -220,7 +191,7 @@ const cleanMediaMarkup = (node: Element) => {
 
     if (figCaption) {
       nodeProps.className = twMerge("table", nodeProps.className)
-      if (!!nodeProps.className?.indexOf("mx-auto")) nodeProps.className += " w-full"
+      if (nodeProps.className?.indexOf("mx-auto") >= 0) nodeProps.className += " w-full"
       delete nodeProps.role
       return (
         <figure {...nodeProps}>
@@ -234,6 +205,7 @@ const cleanMediaMarkup = (node: Element) => {
         </figure>
       )
     }
+
     return (
       <WysiwygImage
         src={src}
@@ -244,8 +216,7 @@ const cleanMediaMarkup = (node: Element) => {
       />
     )
   }
-  let NodeName: React.ElementType = node.name as React.ElementType
-  return <NodeName {...nodeProps}>{domToReact(node.children as DOMNode[], options)}</NodeName>
+  return <div {...nodeProps}>{domToReact(node.children as DOMNode[], options)}</div>
 }
 
 const WysiwygImage = ({src, alt, height, width, className}: {src: string; alt?: Maybe<string>; height?: Maybe<string>; width?: Maybe<string>; className?: string}) => {

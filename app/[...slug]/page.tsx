@@ -22,7 +22,7 @@ const Page = async ({params}: PageProps) => {
   if (!entity) notFound()
 
   if (entity.__typename === "NodeSupBook") {
-    if (page === "excerpt") return entity.supBookExcerpts || entity.supBookTableOfContents ? <SupBookExcerptPage node={entity} /> : notFound()
+    if (page === "excerpt") return <SupBookExcerptPage node={entity} />
     if (page === "copy-requests") return <SupBookDeskExaminationPage node={entity} />
   }
 

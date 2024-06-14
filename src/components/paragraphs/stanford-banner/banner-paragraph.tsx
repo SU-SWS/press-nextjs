@@ -6,6 +6,7 @@ import Button from "@components/elements/button"
 import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behaviors"
 import {twMerge} from "tailwind-merge"
 import HeroBanner from "@components/patterns/hero-banner"
+import {BannerParagraphBehaviors} from "@lib/drupal/drupal-jsonapi.d"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordBanner
@@ -13,7 +14,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 }
 
 const BannerParagraph = ({paragraph, eagerLoadImage, ...props}: Props) => {
-  const behaviors = getParagraphBehaviors(paragraph)
+  const behaviors = getParagraphBehaviors<BannerParagraphBehaviors>(paragraph)
   const hasCard = paragraph.suBannerHeader || paragraph.suBannerButton || paragraph.suBannerBody || paragraph.suBannerSupHeader
 
   const headerTagChoice = (behaviors.hero_pattern?.heading || "h2").split(".", 2)

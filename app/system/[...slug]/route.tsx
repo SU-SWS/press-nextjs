@@ -8,13 +8,12 @@ export const GET = async (request: NextRequest) => {
   const accessToken = await getAccessToken(true)
   const headers = await buildHeaders({accessToken})
 
-  const res = await fetch(process.env.NEXT_PUBLIC_DRUPAL_BASE_URL + request.nextUrl.pathname, {
-    headers,
-    cache: "no-cache",
-  })
+  const drupalFilePath = process.env.NEXT_PUBLIC_DRUPAL_BASE_URL + request.nextUrl.pathname
+  const res = await fetch(drupalFilePath, {headers, cache: "no-cache"})
 
   if (!res.ok) {
-    return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    console.warn(`Unable to fetch file at ${drupalFilePath}`)
+    return new NextResponse("Unable to fetch file at this time.", {status: 500})
   }
 
   const filename = request.nextUrl.pathname.split("/").pop()
