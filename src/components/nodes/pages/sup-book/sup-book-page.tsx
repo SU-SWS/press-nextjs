@@ -1,4 +1,4 @@
-import {NodeSupBook} from "@lib/gql/__generated__/drupal"
+import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/drupal"
 import {H1, H2} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
@@ -20,6 +20,21 @@ const SupBookPage = async ({node, ...props}: Props) => {
   const lowestPrice = Math.min(node.supBookClothSalePrice || 9999, node.supBookPaperSalePrice || 9999, node.supBookPriceCloth || 9999, node.supBookPriceDigital || 9999, node.supBookPricePaper || 9999)
   const awards = node.supBookAwards?.sort((a, b) => (a.supRank && b.supRank && a.supRank < b.supRank ? -1 : 1))
 
+  function createLinkParams(subject: TermSupBookSubject) {
+    const linkParams = new URLSearchParams()
+  
+    if (subject.parent?.name) {
+      linkParams.set("subjects", subject.parent.name)
+      linkParams.set("q", subject.name);
+    } else {
+      linkParams.set("subjects", subject.name)
+    }
+  
+    return linkParams.toString();
+  }
+
+  const bookSubject = node.supBookSubjects && createLinkParams(node.supBookSubjects[0])
+
   return (
     <article
       className="centered pt-32"
@@ -31,7 +46,16 @@ const SupBookPage = async ({node, ...props}: Props) => {
             <div className="rs-mb-0 rs-pb-3 flex flex-col border-b-2 border-fog">
               <H1 className="type-3 mb-0">{node.title}</H1>
 
-              {node.supBookSubjects && <div className="rs-mb-2 order-first">{node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}</div>}
+              {node.supBookSubjects &&
+                <div className="rs-mb-2 order-first">
+                  <a
+                    href={`/search?${bookSubject}`}
+                    className="-text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:decoration-archway-dark hocus:decoration-2"
+                  >
+                    {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
+                  </a>
+                </div>
+              }
 
               {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
 
@@ -58,7 +82,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
             <div className="rs-mb-0 rs-pb-3 flex flex-col gap-2 border-b-2 border-fog">
               {node.supBookImprint && <div className="rs-mb-0 -text-m1 font-semibold text-press-sand-dark">Imprint: {node.supBookImprint.name}</div>}
 
-              <H2 className="-text-m1 font-normal text-stone-dark">Book Details</H2>
+              <H2 className="font-normal text-stone-dark -text-m1">Book Details</H2>
 
               {node.supBookCopublisherName && <div className="text-press-sand-dark">{node.supBookCopublisherName}</div>}
 
@@ -191,22 +215,15 @@ const SupBookPage = async ({node, ...props}: Props) => {
           <H2 className="text-m1 font-bold">Related Subjects</H2>
           <ul className="list-unstyled flex flex-wrap">
             {node.supBookSubjects.map(subject => {
-              const linkParams = new URLSearchParams()
-              if (subject.parent?.name) {
-                linkParams.set("subjects", subject.parent.name)
-                linkParams.set("q", subject.name)
-              } else {
-                linkParams.set("subjects", subject.name)
-              }
-
+              const linkParamsString = createLinkParams(subject)
               return (
                 <li
                   key={subject.id}
                   className="min-w-fit flex-1"
                 >
                   <a
-                    href={`/search?${linkParams.toString()}`}
-                    className="font-normal text-stone-dark"
+                    href={`/search?${linkParamsString}`}
+                    className="-text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:decoration-archway-dark hocus:decoration-2"
                   >
                     {subject.parent?.name && `${subject.parent.name} / `}
                     {subject.name}

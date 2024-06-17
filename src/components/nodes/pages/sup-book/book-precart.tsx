@@ -117,7 +117,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
         <Button
           buttonElem
           type="submit"
-          className="flex w-full items-center justify-center"
+          className="flex w-full items-center gap-2 justify-center"
         >
           Add to cart
           <ArrowRightIcon width={24} />
