@@ -32,6 +32,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@stanfordpress",
+    creator: "@stanfordpress",
   },
   icons: {
     icon: [{url: "/favicon.ico"}, ...icons],

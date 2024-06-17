@@ -25,7 +25,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
           <div className="flex flex-col gap-10">
             {book.supBookSubtitle && <div className="text-m3 font-medium">{book.supBookSubtitle}</div>}
 
-            {book.supBookAuthorsFull && <div className="text-m2 text-stone">{book.supBookAuthorsFull}</div>}
+            {book.supBookAuthorsFull && <div className="text-m2 text-press-sand-dark">{book.supBookAuthorsFull}</div>}
           </div>
 
           {book.supBookImage?.mediaImage && (

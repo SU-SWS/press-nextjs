@@ -233,7 +233,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
               <div className="flex-1 flex-grow">
                 <div
                   id={`${id}-min-year`}
-                  className="text-stone"
+                  className="text-press-sand-dark"
                 >
                   <span className="sr-only">Minimum&nbps;</span>Year
                 </div>
@@ -255,7 +255,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
               <div className="flex-1 flex-grow">
                 <div
                   id={`${id}-max-year`}
-                  className="text-stone"
+                  className="text-press-sand-dark"
                 >
                   <span className="sr-only">Minimum&nbps;</span>Year
                 </div>
@@ -331,7 +331,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
         <div className="flex w-1/2 items-center gap-3">
           <div
             id="sort-by"
-            className="text-stone"
+            className="text-press-sand-dark"
           >
             Sort By:
           </div>

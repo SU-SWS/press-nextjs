@@ -199,7 +199,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
           {title === "Cart" && (
             <ShoppingCartIcon
               width={30}
-              className={clsx({"text-stone": !pageHasBanner})}
+              className={clsx({"text-press-sand-dark": !pageHasBanner})}
             />
           )}
         </Link>

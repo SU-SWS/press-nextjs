@@ -23,6 +23,7 @@ const PageHeader = async () => {
             <Link
               href="/"
               className="flex flex-col gap-4 no-underline lg:flex-row"
+              aria-label="Stanford University Press Home"
             >
               <div className="hidden sm:block">
                 <HeaderLogoLg />

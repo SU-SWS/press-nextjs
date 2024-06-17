@@ -3,7 +3,7 @@ import {H1, H2} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
 import Wysiwyg from "@components/elements/wysiwyg"
-import BookPrecart from "@components/nodes/pages/sup-book/book-precart"
+import BookPreCart from "@components/nodes/pages/sup-book/book-precart"
 import {formatCurrency} from "@lib/utils/format-currency"
 import {BookmarkIcon, ClipboardIcon, DocumentDuplicateIcon} from "@heroicons/react/24/outline"
 import Link from "@components/elements/link"
@@ -35,7 +35,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
 
               {node.supBookSubtitle && <div className="text-m3 font-medium">{node.supBookSubtitle}</div>}
 
-              {node.supBookAuthorsFull && <div className="text-m2 text-stone">{node.supBookAuthorsFull}</div>}
+              {node.supBookAuthorsFull && <div className="text-m2 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
 
               {awards && (
                 <div className="border-t border-fog">
@@ -56,14 +56,14 @@ const SupBookPage = async ({node, ...props}: Props) => {
             </div>
 
             <div className="mb-20 flex flex-col gap-2 border-b border-fog pb-20">
-              {node.supBookImprint && <div className="font-semibold text-stone">Imprint: {node.supBookImprint.name}</div>}
+              {node.supBookImprint && <div className="font-semibold text-press-sand-dark">Imprint: {node.supBookImprint.name}</div>}
 
               <H2 className="-text-m1 font-normal">Book Details</H2>
 
-              {node.supBookCopublisherName && <div className="text-stone">{node.supBookCopublisherName}</div>}
+              {node.supBookCopublisherName && <div className="text-press-sand-dark">{node.supBookCopublisherName}</div>}
 
               {node.supBookPubDateCloth?.time && (
-                <div className="text-stone">
+                <div className="text-press-sand-dark">
                   {new Date(node.supBookPubDateCloth.time).toLocaleDateString("en-us", {
                     month: "long",
                     year: "numeric",
@@ -71,9 +71,9 @@ const SupBookPage = async ({node, ...props}: Props) => {
                 </div>
               )}
 
-              {node.supBookPages && <div className="text-stone">{node.supBookPages} Pages</div>}
+              {node.supBookPages && <div className="text-press-sand-dark">{node.supBookPages} Pages</div>}
 
-              {lowestPrice && <div className="text-stone">From {formatCurrency(lowestPrice)}</div>}
+              {lowestPrice && <div className="text-press-sand-dark">From {formatCurrency(lowestPrice)}</div>}
 
               {node.supBookSeries?.name && (
                 <div>
@@ -114,7 +114,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
 
         <div className="xl:w-1/3">
           <div className="mb-10 border-b border-fog pb-10">
-            <BookPrecart
+            <BookPreCart
               bookTitle={node.title}
               usClothPrice={node.supBookPriceCloth}
               usClothSalePrice={node.supBookClothSalePrice}
@@ -151,7 +151,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
           >
             <ClipboardIcon
               width={20}
-              className="text-stone"
+              className="text-press-sand-dark"
             />{" "}
             Desk, Examination, or Review Copy Requests
           </Link>

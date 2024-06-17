@@ -48,9 +48,9 @@ const SupBookCard = ({node, headingLevel, ...props}: Props) => {
         </Heading>
       </div>
 
-      {node.supBookSubtitle && <div className="mb-16 text-stone">{node.supBookSubtitle}</div>}
+      {node.supBookSubtitle && <div className="mb-16 text-press-sand-dark">{node.supBookSubtitle}</div>}
 
-      {node.supBookAuthorsFull && <div className="text-stone">{node.supBookAuthorsFull}</div>}
+      {node.supBookAuthorsFull && <div className="text-press-sand-dark">{node.supBookAuthorsFull}</div>}
     </div>
   )
 }

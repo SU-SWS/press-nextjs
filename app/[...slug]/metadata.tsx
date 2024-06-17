@@ -63,11 +63,11 @@ const getBookMetaData = (node: NodeSupBook, page: "excerpt" | "copy-requests" | 
   }
 
   return {
-    title: title,
+    title: title + " | Stanford University Press",
     description: description,
     openGraph: {
       type: "book",
-      title: node.title,
+      title: node.title + " | Stanford University Press",
       isbn: node.supBookIsbn13Isw || node.supBookIsbn13Paper || node.supBookIsbn13Cloth || node.supBookIsbn13Alt,
       authors: node.supBookAuthors?.map(author => ({
         "profile:first_name": author.given,
@@ -76,14 +76,18 @@ const getBookMetaData = (node: NodeSupBook, page: "excerpt" | "copy-requests" | 
       releaseDate: node.supBookPubYearFirst,
       description: description,
       images: image ? getOpenGraphImage(image.url, image.alt || "") : [],
+      locale: "en_IE",
+      url: "https://sup.org" + node.path,
+      siteName: "Stanford University Press",
     },
   }
 }
 
 const getBasicPageMetaData = (node: NodeStanfordPage) => {
   const pageTitleBannerImage = node.suPageBanner?.__typename === "ParagraphStanfordPageTitleBanner" && node.suPageBanner.suTitleBannerImage.mediaImage
+  const firstCarouselBannerImage = node.suPageBanner?.__typename === "ParagraphSupCarousel" && (node.suPageBanner.supCarouselSlides[0].supSlideImage?.mediaImage || node.suPageBanner.supCarouselSlides[0].supSlideBook?.supBookImage?.mediaImage)
   const bannerImage = node.suPageBanner?.__typename === "ParagraphStanfordBanner" && node.suPageBanner.suBannerImage?.mediaImage
-  const image = node.suPageImage?.mediaImage || pageTitleBannerImage || bannerImage
+  const image = node.suPageImage?.mediaImage || pageTitleBannerImage || bannerImage || firstCarouselBannerImage
 
   const description = node.suPageDescription || getFirstText(node.suPageComponents)
 
@@ -91,9 +95,12 @@ const getBasicPageMetaData = (node: NodeStanfordPage) => {
     description: description,
     openGraph: {
       type: "website",
-      title: node.title,
+      title: node.title + " | Stanford University Press",
       description: description,
       images: image ? getOpenGraphImage(image.url, image.alt || "") : [],
+      locale: "en_IE",
+      url: "https://sup.org" + (node.path === "/home" ? "/" : node.path),
+      siteName: "Stanford University Press",
     },
   }
 }

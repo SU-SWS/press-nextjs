@@ -31,7 +31,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
 
             {node.supBookSubtitle && <div className="text-m3 font-medium">{node.supBookSubtitle}</div>}
 
-            {node.supBookAuthorsFull && <div className="text-m2 text-stone">{node.supBookAuthorsFull}</div>}
+            {node.supBookAuthorsFull && <div className="text-m2 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
 
             {ancillaryPages.map(page => (
               <Link
