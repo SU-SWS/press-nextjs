@@ -155,7 +155,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
           </div>
 
           {node.supBookERetailers && (
-            <div className="rs-mb-1 rs-pb-1 border-b border-fog">
+            <div className="rs-mb-1 rs-pb-1 border-b border-fog -text-m1">
               <div>Also Available from</div>
               <ul className="list-unstyled [&_a]:font-normal [&_a]:text-digital-red rs-mt-0">
                 {node.supBookERetailers.map((link, i) => (
@@ -163,7 +163,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
                     key={`e-book-retailer-${i}`}
                     className="mb-0"
                   >
-                    <a href={link.url || "#"} className="-text-m1 font-normal underline-offset-[5px] hocus:text-stone-dark hocus:decoration-archway-dark hocus:decoration-2">{link.title}</a>
+                    <a href={link.url || "#"} className="font-normal underline-offset-[5px] hocus:text-stone-dark hocus:decoration-archway-dark hocus:decoration-2">{link.title}</a>
                   </li>
                 ))}
               </ul>
@@ -213,7 +213,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
       {node.supBookSubjects && (
         <div className="mx-auto max-w-5xl">
           <H2 className="text-m1 font-bold">Related Subjects</H2>
-          <ul className="list-unstyled flex flex-wrap">
+          <ul className="list-unstyled flex flex-col md:flex-row md:flex-wrap">
             {node.supBookSubjects.map(subject => {
               const linkParamsString = createLinkParams(subject)
               return (

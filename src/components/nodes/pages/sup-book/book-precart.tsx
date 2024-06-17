@@ -94,7 +94,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
                 checked={!isIntl}
                 onChange={() => setIntl(false)}
               />
-              <span className="block p-5 text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline">US/Canada</span>
+              <span className="block p-5 text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:border-2 peer-checked:border-press-sand-dark peer-checked:text-white peer-focus-visible:underline">US/Canada</span>
             </div>
             <label className="min-w-fit flex-1 cursor-pointer">
               <input
@@ -125,9 +125,9 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
       </div>
 
       {formatChoice === "cloth" && !isIntl && usClothPrice && usClothSalePrice && (
-        <div className="rs-mt-1">
+        <div className="rs-mt-1 -text-m1">
           <div>
-            List Price: <span className="line-through">{formatCurrency(usClothPrice)}</span>
+            List Price: <span className="italic line-through">{formatCurrency(usClothPrice)}</span>
           </div>
           <div>
             Save {formatCurrency(usClothPrice - usClothSalePrice)} ({usClothSaleDiscount}%)
@@ -163,12 +163,12 @@ const UsFormatChoices = ({clothPrice, paperPrice, onChange}: {clothPrice?: Maybe
             defaultChecked={defaultChoice === "cloth"}
             onChange={() => onChange("cloth")}
           />
-          <span className="group flex items-center border-3 p-5 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
-            <span className="flex w-full items-center gap-1">
-              <span className="flex w-full flex-col justify-between @lg:flex-row">
+          <span className="group flex items-center border-3 rs-px-1 rs-py-0 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
+            <span className="flex w-full items-center gap-2">
+              <span className="flex w-full flex-col justify-between gap-2 @lg:gap-0 @lg:flex-row">
                 <span className="font-semibold group-hover:underline">Hardcover</span>
                 <span className="flex items-center">
-                  <span className="text-press-sand-dark">US/CAN</span>
+                  <span className="text-press-sand-dark mr-2">US/CAN</span>
                   <span>{formatCurrency(clothPrice)}</span>
                 </span>
               </span>
@@ -190,12 +190,12 @@ const UsFormatChoices = ({clothPrice, paperPrice, onChange}: {clothPrice?: Maybe
             defaultChecked={defaultChoice === "paper"}
             onChange={() => onChange("paper")}
           />
-          <span className="group flex items-center border-3 p-5 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
-            <span className="flex w-full items-center gap-1">
-              <span className="flex w-full flex-col justify-between @lg:flex-row">
+          <span className="group flex items-center border-3 rs-px-1 rs-py-0 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
+            <span className="flex w-full items-center gap-2">
+              <span className="flex w-full flex-col justify-between gap-2 @lg:gap-0 @lg:flex-row">
                 <span className="font-semibold group-hover:underline">Paperback</span>
                 <span className="flex items-center">
-                  <span className="text-press-sand-dark">US/CAN</span>
+                  <span className="text-press-sand-dark mr-2">US/CAN</span>
                   <span>{formatCurrency(paperPrice)}</span>
                 </span>
               </span>
