@@ -62,7 +62,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
       className="@container"
       onSubmit={onFormSubmit}
     >
-      <fieldset className="mb-5">
+      <fieldset className="rs-mb-1">
         <legend className="sr-only">Format</legend>
         {!isIntl && (
           <UsFormatChoices
@@ -84,8 +84,8 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
 
       {hasIntlCart && (
         <fieldset>
-          <legend className="font-semibold">Region</legend>
-          <div className="mb-5 flex flex-wrap border-2 border-black-40 p-1">
+          <legend className="mb-3 font-semibold">Region</legend>
+          <div className="rs-mb-1 flex flex-wrap border-2 border-black-40 p-1">
             <div className="min-w-fit flex-1">
               <input
                 id="us-region"
@@ -133,12 +133,12 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
           className="flex w-full items-center justify-center"
         >
           Add to cart
-          <ArrowRightIcon width={30} />
+          <ArrowRightIcon width={24} />
         </Button>
       </div>
 
       {formatChoice === "cloth" && !isIntl && usClothPrice && usClothSalePrice && (
-        <div className="my-5">
+        <div className="rs-mt-1">
           <div>
             List Price: <span className="line-through">{formatCurrency(usClothPrice)}</span>
           </div>
@@ -149,7 +149,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
       )}
 
       {formatChoice === "paper" && !isIntl && usPaperPrice && usPaperSalePrice && (
-        <div className="my-5">
+        <div className="rs-mt-1">
           <div>
             List Price: <span className="line-through">{formatCurrency(usPaperPrice)}</span>
           </div>
@@ -180,9 +180,9 @@ const UsFormatChoices = ({clothPrice, paperPrice, digitalPrice, onChange}: {clot
           />
           <label
             htmlFor={`${id}-cloth`}
-            className="group flex items-center border-3 p-5 hover:cursor-pointer hover:bg-fog-light peer-checked:border-cardinal-red-dark peer-focus-visible:bg-fog-light peer-focus-visible:underline"
+            className="group flex items-center border-3 p-5 hover:cursor-pointer hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline"
           >
-            <span className="flex w-full items-center">
+            <span className="flex w-full items-center gap-1">
               <span className="flex w-full flex-col justify-between @lg:flex-row">
                 <span className="font-semibold group-hover:underline">Hardcover</span>
                 <span className="flex items-center">
@@ -191,7 +191,7 @@ const UsFormatChoices = ({clothPrice, paperPrice, digitalPrice, onChange}: {clot
                 </span>
               </span>
               <BookmarkIcon
-                width={30}
+                width={24}
                 className="text-fog-dark"
               />
             </span>
@@ -211,9 +211,9 @@ const UsFormatChoices = ({clothPrice, paperPrice, digitalPrice, onChange}: {clot
           />
           <label
             htmlFor={`${id}-paper`}
-            className="group flex items-center border-3 p-5 hover:cursor-pointer hover:bg-fog-light peer-checked:border-cardinal-red-dark peer-focus-visible:bg-fog-light peer-focus-visible:underline"
+            className="group flex items-center border-3 p-5 hover:cursor-pointer hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline"
           >
-            <span className="flex w-full items-center">
+            <span className="flex w-full items-center gap-1">
               <span className="flex w-full flex-col justify-between @lg:flex-row">
                 <span className="font-semibold group-hover:underline">Paperback</span>
                 <span className="flex items-center">
@@ -222,7 +222,7 @@ const UsFormatChoices = ({clothPrice, paperPrice, digitalPrice, onChange}: {clot
                 </span>
               </span>
               <BookOpenIcon
-                width={30}
+                width={24}
                 className="text-fog-dark"
               />
             </span>
@@ -242,9 +242,9 @@ const UsFormatChoices = ({clothPrice, paperPrice, digitalPrice, onChange}: {clot
           />
           <label
             htmlFor={`${id}-digital`}
-            className="group flex items-center border-3 p-5 hover:cursor-pointer hover:bg-fog-light peer-checked:border-cardinal-red-dark peer-focus-visible:bg-fog-light peer-focus-visible:underline"
+            className="group flex items-center border-3 p-5 hover:cursor-pointer hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline"
           >
-            <span className="flex w-full items-center">
+            <span className="flex w-full items-center gap-1">
               <span className="flex w-full flex-col justify-between @lg:flex-row">
                 <span className="font-semibold group-hover:underline">eBook</span>
                 <span className="flex items-center">
@@ -253,7 +253,7 @@ const UsFormatChoices = ({clothPrice, paperPrice, digitalPrice, onChange}: {clot
                 </span>
               </span>
               <DeviceTabletIcon
-                width={30}
+                width={24}
                 className="text-fog-dark"
               />
             </span>
@@ -282,12 +282,12 @@ const IntlFormatChoices = ({clothIsbn, paperIsbn, onChange}: {clothIsbn?: Maybe<
           />
           <label
             htmlFor={`${id}-cloth`}
-            className="group flex items-center border-3 p-5 hover:cursor-pointer hover:bg-fog-light peer-checked:border-cardinal-red-dark peer-focus-visible:bg-fog-light peer-focus-visible:underline"
+            className="group flex items-center border-3 p-5 hover:cursor-pointer hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline"
           >
             <span className="flex w-full items-center justify-between font-semibold">
               <span className="group-hover:underline">Hardcover</span>
               <BookmarkIcon
-                width={30}
+                width={24}
                 className="text-fog-dark"
               />
             </span>
@@ -307,12 +307,12 @@ const IntlFormatChoices = ({clothIsbn, paperIsbn, onChange}: {clothIsbn?: Maybe<
           />
           <label
             htmlFor={`${id}-paper`}
-            className="group flex items-center border-3 p-5 hover:cursor-pointer hover:bg-fog-light peer-checked:border-cardinal-red-dark peer-focus-visible:bg-fog-light peer-focus-visible:underline"
+            className="group flex items-center border-3 p-5 hover:cursor-pointer hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline"
           >
             <span className="flex w-full items-center justify-between font-semibold">
               <span className="group-hover:underline">Paperback</span>
               <BookOpenIcon
-                width={30}
+                width={24}
                 className="text-fog-dark"
               />
             </span>
