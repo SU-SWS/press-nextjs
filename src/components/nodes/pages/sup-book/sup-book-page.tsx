@@ -50,7 +50,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
                 <div className="rs-mb-2 order-first">
                   <a
                     href={`/search?${bookSubject}`}
-                    className="-text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:decoration-archway-dark hocus:decoration-2"
+                    className="-text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                   >
                     {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
                   </a>
@@ -156,14 +156,14 @@ const SupBookPage = async ({node, ...props}: Props) => {
 
           {node.supBookERetailers && (
             <div className="rs-mb-1 rs-pb-1 border-b border-fog">
-              <div className="mb-8">Also Available from</div>
-              <ul className="list-unstyled [&_a]:font-normal [&_a]:text-digital-red">
+              <div>Also Available from</div>
+              <ul className="list-unstyled [&_a]:font-normal [&_a]:text-digital-red rs-mt-0">
                 {node.supBookERetailers.map((link, i) => (
                   <li
                     key={`e-book-retailer-${i}`}
                     className="mb-0"
                   >
-                    <a href={link.url || "#"}>{link.title}</a>
+                    <a href={link.url || "#"} className="-text-m1 font-normal underline-offset-[5px] hocus:text-stone-dark hocus:decoration-archway-dark hocus:decoration-2">{link.title}</a>
                   </li>
                 ))}
               </ul>
@@ -172,11 +172,11 @@ const SupBookPage = async ({node, ...props}: Props) => {
 
           <Link
             href={node.path + "/desk-examination-copy-requests"}
-            className="flex items-start gap-3 text-18 font-normal text-stone-dark"
+            className="flex items-start gap-3 text-stone-dark -text-m1 font-normal underline-offset-[5px] leading-snug hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2" 
           >
             <ClipboardIcon
               width={24}
-              className="text-fog-dark"
+              className="text-fog-dark mt-1"
             />{" "}
             Desk, Examination, or Review Copy Requests
           </Link>
@@ -223,7 +223,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
                 >
                   <a
                     href={`/search?${linkParamsString}`}
-                    className="-text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:decoration-archway-dark hocus:decoration-2"
+                    className="-text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                   >
                     {subject.parent?.name && `${subject.parent.name} / `}
                     {subject.name}
