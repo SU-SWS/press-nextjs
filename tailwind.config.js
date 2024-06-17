@@ -60,7 +60,7 @@ module.exports = {
         'press-sand': {
           DEFAULT: '#9c9286',
           light: "#C5BEB2",
-          dark: '#7e7267',
+          dark: '#786E63',
         },
       },
     },

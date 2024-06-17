@@ -3,13 +3,13 @@ import {H1, H2} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
 import Wysiwyg from "@components/elements/wysiwyg"
-import BookPrecart from "@components/nodes/pages/sup-book/book-precart"
 import {formatCurrency} from "@lib/utils/format-currency"
 import {BookmarkIcon, ClipboardIcon, DocumentDuplicateIcon} from "@heroicons/react/24/outline"
 import Link from "@components/elements/link"
 import BookAwards from "@components/nodes/pages/sup-book/book-awards"
 import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
+import BookPrecart from "./book-precart"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -35,7 +35,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
 
               {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
 
-              {node.supBookAuthorsFull && <div className="type-1 mt-5 text-stone">{node.supBookAuthorsFull}</div>}
+              {node.supBookAuthorsFull && <div className="text-m2 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
 
               {awards && (
                 <div className="border-t border-fog">
@@ -63,7 +63,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
               {node.supBookCopublisherName && <div className="text-press-sand-dark">{node.supBookCopublisherName}</div>}
 
               {node.supBookPubDateCloth?.time && (
-                <div className="-text-m1 text-stone">
+                <div className="-text-m1 text-press-sand-dark">
                   {new Date(node.supBookPubDateCloth.time).toLocaleDateString("en-us", {
                     month: "long",
                     year: "numeric",
@@ -71,9 +71,9 @@ const SupBookPage = async ({node, ...props}: Props) => {
                 </div>
               )}
 
-              {node.supBookPages && <div className="-text-m1 text-stone">{node.supBookPages} Pages</div>}
+              {node.supBookPages && <div className="-text-m1 text-press-sand-dark">{node.supBookPages} Pages</div>}
 
-              {lowestPrice && <div className="-text-m1 text-stone">From {formatCurrency(lowestPrice)}</div>}
+              {lowestPrice && <div className="-text-m1 text-press-sand-dark">From {formatCurrency(lowestPrice)}</div>}
 
               {node.supBookSeries?.name && (
                 <div>

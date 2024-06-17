@@ -73,6 +73,7 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
       <div
         className="sr-only"
         aria-live="polite"
+        aria-atomic
       >
         Showing authors that start with {alphaChosen}
       </div>
@@ -142,25 +143,18 @@ const AuthorItem = ({authorName, books}: {authorName: string; books?: JSX.Elemen
 }
 
 const RadioOption = ({value, defaultChecked, onChange}: {value: string; defaultChecked?: boolean; onChange: () => void}) => {
-  const id = useId()
   return (
-    <div className="mb-8">
+    <label className="mb-8 block cursor-pointer">
       <input
         className="peer sr-only"
-        id={`${id}-value`}
         type="radio"
         defaultChecked={defaultChecked}
         name="alpha"
         value={value}
         onChange={onChange}
       />
-      <label
-        htmlFor={`${id}-value`}
-        className="flex h-[45px] w-[45px] cursor-pointer items-center justify-center rounded-full bg-fog-light font-semibold text-press-sand-dark hover:underline peer-checked:bg-digital-red peer-checked:text-white peer-focus-visible:underline"
-      >
-        {value}
-      </label>
-    </div>
+      <span className="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-fog-light font-semibold text-press-sand-dark hover:underline peer-checked:bg-digital-red peer-checked:text-white peer-focus:underline peer-focus-visible:outline peer-focus-visible:outline-press-sand-dark">{value}</span>
+    </label>
   )
 }
 
