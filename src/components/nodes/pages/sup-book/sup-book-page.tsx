@@ -22,15 +22,15 @@ const SupBookPage = async ({node, ...props}: Props) => {
 
   function createLinkParams(subject: TermSupBookSubject) {
     const linkParams = new URLSearchParams()
-  
+
     if (subject.parent?.name) {
       linkParams.set("subjects", subject.parent.name)
-      linkParams.set("q", subject.name);
+      linkParams.set("q", subject.name)
     } else {
       linkParams.set("subjects", subject.name)
     }
-  
-    return linkParams.toString();
+
+    return linkParams.toString()
   }
 
   const bookSubject = node.supBookSubjects && createLinkParams(node.supBookSubjects[0])
@@ -46,7 +46,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
             <div className="rs-mb-0 rs-pb-3 flex flex-col border-b-2 border-fog">
               <H1 className="type-3 mb-0">{node.title}</H1>
 
-              {node.supBookSubjects &&
+              {node.supBookSubjects && (
                 <div className="rs-mb-2 order-first">
                   <a
                     href={`/search?${bookSubject}`}
@@ -55,14 +55,14 @@ const SupBookPage = async ({node, ...props}: Props) => {
                     {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
                   </a>
                 </div>
-              }
+              )}
 
               {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
 
               {node.supBookAuthorsFull && <div className="text-m2 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
 
               {awards && (
-                <div className="border-t border-fog">
+                <div className="rs-mt-1 border-t-2 border-fog">
                   <H2 className="flex w-fit items-center gap-2 bg-fog p-3 -text-m1 font-semibold">
                     <BookmarkIcon
                       width={20}
@@ -82,7 +82,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
             <div className="rs-mb-0 rs-pb-3 flex flex-col gap-2 border-b-2 border-fog">
               {node.supBookImprint && <div className="rs-mb-0 -text-m1 font-semibold text-press-sand-dark">Imprint: {node.supBookImprint.name}</div>}
 
-              <H2 className="font-normal text-stone-dark -text-m1">Book Details</H2>
+              <H2 className="-text-m1 font-normal text-stone-dark">Book Details</H2>
 
               {node.supBookCopublisherName && <div className="text-press-sand-dark">{node.supBookCopublisherName}</div>}
 
@@ -125,12 +125,12 @@ const SupBookPage = async ({node, ...props}: Props) => {
             {hasExcerptAndMore && (
               <Link
                 href={`${node.path}/excerpts`}
-                className="rs-py-1 rs-px-2 mx-auto flex w-fit items-center justify-center gap-5 border-2 border-press-sand font-normal text-stone-dark no-underline hocus:underline"
+                className="group rs-py-1 rs-px-2 mx-auto flex w-fit items-center justify-center gap-5 border-2 border-press-sand font-normal text-stone-dark no-underline hocus:border-cardinal-red hocus:bg-cardinal-red hocus:text-white hocus:underline"
               >
                 <span>Excerpts + more</span>
                 <DocumentDuplicateIcon
                   width={28}
-                  className="text-stone"
+                  className="text-stone group-hocus:text-white"
                 />
               </Link>
             )}
@@ -138,7 +138,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
         </div>
 
         <div className="xl:w-1/3">
-          <div className="rs-mb-1 rs-pb-1 border-b border-fog">
+          <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog">
             <BookPrecart
               bookTitle={node.title}
               usClothPrice={node.supBookPriceCloth}
@@ -155,15 +155,20 @@ const SupBookPage = async ({node, ...props}: Props) => {
           </div>
 
           {node.supBookERetailers && (
-            <div className="rs-mb-1 rs-pb-1 border-b border-fog -text-m1">
+            <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog -text-m1">
               <div>Also Available from</div>
-              <ul className="list-unstyled [&_a]:font-normal [&_a]:text-digital-red rs-mt-0">
+              <ul className="list-unstyled rs-mt-0 [&_a]:font-normal [&_a]:text-digital-red">
                 {node.supBookERetailers.map((link, i) => (
                   <li
                     key={`e-book-retailer-${i}`}
                     className="mb-0"
                   >
-                    <a href={link.url || "#"} className="font-normal underline-offset-[5px] hocus:text-stone-dark hocus:decoration-archway-dark hocus:decoration-2">{link.title}</a>
+                    <a
+                      href={link.url || "#"}
+                      className="font-normal underline-offset-[5px] hocus:text-stone-dark hocus:decoration-archway-dark hocus:decoration-2"
+                    >
+                      {link.title}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -172,11 +177,11 @@ const SupBookPage = async ({node, ...props}: Props) => {
 
           <Link
             href={node.path + "/desk-examination-copy-requests"}
-            className="flex items-start gap-3 text-stone-dark -text-m1 font-normal underline-offset-[5px] leading-snug hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2" 
+            className="flex items-start gap-3 -text-m1 font-normal leading-snug text-stone-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
           >
             <ClipboardIcon
               width={24}
-              className="text-fog-dark mt-1"
+              className="mt-1 text-fog-dark"
             />{" "}
             Desk, Examination, or Review Copy Requests
           </Link>
