@@ -3,7 +3,8 @@ import UnpublishedBanner from "@components/elements/unpublished-banner"
 import {NodeUnion} from "@lib/gql/__generated__/drupal.d"
 import {getEntityFromPath} from "@lib/gql/gql-queries"
 import {notFound} from "next/navigation"
-import {getPathFromContext, isPreviewMode, PageProps} from "@lib/drupal/utils"
+import {getPathFromContext, PageProps} from "@lib/drupal/utils"
+import {isPreviewMode} from "@lib/drupal/is-preview-mode"
 
 const PreviewPage = async ({params}: PageProps) => {
   if (!isPreviewMode()) notFound()

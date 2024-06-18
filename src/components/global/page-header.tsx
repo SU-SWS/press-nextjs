@@ -2,13 +2,12 @@ import MainMenu from "@components/menu/main-menu"
 import GlobalMessage from "@components/config-pages/global-message"
 import {getConfigPage, getMenu} from "@lib/gql/gql-queries"
 import {MenuAvailable, StanfordGlobalMessage} from "@lib/gql/__generated__/drupal.d"
-import {isPreviewMode} from "@lib/drupal/utils"
 import Link from "@components/elements/link"
 import HeaderLogoLg from "@components/images/header-logo-lg"
 import HeaderLogoXs from "@components/images/header-logo-xs"
 
 const PageHeader = async () => {
-  const menuItems = await getMenu(MenuAvailable.Main, isPreviewMode())
+  const menuItems = await getMenu(MenuAvailable.Main)
   const globalMessageConfig = await getConfigPage<StanfordGlobalMessage>("StanfordGlobalMessage")
 
   return (

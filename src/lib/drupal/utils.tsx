@@ -1,13 +1,5 @@
 import {stringify} from "qs"
-import {getAccessToken, AccessToken} from "@lib/drupal/get-access-token"
-import {cookies} from "next/headers"
-
-/*
- * Draft mode works when in normal builds. Use environment variable during development.
- */
-export const isPreviewMode = (): boolean => {
-  return process.env.NODE_ENV === "development" || cookies()?.get("preview")?.value === process.env.DRUPAL_PREVIEW_SECRET
-}
+import {TermUnion} from "@lib/gql/__generated__/drupal"
 
 export const buildUrl = (path: string, params?: string | Record<string, string> | URLSearchParams): URL => {
   const url = new URL(path.charAt(0) === "/" ? `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}${path}` : path)
@@ -17,22 +9,11 @@ export const buildUrl = (path: string, params?: string | Record<string, string> 
   return url
 }
 
-export const buildHeaders = async ({
-  accessToken,
-  headers = {},
-  previewMode = false,
-}: {
-  accessToken?: AccessToken
-  headers?: HeadersInit
-  previewMode?: boolean
-} = {}): Promise<Headers> => {
-  if (process.env.REQUEST_HEADERS) headers = {...headers, ...JSON.parse(process.env.REQUEST_HEADERS)}
-
+export const buildHeaders = (headers?: HeadersInit, isPreviewMode?: boolean): Headers => {
   const requestHeaders = new Headers(headers)
+  const authCreds = (isPreviewMode ? process.env.DRUPAL_BASIC_AUTH_ADMIN || process.env.DRUPAL_BASIC_AUTH : process.env.DRUPAL_BASIC_AUTH) as string
 
-  const token = accessToken || (await getAccessToken(previewMode))
-  if (token) requestHeaders.set("Authorization", `Bearer ${token.access_token}`)
-
+  requestHeaders.set("Authorization", "Basic " + Buffer.from(authCreds).toString("base64"))
   return requestHeaders
 }
 
@@ -47,4 +28,28 @@ export const getPathFromContext = (context: PageProps, prefix = ""): string => {
   slug = Array.isArray(slug) ? slug.map(s => encodeURIComponent(s)).join("/") : slug
   slug = slug.replace(/^\//, "")
   return prefix ? `${prefix}/${slug}` : `/${slug}`
+}
+
+export type TermTree<T extends TermUnion> = T & {
+  below?: TermTree<T>[]
+}
+
+export const getTaxonomyTree = <T extends TermUnion>(terms: T[]): TermTree<T>[] => {
+  const {below} = buildTaxonomyTree<T>(terms)
+  return below || terms
+}
+
+export const buildTaxonomyTree = <T extends TermUnion>(terms: T[], parent: T["id"] = ""): {below?: T[]} => {
+  if (!terms?.length) return {below: []}
+
+  const children = terms.filter(term => parent && term.parent?.id === parent)
+
+  return children.length
+    ? {
+        below: children.map(link => ({
+          ...link,
+          ...buildTaxonomyTree(terms, link.id),
+        })),
+      }
+    : {}
 }

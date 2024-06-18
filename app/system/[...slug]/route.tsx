@@ -1,12 +1,10 @@
 import {NextRequest, NextResponse} from "next/server"
 import {buildHeaders} from "@lib/drupal/utils"
-import {getAccessToken} from "@lib/drupal/get-access-token"
 
 export const revalidate = 0
 
 export const GET = async (request: NextRequest) => {
-  const accessToken = await getAccessToken(true)
-  const headers = await buildHeaders({accessToken})
+  const headers = buildHeaders()
 
   const drupalFilePath = process.env.NEXT_PUBLIC_DRUPAL_BASE_URL + request.nextUrl.pathname
   const res = await fetch(drupalFilePath, {headers, cache: "no-cache"})

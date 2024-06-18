@@ -1,4 +1,4 @@
-import {isPreviewMode} from "@lib/drupal/utils"
+import {isPreviewMode} from "@lib/drupal/is-preview-mode"
 import Editori11y from "@components/tools/editorially"
 import UnpublishedBanner from "@components/elements/unpublished-banner"
 
