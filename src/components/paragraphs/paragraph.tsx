@@ -6,7 +6,7 @@ import SpacerParagraph from "@components/paragraphs/stanford-spacer/spacer-parag
 import WysiwygParagraph from "@components/paragraphs/stanford-wysiwyg/wysiwyg-paragraph"
 import BannerParagraph from "@components/paragraphs/stanford-banner/banner-paragraph"
 import ListParagraph from "@components/paragraphs/stanford-lists/list-paragraph"
-import {isPreviewMode} from "@lib/drupal/utils"
+import {isPreviewMode} from "@lib/drupal/is-preview-mode"
 import {ParagraphUnion} from "@lib/gql/__generated__/drupal.d"
 import {Suspense} from "react"
 import FileListParagraph from "@components/paragraphs/sup-file-list/file-list-paragraph"
@@ -14,6 +14,7 @@ import SupCarouselParagraph from "@components/paragraphs/sup-carousel/sup-carous
 import SupAuthorListParagraph from "@components/paragraphs/sup-author-list/sup-author-list-paragraph"
 import SupSearchFormParagraph from "@components/paragraphs/sup-search-form/sup-search-form-paragraph"
 import SupBlogTeaserParagraph from "@components/paragraphs/sup-blog-teaser/sup-blog-teaser-paragraph"
+import UnpublishedBanner from "@components/elements/unpublished-banner"
 
 type Props = {
   /**
@@ -23,6 +24,16 @@ type Props = {
 }
 
 const Paragraph = async ({paragraph}: Props) => {
+  return (
+    <UnpublishedBanner
+      status={paragraph.status}
+      message="Unpublished Content"
+    >
+      <ParagraphComponent paragraph={paragraph} />
+    </UnpublishedBanner>
+  )
+}
+const ParagraphComponent = async ({paragraph}: Props) => {
   const previewMode = isPreviewMode()
 
   const itemProps: Record<string, string> = {}

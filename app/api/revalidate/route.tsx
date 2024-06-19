@@ -1,5 +1,4 @@
 import {NextRequest, NextResponse} from "next/server"
-import {cache as nodeCache} from "@lib/drupal/get-cache"
 import {revalidateTag} from "next/cache"
 import {getEntityFromPath} from "@lib/gql/gql-queries"
 
@@ -25,6 +24,5 @@ export const GET = async (request: NextRequest) => {
   if (entity?.path === path) tagsInvalidated.push("paths:/")
 
   tagsInvalidated.map(tag => revalidateTag(tag))
-  nodeCache.del(tagsInvalidated)
   return NextResponse.json({revalidated: true, tags: tagsInvalidated})
 }
