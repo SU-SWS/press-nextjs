@@ -19,8 +19,20 @@ for (i = 1; i <= 4; i++) {
 
 module.exports = {
   content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  safelist: [
+    "max-w-prose",
+    "mb-2",
+    "mb-3",
+    "mb-4",
+    "pl-10",
+    "pl-20",
+    "pr-10",
+    "pr-5",
+    "pr-7",
+    "text-sm",
   ],
   theme: {
     fontFamily: decanter.theme.fontFamily,
