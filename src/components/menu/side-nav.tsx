@@ -50,9 +50,10 @@ const MenuItem = ({id, url, title, children, activeTrail, level}: MenuItemProps)
     {
       // Non-active state.
       "font-normal text-stone-dark hocus:text-archway-dark hocus:font-medium": !activeTrail.includes(id) && activeTrail.at(-1) !== id,
-      "font-semibold text-stone-dark hocus:text-archway-dark hocus:font-medium hocus:before:content-[''] before:block before:w-[1px] before:h-full before:bg-stone-dark before:absolute before:left-0 before:top-0 before:scale-y-[1] before:transition": activeTrail.includes(id) && activeTrail.at(-1) !== id,
+      "font-semibold text-stone-dark hocus:text-archway-dark hocus:font-medium hocus:before:content-[''] before:block before:w-[2px] before:h-full before:bg-stone-dark before:absolute before:left-0 before:top-0 before:scale-y-[1] before:transition": activeTrail.includes(id),
+      "font-semibold text-stone-dark hocus:text-archway-dark hocus:font-medium hocus:before:content-[''] before:block before:w-[2px] before:h-full before:bg-fog before:absolute before:left-0 before:top-0 before:scale-y-[1] before:transition": activeTrail.includes(id) && activeTrail.at(-1) !== id,
       // Active state.
-      "font-semibold text-stone-dark before:content-[''] before:block before:w-[6px] before:h-full before:bg-stone-dark before:absolute before:left-0 before:top-0": activeTrail.at(-1) === id,
+      "font-semibold text-stone-dark before:content-[''] before:block before:w-[5px] before:h-full before:bg-stone-dark before:absolute before:left-0 before:top-0": activeTrail.at(-1) === id,
     }
   )
 
