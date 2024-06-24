@@ -88,7 +88,7 @@ const MainMenu = ({menuItems}: Props) => {
 
         <a
           href="/search"
-          className="group ml-24 hidden lg:block"
+          className="group rs-ml-2 hidden lg:block"
         >
           <span className="sr-only">Search Site</span>
           <MagnifyingGlassIcon
@@ -164,7 +164,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
       "lg:border-white": pageHasBanner && level === 0 && isCurrent,
       "lg:border-fog": pageHasBanner && level === 0 && !isCurrent && inTrail,
       "border-transparent": level === 0 && !isCurrent && !inTrail,
-      "flex items-center gap-5": title === "Cart",
+      "flex items-center gap-3": title === "Cart",
     },
     // Child menu item styles.
     {
@@ -186,7 +186,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
   return (
     <li
       ref={menuItemRef}
-      className={clsx("relative m-0 border-b border-cool-grey py-2 first:border-t last:border-0 lg:relative lg:mr-5 lg:border-black-20 lg:py-0 last:lg:mr-0", {"first:border-t-0 lg:border-b-0": level === 0})}
+      className={clsx("relative m-0 border-b border-cool-grey py-2 first:border-t last:border-0 lg:relative lg:rs-ml-2 2xl:rs-ml-3 lg:border-black-20 lg:py-0 first:lg:ml-0", {"first:border-t-0 lg:border-b-0": level === 0})}
     >
       <div className="flex items-center justify-between lg:justify-end">
         <Link
@@ -198,7 +198,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
           {title}
           {title === "Cart" && (
             <ShoppingCartIcon
-              width={30}
+              width={20}
               className={clsx({"text-press-sand-dark": !pageHasBanner})}
             />
           )}

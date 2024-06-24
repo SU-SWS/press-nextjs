@@ -18,7 +18,7 @@ const PageHeader = async () => {
       {globalMessageConfig && <GlobalMessage {...globalMessageConfig} />}
       <div className="min-h-50 centered pr-24 lg:pr-0">
         <div className="flex w-full items-center justify-between gap-20">
-          <div className="py-10">
+          <div className="rs-pt-2 rs-pb-3">
             <Link
               href="/"
               className="flex flex-col gap-4 no-underline lg:flex-row"

@@ -2,6 +2,8 @@
 
 import {HtmlHTMLAttributes} from "react"
 import usePageHasTopBanner from "@lib/hooks/usePageHasTopBanner"
+import { useWindowSize } from 'usehooks-ts'
+
 
 type Props = HtmlHTMLAttributes<SVGSVGElement> & {
   height?: number
@@ -10,6 +12,11 @@ type Props = HtmlHTMLAttributes<SVGSVGElement> & {
 
 const HeaderLogoLg = ({height = 89, width = 579, ...props}: Props) => {
   const hasPageBanner = usePageHasTopBanner()
+  const { width: windowWidth } = useWindowSize()
+  
+  if (!height || height === 89) {
+    height = windowWidth >= 1500 ? 126 : windowWidth <= 1500 ? 104 : 72;
+  }
 
   if (height != 89 && width == 579) {
     width *= height / 89
