@@ -1804,69 +1804,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dprint/darwin-arm64@npm:0.45.1":
-  version: 0.45.1
-  resolution: "@dprint/darwin-arm64@npm:0.45.1"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@dprint/darwin-x64@npm:0.45.1":
-  version: 0.45.1
-  resolution: "@dprint/darwin-x64@npm:0.45.1"
-  conditions: os=darwin & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@dprint/formatter@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "@dprint/formatter@npm:0.3.0"
-  checksum: 10c0/e862fb7d2badf6d41f8457e2b3749904669c4498c598afcc4fc3bc85a673e98b54e2845a33e91bdd2e366adc7ebd95a037283508decbc6f9dbfb0ec92ae3356c
-  languageName: node
-  linkType: hard
-
-"@dprint/linux-arm64-glibc@npm:0.45.1":
-  version: 0.45.1
-  resolution: "@dprint/linux-arm64-glibc@npm:0.45.1"
-  conditions: os=linux & cpu=arm64 & libc=glibc
-  languageName: node
-  linkType: hard
-
-"@dprint/linux-arm64-musl@npm:0.45.1":
-  version: 0.45.1
-  resolution: "@dprint/linux-arm64-musl@npm:0.45.1"
-  conditions: os=linux & cpu=arm64 & libc=musl
-  languageName: node
-  linkType: hard
-
-"@dprint/linux-x64-glibc@npm:0.45.1":
-  version: 0.45.1
-  resolution: "@dprint/linux-x64-glibc@npm:0.45.1"
-  conditions: os=linux & cpu=x64 & libc=glibc
-  languageName: node
-  linkType: hard
-
-"@dprint/linux-x64-musl@npm:0.45.1":
-  version: 0.45.1
-  resolution: "@dprint/linux-x64-musl@npm:0.45.1"
-  conditions: os=linux & cpu=x64 & libc=musl
-  languageName: node
-  linkType: hard
-
-"@dprint/typescript@npm:^0.90.4":
-  version: 0.90.5
-  resolution: "@dprint/typescript@npm:0.90.5"
-  checksum: 10c0/0e5715e6a8d55d1e4aec14588936457b8d771a76e8cd91050d0c65fd6e89ac2020e2ddfaedacb9eb2b614dcc2cf91978c3e05c78a2330e7842213130e2c159ff
-  languageName: node
-  linkType: hard
-
-"@dprint/win32-x64@npm:0.45.1":
-  version: 0.45.1
-  resolution: "@dprint/win32-x64@npm:0.45.1"
-  conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@emnapi/runtime@npm:^1.1.0":
   version: 1.1.1
   resolution: "@emnapi/runtime@npm:1.1.1"
@@ -6145,12 +6082,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.14.6":
-  version: 20.14.6
-  resolution: "@types/node@npm:20.14.6"
+"@types/node@npm:^20.14.8":
+  version: 20.14.8
+  resolution: "@types/node@npm:20.14.8"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10c0/22640f0eb2a955872e4529a93be1b719f67b527b80fdab51419756d20e21b5ce0f4ccbee9a3e2ff20e5def647f77baf77b4b0434ff8896791c102165ec0c3e48
+  checksum: 10c0/06d4643fa3b179b41fe19f9c75c240278ca1f7a313b3b837bc36ea119499c7ad77f06bbe72694ac04aa91ec77fe747baa09b889f4c435450c1724a26bd55f160
   languageName: node
   linkType: hard
 
@@ -6987,14 +6924,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"algoliasearch-helper@npm:3.22.0":
-  version: 3.22.0
-  resolution: "algoliasearch-helper@npm:3.22.0"
+"algoliasearch-helper@npm:3.22.1":
+  version: 3.22.1
+  resolution: "algoliasearch-helper@npm:3.22.1"
   dependencies:
     "@algolia/events": "npm:^4.0.1"
   peerDependencies:
     algoliasearch: ">= 3.1 < 6"
-  checksum: 10c0/a7f5d7498cb28732dbf4c763bf5a0b1187d991975e3e94fe4d6489eb690ca510cec0c574de116672054bc5ad509090e6ccdc33e48fbda6e469a68c33176a2c20
+  checksum: 10c0/c3b9bda0eb8e6851d11e97fc5d649a367163816772b0a4e05edf4904ffab3a20357ea37e959a56c0a5e2246402969a8668fe9f08d086b33510473ad5b2e43497
   languageName: node
   linkType: hard
 
@@ -8872,7 +8809,7 @@ __metadata:
     "@storybook/react": "npm:^8.1.10"
     "@storybook/testing-library": "npm:^0.2.2"
     "@tailwindcss/container-queries": "npm:^0.1.1"
-    "@types/node": "npm:^20.14.6"
+    "@types/node": "npm:^20.14.8"
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
     "@types/react-slick": "npm:^0.23.13"
@@ -8888,8 +8825,8 @@ __metadata:
     eslint-plugin-deprecation: "npm:^3.0.0"
     eslint-plugin-storybook: "npm:^0.8.0"
     eslint-plugin-unused-imports: "npm:^4.0.0"
-    graphql: "npm:^16.8.2"
-    graphql-request: "npm:^7.0.1"
+    graphql: "npm:^16.9.0"
+    graphql-request: "npm:^7.1.0"
     graphql-tag: "npm:^2.12.6"
     html-entities: "npm:^2.5.2"
     html-react-parser: "npm:^5.1.10"
@@ -8904,8 +8841,8 @@ __metadata:
     react-docgen: "npm:^7.0.3"
     react-dom: "npm:^18.3.1"
     react-focus-lock: "npm:^2.12.1"
-    react-instantsearch: "npm:^7.11.2"
-    react-instantsearch-nextjs: "npm:^0.3.3"
+    react-instantsearch: "npm:^7.11.3"
+    react-instantsearch-nextjs: "npm:^0.3.4"
     react-slick: "npm:^0.30.2"
     react-tiny-oembed: "npm:^1.1.0"
     sharp: "npm:^0.33.4"
@@ -8913,7 +8850,7 @@ __metadata:
     tailwind-merge: "npm:^2.3.0"
     tailwindcss: "npm:^3.4.4"
     tsconfig-paths-webpack-plugin: "npm:^4.1.0"
-    typescript: "npm:^5.4.5"
+    typescript: "npm:^5.5.2"
     usehooks-ts: "npm:^3.1.0"
   languageName: unknown
   linkType: soft
@@ -9303,38 +9240,6 @@ __metadata:
   version: 16.4.5
   resolution: "dotenv@npm:16.4.5"
   checksum: 10c0/48d92870076832af0418b13acd6e5a5a3e83bb00df690d9812e94b24aff62b88ade955ac99a05501305b8dc8f1b0ee7638b18493deb6fe93d680e5220936292f
-  languageName: node
-  linkType: hard
-
-"dprint@npm:^0.45.1":
-  version: 0.45.1
-  resolution: "dprint@npm:0.45.1"
-  dependencies:
-    "@dprint/darwin-arm64": "npm:0.45.1"
-    "@dprint/darwin-x64": "npm:0.45.1"
-    "@dprint/linux-arm64-glibc": "npm:0.45.1"
-    "@dprint/linux-arm64-musl": "npm:0.45.1"
-    "@dprint/linux-x64-glibc": "npm:0.45.1"
-    "@dprint/linux-x64-musl": "npm:0.45.1"
-    "@dprint/win32-x64": "npm:0.45.1"
-  dependenciesMeta:
-    "@dprint/darwin-arm64":
-      optional: true
-    "@dprint/darwin-x64":
-      optional: true
-    "@dprint/linux-arm64-glibc":
-      optional: true
-    "@dprint/linux-arm64-musl":
-      optional: true
-    "@dprint/linux-x64-glibc":
-      optional: true
-    "@dprint/linux-x64-musl":
-      optional: true
-    "@dprint/win32-x64":
-      optional: true
-  bin:
-    dprint: bin.js
-  checksum: 10c0/6c8905f1d9b6731274a356168cee627d8f91e19fbd75841a39ebcda29f96eecda96296aede003cfcb0ad329bfe23e053d4aa00501682324a8b1cbd820287c962
   languageName: node
   linkType: hard
 
@@ -11188,21 +11093,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-request@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "graphql-request@npm:7.0.1"
+"graphql-request@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "graphql-request@npm:7.1.0"
   dependencies:
-    "@dprint/formatter": "npm:^0.3.0"
-    "@dprint/typescript": "npm:^0.90.4"
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     "@molt/command": "npm:^0.9.0"
-    dprint: "npm:^0.45.1"
-    zod: "npm:^3.23.5"
+    zod: "npm:^3.23.8"
   peerDependencies:
+    "@dprint/formatter": ^0.3.0
+    "@dprint/typescript": ^0.91.1
+    dprint: ^0.46.2
     graphql: 14 - 16
+  peerDependenciesMeta:
+    "@dprint/formatter":
+      optional: true
+    "@dprint/typescript":
+      optional: true
+    dprint:
+      optional: true
   bin:
     graffle: build/cli/generate.js
-  checksum: 10c0/8f61d28ceda46205267ad9b58c23a48da4530773cec34ff7a25eadc05e9a64f5d9d3c342919cb509569ce7eb031ca3290765d9418167a7628a6ebf25cc7057d8
+  checksum: 10c0/ded2c63bc4ba383c8d16bee176f0160bfa065d4d3fcef06822bfddf06664f10cae1b0388ad338801e491832b591c8b9316bb34821d14f5741e7229c534516357
   languageName: node
   linkType: hard
 
@@ -11226,10 +11138,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.8.2":
-  version: 16.8.2
-  resolution: "graphql@npm:16.8.2"
-  checksum: 10c0/921a6321c4efe2540fd5a752093c1542f96cd10b3907b1a8044819f054e6e8a6bca78d93a8eada065a07dfd4e53d89eef99ebdced2c372453e05480e12d8652e
+"graphql@npm:^16.9.0":
+  version: 16.9.0
+  resolution: "graphql@npm:16.9.0"
+  checksum: 10c0/a8850f077ff767377237d1f8b1da2ec70aeb7623cdf1dfc9e1c7ae93accc0c8149c85abe68923be9871a2934b1bce5a2496f846d4d56e1cfb03eaaa7ddba9b6a
   languageName: node
   linkType: hard
 
@@ -11770,16 +11682,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"instantsearch.js@npm:4.72.0":
-  version: 4.72.0
-  resolution: "instantsearch.js@npm:4.72.0"
+"instantsearch.js@npm:4.72.1":
+  version: 4.72.1
+  resolution: "instantsearch.js@npm:4.72.1"
   dependencies:
     "@algolia/events": "npm:^4.0.1"
     "@types/dom-speech-recognition": "npm:^0.0.1"
     "@types/google.maps": "npm:^3.45.3"
     "@types/hogan.js": "npm:^3.0.0"
     "@types/qs": "npm:^6.5.3"
-    algoliasearch-helper: "npm:3.22.0"
+    algoliasearch-helper: "npm:3.22.1"
     hogan.js: "npm:^3.0.2"
     htm: "npm:^3.0.0"
     instantsearch-ui-components: "npm:0.7.0"
@@ -11788,7 +11700,7 @@ __metadata:
     search-insights: "npm:^2.13.0"
   peerDependencies:
     algoliasearch: ">= 3.1 < 6"
-  checksum: 10c0/6bec9be9a683ad337e502a0621bc8ef99bccde1ffe4572cf18b316827ba1551cfd490cbcd892a944b39718f5575d273fcf5bfebc1eddaee88f99e92bac9342e2
+  checksum: 10c0/04ccade6dd7349850bbf21dafcd03058ad37cb3cc09e4af1ad719de4dcc0db1045d33f88de880070563a737a2018681ef73e9e3a7ba7b4b2512369f1478364b0
   languageName: node
   linkType: hard
 
@@ -14918,44 +14830,44 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-instantsearch-core@npm:7.11.2":
-  version: 7.11.2
-  resolution: "react-instantsearch-core@npm:7.11.2"
+"react-instantsearch-core@npm:7.11.3":
+  version: 7.11.3
+  resolution: "react-instantsearch-core@npm:7.11.3"
   dependencies:
     "@babel/runtime": "npm:^7.1.2"
-    algoliasearch-helper: "npm:3.22.0"
-    instantsearch.js: "npm:4.72.0"
+    algoliasearch-helper: "npm:3.22.1"
+    instantsearch.js: "npm:4.72.1"
     use-sync-external-store: "npm:^1.0.0"
   peerDependencies:
     algoliasearch: ">= 3.1 < 5"
     react: ">= 16.8.0 < 19"
-  checksum: 10c0/e1d38fb637d251775a66e7f8f373d1d48744e81126418e1679fc89850becbde4400d9a13f96049dbe66b0ed934f172a7a0bf7790d5c01499854735586c42bb34
+  checksum: 10c0/7bf9808d9b3692fdda6e7d6d35102cd4859bbb7361a27fb885224156ae09cc9b6c542259e177883e52812c46f252620ee44ec8bcb7f0fe4a9e2f5955ca911176
   languageName: node
   linkType: hard
 
-"react-instantsearch-nextjs@npm:^0.3.3":
-  version: 0.3.3
-  resolution: "react-instantsearch-nextjs@npm:0.3.3"
+"react-instantsearch-nextjs@npm:^0.3.4":
+  version: 0.3.4
+  resolution: "react-instantsearch-nextjs@npm:0.3.4"
   peerDependencies:
     next: "*"
     react-instantsearch: "*"
-  checksum: 10c0/072123a059377fbfa843952f9faf9343cf7a41716062f7173c5a8a62e32fd6085876f8a9da01f373adcd4c789a2996ad6e8dd5a290e4287a8125f63547aab675
+  checksum: 10c0/279b405988d01c2e4b768106e5ac0030ffdf9aee4003c041231f3d07a1f2dc772338dae681e1b79292e77c41077f2f77b135c4192359c02dedf648a4d26de501
   languageName: node
   linkType: hard
 
-"react-instantsearch@npm:^7.11.2":
-  version: 7.11.2
-  resolution: "react-instantsearch@npm:7.11.2"
+"react-instantsearch@npm:^7.11.3":
+  version: 7.11.3
+  resolution: "react-instantsearch@npm:7.11.3"
   dependencies:
     "@babel/runtime": "npm:^7.1.2"
     instantsearch-ui-components: "npm:0.7.0"
-    instantsearch.js: "npm:4.72.0"
-    react-instantsearch-core: "npm:7.11.2"
+    instantsearch.js: "npm:4.72.1"
+    react-instantsearch-core: "npm:7.11.3"
   peerDependencies:
     algoliasearch: ">= 3.1 < 5"
     react: ">= 16.8.0 < 19"
     react-dom: ">= 16.8.0 < 19"
-  checksum: 10c0/daa160a43566a9d7092ea1e56acac2c244ec45bb61633904e756e83cb1f9a0c7164f9a64d8fae57a56356fce3d6374703ad17193fd6d818e9d879fd1c241c59e
+  checksum: 10c0/45389f6063e0afe824e18f628bfc3be94ac136dccabc9e71efeaf73b5c2e6107cbc0680dddd639a649b0cea9852aee1277a400dd8594c3bacc2ed7791835170d
   languageName: node
   linkType: hard
 
@@ -17227,23 +17139,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.4.5":
-  version: 5.4.5
-  resolution: "typescript@npm:5.4.5"
+"typescript@npm:^5.5.2":
+  version: 5.5.2
+  resolution: "typescript@npm:5.5.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/2954022ada340fd3d6a9e2b8e534f65d57c92d5f3989a263754a78aba549f7e6529acc1921913560a4b816c46dce7df4a4d29f9f11a3dc0d4213bb76d043251e
+  checksum: 10c0/8ca39b27b5f9bd7f32db795045933ab5247897660627251e8254180b792a395bf061ea7231947d5d7ffa5cb4cc771970fd4ef543275f9b559f08c9325cccfce3
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.4.5#optional!builtin<compat/typescript>":
-  version: 5.4.5
-  resolution: "typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"
+"typescript@patch:typescript@npm%3A^5.5.2#optional!builtin<compat/typescript>":
+  version: 5.5.2
+  resolution: "typescript@patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=b45daf"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/db2ad2a16ca829f50427eeb1da155e7a45e598eec7b086d8b4e8ba44e5a235f758e606d681c66992230d3fc3b8995865e5fd0b22a2c95486d0b3200f83072ec9
+  checksum: 10c0/6721ac8933a70c252d7b640b345792e103d881811ff660355617c1836526dbb71c2044e2e77a8823fb3570b469f33276875a4cab6d3c4de4ae7d7ee1c3074ae4
   languageName: node
   linkType: hard
 
@@ -18106,7 +18018,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.17.3, zod@npm:^3.22.2, zod@npm:^3.23.5":
+"zod@npm:^3.17.3, zod@npm:^3.22.2, zod@npm:^3.23.8":
   version: 3.23.8
   resolution: "zod@npm:3.23.8"
   checksum: 10c0/8f14c87d6b1b53c944c25ce7a28616896319d95bc46a9660fe441adc0ed0a81253b02b5abdaeffedbeb23bdd25a0bf1c29d2c12dd919aef6447652dd295e3e69
