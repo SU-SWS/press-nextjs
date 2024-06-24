@@ -19,7 +19,7 @@ const SupBookCard = ({node, headingLevel, ...props}: Props) => {
       className={twMerge("mx-auto max-w-3xl", props.className)}
     >
       <div className="relative">
-        <div className="relative mb-8 aspect-[2/3] w-full">
+        <div className="rs-mb-1 relative aspect-[2/3] w-full">
           <Image
             className="object-cover"
             src={node.supBookImage?.mediaImage.url || "/default-book-image.jpg"}
@@ -38,7 +38,7 @@ const SupBookCard = ({node, headingLevel, ...props}: Props) => {
           )}
         </div>
 
-        <Heading className="mb-8 text-m1 font-normal">
+        <Heading className="mb-5 text-m1 font-normal">
           <Link
             className="stretched-link font-normal text-stone-dark"
             href={node.path}
@@ -48,9 +48,9 @@ const SupBookCard = ({node, headingLevel, ...props}: Props) => {
         </Heading>
       </div>
 
-      {node.supBookSubtitle && <div className="mb-16 text-press-sand-dark">{node.supBookSubtitle}</div>}
+      {node.supBookSubtitle && <div className="rs-mb-3 text-press-sand-dark">{node.supBookSubtitle}</div>}
 
-      {node.supBookAuthorsFull && <div className="text-press-sand-dark">{node.supBookAuthorsFull}</div>}
+      {node.supBookAuthorsFull && <div className="mb-0 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
     </div>
   )
 }
