@@ -123,8 +123,8 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
                 key={`page-button-${pageNum}--${i}`}
                 page={pageNum}
                 currentPage={currentPage}
-                total={items.length * totalPages}
-                onClick={() => goToPage(pageNum)}
+                total={totalPages}
+                onPageClick={goToPage}
               />
             ))}
           </ul>
@@ -134,35 +134,46 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
   )
 }
 
-const PaginationButton = ({page, currentPage, total, onClick}: {page: number | string; currentPage: number; total: number; onClick: () => void}) => {
+const PaginationButton = ({ page, currentPage, total, onPageClick }: { page: number | string; currentPage: number; total: number; onPageClick: (page: number) => void }) => {
   if (page === 0) {
     return (
       <li className="mt-auto h-full">
         <span className="sr-only">More pages available</span>
         <span aria-hidden>...</span>
       </li>
-    )
+    );
   }
-  const isCurrent = page == currentPage
+
+  const handleClick = () => {
+    if (page === 'leftArrow') {
+      onPageClick(1);
+    } else if (page === 'rightArrow') {
+      onPageClick(total);
+    } else {
+      onPageClick(page as number);
+    }
+  };
+
+  const isCurrent = page === currentPage;
   return (
     <li>
       <button
         className="text-m2 font-medium hocus:underline"
-        onClick={onClick}
-        aria-current={isCurrent}
+        onClick={handleClick}
+        aria-current={isCurrent ? "page" : undefined}
       >
         <span className="sr-only">
-          Go to page {page} of {total}
+          {page === 'leftArrow' ? 'Go to first page' : page === 'rightArrow' ? 'Go to last page' : `Go to page ${page} of ${total}`}
         </span>
         <span
           aria-hidden
           className={(isCurrent ? "border-stone-dark text-stone-dark" : "border-transparent text-cardinal-red") + " border-b-2 px-4"}
         >
-          {page}
+          {page === 'leftArrow' ? '«' : page === 'rightArrow' ? '»' : page}
         </span>
       </button>
     </li>
-  )
-}
+  );
+};
 
 export default PagedList
