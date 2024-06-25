@@ -30,7 +30,7 @@ const BookListView = ({items, totalItems, headingLevel, loadPage}: Props) => {
     <PagedList
       ulProps={{
         className: twMerge(
-          "list-unstyled grid @2xl:grid-cols-2 @6xl:grid-cols-3 gap-20",
+          "list-unstyled grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-20",
           clsx({
             "max-w-1200 mx-auto": numItems < 5,
             "@10xl:grid-cols-5": numItems >= 5,
