@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import {useMemo} from "react";
 
 /**
  * Get the array of pages to build the pager navigation buttons.
