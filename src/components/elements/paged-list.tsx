@@ -116,7 +116,7 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
       {loadPage && paginationButtons.length > 1 && (
         <nav
           aria-label="Pager"
-          className="mx-auto w-fit"
+          className="mx-auto w-fit rs-mt-4"
         >
           <ul className="list-unstyled flex items-center gap-5">
             {paginationButtons.map((pageNum, i) => (
@@ -155,6 +155,14 @@ const PaginationButton = ({page, currentPage, total, onPageClick}: {page: number
     }
   }
 
+    // Conditionally render left arrow and right arrow based on currentPage
+    if (page === "leftArrow" && currentPage === 1) {
+      return null;
+    }
+    if (page === "rightArrow" && currentPage === total) {
+      return null;
+    }
+
   const isCurrent = page === currentPage
   return (
     <li className="m-0 flex items-center">
@@ -163,12 +171,18 @@ const PaginationButton = ({page, currentPage, total, onPageClick}: {page: number
         onClick={handleClick}
         aria-current={isCurrent ? "page" : undefined}
       >
-        <span className="sr-only">{page === "leftArrow" ? "Go to first page" : page === "rightArrow" ? "Go to last page" : `Go to page ${page} of ${total}`}</span>
+        <span className="sr-only">
+          {page === "leftArrow" && "Go to first page"}
+          {page === "rightArrow" && "Go to last page"}
+          {page !== "leftArrow" && page !== "rightArrow" && `Go to page ${page} of ${total}`}
+        </span>
         <span
           aria-hidden
           className={(isCurrent ? "border-stone-dark text-stone-dark" : "border-transparent text-cardinal-red") + " block h-fit border-b-2 px-4"}
         >
-          {page === "leftArrow" ? <ArrowLongLeftIcon width={30} /> : page === "rightArrow" ? <ArrowLongRightIcon width={30} /> : page}
+          {page === "leftArrow" && <ArrowLongLeftIcon width={30} />}
+          {page === "rightArrow" && <ArrowLongRightIcon width={30} />}
+          {page !== "leftArrow" && page !== "rightArrow" && page}
         </span>
       </button>
     </li>
