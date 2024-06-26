@@ -23,7 +23,7 @@ const Wysiwyg = ({html, className, ...props}: Props) => {
   const addMathJax = html.match(/\$\$.*\$\$/) || html.match(/\\\[.*\\\]/) || html.match(/\\\(.*\\\)/)
   return (
     <div
-      className={twMerge("[&_a]:not(.btn):text-digital-red hocus:[&_a]:not(.btn):text-archway-dark wysiwyg", className)}
+      className={twMerge("[&_a]:not(.btn):text-digital-red hocus:[&_a]:not(.btn):text-archway-dark wysiwyg leading", className)}
       {...props}
     >
       {addMathJax && <Mathjax />}

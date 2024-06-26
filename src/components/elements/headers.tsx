@@ -8,7 +8,7 @@ const headingLinkClasses = "[&_a]:hocus:underline"
 export const H1 = ({children, className, ...props}: Props) => {
   return (
     <h1
-      className={twMerge(className, "text-m4 font-medium")}
+      className={twMerge("text-m4 font-medium", className)}
       {...props}
     >
       {children}
