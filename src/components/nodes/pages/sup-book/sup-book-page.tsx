@@ -1,5 +1,5 @@
 import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/drupal"
-import Heading, {H1, H2, H3} from "@components/elements/headers"
+import {H1, H2, H3} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
 import Wysiwyg from "@components/elements/wysiwyg"
@@ -110,6 +110,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
 
                 {node.supBookPubDateCloth?.time && (
                   <div className="-text-m1 text-press-sand-dark">
+                    {node.supBookPubDateCloth.time}
                     {new Date(node.supBookPubDateCloth.time).toLocaleDateString("en-us", {
                       month: "long",
                       year: "numeric",
