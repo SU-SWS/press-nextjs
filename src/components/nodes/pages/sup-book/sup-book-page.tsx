@@ -9,7 +9,7 @@ import Link from "@components/elements/link"
 import BookAwards from "@components/nodes/pages/sup-book/book-awards"
 import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
-import BookPrecart from "./book-precart"
+import BookPrecart from "@components/nodes/pages/sup-book/book-precart"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
