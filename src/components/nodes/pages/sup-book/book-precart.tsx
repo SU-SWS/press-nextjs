@@ -85,7 +85,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
         <fieldset>
           <legend className="mb-3 font-semibold">Region</legend>
           <div className="rs-mb-1 flex flex-wrap border-2 border-black-40 p-1">
-            <div className="block min-w-fit flex-1 cursor-pointer">
+            <label className="block min-w-fit flex-1 cursor-pointer">
               <input
                 className="peer sr-only"
                 type="radio"
@@ -95,7 +95,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
                 onChange={() => setIntl(false)}
               />
               <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-2 peer-checked:border-press-sand-dark peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline">US/Canada</span>
-            </div>
+            </label>
             <label className="min-w-fit flex-1 cursor-pointer">
               <input
                 className="peer sr-only"
