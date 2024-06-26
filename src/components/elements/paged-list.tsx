@@ -6,6 +6,7 @@ import {useBoolean, useCounter} from "usehooks-ts"
 import {useRouter, useSearchParams} from "next/navigation"
 import usePagination from "@lib/hooks/usePagination"
 import useFocusOnRender from "@lib/hooks/useFocusOnRender"
+import {ArrowLongLeftIcon, ArrowLongRightIcon} from "@heroicons/react/20/solid"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -117,7 +118,7 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
           aria-label="Pager"
           className="mx-auto w-fit"
         >
-          <ul className="list-unstyled flex gap-5">
+          <ul className="list-unstyled flex items-center gap-5">
             {paginationButtons.map((pageNum, i) => (
               <PaginationButton
                 key={`page-button-${pageNum}--${i}`}
@@ -134,46 +135,44 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
   )
 }
 
-const PaginationButton = ({ page, currentPage, total, onPageClick }: { page: number | string; currentPage: number; total: number; onPageClick: (page: number) => void }) => {
+const PaginationButton = ({page, currentPage, total, onPageClick}: {page: number | string; currentPage: number; total: number; onPageClick: (page: number) => void}) => {
   if (page === 0) {
     return (
       <li className="mt-auto h-full">
         <span className="sr-only">More pages available</span>
         <span aria-hidden>...</span>
       </li>
-    );
+    )
   }
 
   const handleClick = () => {
-    if (page === 'leftArrow') {
-      onPageClick(1);
-    } else if (page === 'rightArrow') {
-      onPageClick(total);
+    if (page === "leftArrow") {
+      onPageClick(1)
+    } else if (page === "rightArrow") {
+      onPageClick(total)
     } else {
-      onPageClick(page as number);
+      onPageClick(page as number)
     }
-  };
+  }
 
-  const isCurrent = page === currentPage;
+  const isCurrent = page === currentPage
   return (
-    <li>
+    <li className="m-0 flex items-center">
       <button
-        className="text-m2 font-medium hocus:underline"
+        className="group text-m2 font-medium hocus:underline"
         onClick={handleClick}
         aria-current={isCurrent ? "page" : undefined}
       >
-        <span className="sr-only">
-          {page === 'leftArrow' ? 'Go to first page' : page === 'rightArrow' ? 'Go to last page' : `Go to page ${page} of ${total}`}
-        </span>
+        <span className="sr-only">{page === "leftArrow" ? "Go to first page" : page === "rightArrow" ? "Go to last page" : `Go to page ${page} of ${total}`}</span>
         <span
           aria-hidden
-          className={(isCurrent ? "border-stone-dark text-stone-dark" : "border-transparent text-cardinal-red") + " border-b-2 px-4"}
+          className={(isCurrent ? "border-stone-dark text-stone-dark" : "border-transparent text-cardinal-red") + " block h-fit border-b-2 px-4"}
         >
-          {page === 'leftArrow' ? '«' : page === 'rightArrow' ? '»' : page}
+          {page === "leftArrow" ? <ArrowLongLeftIcon width={30} /> : page === "rightArrow" ? <ArrowLongRightIcon width={30} /> : page}
         </span>
       </button>
     </li>
-  );
-};
+  )
+}
 
 export default PagedList
