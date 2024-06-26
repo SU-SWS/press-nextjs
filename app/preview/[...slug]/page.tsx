@@ -15,7 +15,10 @@ const PreviewPage = async ({params}: PageProps) => {
 
   return (
     <>
-      <UnpublishedBanner status={entity.status}>Unpublished Page</UnpublishedBanner>
+      <UnpublishedBanner
+        status={entity.status}
+        message="Unpublished Page"
+      />
       <NodePage node={entity} />
     </>
   )
