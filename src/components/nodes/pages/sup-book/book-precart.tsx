@@ -62,7 +62,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
       className="@container"
       onSubmit={onFormSubmit}
     >
-      <fieldset className="mb-5">
+      <fieldset className="rs-mb-1">
         <legend className="sr-only">Format</legend>
         {!isIntl && (
           <UsFormatChoices
@@ -83,8 +83,8 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
 
       {hasIntlCart && (
         <fieldset>
-          <legend className="font-semibold">Region</legend>
-          <div className="mb-5 flex flex-wrap border-2 border-black-40 p-1">
+          <legend className="mb-3 font-semibold">Region</legend>
+          <div className="rs-mb-1 flex flex-wrap border-2 border-black-40 p-1">
             <label className="block min-w-fit flex-1 cursor-pointer">
               <input
                 className="peer sr-only"
@@ -94,7 +94,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
                 checked={!isIntl}
                 onChange={() => setIntl(false)}
               />
-              <span className="block p-5 text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline">US/Canada</span>
+              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-2 peer-checked:border-press-sand-dark peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline">US/Canada</span>
             </label>
             <label className="min-w-fit flex-1 cursor-pointer">
               <input
@@ -105,7 +105,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
                 checked={isIntl}
                 onChange={() => setIntl(true)}
               />
-              <span className="block p-5 text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline">International</span>
+              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline">International</span>
             </label>
           </div>
         </fieldset>
@@ -117,17 +117,17 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
         <Button
           buttonElem
           type="submit"
-          className="flex w-full items-center justify-center"
+          className="flex w-full items-center justify-center gap-2"
         >
           Add to cart
-          <ArrowRightIcon width={30} />
+          <ArrowRightIcon width={24} />
         </Button>
       </div>
 
       {formatChoice === "cloth" && !isIntl && usClothPrice && usClothSalePrice && (
-        <div className="my-5">
+        <div className="rs-mt-1 -text-m1">
           <div>
-            List Price: <span className="line-through">{formatCurrency(usClothPrice)}</span>
+            List Price: <span className="italic line-through">{formatCurrency(usClothPrice)}</span>
           </div>
           <div>
             Save {formatCurrency(usClothPrice - usClothSalePrice)} ({usClothSaleDiscount}%)
@@ -136,7 +136,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
       )}
 
       {formatChoice === "paper" && !isIntl && usPaperPrice && usPaperSalePrice && (
-        <div className="my-5">
+        <div className="rs-mt-1">
           <div>
             List Price: <span className="line-through">{formatCurrency(usPaperPrice)}</span>
           </div>
@@ -163,17 +163,17 @@ const UsFormatChoices = ({clothPrice, paperPrice, onChange}: {clothPrice?: Maybe
             defaultChecked={defaultChoice === "cloth"}
             onChange={() => onChange("cloth")}
           />
-          <span className="group flex items-center border-3 p-5 hover:bg-fog-light peer-checked:border-cardinal-red-dark peer-focus-visible:bg-fog-light peer-focus-visible:underline">
-            <span className="flex w-full items-center">
-              <span className="flex w-full flex-col justify-between @lg:flex-row">
+          <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
+            <span className="flex w-full items-center gap-2">
+              <span className="flex w-full flex-col justify-between gap-2 @lg:flex-row @lg:gap-0">
                 <span className="font-semibold group-hover:underline">Hardcover</span>
                 <span className="flex items-center">
-                  <span className="text-press-sand-dark">US/CAN</span>
+                  <span className="mr-2 text-press-sand-dark">US/CAN</span>
                   <span>{formatCurrency(clothPrice)}</span>
                 </span>
               </span>
               <BookmarkIcon
-                width={30}
+                width={24}
                 className="text-fog-dark"
               />
             </span>
@@ -190,17 +190,17 @@ const UsFormatChoices = ({clothPrice, paperPrice, onChange}: {clothPrice?: Maybe
             defaultChecked={defaultChoice === "paper"}
             onChange={() => onChange("paper")}
           />
-          <span className="group flex items-center border-3 p-5 hover:bg-fog-light peer-checked:border-cardinal-red-dark peer-focus-visible:bg-fog-light peer-focus-visible:underline">
-            <span className="flex w-full items-center">
-              <span className="flex w-full flex-col justify-between @lg:flex-row">
+          <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
+            <span className="flex w-full items-center gap-2">
+              <span className="flex w-full flex-col justify-between gap-2 @lg:flex-row @lg:gap-0">
                 <span className="font-semibold group-hover:underline">Paperback</span>
                 <span className="flex items-center">
-                  <span className="text-press-sand-dark">US/CAN</span>
+                  <span className="mr-2 text-press-sand-dark">US/CAN</span>
                   <span>{formatCurrency(paperPrice)}</span>
                 </span>
               </span>
               <BookOpenIcon
-                width={30}
+                width={24}
                 className="text-fog-dark"
               />
             </span>
@@ -225,11 +225,11 @@ const IntlFormatChoices = ({clothIsbn, paperIsbn, onChange}: {clothIsbn?: Maybe<
             defaultChecked={defaultChoice === "cloth"}
             onChange={() => onChange("cloth")}
           />
-          <span className="group flex items-center border-3 p-5 hover:bg-fog-light peer-checked:border-cardinal-red-dark peer-focus-visible:bg-fog-light peer-focus-visible:underline">
+          <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center justify-between font-semibold">
               <span className="group-hover:underline">Hardcover</span>
               <BookmarkIcon
-                width={30}
+                width={24}
                 className="text-fog-dark"
               />
             </span>
@@ -246,11 +246,11 @@ const IntlFormatChoices = ({clothIsbn, paperIsbn, onChange}: {clothIsbn?: Maybe<
             defaultChecked={defaultChoice === "paper"}
             onChange={() => onChange("paper")}
           />
-          <span className="group flex items-center border-3 p-5 hover:bg-fog-light peer-checked:border-cardinal-red-dark peer-focus-visible:bg-fog-light peer-focus-visible:underline">
+          <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center justify-between font-semibold">
               <span className="group-hover:underline">Paperback</span>
               <BookOpenIcon
-                width={30}
+                width={24}
                 className="text-fog-dark"
               />
             </span>

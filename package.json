@@ -11,7 +11,7 @@
     "lint": "next lint && tsc",
     "storybook": "storybook dev -p 6006",
     "graphql": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen --config codegen.ts -r dotenv/config",
-    "postinstall": "git config --local core.hooksPath .githooks/"
+    "postinstall": "git config --local core.hooksPath .githooks/; exit 0"
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.2",
@@ -20,7 +20,7 @@
     "@mui/base": "5.0.0-beta.40",
     "@next/third-parties": "^14.2.4",
     "@tailwindcss/container-queries": "^0.1.1",
-    "@types/node": "^20.14.6",
+    "@types/node": "^20.14.8",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "algoliasearch": "^4.23.3",
@@ -30,8 +30,8 @@
     "drupal-jsonapi-params": "^2.3.1",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.4",
-    "graphql": "^16.8.2",
-    "graphql-request": "^7.0.1",
+    "graphql": "^16.9.0",
+    "graphql-request": "^7.1.0",
     "graphql-tag": "^2.12.6",
     "html-entities": "^2.5.2",
     "html-react-parser": "^5.1.10",
@@ -43,14 +43,14 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-focus-lock": "^2.12.1",
-    "react-instantsearch": "^7.11.2",
-    "react-instantsearch-nextjs": "^0.3.3",
+    "react-instantsearch": "^7.11.3",
+    "react-instantsearch-nextjs": "^0.3.4",
     "react-slick": "^0.30.2",
     "react-tiny-oembed": "^1.1.0",
     "sharp": "^0.33.4",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.4",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.2",
     "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
