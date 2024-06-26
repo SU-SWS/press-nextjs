@@ -40,7 +40,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
       className="centered"
       {...props}
     >
-      <div>
+      <>
         <div className="mb-20 flex flex-col md:flex-row md:gap-24 md:pt-32">
           <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-row justify-center gap-24 bg-fog-light px-20 pt-32 md:hidden">
             <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
@@ -72,14 +72,12 @@ const SupBookPage = async ({node, ...props}: Props) => {
                   <H1 className="type-3 mb-0">{node.title}</H1>
 
                   {node.supBookSubjects && (
-                    <div className="rs-mb-2 order-first">
-                      <a
-                        href={`/search?${bookSubject}`}
-                        className="-text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
-                      >
-                        {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
-                      </a>
-                    </div>
+                    <a
+                      href={`/search?${bookSubject}`}
+                      className="rs-mb-2 order-first -text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+                    >
+                      {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
+                    </a>
                   )}
 
                   {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
@@ -215,7 +213,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
             )}
           </div>
         </div>
-      </div>
+      </>
 
       <Tabs className="mb-20 border-b border-fog pb-20">
         <div className="mb-20 border-b border-fog">
