@@ -60,6 +60,7 @@ export const FragmentParagraphInterfaceFragmentDoc = gql`
   __typename
   id
   behaviors
+  status
 }
     `;
 export const FragmentParagraphStanfordAccordionFragmentDoc = gql`
@@ -86,9 +87,6 @@ export const FragmentMediaImageFragmentDoc = gql`
     alt
     height
     width
-    variations(styles: BREAKPOINT2XL2X) {
-      url
-    }
   }
 }
     ${FragmentMediaInterfaceFragmentDoc}`;

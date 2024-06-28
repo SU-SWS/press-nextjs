@@ -37,9 +37,6 @@ fragment FragmentMediaImage on MediaImage {
     alt
     height
     width
-    variations(styles: BREAKPOINT2XL2X) {
-      url
-    }
   }
 }
 
