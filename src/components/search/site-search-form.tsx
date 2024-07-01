@@ -17,7 +17,7 @@ const SiteSearchForm = ({...props}: HTMLAttributes<HTMLFormElement>) => {
           Search this site
         </label>
         <input
-          className="h-15 lg:w-100 w-full rounded-full text-19 lg:border-black-20"
+          className="h-15 lg:w-100 w-full rounded-full p-4 text-16 lg:border-black-20 lg:text-19"
           type="text"
           placeholder="Search this site"
           id={inputId}
@@ -29,7 +29,7 @@ const SiteSearchForm = ({...props}: HTMLAttributes<HTMLFormElement>) => {
           className="absolute right-5 top-2"
         >
           <MagnifyingGlassIcon
-            width={25}
+            width={21}
             className="text-digital-red"
           />
           <span className="sr-only">Submit Search</span>
