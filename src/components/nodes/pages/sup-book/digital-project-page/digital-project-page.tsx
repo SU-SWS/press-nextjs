@@ -187,32 +187,34 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
         </div>
       </>
 
-      <Tabs className="mb-20 border-b border-fog pb-20">
-        <div className="mb-20 border-b border-fog">
-          <TabsList className="mx-auto max-w-5xl">
-            {node.supBookDescription?.processed && <Tab className="p-10">Description</Tab>}
-            {node.supBookReviews && <Tab className="p-10">Reviews</Tab>}
-            {node.supBookAuthorInfo && <Tab className="p-10">About the Author</Tab>}
-          </TabsList>
-        </div>
-        <div className="mx-auto max-w-5xl">
-          {node.supBookDescription?.processed && (
-            <TabPanel>
-              <Wysiwyg html={node.supBookDescription?.processed} />
-            </TabPanel>
-          )}
-          {node.supBookReviews && (
-            <TabPanel>
-              <Wysiwyg html={node.supBookReviews.processed} />
-            </TabPanel>
-          )}
-          {node.supBookAuthorInfo && (
-            <TabPanel>
-              <Wysiwyg html={node.supBookAuthorInfo.processed} />
-            </TabPanel>
-          )}
-        </div>
-      </Tabs>
+      {(node.supBookDescription?.processed || node.supBookReviews || node.supBookAuthorInfo) && (
+        <Tabs className="mb-20 border-b border-fog pb-20">
+          <div className="mb-20 border-b border-fog">
+            <TabsList className="mx-auto max-w-5xl">
+              {node.supBookDescription?.processed && <Tab className="p-10">Description</Tab>}
+              {node.supBookReviews && <Tab className="p-10">Reviews</Tab>}
+              {node.supBookAuthorInfo && <Tab className="p-10">About the Author</Tab>}
+            </TabsList>
+          </div>
+          <div className="mx-auto max-w-5xl">
+            {node.supBookDescription?.processed && (
+              <TabPanel>
+                <Wysiwyg html={node.supBookDescription?.processed} />
+              </TabPanel>
+            )}
+            {node.supBookReviews && (
+              <TabPanel>
+                <Wysiwyg html={node.supBookReviews.processed} />
+              </TabPanel>
+            )}
+            {node.supBookAuthorInfo && (
+              <TabPanel>
+                <Wysiwyg html={node.supBookAuthorInfo.processed} />
+              </TabPanel>
+            )}
+          </div>
+        </Tabs>
+      )}
 
       {node.supBookSubjects && (
         <div className="mx-auto max-w-5xl">

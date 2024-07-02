@@ -551,6 +551,7 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   supBookERetailers {
     ...FragmentLink
   }
+  supBookType
 }
     ${FragmentNodeInterfaceFragmentDoc}
 ${FragmentNameTypeFragmentDoc}

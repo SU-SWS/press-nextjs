@@ -85,7 +85,7 @@ const options: HTMLReactParserOptions = {
             }
 
             if (nodeProps.className.indexOf("chapnumandtitle") >= 0) {
-              return <H3>{domToReact(children, options)}</H3>
+              nodeProps.className += " font-semibold text-m2"
             }
           }
           return <NodeName {...nodeProps}>{domToReact(children, options)}</NodeName>
