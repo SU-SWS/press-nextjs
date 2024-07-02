@@ -6,6 +6,7 @@ import {useBoolean, useCounter} from "usehooks-ts"
 import {useRouter, useSearchParams} from "next/navigation"
 import usePagination from "@lib/hooks/usePagination"
 import useFocusOnRender from "@lib/hooks/useFocusOnRender"
+import {ArrowLongLeftIcon, ArrowLongRightIcon} from "@heroicons/react/20/solid"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -115,16 +116,17 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
       {loadPage && paginationButtons.length > 1 && (
         <nav
           aria-label="Pager"
-          className="mx-auto w-fit"
+          className="rs-mt-4 mx-auto w-fit"
         >
-          <ul className="list-unstyled flex gap-5">
+          <ul className="list-unstyled flex items-center gap-5">
             {paginationButtons.map((pageNum, i) => (
               <PaginationButton
                 key={`page-button-${pageNum}--${i}`}
                 page={pageNum}
                 currentPage={currentPage}
-                total={items.length * totalPages}
-                onClick={() => goToPage(pageNum)}
+                total={totalPages}
+                onPageClick={goToPage}
+                pagerSiblingCount={pagerSiblingCount}
               />
             ))}
           </ul>
@@ -134,7 +136,7 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
   )
 }
 
-const PaginationButton = ({page, currentPage, total, onClick}: {page: number | string; currentPage: number; total: number; onClick: () => void}) => {
+const PaginationButton = ({page, currentPage, total, onPageClick, pagerSiblingCount}: {page: number | string; currentPage: number; total: number; onPageClick: (_page: number) => void; pagerSiblingCount: number}) => {
   if (page === 0) {
     return (
       <li className="mt-auto h-full">
@@ -143,22 +145,40 @@ const PaginationButton = ({page, currentPage, total, onClick}: {page: number | s
       </li>
     )
   }
-  const isCurrent = page == currentPage
+
+  const handleClick = () => {
+    if (page === "leftArrow") return onPageClick(1)
+    if (page === "rightArrow") return onPageClick(total)
+    onPageClick(page as number)
+  }
+
+  // Conditionally render left arrow and right arrow based on currentPage
+  if (page === 1 && currentPage >= pagerSiblingCount + 3) return null
+  if (page === "leftArrow" && currentPage < pagerSiblingCount + 3) return null
+
+  if (page === total && currentPage <= total - (pagerSiblingCount + 3)) return null
+  if (page === "rightArrow" && currentPage > total - (pagerSiblingCount + 3)) return null
+
+  const isCurrent = page === currentPage
   return (
-    <li>
+    <li className="m-0 flex items-center">
       <button
-        className="text-m2 font-medium hocus:underline"
-        onClick={onClick}
-        aria-current={isCurrent}
+        className="group text-m2 font-medium hocus:underline"
+        onClick={handleClick}
+        aria-current={isCurrent ? "page" : undefined}
       >
         <span className="sr-only">
-          Go to page {page} of {total}
+          {page === "leftArrow" && "Go to first page"}
+          {page === "rightArrow" && "Go to last page"}
+          {page !== "leftArrow" && page !== "rightArrow" && `Go to page ${page} of ${total}`}
         </span>
         <span
           aria-hidden
-          className={(isCurrent ? "border-stone-dark text-stone-dark" : "border-transparent text-cardinal-red") + " border-b-2 px-4"}
+          className={(isCurrent ? "border-stone-dark text-stone-dark" : "border-transparent text-cardinal-red") + " block h-fit border-b-2 px-4"}
         >
-          {page}
+          {page === "leftArrow" && <ArrowLongLeftIcon width={30} />}
+          {page === "rightArrow" && <ArrowLongRightIcon width={30} />}
+          {page !== "leftArrow" && page !== "rightArrow" && page}
         </span>
       </button>
     </li>
