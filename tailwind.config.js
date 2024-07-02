@@ -1,9 +1,9 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 
-const decanter = require('decanter');
+const decanter = require("decanter");
 
-const path = require('path');
-const dir = path.resolve(__dirname, 'src/styles');
+const path = require("path");
+const dir = path.resolve(__dirname, "src/styles");
 
 let twoColumn = {}, threeColumn = {}, i;
 for (i = 1; i <= 4; i++) {
@@ -46,40 +46,40 @@ module.exports = {
       },
       gridTemplateColumns: {...twoColumn, ...threeColumn},
       containers: {
-        '9xl': '90rem',
-        '10xl': '100rem',
-        '11xl': '110rem',
-        '12xl': '120rem',
-        '13xl': '130rem',
-        '14xl': '140rem',
-        '15xl': '150rem',
+        "9xl": "90rem",
+        "10xl": "100rem",
+        "11xl": "110rem",
+        "12xl": "120rem",
+        "13xl": "130rem",
+        "14xl": "140rem",
+        "15xl": "150rem",
       },
       scale: {
-        '-100': '-1',
+        "-100": "-1",
       },
       colors: {
         ...decanter.theme.extend.colors,
-        'press-indigo': '#003D69',
-        'press-grass': {
-          DEFAULT: '#00593e',
+        "press-indigo": "#003D69",
+        "press-grass": {
+          DEFAULT: "#00593e",
           light: "#6FA287"
         },
-        'press-bay': {
+        "press-bay": {
           DEFAULT: "#6FA287",
-          light: '#a0d2bf',
+          light: "#a0d2bf",
           dark: "#417865",
         },
-        'press-sand': {
-          DEFAULT: '#9c9286',
+        "press-sand": {
+          DEFAULT: "#9c9286",
           light: "#C5BEB2",
-          dark: '#786E63',
+          dark: "#786E63",
         },
       },
     },
   },
   plugins: [
     ...decanter.plugins,
-    require('@tailwindcss/container-queries'),
+    require("@tailwindcss/container-queries"),
     require(`${dir}/typography/local-footer.tsx`)(),
     require(`${dir}/typography/global-message.tsx`)(),
     require(`${dir}/typography/wysiwyg.tsx`)(),

@@ -62,10 +62,10 @@ function CustomOption(props: OptionProps) {
       {...otherProps}
       id={id}
       className={twMerge(
-        "mx-5 mb-5 flex cursor-pointer items-center overflow-hidden rounded-full px-5 py-2 hocus:bg-press-bay-light hocus:text-black hocus:underline",
+        "text-16 rs-m-neg1 rs-mt-0 flex cursor-pointer items-center overflow-hidden rounded-full px-8 py-4 border-3 border-transparent hocus:bg-press-bay-light hocus:text-black hocus:underline",
         clsx({
-          "bg-press-bay-light text-black": selected,
-          "bg-press-bay-light text-black underline": !selected && highlighted,
+          "bg-press-bay-light border-press-bay text-black no-underline": selected,
+          "bg-press-bay-light border-press-bay text-black underline": !selected && highlighted,
         })
       )}
     >
@@ -130,7 +130,7 @@ const SelectList = ({options = [], label, multiple, ariaLabelledby, required, de
   const optionChosen = multiple && value ? value.length > 0 : !!value
 
   return (
-    <div className="relative h-fit">
+    <div className="relative h-[45px]">
       <button
         {...getButtonProps()}
         className={clsx("w-full p-5 text-left", {"rounded border border-black-40": !borderless, "bg-black-30": props.disabled})}
@@ -139,13 +139,12 @@ const SelectList = ({options = [], label, multiple, ariaLabelledby, required, de
         {label && (
           <div
             className={clsx("relative max-w-[calc(100%-30px)]", {
-              "top-[-15px] w-full text-m0": optionChosen,
-              "text-m1": !optionChosen,
+              "top-[-15px] w-full": optionChosen,
             })}
           >
             <div
               id={labelId}
-              className={clsx("w-fit bg-white px-5", {"bg-black-30": props.disabled})}
+              className={clsx("w-fit bg-white px-5 text-16", {"bg-black-30": props.disabled})}
             >
               {label}
             </div>
@@ -153,17 +152,17 @@ const SelectList = ({options = [], label, multiple, ariaLabelledby, required, de
         )}
 
         {!label && emptyLabel && !optionChosen && (
-          <div className={clsx("relative max-w-[calc(100%-30px)] text-m1")}>
+          <div className={clsx("relative max-w-[calc(100%-30px)]")}>
             <div
               id={labelId}
-              className={clsx("w-fit bg-white px-5", {"bg-black-30": props.disabled})}
+              className={clsx("w-fit bg-white px-5 text-16", {"bg-black-30": props.disabled})}
             >
               {emptyLabel}
             </div>
           </div>
         )}
 
-        {optionChosen && <div className="max-w-[calc(100%-30px)] overflow-hidden">{renderSelectedValue(value, options)}</div>}
+        {optionChosen && <div className="max-w-[calc(100%-30px)] overflow-hidden text-16">{renderSelectedValue(value, options)}</div>}
 
         <span className="absolute right-5 top-0 flex h-full items-center">{downIcon || <ChevronDownIcon width={20} />}</span>
       </button>

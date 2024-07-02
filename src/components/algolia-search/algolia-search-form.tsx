@@ -103,7 +103,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
         aria-labelledby="page-title"
         onSubmit={e => e.preventDefault()}
       >
-        <div className="mx-auto mb-20 flex items-center gap-5 md:w-2/3">
+        <div className="mx-auto mb-20 flex items-center gap-6 md:gap-8 md:w-2/3">
           <label
             className="sr-only"
             htmlFor="search-input"
@@ -112,7 +112,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           </label>
           <input
             id="search-input"
-            className="flex-grow border-0 border-b border-black-30 text-m2 placeholder:-text-m1"
+            className="flex-grow border-0 border-b border-black-30 card-paragraph rs-pl-1 pb-10 pt-8 rs-pr-1 md:rs-pl-3 md:py-12 md:rs-pr-2"
             ref={inputRef}
             autoComplete="on"
             autoCorrect="on"
@@ -127,28 +127,29 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           <button
             type="submit"
             onClick={() => refine(inputRef.current?.value || "")}
+            className="group"
           >
             <span className="sr-only">Submit Search</span>
             <MagnifyingGlassIcon
               width={40}
-              className="block rounded-full bg-cardinal-red p-3 text-white"
+              className="block rounded-full bg-digital-red group-hocus:bg-cardinal-red p-3 text-white"
             />
           </button>
         </div>
 
         <div className="float-left hidden w-1/4 md:block">
-          <div className="mb-16 border-b border-black-30 pb-20">
-            <H2 className="text-m1">Filter by</H2>
+          <div className="rs-mb-2 border-b border-black-30 rs-pb-3">
+            <H2 className="type-0 mb-0">Filter by</H2>
 
             {currentRefinements.filter(refinement => refinement.attribute === "book_subject").length > 0 && (
-              <ul className="list-unstyled mb-16">
+              <ul className="list-unstyled first:children:rs-mt-0">
                 {currentRefinements
                   .filter(refinement => refinement.attribute === "book_subject")
                   .map(refinement => {
                     return refinement.refinements.map((item, i) => (
                       <li
                         key={`refinement-${i}`}
-                        className="flex w-fit items-center gap-8 border-2 border-press-sand p-5"
+                        className="flex w-fit items-center gap-8 border-2 border-press-sand px-10 py-6 mb-4 text-18"
                       >
                         {item.value}
                         <button
@@ -172,11 +173,11 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             )}
           </div>
 
-          <div className="mb-14 border-b border-black-30 pb-16">
+          <div className="rs-mb-1 border-b border-black-30 rs-pb-2">
             <label className="flex cursor-pointer items-center justify-between gap-10">
-              <span>Search only books</span>
+              <span className="text-16">Search only books</span>
 
-              <div className="relative">
+              <div className="relative group">
                 <input
                   className="peer sr-only"
                   type="checkbox"
@@ -184,19 +185,19 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                   onChange={() => refineBookType("book")}
                 />
                 <div className="h-6 w-16 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
-                <div className="absolute -left-1 -top-2 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-press-grass-light transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline" />
+                <div className="absolute -left-1 -top-2 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-press-bay/60 outline-8 transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline group-hocus:outline" />
               </div>
             </label>
           </div>
 
-          <fieldset className="mb-12 border-b border-black-30 pb-16">
-            <legend className="mb-6 text-m1 font-medium">Subject</legend>
+          <fieldset className="rs-mb-1 border-b border-black-30 rs-pb-2">
+            <legend className="rs-mb-0 card-paragraph font-medium">Subject</legend>
             {bookSubjectRefinementList.map(refinementOption => (
               <label
                 key={refinementOption.value}
-                className="mb-8 mt-5 flex cursor-pointer items-center gap-5"
+                className="group mx-5 text-16 flex cursor-pointer items-center gap-5"
               >
-                <div className="relative">
+                <div className="relative group">
                   <input
                     className="peer sr-only"
                     type="checkbox"
@@ -204,8 +205,8 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                     name="subject"
                     onChange={() => refineBookSubjects(refinementOption.value)}
                   />
-                  <div className="h-14 w-14 rounded-full peer-focus-visible:bg-press-bay" />
-                  <div className="absolute left-3 top-3 h-8 w-8 rounded border-2 border-press-sand-light peer-checked:border-press-bay-dark peer-checked:bg-press-grass-light peer-focus-visible:border-press-grass" />
+                  <div className="h-14 w-14 rounded-full peer-focus-visible:bg-press-bay group-hocus:bg-press-bay/60" />
+                  <div className="absolute left-3 top-3 h-8 w-8 rounded border-2 border-press-sand-light peer-checked:border-press-grass peer-checked:bg-press-bay-dark peer-focus-visible:border-press-grass group-hocus:border-press-grass" />
                   <CheckIcon
                     width={15}
                     className="absolute left-4 top-4 hidden text-white peer-checked:block"
@@ -219,6 +220,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                       .toLowerCase()
                       .replaceAll(/[^a-z0-9]/g, "-")
                   }
+                  className="group-hocus:underline"
                 >
                   {refinementOption.value}
                 </span>
@@ -227,13 +229,13 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           </fieldset>
 
           <fieldset>
-            <legend className="mb-6 text-m1 font-medium">Published Date</legend>
+            <legend className="rs-mb-1 card-paragraph font-medium">Published Date</legend>
 
             <div className="flex items-center gap-5">
               <div className="flex-1 flex-grow">
                 <div
                   id={`${id}-min-year`}
-                  className="text-press-sand-dark"
+                  className="text-press-sand-dark text-18 mb-2"
                 >
                   <span className="sr-only">Minimum&nbps;</span>Year
                 </div>
@@ -255,7 +257,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
               <div className="flex-1 flex-grow">
                 <div
                   id={`${id}-max-year`}
-                  className="text-press-sand-dark"
+                  className="text-press-sand-dark text-18 mb-2"
                 >
                   <span className="sr-only">Minimum&nbps;</span>Year
                 </div>
@@ -266,6 +268,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                   disabled={!canRefinePubYear}
                   emptyLabel="Any"
                   onChange={(_e, value) => setRangeChoices(prevState => [prevState[0], parseInt(value as string) || undefined])}
+                  className="text-16 *:text-16 h-[45px]"
                 />
               </div>
             </div>
@@ -324,14 +327,14 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <div aria-live="polite">
+        <div aria-live="polite" className="card-paragraph">
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
         </div>
 
         <div className="flex w-1/2 items-center gap-3">
           <div
             id="sort-by"
-            className="text-press-sand-dark"
+            className="text-press-sand-dark text-16"
           >
             Sort By:
           </div>
