@@ -116,7 +116,7 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
       {loadPage && paginationButtons.length > 1 && (
         <nav
           aria-label="Pager"
-          className="mx-auto w-fit rs-mt-4"
+          className="rs-mt-4 mx-auto w-fit"
         >
           <ul className="list-unstyled flex items-center gap-5">
             {paginationButtons.map((pageNum, i) => (
@@ -126,6 +126,7 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
                 currentPage={currentPage}
                 total={totalPages}
                 onPageClick={goToPage}
+                pagerSiblingCount={pagerSiblingCount}
               />
             ))}
           </ul>
@@ -135,7 +136,7 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
   )
 }
 
-const PaginationButton = ({page, currentPage, total, onPageClick}: {page: number | string; currentPage: number; total: number; onPageClick: (page: number) => void}) => {
+const PaginationButton = ({page, currentPage, total, onPageClick, pagerSiblingCount}: {page: number | string; currentPage: number; total: number; onPageClick: (_page: number) => void; pagerSiblingCount: number}) => {
   if (page === 0) {
     return (
       <li className="mt-auto h-full">
@@ -146,22 +147,17 @@ const PaginationButton = ({page, currentPage, total, onPageClick}: {page: number
   }
 
   const handleClick = () => {
-    if (page === "leftArrow") {
-      onPageClick(1)
-    } else if (page === "rightArrow") {
-      onPageClick(total)
-    } else {
-      onPageClick(page as number)
-    }
+    if (page === "leftArrow") return onPageClick(1)
+    if (page === "rightArrow") return onPageClick(total)
+    onPageClick(page as number)
   }
 
-    // Conditionally render left arrow and right arrow based on currentPage
-    if (page === "leftArrow" && currentPage === 1) {
-      return null;
-    }
-    if (page === "rightArrow" && currentPage === total) {
-      return null;
-    }
+  // Conditionally render left arrow and right arrow based on currentPage
+  if (page === 1 && currentPage >= pagerSiblingCount + 3) return null
+  if (page === "leftArrow" && currentPage < pagerSiblingCount + 3) return null
+
+  if (page === total && currentPage <= total - (pagerSiblingCount + 3)) return null
+  if (page === "rightArrow" && currentPage > total - (pagerSiblingCount + 3)) return null
 
   const isCurrent = page === currentPage
   return (
