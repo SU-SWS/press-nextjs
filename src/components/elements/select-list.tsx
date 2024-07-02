@@ -62,10 +62,10 @@ function CustomOption(props: OptionProps) {
       {...otherProps}
       id={id}
       className={twMerge(
-        "text-16 rs-m-neg1 rs-mt-0 flex cursor-pointer items-center overflow-hidden rounded-full px-8 py-4 border-3 border-transparent hocus:bg-press-bay-light hocus:text-black hocus:underline",
+        "rs-mt-0 rs-m-neg1 flex cursor-pointer items-center overflow-hidden rounded-full border-3 border-transparent px-8 py-4 hocus:bg-press-bay-light hocus:text-black hocus:underline",
         clsx({
-          "bg-press-bay-light border-press-bay text-black no-underline": selected,
-          "bg-press-bay-light border-press-bay text-black underline": !selected && highlighted,
+          "border-press-bay bg-press-bay-light text-black no-underline": selected,
+          "border-press-bay bg-press-bay-light text-black underline": !selected && highlighted,
         })
       )}
     >
@@ -173,7 +173,7 @@ const SelectList = ({options = [], label, multiple, ariaLabelledby, required, de
       >
         <ul
           {...getListboxProps()}
-          className={clsx("list-unstyled my-5", {hidden: !listboxVisible})}
+          className={clsx("list-unstyled my-5 *:text-16", {hidden: !listboxVisible})}
           aria-hidden={!listboxVisible}
           aria-labelledby={labeledBy}
         >
