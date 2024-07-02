@@ -12,9 +12,10 @@ import SelectList from "@components/elements/select-list"
 import {SelectOptionDefinition} from "@mui/base/useSelect"
 import {RangeBoundaries} from "instantsearch.js/es/connectors/range/connectRange"
 import {IndexUiState} from "instantsearch.js/es/types/ui-state"
-import {MagnifyingGlassIcon, XMarkIcon} from "@heroicons/react/20/solid"
+import {ArrowLongLeftIcon, ArrowLongRightIcon, MagnifyingGlassIcon, XMarkIcon} from "@heroicons/react/20/solid"
 import DefaultHit, {AlgoliaHit} from "@components/algolia-search/hits/default"
 import {CheckIcon} from "@heroicons/react/20/solid"
+import clsx from "clsx"
 
 type Props = {
   appId: string
@@ -103,7 +104,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
         aria-labelledby="page-title"
         onSubmit={e => e.preventDefault()}
       >
-        <div className="mx-auto mb-20 flex items-center gap-6 md:gap-8 md:w-2/3">
+        <div className="mx-auto mb-20 flex items-center gap-6 md:w-2/3 md:gap-8">
           <label
             className="sr-only"
             htmlFor="search-input"
@@ -112,7 +113,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           </label>
           <input
             id="search-input"
-            className="flex-grow border-0 border-b border-black-30 card-paragraph rs-pl-1 pb-10 pt-8 rs-pr-1 md:rs-pl-3 md:py-12 md:rs-pr-2"
+            className="rs-pr-1 rs-pl-1 card-paragraph flex-grow border-0 border-b border-black-30 pb-10 pt-8 md:rs-pr-2 md:rs-pl-3 md:py-12"
             ref={inputRef}
             autoComplete="on"
             autoCorrect="on"
@@ -132,13 +133,13 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             <span className="sr-only">Submit Search</span>
             <MagnifyingGlassIcon
               width={40}
-              className="block rounded-full bg-digital-red group-hocus:bg-cardinal-red p-3 text-white"
+              className="block rounded-full bg-digital-red p-3 text-white group-hocus:bg-cardinal-red"
             />
           </button>
         </div>
 
         <div className="float-left hidden w-1/4 md:block">
-          <div className="rs-mb-2 border-b border-black-30 rs-pb-3">
+          <div className="rs-mb-2 rs-pb-3 border-b border-black-30">
             <H2 className="type-0 mb-0">Filter by</H2>
 
             {currentRefinements.filter(refinement => refinement.attribute === "book_subject").length > 0 && (
@@ -149,7 +150,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                     return refinement.refinements.map((item, i) => (
                       <li
                         key={`refinement-${i}`}
-                        className="flex w-fit items-center gap-8 border-2 border-press-sand px-10 py-6 mb-4 text-18"
+                        className="mb-4 flex w-fit items-center gap-8 border-2 border-press-sand px-10 py-6 text-18"
                       >
                         {item.value}
                         <button
@@ -173,11 +174,11 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             )}
           </div>
 
-          <div className="rs-mb-1 border-b border-black-30 rs-pb-2">
+          <div className="rs-mb-1 rs-pb-2 border-b border-black-30">
             <label className="flex cursor-pointer items-center justify-between gap-10">
               <span className="text-16">Search only books</span>
 
-              <div className="relative group">
+              <div className="group relative">
                 <input
                   className="peer sr-only"
                   type="checkbox"
@@ -185,19 +186,19 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                   onChange={() => refineBookType("book")}
                 />
                 <div className="h-6 w-16 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
-                <div className="absolute -left-1 -top-2 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-press-bay/60 outline-8 transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline group-hocus:outline" />
+                <div className="absolute -left-1 -top-2 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-8 outline-press-bay/60 transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline group-hocus:outline" />
               </div>
             </label>
           </div>
 
-          <fieldset className="rs-mb-1 border-b border-black-30 rs-pb-2">
+          <fieldset className="rs-mb-1 rs-pb-2 border-b border-black-30">
             <legend className="rs-mb-0 card-paragraph font-medium">Subject</legend>
             {bookSubjectRefinementList.map(refinementOption => (
               <label
                 key={refinementOption.value}
-                className="group mx-5 text-16 flex cursor-pointer items-center gap-5"
+                className="group mx-5 flex cursor-pointer items-center gap-5 text-16"
               >
-                <div className="relative group">
+                <div className="group relative">
                   <input
                     className="peer sr-only"
                     type="checkbox"
@@ -235,7 +236,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
               <div className="flex-1 flex-grow">
                 <div
                   id={`${id}-min-year`}
-                  className="text-press-sand-dark text-18 mb-2"
+                  className="mb-2 text-18 text-press-sand-dark"
                 >
                   <span className="sr-only">Minimum&nbps;</span>Year
                 </div>
@@ -257,7 +258,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
               <div className="flex-1 flex-grow">
                 <div
                   id={`${id}-max-year`}
-                  className="text-press-sand-dark text-18 mb-2"
+                  className="mb-2 text-18 text-press-sand-dark"
                 >
                   <span className="sr-only">Minimum&nbps;</span>Year
                 </div>
@@ -268,7 +269,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                   disabled={!canRefinePubYear}
                   emptyLabel="Any"
                   onChange={(_e, value) => setRangeChoices(prevState => [prevState[0], parseInt(value as string) || undefined])}
-                  className="text-16 *:text-16 h-[45px]"
+                  className="h-[45px] text-16 *:text-16"
                 />
               </div>
             </div>
@@ -327,14 +328,17 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <div aria-live="polite" className="card-paragraph">
+        <div
+          aria-live="polite"
+          className="card-paragraph"
+        >
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
         </div>
 
         <div className="flex w-1/2 items-center gap-3">
           <div
             id="sort-by"
-            className="text-press-sand-dark text-16"
+            className="text-16 text-press-sand-dark"
           >
             Sort By:
           </div>
@@ -364,10 +368,13 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
 
       {pages.length > 1 && (
         <nav aria-label="Search results pager">
-          <ul className="list-unstyled flex justify-between">
+          <ul className="list-unstyled mx-auto flex w-fit gap-8 *:text-press-sand-dark">
             {pages[0] > 0 && (
               <li>
-                <button onClick={() => goToPage(0)}>First</button>
+                <button onClick={() => goToPage(0)}>
+                  <span className="sr-only">Go to first page</span>
+                  <ArrowLongLeftIcon width={30} />
+                </button>
               </li>
             )}
 
@@ -375,14 +382,23 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
               <li
                 key={`page-${pageNum}`}
                 aria-current={currentPage === pageNum}
+                className={clsx("h-fit px-4 pb-3", {"border-b-2 border-press-sand-dark": currentPage === pageNum})}
               >
-                <button onClick={() => goToPage(pageNum)}>{pageNum + 1}</button>
+                <button
+                  className="no-underline hocus:underline"
+                  onClick={() => goToPage(pageNum)}
+                >
+                  {pageNum + 1}
+                </button>
               </li>
             ))}
 
             {pages[pages.length - 1] !== nbPages && (
               <li>
-                <button onClick={() => goToPage(nbPages - 1)}>Last</button>
+                <button onClick={() => goToPage(nbPages - 1)}>
+                  <span className="sr-only">Go to last page</span>
+                  <ArrowLongRightIcon width={30} />
+                </button>
               </li>
             )}
           </ul>
