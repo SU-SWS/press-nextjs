@@ -69,7 +69,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
             <li>Mailing address (if a print book is requested)</li>
           </ul>
 
-          <p className="italic">Please note that submissions from individuals or professors requiring a desk or examination copy cannot be approved though this method.</p>
+          <p className="my-5 border-l-3 border-fog pl-5">Please note that submissions from individuals or professors requiring a desk or examination copy cannot be approved though this method.</p>
 
           {node.supBookDigitalCompLink && (
             <>

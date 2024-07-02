@@ -20,7 +20,7 @@ const BookAwards = ({children}: {children: JSX.Element[]}) => {
 
   return (
     <div>
-      <ul className="list-unstyled mb-10">
+      <ul className="list-unstyled">
         {top.map((item, i) => (
           <li
             className="mb-10"

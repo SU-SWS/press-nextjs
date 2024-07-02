@@ -72,8 +72,9 @@ const RootLayout = ({children, modal}: {children: React.ReactNode; modal: React.
             className="mb-32 flex-grow"
           >
             {children}
+
+            <BackToTop />
           </main>
-          <BackToTop />
           <PageFooter />
         </div>
         {modal}

@@ -7,6 +7,8 @@ import {twMerge} from "tailwind-merge"
 import {Maybe} from "@lib/gql/__generated__/drupal.d"
 import Mathjax from "@components/tools/mathjax"
 import Script from "next/script"
+import Button from "@components/elements/button"
+import ActionLink from "@components/elements/action-link"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -23,7 +25,7 @@ const Wysiwyg = ({html, className, ...props}: Props) => {
   const addMathJax = html.match(/\$\$.*\$\$/) || html.match(/\\\[.*\\\]/) || html.match(/\\\(.*\\\)/)
   return (
     <div
-      className={twMerge("[&_a]:not(.btn):text-digital-red hocus:[&_a]:not(.btn):text-archway-dark wysiwyg", className)}
+      className={twMerge("[&_a]:not(.btn):text-digital-red hocus:[&_a]:not(.btn):text-archway-dark wysiwyg leading", className)}
       {...props}
     >
       {addMathJax && <Mathjax />}
@@ -46,6 +48,29 @@ const options: HTMLReactParserOptions = {
           delete nodeProps["data-entity-type"]
           delete nodeProps["data-entity-uuid"]
 
+          if (nodeProps.className?.indexOf("link--action") >= 0) {
+            return (
+              <ActionLink
+                {...nodeProps}
+                href={nodeProps.href as string}
+              >
+                {domToReact(children, options)}
+              </ActionLink>
+            )
+          }
+
+          if (nodeProps.className?.indexOf("button") >= 0) {
+            return (
+              <Button
+                {...nodeProps}
+                big={nodeProps.className.indexOf("button--big") >= 0}
+                secondary={nodeProps.className.indexOf("button--secondary") >= 0}
+              >
+                {domToReact(children, options)}
+              </Button>
+            )
+          }
+
           return <a {...nodeProps}>{domToReact(children, options)}</a>
 
         case "div":
@@ -60,7 +85,7 @@ const options: HTMLReactParserOptions = {
             }
 
             if (nodeProps.className.indexOf("chapnumandtitle") >= 0) {
-              return <H3>{domToReact(children, options)}</H3>
+              nodeProps.className += " font-semibold text-m2"
             }
           }
           return <NodeName {...nodeProps}>{domToReact(children, options)}</NodeName>
