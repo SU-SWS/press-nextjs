@@ -2,8 +2,6 @@
 
 import {HtmlHTMLAttributes} from "react"
 import usePageHasTopBanner from "@lib/hooks/usePageHasTopBanner"
-import {useWindowSize} from "usehooks-ts"
-import {twMerge} from "tailwind-merge"
 
 type Props = HtmlHTMLAttributes<SVGSVGElement> & {
   height?: number
@@ -12,17 +10,12 @@ type Props = HtmlHTMLAttributes<SVGSVGElement> & {
 
 const HeaderLogoLg = (props: Props) => {
   const hasPageBanner = usePageHasTopBanner()
-  const {width: windowWidth} = useWindowSize()
-  const height = windowWidth >= 1500 ? 126 : windowWidth <= 1500 ? 104 : 72
-  const width = (height / 89) * 579
-  const size = `w-[${width}px] h-[${height}px]`
-
   const treeFill = hasPageBanner ? "fill-cardinal-red lg:fill-white" : "fill-cardinal-red"
   const wordFill = hasPageBanner ? "fill-stone-dark lg:fill-white" : "fill-stone-dark"
 
   return (
     <svg
-      className={twMerge("max-w-full", size)}
+      className="aspect-[579/87] h-[72px] w-full lg:h-[126px]"
       width="100%"
       height="100%"
       xmlns="http://www.w3.org/2000/svg"
