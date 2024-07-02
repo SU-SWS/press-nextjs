@@ -20,7 +20,7 @@ const FileListParagraph = ({paragraph, ...props}: Props) => {
     return (
       <FileListSelection
         fileOptions={fileOptions}
-        label={paragraph.supFileListLabel}
+        label={paragraph.supFileListLabel || "Choose a file"}
         {...props}
       />
     )
