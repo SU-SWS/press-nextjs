@@ -7,6 +7,8 @@ import {twMerge} from "tailwind-merge"
 import {Maybe} from "@lib/gql/__generated__/drupal.d"
 import Mathjax from "@components/tools/mathjax"
 import Script from "next/script"
+import Button from "@components/elements/button"
+import ActionLink from "@components/elements/action-link"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -45,6 +47,29 @@ const options: HTMLReactParserOptions = {
           delete nodeProps["data-entity-substitution"]
           delete nodeProps["data-entity-type"]
           delete nodeProps["data-entity-uuid"]
+
+          if (nodeProps.className?.indexOf("link--action") >= 0) {
+            return (
+              <ActionLink
+                {...nodeProps}
+                href={nodeProps.href as string}
+              >
+                {domToReact(children, options)}
+              </ActionLink>
+            )
+          }
+
+          if (nodeProps.className?.indexOf("button") >= 0) {
+            return (
+              <Button
+                {...nodeProps}
+                big={nodeProps.className.indexOf("button--big") >= 0}
+                secondary={nodeProps.className.indexOf("button--secondary") >= 0}
+              >
+                {domToReact(children, options)}
+              </Button>
+            )
+          }
 
           return <a {...nodeProps}>{domToReact(children, options)}</a>
 

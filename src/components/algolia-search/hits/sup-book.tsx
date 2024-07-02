@@ -44,7 +44,7 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
           <div className="relative mx-auto aspect-[2/3] w-[150px] shrink-0 @2xl:mr-0">
             <Image
               className="object-cover"
-              src={hit.photo}
+              src={hit.photo.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)}
               alt=""
               fill
               sizes="300px"
