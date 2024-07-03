@@ -37,6 +37,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 
 const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pagerSiblingCount = 2, loadPage, ...props}: Props) => {
   const id = useId()
+  const ref = useRef(false)
   const [items, setItems] = useState<JSX.Element[]>(Array.isArray(children) ? children : [children])
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -52,8 +53,9 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
 
   const goToPage = async (page: number) => {
     if (loadPage) {
-      const newView = await loadPage(page - 1)
-      setItems(newView.props.children)
+      loadPage(page - 1)
+        .then(response => setItems(response.props.children))
+        .catch(() => console.warn("An error occurred fetching more results."))
     }
 
     enableFocusElement()
@@ -83,13 +85,15 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
   useEffect(() => {
     const updateInitialContents = async (initialPage: number) => {
       if (loadPage) {
-        const newView = await loadPage(initialPage - 1)
-        setItems(newView.props.children)
+        loadPage(initialPage - 1)
+          .then(response => setItems(response.props.children))
+          .catch(() => console.warn("An error occurred fetching more results."))
       }
     }
 
     const initialPage = parseInt(searchParams.get(pageKey || "") || "")
-    if (initialPage > 1) updateInitialContents(initialPage)
+    if (initialPage > 1 && !ref.current) updateInitialContents(initialPage)
+    ref.current = true
   }, [searchParams, pageKey, loadPage])
 
   const paginationButtons = usePagination(totalPages * items.length, currentPage, items.length, pagerSiblingCount)
