@@ -95,6 +95,7 @@ type Props = {
   name?: Maybe<string>
   borderless?: boolean
   downIcon?: JSX.Element
+  className?: string
 }
 
 const SelectList = ({options = [], label, multiple, ariaLabelledby, required, defaultValue, name, emptyValue, emptyLabel = "- None -", borderless = false, downIcon, ...props}: Props) => {
@@ -144,7 +145,7 @@ const SelectList = ({options = [], label, multiple, ariaLabelledby, required, de
           >
             <div
               id={labelId}
-              className={clsx("w-fit bg-white px-5 text-16", {"bg-black-30": props.disabled})}
+              className={twMerge("w-fit px-5 text-16", clsx({"bg-black-30": props.disabled}))}
             >
               {label}
             </div>
@@ -155,7 +156,7 @@ const SelectList = ({options = [], label, multiple, ariaLabelledby, required, de
           <div className={clsx("relative max-w-[calc(100%-30px)]")}>
             <div
               id={labelId}
-              className={clsx("w-fit bg-white px-5 text-16", {"bg-black-30": props.disabled})}
+              className={twMerge("w-fit px-5 text-16", clsx({"bg-black-30": props.disabled}))}
             >
               {emptyLabel}
             </div>
