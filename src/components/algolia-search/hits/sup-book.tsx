@@ -17,7 +17,7 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
     <article className="py-12 @container">
       <div className="flex flex-col justify-between gap-20 @2xl:flex-row">
         <div>
-          <H2 className="text-m2">
+          <H2 className="type-0 mb-2">
             <Link
               className="text-stone-dark hocus:text-digital-red"
               href={hit.url.replace(hitUrl.origin, "")}
@@ -26,9 +26,9 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
             </Link>
           </H2>
 
-          {hit.summary && <p className="mb-10">{hit.summary}</p>}
+          {hit.summary && <p className="card-paragraph mb-8">{hit.summary}</p>}
           {hit.html && !hit.summary && (
-            <p className="mb-10">
+            <p className="card-paragraph mb-8">
               <Snippet
                 hit={hit}
                 attribute="html"
@@ -36,8 +36,8 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
             </p>
           )}
 
-          {hit.book_authors && <div>{hit.book_authors}</div>}
-          {hit.book_published && <div>{hit.book_published}</div>}
+          {hit.book_authors && <div className="text-18">{hit.book_authors}</div>}
+          {hit.book_published && <div className="text-18">{hit.book_published}</div>}
         </div>
 
         {hit.photo && (
