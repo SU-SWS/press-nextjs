@@ -8,26 +8,16 @@ type Props = HtmlHTMLAttributes<SVGSVGElement> & {
   width?: number
 }
 
-const HeaderLogoLg = ({height = 89, width = 579, ...props}: Props) => {
+const HeaderLogoLg = (props: Props) => {
   const hasPageBanner = usePageHasTopBanner()
-
-  if (height != 89 && width == 579) {
-    width *= height / 89
-  }
-
-  if (height == 89 && width != 579) {
-    height *= width / 579
-  }
-
   const treeFill = hasPageBanner ? "fill-cardinal-red lg:fill-white" : "fill-cardinal-red"
   const wordFill = hasPageBanner ? "fill-stone-dark lg:fill-white" : "fill-stone-dark"
 
   return (
     <svg
-      className="max-w-full"
-      width={width}
-      height={height}
-      viewBox={`0 0 ${width} ${height}`}
+      className="aspect-[579/87] h-[72px] w-full lg:h-[126px]"
+      width="100%"
+      height="100%"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
