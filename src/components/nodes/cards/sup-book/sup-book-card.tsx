@@ -21,9 +21,9 @@ const SupBookCard = ({node, headingLevel, ...props}: Props) => {
       <div className="relative">
         <div className="rs-mb-1 relative aspect-[2/3] w-full">
           <Image
-            className="object-cover"
+            className="ed11y-ignore object-cover"
             src={node.supBookImage?.mediaImage.url || "/default-book-image.jpg"}
-            alt={node.supBookImage?.mediaImage.alt || ""}
+            alt=""
             fill
             sizes="400px"
           />

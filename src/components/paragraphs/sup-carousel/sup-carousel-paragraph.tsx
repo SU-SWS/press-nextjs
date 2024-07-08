@@ -21,10 +21,11 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
   const isTopHero = !!(paragraph.supCarouselTopHero && isTopBanner)
 
   return (
-    <div
+    <section
       {...props}
+      aria-label="Page banner carousel"
       data-top-hero={isTopHero || undefined}
-      className={twMerge("relative", clsx({"lg:-top-[300px]": isTopHero}), props?.className)}
+      className={twMerge("relative mb-32", clsx({"lg:-top-[300px]": isTopHero}), props?.className)}
     >
       {paragraph.supCarouselSlides.length === 1 && (
         <div className="relative left-1/2 w-screen -translate-x-1/2">
@@ -51,7 +52,7 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
           ))}
         </Slideshow>
       )}
-    </div>
+    </section>
   )
 }
 
