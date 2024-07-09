@@ -10,7 +10,7 @@ import {useBoolean, useEventListener} from "usehooks-ts"
 import {useCallback, useEffect, useId, useLayoutEffect, useRef, useState} from "react"
 import {usePathname} from "next/navigation"
 import usePageHasTopBanner from "@lib/hooks/usePageHasTopBanner"
-import getActiveTrail from "@lib/utils/get-active-trail"
+import getActiveTrail from "@lib/drupal/utils"
 import {ShoppingCartIcon} from "@heroicons/react/24/outline"
 
 const menuLevelsToShow = 2
@@ -186,7 +186,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
   return (
     <li
       ref={menuItemRef}
-      className={clsx("relative m-0 border-b border-cool-grey py-2 first:border-t last:border-0 lg:relative lg:rs-ml-2 2xl:rs-ml-3 lg:border-black-20 lg:py-0 first:lg:ml-0", {"first:border-t-0 lg:border-b-0": level === 0})}
+      className={clsx("relative m-0 border-b border-cool-grey py-2 lg:rs-ml-2 2xl:rs-ml-3 first:border-t last:border-0 lg:relative lg:border-black-20 lg:py-0 first:lg:ml-0", {"first:border-t-0 lg:border-b-0": level === 0})}
     >
       <div className="flex items-center justify-between lg:justify-end">
         <Link

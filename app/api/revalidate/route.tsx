@@ -1,6 +1,7 @@
 import {NextRequest, NextResponse} from "next/server"
 import {revalidateTag} from "next/cache"
-import {getEntityFromPath} from "@lib/gql/gql-queries"
+import {getEntityFromPath, getMenu} from "@lib/gql/gql-queries"
+import getActiveTrail from "@lib/drupal/utils"
 
 export const revalidate = 0
 
@@ -22,6 +23,9 @@ export const GET = async (request: NextRequest) => {
   // the home page path.
   const {entity} = await getEntityFromPath("/")
   if (entity?.path === path) tagsInvalidated.push("paths:/")
+
+  const menu = await getMenu()
+  if (!!getActiveTrail(menu, path).length) tagsInvalidated.push("menu:main")
 
   tagsInvalidated.map(tag => revalidateTag(tag))
   return NextResponse.json({revalidated: true, tags: tagsInvalidated})
