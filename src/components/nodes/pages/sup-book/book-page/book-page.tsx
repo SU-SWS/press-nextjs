@@ -1,5 +1,5 @@
 import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/drupal"
-import {H1, H2, H3} from "@components/elements/headers"
+import {H1, H2} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
 import Wysiwyg from "@components/elements/wysiwyg"
@@ -103,8 +103,6 @@ const BookPage = async ({node, ...props}: Props) => {
               <div className="rs-mb-0 rs-pb-3 flex flex-col gap-2 border-b-2 border-fog">
                 {node.supBookImprint && <div className="rs-mb-0 -text-m1 font-semibold text-press-sand-dark">Imprint: {node.supBookImprint.name}</div>}
 
-                <H2 className="-text-m1 font-normal text-stone-dark">Book Details</H2>
-
                 {node.supBookCopublisherName && <div className="text-press-sand-dark">{node.supBookCopublisherName}</div>}
 
                 {node.supBookPubDateCloth?.time && (
@@ -159,7 +157,7 @@ const BookPage = async ({node, ...props}: Props) => {
 
               {node.supBookERetailers && (
                 <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog -text-m1">
-                  <H3 className="-text-m1">Also Available from</H3>
+                  <H2 className="-text-m1">Also Available from</H2>
                   <ul className="list-unstyled rs-mt-0 flex flex-col gap-3 [&_a]:font-normal [&_a]:text-digital-red">
                     {node.supBookERetailers.map((link, i) => (
                       <li

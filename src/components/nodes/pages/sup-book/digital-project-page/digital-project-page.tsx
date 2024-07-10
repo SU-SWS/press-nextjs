@@ -1,5 +1,5 @@
 import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/drupal"
-import {H1, H2, H3} from "@components/elements/headers"
+import {H1, H2} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
 import Wysiwyg from "@components/elements/wysiwyg"
@@ -19,7 +19,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
   const lowestPrice = Math.min(node.supBookClothSalePrice || 9999, node.supBookPaperSalePrice || 9999, node.supBookPriceCloth || 9999, node.supBookPriceDigital || 9999, node.supBookPricePaper || 9999)
   const awards = node.supBookAwards?.sort((a, b) => (a.supRank && b.supRank && a.supRank < b.supRank ? -1 : 1))
 
-  function createLinkParams(subject: TermSupBookSubject) {
+  const createLinkParams = (subject: TermSupBookSubject) => {
     const linkParams = new URLSearchParams()
 
     if (subject.parent?.name) {
@@ -32,7 +32,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
     return linkParams.toString()
   }
 
-  const bookSubject = node.supBookSubjects && createLinkParams(node.supBookSubjects[0])
+  const bookSubjectLinkParams = node.supBookSubjects && createLinkParams(node.supBookSubjects[0])
 
   return (
     <article
@@ -47,7 +47,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
 
               {node.supBookSubjects && (
                 <a
-                  href={`/search?${bookSubject}`}
+                  href={`/search?${bookSubjectLinkParams}`}
                   className="rs-mb-2 order-first -text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                 >
                   {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
@@ -70,7 +70,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
 
                   {node.supBookSubjects && (
                     <a
-                      href={`/search?${bookSubject}`}
+                      href={`/search?${bookSubjectLinkParams}`}
                       className="rs-mb-2 order-first -text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                     >
                       {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
@@ -102,8 +102,6 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
 
               <div className="rs-mb-0 rs-pb-3 flex flex-col gap-2 border-b-2 border-fog">
                 {node.supBookImprint && <div className="rs-mb-0 -text-m1 font-semibold text-press-sand-dark">Imprint: {node.supBookImprint.name}</div>}
-
-                <H2 className="-text-m1 font-normal text-stone-dark">Book Details</H2>
 
                 {node.supBookCopublisherName && <div className="text-press-sand-dark">{node.supBookCopublisherName}</div>}
 
@@ -145,7 +143,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
 
               {node.supBookERetailers && (
                 <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog -text-m1">
-                  <H3 className="-text-m1">Also Available from</H3>
+                  <H2 className="-text-m1">Also Available from</H2>
                   <ul className="list-unstyled rs-mt-0 flex flex-col gap-3 [&_a]:font-normal [&_a]:text-digital-red">
                     {node.supBookERetailers.map((link, i) => (
                       <li
