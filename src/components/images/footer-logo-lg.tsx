@@ -123,7 +123,7 @@ const FooterLogoLg = ({height = 89, width = 579, ...props}: Props) => {
         fill="white"
       />
       <defs>
-        <clipPath id="clip0_2247_29338">
+        <clipPath>
           <rect
             width="39.8557"
             height="88.1051"

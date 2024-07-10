@@ -138,32 +138,32 @@ const SelectList = ({options = [], label, multiple, ariaLabelledby, required, de
         aria-labelledby={labeledBy}
       >
         {label && (
-          <div
-            className={clsx("relative max-w-[calc(100%-30px)]", {
+          <span
+            className={clsx("relative block max-w-[calc(100%-30px)]", {
               "top-[-15px] w-full": optionChosen,
             })}
           >
-            <div
+            <span
               id={labelId}
-              className={twMerge("w-fit px-5 text-16", clsx({"bg-black-30": props.disabled}))}
+              className={twMerge("block w-fit px-5 text-16", clsx({"bg-black-30": props.disabled}))}
             >
               {label}
-            </div>
-          </div>
+            </span>
+          </span>
         )}
 
         {!label && emptyLabel && !optionChosen && (
-          <div className={clsx("relative max-w-[calc(100%-30px)]")}>
-            <div
+          <span className={clsx("relative block max-w-[calc(100%-30px)]")}>
+            <span
               id={labelId}
-              className={twMerge("w-fit px-5 text-16", clsx({"bg-black-30": props.disabled}))}
+              className={twMerge("block w-fit px-5 text-16", clsx({"bg-black-30": props.disabled}))}
             >
               {emptyLabel}
-            </div>
-          </div>
+            </span>
+          </span>
         )}
 
-        {optionChosen && <div className="max-w-[calc(100%-30px)] overflow-hidden text-16">{renderSelectedValue(value, options)}</div>}
+        {optionChosen && <span className="block max-w-[calc(100%-30px)] overflow-hidden text-16">{renderSelectedValue(value, options)}</span>}
 
         <span className="absolute right-5 top-0 flex h-full items-center">{downIcon || <ChevronDownIcon width={20} />}</span>
       </button>
