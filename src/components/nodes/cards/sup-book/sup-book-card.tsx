@@ -28,7 +28,7 @@ const SupBookCard = ({node, headingLevel, ...props}: Props) => {
             sizes="400px"
           />
           {node.supBookAwards && (
-            <div className="absolute left-5 top-0 flex items-center gap-3 bg-fog py-2 pl-3 pr-5">
+            <div className="absolute left-5 top-0 flex max-w-[90%] items-center gap-3 bg-fog py-2 pl-3 pr-5">
               <BookmarkIcon
                 width={20}
                 className="fill-stone-dark"

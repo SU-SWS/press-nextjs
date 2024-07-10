@@ -111,7 +111,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
         </fieldset>
       )}
 
-      {isIntl && <p>For customer shipments outside the US and Canada, please use the button below to order from our partner, Combine Academic Publishers.</p>}
+      {isIntl && <p>For customer shipments outside the US and Canada, please use the button below to order from our partner, Combined Academic Publishers.</p>}
 
       <div>
         <Button

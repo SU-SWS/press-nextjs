@@ -123,6 +123,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             type="search"
             placeholder="Search"
             defaultValue={query}
+            autoFocus
           />
 
           <button

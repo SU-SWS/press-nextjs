@@ -2,13 +2,14 @@ import {useState, useEffect, useTransition, useRef} from "react"
 import {useBoolean} from "usehooks-ts"
 
 /**
+ * Call a server action and provide a pending state while the procss is running.
+ *
+ * @see https://github.com/vercel/next.js/discussions/51371#discussioncomment-8671340
  *
  * @param action
  * @param onFinished
- *
- * @see https://github.com/vercel/next.js/discussions/51371#discussioncomment-7143482
  */
-const useServerAction = <P, R>(action?: (_: P) => Promise<R>, onFinished?: (_: R | undefined) => void): [(_: P) => Promise<R | undefined>, boolean] => {
+const useServerAction = <P extends any[], R>(action?: (..._args: P) => Promise<R>, onFinished?: (_: R | undefined) => void): [(..._args: P) => Promise<R | undefined>, boolean] => {
   const [isPending, startTransition] = useTransition()
   const [result, setResult] = useState<R>()
   const {value: finished, setTrue: setFinished} = useBoolean(false)
@@ -21,10 +22,10 @@ const useServerAction = <P, R>(action?: (_: P) => Promise<R>, onFinished?: (_: R
     resolver.current?.(result)
   }, [result, finished, onFinished])
 
-  const runAction = async (args: P): Promise<R | undefined> => {
+  const runAction = async (...args: P): Promise<R | undefined> => {
     startTransition(() => {
       if (action) {
-        action(args).then(data => {
+        action(...args).then(data => {
           setResult(data)
           setFinished()
         })

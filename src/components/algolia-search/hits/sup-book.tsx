@@ -17,7 +17,10 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
     <article className="py-12 @container">
       <div className="flex flex-col justify-between gap-20 @2xl:flex-row">
         <div>
-          <H2 className="type-0 mb-2">
+          <H2
+            className="type-0 mb-2"
+            id={hit.objectID}
+          >
             <Link
               className="text-stone-dark hocus:text-digital-red"
               href={hit.url.replace(hitUrl.origin, "")}
@@ -42,13 +45,18 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
 
         {hit.photo && (
           <div className="relative mx-auto aspect-[2/3] w-[150px] shrink-0 @2xl:mr-0">
-            <Image
-              className="object-cover"
-              src={hit.photo.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)}
-              alt=""
-              fill
-              sizes="300px"
-            />
+            <a
+              href={hit.url}
+              aria-labelledby={hit.objectID}
+            >
+              <Image
+                className="object-cover"
+                src={hit.photo.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)}
+                alt=""
+                fill
+                sizes="300px"
+              />
+            </a>
           </div>
         )}
       </div>

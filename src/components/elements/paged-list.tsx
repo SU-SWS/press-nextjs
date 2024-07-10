@@ -41,14 +41,14 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pagerSiblingCount = 2, loadPage, ...props}: Props) => {
   const ref = useRef(false)
   const [items, setItems] = useState<JSX.Element[]>(Array.isArray(children) ? children : [children])
-  const [runAction, isRunning] = useServerAction<number, JSX.Element>(loadPage)
+  const [runAction, isRunning] = useServerAction<[number], JSX.Element>(loadPage)
 
   const router = useRouter()
   const searchParams = useSearchParams()
 
   // Use the GET param for page, but make sure that it is between 1 and the last page. If it's a string or a number
   // outside the range, fix the value, so it works as expected.
-  const {count: currentPage, setCount: setPage} = useCounter(Math.min(totalPages, pageKey ? Math.max(1, parseInt(searchParams.get(pageKey) || "")) : 1))
+  const {count: currentPage, setCount: setPage} = useCounter(Math.min(totalPages, Math.max(1, parseInt((pageKey && searchParams.get(pageKey)) || "1"))))
   const {value: focusOnElement, setTrue: enableFocusElement, setFalse: disableFocusElement} = useBoolean(false)
 
   const focusItemRef = useRef<HTMLLIElement>(null)
@@ -95,12 +95,11 @@ const PagedList = ({children, ulProps, liProps, pageKey = "page", totalPages, pa
   }, [loadPage, router, currentPage, pageKey, searchParams])
 
   useEffect(() => {
-    const initialPage = pageKey ? parseInt(searchParams.get(pageKey) || "") : 1
-    if (initialPage > 1 && !ref.current) {
-      goToPage(Math.max(1, Math.min(totalPages, initialPage)), true)
+    if (currentPage > 1 && !ref.current) {
+      goToPage(currentPage, true)
     }
     ref.current = true
-  }, [searchParams, pageKey, loadPage, goToPage, totalPages])
+  }, [currentPage, goToPage])
 
   const paginationButtons = usePagination(totalPages * items.length, currentPage, items.length, pagerSiblingCount)
 
