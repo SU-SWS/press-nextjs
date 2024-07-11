@@ -15,7 +15,10 @@ const PageTitleBannerParagraph = ({paragraph, pageTitle, ...props}: Props) => {
   return (
     <div
       {...props}
-      className={twMerge("rs-mb-5 flex min-h-[200px] flex-col items-center @container md:min-h-[400px]", props.className)}
+      className={twMerge(
+        "rs-mb-5 flex min-h-[200px] flex-col items-center @container md:min-h-[400px]",
+        props.className
+      )}
     >
       <div
         className={clsx("@6xl:aspect-auto absolute aspect-[16/9] h-full w-full", {

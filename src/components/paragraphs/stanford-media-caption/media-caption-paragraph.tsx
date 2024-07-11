@@ -11,14 +11,13 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 }
 
 const MediaCaptionParagraph = ({paragraph, ...props}: Props) => {
-  const image = paragraph.suMediaCaptionMedia?.__typename === "MediaImage" ? paragraph.suMediaCaptionMedia.mediaImage : undefined
-  const videoUrl = paragraph.suMediaCaptionMedia?.__typename === "MediaVideo" && paragraph.suMediaCaptionMedia.mediaOembedVideo
+  const image =
+    paragraph.suMediaCaptionMedia?.__typename === "MediaImage" ? paragraph.suMediaCaptionMedia.mediaImage : undefined
+  const videoUrl =
+    paragraph.suMediaCaptionMedia?.__typename === "MediaVideo" && paragraph.suMediaCaptionMedia.mediaOembedVideo
 
   return (
-    <figure
-      {...props}
-      className={twMerge("centered lg:max-w-1200", props.className)}
-    >
+    <figure {...props} className={twMerge("centered lg:max-w-1200", props.className)}>
       {image?.url && (
         <div className="relative aspect-[16/9] w-full">
           <Image
@@ -42,10 +41,7 @@ const MediaCaptionParagraph = ({paragraph, ...props}: Props) => {
           </Link>
         )}
 
-        <Wysiwyg
-          html={paragraph.suMediaCaptionCaption?.processed}
-          className="rs-mb-4 children:text-18"
-        />
+        <Wysiwyg html={paragraph.suMediaCaptionCaption?.processed} className="rs-mb-4 children:text-18" />
       </figcaption>
     </figure>
   )

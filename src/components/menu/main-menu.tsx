@@ -48,11 +48,7 @@ const MainMenu = ({menuItems}: Props) => {
   const pageHasBanner = usePageHasTopBanner()
 
   return (
-    <nav
-      id={navId}
-      aria-label="Main Navigation"
-      ref={menuRef}
-    >
+    <nav id={navId} aria-label="Main Navigation" ref={menuRef}>
       <button
         ref={buttonRef}
         className="group flex w-0 flex-col items-center lg:hidden"
@@ -61,35 +57,44 @@ const MainMenu = ({menuItems}: Props) => {
         aria-labelledby={navId}
       >
         <span className="flex h-[30px] w-[30px] flex-col items-center justify-center">
-          <span className={clsx("block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {"translate-y-4 rotate-45": menuOpen, "-translate-y-0.5": !menuOpen})} />
-          <span className={clsx("my-3 block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {"opacity-0": menuOpen, "opacity-100": !menuOpen})} />
-          <span className={clsx("block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {"-translate-y-4 -rotate-45": menuOpen, "translate-y-0.5": !menuOpen})} />
+          <span
+            className={clsx("block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
+              "translate-y-4 rotate-45": menuOpen,
+              "-translate-y-0.5": !menuOpen,
+            })}
+          />
+          <span
+            className={clsx("my-3 block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
+              "opacity-0": menuOpen,
+              "opacity-100": !menuOpen,
+            })}
+          />
+          <span
+            className={clsx("block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
+              "-translate-y-4 -rotate-45": menuOpen,
+              "translate-y-0.5": !menuOpen,
+            })}
+          />
         </span>
-        <span
-          className="group-hocus:underline"
-          aria-hidden
-        >
+        <span className="group-hocus:underline" aria-hidden>
           {menuOpen ? "Close" : "Menu"}
         </span>
       </button>
 
-      <div className={(menuOpen ? "block" : "hidden") + " absolute left-0 top-full z-10 w-full items-center bg-black lg:relative lg:flex lg:bg-transparent"}>
+      <div
+        className={
+          (menuOpen ? "block" : "hidden") +
+          " absolute left-0 top-full z-10 w-full items-center bg-black lg:relative lg:flex lg:bg-transparent"
+        }
+      >
         <SiteSearchForm className="px-10 lg:hidden" />
         <ul className="list-unstyled m-0 ml-auto flex-wrap p-0 lg:flex lg:justify-end">
           {menuItems.map(item => (
-            <MenuItem
-              key={item.id}
-              {...item}
-              activeTrail={activeTrail}
-              level={0}
-            />
+            <MenuItem key={item.id} {...item} activeTrail={activeTrail} level={0} />
           ))}
         </ul>
 
-        <a
-          href="/search"
-          className="group rs-ml-2 hidden lg:block"
-        >
+        <a href="/search" className="group rs-ml-2 hidden lg:block">
           <span className="sr-only">Search Site</span>
           <MagnifyingGlassIcon
             width={25}
@@ -174,39 +179,40 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
     }
   )
 
-  const subMenuStyles = clsx("list-unstyled w-full min-w-[300px] lg:bg-white lg:shadow-2xl px-0 lg:hidden lg:absolute", zIndexes[level], {
-    "lg:top-full lg:right-0": level === 0,
-    "lg:top-0": level !== 0,
-    "lg:left-full": level !== 0 && positionRight,
-    "lg:right-full": level !== 0 && !positionRight,
-    block: submenuOpen,
-    hidden: !submenuOpen,
-  })
+  const subMenuStyles = clsx(
+    "list-unstyled w-full min-w-[300px] lg:bg-white lg:shadow-2xl px-0 lg:hidden lg:absolute",
+    zIndexes[level],
+    {
+      "lg:top-full lg:right-0": level === 0,
+      "lg:top-0": level !== 0,
+      "lg:left-full": level !== 0 && positionRight,
+      "lg:right-full": level !== 0 && !positionRight,
+      block: submenuOpen,
+      hidden: !submenuOpen,
+    }
+  )
 
   return (
     <li
       ref={menuItemRef}
-      className={clsx("relative m-0 border-b border-cool-grey py-2 lg:rs-ml-2 2xl:rs-ml-3 first:border-t last:border-0 lg:relative lg:border-black-20 lg:py-0 first:lg:ml-0", {"first:border-t-0 lg:border-b-0": level === 0})}
+      className={clsx(
+        "relative m-0 border-b border-cool-grey py-2 lg:rs-ml-2 2xl:rs-ml-3 first:border-t last:border-0 lg:relative lg:border-black-20 lg:py-0 first:lg:ml-0",
+        {"first:border-t-0 lg:border-b-0": level === 0}
+      )}
     >
       <div className="flex items-center justify-between lg:justify-end">
-        <Link
-          id={linkId}
-          href={url || "#"}
-          className={linkStyles}
-          aria-current={isCurrent ? "true" : undefined}
-        >
+        <Link id={linkId} href={url || "#"} className={linkStyles} aria-current={isCurrent ? "true" : undefined}>
           {title}
           {title === "Cart" && (
-            <ShoppingCartIcon
-              width={20}
-              className={clsx({"text-press-sand-dark": !pageHasBanner})}
-            />
+            <ShoppingCartIcon width={20} className={clsx({"text-press-sand-dark": !pageHasBanner})} />
           )}
         </Link>
 
         {children.length > 0 && level < menuLevelsToShow && (
           <>
-            {level === 0 && <div className="mb-[6px] ml-5 block h-[25px] w-[1px] shrink-0 bg-archway-light lg:hidden" />}
+            {level === 0 && (
+              <div className="mb-[6px] ml-5 block h-[25px] w-[1px] shrink-0 bg-archway-light lg:hidden" />
+            )}
             <button
               ref={buttonRef}
               className="group relative right-10 shrink-0 rounded-full border-b border-transparent bg-digital-red text-white hocus:border-black hocus:bg-white lg:right-0 lg:hidden lg:rounded-none lg:bg-transparent lg:text-digital-red"
@@ -216,7 +222,9 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
             >
               <ChevronDownIcon
                 height={35}
-                className={clsx("transition duration-150 ease-in-out group-hocus:scale-125 group-hocus:text-black", {"rotate-180": submenuOpen})}
+                className={clsx("transition duration-150 ease-in-out group-hocus:scale-125 group-hocus:text-black", {
+                  "rotate-180": submenuOpen,
+                })}
               />
             </button>
           </>
@@ -224,17 +232,9 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
       </div>
 
       {children.length > 0 && level < menuLevelsToShow && (
-        <ul
-          className={subMenuStyles}
-          ref={belowListRef}
-        >
+        <ul className={subMenuStyles} ref={belowListRef}>
           {children.map(item => (
-            <MenuItem
-              key={item.id}
-              {...item}
-              level={level + 1}
-              activeTrail={activeTrail}
-            />
+            <MenuItem key={item.id} {...item} level={level + 1} activeTrail={activeTrail} />
           ))}
         </ul>
       )}

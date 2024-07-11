@@ -104,7 +104,10 @@ export const Tab = ({buttonProps, className, children, ...props}: TabProps) => {
     <button
       {...getRootProps()}
       {...buttonProps}
-      className={twMerge(clsx("border-b-3 border-transparent p-3 text-left", {"border-press-bay": selected}), className)}
+      className={twMerge(
+        clsx("border-b-3 border-transparent p-3 text-left", {"border-press-bay": selected}),
+        className
+      )}
     >
       {children}
     </button>
@@ -130,12 +133,7 @@ export const TabPanel = ({panelProps, className, children}: TabPanelProps) => {
   const rootRef = useRef<HTMLDivElement>(null)
   const {getRootProps} = useTabPanel({rootRef})
   return (
-    <section
-      {...getRootProps()}
-      {...panelProps}
-      role="tabpanel"
-      className={className}
-    >
+    <section {...getRootProps()} {...panelProps} role="tabpanel" className={className}>
       {children}
     </section>
   )

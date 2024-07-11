@@ -43,11 +43,7 @@ const BookListView = ({items, totalItems, headingLevel, loadPage}: Props) => {
         loadPage={loadPage}
       >
         {items.map(item => (
-          <SupBookCard
-            key={item.id}
-            node={item}
-            headingLevel={headingLevel}
-          />
+          <SupBookCard key={item.id} node={item} headingLevel={headingLevel} />
         ))}
       </PagedList>
     </Suspense>
@@ -58,10 +54,7 @@ const BookListSkeleton = () => {
   return (
     <div className="grid gap-20 @lg:grid-cols-2 @5xl:grid-cols-3 @7xl:grid-cols-4">
       {[1, 2, 3, 4].map(item => (
-        <div
-          key={`book-list-skeleton-${item}`}
-          className="mx-auto min-w-72 max-w-3xl"
-        >
+        <div key={`book-list-skeleton-${item}`} className="mx-auto min-w-72 max-w-3xl">
           <div className="relative">
             <div className="rs-mb-1 relative aspect-[2/3] w-full bg-black-10 bg-opacity-50" />
 

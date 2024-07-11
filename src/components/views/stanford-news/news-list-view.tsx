@@ -32,11 +32,7 @@ const NewsListView = async ({items, totalItems, headingLevel, loadPage}: Props) 
       loadPage={loadPage}
     >
       {items.map(item => (
-        <StanfordNewsListItem
-          key={item.id}
-          node={item}
-          headingLevel={headingLevel}
-        />
+        <StanfordNewsListItem key={item.id} node={item} headingLevel={headingLevel} />
       ))}
     </PagedList>
   )

@@ -27,10 +27,7 @@ const ImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children, ...props}
   const CardWrapper: ElementType = isArticle ? "article" : "div"
 
   return (
-    <CardWrapper
-      {...props}
-      className={twMerge("centered w-full lg:max-w-[980px]", props.className)}
-    >
+    <CardWrapper {...props} className={twMerge("centered w-full lg:max-w-[980px]", props.className)}>
       {imageUrl && (
         <div className="relative aspect-[16/9] w-full">
           <Image

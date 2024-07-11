@@ -45,4 +45,5 @@ type ParagraphBehaviorBase = {
   layout_paragraphs?: LayoutParagraphBehaviors
 }
 
-export type ParagraphBehaviors = ParagraphBehaviorBase & (ListParagraphBehaviors | CardParagraphBehaviors | BannerParagraphBehaviors | TeaserParagraphBehaviors)
+export type ParagraphBehaviors = ParagraphBehaviorBase &
+  (ListParagraphBehaviors | CardParagraphBehaviors | BannerParagraphBehaviors | TeaserParagraphBehaviors)

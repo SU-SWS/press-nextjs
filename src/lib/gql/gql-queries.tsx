@@ -1,4 +1,19 @@
-import {NodeSupBookAncillary, AllNodesQuery, AllNodesQueryVariables, ConfigPagesQuery, ConfigPagesUnion, MenuAvailable, MenuItem, NodeUnion, Redirect, RedirectsQuery, RedirectsQueryVariables, RouteQuery, RouteRedirect, TermUnion} from "@lib/gql/__generated__/drupal.d"
+import {
+  NodeSupBookAncillary,
+  AllNodesQuery,
+  AllNodesQueryVariables,
+  ConfigPagesQuery,
+  ConfigPagesUnion,
+  MenuAvailable,
+  MenuItem,
+  NodeUnion,
+  Redirect,
+  RedirectsQuery,
+  RedirectsQueryVariables,
+  RouteQuery,
+  RouteRedirect,
+  TermUnion,
+} from "@lib/gql/__generated__/drupal.d"
 import {cache} from "react"
 import {graphqlClient} from "@lib/gql/gql-client"
 
@@ -29,7 +44,9 @@ export const getEntityFromPath = cache(
   }
 )
 
-export const getConfigPage = async <T extends ConfigPagesUnion>(configPageType: ConfigPagesUnion["__typename"]): Promise<T | undefined> => {
+export const getConfigPage = async <T extends ConfigPagesUnion>(
+  configPageType: ConfigPagesUnion["__typename"]
+): Promise<T | undefined> => {
   "use server"
 
   let query: ConfigPagesQuery

@@ -12,10 +12,7 @@ type Props = HTMLAttributes<HTMLDivElement> & {
 
 const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
   return (
-    <div
-      {...props}
-      className={twMerge("centered lg:max-w-1200", props.className)}
-    >
+    <div {...props} className={twMerge("centered lg:max-w-1200", props.className)}>
       <div className="flex items-center justify-between">
         {paragraph.supBlogTeaserHeader && <H2>{paragraph.supBlogTeaserHeader}</H2>}
         {paragraph.supBlogTeaserLink?.url && (
@@ -32,10 +29,7 @@ const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
       {paragraph.supBlogTeaserItems && (
         <ul className="list-unstyled grid gap-10 @7xl:grid-cols-2">
           {paragraph.supBlogTeaserItems.map(blogItem => (
-            <li
-              key={blogItem.id}
-              className="relative aspect-[4/3] w-full"
-            >
+            <li key={blogItem.id} className="relative aspect-[4/3] w-full">
               {blogItem.supBlogImage?.mediaImage && (
                 <Image
                   className="object-cover"
@@ -53,10 +47,7 @@ const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
                   className="group stretched-link no-underline"
                   aria-labelledby={blogItem.id}
                 >
-                  <H3
-                    id={blogItem.id}
-                    className="border-t border-white pt-10 text-white group-hocus:underline"
-                  >
+                  <H3 id={blogItem.id} className="border-t border-white pt-10 text-white group-hocus:underline">
                     {blogItem.supBlogTitle}
                   </H3>
                 </Link>

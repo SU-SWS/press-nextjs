@@ -43,7 +43,8 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
   const settings: Settings = {
     autoplay: false,
     centerMode: false,
-    className: "[&_.slick-track]:flex [&_.slick-slider]:relative [&_.slick-slide>div]:h-full [&_.slick-slide>div>div]:h-full",
+    className:
+      "[&_.slick-track]:flex [&_.slick-slider]:relative [&_.slick-slide>div]:h-full [&_.slick-slide>div>div]:h-full",
     dots: false,
     infinite: false,
     initialSlide: 0,
@@ -65,10 +66,7 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
     ...slideshowProps,
   }
   return (
-    <div
-      {...props}
-      className={twMerge("relative", props.className)}
-    >
+    <div {...props} className={twMerge("relative", props.className)}>
       <Slider {...settings}>{children}</Slider>
     </div>
   )

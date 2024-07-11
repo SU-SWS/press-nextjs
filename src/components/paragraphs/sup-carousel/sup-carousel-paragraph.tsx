@@ -29,25 +29,15 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
     >
       {paragraph.supCarouselSlides.length === 1 && (
         <div className="relative left-1/2 w-screen -translate-x-1/2">
-          <Slide
-            slideParagraph={paragraph.supCarouselSlides[0]}
-            isTopHero={isTopHero}
-          />
+          <Slide slideParagraph={paragraph.supCarouselSlides[0]} isTopHero={isTopHero} />
         </div>
       )}
 
       {paragraph.supCarouselSlides.length > 1 && (
-        <Slideshow
-          slideshowProps={{slidesToShow: 1}}
-          className="left-1/2 w-screen -translate-x-1/2"
-        >
+        <Slideshow slideshowProps={{slidesToShow: 1}} className="left-1/2 w-screen -translate-x-1/2">
           {paragraph.supCarouselSlides.map(slide => (
             <div key={slide.id}>
-              <Slide
-                key={slide.id}
-                slideParagraph={slide}
-                isTopHero={isTopHero}
-              />
+              <Slide key={slide.id} slideParagraph={slide} isTopHero={isTopHero} />
             </div>
           ))}
         </Slideshow>
@@ -58,7 +48,9 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
 
 const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouselSlide; isTopHero?: boolean}) => {
   const slideTitle = slideParagraph.supSlideTitle || slideParagraph.supSlideBook?.title
-  const eyebrow = slideParagraph.supSlideEyebrow || (!slideParagraph.supSlideHide?.includes("author") && slideParagraph.supSlideBook?.supBookAuthorsFull)
+  const eyebrow =
+    slideParagraph.supSlideEyebrow ||
+    (!slideParagraph.supSlideHide?.includes("author") && slideParagraph.supSlideBook?.supBookAuthorsFull)
   const subtitle = slideParagraph.supSlideSubtitle || slideParagraph.supSlideBook?.supBookSubtitle
   const bgImage = slideParagraph.supSlideBgImage.mediaImage
   const image = slideParagraph.supSlideImage?.mediaImage || slideParagraph.supSlideBook?.supBookImage?.mediaImage
@@ -79,14 +71,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
       )}
     >
       <figure className="absolute left-0 top-0 h-full w-full overflow-hidden">
-        <Image
-          className="relative object-cover"
-          src={bgImage.url}
-          alt=""
-          fill
-          sizes="100vw"
-          loading="eager"
-        />
+        <Image className="relative object-cover" src={bgImage.url} alt="" fill sizes="100vw" loading="eager" />
       </figure>
       <div
         className={clsx("absolute left-0 top-0 block h-full w-full bg-opacity-80", {
@@ -114,10 +99,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
         >
           <div className={clsx("flex flex-col", {"text-left": leftImage, "text-center": !leftImage})}>
             {slideParagraph.supSlideBook?.path && (
-              <H2
-                className={clsx({"text-m1": slideParagraph.supSlideTitleSize === "small"})}
-                id={slideParagraph.id}
-              >
+              <H2 className={clsx({"text-m1": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
                 <Link
                   className="font-medium text-white no-underline hocus:text-white hocus:underline"
                   href={slideParagraph.supSlideBook.path}
@@ -128,10 +110,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
             )}
 
             {!slideParagraph.supSlideBook?.path && (
-              <H2
-                className={clsx({"text-m1": slideParagraph.supSlideTitleSize === "small"})}
-                id={slideParagraph.id}
-              >
+              <H2 className={clsx({"text-m1": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
                 {slideTitle}
               </H2>
             )}
@@ -141,13 +120,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
             <div className="order-first">
               {!leftImage && image && (
                 <div className="rs-mb-3 relative mx-auto aspect-1 w-[200px] max-w-3xl">
-                  <Image
-                    className="object-cover"
-                    src={image.url}
-                    alt={image.alt || ""}
-                    fill
-                    sizes="200px"
-                  />
+                  <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="200px" />
                 </div>
               )}
 
@@ -157,13 +130,20 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
 
           <Wysiwyg
             html={body}
-            className={clsx("rs-mb-3", {"[&_p]:-text-m1": slideParagraph.supSlideBodySize === "small", "text-left": leftImage, "text-center": !leftImage})}
+            className={clsx("rs-mb-3", {
+              "[&_p]:-text-m1": slideParagraph.supSlideBodySize === "small",
+              "text-left": leftImage,
+              "text-center": !leftImage,
+            })}
           />
 
           {slideParagraph.supSlideButton?.url && (
             <div className={clsx({"rs-pt-3 border-t": !leftImage})}>
               <Link
-                className={clsx("group flex w-fit items-center gap-5 border p-6 text-white no-underline hocus:text-white", {"mx-auto": !leftImage})}
+                className={clsx(
+                  "group flex w-fit items-center gap-5 border p-6 text-white no-underline hocus:text-white",
+                  {"mx-auto": !leftImage}
+                )}
                 href={slideParagraph.supSlideButton.url}
               >
                 <span className="group-hocus:underline">{slideParagraph.supSlideButton.title}</span>
@@ -174,13 +154,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
         </div>
         {leftImage && image && (
           <div className="relative order-first aspect-[11/16] h-auto w-1/2 max-w-2xl shrink-0">
-            <Image
-              className="object-cover"
-              src={image.url}
-              alt={image.alt || ""}
-              fill
-              sizes="500px"
-            />
+            <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="500px" />
           </div>
         )}
       </div>

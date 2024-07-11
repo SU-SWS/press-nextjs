@@ -6,7 +6,8 @@ type Props = {
   node: NodeSupBook
 }
 const BookPageImage = async ({node}: Props) => {
-  const placeholderImage = node.supBookImage?.mediaImage.url && (await getPlaceholderImage(node.supBookImage.mediaImage.url))
+  const placeholderImage =
+    node.supBookImage?.mediaImage.url && (await getPlaceholderImage(node.supBookImage.mediaImage.url))
 
   return (
     <Image

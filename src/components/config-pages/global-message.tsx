@@ -5,7 +5,14 @@ import Link from "@components/elements/link"
 import {clsx} from "clsx"
 import {StanfordGlobalMessage} from "@lib/gql/__generated__/drupal.d"
 
-const GlobalMessage = ({suGlobalMsgEnabled, suGlobalMsgType, suGlobalMsgLabel, suGlobalMsgHeader, suGlobalMsgLink, suGlobalMsgMessage}: StanfordGlobalMessage) => {
+const GlobalMessage = ({
+  suGlobalMsgEnabled,
+  suGlobalMsgType,
+  suGlobalMsgLabel,
+  suGlobalMsgHeader,
+  suGlobalMsgLink,
+  suGlobalMsgMessage,
+}: StanfordGlobalMessage) => {
   if (!suGlobalMsgEnabled) return
 
   const wrapperClasses = clsx({
@@ -29,10 +36,7 @@ const GlobalMessage = ({suGlobalMsgEnabled, suGlobalMsgType, suGlobalMsgLabel, s
           <Wysiwyg html={suGlobalMsgMessage?.processed} />
 
           {suGlobalMsgLink?.url && (
-            <Link
-              href={suGlobalMsgLink.url}
-              className="text-white"
-            >
+            <Link href={suGlobalMsgLink.url} className="text-white">
               {suGlobalMsgLink.title}
             </Link>
           )}

@@ -1,7 +1,16 @@
 "use client"
 
 import algoliasearch from "algoliasearch/lite"
-import {useHits, useSearchBox, useCurrentRefinements, useRefinementList, useRange, useClearRefinements, usePagination, useSortBy} from "react-instantsearch"
+import {
+  useHits,
+  useSearchBox,
+  useCurrentRefinements,
+  useRefinementList,
+  useRange,
+  useClearRefinements,
+  usePagination,
+  useSortBy,
+} from "react-instantsearch"
 import {InstantSearchNext} from "react-instantsearch-nextjs"
 import {H2} from "@components/elements/headers"
 import {useEffect, useId, useMemo, useRef, useState} from "react"
@@ -52,12 +61,20 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     limit: 100,
   })
   const {items: bookTypeRefinementItems, refine: refineBookType} = useRefinementList({attribute: "book_type"})
-  const {start: pubYearRange, range: pubYearRangeBounds, refine: refineRange, canRefine: canRefinePubYear} = useRange({attribute: "book_published"})
+  const {
+    start: pubYearRange,
+    range: pubYearRangeBounds,
+    refine: refineRange,
+    canRefine: canRefinePubYear,
+  } = useRange({attribute: "book_published"})
   const {min: minYear, max: maxYear} = pubYearRangeBounds
   const {items: currentRefinements, canRefine: canRefineCurrent, refine: removeRefinement} = useCurrentRefinements({})
 
   // State handlers to manage the GET parameters.
-  const [rangeChoices, setRangeChoices] = useState<RangeBoundaries>([parseInt(searchParams.get("published-min") || "0"), parseInt(searchParams.get("published-max") || "3000")])
+  const [rangeChoices, setRangeChoices] = useState<RangeBoundaries>([
+    parseInt(searchParams.get("published-min") || "0"),
+    parseInt(searchParams.get("published-max") || "3000"),
+  ])
 
   const yearOptions: SelectOptionDefinition<string>[] = []
   for (let i = maxYear || new Date().getFullYear(); i >= (minYear || 1990); i--) {
@@ -91,7 +108,9 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     if (!!currentRefinements.find(refinement => refinement.attribute === "book_type")) params.set("books", "1")
 
     // Book subjects.
-    const chosenSubjects = currentRefinements.find(refinement => refinement.attribute === "book_subject")?.refinements.map(item => item.value)
+    const chosenSubjects = currentRefinements
+      .find(refinement => refinement.attribute === "book_subject")
+      ?.refinements.map(item => item.value)
     if (chosenSubjects) params.set("subjects", chosenSubjects.join(","))
 
     router.replace(`?${params.toString()}`, {scroll: false})
@@ -99,16 +118,9 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
 
   return (
     <div>
-      <form
-        role="search"
-        aria-labelledby="page-title"
-        onSubmit={e => e.preventDefault()}
-      >
+      <form role="search" aria-labelledby="page-title" onSubmit={e => e.preventDefault()}>
         <div className="mx-auto mb-20 flex items-center gap-6 md:w-2/3 md:gap-8">
-          <label
-            className="sr-only"
-            htmlFor="search-input"
-          >
+          <label className="sr-only" htmlFor="search-input">
             Keywords Search
           </label>
           <input
@@ -126,11 +138,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             autoFocus
           />
 
-          <button
-            type="submit"
-            onClick={() => refine(inputRef.current?.value || "")}
-            className="group"
-          >
+          <button type="submit" onClick={() => refine(inputRef.current?.value || "")} className="group">
             <span className="sr-only">Submit Search</span>
             <MagnifyingGlassIcon
               width={40}
@@ -195,10 +203,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           <fieldset className="rs-mb-1 rs-pb-2 border-b border-black-30">
             <legend className="rs-mb-0 card-paragraph font-medium">Subject</legend>
             {bookSubjectRefinementList.map(refinementOption => (
-              <label
-                key={refinementOption.value}
-                className="group mx-5 flex cursor-pointer items-center gap-5 text-16"
-              >
+              <label key={refinementOption.value} className="group mx-5 flex cursor-pointer items-center gap-5 text-16">
                 <div className="group relative">
                   <input
                     className="peer sr-only"
@@ -209,10 +214,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                   />
                   <div className="h-14 w-14 rounded-full peer-focus-visible:bg-press-bay group-hocus:bg-press-bay/60" />
                   <div className="absolute left-3 top-3 h-8 w-8 rounded border-2 border-press-sand-light peer-checked:border-press-grass peer-checked:bg-press-bay-dark peer-focus-visible:border-press-grass group-hocus:border-press-grass" />
-                  <CheckIcon
-                    width={15}
-                    className="absolute left-4 top-4 hidden text-white peer-checked:block"
-                  />
+                  <CheckIcon width={15} className="absolute left-4 top-4 hidden text-white peer-checked:block" />
                 </div>
                 <span
                   id={
@@ -235,41 +237,42 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
 
             <div className="flex items-center gap-5">
               <div className="flex-1 flex-grow">
-                <div
-                  id={`${id}-min-year`}
-                  className="mb-2 text-18 text-press-sand-dark"
-                >
+                <div id={`${id}-min-year`} className="mb-2 text-18 text-press-sand-dark">
                   <span className="sr-only">Minimum&nbps;</span>Year
                 </div>
                 <SelectList
-                  options={yearOptions.filter(option => parseInt(option.value) < (rangeChoices[1] || 3000) && parseInt(option.value) > (minYear || 0))}
+                  options={yearOptions.filter(
+                    option =>
+                      parseInt(option.value) < (rangeChoices[1] || 3000) && parseInt(option.value) > (minYear || 0)
+                  )}
                   value={!rangeChoices[0] || !minYear || rangeChoices[0] <= minYear ? null : `${rangeChoices[0]}`}
                   ariaLabelledby={`${id}-min-year`}
                   disabled={!canRefinePubYear}
                   emptyLabel="Any"
-                  onChange={(_e, value) => setRangeChoices(prevState => [parseInt(value as string) || undefined, prevState[1]])}
+                  onChange={(_e, value) =>
+                    setRangeChoices(prevState => [parseInt(value as string) || undefined, prevState[1]])
+                  }
                 />
               </div>
-              <span
-                aria-hidden
-                className="relative top-5"
-              >
+              <span aria-hidden className="relative top-5">
                 to
               </span>
               <div className="flex-1 flex-grow">
-                <div
-                  id={`${id}-max-year`}
-                  className="mb-2 text-18 text-press-sand-dark"
-                >
+                <div id={`${id}-max-year`} className="mb-2 text-18 text-press-sand-dark">
                   <span className="sr-only">Minimum&nbps;</span>Year
                 </div>
                 <SelectList
-                  options={yearOptions.filter(option => parseInt(option.value) > (rangeChoices[0] || 0) && parseInt(option.value) < (maxYear || 3000))}
+                  options={yearOptions.filter(
+                    option =>
+                      parseInt(option.value) > (rangeChoices[0] || 0) && parseInt(option.value) < (maxYear || 3000)
+                  )}
                   value={!rangeChoices[1] || !maxYear || rangeChoices[1] >= maxYear ? null : `${rangeChoices[1]}`}
                   ariaLabelledby={`${id}-max-year`}
                   disabled={!canRefinePubYear}
                   emptyLabel="Any"
-                  onChange={(_e, value) => setRangeChoices(prevState => [prevState[0], parseInt(value as string) || undefined])}
+                  onChange={(_e, value) =>
+                    setRangeChoices(prevState => [prevState[0], parseInt(value as string) || undefined])
+                  }
                   className="h-[45px] text-16 *:text-16"
                 />
               </div>
@@ -329,18 +332,12 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <div
-          aria-live="polite"
-          className="card-paragraph"
-        >
+        <div aria-live="polite" className="card-paragraph">
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
         </div>
 
         <div className="flex w-1/2 items-center gap-3">
-          <div
-            id="sort-by"
-            className="text-16 text-press-sand-dark"
-          >
+          <div id="sort-by" className="text-16 text-press-sand-dark">
             Sort By:
           </div>
           <div className="flex-grow">
@@ -358,10 +355,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
 
       <ul className="list-unstyled">
         {hits.map(hit => (
-          <li
-            key={hit.objectID}
-            className="border-b border-gray-300 last:border-0"
-          >
+          <li key={hit.objectID} className="border-b border-gray-300 last:border-0">
             <DefaultHit hit={hit} />
           </li>
         ))}
@@ -385,10 +379,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
                 aria-current={currentPage === pageNum}
                 className={clsx("h-fit px-4 pb-3", {"border-b-2 border-press-sand-dark": currentPage === pageNum})}
               >
-                <button
-                  className="no-underline hocus:underline"
-                  onClick={() => goToPage(pageNum)}
-                >
+                <button className="no-underline hocus:underline" onClick={() => goToPage(pageNum)}>
                   {pageNum + 1}
                 </button>
               </li>

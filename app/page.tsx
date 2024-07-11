@@ -20,10 +20,7 @@ const Home = async () => {
   return (
     <article>
       {entity.suPageBanner?.__typename === "ParagraphSupCarousel" && (
-        <SupCarouselParagraph
-          paragraph={entity.suPageBanner}
-          isTopBanner
-        />
+        <SupCarouselParagraph paragraph={entity.suPageBanner} isTopBanner />
       )}
 
       {entity.suPageComponents && <Rows components={entity.suPageComponents} />}

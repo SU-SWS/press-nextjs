@@ -8,7 +8,19 @@ import FacebookIcon from "@components/elements/icons/FacebookIcon"
 import InstagramIcon from "@components/elements/icons/InstagramIcon"
 import {StanfordLocalFooter} from "@lib/gql/__generated__/drupal.d"
 
-const LocalFooter = ({suFooterEnabled, suLocalFootAction, suLocalFootPrCo, suLocalFootPrimary, suLocalFootPrimeH, suLocalFootSeCo, suLocalFootSecond, suLocalFootSecondH, suLocalFootSocial, suLocalFootTr2Co, suLocalFootTrCo}: StanfordLocalFooter) => {
+const LocalFooter = ({
+  suFooterEnabled,
+  suLocalFootAction,
+  suLocalFootPrCo,
+  suLocalFootPrimary,
+  suLocalFootPrimeH,
+  suLocalFootSeCo,
+  suLocalFootSecond,
+  suLocalFootSecondH,
+  suLocalFootSocial,
+  suLocalFootTr2Co,
+  suLocalFootTrCo,
+}: StanfordLocalFooter) => {
   if (!suFooterEnabled) return
 
   return (
@@ -24,14 +36,8 @@ const LocalFooter = ({suFooterEnabled, suLocalFootAction, suLocalFootPrCo, suLoc
             {suLocalFootSocial.map((link, index) => {
               if (!link.url) return
               return (
-                <li
-                  key={`footer-action-link-${index}`}
-                  className="rs-mr-0"
-                >
-                  <Link
-                    href={link.url}
-                    className="text-white hocus:text-bay-light"
-                  >
+                <li key={`footer-action-link-${index}`} className="rs-mr-0">
+                  <Link href={link.url} className="text-white hocus:text-bay-light">
                     <SocialIcon url={link.url} />
                     <span className="sr-only">{link.title}</span>
                   </Link>
@@ -43,10 +49,7 @@ const LocalFooter = ({suFooterEnabled, suLocalFootAction, suLocalFootPrCo, suLoc
         <div className="grid grid-cols-1 sm:rs-ml-4 sm:grid-cols-2 2xl:grid-cols-4 [&_a:focus]:text-bay-light [&_a:hover]:text-bay-light [&_a:hover]:decoration-bay-light [&_a:hover]:decoration-2 [&_a]:font-normal [&_a]:text-white [&_a]:decoration-white [&_a]:decoration-1 [&_a]:transition">
           <div className="list-unstyled sm:border-r sm:border-fog-dark">
             {/* Content block 1 */}
-            <Wysiwyg
-              html={suLocalFootPrCo?.processed}
-              className="max-w-[250px]"
-            />
+            <Wysiwyg html={suLocalFootPrCo?.processed} className="max-w-[250px]" />
 
             {/* Action Links */}
             {suLocalFootAction && (
@@ -65,10 +68,7 @@ const LocalFooter = ({suFooterEnabled, suLocalFootAction, suLocalFootPrCo, suLoc
 
           <div className="list-unstyled 2xl:rs-pl-4 sm:order-4 sm:border-r sm:border-fog-dark">
             {/* Content block 3 */}
-            <Wysiwyg
-              html={suLocalFootTr2Co?.processed}
-              className="max-w-[250px]"
-            />
+            <Wysiwyg html={suLocalFootTr2Co?.processed} className="max-w-[250px]" />
             {/* Primary Links */}
             {suLocalFootPrimeH && <H2 className="rs-pt-4 text-m1 text-white">{suLocalFootPrimeH}</H2>}
             {suLocalFootPrimary && (
@@ -87,10 +87,7 @@ const LocalFooter = ({suFooterEnabled, suLocalFootAction, suLocalFootPrCo, suLoc
 
           <div className="list-unstyled sm:rs-pl-4 2xl:rs-pl-4 sm:border-r sm:border-fog-dark">
             {/* Content block 2 */}
-            <Wysiwyg
-              html={suLocalFootSeCo?.processed}
-              className="max-w-[250px]"
-            />
+            <Wysiwyg html={suLocalFootSeCo?.processed} className="max-w-[250px]" />
             {/* Secondary links */}
             {suLocalFootSecondH && <H2 className="rs-pt-4 text-m1 text-white">{suLocalFootSecondH}</H2>}
 
@@ -110,14 +107,13 @@ const LocalFooter = ({suFooterEnabled, suLocalFootAction, suLocalFootPrCo, suLoc
 
           <div className="list-unstyled order-4 sm:rs-pl-4 2xl:rs-pl-4 sm:border-r sm:border-fog-dark 2xl:border-0">
             {/* Content block 4 */}
-            <Wysiwyg
-              html={suLocalFootTrCo?.processed}
-              className="max-w-[250px]"
-            />
+            <Wysiwyg html={suLocalFootTrCo?.processed} className="max-w-[250px]" />
           </div>
         </div>
       </div>
-      <div className="rs-mb-6 rs-mt-8 text-center text-21 text-white lg:centered lg:text-left">© 2024 Stanford University Press. All rights reserved.</div>
+      <div className="rs-mb-6 rs-mt-8 text-center text-21 text-white lg:centered lg:text-left">
+        © 2024 Stanford University Press. All rights reserved.
+      </div>
     </div>
   )
 }

@@ -9,10 +9,7 @@ const Layout = ({children}: {children: React.ReactNode}) => {
       {inPreview && (
         <>
           <Editori11y />
-          <UnpublishedBanner
-            status={false}
-            message="Preview Mode"
-          />
+          <UnpublishedBanner status={false} message="Preview Mode" />
         </>
       )}
       {children}

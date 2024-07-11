@@ -25,17 +25,14 @@ const SupAuthorListParagraph = async ({...props}: Props) => {
   books.map(book => {
     book.supBookAuthors?.map(author => {
       if (author.credentials && author.credentials.length > 0) {
-        const authorName = ([author.family, author.given + " " + author.middle].filter(a => !!a).join(", ") + ` [${author.credentials}]`).trim()
+        const authorName = (
+          [author.family, author.given + " " + author.middle].filter(a => !!a).join(", ") + ` [${author.credentials}]`
+        ).trim()
 
         const authorsBooks = authors.get(authorName) || []
         authors.set(authorName, [
           ...authorsBooks,
-          <Link
-            className="block font-normal text-digital-red"
-            key={book.id}
-            prefetch={false}
-            href={book.path}
-          >
+          <Link className="block font-normal text-digital-red" key={book.id} prefetch={false} href={book.path}>
             {book.title}
             {book.supBookSubtitle && `: ${book.supBookSubtitle}`}
           </Link>,
@@ -44,11 +41,6 @@ const SupAuthorListParagraph = async ({...props}: Props) => {
     })
   })
 
-  return (
-    <FilteringAuthorList
-      authors={authors}
-      {...props}
-    />
-  )
+  return <FilteringAuthorList authors={authors} {...props} />
 }
 export default SupAuthorListParagraph

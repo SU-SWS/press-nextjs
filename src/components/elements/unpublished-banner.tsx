@@ -16,10 +16,7 @@ const UnpublishedBanner = ({status, message, children, ...props}: Props) => {
   if (status !== false) return <>{children}</>
   return (
     <div className="border-dotted border-illuminating">
-      <div
-        {...props}
-        className={twMerge("bg-illuminating p-5 text-4xl font-bold", props.className)}
-      >
+      <div {...props} className={twMerge("bg-illuminating p-5 text-4xl font-bold", props.className)}>
         <div className="centered flex items-center gap-10">
           <ExclamationTriangleIcon width={30} />
           {message}

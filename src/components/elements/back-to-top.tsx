@@ -18,7 +18,10 @@ const BackToTop = () => {
   return (
     <Button
       buttonElem
-      className={"fixed bottom-10 right-10 transition-all duration-300 " + (value ? "visible opacity-100" : "invisible opacity-0")}
+      className={
+        "fixed bottom-10 right-10 transition-all duration-300 " +
+        (value ? "visible opacity-100" : "invisible opacity-0")
+      }
       onClick={() =>
         scrollTo({
           left: 0,

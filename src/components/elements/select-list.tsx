@@ -3,7 +3,18 @@
 import {JSX} from "react"
 import {useSelect, SelectOptionDefinition, SelectProvider, SelectValue} from "@mui/base/useSelect"
 import {useOption} from "@mui/base/useOption"
-import {FocusEvent, KeyboardEvent, MouseEvent, ReactNode, RefObject, useEffect, useId, useLayoutEffect, useRef, useState} from "react"
+import {
+  FocusEvent,
+  KeyboardEvent,
+  MouseEvent,
+  ReactNode,
+  RefObject,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react"
 import {CheckIcon, ChevronDownIcon} from "@heroicons/react/20/solid"
 import {Maybe} from "@lib/gql/__generated__/drupal.d"
 import {twMerge} from "tailwind-merge"
@@ -70,12 +81,7 @@ function CustomOption(props: OptionProps) {
       )}
     >
       {children}
-      {selected && (
-        <CheckIcon
-          width={20}
-          className="text-stone-dark"
-        />
-      )}
+      {selected && <CheckIcon width={20} className="text-stone-dark" />}
     </li>
   )
 }
@@ -98,7 +104,20 @@ type Props = {
   className?: string
 }
 
-const SelectList = ({options = [], label, multiple, ariaLabelledby, required, defaultValue, name, emptyValue, emptyLabel = "- None -", borderless = false, downIcon, ...props}: Props) => {
+const SelectList = ({
+  options = [],
+  label,
+  multiple,
+  ariaLabelledby,
+  required,
+  defaultValue,
+  name,
+  emptyValue,
+  emptyLabel = "- None -",
+  borderless = false,
+  downIcon,
+  ...props
+}: Props) => {
   const labelId = useId()
   const labeledBy = ariaLabelledby || labelId
 
@@ -134,7 +153,10 @@ const SelectList = ({options = [], label, multiple, ariaLabelledby, required, de
     <div className="relative h-[45px]">
       <button
         {...getButtonProps()}
-        className={clsx("w-full p-5 text-left", {"rounded border border-black-40": !borderless, "bg-black-30": props.disabled})}
+        className={clsx("w-full p-5 text-left", {
+          "rounded border border-black-40": !borderless,
+          "bg-black-30": props.disabled,
+        })}
         aria-labelledby={labeledBy}
       >
         {label && (
@@ -143,10 +165,7 @@ const SelectList = ({options = [], label, multiple, ariaLabelledby, required, de
               "top-[-15px] w-full": optionChosen,
             })}
           >
-            <span
-              id={labelId}
-              className={twMerge("block w-fit px-5 text-16", clsx({"bg-black-30": props.disabled}))}
-            >
+            <span id={labelId} className={twMerge("block w-fit px-5 text-16", clsx({"bg-black-30": props.disabled}))}>
               {label}
             </span>
           </span>
@@ -154,23 +173,29 @@ const SelectList = ({options = [], label, multiple, ariaLabelledby, required, de
 
         {!label && emptyLabel && !optionChosen && (
           <span className={clsx("relative block max-w-[calc(100%-30px)]")}>
-            <span
-              id={labelId}
-              className={twMerge("block w-fit px-5 text-16", clsx({"bg-black-30": props.disabled}))}
-            >
+            <span id={labelId} className={twMerge("block w-fit px-5 text-16", clsx({"bg-black-30": props.disabled}))}>
               {emptyLabel}
             </span>
           </span>
         )}
 
-        {optionChosen && <span className="block max-w-[calc(100%-30px)] overflow-hidden text-16">{renderSelectedValue(value, options)}</span>}
+        {optionChosen && (
+          <span className="block max-w-[calc(100%-30px)] overflow-hidden text-16">
+            {renderSelectedValue(value, options)}
+          </span>
+        )}
 
-        <span className="absolute right-5 top-0 flex h-full items-center">{downIcon || <ChevronDownIcon width={20} />}</span>
+        <span className="absolute right-5 top-0 flex h-full items-center">
+          {downIcon || <ChevronDownIcon width={20} />}
+        </span>
       </button>
 
       <div
         ref={listboxContainerRef}
-        className={twMerge("absolute left-0 top-full z-[10] max-h-[300px] w-full overflow-y-scroll border border-black-20 bg-white pb-5 shadow-lg", clsx({hidden: !listboxVisible}))}
+        className={twMerge(
+          "absolute left-0 top-full z-[10] max-h-[300px] w-full overflow-y-scroll border border-black-20 bg-white pb-5 shadow-lg",
+          clsx({hidden: !listboxVisible})
+        )}
       >
         <ul
           {...getListboxProps()}
@@ -180,21 +205,14 @@ const SelectList = ({options = [], label, multiple, ariaLabelledby, required, de
         >
           <SelectProvider value={contextValue}>
             {!required && !multiple && (
-              <CustomOption
-                value={emptyValue || ""}
-                rootRef={listboxRef}
-              >
+              <CustomOption value={emptyValue || ""} rootRef={listboxRef}>
                 {emptyLabel}
               </CustomOption>
             )}
 
             {options.map(option => {
               return (
-                <CustomOption
-                  key={option.value}
-                  value={option.value}
-                  rootRef={listboxRef}
-                >
+                <CustomOption key={option.value} value={option.value} rootRef={listboxRef}>
                   {option.label}
                 </CustomOption>
               )
@@ -202,14 +220,7 @@ const SelectList = ({options = [], label, multiple, ariaLabelledby, required, de
           </SelectProvider>
         </ul>
       </div>
-      {name && (
-        <input
-          ref={inputRef}
-          name={name}
-          type="hidden"
-          value={value || ""}
-        />
-      )}
+      {name && <input ref={inputRef} name={name} type="hidden" value={value || ""} />}
     </div>
   )
 }

@@ -15,9 +15,16 @@ type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
 }
 const BookPage = async ({node, ...props}: Props) => {
-  const hasExcerptAndMore = node.supBookExcerpts || node.supBookTableOfContents || !!(await getBookAncillaryContents(node.id)).length
+  const hasExcerptAndMore =
+    node.supBookExcerpts || node.supBookTableOfContents || !!(await getBookAncillaryContents(node.id)).length
 
-  const lowestPrice = Math.min(node.supBookClothSalePrice || 9999, node.supBookPaperSalePrice || 9999, node.supBookPriceCloth || 9999, node.supBookPriceDigital || 9999, node.supBookPricePaper || 9999)
+  const lowestPrice = Math.min(
+    node.supBookClothSalePrice || 9999,
+    node.supBookPaperSalePrice || 9999,
+    node.supBookPriceCloth || 9999,
+    node.supBookPriceDigital || 9999,
+    node.supBookPricePaper || 9999
+  )
   const awards = node.supBookAwards?.sort((a, b) => (a.supRank && b.supRank && a.supRank < b.supRank ? -1 : 1))
 
   function createLinkParams(subject: TermSupBookSubject) {
@@ -35,10 +42,7 @@ const BookPage = async ({node, ...props}: Props) => {
 
   const bookSubject = node.supBookSubjects && createLinkParams(node.supBookSubjects[0])
   return (
-    <article
-      className="centered"
-      {...props}
-    >
+    <article className="centered" {...props}>
       <>
         <div className="mb-20 flex flex-col md:flex-row md:gap-24 md:pt-32">
           <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-row justify-center gap-24 bg-fog-light px-20 pt-32 md:hidden">
@@ -56,7 +60,9 @@ const BookPage = async ({node, ...props}: Props) => {
 
               {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
 
-              {node.supBookAuthorsFull && <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
+              {node.supBookAuthorsFull && (
+                <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
+              )}
             </div>
             <div className="order-first w-5/12">
               <BookPageImage node={node} />
@@ -79,16 +85,15 @@ const BookPage = async ({node, ...props}: Props) => {
 
                   {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
 
-                  {node.supBookAuthorsFull && <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
+                  {node.supBookAuthorsFull && (
+                    <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
+                  )}
                 </div>
 
                 {awards && (
                   <div className="rs-mt-1 border-t-2 border-fog">
                     <H2 className="flex w-fit items-center gap-2 bg-fog p-3 -text-m1 font-semibold">
-                      <BookmarkIcon
-                        width={20}
-                        className="fill-archway"
-                      />
+                      <BookmarkIcon width={20} className="fill-archway" />
                       Award Winner
                     </H2>
                     <BookAwards>
@@ -101,9 +106,15 @@ const BookPage = async ({node, ...props}: Props) => {
               </div>
 
               <div className="rs-mb-0 rs-pb-3 flex flex-col gap-2 border-b-2 border-fog">
-                {node.supBookImprint && <div className="rs-mb-0 -text-m1 font-semibold text-press-sand-dark">Imprint: {node.supBookImprint.name}</div>}
+                {node.supBookImprint && (
+                  <div className="rs-mb-0 -text-m1 font-semibold text-press-sand-dark">
+                    Imprint: {node.supBookImprint.name}
+                  </div>
+                )}
 
-                {node.supBookCopublisherName && <div className="text-press-sand-dark">{node.supBookCopublisherName}</div>}
+                {node.supBookCopublisherName && (
+                  <div className="text-press-sand-dark">{node.supBookCopublisherName}</div>
+                )}
 
                 {node.supBookPubDateCloth?.time && (
                   <div className="-text-m1 text-press-sand-dark">
@@ -116,25 +127,30 @@ const BookPage = async ({node, ...props}: Props) => {
 
                 {!!node.supBookPages && <div className="-text-m1 text-press-sand-dark">{node.supBookPages} Pages</div>}
 
-                {lowestPrice && lowestPrice < 999 && <div className="-text-m1 text-press-sand-dark">From {formatCurrency(lowestPrice)}</div>}
+                {lowestPrice && lowestPrice < 999 && (
+                  <div className="-text-m1 text-press-sand-dark">From {formatCurrency(lowestPrice)}</div>
+                )}
 
                 {node.supBookSeries?.name && (
                   <div>
                     Series
                     <br />
-                    <a
-                      href={`/search?q=${node.supBookSeries.name}`}
-                      className="-text-m1 font-normal text-stone-dark"
-                    >
+                    <a href={`/search?q=${node.supBookSeries.name}`} className="-text-m1 font-normal text-stone-dark">
                       {node.supBookSeries.name}
                     </a>
                   </div>
                 )}
               </div>
               <div className="rs-mb-2 flex flex-col gap-2">
-                {node.supBookIsbn13Cloth && <div className="-text-m1 text-stone-dark">Hardcover ISBN: {node.supBookIsbn13Cloth}</div>}
-                {node.supBookIsbn13Paper && <div className="-text-m1 text-stone-dark">Paperback ISBN: {node.supBookIsbn13Paper}</div>}
-                {node.supBookIsbn13Digital && <div className="-text-m1 text-stone-dark">Ebook ISBN: {node.supBookIsbn13Digital}</div>}
+                {node.supBookIsbn13Cloth && (
+                  <div className="-text-m1 text-stone-dark">Hardcover ISBN: {node.supBookIsbn13Cloth}</div>
+                )}
+                {node.supBookIsbn13Paper && (
+                  <div className="-text-m1 text-stone-dark">Paperback ISBN: {node.supBookIsbn13Paper}</div>
+                )}
+                {node.supBookIsbn13Digital && (
+                  <div className="-text-m1 text-stone-dark">Ebook ISBN: {node.supBookIsbn13Digital}</div>
+                )}
               </div>
             </div>
 
@@ -160,10 +176,7 @@ const BookPage = async ({node, ...props}: Props) => {
                   <H2 className="-text-m1">Also Available from</H2>
                   <ul className="list-unstyled rs-mt-0 flex flex-col gap-3 [&_a]:font-normal [&_a]:text-digital-red">
                     {node.supBookERetailers.map((link, i) => (
-                      <li
-                        key={`e-book-retailer-${i}`}
-                        className="mb-0"
-                      >
+                      <li key={`e-book-retailer-${i}`} className="mb-0">
                         <a
                           href={link.url || "#"}
                           className="font-normal underline-offset-[5px] hocus:text-stone-dark hocus:decoration-archway-dark hocus:decoration-2"
@@ -180,11 +193,7 @@ const BookPage = async ({node, ...props}: Props) => {
                 href={node.path + "/desk-examination-copy-requests"}
                 className="flex items-start gap-3 -text-m1 font-normal leading-snug text-stone-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
               >
-                <ClipboardIcon
-                  width={24}
-                  className="mt-1 text-fog-dark"
-                />{" "}
-                Desk, Examination, or Review Copy Requests
+                <ClipboardIcon width={24} className="mt-1 text-fog-dark" /> Desk, Examination, or Review Copy Requests
               </Link>
             </div>
           </div>
@@ -200,10 +209,7 @@ const BookPage = async ({node, ...props}: Props) => {
                 className="group rs-py-1 rs-mt-2 rs-px-2 mx-auto flex w-fit items-center justify-center gap-5 border-2 border-press-sand font-normal text-stone-dark no-underline hocus:border-cardinal-red hocus:bg-cardinal-red hocus:text-white hocus:underline md:mt-0"
               >
                 <span>Excerpts + more</span>
-                <DocumentDuplicateIcon
-                  width={28}
-                  className="text-stone group-hocus:text-white"
-                />
+                <DocumentDuplicateIcon width={28} className="text-stone group-hocus:text-white" />
               </Link>
             )}
           </div>
@@ -246,10 +252,7 @@ const BookPage = async ({node, ...props}: Props) => {
             {node.supBookSubjects.map(subject => {
               const linkParamsString = createLinkParams(subject)
               return (
-                <li
-                  key={subject.id}
-                  className="min-w-fit flex-1"
-                >
+                <li key={subject.id} className="min-w-fit flex-1">
                   <a
                     href={`/search?${linkParamsString}`}
                     className="-text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"

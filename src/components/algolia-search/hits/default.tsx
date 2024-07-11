@@ -25,10 +25,7 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
       <div className="flex flex-col justify-between gap-20 @3xl:flex-row">
         <div>
           <H2 className="text-m1">
-            <Link
-              className="text-stone-dark hocus:text-digital-red"
-              href={hit.url.replace(hitUrl.origin, "")}
-            >
+            <Link className="text-stone-dark hocus:text-digital-red" href={hit.url.replace(hitUrl.origin, "")}>
               {hit.title}
             </Link>
           </H2>
@@ -36,10 +33,7 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
           {hit.summary && <p className="mb-10">{hit.summary}</p>}
           {hit.html && !hit.summary && (
             <p className="mb-10">
-              <Snippet
-                hit={hit}
-                attribute="html"
-              />
+              <Snippet hit={hit} attribute="html" />
             </p>
           )}
 
@@ -57,13 +51,7 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
 
         {hit.photo && (
           <div className="relative aspect-[2/3] w-[150px] shrink-0">
-            <Image
-              className="object-cover"
-              src={hit.photo}
-              alt=""
-              fill
-              sizes="300px"
-            />
+            <Image className="object-cover" src={hit.photo} alt="" fill sizes="300px" />
           </div>
         )}
       </div>

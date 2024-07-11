@@ -15,7 +15,8 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 
 const BannerParagraph = ({paragraph, eagerLoadImage, ...props}: Props) => {
   const behaviors = getParagraphBehaviors<BannerParagraphBehaviors>(paragraph)
-  const hasCard = paragraph.suBannerHeader || paragraph.suBannerButton || paragraph.suBannerBody || paragraph.suBannerSupHeader
+  const hasCard =
+    paragraph.suBannerHeader || paragraph.suBannerButton || paragraph.suBannerBody || paragraph.suBannerSupHeader
 
   const headerTagChoice = (behaviors.hero_pattern?.heading || "h2").split(".", 2)
   const headerTag = headerTagChoice[0]
@@ -34,10 +35,7 @@ const BannerParagraph = ({paragraph, eagerLoadImage, ...props}: Props) => {
       {hasCard && (
         <>
           {paragraph.suBannerHeader && (
-            <div
-              id={paragraph.id}
-              className={twMerge("order-2", behaviors.hero_pattern?.hide_heading && "sr-only")}
-            >
+            <div id={paragraph.id} className={twMerge("order-2", behaviors.hero_pattern?.hide_heading && "sr-only")}>
               {headerTag === "h2" && <H2 className={twMerge(headerClasses, "mb-0")}>{paragraph.suBannerHeader}</H2>}
               {headerTag === "h3" && <H3 className={headerClasses}>{paragraph.suBannerHeader}</H3>}
               {headerTag === "h4" && <H4 className={headerClasses}>{paragraph.suBannerHeader}</H4>}
@@ -45,12 +43,11 @@ const BannerParagraph = ({paragraph, eagerLoadImage, ...props}: Props) => {
             </div>
           )}
 
-          {paragraph.suBannerSupHeader && <div className="order-1 text-09em font-semibold">{paragraph.suBannerSupHeader}</div>}
+          {paragraph.suBannerSupHeader && (
+            <div className="order-1 text-09em font-semibold">{paragraph.suBannerSupHeader}</div>
+          )}
 
-          <Wysiwyg
-            html={paragraph.suBannerBody?.processed}
-            className="order-3 text-m0"
-          />
+          <Wysiwyg html={paragraph.suBannerBody?.processed} className="order-3 text-m0" />
 
           {paragraph.suBannerButton?.url && (
             <div className="order-4">

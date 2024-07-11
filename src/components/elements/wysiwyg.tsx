@@ -25,7 +25,10 @@ const Wysiwyg = ({html, className, ...props}: Props) => {
   const addMathJax = html.match(/\$\$.*\$\$/) || html.match(/\\\[.*\\\]/) || html.match(/\\\(.*\\\)/)
   return (
     <div
-      className={twMerge("[&_a]:not(.btn):text-digital-red hocus:[&_a]:not(.btn):text-archway-dark wysiwyg leading", className)}
+      className={twMerge(
+        "[&_a]:not(.btn):text-digital-red hocus:[&_a]:not(.btn):text-archway-dark wysiwyg leading",
+        className
+      )}
       {...props}
     >
       {addMathJax && <Mathjax />}
@@ -50,10 +53,7 @@ const options: HTMLReactParserOptions = {
 
           if (nodeProps.className?.indexOf("link--action") >= 0) {
             return (
-              <ActionLink
-                {...nodeProps}
-                href={nodeProps.href as string}
-              >
+              <ActionLink {...nodeProps} href={nodeProps.href as string}>
                 {domToReact(children, options)}
               </ActionLink>
             )
@@ -134,7 +134,10 @@ const fixClasses = (classes?: string | boolean): string => {
     .replaceAll(" font-splash ", " splash-text text-m4 ")
     .replaceAll(" callout-text ", " font-bold text-m2 ")
     .replaceAll(" related-text ", " shadow-lg border border-black-20 p-16 ")
-    .replaceAll(" drop-cap ", " text-m1 first-letter:font-bold first-letter:text-m6 first-letter:float-left first-letter:my-2 first-letter:mr-4 ")
+    .replaceAll(
+      " drop-cap ",
+      " text-m1 first-letter:font-bold first-letter:text-m6 first-letter:float-left first-letter:my-2 first-letter:mr-4 "
+    )
     .replaceAll(" intro-text ", " text-m2 ")
     .replace(/ tablesaw.*? /g, " ")
     .replace(/ +/g, " ")
@@ -220,31 +223,32 @@ const cleanMediaMarkup = (node: Element) => {
       delete nodeProps.role
       return (
         <figure {...nodeProps}>
-          <WysiwygImage
-            src={src}
-            alt={alt}
-            height={height}
-            width={width}
-          />
-          <figcaption className="table-caption caption-bottom text-center">{domToReact(figCaption, options)}</figcaption>
+          <WysiwygImage src={src} alt={alt} height={height} width={width} />
+          <figcaption className="table-caption caption-bottom text-center">
+            {domToReact(figCaption, options)}
+          </figcaption>
         </figure>
       )
     }
 
-    return (
-      <WysiwygImage
-        src={src}
-        alt={alt}
-        height={height}
-        width={width}
-        {...nodeProps}
-      />
-    )
+    return <WysiwygImage src={src} alt={alt} height={height} width={width} {...nodeProps} />
   }
   return <div {...nodeProps}>{domToReact(node.children as DOMNode[], options)}</div>
 }
 
-const WysiwygImage = ({src, alt, height, width, className}: {src: string; alt?: Maybe<string>; height?: Maybe<string>; width?: Maybe<string>; className?: string}) => {
+const WysiwygImage = ({
+  src,
+  alt,
+  height,
+  width,
+  className,
+}: {
+  src: string
+  alt?: Maybe<string>
+  height?: Maybe<string>
+  width?: Maybe<string>
+  className?: string
+}) => {
   if (width && height) {
     return (
       <Image

@@ -13,16 +13,17 @@ const FileListParagraph = ({paragraph, ...props}: Props) => {
   const fileOptions = paragraph.supFileListFiles.map(media => ({
     value: media.id,
     label: media.name,
-    url: media.__typename === "MediaFile" ? media.mediaFile.url : media.__typename === "MediaSupProtectedFile" ? media.supMediaFile.url.replace(process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string, "") : "",
+    url:
+      media.__typename === "MediaFile"
+        ? media.mediaFile.url
+        : media.__typename === "MediaSupProtectedFile"
+          ? media.supMediaFile.url.replace(process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string, "")
+          : "",
   }))
 
   if (paragraph.supFileListDisplay === "select") {
     return (
-      <FileListSelection
-        fileOptions={fileOptions}
-        label={paragraph.supFileListLabel || "Choose a file"}
-        {...props}
-      />
+      <FileListSelection fileOptions={fileOptions} label={paragraph.supFileListLabel || "Choose a file"} {...props} />
     )
   }
 
@@ -32,10 +33,7 @@ const FileListParagraph = ({paragraph, ...props}: Props) => {
       <ul className="list-unstyled">
         {fileOptions.map(media => (
           <li key={media.value}>
-            <a
-              href={media.url}
-              className="group flex w-fit items-center gap-10 text-m1 text-press-sand-dark"
-            >
+            <a href={media.url} className="group flex w-fit items-center gap-10 text-m1 text-press-sand-dark">
               <span className="relative block">
                 <DocumentTextIcon
                   width={50}
@@ -43,10 +41,7 @@ const FileListParagraph = ({paragraph, ...props}: Props) => {
                 />
 
                 {media.url.startsWith("/system/") && (
-                  <LockClosedIcon
-                    width={30}
-                    className="absolute bottom-0 right-0"
-                  />
+                  <LockClosedIcon width={30} className="absolute bottom-0 right-0" />
                 )}
               </span>
               {media.label}

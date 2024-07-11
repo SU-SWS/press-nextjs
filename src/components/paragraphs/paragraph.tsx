@@ -25,10 +25,7 @@ type Props = {
 
 const Paragraph = async ({paragraph}: Props) => {
   return (
-    <UnpublishedBanner
-      status={paragraph.status}
-      message="Unpublished Content"
-    >
+    <UnpublishedBanner status={paragraph.status} message="Unpublished Content">
       <ParagraphComponent paragraph={paragraph} />
     </UnpublishedBanner>
   )
@@ -44,93 +41,35 @@ const ParagraphComponent = async ({paragraph}: Props) => {
 
   switch (paragraph.__typename) {
     case "ParagraphStanfordBanner":
-      return (
-        <BannerParagraph
-          paragraph={paragraph}
-          {...itemProps}
-        />
-      )
+      return <BannerParagraph paragraph={paragraph} {...itemProps} />
     case "ParagraphStanfordCard":
-      return (
-        <CardParagraph
-          paragraph={paragraph}
-          {...itemProps}
-        />
-      )
+      return <CardParagraph paragraph={paragraph} {...itemProps} />
     case "ParagraphStanfordEntity":
-      return (
-        <EntityParagraph
-          paragraph={paragraph}
-          {...itemProps}
-        />
-      )
+      return <EntityParagraph paragraph={paragraph} {...itemProps} />
     case "ParagraphStanfordGallery":
-      return (
-        <GalleryParagraph
-          paragraph={paragraph}
-          {...itemProps}
-        />
-      )
+      return <GalleryParagraph paragraph={paragraph} {...itemProps} />
     case "ParagraphStanfordMediaCaption":
-      return (
-        <MediaCaptionParagraph
-          paragraph={paragraph}
-          {...itemProps}
-        />
-      )
+      return <MediaCaptionParagraph paragraph={paragraph} {...itemProps} />
     case "ParagraphStanfordSpacer":
-      return (
-        <SpacerParagraph
-          paragraph={paragraph}
-          {...itemProps}
-        />
-      )
+      return <SpacerParagraph paragraph={paragraph} {...itemProps} />
     case "ParagraphStanfordWysiwyg":
-      return (
-        <WysiwygParagraph
-          paragraph={paragraph}
-          {...itemProps}
-        />
-      )
+      return <WysiwygParagraph paragraph={paragraph} {...itemProps} />
     case "ParagraphStanfordList":
       return (
         <Suspense>
-          <ListParagraph
-            paragraph={paragraph}
-            {...itemProps}
-          />
+          <ListParagraph paragraph={paragraph} {...itemProps} />
         </Suspense>
       )
     case "ParagraphSupFileList":
-      return (
-        <FileListParagraph
-          paragraph={paragraph}
-          {...itemProps}
-        />
-      )
+      return <FileListParagraph paragraph={paragraph} {...itemProps} />
     case "ParagraphSupCarousel":
-      return (
-        <SupCarouselParagraph
-          paragraph={paragraph}
-          {...itemProps}
-        />
-      )
+      return <SupCarouselParagraph paragraph={paragraph} {...itemProps} />
     case "ParagraphSupAuthorList":
       return <SupAuthorListParagraph {...itemProps} />
     case "ParagraphSupSearchForm":
-      return (
-        <SupSearchFormParagraph
-          paragraph={paragraph}
-          {...itemProps}
-        />
-      )
+      return <SupSearchFormParagraph paragraph={paragraph} {...itemProps} />
     case "ParagraphSupBlogTeaser":
-      return (
-        <SupBlogTeaserParagraph
-          paragraph={paragraph}
-          {...itemProps}
-        />
-      )
+      return <SupBlogTeaserParagraph paragraph={paragraph} {...itemProps} />
   }
   console.warn(`Unknown paragraph ${paragraph.__typename}. Item ${paragraph.id}.`)
 }

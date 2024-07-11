@@ -20,10 +20,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
 
   return (
     <div className="centered flex flex-col">
-      <article
-        className="order-last mx-auto max-w-900 gap-10 pt-32"
-        {...props}
-      >
+      <article className="order-last mx-auto max-w-900 gap-10 pt-32" {...props}>
         <H1 className="mb-32">Excerpts + More</H1>
         <div className="mb-36 flex flex-col gap-20 md:flex-row">
           <div className="flex flex-col gap-10">
@@ -34,10 +31,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
             {node.supBookAuthorsFull && <div className="text-m2 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
 
             {ancillaryPages.map(page => (
-              <Link
-                key={page.id}
-                href={page.path}
-              >
+              <Link key={page.id} href={page.path}>
                 {page.title}
               </Link>
             ))}
@@ -49,10 +43,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
             </div>
           )}
         </div>
-        <Rows
-          components={node.supBookExcerpts}
-          className="px-5"
-        />
+        <Rows components={node.supBookExcerpts} className="px-5" />
 
         {node.supBookTableOfContents && (
           <div className="centered lg:max-w-[980px]">
@@ -62,14 +53,8 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
         )}
       </article>
 
-      <Link
-        href={node.path}
-        className="flex w-fit items-center gap-5 pt-20"
-      >
-        <ArrowLeftIcon
-          width={20}
-          className="text-fog-dark"
-        />
+      <Link href={node.path} className="flex w-fit items-center gap-5 pt-20">
+        <ArrowLeftIcon width={20} className="text-fog-dark" />
         <span>Back to {node.title}</span>
       </Link>
     </div>

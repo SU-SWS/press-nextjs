@@ -17,14 +17,8 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
     <article className="py-12 @container">
       <div className="flex flex-col justify-between gap-20 @2xl:flex-row">
         <div>
-          <H2
-            className="type-0 mb-2"
-            id={hit.objectID}
-          >
-            <Link
-              className="text-stone-dark hocus:text-digital-red"
-              href={hit.url.replace(hitUrl.origin, "")}
-            >
+          <H2 className="type-0 mb-2" id={hit.objectID}>
+            <Link className="text-stone-dark hocus:text-digital-red" href={hit.url.replace(hitUrl.origin, "")}>
               {hit.title}
             </Link>
           </H2>
@@ -32,10 +26,7 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
           {hit.summary && <p className="card-paragraph mb-8">{hit.summary}</p>}
           {hit.html && !hit.summary && (
             <p className="card-paragraph mb-8">
-              <Snippet
-                hit={hit}
-                attribute="html"
-              />
+              <Snippet hit={hit} attribute="html" />
             </p>
           )}
 
@@ -45,10 +36,7 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
 
         {hit.photo && (
           <div className="relative mx-auto aspect-[2/3] w-[150px] shrink-0 @2xl:mr-0">
-            <a
-              href={hit.url}
-              aria-labelledby={hit.objectID}
-            >
+            <a href={hit.url} aria-labelledby={hit.objectID}>
               <Image
                 className="object-cover"
                 src={hit.photo.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)}

@@ -14,10 +14,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 const SupBookCard = ({node, headingLevel, ...props}: Props) => {
   const Heading = headingLevel === "h3" ? H3 : H2
   return (
-    <div
-      {...props}
-      className={twMerge("mx-auto max-w-3xl", props.className)}
-    >
+    <div {...props} className={twMerge("mx-auto max-w-3xl", props.className)}>
       <div className="relative">
         <div className="rs-mb-1 relative aspect-[2/3] w-full">
           <Image
@@ -29,20 +26,14 @@ const SupBookCard = ({node, headingLevel, ...props}: Props) => {
           />
           {node.supBookAwards && (
             <div className="absolute left-5 top-0 flex max-w-[90%] items-center gap-3 bg-fog py-2 pl-3 pr-5">
-              <BookmarkIcon
-                width={20}
-                className="fill-stone-dark"
-              />
+              <BookmarkIcon width={20} className="fill-stone-dark" />
               Award winner
             </div>
           )}
         </div>
 
         <Heading className="mb-5 text-m1 font-normal">
-          <Link
-            className="stretched-link font-normal text-stone-dark"
-            href={node.path}
-          >
+          <Link className="stretched-link font-normal text-stone-dark" href={node.path}>
             {node.title}
           </Link>
         </Heading>

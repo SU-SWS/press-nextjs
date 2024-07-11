@@ -53,11 +53,7 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
             .sort()
             .slice(page * 25, (page + 1) * 25)
             .map(authorName => (
-              <AuthorItem
-                key={authorName}
-                authorName={authorName}
-                books={authors.get(authorName)}
-              />
+              <AuthorItem key={authorName} authorName={authorName} books={authors.get(authorName)} />
             ))}
         </>
       )
@@ -66,21 +62,11 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
   )
 
   return (
-    <div
-      {...props}
-      className={twMerge("flex justify-between", props?.className)}
-    >
-      <div
-        className="sr-only"
-        aria-live="polite"
-        aria-atomic
-      >
+    <div {...props} className={twMerge("flex justify-between", props?.className)}>
+      <div className="sr-only" aria-live="polite" aria-atomic>
         Showing authors that start with {alphaChosen}
       </div>
-      <a
-        href="#author-filter"
-        className="skiplink"
-      >
+      <a href="#author-filter" className="skiplink">
         Skip to filter
       </a>
 
@@ -97,27 +83,15 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
           .sort()
           .slice(0, 25)
           .map(authorName => (
-            <AuthorItem
-              key={authorName}
-              authorName={authorName}
-              books={authors.get(authorName)}
-            />
+            <AuthorItem key={authorName} authorName={authorName} books={authors.get(authorName)} />
           ))}
       </PagedList>
 
-      <form
-        role="search"
-        id="author-filter"
-        aria-label="Author name filtering"
-      >
+      <form role="search" id="author-filter" aria-label="Author name filtering">
         <fieldset className="list-unstyled">
           <legend className="sr-only">Filter by first letter of authors last name</legend>
 
-          <RadioOption
-            value="All"
-            defaultChecked={alphaChosen === ""}
-            onChange={() => setAlphaChosen("")}
-          />
+          <RadioOption value="All" defaultChecked={alphaChosen === ""} onChange={() => setAlphaChosen("")} />
 
           {alphaChoices.map(choice => (
             <RadioOption
@@ -142,7 +116,15 @@ const AuthorItem = ({authorName, books}: {authorName: string; books?: JSX.Elemen
   )
 }
 
-const RadioOption = ({value, defaultChecked, onChange}: {value: string; defaultChecked?: boolean; onChange: () => void}) => {
+const RadioOption = ({
+  value,
+  defaultChecked,
+  onChange,
+}: {
+  value: string
+  defaultChecked?: boolean
+  onChange: () => void
+}) => {
   return (
     <label className="mb-8 block cursor-pointer">
       <input
@@ -153,7 +135,9 @@ const RadioOption = ({value, defaultChecked, onChange}: {value: string; defaultC
         value={value}
         onChange={onChange}
       />
-      <span className="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-fog-light font-semibold text-press-sand-dark hover:underline peer-checked:bg-digital-red peer-checked:text-white peer-focus:underline peer-focus-visible:outline peer-focus-visible:outline-press-sand-dark">{value}</span>
+      <span className="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-fog-light font-semibold text-press-sand-dark hover:underline peer-checked:bg-digital-red peer-checked:text-white peer-focus:underline peer-focus-visible:outline peer-focus-visible:outline-press-sand-dark">
+        {value}
+      </span>
     </label>
   )
 }

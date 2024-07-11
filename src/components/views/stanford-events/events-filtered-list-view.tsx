@@ -9,7 +9,10 @@ import StanfordEventListItem from "@components/nodes/list-item/stanford-event/st
 import {SelectOptionDefinition, SelectValue} from "@mui/base/useSelect"
 import {NodeStanfordEvent, TermStanfordEventType} from "@lib/gql/__generated__/drupal.d"
 
-const getTopicOptions = (eventItems: NodeStanfordEvent[] = [], topicTree: TermStanfordEventType[] = []): SelectOptionDefinition<string>[] => {
+const getTopicOptions = (
+  eventItems: NodeStanfordEvent[] = [],
+  topicTree: TermStanfordEventType[] = []
+): SelectOptionDefinition<string>[] => {
   const topicOptions: SelectOptionDefinition<string>[] = []
 
   const cleanTopic = (topic: TermStanfordEventType): boolean => {
@@ -70,10 +73,7 @@ const EventsFilteredListView = ({items, topics}: {items: NodeStanfordEvent[]; to
         </div>
         <Button onClick={filterEvents}>Filter</Button>
       </form>
-      <div
-        aria-live="polite"
-        aria-atomic="true"
-      >
+      <div aria-live="polite" aria-atomic="true">
         Showing {displayedEvents.length} of {items.length} events.
       </div>
       <LoadMoreList
@@ -88,10 +88,7 @@ const EventsFilteredListView = ({items, topics}: {items: NodeStanfordEvent[]; to
         itemsPerPage={3}
       >
         {displayedEvents.map(event => (
-          <StanfordEventListItem
-            key={event.id}
-            node={event}
-          />
+          <StanfordEventListItem key={event.id} node={event} />
         ))}
       </LoadMoreList>
     </div>

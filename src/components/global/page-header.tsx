@@ -11,10 +11,7 @@ const PageHeader = async () => {
   const globalMessageConfig = await getConfigPage<StanfordGlobalMessage>("StanfordGlobalMessage")
 
   return (
-    <header
-      id="site-header"
-      className="relative z-[1] border-b border-fog"
-    >
+    <header id="site-header" className="relative z-[1] border-b border-fog">
       {globalMessageConfig && <GlobalMessage {...globalMessageConfig} />}
       <div className="min-h-50 centered pr-24 lg:pr-0">
         <div className="flex w-full items-center justify-between gap-20">

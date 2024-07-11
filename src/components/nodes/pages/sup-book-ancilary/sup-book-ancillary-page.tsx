@@ -14,10 +14,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
   const book = node.supAncillaryBook
   return (
     <div className="centered flex flex-col">
-      <article
-        className="order-last mx-auto max-w-900 gap-10 pt-32"
-        {...props}
-      >
+      <article className="order-last mx-auto max-w-900 gap-10 pt-32" {...props}>
         <H1 className="mb-32">
           {book.title}: {node.title}
         </H1>
@@ -34,20 +31,11 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
             </div>
           )}
         </div>
-        <Rows
-          components={node.supAncillaryParagraphs}
-          className="px-5"
-        />
+        <Rows components={node.supAncillaryParagraphs} className="px-5" />
       </article>
 
-      <Link
-        href={book.path}
-        className="flex w-fit items-center gap-5 pt-20"
-      >
-        <ArrowLeftIcon
-          width={20}
-          className="text-fog-dark"
-        />
+      <Link href={book.path} className="flex w-fit items-center gap-5 pt-20">
+        <ArrowLeftIcon width={20} className="text-fog-dark" />
         <span>Back to {book.title}</span>
       </Link>
     </div>

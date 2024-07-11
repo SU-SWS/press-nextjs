@@ -22,10 +22,7 @@ const BookAwards = ({children}: {children: JSX.Element[]}) => {
     <div>
       <ul className="list-unstyled">
         {top.map((item, i) => (
-          <li
-            className="mb-10"
-            key={`top-award-${i}`}
-          >
+          <li className="mb-10" key={`top-award-${i}`}>
             {item}
           </li>
         ))}
@@ -54,11 +51,7 @@ const BookAwards = ({children}: {children: JSX.Element[]}) => {
             showMore()
           }}
         >
-          <ChevronDownIcon
-            width={24}
-            className="shrink-0 text-fog-dark"
-          />{" "}
-          Read more
+          <ChevronDownIcon width={24} className="shrink-0 text-fog-dark" /> Read more
         </button>
       )}
     </div>

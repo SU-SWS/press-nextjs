@@ -24,7 +24,19 @@ type Props = {
   hasIntlCart?: boolean
 }
 
-const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDiscount, usPaperPrice, usPaperSalePrice, usPaperSaleDiscount, clothIsbn, paperIsbn, digitalIsbn, hasIntlCart = true}: Props) => {
+const BookPreCart = ({
+  bookTitle,
+  usClothPrice,
+  usClothSalePrice,
+  usClothSaleDiscount,
+  usPaperPrice,
+  usPaperSalePrice,
+  usPaperSaleDiscount,
+  clothIsbn,
+  paperIsbn,
+  digitalIsbn,
+  hasIntlCart = true,
+}: Props) => {
   const router = useRouter()
   const defaultChoice = usClothPrice ? "cloth" : usPaperPrice ? "paper" : "digital"
   const [formatChoice, setFormatChoice] = useState(defaultChoice)
@@ -58,10 +70,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
   }
 
   return (
-    <form
-      className="@container"
-      onSubmit={onFormSubmit}
-    >
+    <form className="@container" onSubmit={onFormSubmit}>
       <fieldset className="rs-mb-1">
         <legend className="sr-only">Format</legend>
         {!isIntl && (
@@ -72,13 +81,7 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
           />
         )}
 
-        {isIntl && (
-          <IntlFormatChoices
-            clothIsbn={clothIsbn}
-            paperIsbn={paperIsbn}
-            onChange={setFormatChoice}
-          />
-        )}
+        {isIntl && <IntlFormatChoices clothIsbn={clothIsbn} paperIsbn={paperIsbn} onChange={setFormatChoice} />}
       </fieldset>
 
       {hasIntlCart && (
@@ -94,7 +97,9 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
                 checked={!isIntl}
                 onChange={() => setIntl(false)}
               />
-              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-2 peer-checked:border-press-sand-dark peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline">US/Canada</span>
+              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-2 peer-checked:border-press-sand-dark peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline">
+                US/Canada
+              </span>
             </label>
             <label className="min-w-fit flex-1 cursor-pointer">
               <input
@@ -105,20 +110,23 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
                 checked={isIntl}
                 onChange={() => setIntl(true)}
               />
-              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline">International</span>
+              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline">
+                International
+              </span>
             </label>
           </div>
         </fieldset>
       )}
 
-      {isIntl && <p>For customer shipments outside the US and Canada, please use the button below to order from our partner, Combined Academic Publishers.</p>}
+      {isIntl && (
+        <p>
+          For customer shipments outside the US and Canada, please use the button below to order from our partner,
+          Combined Academic Publishers.
+        </p>
+      )}
 
       <div>
-        <Button
-          buttonElem
-          type="submit"
-          className="flex w-full items-center justify-center gap-2"
-        >
+        <Button buttonElem type="submit" className="flex w-full items-center justify-center gap-2">
           Add to cart
           <ArrowRightIcon width={24} />
         </Button>
@@ -149,7 +157,15 @@ const BookPreCart = ({bookTitle, usClothPrice, usClothSalePrice, usClothSaleDisc
   )
 }
 
-const UsFormatChoices = ({clothPrice, paperPrice, onChange}: {clothPrice?: Maybe<number>; paperPrice?: Maybe<number>; onChange: (_format: string) => void}) => {
+const UsFormatChoices = ({
+  clothPrice,
+  paperPrice,
+  onChange,
+}: {
+  clothPrice?: Maybe<number>
+  paperPrice?: Maybe<number>
+  onChange: (_format: string) => void
+}) => {
   const defaultChoice = clothPrice ? "cloth" : paperPrice ? "paper" : "digital"
   return (
     <>
@@ -172,10 +188,7 @@ const UsFormatChoices = ({clothPrice, paperPrice, onChange}: {clothPrice?: Maybe
                   <span>{formatCurrency(clothPrice)}</span>
                 </span>
               </span>
-              <BookmarkIcon
-                width={24}
-                className="text-fog-dark"
-              />
+              <BookmarkIcon width={24} className="text-fog-dark" />
             </span>
           </span>
         </label>
@@ -199,10 +212,7 @@ const UsFormatChoices = ({clothPrice, paperPrice, onChange}: {clothPrice?: Maybe
                   <span>{formatCurrency(paperPrice)}</span>
                 </span>
               </span>
-              <BookOpenIcon
-                width={24}
-                className="text-fog-dark"
-              />
+              <BookOpenIcon width={24} className="text-fog-dark" />
             </span>
           </span>
         </label>
@@ -211,7 +221,15 @@ const UsFormatChoices = ({clothPrice, paperPrice, onChange}: {clothPrice?: Maybe
   )
 }
 
-const IntlFormatChoices = ({clothIsbn, paperIsbn, onChange}: {clothIsbn?: Maybe<string>; paperIsbn?: Maybe<string>; onChange: (_format: string) => void}) => {
+const IntlFormatChoices = ({
+  clothIsbn,
+  paperIsbn,
+  onChange,
+}: {
+  clothIsbn?: Maybe<string>
+  paperIsbn?: Maybe<string>
+  onChange: (_format: string) => void
+}) => {
   const defaultChoice = clothIsbn ? "cloth" : "paper"
   return (
     <>
@@ -228,10 +246,7 @@ const IntlFormatChoices = ({clothIsbn, paperIsbn, onChange}: {clothIsbn?: Maybe<
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center justify-between font-semibold">
               <span className="group-hover:underline">Hardcover</span>
-              <BookmarkIcon
-                width={24}
-                className="text-fog-dark"
-              />
+              <BookmarkIcon width={24} className="text-fog-dark" />
             </span>
           </span>
         </label>
@@ -249,10 +264,7 @@ const IntlFormatChoices = ({clothIsbn, paperIsbn, onChange}: {clothIsbn?: Maybe<
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center justify-between font-semibold">
               <span className="group-hover:underline">Paperback</span>
-              <BookOpenIcon
-                width={24}
-                className="text-fog-dark"
-              />
+              <BookOpenIcon width={24} className="text-fog-dark" />
             </span>
           </span>
         </label>

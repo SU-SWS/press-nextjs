@@ -8,15 +8,9 @@ type Props = HTMLAttributes<HTMLElement> & {
 }
 const SupBookPage = async ({node, ...props}: Props) => {
   return node.supBookType === "book" ? (
-    <BookPage
-      node={node}
-      {...props}
-    />
+    <BookPage node={node} {...props} />
   ) : (
-    <DigitalProjectPage
-      node={node}
-      {...props}
-    />
+    <DigitalProjectPage node={node} {...props} />
   )
 }
 export default SupBookPage

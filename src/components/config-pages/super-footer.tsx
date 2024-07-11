@@ -4,7 +4,13 @@ import {LockClosedIcon} from "@heroicons/react/24/outline"
 import {H2} from "@components/elements/headers"
 import {StanfordSuperFooter} from "@lib/gql/__generated__/drupal.d"
 
-const SuperFooter = ({suSuperFootEnabled, suSuperFootTitle, suSuperFootText, suSuperFootLink, suSuperFootIntranet}: StanfordSuperFooter) => {
+const SuperFooter = ({
+  suSuperFootEnabled,
+  suSuperFootTitle,
+  suSuperFootText,
+  suSuperFootLink,
+  suSuperFootIntranet,
+}: StanfordSuperFooter) => {
   if (!suSuperFootEnabled) return
 
   return (
@@ -41,10 +47,7 @@ const SuperFooter = ({suSuperFootEnabled, suSuperFootTitle, suSuperFootText, suS
                 className="flex items-center text-digital-red no-underline hocus:text-black hocus:underline"
               >
                 {suSuperFootIntranet.title}
-                <LockClosedIcon
-                  width={20}
-                  className="ml-2"
-                />
+                <LockClosedIcon width={20} className="ml-2" />
               </Link>
             )}
           </div>
