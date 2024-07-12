@@ -125,7 +125,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           </label>
           <input
             id="search-input"
-            className="rs-pr-1 rs-pl-1 card-paragraph flex-grow border-0 border-b border-black-30 pb-10 pt-8 md:rs-pr-2 md:rs-pl-3 md:py-12"
+            className="rs-pr-1 rs-pl-1 card-paragraph flex-grow border-0 border-b-2 border-black-30 pb-10 pt-8 md:rs-pr-2 md:rs-pl-3 md:py-12"
             ref={inputRef}
             autoComplete="on"
             autoCorrect="on"
