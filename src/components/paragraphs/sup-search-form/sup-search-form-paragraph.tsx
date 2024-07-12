@@ -17,7 +17,7 @@ const SupSearchFormParagraph = ({paragraph, ...props}: Props) => {
           </label>
 
           <input
-            className="lg:w-100 h-32 w-full border-0 border-b border-stone text-24 placeholder:-text-m1"
+            className="lg:w-100 rs-pr-1 rs-pl-1 card-paragraph w-full border-0 border-b-2 border-stone pb-10 pt-8 placeholder:card-paragraph md:rs-pr-2 md:rs-pl-3 md:py-12"
             type="text"
             placeholder="Search all books by title, author, subject, keywords, ISBNs..."
             id={inputId}
@@ -30,12 +30,12 @@ const SupSearchFormParagraph = ({paragraph, ...props}: Props) => {
           )}
           {paragraph.supSearchBooksOnly && <input type="hidden" name="books" value="1" />}
 
-          <button
-            type="submit"
-            className="flex h-[45px] w-[45px] shrink-0 items-center justify-center rounded-full bg-digital-red"
-          >
-            <MagnifyingGlassIcon width={25} className="text-white" />
+          <button type="submit" className="group">
             <span className="sr-only">Submit Search</span>
+            <MagnifyingGlassIcon
+              width={40}
+              className="block rounded-full bg-digital-red p-3 text-white group-hocus:bg-cardinal-red"
+            />
           </button>
         </div>
       </form>
