@@ -66,7 +66,7 @@ jobs:
             docroot/core
             docroot/libraries
             docroot/modules/contrib
-          key: 2.1-${{ hashFiles('blt/blt.yml') }}-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}
+          key: backend-${{ hashFiles('blt/blt.yml') }}-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}
           restore-keys: |
             backend-${{ hashFiles('blt/blt.yml') }}-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}
             backend-${{ hashFiles('blt/blt.yml') }}-${{ hashFiles('composer.json') }}-
@@ -90,7 +90,6 @@ jobs:
       - name: Build Frontend
         run: |
           cd $GITHUB_WORKSPACE/frontend &&
-          nvm use &&
           cp .env.example .env.local &&
           sed -i -r "s|NEXT_PUBLIC_DRUPAL_BASE_URL.*|NEXT_PUBLIC_DRUPAL_BASE_URL=http://localhost|g" .env.local &&
           cd $GITHUB_WORKSPACE &&
