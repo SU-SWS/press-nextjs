@@ -85,7 +85,7 @@ const options: HTMLReactParserOptions = {
             }
 
             if (nodeProps.className.indexOf("chapnumandtitle") >= 0) {
-              nodeProps.className += " font-semibold text-m2"
+              nodeProps.className += " font-semibold type-3"
             }
           }
           return <NodeName {...nodeProps}>{domToReact(children, options)}</NodeName>
@@ -131,14 +131,14 @@ const fixClasses = (classes?: string | boolean): string => {
     .replaceAll(" align-left ", " float-left mr-10 mb-10 ")
     .replaceAll(" align-right ", " float-right ml-10 mb-10 ")
     .replaceAll(" visually-hidden ", " sr-only ")
-    .replaceAll(" font-splash ", " splash-text text-m4 ")
-    .replaceAll(" callout-text ", " font-bold text-m2 ")
+    .replaceAll(" font-splash ", " splash-text type-5 ")
+    .replaceAll(" callout-text ", " font-bold type-3 ")
     .replaceAll(" related-text ", " shadow-lg border border-black-20 p-16 ")
     .replaceAll(
       " drop-cap ",
-      " text-m1 first-letter:font-bold first-letter:text-m6 first-letter:float-left first-letter:my-2 first-letter:mr-4 "
+      " type-2 first-letter:font-bold first-letter:text-m6 first-letter:float-left first-letter:my-2 first-letter:mr-4 "
     )
-    .replaceAll(" intro-text ", " text-m2 ")
+    .replaceAll(" intro-text ", " type-3 ")
     .replace(/ tablesaw.*? /g, " ")
     .replace(/ +/g, " ")
     .trim()

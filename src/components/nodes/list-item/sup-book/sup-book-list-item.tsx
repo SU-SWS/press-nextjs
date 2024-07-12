@@ -18,7 +18,7 @@ const SupBookListItem = ({node, headingLevel, ...props}: Props) => {
       className={twMerge("mx-auto w-full max-w-[500px] border border-black-20 p-10 shadow-xl", props.className)}
     >
       <div className="flex flex-col">
-        <Heading className="order-first text-m2" id={node.id}>
+        <Heading className="type-3 order-first" id={node.id}>
           <Link href={node.path}>{node.title}</Link>
         </Heading>
         <div className="font-bold">Publication</div>

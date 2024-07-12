@@ -99,7 +99,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
         >
           <div className={clsx("flex flex-col", {"text-left": leftImage, "text-center": !leftImage})}>
             {slideParagraph.supSlideBook?.path && (
-              <H2 className={clsx({"text-m1": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
+              <H2 className={clsx({"type-2": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
                 <Link
                   className="font-medium text-white no-underline hocus:text-white hocus:underline"
                   href={slideParagraph.supSlideBook.path}
@@ -110,7 +110,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
             )}
 
             {!slideParagraph.supSlideBook?.path && (
-              <H2 className={clsx({"text-m1": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
+              <H2 className={clsx({"type-2": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
                 {slideTitle}
               </H2>
             )}
@@ -131,7 +131,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
           <Wysiwyg
             html={body}
             className={clsx("rs-mb-3", {
-              "[&_p]:-text-m1": slideParagraph.supSlideBodySize === "small",
+              "[&_p]:-type-2": slideParagraph.supSlideBodySize === "small",
               "text-left": leftImage,
               "text-center": !leftImage,
             })}

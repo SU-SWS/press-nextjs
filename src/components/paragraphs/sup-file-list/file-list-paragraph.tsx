@@ -33,7 +33,7 @@ const FileListParagraph = ({paragraph, ...props}: Props) => {
       <ul className="list-unstyled">
         {fileOptions.map(media => (
           <li key={media.value}>
-            <a href={media.url} className="group flex w-fit items-center gap-10 text-m1 text-press-sand-dark">
+            <a href={media.url} className="group type-2 flex w-fit items-center gap-10 text-press-sand-dark">
               <span className="relative block">
                 <DocumentTextIcon
                   width={50}

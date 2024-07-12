@@ -20,7 +20,7 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
   return (
     <div {...props}>
       <div className="mb-10 max-w-4xl">
-        <div id={id} className="mb-3 text-m1">
+        <div id={id} className="type-2 mb-3">
           {label}
         </div>
         <SelectList
