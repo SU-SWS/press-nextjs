@@ -3,7 +3,7 @@ import {H1, H2} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import Rows from "@components/paragraphs/rows/rows"
 import Link from "@components/elements/link"
-import {ArrowLeftIcon} from "@heroicons/react/16/solid"
+import {ArrowLongLeftIcon} from "@heroicons/react/16/solid"
 import Wysiwyg from "@components/elements/wysiwyg"
 import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import {notFound} from "next/navigation"
@@ -53,8 +53,11 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
         )}
       </article>
 
-      <Link href={node.path} className="flex w-fit items-center gap-5 pt-20">
-        <ArrowLeftIcon width={20} className="text-fog-dark" />
+      <Link
+        href={node.path}
+        className="group flex w-fit items-center gap-5 pt-20 text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6"
+      >
+        <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
         <span>Back to {node.title}</span>
       </Link>
     </div>
