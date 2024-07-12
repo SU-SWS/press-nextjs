@@ -32,13 +32,13 @@ const SupSearchFormParagraph = ({paragraph, ...props}: Props) => {
 
           <button
             type="submit"
-            className="flex h-[45px] w-[45px] shrink-0 items-center justify-center rounded-full bg-digital-red"
+            className="group"
           >
+            <span className="sr-only">Submit Search</span>
             <MagnifyingGlassIcon 
               width={40}
               className="block rounded-full bg-digital-red p-3 text-white group-hocus:bg-cardinal-red"
             />
-            <span className="sr-only">Submit Search</span>
           </button>
         </div>
       </form>
