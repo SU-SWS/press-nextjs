@@ -48,6 +48,13 @@ jobs:
           - 33306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          name: id_rsa
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          if_key_exists: fail
       - uses: actions/checkout@v4
         with:
           repository: "SU-SWS/ace-stanfordlagunita"
@@ -64,7 +71,7 @@ jobs:
             backend-${{ hashFiles('blt/blt.yml') }}-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}
             backend-${{ hashFiles('blt/blt.yml') }}-${{ hashFiles('composer.json') }}-
             backend-${{ hashFiles('blt/blt.yml') }}-
-      - name: Install Site
+      - name: Sync Site
         run: |
           git config --system --add safe.directory '*' &&
           mysql -h mysql -P 3306 -u root -pdrupal -e 'SET GLOBAL max_allowed_packet=67108864;' &&
@@ -74,13 +81,9 @@ jobs:
           chmod -R 777 docroot/sites/default/files/ &&
           rm -rf docroot/sites/supress/files &&
           ln -sL ../default/files/ docroot/sites/supress/files &&
-          apachectl stop &&
-          apachectl start &&
+          apachectl stop && apachectl start &&
           composer install -n &&
-          blt drupal:install --site=supress -n &&
-          drush image:derive thumbnail $(drush sql:query 'select uri from file_managed where uri like "%//media/%" limit 1') &&
-          drush xmlsitemap:rebuild &&
-          drush cr
+          blt drupal:sync --site=supress -n
       - uses: actions/checkout@v4
         with:
           path: frontend
