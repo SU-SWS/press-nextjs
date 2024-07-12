@@ -326,7 +326,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
   }, [sortBy, searchIndex, query])
 
   if (hits.length === 0) {
-    return <p>No results for your search. Please try another search.</p>
+    return <p className="rs-mt-6">No results for your search. Please try another search.</p>
   }
 
   return (
