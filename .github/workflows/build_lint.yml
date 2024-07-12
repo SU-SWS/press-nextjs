@@ -35,7 +35,7 @@ jobs:
     container:
       image: pookmish/drupal8ci:latest
       env:
-        BUILD_COMPLETE: 'true'
+        BUILD_PAGES: 100
     services:
       mysql:
         image: mysql:5.7
