@@ -136,7 +136,7 @@ const fixClasses = (classes?: string | boolean): string => {
     .replaceAll(" related-text ", " shadow-lg border border-black-20 p-16 ")
     .replaceAll(
       " drop-cap ",
-      " type-2 first-letter:font-bold first-letter:text-m6 first-letter:float-left first-letter:my-2 first-letter:mr-4 "
+      " type-2 first-letter:font-bold first-letter:type-6 first-letter:float-left first-letter:my-2 first-letter:mr-4 "
     )
     .replaceAll(" intro-text ", " type-3 ")
     .replace(/ tablesaw.*? /g, " ")
