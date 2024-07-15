@@ -19,7 +19,7 @@ ports:
     visibility: public
   - name: frontend
     description: NextJS frontend
-    port: 3000
+    port: 3000-3004
     onOpen: ignore
     visibility: public
   - port: 8002-9999
@@ -39,8 +39,9 @@ tasks:
       export PREVIEW_URL=${NEXT_PUBLIC_DRUPAL_BASE_URL#"https://"} &&
       blt blt:telemetry:disable --no-interaction &&
       blt settings &&
-      blt drupal:install --site=supress -n &&
-      drush @supress.local cset system.theme default stanford_profile_admin_theme -y &&
+      echo 'ssh: {options: "-o StrictHostKeyChecking=no"}' > drush/local.drush.yml &&
+      blt drupal:sync --site=supress -n || blt drupal:install --site=supress -n &&
+      drush @supress.local cset system.theme default stanford_profile_admin_theme -y
       cd /workspace/front &&
       yarn
     command: |
@@ -58,7 +59,6 @@ tasks:
       drush @supress.local uli --uri=$NEXT_PUBLIC_DRUPAL_BASE_URL &&
       drush @supress.local uli --uri=$NEXT_PUBLIC_DRUPAL_BASE_URL | xargs gp preview --external &&
       git config core.fileMode false &&
-      echo 'Connecting Drupal to Frontend' &&
       drush @supress.local su-next-connect "$(gp url 3000)" >> /workspace/front/.env.local &&
       cd /workspace/front &&
       yarn install &&
@@ -72,18 +72,14 @@ tasks:
     before: |
       code --add /workspace/back &&
       mkdir -p ~/.ssh
-      if [[ ! -z $SSH_PUBLIC_KEY  ]]; then
-          echo $SSH_PUBLIC_KEY | base64 -d > ~/.ssh/id_rsa.pub && chmod 644 ~/.ssh/id_rsa.pub
-          git remote set-url origin $(echo $GITPOD_WORKSPACE_CONTEXT | jq -r .repository.cloneUrl | sed -E 's|^.*.com/(.*)$|git@github.com:\1|')
-      fi
       if [[ ! -z $SSH_PRIVATE_KEY ]]; then
-          echo $SSH_PRIVATE_KEY | base64 -d > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+          echo $SSH_PRIVATE_KEY | base64 -d > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa &&
+          git remote set-url origin $(echo $GITPOD_WORKSPACE_CONTEXT | jq -r .repository.cloneUrl | sed -E 's|^.*.com/(.*)$|git@github.com:\1|') &&
+          cd /workspace/back && git remote set-url origin git@github.com:SU-SWS/ace-stanfordlagunita.git
       fi
       if [[ ! -z $GITCONFIG ]]; then
           echo $GITCONFIG | base64 -d > ~/.gitconfig && chmod 644 ~/.gitconfig
       fi
-      git remote set-url origin $(echo $GITPOD_WORKSPACE_CONTEXT | jq -r .repository.cloneUrl | sed -E 's|^.*.com/(.*)$|git@github.com:\1|')
-      cd /workspace/back && git remote set-url origin git@github.com:SU-SWS/ace-stanfordlagunita.git
 
 vscode:
   extensions:
