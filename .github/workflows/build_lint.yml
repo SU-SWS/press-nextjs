@@ -84,8 +84,8 @@ jobs:
           ln -sL ../default/files/ docroot/sites/supress/files &&
           apachectl stop && apachectl start &&
           composer install -n &&
-          blt drupal:sync --site=supress -n
-
+          blt drupal:sync --site=supress -n &&
+          drush sqlq 'truncate config_pages__su_site_algolia_id'
       - name: Build Frontend
         run: |
           cd $GITHUB_WORKSPACE/frontend &&
