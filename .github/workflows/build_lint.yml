@@ -85,7 +85,7 @@ jobs:
           apachectl stop && apachectl start &&
           composer install -n &&
           blt drupal:sync --site=supress -n &&
-          drush config:pages-set-field-value stanford_basic_site_settings su_site_algolia_id ""
+          drush config:pages-set-field-value stanford_basic_site_settings su_site_algolia_id ''
       - name: Build Frontend
         run: |
           cd $GITHUB_WORKSPACE/frontend &&
