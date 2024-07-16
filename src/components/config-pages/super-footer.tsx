@@ -17,7 +17,7 @@ const SuperFooter = ({
     <div className="border-b border-black-20 bg-foggy-light py-20">
       <div className="centered flex justify-between">
         <div className="flex-1">
-          {suSuperFootTitle && <H2 className="type-3">{suSuperFootTitle}</H2>}
+          {suSuperFootTitle && <H2 className="type-1">{suSuperFootTitle}</H2>}
 
           <Wysiwyg html={suSuperFootText?.processed} />
         </div>

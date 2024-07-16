@@ -131,7 +131,7 @@ const fixClasses = (classes?: string | boolean): string => {
     .replaceAll(" align-left ", " float-left mr-10 mb-10 ")
     .replaceAll(" align-right ", " float-right ml-10 mb-10 ")
     .replaceAll(" visually-hidden ", " sr-only ")
-    .replaceAll(" font-splash ", " splash-text type-5 ")
+    .replaceAll(" font-splash ", " splash-text fluid-type-4 ")
     .replaceAll(" callout-text ", " font-bold type-3 ")
     .replaceAll(" related-text ", " shadow-lg border border-black-20 p-16 ")
     .replaceAll(

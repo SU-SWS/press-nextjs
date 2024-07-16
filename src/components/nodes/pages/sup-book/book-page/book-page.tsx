@@ -48,7 +48,7 @@ const BookPage = async ({node, ...props}: Props) => {
           <div className="mb-20 flex flex-col md:flex-row md:gap-24 md:pt-32">
             <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-row justify-center gap-24 bg-fog-light px-20 pt-32 md:hidden">
               <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
-                <H1 className="type-3 mb-0">{node.title}</H1>
+                <H1 className="type-1 mb-0">{node.title}</H1>
 
                 {node.supBookSubjects && (
                   <a
@@ -59,7 +59,7 @@ const BookPage = async ({node, ...props}: Props) => {
                   </a>
                 )}
 
-                {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
+                {node.supBookSubtitle && <div className="type-0 mt-5 font-medium">{node.supBookSubtitle}</div>}
 
                 {node.supBookAuthorsFull && (
                   <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
@@ -73,7 +73,7 @@ const BookPage = async ({node, ...props}: Props) => {
               <div className="lg:w-5/8">
                 <div className="rs-mb-0 rs-pb-3 flex flex-col border-b-2 border-fog">
                   <div className="mt-7 flex flex-col sm:mt-0 sm:hidden md:flex">
-                    <H1 className="type-3 mb-0">{node.title}</H1>
+                    <H1 className="type-1 mb-0">{node.title}</H1>
 
                     {node.supBookSubjects && (
                       <a
@@ -84,7 +84,7 @@ const BookPage = async ({node, ...props}: Props) => {
                       </a>
                     )}
 
-                    {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
+                    {node.supBookSubtitle && <div className="type-0 mt-5 font-medium">{node.supBookSubtitle}</div>}
 
                     {node.supBookAuthorsFull && (
                       <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
@@ -249,7 +249,7 @@ const BookPage = async ({node, ...props}: Props) => {
 
         {node.supBookSubjects && (
           <div className="mx-auto max-w-5xl">
-            <H2 className="type-2 font-bold">Related Subjects</H2>
+            <H2 className="type-0 font-bold">Related Subjects</H2>
             <ul className="list-unstyled flex flex-col md:flex-row md:flex-wrap">
               {node.supBookSubjects.map(subject => {
                 const linkParamsString = createLinkParams(subject)
