@@ -20,7 +20,7 @@ const BannerParagraph = ({paragraph, eagerLoadImage, ...props}: Props) => {
 
   const headerTagChoice = (behaviors.hero_pattern?.heading || "h2").split(".", 2)
   const headerTag = headerTagChoice[0]
-  const headerClasses = headerTagChoice[1]?.replace(".", " ").replace("su-font-splash", "text-m2 font-bold")
+  const headerClasses = headerTagChoice[1]?.replace(".", " ").replace("su-font-splash", "type-3 font-bold")
 
   return (
     <HeroBanner
@@ -47,7 +47,7 @@ const BannerParagraph = ({paragraph, eagerLoadImage, ...props}: Props) => {
             <div className="order-1 text-09em font-semibold">{paragraph.suBannerSupHeader}</div>
           )}
 
-          <Wysiwyg html={paragraph.suBannerBody?.processed} className="order-3 text-m0" />
+          <Wysiwyg html={paragraph.suBannerBody?.processed} className="type-0 order-3" />
 
           {paragraph.suBannerButton?.url && (
             <div className="order-4">

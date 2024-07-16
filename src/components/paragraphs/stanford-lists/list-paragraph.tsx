@@ -82,7 +82,7 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
           )}
 
           {paragraph.supListEyebrow && (
-            <div className="order-first text-m1 text-press-sand-dark">{paragraph.supListEyebrow}</div>
+            <div className="type-2 order-first text-press-sand-dark">{paragraph.supListEyebrow}</div>
           )}
         </div>
 

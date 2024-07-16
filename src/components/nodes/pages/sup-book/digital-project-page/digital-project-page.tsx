@@ -52,7 +52,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
               {node.supBookSubjects && (
                 <a
                   href={`/search?${bookSubjectLinkParams}`}
-                  className="rs-mb-2 order-first -text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+                  className="rs-mb-2 -type-2 order-first font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                 >
                   {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
                 </a>
@@ -77,7 +77,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                   {node.supBookSubjects && (
                     <a
                       href={`/search?${bookSubjectLinkParams}`}
-                      className="rs-mb-2 order-first -text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+                      className="rs-mb-2 -type-2 order-first font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                     >
                       {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
                     </a>
@@ -92,7 +92,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
 
                 {awards && (
                   <div className="rs-mt-1 border-t-2 border-fog">
-                    <H2 className="flex w-fit items-center gap-2 bg-fog p-3 -text-m1 font-semibold">
+                    <H2 className="-type-2 flex w-fit items-center gap-2 bg-fog p-3 font-semibold">
                       <BookmarkIcon width={20} className="fill-archway" />
                       Award Winner
                     </H2>
@@ -107,7 +107,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
 
               <div className="rs-mb-0 rs-pb-3 flex flex-col gap-2 border-b-2 border-fog">
                 {node.supBookImprint && (
-                  <div className="rs-mb-0 -text-m1 font-semibold text-press-sand-dark">
+                  <div className="rs-mb-0 -type-2 font-semibold text-press-sand-dark">
                     Imprint: {node.supBookImprint.name}
                   </div>
                 )}
@@ -117,7 +117,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                 )}
 
                 {node.supBookPubDateCloth?.time && (
-                  <div className="-text-m1 text-press-sand-dark">
+                  <div className="-type-2 text-press-sand-dark">
                     {new Date(node.supBookPubDateCloth.time).toLocaleDateString("en-us", {
                       month: "long",
                       year: "numeric",
@@ -125,17 +125,17 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                   </div>
                 )}
 
-                {!!node.supBookPages && <div className="-text-m1 text-press-sand-dark">{node.supBookPages} Pages</div>}
+                {!!node.supBookPages && <div className="-type-2 text-press-sand-dark">{node.supBookPages} Pages</div>}
 
                 {lowestPrice && lowestPrice < 999 && (
-                  <div className="-text-m1 text-press-sand-dark">From {formatCurrency(lowestPrice)}</div>
+                  <div className="-type-2 text-press-sand-dark">From {formatCurrency(lowestPrice)}</div>
                 )}
 
                 {node.supBookSeries?.name && (
                   <div>
                     Series
                     <br />
-                    <a href={`/search?q=${node.supBookSeries.name}`} className="-text-m1 font-normal text-stone-dark">
+                    <a href={`/search?q=${node.supBookSeries.name}`} className="-type-2 font-normal text-stone-dark">
                       {node.supBookSeries.name}
                     </a>
                   </div>
@@ -143,13 +143,13 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
               </div>
               <div className="rs-mb-2 flex flex-col gap-2">
                 {node.supBookIsbn13Cloth && (
-                  <div className="-text-m1 text-stone-dark">Hardcover ISBN: {node.supBookIsbn13Cloth}</div>
+                  <div className="-type-2 text-stone-dark">Hardcover ISBN: {node.supBookIsbn13Cloth}</div>
                 )}
                 {node.supBookIsbn13Paper && (
-                  <div className="-text-m1 text-stone-dark">Paperback ISBN: {node.supBookIsbn13Paper}</div>
+                  <div className="-type-2 text-stone-dark">Paperback ISBN: {node.supBookIsbn13Paper}</div>
                 )}
                 {node.supBookIsbn13Digital && (
-                  <div className="-text-m1 text-stone-dark">Ebook ISBN: {node.supBookIsbn13Digital}</div>
+                  <div className="-type-2 text-stone-dark">Ebook ISBN: {node.supBookIsbn13Digital}</div>
                 )}
               </div>
             </div>
@@ -162,8 +162,8 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
               )}
 
               {node.supBookERetailers && (
-                <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog -text-m1">
-                  <H2 className="-text-m1">Also Available from</H2>
+                <div className="rs-mb-1 rs-pb-1 -type-2 border-b-2 border-fog">
+                  <H2 className="-type-2">Also Available from</H2>
                   <ul className="list-unstyled rs-mt-0 flex flex-col gap-3 [&_a]:font-normal [&_a]:text-digital-red">
                     {node.supBookERetailers.map((link, i) => (
                       <li key={`e-book-retailer-${i}`} className="mb-0">
@@ -230,7 +230,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
 
       {node.supBookSubjects && (
         <div className="mx-auto max-w-5xl">
-          <H2 className="text-m1 font-bold">Related Subjects</H2>
+          <H2 className="type-2 font-bold">Related Subjects</H2>
           <ul className="list-unstyled flex flex-col md:flex-row md:flex-wrap">
             {node.supBookSubjects.map(subject => {
               const linkParamsString = createLinkParams(subject)
@@ -238,7 +238,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                 <li key={subject.id} className="min-w-fit flex-1">
                   <a
                     href={`/search?${linkParamsString}`}
-                    className="-text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+                    className="-type-2 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                   >
                     {subject.parent?.name && `${subject.parent.name} / `}
                     {subject.name}

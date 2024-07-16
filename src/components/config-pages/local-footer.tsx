@@ -70,7 +70,7 @@ const LocalFooter = ({
             {/* Content block 3 */}
             <Wysiwyg html={suLocalFootTr2Co?.processed} className="max-w-[250px]" />
             {/* Primary Links */}
-            {suLocalFootPrimeH && <H2 className="rs-pt-4 text-m1 text-white">{suLocalFootPrimeH}</H2>}
+            {suLocalFootPrimeH && <H2 className="rs-pt-4 type-2 text-white">{suLocalFootPrimeH}</H2>}
             {suLocalFootPrimary && (
               <ul className="list-unstyled">
                 {suLocalFootPrimary.map((link, index) => {
@@ -89,7 +89,7 @@ const LocalFooter = ({
             {/* Content block 2 */}
             <Wysiwyg html={suLocalFootSeCo?.processed} className="max-w-[250px]" />
             {/* Secondary links */}
-            {suLocalFootSecondH && <H2 className="rs-pt-4 text-m1 text-white">{suLocalFootSecondH}</H2>}
+            {suLocalFootSecondH && <H2 className="rs-pt-4 type-2 text-white">{suLocalFootSecondH}</H2>}
 
             {suLocalFootSecond && (
               <ul className="list-unstyled">
