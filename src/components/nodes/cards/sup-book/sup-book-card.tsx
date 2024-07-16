@@ -32,7 +32,7 @@ const SupBookCard = ({node, headingLevel, ...props}: Props) => {
           )}
         </div>
 
-        <Heading className="mb-5 text-m1 font-normal">
+        <Heading className="type-2 mb-5 font-normal">
           <Link className="stretched-link font-normal text-stone-dark" href={node.path}>
             {node.title}
           </Link>

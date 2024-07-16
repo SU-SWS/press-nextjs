@@ -50,14 +50,14 @@ const BookPage = async ({node, ...props}: Props) => {
               <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
                 <H1 className="type-3 mb-0">{node.title}</H1>
 
-                {node.supBookSubjects && (
-                  <a
-                    href={`/search?${bookSubject}`}
-                    className="rs-mb-2 order-first -text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
-                  >
-                    {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
-                  </a>
-                )}
+              {node.supBookSubjects && (
+                <a
+                  href={`/search?${bookSubject}`}
+                  className="rs-mb-2 -type-2 order-first font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+                >
+                  {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
+                </a>
+              )}
 
                 {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
 
@@ -75,16 +75,14 @@ const BookPage = async ({node, ...props}: Props) => {
                   <div className="mt-7 flex flex-col sm:mt-0 sm:hidden md:flex">
                     <H1 className="type-3 mb-0">{node.title}</H1>
 
-                    {node.supBookSubjects && (
-                      <a
-                        href={`/search?${bookSubject}`}
-                        className="rs-mb-2 order-first -text-m1 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
-                      >
-                        {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
-                      </a>
-                    )}
-
-                    {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
+                  {node.supBookSubjects && (
+                    <a
+                      href={`/search?${bookSubject}`}
+                      className="rs-mb-2 -type-2 order-first font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+                    >
+                      {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
+                    </a>
+                  )}
 
                     {node.supBookAuthorsFull && (
                       <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
@@ -106,16 +104,27 @@ const BookPage = async ({node, ...props}: Props) => {
                   )}
                 </div>
 
-                <div className="rs-mb-0 rs-pb-3 flex flex-col gap-2 border-b-2 border-fog">
-                  {node.supBookImprint && (
-                    <div className="rs-mb-0 -text-m1 font-semibold text-press-sand-dark">
-                      Imprint: {node.supBookImprint.name}
-                    </div>
-                  )}
+                {awards && (
+                  <div className="rs-mt-1 border-t-2 border-fog">
+                    <H2 className="-type-2 flex w-fit items-center gap-2 bg-fog p-3 font-semibold">
+                      <BookmarkIcon width={20} className="fill-archway" />
+                      Award Winner
+                    </H2>
+                    <BookAwards>
+                      {awards.map(award => (
+                        <div key={award.id}>{award.name}</div>
+                      ))}
+                    </BookAwards>
+                  </div>
+                )}
+              </div>
 
-                  {node.supBookCopublisherName && (
-                    <div className="text-press-sand-dark">{node.supBookCopublisherName}</div>
-                  )}
+              <div className="rs-mb-0 rs-pb-3 flex flex-col gap-2 border-b-2 border-fog">
+                {node.supBookImprint && (
+                  <div className="rs-mb-0 -type-2 font-semibold text-press-sand-dark">
+                    Imprint: {node.supBookImprint.name}
+                  </div>
+                )}
 
                   {node.supBookPubDateCloth?.time && (
                     <div className="-text-m1 text-press-sand-dark">
@@ -126,78 +135,41 @@ const BookPage = async ({node, ...props}: Props) => {
                     </div>
                   )}
 
-                  {!!node.supBookPages && (
-                    <div className="-text-m1 text-press-sand-dark">{node.supBookPages} Pages</div>
-                  )}
-
-                  {lowestPrice && lowestPrice < 999 && (
-                    <div className="-text-m1 text-press-sand-dark">From {formatCurrency(lowestPrice)}</div>
-                  )}
-
-                  {node.supBookSeries?.name && (
-                    <div>
-                      Series
-                      <br />
-                      <a href={`/search?q=${node.supBookSeries.name}`} className="-text-m1 font-normal text-stone-dark">
-                        {node.supBookSeries.name}
-                      </a>
-                    </div>
-                  )}
-                </div>
-                <div className="rs-mb-2 flex flex-col gap-2">
-                  {node.supBookIsbn13Cloth && (
-                    <div className="-text-m1 text-stone-dark">Hardcover ISBN: {node.supBookIsbn13Cloth}</div>
-                  )}
-                  {node.supBookIsbn13Paper && (
-                    <div className="-text-m1 text-stone-dark">Paperback ISBN: {node.supBookIsbn13Paper}</div>
-                  )}
-                  {node.supBookIsbn13Digital && (
-                    <div className="-text-m1 text-stone-dark">Ebook ISBN: {node.supBookIsbn13Digital}</div>
-                  )}
-                </div>
-              </div>
-
-              <div className="lg:w-3/8">
-                <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog">
-                  <BookPrecart
-                    bookTitle={node.title}
-                    usClothPrice={node.supBookPriceCloth}
-                    usClothSalePrice={node.supBookClothSalePrice}
-                    usClothSaleDiscount={node.supBookClothSalePercent}
-                    usPaperPrice={node.supBookPricePaper}
-                    usPaperSalePrice={node.supBookPaperSalePrice}
-                    usPaperSaleDiscount={node.supBookPaperSalePercent}
-                    usDigitalPrice={node.supBookPriceDigital}
-                    clothIsbn={node.supBookIsbn13Cloth}
-                    paperIsbn={node.supBookIsbn13Paper}
-                    digitalIsbn={node.supBookIsbn13Digital}
-                  />
-                </div>
-
-                {node.supBookERetailers && (
-                  <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog -text-m1">
-                    <H2 className="-text-m1">Also Available from</H2>
-                    <ul className="list-unstyled rs-mt-0 flex flex-col gap-3 [&_a]:font-normal [&_a]:text-digital-red">
-                      {node.supBookERetailers.map((link, i) => (
-                        <li key={`e-book-retailer-${i}`} className="mb-0">
-                          <a
-                            href={link.url || "#"}
-                            className="font-normal underline-offset-[5px] hocus:text-stone-dark hocus:decoration-archway-dark hocus:decoration-2"
-                          >
-                            {link.title}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                {node.supBookPubDateCloth?.time && (
+                  <div className="-type-2 text-press-sand-dark">
+                    {new Date(node.supBookPubDateCloth.time).toLocaleDateString("en-us", {
+                      month: "long",
+                      year: "numeric",
+                    })}
                   </div>
                 )}
 
-                <Link
-                  href={node.path + "/desk-examination-copy-requests"}
-                  className="flex items-start gap-3 -text-m1 font-normal leading-snug text-stone-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
-                >
-                  <ClipboardIcon width={24} className="mt-1 text-fog-dark" /> Desk, Examination, or Review Copy Requests
-                </Link>
+                {!!node.supBookPages && <div className="-type-2 text-press-sand-dark">{node.supBookPages} Pages</div>}
+
+                {lowestPrice && lowestPrice < 999 && (
+                  <div className="-type-2 text-press-sand-dark">From {formatCurrency(lowestPrice)}</div>
+                )}
+
+                {node.supBookSeries?.name && (
+                  <div>
+                    Series
+                    <br />
+                    <a href={`/search?q=${node.supBookSeries.name}`} className="-type-2 font-normal text-stone-dark">
+                      {node.supBookSeries.name}
+                    </a>
+                  </div>
+                )}
+              </div>
+              <div className="rs-mb-2 flex flex-col gap-2">
+                {node.supBookIsbn13Cloth && (
+                  <div className="-type-2 text-stone-dark">Hardcover ISBN: {node.supBookIsbn13Cloth}</div>
+                )}
+                {node.supBookIsbn13Paper && (
+                  <div className="-type-2 text-stone-dark">Paperback ISBN: {node.supBookIsbn13Paper}</div>
+                )}
+                {node.supBookIsbn13Digital && (
+                  <div className="-type-2 text-stone-dark">Ebook ISBN: {node.supBookIsbn13Digital}</div>
+                )}
               </div>
             </div>
 
@@ -206,15 +178,30 @@ const BookPage = async ({node, ...props}: Props) => {
                 <BookPageImage node={node} />
               </div>
 
-              {hasExcerptAndMore && (
-                <Link
-                  href={`${node.path}/excerpts`}
-                  className="group rs-py-1 rs-mt-2 rs-px-2 mx-auto flex w-fit items-center justify-center gap-5 border-2 border-press-sand font-normal text-stone-dark no-underline hocus:border-cardinal-red hocus:bg-cardinal-red hocus:text-white hocus:underline md:mt-0"
-                >
-                  <span>Excerpts + more</span>
-                  <DocumentDuplicateIcon width={28} className="text-stone group-hocus:text-white" />
-                </Link>
+              {node.supBookERetailers && (
+                <div className="rs-mb-1 rs-pb-1 -type-2 border-b-2 border-fog">
+                  <H2 className="-type-2">Also Available from</H2>
+                  <ul className="list-unstyled rs-mt-0 flex flex-col gap-3 [&_a]:font-normal [&_a]:text-digital-red">
+                    {node.supBookERetailers.map((link, i) => (
+                      <li key={`e-book-retailer-${i}`} className="mb-0">
+                        <a
+                          href={link.url || "#"}
+                          className="font-normal underline-offset-[5px] hocus:text-stone-dark hocus:decoration-archway-dark hocus:decoration-2"
+                        >
+                          {link.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
+
+              <Link
+                href={node.path + "/desk-examination-copy-requests"}
+                className="-type-2 flex items-start gap-3 font-normal leading-snug text-stone-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+              >
+                <ClipboardIcon width={24} className="mt-1 text-fog-dark" /> Desk, Examination, or Review Copy Requests
+              </Link>
             </div>
           </div>
         </>
@@ -268,16 +255,31 @@ const BookPage = async ({node, ...props}: Props) => {
               })}
             </ul>
           </div>
-        )}
-      </article>
-      <Link
-        href="/books"
-        className="group flex w-fit items-center gap-5 pt-20 text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6"
-      >
-        <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
-        <span>Back to Books</span>
-      </Link>
-    </div>
+        </Tabs>
+      )}
+
+      {node.supBookSubjects && (
+        <div className="mx-auto max-w-5xl">
+          <H2 className="type-2 font-bold">Related Subjects</H2>
+          <ul className="list-unstyled flex flex-col md:flex-row md:flex-wrap">
+            {node.supBookSubjects.map(subject => {
+              const linkParamsString = createLinkParams(subject)
+              return (
+                <li key={subject.id} className="min-w-fit flex-1">
+                  <a
+                    href={`/search?${linkParamsString}`}
+                    className="-type-2 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+                  >
+                    {subject.parent?.name && `${subject.parent.name} / `}
+                    {subject.name}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      )}
+    </article>
   )
 }
 export default BookPage
