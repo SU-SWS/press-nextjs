@@ -48,7 +48,7 @@ const BookPage = async ({node, ...props}: Props) => {
           <div className="mb-20 flex flex-col md:flex-row md:gap-24 md:pt-32">
             <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-row justify-center gap-24 bg-fog-light px-20 pt-32 md:hidden">
               <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
-                <H1 className="type-1 mb-0">{node.title}</H1>
+                <H1 className="type-3 mb-0">{node.title}</H1>
 
                 {node.supBookSubjects && (
                   <a
@@ -59,7 +59,7 @@ const BookPage = async ({node, ...props}: Props) => {
                   </a>
                 )}
 
-                {node.supBookSubtitle && <div className="type-0 mt-5 font-medium">{node.supBookSubtitle}</div>}
+                {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
 
                 {node.supBookAuthorsFull && (
                   <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
