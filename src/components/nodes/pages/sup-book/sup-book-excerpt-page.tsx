@@ -23,7 +23,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
       <article className="order-last mx-auto max-w-900 gap-10 pt-32" {...props}>
         <H1 className="mb-32">Excerpts + More</H1>
         <div className="mb-36 flex flex-col gap-20 md:flex-row">
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-5">
             <div className="type-3 font-medium">{node.title}</div>
 
             {node.supBookSubtitle && <div className="type-2 font-medium">{node.supBookSubtitle}</div>}
