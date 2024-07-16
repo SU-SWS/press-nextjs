@@ -131,7 +131,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
           <Wysiwyg
             html={body}
             className={clsx("rs-mb-3", {
-              "[&_p]:-type-2": slideParagraph.supSlideBodySize === "small",
+              "[&_p]:text-18": slideParagraph.supSlideBodySize === "small",
               "text-left": leftImage,
               "text-center": !leftImage,
             })}
