@@ -19,7 +19,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
         <H1 className="mb-32">Desk, Examination, or Review copy request</H1>
         <div className="mb-36 flex flex-col gap-20 md:flex-row">
           <div className="flex flex-col gap-10">
-            <div className="fluid-type-4 font-medium">{node.title}</div>
+            <div className="type-4 font-medium">{node.title}</div>
 
             {node.supBookSubtitle && <div className="type-2 font-medium">{node.supBookSubtitle}</div>}
 

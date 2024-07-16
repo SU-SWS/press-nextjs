@@ -32,7 +32,7 @@ const StanfordEventListItem = ({node, headingLevel, ...props}: Props) => {
     >
       <div aria-hidden className="flex w-fit flex-col items-start">
         <div className="type-0 mb-4 w-full text-center font-semibold">{startMonth.toUpperCase()}</div>
-        <div className="fluid-type-4 w-full text-center font-bold">{startDay}</div>
+        <div className="type-4 w-full text-center font-bold">{startDay}</div>
       </div>
       <div>
         <div className="flex flex-col">
