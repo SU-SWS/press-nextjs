@@ -271,7 +271,7 @@ const BookPage = async ({node, ...props}: Props) => {
       </article>
       <Link
         href="/books"
-        className="group flex w-fit items-center gap-5 pt-20 text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6"
+        className="group flex w-fit items-center gap-5 pt-20 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6"
       >
         <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
         <span>Back to Books</span>
