@@ -40,10 +40,10 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
         {hit.photo && (
           <div
             className={twMerge(
-              "relative mx-auto w-[150px] shrink-0 @2xl:mr-0",
+              "relative mx-auto shrink-0 @2xl:mr-0",
               clsx({
-                "aspect-[2/3]": hit.book_type === "book",
-                "aspect-[4/3]": hit.book_type === "digital_project",
+                "aspect-[2/3] w-[150px]": hit.book_type === "book",
+                "aspect-[4/3] h-[150px]": hit.book_type === "digital_project",
               })
             )}
           >
