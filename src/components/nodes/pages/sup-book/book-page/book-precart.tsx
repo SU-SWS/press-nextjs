@@ -144,7 +144,7 @@ const BookPreCart = ({
       )}
 
       {formatChoice === "paper" && !isIntl && usPaperPrice && usPaperSalePrice && (
-        <div className="rs-mt-1">
+        <div className="rs-mt-1 text-18">
           <div>
             List Price: <span className="line-through">{formatCurrency(usPaperPrice)}</span>
           </div>
