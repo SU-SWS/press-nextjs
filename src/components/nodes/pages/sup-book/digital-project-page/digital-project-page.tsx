@@ -4,11 +4,12 @@ import {HTMLAttributes} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
 import Wysiwyg from "@components/elements/wysiwyg"
 import {formatCurrency} from "@lib/utils/format-currency"
-import {ArrowLongLeftIcon, BookmarkIcon, DocumentDuplicateIcon} from "@heroicons/react/24/outline"
+import {ArrowLongLeftIcon, ArrowRightIcon, BookmarkIcon, DocumentDuplicateIcon} from "@heroicons/react/24/outline"
 import Link from "@components/elements/link"
 import BookAwards from "@components/nodes/pages/sup-book/book-awards"
 import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
+import Button from "@components/elements/button"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -38,6 +39,8 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
 
     return linkParams.toString()
   }
+
+  console.log("DIGITAL NODE", node)
 
   const bookSubjectLinkParams = node.supBookSubjects && createLinkParams(node.supBookSubjects[0])
 
@@ -141,7 +144,14 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                   </div>
                 )}
               </div>
-              <div className="rs-mb-2 flex flex-col gap-2">
+              <div className="rs-mb-2 flex flex-col gap-5">
+                <Link
+                  href="/digital"
+                  className="w-fit text-18 font-normal leading-snug text-stone-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+                >
+                  A Stanford Digital Project
+                </Link>
+                {node.supBookIsbn13Isw && <div className="text-18 text-stone-dark">ISBN: {node.supBookIsbn13Isw}</div>}
                 {node.supBookIsbn13Cloth && (
                   <div className="text-18 text-stone-dark">Hardcover ISBN: {node.supBookIsbn13Cloth}</div>
                 )}
@@ -154,11 +164,33 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
               </div>
             </div>
 
-            <div className="lg:w-3/8">
+            <div className="lg:w-3/8 shrink-0">
               {node.supBookUrlIsw && (
-                <a href={node.supBookUrlIsw.startsWith("http") ? node.supBookUrlIsw : "https://" + node.supBookUrlIsw}>
+                <Button
+                  href={node.supBookUrlIsw.startsWith("http") ? node.supBookUrlIsw : "https://" + node.supBookUrlIsw}
+                  className="flex w-full items-center justify-center gap-2"
+                >
                   Start Exploring
-                </a>
+                  <ArrowRightIcon width={24} />
+                </Button>
+              )}
+
+              {node.supBookERetailers && (
+                <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog text-18">
+                  <H2 className="text-18">Also Available from</H2>
+                  <ul className="list-unstyled rs-mt-0 flex flex-col gap-3 [&_a]:font-normal [&_a]:text-digital-red">
+                    {node.supBookERetailers.map((link, i) => (
+                      <li key={`e-book-retailer-${i}`} className="mb-0">
+                        <a
+                          href={link.url || "#"}
+                          className="font-normal underline-offset-[5px] hocus:text-stone-dark hocus:decoration-archway-dark hocus:decoration-2"
+                        >
+                          {link.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
 
               {node.supBookERetailers && (
