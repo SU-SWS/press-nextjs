@@ -133,7 +133,7 @@ const BookPreCart = ({
       </div>
 
       {formatChoice === "cloth" && !isIntl && usClothPrice && usClothSalePrice && (
-        <div className="rs-mt-1 -type-2">
+        <div className="rs-mt-1 text-18">
           <div>
             List Price: <span className="italic line-through">{formatCurrency(usClothPrice)}</span>
           </div>

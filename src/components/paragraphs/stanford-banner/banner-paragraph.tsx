@@ -20,7 +20,7 @@ const BannerParagraph = ({paragraph, eagerLoadImage, ...props}: Props) => {
 
   const headerTagChoice = (behaviors.hero_pattern?.heading || "h2").split(".", 2)
   const headerTag = headerTagChoice[0]
-  const headerClasses = headerTagChoice[1]?.replace(".", " ").replace("su-font-splash", "type-3 font-bold")
+  const headerClasses = headerTagChoice[1]?.replace(".", " ").replace("su-font-splash", "type-1 font-bold")
 
   return (
     <HeroBanner

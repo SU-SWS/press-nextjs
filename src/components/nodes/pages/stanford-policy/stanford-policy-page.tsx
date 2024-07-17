@@ -53,7 +53,7 @@ const StanfordPolicyPage = async ({node, ...props}: Props) => {
 
         {changeLog.length > 0 && (
           <div className="mb-10 border border-black-40 bg-black-10 p-20">
-            <H2 className="type-2">Change log:</H2>
+            <H2 className="type-0">Change log:</H2>
 
             {changeLog.map(change => (
               <div key={change.id}>

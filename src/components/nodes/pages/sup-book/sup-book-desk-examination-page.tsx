@@ -19,11 +19,11 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
         <H1 className="mb-32">Desk, Examination, or Review copy request</H1>
         <div className="mb-36 flex flex-col gap-20 md:flex-row">
           <div className="flex flex-col gap-10">
-            <div className="type-5 font-medium">{node.title}</div>
+            <div className="type-4 font-medium">{node.title}</div>
 
-            {node.supBookSubtitle && <div className="type-4 font-medium">{node.supBookSubtitle}</div>}
+            {node.supBookSubtitle && <div className="type-2 font-medium">{node.supBookSubtitle}</div>}
 
-            {node.supBookAuthorsFull && <div className="type-3 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
+            {node.supBookAuthorsFull && <div className="type-1 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
           </div>
 
           {node.supBookImage?.mediaImage && (
@@ -40,7 +40,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
 
         <div>
           {node.supBookAvailDesc && (
-            <div className="type-2 mb-16 font-semibold text-archway-dark">{node.supBookAvailDesc}</div>
+            <div className="type-0 mb-16 font-semibold text-archway-dark">{node.supBookAvailDesc}</div>
           )}
 
           <H2>Request Types</H2>

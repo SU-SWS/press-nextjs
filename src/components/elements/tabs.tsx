@@ -105,7 +105,7 @@ export const Tab = ({buttonProps, className, children, ...props}: TabProps) => {
       {...getRootProps()}
       {...buttonProps}
       className={twMerge(
-        clsx("border-b-3 border-transparent p-3 text-left", {"border-press-bay": selected}),
+        clsx("card-paragraph border-b-3 border-transparent p-3 text-left", {"border-press-bay": selected}),
         className
       )}
     >
