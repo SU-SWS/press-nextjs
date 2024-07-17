@@ -4,10 +4,13 @@ import Link from "@components/elements/link"
 import {Snippet} from "react-instantsearch"
 import Image from "next/image"
 import {AlgoliaHit} from "@components/algolia-search/hits/default"
+import clsx from "clsx"
+import {twMerge} from "tailwind-merge"
 
 type BookHit = AlgoliaHit & {
   book_published?: number
   book_authors?: string
+  book_type?: "book" | "digital_project"
 }
 
 const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
@@ -35,8 +38,16 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
         </div>
 
         {hit.photo && (
-          <div className="relative mx-auto aspect-[2/3] w-[150px] shrink-0 @2xl:mr-0">
-            <a href={hit.url} aria-labelledby={hit.objectID}>
+          <div
+            className={twMerge(
+              "relative mx-auto w-[150px] shrink-0 @2xl:mr-0",
+              clsx({
+                "aspect-[2/3]": hit.book_type === "book",
+                "aspect-[4/3]": hit.book_type === "digital_project",
+              })
+            )}
+          >
+            <a href={hit.url} aria-labelledby={hit.objectID} aria-hidden tabIndex={-1}>
               <Image
                 className="object-cover"
                 src={hit.photo.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)}
