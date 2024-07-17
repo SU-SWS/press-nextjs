@@ -40,8 +40,6 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
     return linkParams.toString()
   }
 
-  console.log("DIGITAL NODE", node)
-
   const bookSubjectLinkParams = node.supBookSubjects && createLinkParams(node.supBookSubjects[0])
 
   return (
@@ -263,20 +261,17 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
           <div className="mx-auto max-w-5xl">
             <H2 className="type-0 font-bold">Related Subjects</H2>
             <ul className="list-unstyled flex flex-col md:flex-row md:flex-wrap">
-              {node.supBookSubjects.map(subject => {
-                const linkParamsString = createLinkParams(subject)
-                return (
-                  <li key={subject.id} className="min-w-fit flex-1">
-                    <a
-                      href={`/search?${linkParamsString}`}
-                      className="text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
-                    >
-                      {subject.parent?.name && `${subject.parent.name} / `}
-                      {subject.name}
-                    </a>
-                  </li>
-                )
-              })}
+              {node.supBookSubjects.map(subject => (
+                <li key={subject.id} className="min-w-fit flex-1">
+                  <a
+                    href={`/search?${createLinkParams(subject)}`}
+                    className="text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+                  >
+                    {subject.parent?.name && `${subject.parent.name} / `}
+                    {subject.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         )}
