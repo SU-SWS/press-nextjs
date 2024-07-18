@@ -158,12 +158,12 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
   const inTrail = activeTrail.includes(id) && !isCurrent
 
   const linkStyles = clsx(
-    "font-normal w-full relative inline-block text-white hocus:text-white no-underline hocus:underline py-5 lg:pl-0 border-l-[6px]",
+    "font-normal w-full relative inline-block text-white hocus:text-white no-underline hocus:underline pt-5 rs-pb-0 lg:pl-0 border-l-[4px]",
     leftPadding[level],
     // Top menu item styles.
     {
       "lg:text-stone-dark lg:hocus:text-stone-dark": !pageHasBanner,
-      "lg:border-l-0 lg:border-b-[6px] ml-5 lg:ml-0 lg:pb-2": level === 0,
+      "lg:border-l-0 lg:border-b-[6px] ml-5 lg:ml-0": level === 0,
       "border-digital-red lg:border-black": !pageHasBanner && level === 0 && isCurrent,
       "border-transparent lg:border-foggy-dark": !pageHasBanner && level === 0 && !isCurrent && inTrail,
       "lg:border-white": pageHasBanner && level === 0 && isCurrent,
