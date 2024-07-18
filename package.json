@@ -31,7 +31,7 @@
     "graphql-request": "^7.1.0",
     "graphql-tag": "^2.12.6",
     "html-entities": "^2.5.2",
-    "html-react-parser": "^5.1.10",
+    "html-react-parser": "^5.1.12",
     "next": "^14.2.5",
     "plaiceholder": "^3.0.0",
     "postcss": "^8.4.39",

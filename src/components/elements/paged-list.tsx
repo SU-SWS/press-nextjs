@@ -96,11 +96,8 @@ const PagedList = ({
 
     // Use search params to retain any other parameters.
     const params = new URLSearchParams(searchParams.toString())
-    if (currentPage > 1) {
-      params.set(pageKey, `${currentPage}`)
-    } else {
-      params.delete(pageKey)
-    }
+    params.delete(pageKey)
+    if (currentPage > 1) params.set(pageKey, `${currentPage}`)
 
     router.replace(`?${params.toString()}`, {scroll: false})
   }, [loadPage, router, currentPage, pageKey, searchParams])
@@ -163,7 +160,6 @@ const PaginationButton = ({
   currentPage,
   total,
   onPageClick,
-  pagerSiblingCount,
   disabled,
 }: {
   page: number | string
@@ -187,13 +183,6 @@ const PaginationButton = ({
     if (page === "rightArrow") return onPageClick(total)
     onPageClick(page as number)
   }
-
-  // Conditionally render left arrow and right arrow based on currentPage
-  if (page === 1 && currentPage >= pagerSiblingCount + 3) return null
-  if (page === "leftArrow" && currentPage < pagerSiblingCount + 3) return null
-
-  if (page === total && currentPage <= total - (pagerSiblingCount + 3)) return null
-  if (page === "rightArrow" && currentPage > total - (pagerSiblingCount + 3)) return null
 
   const isCurrent = page === currentPage
   return (
