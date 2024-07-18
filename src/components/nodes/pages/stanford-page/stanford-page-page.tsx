@@ -6,6 +6,7 @@ import {NodeStanfordPage} from "@lib/gql/__generated__/drupal.d"
 import BannerParagraph from "@components/paragraphs/stanford-banner/banner-paragraph"
 import PageTitleBannerParagraph from "@components/paragraphs/stanford-page-title-banner/page-title-banner-paragraph"
 import SupCarouselParagraph from "@components/paragraphs/sup-carousel/sup-carousel-paragraph"
+import clsx from "clsx"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordPage
@@ -30,7 +31,7 @@ const StanfordPagePage = ({node, ...props}: Props) => {
       )}
 
       {node.suPageBanner?.__typename !== "ParagraphStanfordPageTitleBanner" && (
-        <H1 className="centered mt-32">{node.title}</H1>
+        <H1 className={clsx("centered mt-32", {"lg:max-w-1200": fullWidth})}>{node.title}</H1>
       )}
 
       {!fullWidth && (
