@@ -15,9 +15,10 @@ const HeaderLogoLg = (props: Props) => {
 
   return (
     <svg
-      className="aspect-[579/87] h-[72px] w-full lg:h-[126px]"
+      className="h-auto w-full lg:h-[72px] 2xl:h-[100px] 3xl:h-[126px]"
       width="100%"
       height="100%"
+      viewBox="0 0 579 87"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
