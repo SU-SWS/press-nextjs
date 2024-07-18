@@ -15,13 +15,13 @@ type BookHit = AlgoliaHit & {
 
 const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
   const hitUrl = new URL(hit.url)
-
+  const url = hit.url.replace(hitUrl.origin, "")
   return (
     <article className="py-12 @container">
       <div className="flex flex-col justify-between gap-20 @2xl:flex-row">
         <div>
           <H2 className="type-0 mb-2" id={hit.objectID}>
-            <Link className="text-stone-dark hocus:text-digital-red" href={hit.url.replace(hitUrl.origin, "")}>
+            <Link className="text-stone-dark hocus:text-digital-red" href={url} prefetch={false}>
               {hit.title}
             </Link>
           </H2>
@@ -47,7 +47,7 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
               })
             )}
           >
-            <a href={hit.url} aria-labelledby={hit.objectID} aria-hidden tabIndex={-1}>
+            <Link href={url} aria-labelledby={hit.objectID} aria-hidden tabIndex={-1} prefetch={false}>
               <Image
                 className="object-cover"
                 src={hit.photo.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)}
@@ -55,7 +55,7 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
                 fill
                 sizes="300px"
               />
-            </a>
+            </Link>
           </div>
         )}
       </div>

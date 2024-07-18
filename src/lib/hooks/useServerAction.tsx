@@ -1,4 +1,4 @@
-import {useState, useEffect, useTransition, useRef} from "react"
+import {useState, useEffect, useTransition, useRef, useCallback} from "react"
 import {useBoolean} from "usehooks-ts"
 
 /**
@@ -25,20 +25,25 @@ const useServerAction = <P extends any[], R>(
     resolver.current?.(result)
   }, [result, finished, onFinished])
 
-  const runAction = async (...args: P): Promise<R | undefined> => {
-    startTransition(() => {
-      if (action) {
-        action(...args).then(data => {
-          setResult(data)
-          setFinished()
-        })
-      }
-    })
+  const runAction = useCallback(
+    async (...args: P): Promise<R | undefined> => {
+      startTransition(() => {
+        if (action) {
+          action(...args)
+            .then(data => {
+              setFinished()
+              setResult(data)
+            })
+            .catch(e => console.error("something went wrong" + e.message))
+        }
+      })
 
-    return new Promise(resolve => {
-      resolver.current = resolve
-    })
-  }
+      return new Promise(resolve => {
+        resolver.current = resolve
+      })
+    },
+    [action, setFinished]
+  )
 
   return [runAction, isPending]
 }
