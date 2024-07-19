@@ -7,10 +7,17 @@ import {AlgoliaHit} from "@components/algolia-search/hits/default"
 import clsx from "clsx"
 import {twMerge} from "tailwind-merge"
 
-type BookHit = AlgoliaHit & {
+export type BookHit = AlgoliaHit & {
   book_published?: number
   book_authors?: string
   book_type?: "book" | "digital_project"
+  book_authors_last_name?: string | string[]
+  book_imprint?: string[]
+  book_subject?: string[]
+  book_subject_all?: string[]
+  book_series?: string[]
+  book_subtitle?: string
+  book_award_winner?: boolean
 }
 
 const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
