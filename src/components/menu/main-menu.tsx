@@ -12,6 +12,7 @@ import {usePathname} from "next/navigation"
 import usePageHasTopBanner from "@lib/hooks/usePageHasTopBanner"
 import getActiveTrail from "@lib/drupal/utils"
 import {ShoppingCartIcon} from "@heroicons/react/24/outline"
+import {twMerge} from "tailwind-merge"
 
 const menuLevelsToShow = 2
 
@@ -82,27 +83,35 @@ const MainMenu = ({menuItems}: Props) => {
       </button>
 
       <div
-        className={
-          (menuOpen ? "block" : "hidden") +
-          " absolute left-0 top-full z-10 w-full items-center bg-black lg:relative lg:flex lg:bg-transparent"
-        }
+        className={twMerge(
+          "absolute left-0 top-full z-10 hidden w-full items-center bg-black lg:relative lg:flex lg:bg-transparent",
+          clsx({
+            block: menuOpen,
+          })
+        )}
       >
         <SiteSearchForm className="px-10 lg:hidden" />
         <ul className="list-unstyled m-0 ml-auto flex-wrap p-0 lg:flex lg:justify-end">
           {menuItems.map(item => (
             <MenuItem key={item.id} {...item} activeTrail={activeTrail} level={0} />
           ))}
+          <li>
+            <Link
+              prefetch={false}
+              href="/search"
+              className="group rs-ml-2 hidden h-full items-center lg:flex"
+              title="Search Site"
+            >
+              <MagnifyingGlassIcon
+                width={25}
+                className={clsx("-translate-y-2 border-b border-transparent", {
+                  "text-white group-hocus:border-b-white": pageHasBanner,
+                  "text-stone-dark group-hocus:border-b-stone-dark": !pageHasBanner,
+                })}
+              />
+            </Link>
+          </li>
         </ul>
-
-        <a href="/search" className="group rs-ml-2 hidden lg:block" title="Search Site">
-          <MagnifyingGlassIcon
-            width={25}
-            className={clsx("border-b border-transparent", {
-              "text-white group-hocus:border-b-white": pageHasBanner,
-              "text-stone-dark group-hocus:border-b-stone-dark": !pageHasBanner,
-            })}
-          />
-        </a>
       </div>
     </nav>
   )
