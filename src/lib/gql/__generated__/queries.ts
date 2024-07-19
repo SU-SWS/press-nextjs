@@ -1416,6 +1416,7 @@ export const ConfigPagesDocument = gql`
   stanfordGlobalMessages(first: 1) {
     nodes {
       __typename
+      id
       suGlobalMsgEnabled
       suGlobalMsgHeader
       suGlobalMsgLabel

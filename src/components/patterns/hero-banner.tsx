@@ -34,7 +34,7 @@ const HeroBanner = ({imageUrl, imageAlt, eagerLoadImage, isSection, overlayPosit
       <div className="@6xl:aspect-auto relative aspect-[16/9] w-full bg-cool-grey @6xl:absolute @6xl:h-full">
         {imageUrl && (
           <Image
-            className="object-cover"
+            className="ed11y-ignore object-cover"
             src={imageUrl}
             alt={imageAlt || ""}
             loading={eagerLoadImage ? "eager" : "lazy"}

@@ -29,9 +29,9 @@ const PageTitleBannerParagraph = ({paragraph, pageTitle, ...props}: Props) => {
         })}
       >
         <Image
-          className="object-cover mix-blend-multiply"
+          className="ed11y-ignore object-cover mix-blend-multiply"
           src={paragraph.suTitleBannerImage.mediaImage.url}
-          alt={paragraph.suTitleBannerImage.mediaImage.alt || ""}
+          alt=""
           loading="eager"
           fill
           sizes="100vw"

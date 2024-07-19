@@ -62,16 +62,23 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
     <article
       aria-labelledby={slideParagraph.id}
       className={twMerge(
-        "centered-container relative flex h-full min-h-full w-full text-white",
+        "centered-container relative flex h-full min-h-full w-full bg-black text-white",
         clsx({
           "text-center": !leftImage,
           "text-center lg:text-left": leftImage,
-          "lg:mb-[-300px] lg:pt-[300px]": isTopHero,
+          "-z-10 lg:mb-[-300px] lg:pt-[300px]": isTopHero,
         })
       )}
     >
       <figure className="absolute left-0 top-0 h-full w-full overflow-hidden">
-        <Image className="relative object-cover" src={bgImage.url} alt="" fill sizes="100vw" loading="eager" />
+        <Image
+          className="ed11y-ignore relative object-cover"
+          src={bgImage.url}
+          alt=""
+          fill
+          sizes="100vw"
+          loading="eager"
+        />
       </figure>
       <div
         className={clsx("absolute left-0 top-0 block h-full w-full bg-opacity-80", {

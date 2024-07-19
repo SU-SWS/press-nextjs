@@ -1,20 +1,20 @@
 import MainMenu from "@components/menu/main-menu"
 import GlobalMessage from "@components/config-pages/global-message"
-import {getConfigPage, getMenu} from "@lib/gql/gql-queries"
-import {MenuAvailable, StanfordGlobalMessage} from "@lib/gql/__generated__/drupal.d"
+import {getMenu} from "@lib/gql/gql-queries"
+import {MenuAvailable} from "@lib/gql/__generated__/drupal.d"
 import Link from "@components/elements/link"
 import HeaderLogoLg from "@components/images/header-logo-lg"
 import HeaderLogoXs from "@components/images/header-logo-xs"
+import HeaderForCarousel from "@components/global/header-for-carousel"
 
 const PageHeader = async () => {
   const menuItems = await getMenu(MenuAvailable.Main)
-  const globalMessageConfig = await getConfigPage<StanfordGlobalMessage>("StanfordGlobalMessage")
 
   return (
-    <header id="site-header" className="relative z-[1] border-b border-fog">
-      {globalMessageConfig && <GlobalMessage {...globalMessageConfig} />}
-      <div className="min-h-50 centered pr-24 lg:pr-0">
-        <div className="flex w-full items-center justify-between gap-20">
+    <HeaderForCarousel id="site-header">
+      <GlobalMessage />
+      <div className="min-h-50 relative z-[1] border-b border-fog">
+        <div className="centered flex w-full items-center justify-between gap-20 pr-24 lg:pr-0">
           <div className="rs-pt-1 rs-pb-2 lg:rs-pt-2 lg:rs-pb-3">
             <Link
               href="/"
@@ -33,7 +33,7 @@ const PageHeader = async () => {
           <MainMenu menuItems={menuItems} />
         </div>
       </div>
-    </header>
+    </HeaderForCarousel>
   )
 }
 export default PageHeader

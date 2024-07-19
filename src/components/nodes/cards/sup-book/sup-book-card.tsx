@@ -5,13 +5,18 @@ import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import Image from "next/image"
 import {BookmarkIcon} from "@heroicons/react/24/outline"
 import {twMerge} from "tailwind-merge"
+import {clsx} from "clsx"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeSupBook
   headingLevel?: "h2" | "h3"
+  /**
+   * If the card is displayed on top of a dark background.
+   */
+  darkBg?: boolean
 }
 
-const SupBookCard = ({node, headingLevel, ...props}: Props) => {
+const SupBookCard = ({node, headingLevel, darkBg, ...props}: Props) => {
   const Heading = headingLevel === "h3" ? H3 : H2
   return (
     <div {...props} className={twMerge("mx-auto max-w-3xl", props.className)}>
@@ -26,22 +31,36 @@ const SupBookCard = ({node, headingLevel, ...props}: Props) => {
           />
           {node.supBookAwards && (
             <div className="absolute left-5 top-0 flex max-w-[90%] items-center gap-3 bg-fog py-2 pl-3 pr-5">
-              <BookmarkIcon width={20} className="fill-stone-dark" />
+              <BookmarkIcon width={20} className={twMerge("fill-stone-dark", clsx({"text-fog": darkBg}))} />
               Award winner
             </div>
           )}
         </div>
 
         <Heading className="type-0 mb-5 font-normal">
-          <Link className="stretched-link font-normal text-stone-dark" href={node.path}>
+          <Link
+            className={twMerge(
+              "stretched-link font-medium text-stone-dark",
+              clsx({"text-fog-light hocus:text-fog-light": darkBg})
+            )}
+            href={node.path}
+          >
             {node.title}
           </Link>
         </Heading>
       </div>
 
-      {node.supBookSubtitle && <div className="rs-mb-3 text-press-sand-dark">{node.supBookSubtitle}</div>}
+      {node.supBookSubtitle && (
+        <div className={twMerge("rs-mb-3 text-press-sand-dark", clsx({"text-press-sand-light": darkBg}))}>
+          {node.supBookSubtitle}
+        </div>
+      )}
 
-      {node.supBookAuthorsFull && <div className="mb-0 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
+      {node.supBookAuthorsFull && (
+        <div className={twMerge("mb-0 text-press-sand-dark", clsx({"text-press-sand-light": darkBg}))}>
+          {node.supBookAuthorsFull}
+        </div>
+      )}
     </div>
   )
 }

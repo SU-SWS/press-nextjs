@@ -228,6 +228,7 @@ query ConfigPages {
     stanfordGlobalMessages(first: 1) {
         nodes {
             __typename
+            id
             suGlobalMsgEnabled
             suGlobalMsgHeader
             suGlobalMsgLabel

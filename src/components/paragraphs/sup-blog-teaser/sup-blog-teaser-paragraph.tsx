@@ -47,9 +47,9 @@ const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
 
               {blogItem.supBlogImage?.mediaImage && (
                 <Image
-                  className="-z-10 object-cover"
+                  className="ed11y-ignore -z-10 object-cover"
                   src={blogItem.supBlogImage.mediaImage.url}
-                  alt={blogItem.supBlogImage.mediaImage.alt || ""}
+                  alt=""
                   fill
                 />
               )}

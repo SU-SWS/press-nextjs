@@ -94,8 +94,7 @@ const MainMenu = ({menuItems}: Props) => {
           ))}
         </ul>
 
-        <a href="/search" className="group rs-ml-2 hidden lg:block">
-          <span className="sr-only">Search Site</span>
+        <a href="/search" className="group rs-ml-2 hidden lg:block" title="Search Site">
           <MagnifyingGlassIcon
             width={25}
             className={clsx("border-b border-transparent", {
