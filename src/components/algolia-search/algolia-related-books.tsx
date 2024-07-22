@@ -5,14 +5,15 @@ import RelatedBooks from "@components/algolia-search/algolia-related-books-clien
 const AlgoliaRelatedBooks = async ({objectId}: {objectId: NodeSupBook["id"]}) => {
   const siteSettings = await getConfigPage<StanfordBasicSiteSetting>("StanfordBasicSiteSetting")
 
-  if (!siteSettings?.suSiteAlgoliaId || !siteSettings.suSiteAlgoliaIndex || !siteSettings.suSiteAlgoliaSearch) return
+  if (!siteSettings?.suSiteAlgoliaId || !siteSettings.suSiteAlgoliaIndex || !siteSettings.suSiteAlgoliaSearch || true)
+    return
 
   return (
     <RelatedBooks
       objectId={objectId}
-      appId={siteSettings.suSiteAlgoliaId}
-      searchIndex={siteSettings.suSiteAlgoliaIndex}
-      searchApiKey={siteSettings.suSiteAlgoliaSearch}
+      appId={siteSettings?.suSiteAlgoliaId}
+      searchIndex={siteSettings?.suSiteAlgoliaIndex}
+      searchApiKey={siteSettings?.suSiteAlgoliaSearch}
     />
   )
 }
