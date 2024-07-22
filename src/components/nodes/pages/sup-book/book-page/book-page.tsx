@@ -154,7 +154,7 @@ const BookPage = async ({node, ...props}: Props) => {
               </div>
             </div>
 
-            <div className="lg:w-3/8">
+            <div className="lg:w-3/8 xl:min-w-[200px] 2xl:min-w-[320px]">
               <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog">
                 <BookPrecart
                   bookTitle={node.title}

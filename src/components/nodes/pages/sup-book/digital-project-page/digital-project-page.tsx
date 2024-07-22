@@ -45,7 +45,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
   return (
     <div className="centered flex flex-col" {...props}>
       <article className="centered order-last">
-        <div className="mb-20 flex flex-col md:flex-row md:gap-24 md:pt-32">
+        <div className="mb-20 flex flex-col md:flex-row md:gap-32 md:pt-32 lg:gap-[9.5rem]">
           <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-row justify-center gap-24 bg-fog-light px-20 pt-32 md:hidden">
             <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
               <H1 className="type-3 mb-0">{node.title}</H1>
@@ -69,7 +69,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
               <BookPageImage node={node} />
             </div>
           </div>
-          <div className="flex flex-col md:w-2/3 md:gap-24 lg:flex-row">
+          <div className="flex flex-col md:w-2/3 md:gap-32 lg:flex-row lg:gap-[9.5rem]">
             <div className="lg:w-5/8">
               <div className="rs-mb-0 rs-pb-3 flex flex-col border-b-2 border-fog">
                 <div className="mt-7 flex flex-col sm:mt-0 sm:hidden md:flex">
@@ -162,7 +162,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
               </div>
             </div>
 
-            <div className="lg:w-3/8 shrink-0">
+            <div className="lg:w-3/8 xl:min-w-[200px] 2xl:min-w-[320px]">
               {node.supBookUrlIsw && (
                 <Button
                   href={node.supBookUrlIsw.startsWith("http") ? node.supBookUrlIsw : "https://" + node.supBookUrlIsw}
