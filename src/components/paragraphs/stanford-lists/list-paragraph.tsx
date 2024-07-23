@@ -20,6 +20,7 @@ import {twMerge} from "tailwind-merge"
 import Link from "@components/elements/link"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
 import {ListParagraphBehaviors} from "@lib/drupal/drupal-jsonapi.d"
+import clsx from "clsx"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordList
@@ -64,11 +65,17 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
   return (
     <ListWrapper
       {...props}
-      className={twMerge("centered mb-20 flex flex-col gap-10 border-t border-press-sand-dark pt-14", props.className)}
+      className={twMerge(
+        "rs-mb-4 centered flex flex-col gap-10 border-t border-press-sand pt-14",
+        clsx({
+          "border-0": !paragraph.suListHeadline,
+        }),
+        props.className
+      )}
       aria-labelledby={ListWrapper === "section" ? paragraph.id : undefined}
     >
       <div className="flex w-full flex-col justify-between @3xl:flex-row">
-        <div className="flex flex-col">
+        <div className="flex max-w-1000 flex-col">
           {ListWrapper === "section" && (
             <H2
               id={paragraph.id}
@@ -82,7 +89,7 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
           )}
 
           {paragraph.supListEyebrow && (
-            <div className="type-0 order-first text-press-sand-dark">{paragraph.supListEyebrow}</div>
+            <div className="rs-mb-neg2 type-0 order-first text-press-sand-dark">{paragraph.supListEyebrow}</div>
           )}
         </div>
 
@@ -94,7 +101,7 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
         )}
       </div>
 
-      <Wysiwyg html={paragraph.suListDescription?.processed} />
+      <Wysiwyg className="max-w-1000" html={paragraph.suListDescription?.processed} />
 
       {viewId && displayId && viewItems && (
         <div className="mx-auto max-w-[1600px]">
