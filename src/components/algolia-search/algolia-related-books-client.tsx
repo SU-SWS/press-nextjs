@@ -33,7 +33,7 @@ const RelatedBook = ({item}: {item: HitType<BookHit>}) => {
             sizes="400px"
           />
           {item.book_award_winner && (
-            <div className="absolute left-5 top-0 flex max-w-[90%] items-center gap-3 bg-fog py-2 pl-3 pr-5">
+            <div className="absolute left-5 top-0 flex max-w-[90%] items-center justify-between gap-3 bg-fog py-2 pl-3 pr-5 text-09em">
               <BookmarkIcon width={20} className="fill-stone-dark" />
               Award winner
             </div>
@@ -50,9 +50,9 @@ const RelatedBook = ({item}: {item: HitType<BookHit>}) => {
         </H3>
       </div>
 
-      {item.book_subtitle && <div className="rs-mb-3 text-press-sand-dark">{item.book_subtitle}</div>}
+      {item.book_subtitle && <div className="rs-mb-3 text-09em text-press-sand-dark">{item.book_subtitle}</div>}
 
-      {item.book_authors && <div className="mb-0 text-press-sand-dark">{item.book_authors}</div>}
+      {item.book_authors && <div className="mb-0 text-09em text-press-sand-dark">{item.book_authors}</div>}
     </div>
   )
 }
