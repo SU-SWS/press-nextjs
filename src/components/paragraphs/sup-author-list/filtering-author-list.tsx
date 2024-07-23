@@ -62,7 +62,7 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
   )
 
   return (
-    <div {...props} className={twMerge("flex justify-between", props?.className)}>
+    <div {...props} className={twMerge("flex max-w-[900px] justify-between", props?.className)}>
       <div className="sr-only" aria-live="polite" aria-atomic>
         Showing authors that start with {alphaChosen}
       </div>
