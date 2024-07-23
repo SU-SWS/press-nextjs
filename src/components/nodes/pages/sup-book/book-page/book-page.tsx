@@ -210,7 +210,7 @@ const BookPage = async ({node, ...props}: Props) => {
             </div>
           </div>
 
-          <div className="md:order-first md:w-1/3">
+          <div className="md:order-first md:w-[27%]">
             <div className="hidden md:block">
               <BookPageImage node={node} />
             </div>
