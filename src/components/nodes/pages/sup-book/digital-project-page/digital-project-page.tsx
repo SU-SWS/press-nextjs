@@ -289,7 +289,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
       </article>
       <Link
         href="/books"
-        className="group hidden w-fit items-center gap-5 pt-20 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:flex md:gap-6"
+        className="group rs-pt-1 hidden w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:flex md:gap-6"
       >
         <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
         <span>Back to Books</span>
