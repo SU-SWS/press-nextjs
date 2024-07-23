@@ -54,7 +54,7 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
               })
             )}
           >
-            <Link href={url} aria-labelledby={hit.objectID} aria-hidden tabIndex={-1} prefetch={false}>
+            <Link href={url} aria-hidden tabIndex={-1} prefetch={false}>
               <Image
                 className="object-cover"
                 src={hit.photo.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)}
