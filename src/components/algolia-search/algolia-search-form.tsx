@@ -363,12 +363,12 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
 
       {pages.length > 1 && (
         <nav aria-label="Search results pager">
-          <ul className="list-unstyled mx-auto flex w-fit gap-8 *:text-press-sand-dark">
+          <ul className="list-unstyled mx-auto flex w-fit items-end gap-8 *:mb-0 *:text-press-sand-dark">
             {pages[0] > 0 && (
               <li>
-                <button onClick={() => goToPage(0)}>
+                <button onClick={() => goToPage(0)} className="group p-4 hocus:rounded-full hocus:bg-cardinal-red">
                   <span className="sr-only">Go to first page</span>
-                  <ArrowLongLeftIcon width={30} />
+                  <ArrowLongLeftIcon width={30} className="text-stone-dark group-hocus:text-white" />
                 </button>
               </li>
             )}
@@ -377,7 +377,10 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
               <li
                 key={`page-${pageNum}`}
                 aria-current={currentPage === pageNum}
-                className={clsx("h-fit px-4 pb-3", {"border-b-2 border-press-sand-dark": currentPage === pageNum})}
+                className={clsx("h-fit border-b-2 px-4 pb-3", {
+                  "border-transparent": currentPage !== pageNum,
+                  "border-press-sand-dark": currentPage === pageNum,
+                })}
               >
                 <button className="no-underline hocus:underline" onClick={() => goToPage(pageNum)}>
                   {pageNum + 1}
@@ -387,9 +390,12 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
 
             {pages[pages.length - 1] !== nbPages && (
               <li>
-                <button onClick={() => goToPage(nbPages - 1)}>
+                <button
+                  onClick={() => goToPage(nbPages - 1)}
+                  className="group p-4 hocus:rounded-full hocus:bg-cardinal-red"
+                >
                   <span className="sr-only">Go to last page</span>
-                  <ArrowLongRightIcon width={30} />
+                  <ArrowLongRightIcon width={30} className="text-stone-dark group-hocus:text-white" />
                 </button>
               </li>
             )}

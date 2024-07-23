@@ -10,6 +10,7 @@ import {ArrowLongLeftIcon, ArrowLongRightIcon} from "@heroicons/react/20/solid"
 import {ArrowPathIcon} from "@heroicons/react/16/solid"
 import {twMerge} from "tailwind-merge"
 import useServerAction from "@lib/hooks/useServerAction"
+import clsx from "clsx"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -188,7 +189,9 @@ const PaginationButton = ({
   return (
     <li className="m-0 flex items-center">
       <button
-        className="group type-3 font-medium hocus:underline"
+        className={clsx("group type-1 font-medium hocus:text-stone-dark hocus:underline", {
+          "p-4 hocus:rounded-full hocus:bg-cardinal-red": page === "leftArrow" || page === "rightArrow",
+        })}
         onClick={handleClick}
         aria-current={isCurrent ? "page" : undefined}
         disabled={disabled}
@@ -205,8 +208,10 @@ const PaginationButton = ({
             " block h-fit border-b-2 px-4"
           }
         >
-          {page === "leftArrow" && <ArrowLongLeftIcon width={30} />}
-          {page === "rightArrow" && <ArrowLongRightIcon width={30} />}
+          {page === "leftArrow" && <ArrowLongLeftIcon width={30} className="text-stone-dark group-hocus:text-white" />}
+          {page === "rightArrow" && (
+            <ArrowLongRightIcon width={30} className="text-stone-dark group-hocus:text-white" />
+          )}
           {page !== "leftArrow" && page !== "rightArrow" && page}
         </span>
       </button>
