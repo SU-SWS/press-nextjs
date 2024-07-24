@@ -53,7 +53,7 @@ export const getConfigPage = async <T extends ConfigPagesUnion>(
   try {
     query = await graphqlClient({next: {tags: ["config-pages"]}}).ConfigPages()
   } catch (e) {
-    console.warn("Unable to fetch config pages")
+    console.warn("Unable to fetch config pages: " + (e instanceof Error && e.stack))
     return
   }
 
