@@ -100,8 +100,7 @@ const getBasicPageMetaData = (node: NodeStanfordPage) => {
     node.suPageBanner.suTitleBannerImage.mediaImage
   const firstCarouselBannerImage =
     node.suPageBanner?.__typename === "ParagraphSupCarousel" &&
-    (node.suPageBanner.supCarouselSlides[0].supSlideImage?.mediaImage ||
-      node.suPageBanner.supCarouselSlides[0].supSlideBook?.supBookImage?.mediaImage)
+    node.suPageBanner.supCarouselSlides[0].supSlideImage?.mediaImage
   const bannerImage =
     node.suPageBanner?.__typename === "ParagraphStanfordBanner" && node.suPageBanner.suBannerImage?.mediaImage
   const image = node.suPageImage?.mediaImage || pageTitleBannerImage || bannerImage || firstCarouselBannerImage

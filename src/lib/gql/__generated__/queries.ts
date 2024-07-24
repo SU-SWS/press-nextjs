@@ -293,27 +293,11 @@ export const FragmentParagraphSupCarouselSlideFragmentDoc = gql`
   supSlideBody {
     processed
   }
-  supSlideBodySize
-  supSlideBook {
-    ... on NodeSupBook {
-      id
-      title
-      path
-      supBookAuthorsFull
-      supBookImage {
-        ...FragmentMediaImage
-      }
-      supBookLocalWebBlurb {
-        processed
-      }
-    }
-  }
   supSlideButton {
     ...FragmentLink
   }
   supSlideColor
   supSlideEyebrow
-  supSlideHide
   supSlideOrientation
   supSlideSubtitle
   supSlideTitle
@@ -326,8 +310,8 @@ export const FragmentParagraphSupCarouselSlideFragmentDoc = gql`
   }
 }
     ${FragmentParagraphInterfaceFragmentDoc}
-${FragmentMediaImageFragmentDoc}
-${FragmentLinkFragmentDoc}`;
+${FragmentLinkFragmentDoc}
+${FragmentMediaImageFragmentDoc}`;
 export const FragmentParagraphSupCarouselFragmentDoc = gql`
     fragment FragmentParagraphSupCarousel on ParagraphSupCarousel {
   ...FragmentParagraphInterface
