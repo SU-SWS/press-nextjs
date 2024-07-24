@@ -10,6 +10,15 @@ export const FragmentPageInfoFragmentDoc = gql`
   endCursor
 }
     `;
+export const AllNodeInterfaceFragmentDoc = gql`
+    fragment AllNodeInterface on NodeInterface {
+  id
+  path
+  changed {
+    time
+  }
+}
+    `;
 export const FragmentDateTimeFragmentDoc = gql`
     fragment FragmentDateTime on DateTime {
   timezone
@@ -1150,10 +1159,7 @@ export const AllNodesDocument = gql`
     query AllNodes($first: Int = 1000, $nodeSupBooks: Cursor, $nodeStanfordCourses: Cursor, $nodeStanfordEventSeriesItems: Cursor, $nodeStanfordEvents: Cursor, $nodeStanfordNewsItems: Cursor, $nodeStanfordPages: Cursor, $nodeStanfordPeople: Cursor, $nodeStanfordPolicies: Cursor, $nodeStanfordPublications: Cursor) {
   nodeSupBooks(first: $first, after: $nodeSupBooks, sortKey: CREATED_AT) {
     nodes {
-      ...FragmentNodeInterface
-      supBookExcerpts {
-        __typename
-      }
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1165,7 +1171,7 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1177,7 +1183,7 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1189,7 +1195,7 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1201,7 +1207,7 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1209,7 +1215,7 @@ export const AllNodesDocument = gql`
   }
   nodeStanfordPages(first: $first, after: $nodeStanfordPages, sortKey: CREATED_AT) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1221,7 +1227,7 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1233,7 +1239,7 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1245,14 +1251,14 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
     }
   }
 }
-    ${FragmentNodeInterfaceFragmentDoc}
+    ${AllNodeInterfaceFragmentDoc}
 ${FragmentPageInfoFragmentDoc}`;
 export const BooksDocument = gql`
     query Books($first: Int = 1000, $after: Cursor) {
