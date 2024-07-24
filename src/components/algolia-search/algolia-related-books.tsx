@@ -6,12 +6,11 @@ import {H2, H3} from "@components/elements/headers"
 import Image from "next/image"
 import {BookmarkIcon} from "@heroicons/react/24/outline"
 import Link from "@components/elements/link"
+import {getAlgoliaCredential} from "@lib/gql/gql-queries"
 
 const getRelatedContent = nextCache(
   async (objectID: string): Promise<BookHit[]> => {
-    const appID = process.env.ALGOLIA_ID
-    const indexName = process.env.ALGOLIA_INDEX
-    const apiKey = process.env.ALGOLIA_KEY
+    const [appID, indexName, apiKey] = await getAlgoliaCredential()
     if (!appID || !indexName || !apiKey) return []
 
     const options: RequestInit = {
@@ -55,7 +54,7 @@ const getRelatedContent = nextCache(
 )
 
 const AlgoliaRelatedBooks = async ({objectId}: {objectId: NodeSupBook["id"]}) => {
-  const recommendations = await getRelatedContent(objectId)
+  const recommendations = process.env.ALGOLIA_RECOMMENDATIONS === "true" ? await getRelatedContent(objectId) : []
   if (recommendations.length === 0) return
 
   return (
