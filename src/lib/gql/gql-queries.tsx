@@ -81,6 +81,21 @@ export const getConfigPage = async <T extends ConfigPagesUnion>(
   return getData()
 }
 
+export const getConfigPageField = async <T extends ConfigPagesUnion, F>(
+  configPageType: ConfigPagesUnion["__typename"],
+  fieldName: keyof T
+): Promise<F | undefined> => {
+  const getData = nextCache(
+    async () => {
+      const configPage = await getConfigPage<T>(configPageType)
+      return configPage?.[fieldName] as F
+    },
+    [fieldName.toString()],
+    {tags: ["config-pages"]}
+  )
+  return getData()
+}
+
 export const getMenu = cache(async (name?: MenuAvailable): Promise<MenuItem[]> => {
   "use server"
   const menuName = name?.toLowerCase() || "main"
@@ -150,11 +165,19 @@ export const getAlgoliaCredential = nextCache(
     if (process.env.ALGOLIA_ID && process.env.ALGOLIA_INDEX && process.env.ALGOLIA_KEY) {
       return [process.env.ALGOLIA_ID, process.env.ALGOLIA_INDEX, process.env.ALGOLIA_KEY]
     }
-    const configPage = await getConfigPage<StanfordBasicSiteSetting>("StanfordBasicSiteSetting")
-    if (configPage?.suSiteAlgoliaId && configPage.suSiteAlgoliaIndex && configPage.suSiteAlgoliaSearch) {
-      return [configPage.suSiteAlgoliaId, configPage.suSiteAlgoliaIndex, configPage.suSiteAlgoliaSearch]
-    }
-    return []
+    const appId = await getConfigPageField<StanfordBasicSiteSetting, StanfordBasicSiteSetting["suSiteAlgoliaId"]>(
+      "StanfordBasicSiteSetting",
+      "suSiteAlgoliaId"
+    )
+    const indexName = await getConfigPageField<
+      StanfordBasicSiteSetting,
+      StanfordBasicSiteSetting["suSiteAlgoliaIndex"]
+    >("StanfordBasicSiteSetting", "suSiteAlgoliaIndex")
+    const apiKey = await getConfigPageField<StanfordBasicSiteSetting, StanfordBasicSiteSetting["suSiteAlgoliaSearch"]>(
+      "StanfordBasicSiteSetting",
+      "suSiteAlgoliaSearch"
+    )
+    return appId && indexName && apiKey ? [appId, indexName, apiKey] : []
   },
   ["algolia"],
   {tags: ["algolia"]}
