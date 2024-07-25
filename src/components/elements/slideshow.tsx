@@ -2,7 +2,7 @@
 
 import {HTMLAttributes, JSX} from "react"
 import Slider, {CustomArrowProps, Settings} from "react-slick"
-import {ArrowLongRightIcon, ArrowLongLeftIcon} from "@heroicons/react/16/solid"
+import {ArrowLongRightIcon, ArrowLongLeftIcon} from "@heroicons/react/24/outline"
 import {twMerge} from "tailwind-merge"
 import {clsx} from "clsx"
 

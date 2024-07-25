@@ -3,6 +3,7 @@ import Image from "next/image"
 import Oembed from "@components/elements/ombed"
 import {ElementType, HTMLAttributes} from "react"
 import {Maybe} from "@lib/gql/__generated__/drupal"
+import clsx from "clsx"
 
 type Props = HTMLAttributes<HTMLElement | HTMLDivElement> & {
   /**
@@ -21,13 +22,20 @@ type Props = HTMLAttributes<HTMLElement | HTMLDivElement> & {
    * If the wrapper should be an article or a div, use an article if an appropriate heading is within the card.
    */
   isArticle?: Maybe<boolean>
+  /**
+   * If card should contain border, box shadow,  and content padding styles
+   */
+  hasBorder?: Maybe<boolean>
 }
 
-const ImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children, ...props}: Props) => {
+const ImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children, hasBorder, ...props}: Props) => {
   const CardWrapper: ElementType = isArticle ? "article" : "div"
 
   return (
-    <CardWrapper {...props} className={twMerge("centered w-full lg:max-w-[980px]", props.className)}>
+    <CardWrapper
+      {...props}
+      className={twMerge("centered w-full lg:max-w-[980px]", clsx({"border shadow": hasBorder}), props.className)}
+    >
       {imageUrl && (
         <div className="relative aspect-[16/9] w-full">
           <Image
@@ -42,7 +50,11 @@ const ImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children, ...props}
 
       {videoUrl && <Oembed url={videoUrl} />}
 
-      <div className="rs-pr-2 rs-py-2 flex flex-col gap-5">{children}</div>
+      <div
+        className={twMerge("flex flex-col gap-5", clsx({"rs-px-1 rs-py-2": hasBorder, "rs-pr-2 rs-py-2": !hasBorder}))}
+      >
+        {children}
+      </div>
     </CardWrapper>
   )
 }
