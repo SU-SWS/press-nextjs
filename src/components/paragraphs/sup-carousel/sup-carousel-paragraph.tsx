@@ -89,10 +89,9 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
 
       <div
         className={twMerge(
-          "rs-py-6 relative mx-auto max-w-1200",
+          "rs-py-6 relative mx-auto flex max-w-1200 flex-col items-center justify-center",
           clsx({
-            "flex flex-col items-center": !leftImage,
-            "mx-auto flex max-w-1200 flex-col items-center gap-20 py-32 lg:flex-row": leftImage,
+            "mx-auto max-w-1200 gap-20 py-32 lg:flex-row": leftImage,
           })
         )}
       >
@@ -104,7 +103,10 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
         >
           <div className={clsx("flex flex-col", {"text-left": leftImage, "text-center": !leftImage})}>
             {slideTitle && (
-              <H2 className={clsx({"type-0": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
+              <H2
+                className={twMerge("type-4", clsx({"type-0": slideParagraph.supSlideTitleSize === "small"}))}
+                id={slideParagraph.id}
+              >
                 {slideTitle}
               </H2>
             )}
@@ -124,10 +126,13 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
 
           <Wysiwyg
             html={body}
-            className={clsx("rs-mb-3", {
-              "text-left": leftImage,
-              "text-center": !leftImage,
-            })}
+            className={twMerge(
+              "rs-mb-3",
+              clsx({
+                "text-left": leftImage,
+                "text-center": !leftImage,
+              })
+            )}
           />
 
           {slideParagraph.supSlideButton?.url && (

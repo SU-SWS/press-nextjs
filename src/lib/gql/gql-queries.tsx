@@ -33,7 +33,7 @@ export const getEntityFromPath = cache(
         let query: RouteQuery
 
         try {
-          query = await graphqlClient({next: {tags: ["all-entities", `paths:${path}`]}}, previewMode).Route({path})
+          query = await graphqlClient({cache: "no-cache"}, previewMode).Route({path})
         } catch (e) {
           console.warn(e instanceof Error ? e.message : "An error occurred")
           return {entity: undefined, redirect: undefined, error: e instanceof Error ? e.message : "An error occurred"}
