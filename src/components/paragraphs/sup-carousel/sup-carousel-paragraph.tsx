@@ -123,7 +123,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
             <div className="order-first">
               {!leftImage && image && (
                 <div className="rs-mb-3 relative mx-auto aspect-1 w-[200px] max-w-3xl">
-                  <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="200px" />
+                  <Image className="object-fit" src={image.url} alt={image.alt || ""} fill sizes="200px" />
                 </div>
               )}
 
