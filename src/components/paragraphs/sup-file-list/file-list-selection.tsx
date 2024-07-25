@@ -6,6 +6,7 @@ import SelectList from "@components/elements/select-list"
 import {SelectOptionDefinition} from "@mui/base/useSelect"
 import {DocumentArrowDownIcon} from "@heroicons/react/24/outline"
 import Button from "@components/elements/button"
+import Link from "next/link"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   fileOptions: (SelectOptionDefinition<string> & {url: string})[]
@@ -31,7 +32,7 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
         />
       </div>
       {chosenItem && (
-        <Button href={chosenItem.url} prefetch={false} className="!rs-py-1 !rs-px-2 !type-0 flex items-center gap-10">
+        <Button href={chosenItem.url} prefetch={false} className="type-0 flex items-center gap-10 px-14 py-10">
           Download {chosenItem.label} <DocumentArrowDownIcon width={28} />
         </Button>
       )}

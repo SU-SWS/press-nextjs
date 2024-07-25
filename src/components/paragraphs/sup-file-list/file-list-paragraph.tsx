@@ -32,7 +32,7 @@ const FileListParagraph = ({paragraph, ...props}: Props) => {
       {paragraph.supFileListLabel && <H2>{paragraph.supFileListLabel}</H2>}
       <ul className="list-unstyled">
         {fileOptions.map(media => (
-          <li key={media.value}>
+          <li key={media.value} className="rs-mb-2">
             <a href={media.url} className="group type-1 flex w-fit items-center gap-7 font-normal text-stone-dark">
               <span className="relative block">
                 <DocumentTextIcon width={50} className="text-press-sand-light group-hocus:text-archway-dark" />
