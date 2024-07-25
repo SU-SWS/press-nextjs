@@ -7,7 +7,10 @@ const headingLinkClasses = "[&_a]:hocus:underline"
 
 export const H1 = ({children, className, ...props}: Props) => {
   return (
-    <h1 className={twMerge("type-4 font-medium", className)} {...props}>
+    <h1
+      className={twMerge("font-medium", className && className.includes("type-") ? className : `type-4 ${className}`)}
+      {...props}
+    >
       {children}
     </h1>
   )
@@ -15,7 +18,14 @@ export const H1 = ({children, className, ...props}: Props) => {
 
 export const H2 = ({children, className, ...props}: Props) => {
   return (
-    <h2 className={twMerge(headingLinkClasses, "type-2 font-medium", className)} {...props}>
+    <h2
+      className={twMerge(
+        headingLinkClasses,
+        "font-medium",
+        className && className.includes("type-") ? className : `type-2 ${className}`
+      )}
+      {...props}
+    >
       {children}
     </h2>
   )
@@ -23,7 +33,14 @@ export const H2 = ({children, className, ...props}: Props) => {
 
 export const H3 = ({children, className, ...props}: Props) => {
   return (
-    <h3 className={twMerge(headingLinkClasses, "type-1 font-medium", className)} {...props}>
+    <h3
+      className={twMerge(
+        headingLinkClasses,
+        "font-medium",
+        className && className.includes("type-") ? className : `type-1 ${className}`
+      )}
+      {...props}
+    >
       {children}
     </h3>
   )
@@ -31,7 +48,14 @@ export const H3 = ({children, className, ...props}: Props) => {
 
 export const H4 = ({children, className, ...props}: Props) => {
   return (
-    <h4 className={twMerge(headingLinkClasses, "type-0 font-bold", className)} {...props}>
+    <h4
+      className={twMerge(
+        headingLinkClasses,
+        "font-bold",
+        className && className.includes("type-") ? className : `type-0 ${className}`
+      )}
+      {...props}
+    >
       {children}
     </h4>
   )
@@ -39,7 +63,14 @@ export const H4 = ({children, className, ...props}: Props) => {
 
 export const H5 = ({children, className, ...props}: Props) => {
   return (
-    <h5 className={twMerge(headingLinkClasses, "type-1 font-medium", className)} {...props}>
+    <h5
+      className={twMerge(
+        headingLinkClasses,
+        "font-medium",
+        className && className.includes("type-") ? className : `type-0 ${className}`
+      )}
+      {...props}
+    >
       {children}
     </h5>
   )
@@ -47,7 +78,14 @@ export const H5 = ({children, className, ...props}: Props) => {
 
 export const H6 = ({children, className, ...props}: Props) => {
   return (
-    <h6 className={twMerge(headingLinkClasses, "type-0 font-medium", className)} {...props}>
+    <h6
+      className={twMerge(
+        headingLinkClasses,
+        "font-medium",
+        className && className.includes("type-") ? className : `type-0 ${className}`
+      )}
+      {...props}
+    >
       {children}
     </h6>
   )
