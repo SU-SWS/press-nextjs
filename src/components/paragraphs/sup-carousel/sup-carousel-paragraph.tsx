@@ -25,7 +25,7 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
       {...props}
       aria-label="Page banner carousel"
       data-top-hero={isTopHero || undefined}
-      className={twMerge("relative mb-32", clsx({"lg:-top-[300px]": isTopHero}), props?.className)}
+      className={twMerge("relative mb-32", clsx({"lg:-top-[300px] lg:mb-[-300px]": isTopHero}), props?.className)}
     >
       {paragraph.supCarouselSlides.length === 1 && (
         <div className="relative left-1/2 w-screen -translate-x-1/2">
@@ -47,14 +47,12 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
 }
 
 const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouselSlide; isTopHero?: boolean}) => {
-  const slideTitle = slideParagraph.supSlideTitle || slideParagraph.supSlideBook?.title
-  const eyebrow =
-    slideParagraph.supSlideEyebrow ||
-    (!slideParagraph.supSlideHide?.includes("author") && slideParagraph.supSlideBook?.supBookAuthorsFull)
-  const subtitle = slideParagraph.supSlideSubtitle || slideParagraph.supSlideBook?.supBookSubtitle
+  const slideTitle = slideParagraph.supSlideTitle
+  const eyebrow = slideParagraph.supSlideEyebrow
+  const subtitle = slideParagraph.supSlideSubtitle
   const bgImage = slideParagraph.supSlideBgImage.mediaImage
-  const image = slideParagraph.supSlideImage?.mediaImage || slideParagraph.supSlideBook?.supBookImage?.mediaImage
-  const body = slideParagraph.supSlideBody?.processed || slideParagraph.supSlideBook?.supBookLocalWebBlurb?.processed
+  const image = slideParagraph.supSlideImage?.mediaImage
+  const body = slideParagraph.supSlideBody?.processed
   const color = slideParagraph.supSlideColor
   const leftImage = slideParagraph.supSlideOrientation === "left_image"
 
@@ -66,7 +64,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
         clsx({
           "text-center": !leftImage,
           "text-center lg:text-left": leftImage,
-          "-z-10 lg:mb-[-300px] lg:pt-[300px]": isTopHero,
+          "lg:pt-[300px]": isTopHero,
         })
       )}
     >
@@ -91,10 +89,9 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
 
       <div
         className={twMerge(
-          "rs-py-6 relative mx-auto max-w-1200",
+          "rs-py-6 relative mx-auto flex max-w-1200 flex-col items-center justify-center",
           clsx({
-            "flex flex-col items-center": !leftImage,
-            "mx-auto flex max-w-1200 flex-col items-center gap-20 py-32 lg:flex-row": leftImage,
+            "mx-auto max-w-1200 gap-20 py-32 lg:flex-row": leftImage,
           })
         )}
       >
@@ -105,19 +102,11 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
           })}
         >
           <div className={clsx("flex flex-col", {"text-left": leftImage, "text-center": !leftImage})}>
-            {slideParagraph.supSlideBook?.path && (
-              <H2 className={clsx({"type-0": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
-                <Link
-                  className="font-medium text-white no-underline hocus:text-white hocus:underline"
-                  href={slideParagraph.supSlideBook.path}
-                >
-                  {slideTitle}
-                </Link>
-              </H2>
-            )}
-
-            {!slideParagraph.supSlideBook?.path && (
-              <H2 className={clsx({"type-0": slideParagraph.supSlideTitleSize === "small"})} id={slideParagraph.id}>
+            {slideTitle && (
+              <H2
+                className={twMerge("type-4", clsx({"type-0": slideParagraph.supSlideTitleSize === "small"}))}
+                id={slideParagraph.id}
+              >
                 {slideTitle}
               </H2>
             )}
@@ -137,11 +126,13 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
 
           <Wysiwyg
             html={body}
-            className={clsx("rs-mb-3", {
-              "[&_p]:text-18": slideParagraph.supSlideBodySize === "small",
-              "text-left": leftImage,
-              "text-center": !leftImage,
-            })}
+            className={twMerge(
+              "rs-mb-3",
+              clsx({
+                "text-left": leftImage,
+                "text-center": !leftImage,
+              })
+            )}
           />
 
           {slideParagraph.supSlideButton?.url && (

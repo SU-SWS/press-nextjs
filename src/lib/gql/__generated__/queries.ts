@@ -10,6 +10,15 @@ export const FragmentPageInfoFragmentDoc = gql`
   endCursor
 }
     `;
+export const AllNodeInterfaceFragmentDoc = gql`
+    fragment AllNodeInterface on NodeInterface {
+  id
+  path
+  changed {
+    time
+  }
+}
+    `;
 export const FragmentDateTimeFragmentDoc = gql`
     fragment FragmentDateTime on DateTime {
   timezone
@@ -284,27 +293,11 @@ export const FragmentParagraphSupCarouselSlideFragmentDoc = gql`
   supSlideBody {
     processed
   }
-  supSlideBodySize
-  supSlideBook {
-    ... on NodeSupBook {
-      id
-      title
-      path
-      supBookAuthorsFull
-      supBookImage {
-        ...FragmentMediaImage
-      }
-      supBookLocalWebBlurb {
-        processed
-      }
-    }
-  }
   supSlideButton {
     ...FragmentLink
   }
   supSlideColor
   supSlideEyebrow
-  supSlideHide
   supSlideOrientation
   supSlideSubtitle
   supSlideTitle
@@ -317,8 +310,8 @@ export const FragmentParagraphSupCarouselSlideFragmentDoc = gql`
   }
 }
     ${FragmentParagraphInterfaceFragmentDoc}
-${FragmentMediaImageFragmentDoc}
-${FragmentLinkFragmentDoc}`;
+${FragmentLinkFragmentDoc}
+${FragmentMediaImageFragmentDoc}`;
 export const FragmentParagraphSupCarouselFragmentDoc = gql`
     fragment FragmentParagraphSupCarousel on ParagraphSupCarousel {
   ...FragmentParagraphInterface
@@ -1148,24 +1141,13 @@ export const NodeDocument = gql`
     ${FragmentNodeUnionFragmentDoc}`;
 export const AllNodesDocument = gql`
     query AllNodes($first: Int = 1000, $nodeSupBooks: Cursor, $nodeStanfordCourses: Cursor, $nodeStanfordEventSeriesItems: Cursor, $nodeStanfordEvents: Cursor, $nodeStanfordNewsItems: Cursor, $nodeStanfordPages: Cursor, $nodeStanfordPeople: Cursor, $nodeStanfordPolicies: Cursor, $nodeStanfordPublications: Cursor) {
-  nodeSupBooks(first: $first, after: $nodeSupBooks, sortKey: CREATED_AT) {
-    nodes {
-      ...FragmentNodeInterface
-      supBookExcerpts {
-        __typename
-      }
-    }
-    pageInfo {
-      ...FragmentPageInfo
-    }
-  }
   nodeStanfordCourses(
     first: $first
     after: $nodeStanfordCourses
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1177,7 +1159,7 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1189,7 +1171,7 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1201,7 +1183,7 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1209,7 +1191,7 @@ export const AllNodesDocument = gql`
   }
   nodeStanfordPages(first: $first, after: $nodeStanfordPages, sortKey: CREATED_AT) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1221,7 +1203,7 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1233,7 +1215,7 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
@@ -1245,14 +1227,22 @@ export const AllNodesDocument = gql`
     sortKey: CREATED_AT
   ) {
     nodes {
-      ...FragmentNodeInterface
+      ...AllNodeInterface
+    }
+    pageInfo {
+      ...FragmentPageInfo
+    }
+  }
+  nodeSupBooks(first: $first, after: $nodeSupBooks, sortKey: CREATED_AT) {
+    nodes {
+      ...AllNodeInterface
     }
     pageInfo {
       ...FragmentPageInfo
     }
   }
 }
-    ${FragmentNodeInterfaceFragmentDoc}
+    ${AllNodeInterfaceFragmentDoc}
 ${FragmentPageInfoFragmentDoc}`;
 export const BooksDocument = gql`
     query Books($first: Int = 1000, $after: Cursor) {
