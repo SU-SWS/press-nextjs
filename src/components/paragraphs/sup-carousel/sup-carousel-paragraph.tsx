@@ -1,6 +1,6 @@
 import {HtmlHTMLAttributes} from "react"
 import {ParagraphSupCarousel, ParagraphSupCarouselSlide} from "@lib/gql/__generated__/drupal.d"
-import Slideshow from "@components/elements/slideshow"
+import Slideshow, {NextArrow, PrevArrow} from "@components/elements/slideshow"
 import {H2} from "@components/elements/headers"
 import Wysiwyg from "@components/elements/wysiwyg"
 import Link from "@components/elements/link"
@@ -34,7 +34,14 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
       )}
 
       {paragraph.supCarouselSlides.length > 1 && (
-        <Slideshow slideshowProps={{slidesToShow: 1}} className="left-1/2 w-screen -translate-x-1/2">
+        <Slideshow
+          slideshowProps={{
+            nextArrow: <NextArrow customClassName={clsx({"lg:mt-[150px]": isTopHero})} />,
+            prevArrow: <PrevArrow customClassName={clsx({"lg:mt-[150px]": isTopHero})} />,
+            slidesToShow: 1,
+          }}
+          className="left-1/2 w-screen -translate-x-1/2"
+        >
           {paragraph.supCarouselSlides.map(slide => (
             <div key={slide.id}>
               <Slide key={slide.id} slideParagraph={slide} isTopHero={isTopHero} />
