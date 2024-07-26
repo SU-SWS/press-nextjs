@@ -19,7 +19,7 @@ const LocalFooter = async () => {
         <div className="rs-mb-3">
           <FooterLockup />
         </div>
-        <div className="grid grid-cols-1 sm:rs-ml-4 sm:grid-cols-2 2xl:grid-cols-4 [&_a:focus]:text-bay-light [&_a:hover]:text-bay-light [&_a:hover]:decoration-bay-light [&_a:hover]:decoration-2 [&_a]:text-white [&_a]:decoration-white [&_a]:decoration-1 [&_a]:underline-offset-[5px] [&_a]:transition [&_h2_a]:font-medium [&_h2_a]:underline [&_h2_strong]:font-medium [&_li]:mb-4 [&_li]:text-[0.9em] [&_li_a]:font-normal [&_p]:text-[0.9em]">
+        <div className="grid grid-cols-1 sm:rs-ml-4 sm:grid-cols-2 2xl:grid-cols-4 [&_a:focus]:text-bay-light [&_a:hover]:text-bay-light [&_a:hover]:decoration-bay-light [&_a:hover]:decoration-2 [&_a]:text-white [&_a]:decoration-fog-dark [&_a]:decoration-1 [&_a]:underline-offset-[5px] [&_a]:transition [&_h2_a]:font-medium [&_h2_a]:underline [&_h2_a]:decoration-fog-dark [&_h2_strong]:font-medium [&_li]:mb-4 [&_li]:text-[0.9em] [&_li_a]:font-normal [&_p]:text-[0.9em]">
           <div className="list-unstyled rs-pb-1 rs-pt-4 sm:border-r sm:border-fog-dark">
             {/* Content block 1 */}
             <Wysiwyg html={localFooterConfig.suLocalFootPrCo?.processed} className="max-w-[250px]" />
