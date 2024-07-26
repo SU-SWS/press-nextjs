@@ -30,7 +30,7 @@ const SupBookCard = ({node, headingLevel, darkBg, ...props}: Props) => {
             sizes="400px"
           />
           {node.supBookAwards && (
-            <div className="absolute left-5 top-0 flex max-w-[90%] items-center justify-between gap-3 bg-fog py-2 pl-3 pr-5 text-09em">
+            <div className="absolute left-5 top-0 flex max-w-[90%] items-center justify-between gap-3 bg-fog py-2 pl-3 pr-5 text-[0.85em]">
               <BookmarkIcon width={20} className={twMerge("fill-stone-dark", clsx({"text-fog": darkBg}))} />
               Award winner
             </div>
