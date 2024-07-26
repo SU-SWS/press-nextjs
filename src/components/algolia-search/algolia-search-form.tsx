@@ -185,7 +185,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
 
           <div className="rs-mb-1 rs-pb-2 border-b border-black-30">
             <label className="flex cursor-pointer items-center justify-between gap-10">
-              <span className="text-16">Search only books</span>
+              <span className="text-18">Search only books</span>
 
               <div className="group relative">
                 <input
