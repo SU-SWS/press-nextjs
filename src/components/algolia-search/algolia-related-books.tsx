@@ -103,9 +103,9 @@ const RelatedBook = ({item}: {item: BookHit}) => {
         </H3>
       </div>
 
-      {item.book_subtitle && <div className="rs-mb-3 text-press-sand-dark">{item.book_subtitle}</div>}
+      {item.book_subtitle && <div className="rs-mb-3 text-09em text-press-sand-dark">{item.book_subtitle}</div>}
 
-      {item.book_authors && <div className="mb-0 text-press-sand-dark">{item.book_authors}</div>}
+      {item.book_authors && <div className="mb-0 text-09em text-press-sand-dark">{item.book_authors}</div>}
     </li>
   )
 }
