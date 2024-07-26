@@ -62,10 +62,11 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
   const body = slideParagraph.supSlideBody?.processed
   const color = slideParagraph.supSlideColor
   const leftImage = slideParagraph.supSlideOrientation === "left_image"
+  const SlideTag = slideTitle ? "article" : "div"
 
   return (
-    <article
-      aria-labelledby={slideParagraph.id}
+    <SlideTag
+      aria-labelledby={slideTitle ? slideParagraph.id : undefined}
       className={twMerge(
         "centered-container relative flex h-full min-h-full w-full bg-black text-white",
         clsx({
@@ -163,7 +164,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
           </div>
         )}
       </div>
-    </article>
+    </SlideTag>
   )
 }
 export default SupCarouselParagraph

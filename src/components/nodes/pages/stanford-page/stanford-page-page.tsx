@@ -19,7 +19,7 @@ const StanfordPagePage = ({node, ...props}: Props) => {
   return (
     <article {...props}>
       {node.suPageBanner?.__typename && (
-        <div className="mb-32">
+        <header className="mb-32">
           {node.suPageBanner?.__typename === "ParagraphStanfordBanner" && (
             <BannerParagraph paragraph={node.suPageBanner} eagerLoadImage />
           )}
@@ -31,7 +31,7 @@ const StanfordPagePage = ({node, ...props}: Props) => {
           {node.suPageBanner?.__typename === "ParagraphSupCarousel" && (
             <SupCarouselParagraph paragraph={node.suPageBanner} isTopBanner />
           )}
-        </div>
+        </header>
       )}
 
       {node.suPageBanner?.__typename !== "ParagraphStanfordPageTitleBanner" && (
