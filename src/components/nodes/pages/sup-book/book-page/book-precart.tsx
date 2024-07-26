@@ -97,7 +97,7 @@ const BookPreCart = ({
                 checked={!isIntl}
                 onChange={() => setIntl(false)}
               />
-              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-2 peer-checked:border-press-sand-dark peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-09em">
+              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-2 peer-checked:border-press-sand-dark peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.85em]">
                 US/Canada
               </span>
             </label>
@@ -110,7 +110,7 @@ const BookPreCart = ({
                 checked={isIntl}
                 onChange={() => setIntl(true)}
               />
-              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-09em">
+              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.85em]">
                 International
               </span>
             </label>
@@ -129,7 +129,7 @@ const BookPreCart = ({
         <Button
           buttonElem
           type="submit"
-          className="flex w-full items-center justify-center gap-2 text-white md:text-09em"
+          className="flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]"
         >
           Add to cart
           <ArrowRightIcon width={24} />
@@ -186,10 +186,10 @@ const UsFormatChoices = ({
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center gap-2">
               <span className="flex w-full flex-col justify-between gap-2 @lg:flex-row @lg:gap-0">
-                <span className="font-semibold group-hover:underline md:text-09em">Hardcover</span>
+                <span className="font-semibold group-hover:underline md:text-[0.85em]">Hardcover</span>
                 <span className="flex items-center">
-                  <span className="mr-2 text-press-sand-dark md:text-09em">US/CAN</span>
-                  <span>{formatCurrency(clothPrice)}</span>
+                  <span className="mr-2 text-press-sand-dark md:text-[0.85em]">US/CAN</span>
+                  <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(clothPrice)}</span>
                 </span>
               </span>
               <BookmarkIcon width={24} className="text-fog-dark" />
@@ -210,10 +210,10 @@ const UsFormatChoices = ({
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center gap-2">
               <span className="flex w-full flex-col justify-between gap-2 @lg:flex-row @lg:gap-0">
-                <span className="font-semibold group-hover:underline md:text-09em">Paperback</span>
+                <span className="font-semibold group-hover:underline md:text-[0.85em]">Paperback</span>
                 <span className="flex items-center">
-                  <span className="mr-2 text-press-sand-dark md:text-09em">US/CAN</span>
-                  <span>{formatCurrency(paperPrice)}</span>
+                  <span className="mr-2 text-press-sand-dark md:text-[0.85em]">US/CAN</span>
+                  <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(paperPrice)}</span>
                 </span>
               </span>
               <BookOpenIcon width={24} className="text-fog-dark" />
@@ -249,7 +249,7 @@ const IntlFormatChoices = ({
           />
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center justify-between font-semibold">
-              <span className="group-hover:underline md:text-09em">Hardcover</span>
+              <span className="group-hover:underline md:text-[0.85em]">Hardcover</span>
               <BookmarkIcon width={24} className="text-fog-dark" />
             </span>
           </span>
@@ -267,7 +267,7 @@ const IntlFormatChoices = ({
           />
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center justify-between font-semibold">
-              <span className="group-hover:underline md:text-09em">Paperback</span>
+              <span className="group-hover:underline md:text-[0.85em]">Paperback</span>
               <BookOpenIcon width={24} className="text-fog-dark" />
             </span>
           </span>
