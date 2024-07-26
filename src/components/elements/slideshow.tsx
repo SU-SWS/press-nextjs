@@ -6,11 +6,15 @@ import {ArrowLongRightIcon, ArrowLongLeftIcon} from "@heroicons/react/24/outline
 import {twMerge} from "tailwind-merge"
 import {clsx} from "clsx"
 
-const NextArrow = ({className, onClick}: CustomArrowProps) => {
-  const slickDisabled = !!(className && className?.indexOf("slick-disabled") > 0)
+export const NextArrow = ({
+  customClassName,
+  className: slickClassNames,
+  onClick,
+}: CustomArrowProps & {customClassName?: string}) => {
+  const slickDisabled = !!(slickClassNames && slickClassNames?.indexOf("slick-disabled") > 0)
   return (
     <button
-      className="absolute right-5 top-1/2 z-50 h-20 w-20 lg:right-20"
+      className={twMerge("absolute right-5 top-1/2 z-50 h-20 w-20 lg:right-20", customClassName)}
       onClick={onClick}
       aria-label="Next"
       disabled={slickDisabled}
@@ -20,11 +24,15 @@ const NextArrow = ({className, onClick}: CustomArrowProps) => {
   )
 }
 
-const PrevArrow = ({className, onClick}: CustomArrowProps) => {
-  const slickDisabled = !!(className && className?.indexOf("slick-disabled") > 0)
+export const PrevArrow = ({
+  customClassName,
+  className: slickClassNames,
+  onClick,
+}: CustomArrowProps & {customClassName?: string}) => {
+  const slickDisabled = !!(slickClassNames && slickClassNames?.indexOf("slick-disabled") > 0)
   return (
     <button
-      className="absolute left-5 top-1/2 z-50 h-20 w-20 lg:left-20"
+      className={twMerge("absolute left-5 top-1/2 z-50 h-20 w-20 lg:left-20", customClassName)}
       onClick={onClick}
       aria-label="Previous"
       disabled={slickDisabled}

@@ -1244,23 +1244,24 @@ export const AllNodesDocument = gql`
 }
     ${AllNodeInterfaceFragmentDoc}
 ${FragmentPageInfoFragmentDoc}`;
-export const BooksDocument = gql`
-    query Books($first: Int = 1000, $after: Cursor) {
+export const BooksAuthorsDocument = gql`
+    query BooksAuthors($first: Int = 1000, $after: Cursor) {
   nodeSupBooks(first: $first, after: $after, sortKey: CREATED_AT) {
     nodes {
-      ...FragmentNodeInterface
+      id
+      title
+      path
+      supBookSubtitle
       supBookAuthors {
         ...FragmentNameType
       }
-      supBookWorkIdNumber
     }
     pageInfo {
       ...FragmentPageInfo
     }
   }
 }
-    ${FragmentNodeInterfaceFragmentDoc}
-${FragmentNameTypeFragmentDoc}
+    ${FragmentNameTypeFragmentDoc}
 ${FragmentPageInfoFragmentDoc}`;
 export const CoursesDocument = gql`
     query Courses($first: Int = 1000, $after: Cursor) {
@@ -1894,8 +1895,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     AllNodes(variables?: DrupalTypes.AllNodesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.AllNodesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.AllNodesQuery>(AllNodesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllNodes', 'query', variables);
     },
-    Books(variables?: DrupalTypes.BooksQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.BooksQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.BooksQuery>(BooksDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Books', 'query', variables);
+    BooksAuthors(variables?: DrupalTypes.BooksAuthorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.BooksAuthorsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.BooksAuthorsQuery>(BooksAuthorsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'BooksAuthors', 'query', variables);
     },
     Courses(variables?: DrupalTypes.CoursesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.CoursesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.CoursesQuery>(CoursesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Courses', 'query', variables);
