@@ -336,7 +336,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
         </div>
 
-        <div className="flex w-1/2 items-center gap-3">
+        <div className="flex min-w-[33rem] items-center gap-3">
           <div id="sort-by" className="text-16 text-press-sand-dark">
             Sort By:
           </div>
