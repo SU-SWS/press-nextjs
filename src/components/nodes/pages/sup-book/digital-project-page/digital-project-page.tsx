@@ -222,7 +222,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
             </div>
           </div>
 
-          <div className="md:order-first md:w-[27%]">
+          <div className="md:w-1/4] md:order-first">
             <div className="hidden md:block">
               <BookPageImage node={node} />
             </div>
