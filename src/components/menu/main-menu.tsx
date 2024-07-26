@@ -57,7 +57,7 @@ const MainMenu = ({menuItems}: Props) => {
         aria-expanded={menuOpen}
         aria-labelledby={navId}
       >
-        <span className="flex h-[30px] w-[30px] flex-col items-center justify-center">
+        <span className="mb-3 flex h-[30px] w-[30px] flex-col items-center justify-center">
           <span
             className={clsx("block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
               "translate-y-4 rotate-45": menuOpen,

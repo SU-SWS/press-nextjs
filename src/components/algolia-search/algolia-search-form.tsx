@@ -331,8 +331,8 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <div aria-live="polite" className="card-paragraph">
+      <div className="border-sand-light rs-pb-1 flex flex-col items-start justify-between border-b sm:flex-row sm:items-center">
+        <div aria-live="polite" className="type-0 font-medium">
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
         </div>
 
@@ -355,7 +355,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
 
       <ul className="list-unstyled">
         {hits.map(hit => (
-          <li key={hit.objectID} className="border-b border-gray-300 last:border-0">
+          <li key={hit.objectID} className="border-sand-light border-b last:border-0">
             <DefaultHit hit={hit} />
           </li>
         ))}
