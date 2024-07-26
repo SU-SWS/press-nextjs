@@ -159,7 +159,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                     return refinement.refinements.map((item, i) => (
                       <li
                         key={`refinement-${i}`}
-                        className="mb-4 flex w-fit items-center gap-8 border-2 border-press-sand px-10 py-6 text-18"
+                        className="mb-4 flex w-fit items-center gap-8 border-2 border-press-sand px-8 pb-5 pt-4 text-18"
                       >
                         {item.value}
                         <button
