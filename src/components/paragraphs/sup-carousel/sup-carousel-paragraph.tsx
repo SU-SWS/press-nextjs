@@ -96,7 +96,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
 
       <div
         className={twMerge(
-          "rs-py-6 relative mx-auto flex max-w-1200 flex-col items-center justify-center",
+          "rs-py-6 relative mx-auto flex w-full max-w-1200 flex-col items-center justify-center",
           clsx({
             "mx-auto max-w-1200 gap-20 py-32 lg:flex-row": leftImage,
           })
@@ -123,7 +123,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
             <div className="order-first">
               {!leftImage && image && (
                 <div className="rs-mb-3 relative mx-auto aspect-1 w-[200px] max-w-3xl">
-                  <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="200px" />
+                  <Image className="object-contain" src={image.url} alt={image.alt || ""} fill sizes="200px" />
                 </div>
               )}
 
@@ -158,8 +158,8 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
           )}
         </div>
         {leftImage && image && (
-          <div className="relative order-first aspect-[11/16] h-auto w-1/2 max-w-2xl shrink-0">
-            <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="500px" />
+          <div className="relative order-first aspect-[11/16] h-full w-1/2 max-w-2xl shrink-0 flex-grow">
+            <Image className="object-contain" src={image.url} alt={image.alt || ""} fill sizes="500px" />
           </div>
         )}
       </div>
