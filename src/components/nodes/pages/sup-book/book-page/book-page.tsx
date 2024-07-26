@@ -44,7 +44,7 @@ const BookPage = async ({node, ...props}: Props) => {
   return (
     <div className="centered flex flex-col" {...props}>
       <article className="centered order-last">
-        <div className="mb-20 flex flex-col md:flex-row md:gap-32 md:pt-32 lg:gap-[9.5rem]">
+        <div className="mb-20 flex flex-col md:flex-row md:gap-32 md:rs-mt-4 lg:gap-[9.5rem]">
           <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-col justify-center bg-fog-light px-20 md:hidden">
             <div className="flex flex-row gap-24">
               <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
