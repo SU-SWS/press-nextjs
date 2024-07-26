@@ -6,7 +6,6 @@ import SelectList from "@components/elements/select-list"
 import {SelectOptionDefinition} from "@mui/base/useSelect"
 import {DocumentArrowDownIcon} from "@heroicons/react/24/outline"
 import Button from "@components/elements/button"
-import Link from "next/link"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   fileOptions: (SelectOptionDefinition<string> & {url: string})[]
