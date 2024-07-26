@@ -47,7 +47,7 @@ export const getEntityFromPath = cache(
           query.route?.__typename === "RouteInternal" && query.route.entity ? (query.route.entity as T) : undefined
         return {entity, redirect: undefined, error: undefined}
       },
-      ["entities", path],
+      ["entities", path, previewMode ? "preview" : "anonymous"],
       {tags: ["all-entities", `paths:${path}`]}
     )
 
