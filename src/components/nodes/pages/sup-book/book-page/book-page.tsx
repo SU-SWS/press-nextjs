@@ -44,43 +44,56 @@ const BookPage = async ({node, ...props}: Props) => {
   return (
     <div className="centered flex flex-col" {...props}>
       <article className="centered order-last">
-        <div className="mb-20 flex flex-col md:flex-row md:gap-24 md:pt-32">
-          <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-row justify-center gap-24 bg-fog-light px-20 pt-32 md:hidden">
-            <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
-              <H1 className="type-3 mb-0">{node.title}</H1>
+        <div className="mb-20 flex flex-col md:rs-mt-4 md:flex-row md:gap-32 lg:gap-[7.6rem]">
+          <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-col justify-center bg-fog-light px-20 md:hidden">
+            <div className="flex flex-row gap-24">
+              <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
+                <H1 className="type-3 mb-0">{node.title}</H1>
 
-              {node.supBookSubjects && (
-                <a
-                  href={`/search?${bookSubject}`}
-                  className="rs-mb-2 order-first text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
-                >
-                  {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
-                </a>
-              )}
+                {node.supBookSubjects && (
+                  <Link
+                    prefetch={false}
+                    href={`/search?${bookSubject}`}
+                    className="rs-mb-2 order-first text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+                  >
+                    {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
+                  </Link>
+                )}
 
-              {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
+                {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
 
-              {node.supBookAuthorsFull && (
-                <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
-              )}
+                {node.supBookAuthorsFull && (
+                  <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
+                )}
+              </div>
+              <div className="order-first sm:w-5/12">
+                <BookPageImage node={node} />
+              </div>
             </div>
-            <div className="order-first w-5/12">
-              <BookPageImage node={node} />
+            <div className="order-first py-8 sm:pb-28 sm:pt-16">
+              <Link
+                href="/books"
+                className="group flex w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6"
+              >
+                <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
+                <span>Back to Books</span>
+              </Link>
             </div>
           </div>
-          <div className="flex flex-col md:w-2/3 md:gap-24 lg:flex-row">
+          <div className="flex flex-col md:w-2/3 md:gap-32 lg:flex-row lg:gap-[7.6rem]">
             <div className="lg:w-5/8">
               <div className="rs-mb-0 rs-pb-3 flex flex-col border-b-2 border-fog">
                 <div className="mt-7 flex flex-col sm:mt-0 sm:hidden md:flex">
                   <H1 className="type-3 mb-0">{node.title}</H1>
 
                   {node.supBookSubjects && (
-                    <a
+                    <Link
+                      prefetch={false}
                       href={`/search?${bookSubject}`}
                       className="rs-mb-2 order-first text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                     >
                       {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
-                    </a>
+                    </Link>
                   )}
 
                   {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
@@ -135,9 +148,13 @@ const BookPage = async ({node, ...props}: Props) => {
                   <div>
                     Series
                     <br />
-                    <a href={`/search?q=${node.supBookSeries.name}`} className="text-18 font-normal text-stone-dark">
+                    <Link
+                      prefetch={false}
+                      href={`/search?q=${node.supBookSeries.name}`}
+                      className="text-18 font-normal text-stone-dark"
+                    >
                       {node.supBookSeries.name}
-                    </a>
+                    </Link>
                   </div>
                 )}
               </div>
@@ -154,7 +171,7 @@ const BookPage = async ({node, ...props}: Props) => {
               </div>
             </div>
 
-            <div className="lg:w-3/8">
+            <div className="lg:w-3/8 xl:min-w-[200px] 2xl:min-w-[320px]">
               <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog">
                 <BookPrecart
                   bookTitle={node.title}
@@ -177,12 +194,13 @@ const BookPage = async ({node, ...props}: Props) => {
                   <ul className="list-unstyled rs-mt-0 flex flex-col gap-3 [&_a]:font-normal [&_a]:text-digital-red">
                     {node.supBookERetailers.map((link, i) => (
                       <li key={`e-book-retailer-${i}`} className="mb-0">
-                        <a
+                        <Link
+                          prefetch={false}
                           href={link.url || "#"}
                           className="font-normal underline-offset-[5px] hocus:text-stone-dark hocus:decoration-archway-dark hocus:decoration-2"
                         >
                           {link.title}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -199,7 +217,7 @@ const BookPage = async ({node, ...props}: Props) => {
             </div>
           </div>
 
-          <div className="md:order-first md:w-1/3">
+          <div className="md:order-first md:w-1/4">
             <div className="hidden md:block">
               <BookPageImage node={node} />
             </div>
@@ -253,13 +271,14 @@ const BookPage = async ({node, ...props}: Props) => {
                 const linkParamsString = createLinkParams(subject)
                 return (
                   <li key={subject.id} className="min-w-fit flex-1">
-                    <a
+                    <Link
+                      prefetch={false}
                       href={`/search?${linkParamsString}`}
                       className="text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                     >
                       {subject.parent?.name && `${subject.parent.name} / `}
                       {subject.name}
-                    </a>
+                    </Link>
                   </li>
                 )
               })}
@@ -269,7 +288,7 @@ const BookPage = async ({node, ...props}: Props) => {
       </article>
       <Link
         href="/books"
-        className="group flex w-fit items-center gap-5 pt-20 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6"
+        className="group rs-pt-1 hidden w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:flex md:gap-6"
       >
         <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
         <span>Back to Books</span>
