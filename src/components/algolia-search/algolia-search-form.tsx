@@ -159,7 +159,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                     return refinement.refinements.map((item, i) => (
                       <li
                         key={`refinement-${i}`}
-                        className="mb-4 flex w-fit items-center gap-8 border-2 border-press-sand px-10 py-6 text-18"
+                        className="mb-4 flex w-fit items-center gap-8 border-2 border-press-sand px-8 pb-5 pt-4 text-18"
                       >
                         {item.value}
                         <button
@@ -185,7 +185,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
 
           <div className="rs-mb-1 rs-pb-2 border-b border-black-30">
             <label className="flex cursor-pointer items-center justify-between gap-10">
-              <span className="text-16">Search only books</span>
+              <span className="text-18">Search only books</span>
 
               <div className="group relative">
                 <input
@@ -331,12 +331,12 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <div aria-live="polite" className="card-paragraph">
+      <div className="border-sand-light rs-pb-1 flex flex-col items-start justify-between border-b sm:flex-row sm:items-center">
+        <div aria-live="polite" className="type-0 font-medium">
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
         </div>
 
-        <div className="flex w-1/2 items-center gap-3">
+        <div className="flex min-w-[33rem] items-center gap-3">
           <div id="sort-by" className="text-16 text-press-sand-dark">
             Sort By:
           </div>
@@ -355,7 +355,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
 
       <ul className="list-unstyled">
         {hits.map(hit => (
-          <li key={hit.objectID} className="border-b border-gray-300 last:border-0">
+          <li key={hit.objectID} className="border-sand-light border-b last:border-0">
             <DefaultHit hit={hit} />
           </li>
         ))}
