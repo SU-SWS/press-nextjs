@@ -44,14 +44,18 @@ const InterceptionModal = ({children, ...props}: HtmlHTMLAttributes<HTMLDialogEl
       <ReactFocusLock returnFocus>
         <div
           ref={wrapper}
-          className="absolute left-1/2 top-1/2 w-11/12 -translate-x-1/2 -translate-y-1/2 p-6 sm:w-10/12 md:w-8/12 lg:w-1/2"
+          className="rs-p-2 absolute left-1/2 top-1/2 w-11/12 -translate-x-1/2 -translate-y-1/2 sm:w-10/12 md:w-8/12 lg:w-1/2"
         >
           {children}
         </div>
 
-        <button type="button" onClick={onDismiss} className="fixed right-60 top-60 flex text-white hocus:underline">
+        <button
+          type="button"
+          onClick={onDismiss}
+          className="text-sand-light rs-py-0 rs-px-1 absolute right-[20px] top-[20px] flex hocus:underline"
+        >
           Close<span className="sr-only"> Overlay</span>
-          <XMarkIcon className="ml-5" width={25} />
+          <XMarkIcon className="text-sand-light ml-2" width={25} />
         </button>
       </ReactFocusLock>
     </dialog>
