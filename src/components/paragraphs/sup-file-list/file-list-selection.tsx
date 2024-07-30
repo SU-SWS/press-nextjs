@@ -19,8 +19,8 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
   const chosenItem = fileOptions.find(option => option.value === chosenFile)
   return (
     <div {...props}>
-      <div className="mb-10 max-w-4xl">
-        <div id={id} className="type-0 mb-3">
+      <div className="rs-mb-1 max-w-4xl">
+        <div id={id} className="type-0 mb-3 font-medium">
           {label}
         </div>
         <SelectList
@@ -31,8 +31,8 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
         />
       </div>
       {chosenItem && (
-        <Button href={chosenItem.url} prefetch={false} className="flex items-center gap-5">
-          Download {chosenItem.label} <DocumentArrowDownIcon width={30} />
+        <Button href={chosenItem.url} prefetch={false} className="type-0 flex items-center gap-10 px-14 py-10">
+          Download {chosenItem.label} <DocumentArrowDownIcon width={28} />
         </Button>
       )}
     </div>
