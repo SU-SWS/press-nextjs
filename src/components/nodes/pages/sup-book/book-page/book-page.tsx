@@ -51,12 +51,13 @@ const BookPage = async ({node, ...props}: Props) => {
                 <H1 className="type-3 mb-0">{node.title}</H1>
 
                 {node.supBookSubjects && (
-                  <a
+                  <Link
+                    prefetch={false}
                     href={`/search?${bookSubject}`}
                     className="rs-mb-2 order-first text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                   >
                     {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
-                  </a>
+                  </Link>
                 )}
 
                 {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
@@ -86,12 +87,13 @@ const BookPage = async ({node, ...props}: Props) => {
                   <H1 className="type-3 mb-0">{node.title}</H1>
 
                   {node.supBookSubjects && (
-                    <a
+                    <Link
+                      prefetch={false}
                       href={`/search?${bookSubject}`}
                       className="rs-mb-2 order-first text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                     >
                       {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
-                    </a>
+                    </Link>
                   )}
 
                   {node.supBookSubtitle && <div className="type-2 mt-5 font-medium">{node.supBookSubtitle}</div>}
@@ -146,9 +148,13 @@ const BookPage = async ({node, ...props}: Props) => {
                   <div>
                     Series
                     <br />
-                    <a href={`/search?q=${node.supBookSeries.name}`} className="text-18 font-normal text-stone-dark">
+                    <Link
+                      prefetch={false}
+                      href={`/search?q=${node.supBookSeries.name}`}
+                      className="text-18 font-normal text-stone-dark"
+                    >
                       {node.supBookSeries.name}
-                    </a>
+                    </Link>
                   </div>
                 )}
               </div>
@@ -188,12 +194,13 @@ const BookPage = async ({node, ...props}: Props) => {
                   <ul className="list-unstyled rs-mt-0 flex flex-col gap-3 [&_a]:font-normal [&_a]:text-digital-red">
                     {node.supBookERetailers.map((link, i) => (
                       <li key={`e-book-retailer-${i}`} className="mb-0">
-                        <a
+                        <Link
+                          prefetch={false}
                           href={link.url || "#"}
                           className="font-normal underline-offset-[5px] hocus:text-stone-dark hocus:decoration-archway-dark hocus:decoration-2"
                         >
                           {link.title}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -264,13 +271,14 @@ const BookPage = async ({node, ...props}: Props) => {
                 const linkParamsString = createLinkParams(subject)
                 return (
                   <li key={subject.id} className="min-w-fit flex-1">
-                    <a
+                    <Link
+                      prefetch={false}
                       href={`/search?${linkParamsString}`}
                       className="text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                     >
                       {subject.parent?.name && `${subject.parent.name} / `}
                       {subject.name}
-                    </a>
+                    </Link>
                   </li>
                 )
               })}
