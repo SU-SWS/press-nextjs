@@ -52,7 +52,7 @@ const InterceptionModal = ({children, ...props}: HtmlHTMLAttributes<HTMLDialogEl
         <button
           type="button"
           onClick={onDismiss}
-          className="text-sand-light rs-py-0 rs-px-1 absolute right-[20px] top-[20px] flex hocus:underline"
+          className="text-sand-light rs-py-0 rs-px-1 absolute right-[20px] top-[20px] flex bg-black-30 hocus:underline"
         >
           Close<span className="sr-only"> Overlay</span>
           <XMarkIcon className="text-sand-light ml-2" width={25} />
