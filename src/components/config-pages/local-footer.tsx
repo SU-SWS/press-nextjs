@@ -7,54 +7,28 @@ import YoutubeIcon from "@components/elements/icons/YoutubeIcon"
 import FacebookIcon from "@components/elements/icons/FacebookIcon"
 import InstagramIcon from "@components/elements/icons/InstagramIcon"
 import {StanfordLocalFooter} from "@lib/gql/__generated__/drupal.d"
+import {getConfigPage} from "@lib/gql/gql-queries"
 
-const LocalFooter = ({
-  suFooterEnabled,
-  suLocalFootAction,
-  suLocalFootPrCo,
-  suLocalFootPrimary,
-  suLocalFootPrimeH,
-  suLocalFootSeCo,
-  suLocalFootSecond,
-  suLocalFootSecondH,
-  suLocalFootSocial,
-  suLocalFootTr2Co,
-  suLocalFootTrCo,
-}: StanfordLocalFooter) => {
-  if (!suFooterEnabled) return
+const LocalFooter = async () => {
+  const localFooterConfig = await getConfigPage<StanfordLocalFooter>("StanfordLocalFooter")
+  if (!localFooterConfig?.suFooterEnabled) return
 
   return (
     <div className="rs-py-6 local-footer bg-stone-dark">
-      <div className="centered">
+      <div className="rs-mb-6 centered">
         <div className="rs-mb-6">
           <FooterLockup />
         </div>
 
-        {/* Social Links */}
-        {suLocalFootSocial && (
-          <ul className="list-unstyled rs-mb-0 flex">
-            {suLocalFootSocial.map((link, index) => {
-              if (!link.url) return
-              return (
-                <li key={`footer-action-link-${index}`} className="rs-mr-0">
-                  <Link href={link.url} className="text-white hocus:text-bay-light">
-                    <SocialIcon url={link.url} />
-                    <span className="sr-only">{link.title}</span>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        )}
         <div className="grid grid-cols-1 sm:rs-ml-4 sm:grid-cols-2 2xl:grid-cols-4 [&_a:focus]:text-bay-light [&_a:hover]:text-bay-light [&_a:hover]:decoration-bay-light [&_a:hover]:decoration-2 [&_a]:font-normal [&_a]:text-white [&_a]:decoration-white [&_a]:decoration-1 [&_a]:transition">
           <div className="list-unstyled sm:border-r sm:border-fog-dark">
             {/* Content block 1 */}
-            <Wysiwyg html={suLocalFootPrCo?.processed} className="max-w-[250px]" />
+            <Wysiwyg html={localFooterConfig.suLocalFootPrCo?.processed} className="max-w-[250px]" />
 
             {/* Action Links */}
-            {suLocalFootAction && (
+            {localFooterConfig.suLocalFootAction && (
               <ul className="list-unstyled rs-pt-4">
-                {suLocalFootAction.map((link, index) => {
+                {localFooterConfig.suLocalFootAction.map((link, index) => {
                   if (!link.url) return
                   return (
                     <li key={`footer-action-link-${index}`}>
@@ -68,12 +42,14 @@ const LocalFooter = ({
 
           <div className="list-unstyled 2xl:rs-pl-4 sm:order-4 sm:border-r sm:border-fog-dark">
             {/* Content block 3 */}
-            <Wysiwyg html={suLocalFootTr2Co?.processed} className="max-w-[250px]" />
+            <Wysiwyg html={localFooterConfig.suLocalFootTr2Co?.processed} className="max-w-[250px]" />
             {/* Primary Links */}
-            {suLocalFootPrimeH && <H2 className="rs-pt-4 type-2 text-white">{suLocalFootPrimeH}</H2>}
-            {suLocalFootPrimary && (
+            {localFooterConfig.suLocalFootPrimeH && (
+              <H2 className="rs-pt-4 type-2 text-white">{localFooterConfig.suLocalFootPrimeH}</H2>
+            )}
+            {localFooterConfig.suLocalFootPrimary && (
               <ul className="list-unstyled">
-                {suLocalFootPrimary.map((link, index) => {
+                {localFooterConfig.suLocalFootPrimary.map((link, index) => {
                   if (!link.url) return
                   return (
                     <li key={`footer-primary-link-${index}`}>
@@ -87,13 +63,15 @@ const LocalFooter = ({
 
           <div className="list-unstyled sm:rs-pl-4 2xl:rs-pl-4 sm:border-r sm:border-fog-dark">
             {/* Content block 2 */}
-            <Wysiwyg html={suLocalFootSeCo?.processed} className="max-w-[250px]" />
+            <Wysiwyg html={localFooterConfig.suLocalFootSeCo?.processed} className="max-w-[250px]" />
             {/* Secondary links */}
-            {suLocalFootSecondH && <H2 className="rs-pt-4 type-2 text-white">{suLocalFootSecondH}</H2>}
+            {localFooterConfig.suLocalFootSecondH && (
+              <H2 className="rs-pt-4 type-2 text-white">{localFooterConfig.suLocalFootSecondH}</H2>
+            )}
 
-            {suLocalFootSecond && (
+            {localFooterConfig.suLocalFootSecond && (
               <ul className="list-unstyled">
-                {suLocalFootSecond.map((link, index) => {
+                {localFooterConfig.suLocalFootSecond.map((link, index) => {
                   if (!link.url) return
                   return (
                     <li key={`footer-second-link-${index}`}>
@@ -107,11 +85,27 @@ const LocalFooter = ({
 
           <div className="list-unstyled order-4 sm:rs-pl-4 2xl:rs-pl-4 sm:border-r sm:border-fog-dark 2xl:border-0">
             {/* Content block 4 */}
-            <Wysiwyg html={suLocalFootTrCo?.processed} className="max-w-[250px]" />
+            <Wysiwyg html={localFooterConfig.suLocalFootTrCo?.processed} className="max-w-[250px]" />
           </div>
         </div>
       </div>
-      <div className="rs-mb-6 rs-mt-8 text-center text-21 text-white lg:centered lg:text-left">
+      {/* Social Links */}
+      {localFooterConfig.suLocalFootSocial && (
+        <ul className="list-unstyled rs-mb-0 mx-auto flex w-fit">
+          {localFooterConfig.suLocalFootSocial.map((link, index) => {
+            if (!link.url) return
+            return (
+              <li key={`footer-action-link-${index}`} className="rs-mr-0">
+                <Link href={link.url} className="text-white hocus:text-bay-light">
+                  <SocialIcon url={link.url} />
+                  <span className="sr-only">{link.title}</span>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      )}
+      <div className="text-center text-21 text-white lg:centered lg:text-left">
         © 2024 Stanford University Press. All rights reserved.
       </div>
     </div>
