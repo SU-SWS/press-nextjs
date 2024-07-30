@@ -44,7 +44,7 @@ const InterceptionModal = ({children, ...props}: HtmlHTMLAttributes<HTMLDialogEl
       <ReactFocusLock returnFocus>
         <div
           ref={wrapper}
-          className="rs-p-2 absolute left-1/2 top-1/2 w-11/12 -translate-x-1/2 -translate-y-1/2 sm:w-10/12 md:w-8/12 lg:w-1/2"
+          className="rs-p-2 absolute left-1/2 top-0 w-11/12 -translate-x-1/2 sm:w-10/12 md:w-8/12 lg:w-1/2"
         >
           {children}
         </div>
