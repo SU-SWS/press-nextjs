@@ -16,7 +16,7 @@ const PageTitleBannerParagraph = ({paragraph, pageTitle, ...props}: Props) => {
     <div
       {...props}
       className={twMerge(
-        "rs-mb-5 flex min-h-[200px] flex-col items-center @container md:min-h-[400px]",
+        "rs-mb-7 flex min-h-[200px] flex-col items-center @container md:min-h-[400px]",
         props.className
       )}
     >
@@ -38,7 +38,7 @@ const PageTitleBannerParagraph = ({paragraph, pageTitle, ...props}: Props) => {
         />
       </div>
 
-      <div className="z-10 flex flex-grow items-center text-center text-white">
+      <div className="z-10 flex max-w-1000 flex-grow items-center text-center text-white">
         <H1>{pageTitle}</H1>
       </div>
     </div>

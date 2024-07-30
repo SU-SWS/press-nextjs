@@ -35,7 +35,7 @@ const StanfordPagePage = ({node, ...props}: Props) => {
       )}
 
       {node.suPageBanner?.__typename !== "ParagraphStanfordPageTitleBanner" && (
-        <H1 className={clsx("centered mt-32", {"lg:max-w-1200": fullWidth})}>{node.title}</H1>
+        <H1 className={clsx("rs-mb-7 centered mt-32", {"lg:max-w-1200": fullWidth})}>{node.title}</H1>
       )}
 
       {!fullWidth && (

@@ -15,13 +15,12 @@ const LocalFooter = async () => {
 
   return (
     <div className="rs-py-6 local-footer bg-stone-dark">
-      <div className="rs-mb-6 centered">
-        <div className="rs-mb-6">
+      <div className="centered">
+        <div className="rs-mb-3">
           <FooterLockup />
         </div>
-
-        <div className="grid grid-cols-1 sm:rs-ml-4 sm:grid-cols-2 2xl:grid-cols-4 [&_a:focus]:text-bay-light [&_a:hover]:text-bay-light [&_a:hover]:decoration-bay-light [&_a:hover]:decoration-2 [&_a]:font-normal [&_a]:text-white [&_a]:decoration-white [&_a]:decoration-1 [&_a]:transition">
-          <div className="list-unstyled sm:border-r sm:border-fog-dark">
+        <div className="grid grid-cols-1 sm:rs-ml-4 sm:grid-cols-2 2xl:grid-cols-4 [&_a:focus]:text-bay-light [&_a:hover]:text-bay-light [&_a:hover]:decoration-bay-light [&_a:hover]:decoration-2 [&_a]:text-white [&_a]:decoration-fog-dark [&_a]:decoration-1 [&_a]:underline-offset-[5px] [&_a]:transition [&_h2_a]:font-medium [&_h2_a]:underline [&_h2_a]:decoration-fog-dark [&_h2_a]:decoration-1 [&_h2_strong]:font-medium [&_li]:mb-4 [&_li]:text-[0.9em] [&_li_a]:font-normal [&_p]:text-[0.9em]">
+          <div className="list-unstyled rs-pb-1 rs-pt-4 sm:border-r sm:border-fog-dark">
             {/* Content block 1 */}
             <Wysiwyg html={localFooterConfig.suLocalFootPrCo?.processed} className="max-w-[250px]" />
 
@@ -40,7 +39,7 @@ const LocalFooter = async () => {
             )}
           </div>
 
-          <div className="list-unstyled 2xl:rs-pl-4 sm:order-4 sm:border-r sm:border-fog-dark">
+          <div className="list-unstyled rs-pb-1 rs-pt-4 2xl:rs-pl-4 sm:order-4 sm:border-r sm:border-fog-dark">
             {/* Content block 3 */}
             <Wysiwyg html={localFooterConfig.suLocalFootTr2Co?.processed} className="max-w-[250px]" />
             {/* Primary Links */}
@@ -61,7 +60,7 @@ const LocalFooter = async () => {
             )}
           </div>
 
-          <div className="list-unstyled sm:rs-pl-4 2xl:rs-pl-4 sm:border-r sm:border-fog-dark">
+          <div className="list-unstyled rs-pb-1 rs-pt-4 sm:rs-pl-4 2xl:rs-pl-4 sm:border-r sm:border-fog-dark">
             {/* Content block 2 */}
             <Wysiwyg html={localFooterConfig.suLocalFootSeCo?.processed} className="max-w-[250px]" />
             {/* Secondary links */}
@@ -83,12 +82,13 @@ const LocalFooter = async () => {
             )}
           </div>
 
-          <div className="list-unstyled order-4 sm:rs-pl-4 2xl:rs-pl-4 sm:border-r sm:border-fog-dark 2xl:border-0">
+          <div className="list-unstyled rs-pb-1 rs-pt-4 order-4 sm:rs-pl-4 2xl:rs-pl-4 sm:border-r sm:border-fog-dark 2xl:border-0">
             {/* Content block 4 */}
             <Wysiwyg html={localFooterConfig.suLocalFootTrCo?.processed} className="max-w-[250px]" />
           </div>
         </div>
       </div>
+
       {/* Social Links */}
       {localFooterConfig.suLocalFootSocial && (
         <ul className="list-unstyled rs-mb-0 mx-auto flex w-fit">
@@ -105,7 +105,7 @@ const LocalFooter = async () => {
           })}
         </ul>
       )}
-      <div className="text-center text-21 text-white lg:centered lg:text-left">
+      <div className="text-center text-white lg:centered lg:text-left [&_a]:text-21 [&_p]:text-21">
         © 2024 Stanford University Press. All rights reserved.
       </div>
     </div>
