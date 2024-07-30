@@ -40,7 +40,7 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
             prevArrow: <PrevArrow customClassName={clsx({"lg:mt-[150px]": isTopHero})} />,
             slidesToShow: 1,
           }}
-          className="left-1/2 w-screen -translate-x-1/2"
+          className="overflow-hidden"
         >
           {paragraph.supCarouselSlides.map(slide => (
             <div key={slide.id}>
@@ -63,6 +63,14 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
   const color = slideParagraph.supSlideColor
   const leftImage = slideParagraph.supSlideOrientation === "left_image"
   const SlideTag = slideTitle ? "article" : "div"
+
+  let imageAspect = "aspect-1"
+  const imageRatio = (image?.width && image?.height && image.width / image.height) || 0
+  if (imageRatio <= 0.5) imageAspect = "aspect-[1/2]"
+  if (imageRatio > 0.5 && imageRatio <= 0.75) imageAspect = "aspect-[2/3]"
+  if (imageRatio > 0.75 && imageRatio <= 1.25) imageAspect = "aspect-1"
+  if (imageRatio > 1.25 && imageRatio <= 1.75) imageAspect = "aspect-[3/2]"
+  if (imageRatio > 1.75) imageAspect = "aspect-2"
 
   return (
     <SlideTag
@@ -93,7 +101,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
           "bg-black-true": color === "steel",
           "bg-press-indigo": color === "indigo",
         })}
-      ></div>
+      />
 
       <div
         className={twMerge(
@@ -103,35 +111,39 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
           })
         )}
       >
-        <div
-          className={clsx("rs-px-8 lg:px-0", {
-            "max-w-[800px]": !leftImage,
-            "flex flex-col items-start": leftImage,
-          })}
-        >
-          <div className={clsx("flex flex-col", {"text-left": leftImage, "text-center": !leftImage})}>
-            {slideTitle && (
-              <H2
-                className={twMerge("type-4", clsx({"type-0": slideParagraph.supSlideTitleSize === "small"}))}
-                id={slideParagraph.id}
-              >
-                {slideTitle}
-              </H2>
-            )}
-
-            {subtitle && <div className="rs-mb-3 type-2">{subtitle}</div>}
-
-            <div className="order-first">
-              {!leftImage && image && (
-                <div className="rs-mb-3 relative mx-auto aspect-1 w-[200px] max-w-3xl">
-                  <Image className="object-contain" src={image.url} alt={image.alt || ""} fill sizes="200px" />
-                </div>
+        <div className="rs-px-8 w-full lg:px-0">
+          {(slideTitle || (!leftImage && image) || eyebrow || subtitle) && (
+            <div className={clsx("flex flex-col", {"text-left": leftImage, "text-center": !leftImage})}>
+              {slideTitle && (
+                <H2
+                  className={twMerge("type-4", clsx({"type-0": slideParagraph.supSlideTitleSize === "small"}))}
+                  id={slideParagraph.id}
+                >
+                  {slideTitle}
+                </H2>
               )}
 
-              {eyebrow && <div className="type-1 mb-5">{eyebrow}</div>}
-            </div>
-          </div>
+              {subtitle && <div className="rs-mb-3 type-2">{subtitle}</div>}
 
+              {((!leftImage && image) || eyebrow) && (
+                <div className="order-first">
+                  {!leftImage && image && (
+                    <div className={twMerge("rs-mb-3 relative mx-auto aspect-1 w-full", imageAspect)}>
+                      <Image
+                        className="object-contain"
+                        src={image.url}
+                        alt={image.alt || ""}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 1200px"
+                      />
+                    </div>
+                  )}
+
+                  {eyebrow && <div className="type-1 mb-5">{eyebrow}</div>}
+                </div>
+              )}
+            </div>
+          )}
           <Wysiwyg
             html={body}
             className={twMerge(
@@ -159,8 +171,14 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
           )}
         </div>
         {leftImage && image && (
-          <div className="relative order-first aspect-[11/16] h-full w-1/2 max-w-2xl shrink-0 flex-grow">
-            <Image className="object-contain" src={image.url} alt={image.alt || ""} fill sizes="500px" />
+          <div className="relative order-first aspect-[11/16] w-1/2 max-w-2xl shrink-0">
+            <Image
+              className="object-contain"
+              src={image.url}
+              alt={image.alt || ""}
+              fill
+              sizes="(max-width: 768px) 100vw, 500px"
+            />
           </div>
         )}
       </div>
