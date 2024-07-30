@@ -58,7 +58,7 @@ const Page = async ({params: {uuid}}: Props) => {
                   {prevImageIndex >= 0 && (
                     <li className="mr-auto">
                       <Link
-                        className="font-medium text-press-sand-light no-underline hocus:text-white hocus:underline"
+                        className="mt-5 font-medium text-press-sand-light no-underline hocus:text-white hocus:underline"
                         href={`/gallery/${paragraph.id}/${paragraph.suGalleryImages?.[prevImageIndex].id}`}
                         replace={true}
                         scroll={false}
@@ -70,7 +70,7 @@ const Page = async ({params: {uuid}}: Props) => {
                   {nextImageIndex >= 0 && (
                     <li className="ml-auto">
                       <Link
-                        className="font-medium text-press-sand-light no-underline hocus:text-white hocus:underline"
+                        className="mt-5 font-medium text-press-sand-light no-underline hocus:text-white hocus:underline"
                         href={`/gallery/${paragraph.id}/${paragraph.suGalleryImages?.[nextImageIndex].id}`}
                         replace={true}
                         scroll={false}
