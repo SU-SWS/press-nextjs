@@ -1,5 +1,5 @@
-import {HtmlHTMLAttributes} from "react"
-import {ParagraphSupCarousel, ParagraphSupCarouselSlide} from "@lib/gql/__generated__/drupal.d"
+import {JSX, HtmlHTMLAttributes} from "react"
+import {Maybe, ParagraphSupCarousel, ParagraphSupCarouselSlide} from "@lib/gql/__generated__/drupal.d"
 import Slideshow, {NextArrow, PrevArrow} from "@components/elements/slideshow"
 import {H2} from "@components/elements/headers"
 import Wysiwyg from "@components/elements/wysiwyg"
@@ -129,13 +129,18 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
                 <div className="order-first">
                   {!leftImage && image && (
                     <div className={twMerge("rs-mb-3 relative mx-auto aspect-1 w-full", imageAspect)}>
-                      <Image
-                        className="object-contain"
-                        src={image.url}
-                        alt={image.alt || ""}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 1200px"
-                      />
+                      <CarouselImageLink
+                        href={slideParagraph.supSlideButton?.url}
+                        title={slideParagraph.supSlideButton?.title}
+                      >
+                        <Image
+                          className="object-contain"
+                          src={image.url}
+                          alt={image.alt || ""}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 1200px"
+                        />
+                      </CarouselImageLink>
                     </div>
                   )}
 
@@ -172,11 +177,41 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
         </div>
         {leftImage && image && (
           <div className="relative order-first aspect-[11/16] h-auto w-full max-w-[21rem] shrink-0 md:w-1/2 md:max-w-2xl">
-            <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="500px" />
+            <CarouselImageLink href={slideParagraph.supSlideButton?.url} title={slideParagraph.supSlideButton?.title}>
+              <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="500px" />
+            </CarouselImageLink>
           </div>
         )}
       </div>
     </SlideTag>
   )
 }
+
+const CarouselImageLink = ({
+  href,
+  title,
+  children,
+}: {
+  href?: Maybe<string>
+  title?: Maybe<string>
+  children: JSX.Element
+}) => {
+  if (href) {
+    return (
+      <Link
+        prefetch={false}
+        href={href}
+        title={title || undefined}
+        aria-hidden
+        tabIndex={-1}
+        className="*:transition hover:*:scale-[1.02]"
+      >
+        {children}
+      </Link>
+    )
+  }
+
+  return <>{children}</>
+}
+
 export default SupCarouselParagraph
