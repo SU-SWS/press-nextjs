@@ -15,7 +15,7 @@ const LocalFooter = async () => {
 
   return (
     <div className="rs-py-6 local-footer bg-stone-dark">
-      <div className="centered">
+      <div className="rs-mb-6 centered">
         <div className="rs-mb-3">
           <FooterLockup />
         </div>
