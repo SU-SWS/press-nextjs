@@ -39,7 +39,7 @@ const Page = async ({searchParams}: {searchParams?: {[_key: string]: string}}) =
           Search
         </H1>
 
-        {appId && (
+        {appId && indexName && initialState && apiKey && (
           <AlgoliaSearchForm
             appId={appId}
             searchIndex={indexName}
