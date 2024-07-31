@@ -28,6 +28,9 @@ export const GET = async (request: NextRequest) => {
   const menu = await getMenu()
   if (!!getActiveTrail(menu, path).length) tagsInvalidated.push("menu:main")
 
+  // Invalidate the book path if the path is an excerpt page.
+  if (path.indexOf("/excerpt/") > 0) tagsInvalidated.push(`excerpts:${path.substring(0, path.indexOf("/excerpt"))}`)
+
   tagsInvalidated.map(tag => revalidateTag(tag))
   return NextResponse.json({revalidated: true, tags: tagsInvalidated})
 }

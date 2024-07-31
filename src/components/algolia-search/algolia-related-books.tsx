@@ -10,8 +10,8 @@ import {getAlgoliaCredential} from "@lib/gql/gql-queries"
 
 const getRelatedContent = nextCache(
   async (objectID: string): Promise<BookHit[]> => {
-    const [appID, indexName, apiKey] = await getAlgoliaCredential()
-    if (!appID || !indexName || !apiKey) return []
+    const [appID, indexName, apiKey, useRelatedContent] = await getAlgoliaCredential()
+    if (!appID || !indexName || !apiKey || !useRelatedContent) return []
 
     const options: RequestInit = {
       method: "POST",
@@ -54,7 +54,7 @@ const getRelatedContent = nextCache(
 )
 
 const AlgoliaRelatedBooks = async ({objectId}: {objectId: NodeSupBook["id"]}) => {
-  const recommendations = process.env.ALGOLIA_RECOMMENDATIONS === "true" ? await getRelatedContent(objectId) : []
+  const recommendations = await getRelatedContent(objectId)
   if (recommendations.length === 0) return
 
   return (

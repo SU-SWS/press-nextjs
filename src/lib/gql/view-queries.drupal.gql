@@ -119,7 +119,11 @@ query supBooksAwardWinners($contextualFilters: SupBooksAwardWinnersContextualFil
 query supBookAncillary($contextualFilters: SupBookAncillaryContextualFilterInput) {
     supBookAncillary(contextualFilter: $contextualFilters) {
         results {
-            ...FragmentNodeInterface
+           ... on NodeInterface {
+                id
+                path
+                title
+            }
         }
     }
 }

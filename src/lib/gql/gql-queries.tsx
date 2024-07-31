@@ -153,20 +153,40 @@ export const getAllNodes = nextCache(
   {revalidate: 60 * 60 * 7}
 )
 
-export const getBookAncillaryContents = async (uuid: string): Promise<NodeSupBookAncillary[]> => {
-  const ancillaryPages = await graphqlClient({next: {tags: [uuid, "ancillary-pages"]}}).supBookAncillary({
-    contextualFilters: {uuid},
-  })
-  return (ancillaryPages.supBookAncillary?.results as NodeSupBookAncillary[]) || []
+/**
+ * Get a list of ancillary excerpt pages for the give book node.
+ *
+ * @param uuid
+ *   Parent book node UUID.
+ * @param bookPath
+ *   Path of book node for cache invalidation.
+ */
+export const getBookAncillaryContents = async (uuid: string, bookPath: string): Promise<NodeSupBookAncillary[]> => {
+  const getData = nextCache(
+    async () => {
+      const ancillaryPages = await graphqlClient({cache: "no-cache"}).supBookAncillary({
+        contextualFilters: {uuid},
+      })
+      return (ancillaryPages.supBookAncillary?.results as NodeSupBookAncillary[]) || []
+    },
+    ["ancillary-pages", uuid],
+    {tags: [`excerpts:${bookPath}`, "ancillary-pages"]}
+  )
+  return getData()
 }
 
 /**
  * If environment variables are available, return those. If not, fetch from the config page.
  */
 export const getAlgoliaCredential = nextCache(
-  async () => {
+  async (): Promise<[string, string, string, boolean] | []> => {
     if (process.env.ALGOLIA_ID && process.env.ALGOLIA_INDEX && process.env.ALGOLIA_KEY) {
-      return [process.env.ALGOLIA_ID, process.env.ALGOLIA_INDEX, process.env.ALGOLIA_KEY]
+      return [
+        process.env.ALGOLIA_ID,
+        process.env.ALGOLIA_INDEX,
+        process.env.ALGOLIA_KEY,
+        process.env.ALGOLIA_RECOMMENDATIONS === "true",
+      ]
     }
     const appId = await getConfigPageField<StanfordBasicSiteSetting, StanfordBasicSiteSetting["suSiteAlgoliaId"]>(
       "StanfordBasicSiteSetting",
@@ -180,7 +200,9 @@ export const getAlgoliaCredential = nextCache(
       "StanfordBasicSiteSetting",
       "suSiteAlgoliaSearch"
     )
-    return appId && indexName && apiKey ? [appId, indexName, apiKey] : []
+    return appId && indexName && apiKey
+      ? [appId, indexName, apiKey, process.env.ALGOLIA_RECOMMENDATIONS === "true"]
+      : []
   },
   ["algolia"],
   {tags: ["algolia"]}

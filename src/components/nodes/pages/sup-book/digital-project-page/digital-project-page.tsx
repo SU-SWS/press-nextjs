@@ -16,7 +16,7 @@ type Props = HTMLAttributes<HTMLElement> & {
 }
 const DigitalProjectPage = async ({node, ...props}: Props) => {
   const hasExcerptAndMore =
-    node.supBookExcerpts || node.supBookTableOfContents || !!(await getBookAncillaryContents(node.id)).length
+    node.supBookExcerpts || node.supBookTableOfContents || !!(await getBookAncillaryContents(node.id, node.path)).length
 
   const lowestPrice = Math.min(
     node.supBookClothSalePrice || 9999,

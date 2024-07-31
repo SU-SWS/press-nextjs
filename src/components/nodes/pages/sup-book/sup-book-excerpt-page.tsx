@@ -14,7 +14,7 @@ type Props = HTMLAttributes<HTMLElement> & {
 }
 
 const SupBookExcerptPage = async ({node, ...props}: Props) => {
-  const ancillaryPages = await getBookAncillaryContents(node.id)
+  const ancillaryPages = await getBookAncillaryContents(node.id, node.path)
   const hasExcerptAndMore = node.supBookExcerpts || node.supBookTableOfContents || !!ancillaryPages.length
   if (!hasExcerptAndMore) notFound()
 
