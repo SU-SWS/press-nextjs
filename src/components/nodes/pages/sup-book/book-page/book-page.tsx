@@ -3,7 +3,6 @@ import {H1, H2} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
 import Wysiwyg from "@components/elements/wysiwyg"
-import {formatCurrency} from "@lib/utils/format-currency"
 import {ArrowLongLeftIcon, BookmarkIcon, ClipboardIcon, DocumentDuplicateIcon} from "@heroicons/react/24/outline"
 import Link from "@components/elements/link"
 import BookAwards from "@components/nodes/pages/sup-book/book-awards"
@@ -16,15 +15,7 @@ type Props = HTMLAttributes<HTMLElement> & {
 }
 const BookPage = async ({node, ...props}: Props) => {
   const hasExcerptAndMore =
-    node.supBookExcerpts || node.supBookTableOfContents || !!(await getBookAncillaryContents(node.id)).length
-
-  const lowestPrice = Math.min(
-    node.supBookClothSalePrice || 9999,
-    node.supBookPaperSalePrice || 9999,
-    node.supBookPriceCloth || 9999,
-    node.supBookPriceDigital || 9999,
-    node.supBookPricePaper || 9999
-  )
+    node.supBookExcerpts || node.supBookTableOfContents || !!(await getBookAncillaryContents(node.id, node.path)).length
   const awards = node.supBookAwards?.sort((a, b) => (a.supRank && b.supRank && a.supRank < b.supRank ? -1 : 1))
 
   function createLinkParams(subject: TermSupBookSubject) {
@@ -139,10 +130,6 @@ const BookPage = async ({node, ...props}: Props) => {
                 )}
 
                 {!!node.supBookPages && <div className="text-18 text-press-sand-dark">{node.supBookPages} Pages</div>}
-
-                {lowestPrice && lowestPrice < 999 && (
-                  <div className="text-18 text-press-sand-dark">From {formatCurrency(lowestPrice)}</div>
-                )}
 
                 {node.supBookSeries?.name && (
                   <div>

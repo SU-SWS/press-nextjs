@@ -11,6 +11,8 @@ import SupBookDeskExaminationPage from "@components/nodes/pages/sup-book/sup-boo
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
 export const revalidate = false
 export const dynamic = "force-static"
+// https://vercel.com/docs/functions/runtimes#max-duration
+export const maxDuration = 60
 
 const Page = async ({params}: PageProps) => {
   const {path, page} = getBookPageRequested(getPathFromContext({params}))

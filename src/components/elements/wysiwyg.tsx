@@ -10,6 +10,7 @@ import Script from "next/script"
 import Button from "@components/elements/button"
 import ActionLink from "@components/elements/action-link"
 import clsx from "clsx"
+import Link from "@components/elements/link"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -54,7 +55,7 @@ const options: HTMLReactParserOptions = {
 
           if (nodeProps.className?.indexOf("link--action") >= 0) {
             return (
-              <ActionLink {...nodeProps} href={nodeProps.href as string}>
+              <ActionLink {...nodeProps} href={nodeProps.href as string} prefetch={false}>
                 {domToReact(children, options)}
               </ActionLink>
             )
@@ -64,6 +65,7 @@ const options: HTMLReactParserOptions = {
             return (
               <Button
                 {...nodeProps}
+                prefetch={false}
                 big={nodeProps.className.indexOf("button--big") >= 0}
                 secondary={nodeProps.className.indexOf("button--secondary") >= 0}
               >
@@ -73,7 +75,11 @@ const options: HTMLReactParserOptions = {
           }
 
           nodeProps.className = twMerge(nodeProps.className, "text-digital-red hocus:text-archway-dark")
-          return <a {...nodeProps}>{domToReact(children, options)}</a>
+          return (
+            <Link href={nodeProps.href as string} prefetch={false} {...nodeProps}>
+              {domToReact(children, options)}
+            </Link>
+          )
 
         case "div":
         case "article":

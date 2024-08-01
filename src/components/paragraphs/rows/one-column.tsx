@@ -8,7 +8,7 @@ const OneColumn = ({items}: {items: ParagraphUnion[]}) => {
     draftProps["data-columns"] = "1"
   }
   return (
-    <div className="space-y-16 @container" {...draftProps}>
+    <div className="space-y-16" {...draftProps}>
       {items.map(item => (
         <Paragraph paragraph={item} key={item.id} />
       ))}

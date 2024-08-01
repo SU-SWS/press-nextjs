@@ -1788,11 +1788,15 @@ export const SupBookAncillaryDocument = gql`
     query supBookAncillary($contextualFilters: SupBookAncillaryContextualFilterInput) {
   supBookAncillary(contextualFilter: $contextualFilters) {
     results {
-      ...FragmentNodeInterface
+      ... on NodeInterface {
+        id
+        path
+        title
+      }
     }
   }
 }
-    ${FragmentNodeInterfaceFragmentDoc}`;
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 

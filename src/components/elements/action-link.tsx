@@ -1,16 +1,8 @@
-import Link from "@components/elements/link"
+import Link, {LinkProps} from "@components/elements/link"
 import {ArrowLongRightIcon} from "@heroicons/react/20/solid"
-import {HtmlHTMLAttributes} from "react"
 import {twMerge} from "tailwind-merge"
 
-type Props = HtmlHTMLAttributes<HTMLAnchorElement> & {
-  /**
-   * Link url.
-   */
-  href: string
-}
-
-const ActionLink = ({children, className, ...props}: Props) => {
+const ActionLink = ({children, className, ...props}: LinkProps) => {
   return (
     <Link
       {...props}

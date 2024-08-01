@@ -3,24 +3,26 @@ import Link from "next/link"
 import {EnvelopeIcon} from "@heroicons/react/24/outline"
 import ActionLink from "@components/elements/action-link"
 import Button from "@components/elements/button"
-import {LinkProps} from "next/dist/client/link"
+import {LinkProps as NextLinkProps} from "next/dist/client/link"
 import clsx from "clsx"
 
-type Props = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement> &
-  LinkProps & {
+export type LinkProps = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement> &
+  NextLinkProps & {
     /**
      * Link URL.
      */
     href: string
   }
 
-const DrupalLink = ({href, children, ...props}: Props) => {
+const DrupalLink = ({href, children, ...props}: LinkProps) => {
   // Make sure all links have a href.
   href = href || "#"
   const drupalBase: string = (process.env.NEXT_PUBLIC_DRUPAL_BASE_URL || "").replace(/\/$/, "")
 
-  if (!href.indexOf("/files/")) {
+  if (href.indexOf("/files/") === -1) {
     href = href.replace(drupalBase, "").replace("<front>", "/")
+  } else if (!href.startsWith(drupalBase)) {
+    href = `${drupalBase}${href}`
   }
 
   if (props.className?.includes("link--action")) {
