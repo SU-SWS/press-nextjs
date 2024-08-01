@@ -178,7 +178,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
         {leftImage && image && (
           <div className="relative order-first aspect-[11/16] h-auto w-full max-w-[21rem] shrink-0 md:w-1/2 md:max-w-2xl">
             <CarouselImageLink href={slideParagraph.supSlideButton?.url} title={slideParagraph.supSlideButton?.title}>
-              <Image className="object-cover" src={image.url} alt={image.alt || ""} fill sizes="500px" />
+              <Image className="object-contain" src={image.url} alt={image.alt || ""} fill sizes="500px" />
             </CarouselImageLink>
           </div>
         )}
