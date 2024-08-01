@@ -168,10 +168,8 @@ const BookPage = async ({node, ...props}: Props) => {
                   usPaperPrice={node.supBookPricePaper}
                   usPaperSalePrice={node.supBookPaperSalePrice}
                   usPaperSaleDiscount={node.supBookPaperSalePercent}
-                  usDigitalPrice={node.supBookPriceDigital}
                   clothIsbn={node.supBookIsbn13Cloth}
                   paperIsbn={node.supBookIsbn13Paper}
-                  digitalIsbn={node.supBookIsbn13Digital}
                 />
               </div>
 

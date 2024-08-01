@@ -17,10 +17,8 @@ type Props = {
   usPaperPrice?: Maybe<number>
   usPaperSalePrice?: Maybe<number>
   usPaperSaleDiscount?: Maybe<number>
-  usDigitalPrice?: Maybe<number>
   clothIsbn?: Maybe<string>
   paperIsbn?: Maybe<string>
-  digitalIsbn?: Maybe<string>
   hasIntlCart?: boolean
 }
 
@@ -34,11 +32,10 @@ const BookPreCart = ({
   usPaperSaleDiscount,
   clothIsbn,
   paperIsbn,
-  digitalIsbn,
   hasIntlCart = true,
 }: Props) => {
   const router = useRouter()
-  const defaultChoice = usClothPrice ? "cloth" : usPaperPrice ? "paper" : "digital"
+  const defaultChoice = usClothPrice ? "cloth" : "paper"
   const [formatChoice, setFormatChoice] = useState(defaultChoice)
 
   const [isIntl, setIntl] = useIsInternational()
@@ -54,10 +51,6 @@ const BookPreCart = ({
 
       case "paper":
         isbn = paperIsbn
-        break
-
-      case "digital":
-        isbn = digitalIsbn
         break
     }
 
@@ -75,8 +68,8 @@ const BookPreCart = ({
         <legend className="sr-only">Format</legend>
         {!isIntl && (
           <UsFormatChoices
-            clothPrice={usClothSalePrice || usClothPrice}
-            paperPrice={usPaperSalePrice || usPaperPrice}
+            clothPrice={clothIsbn ? usClothSalePrice || usClothPrice : undefined}
+            paperPrice={paperIsbn ? usPaperSalePrice || usPaperPrice : undefined}
             onChange={setFormatChoice}
           />
         )}
@@ -170,7 +163,7 @@ const UsFormatChoices = ({
   paperPrice?: Maybe<number>
   onChange: (_format: string) => void
 }) => {
-  const defaultChoice = clothPrice ? "cloth" : paperPrice ? "paper" : "digital"
+  const defaultChoice = clothPrice ? "cloth" : "paper"
   return (
     <>
       {clothPrice && (
