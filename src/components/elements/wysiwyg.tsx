@@ -9,6 +9,7 @@ import Mathjax from "@components/tools/mathjax"
 import Script from "next/script"
 import Button from "@components/elements/button"
 import ActionLink from "@components/elements/action-link"
+import clsx from "clsx"
 import Link from "@components/elements/link"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -73,6 +74,7 @@ const options: HTMLReactParserOptions = {
             )
           }
 
+          nodeProps.className = twMerge(nodeProps.className, "text-digital-red hocus:text-archway-dark")
           return (
             <Link href={nodeProps.href as string} prefetch={false} {...nodeProps}>
               {domToReact(children, options)}
@@ -100,7 +102,11 @@ const options: HTMLReactParserOptions = {
           return cleanMediaMarkup(domNode)
 
         case "p":
-          nodeProps.className = twMerge(nodeProps.className, "max-w-[100ch] leading-[1.7] type-1")
+          nodeProps.className = twMerge(
+            nodeProps.className,
+            "max-w-[100ch]",
+            clsx({"type-0": !nodeProps.className.includes("type-")})
+          )
           return <NodeName {...nodeProps}>{domToReact(children, options)}</NodeName>
 
         case "script":
@@ -116,6 +122,10 @@ const options: HTMLReactParserOptions = {
           return <H5 {...nodeProps}>{domToReact(children, options)}</H5>
         case "h6":
           return <H6 {...nodeProps}>{domToReact(children, options)}</H6>
+
+        case "hr":
+          nodeProps.className = twMerge(nodeProps.className, "border-t border-press-sand-light")
+          return <hr {...nodeProps} />
 
         default:
           return null
@@ -144,7 +154,7 @@ const fixClasses = (classes?: string | boolean): string => {
       " drop-cap ",
       " type-2 first-letter:font-bold first-letter:type-6 first-letter:float-left first-letter:my-2 first-letter:mr-4 "
     )
-    .replaceAll(" intro-text ", " type-3 ")
+    .replaceAll(" intro-text ", " type-1 ")
     .replace(/ tablesaw.*? /g, " ")
     .replace(/ +/g, " ")
     .trim()
