@@ -36,13 +36,10 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
   useEffect(() => {
     // Use search params to retain any other parameters.
     const params = new URLSearchParams(searchParams.toString())
+    params.delete("author")
+    alphaChosen !== "" && params.set("author", alphaChosen)
 
-    if (alphaChosen !== "") {
-      params.set("author", alphaChosen)
-    } else {
-      params.delete("author")
-    }
-    router.replace(`?${params.toString()}`, {scroll: false})
+    router.replace(`?${params.toString()}${window.location.hash || ""}`, {scroll: false})
   }, [router, searchParams, alphaChosen])
 
   const loadPage = useCallback(

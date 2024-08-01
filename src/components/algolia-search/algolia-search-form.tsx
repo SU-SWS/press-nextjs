@@ -111,9 +111,9 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     const chosenSubjects = currentRefinements
       .find(refinement => refinement.attribute === "book_subject")
       ?.refinements.map(item => item.value)
-    if (chosenSubjects) params.set("subjects", chosenSubjects.join(","))
+    chosenSubjects && params.set("subjects", chosenSubjects.join(","))
 
-    router.replace(`?${params.toString()}`, {scroll: false})
+    router.replace(`?${params.toString()}${window.location.hash || ""}`, {scroll: false})
   }, [router, searchParams, currentRefinements, query, pubYearRange])
 
   return (
