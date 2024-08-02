@@ -11,7 +11,7 @@ export const NextArrow = ({
   className: slickClassNames,
   onClick,
 }: CustomArrowProps & {customClassName?: string}) => {
-  const slickDisabled = !!(slickClassNames && slickClassNames?.indexOf("slick-disabled") > 0)
+  const slickDisabled = slickClassNames?.includes("slick-disabled")
   return (
     <button
       className={twMerge("absolute right-5 top-1/2 z-50 h-16 w-16 sm:h-20 sm:w-20 lg:right-20", customClassName)}
@@ -29,7 +29,7 @@ export const PrevArrow = ({
   className: slickClassNames,
   onClick,
 }: CustomArrowProps & {customClassName?: string}) => {
-  const slickDisabled = !!(slickClassNames && slickClassNames?.indexOf("slick-disabled") > 0)
+  const slickDisabled = slickClassNames?.includes("slick-disabled")
   return (
     <button
       className={twMerge("absolute left-5 top-1/2 z-50 h-16 w-16 sm:h-20 sm:w-20 lg:left-20", customClassName)}

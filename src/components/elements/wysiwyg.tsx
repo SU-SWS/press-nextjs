@@ -53,7 +53,7 @@ const options: HTMLReactParserOptions = {
           delete nodeProps["data-entity-type"]
           delete nodeProps["data-entity-uuid"]
 
-          if (nodeProps.className?.indexOf("link--action") >= 0) {
+          if (nodeProps.className?.includes("link--action")) {
             return (
               <ActionLink {...nodeProps} href={nodeProps.href as string} prefetch={false}>
                 {domToReact(children, options)}
@@ -61,13 +61,13 @@ const options: HTMLReactParserOptions = {
             )
           }
 
-          if (nodeProps.className?.indexOf("button") >= 0) {
+          if (nodeProps.className?.includes("button")) {
             return (
               <Button
                 {...nodeProps}
                 prefetch={false}
-                big={nodeProps.className.indexOf("button--big") >= 0}
-                secondary={nodeProps.className.indexOf("button--secondary") >= 0}
+                big={nodeProps.className.includes("button--big")}
+                secondary={nodeProps.className.includes("button--secondary")}
               >
                 {domToReact(children, options)}
               </Button>
@@ -85,14 +85,14 @@ const options: HTMLReactParserOptions = {
         case "article":
           delete nodeProps.role
           if (nodeProps.className) {
-            if (nodeProps.className.indexOf("media-entity-wrapper") >= 0) {
+            if (nodeProps.className.includes("media-entity-wrapper")) {
               return cleanMediaMarkup(domNode)
             }
-            if (nodeProps.className.indexOf("trigger") >= 0) {
+            if (nodeProps.className.includes("trigger")) {
               return <></>
             }
 
-            if (nodeProps.className.indexOf("chapnumandtitle") >= 0) {
+            if (nodeProps.className.includes("chapnumandtitle")) {
               nodeProps.className += " font-semibold type-3"
             }
           }
@@ -235,7 +235,7 @@ const cleanMediaMarkup = (node: Element) => {
 
     if (figCaption) {
       nodeProps.className = twMerge("table", nodeProps.className)
-      if (nodeProps.className?.indexOf("mx-auto") >= 0) nodeProps.className += " w-full"
+      if (nodeProps.className?.includes("mx-auto")) nodeProps.className += " w-full"
       delete nodeProps.role
       return (
         <figure {...nodeProps}>
