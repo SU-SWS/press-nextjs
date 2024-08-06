@@ -204,7 +204,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
     <li
       ref={menuItemRef}
       className={clsx(
-        "relative m-0 border-b border-cool-grey py-2 lg:rs-ml-2 2xl:rs-ml-3 first:border-t last:border-0 lg:relative lg:border-black-20 lg:py-0 first:lg:ml-0",
+        "relative m-0 border-b border-cool-grey py-2 text-09em lg:rs-ml-2 2xl:rs-ml-3 first:border-t last:border-0 lg:relative lg:border-black-20 lg:py-0 first:lg:ml-0",
         {"first:border-t-0 lg:border-b-0": level === 0}
       )}
     >

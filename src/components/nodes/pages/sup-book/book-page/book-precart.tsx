@@ -79,7 +79,7 @@ const BookPreCart = ({
 
       {hasIntlCart && (
         <fieldset>
-          <legend className="mb-3 font-semibold">Region</legend>
+          <legend className="mb-3 text-18 font-semibold">Region</legend>
           <div className="rs-mb-1 flex flex-wrap border-2 border-black-40 p-1">
             <label className="block min-w-fit flex-1 cursor-pointer">
               <input
