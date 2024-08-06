@@ -40,7 +40,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
           <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-col justify-center bg-fog-light px-20 md:hidden">
             <div className="flex flex-row gap-24">
               <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
-                <H1 className="type-3 mb-0">{node.title}</H1>
+                <H1 className="type-2 mb-0">{node.title}</H1>
 
                 {node.supBookSubjects && (
                   <a
@@ -64,7 +64,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
             <div className="order-first py-8 sm:pb-28 sm:pt-16">
               <Link
                 href="/books"
-                className="group flex w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6"
+                className="group flex w-fit items-center gap-5 text-18 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6"
               >
                 <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
                 <span>Back to Books</span>
@@ -75,7 +75,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
             <div className="lg:w-5/8">
               <div className="rs-mb-0 rs-pb-3 flex flex-col border-b-2 border-fog">
                 <div className="mt-7 flex flex-col sm:mt-0 sm:hidden md:flex">
-                  <H1 className="type-3 mb-0">{node.title}</H1>
+                  <H1 className="type-2 mb-0">{node.title}</H1>
 
                   {node.supBookSubjects && (
                     <a
@@ -89,7 +89,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                   {node.supBookSubtitle && <div className="type-0 mt-5 font-medium">{node.supBookSubtitle}</div>}
 
                   {node.supBookAuthorsFull && (
-                    <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
+                    <div className="type-0 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
                   )}
                 </div>
 
