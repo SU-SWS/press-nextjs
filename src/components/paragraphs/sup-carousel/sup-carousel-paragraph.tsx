@@ -64,14 +64,6 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
   const leftImage = slideParagraph.supSlideOrientation === "left_image"
   const SlideTag = slideTitle ? "article" : "div"
 
-  let imageAspect = "aspect-1"
-  const imageRatio = (image?.width && image?.height && image.width / image.height) || 0
-  if (imageRatio <= 0.5) imageAspect = "aspect-[1/2]"
-  if (imageRatio > 0.5 && imageRatio <= 0.75) imageAspect = "aspect-[2/3]"
-  if (imageRatio > 0.75 && imageRatio <= 1.25) imageAspect = "aspect-1"
-  if (imageRatio > 1.25 && imageRatio <= 1.75) imageAspect = "aspect-[3/2]"
-  if (imageRatio > 1.75) imageAspect = "aspect-2"
-
   return (
     <SlideTag
       aria-labelledby={slideTitle ? slideParagraph.id : undefined}
@@ -128,7 +120,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
               {((!leftImage && image) || eyebrow) && (
                 <div className="order-first">
                   {!leftImage && image && (
-                    <div className={twMerge("rs-mb-3 relative mx-auto aspect-1 w-full", imageAspect)}>
+                    <div className="rs-mb-3 relative mx-auto w-full">
                       <CarouselImageLink
                         href={slideParagraph.supSlideButton?.url}
                         title={slideParagraph.supSlideButton?.title}
@@ -137,8 +129,9 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
                           className="object-contain"
                           src={image.url}
                           alt={image.alt || ""}
-                          fill
                           sizes="(max-width: 768px) 100vw, 1200px"
+                          height={image.height}
+                          width={image.width}
                         />
                       </CarouselImageLink>
                     </div>
