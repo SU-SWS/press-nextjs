@@ -2,8 +2,6 @@
 import {useCallback, useState, JSX, HTMLAttributes} from "react"
 import {useCounter} from "usehooks-ts"
 import useServerAction from "@lib/hooks/useServerAction"
-import {SelectOptionDefinition} from "@mui/base/useSelect"
-import SelectList from "@components/elements/select-list"
 import PagedList from "@components/elements/paged-list"
 import {twMerge} from "tailwind-merge"
 import {clsx} from "clsx"
