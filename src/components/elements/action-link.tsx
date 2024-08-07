@@ -1,13 +1,19 @@
 import Link, {LinkProps} from "@components/elements/link"
 import {ArrowLongRightIcon} from "@heroicons/react/20/solid"
+import clsx from "clsx"
 import {twMerge} from "tailwind-merge"
 
 const ActionLink = ({children, className, ...props}: LinkProps) => {
+  console.log("CLASSNAMES:", className)
   return (
     <Link
       {...props}
       className={twMerge(
-        "relative text-digital-red *:text-digital-red hocus:text-archway-dark *:hocus:text-archway-dark",
+        "relative",
+        clsx({
+          "text-digital-red *:text-digital-red hocus:text-archway-dark *:hocus:text-archway-dark":
+            !className?.includes("button"),
+        }),
         className?.replace("link--action", "")
       )}
     >

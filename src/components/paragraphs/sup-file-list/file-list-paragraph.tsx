@@ -4,6 +4,7 @@ import FileListSelection from "@components/paragraphs/sup-file-list/file-list-se
 import {H2} from "@components/elements/headers"
 import {DocumentTextIcon} from "@heroicons/react/24/outline"
 import {LockClosedIcon} from "@heroicons/react/24/solid"
+import {twMerge} from "tailwind-merge"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphSupFileList
@@ -28,17 +29,17 @@ const FileListParagraph = ({paragraph, ...props}: Props) => {
   }
 
   return (
-    <div {...props}>
+    <div className={twMerge("centered max-w-800", props.className)} {...props}>
       {paragraph.supFileListLabel && <H2>{paragraph.supFileListLabel}</H2>}
       <ul className="list-unstyled">
         {fileOptions.map(media => (
           <li key={media.value} className="rs-mb-2">
-            <a href={media.url} className="group type-1 flex w-fit items-center gap-7 font-normal text-stone-dark">
+            <a href={media.url} className="group type-0 flex w-fit items-center gap-7 font-normal text-stone-dark">
               <span className="relative block">
-                <DocumentTextIcon width={50} className="text-press-sand-light group-hocus:text-archway-dark" />
+                <DocumentTextIcon width={44} className="text-press-sand-light group-hocus:text-archway-dark" />
 
                 {media.url.startsWith("/system/") && (
-                  <LockClosedIcon width={30} className="absolute bottom-0 right-0" />
+                  <LockClosedIcon width={26} className="absolute bottom-0 right-0" />
                 )}
               </span>
               {media.label}
