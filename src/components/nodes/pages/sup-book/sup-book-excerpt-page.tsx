@@ -55,7 +55,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
 
       <Link
         href={node.path}
-        className="group rs-pt-1 hidden w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:flex md:gap-6"
+        className="group rs-pt-1 flex w-fit items-center gap-5 gap-6 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline"
       >
         <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
         <span>Back to {node.title}</span>

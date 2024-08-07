@@ -3,7 +3,7 @@ import {H1, H2, H3} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import Link from "@components/elements/link"
 import Image from "next/image"
-import {ArrowLeftIcon} from "@heroicons/react/16/solid"
+import {ArrowLongLeftIcon} from "@heroicons/react/16/solid"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -196,8 +196,11 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
         </div>
       </article>
 
-      <Link href={node.path} className="flex w-fit items-center gap-5 pt-20">
-        <ArrowLeftIcon width={20} className="text-fog-dark" />
+      <Link
+        href={node.path}
+        className="group rs-pt-1 flex w-fit items-center gap-5 gap-6 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline"
+      >
+        <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
         <span>Back to {node.title}</span>
       </Link>
     </div>
