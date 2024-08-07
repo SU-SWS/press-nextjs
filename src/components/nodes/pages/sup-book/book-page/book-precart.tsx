@@ -124,7 +124,8 @@ const BookPreCart = ({
           type="submit"
           className="flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]"
         >
-          Add to cart
+          {!isIntl && "Add to cart"}
+          {isIntl && "Purcase from CAP"}
           <ArrowRightIcon width={24} />
         </Button>
       </div>

@@ -1767,9 +1767,10 @@ export const SupBooksDocument = gql`
     ${FragmentNodeSupBookTeaserFragmentDoc}
 ${FragmentViewPageInfoFragmentDoc}`;
 export const SupBooksAwardWinnersDocument = gql`
-    query supBooksAwardWinners($contextualFilters: SupBooksAwardWinnersContextualFilterInput, $pageSize: Int = 3, $page: Int, $offset: Int) {
+    query supBooksAwardWinners($contextualFilters: SupBooksAwardWinnersContextualFilterInput, $filters: SupBooksAwardWinnersFilterInput, $pageSize: Int = 3, $page: Int, $offset: Int) {
   supBooksAwardWinners(
     contextualFilter: $contextualFilters
+    filter: $filters
     pageSize: $pageSize
     page: $page
     offset: $offset

@@ -22,6 +22,7 @@ import {
   NodeUnion,
 } from "@lib/gql/__generated__/drupal.d"
 import BookListView from "@components/views/sup-books/book-list-view"
+import AwardListView from "@components/views/sup-books/award-list-view/award-list-view"
 
 interface Props {
   /**
@@ -99,9 +100,17 @@ const View = async ({viewId, displayId, items, totalItems, loadPage, headingLeve
       return <PublicationsChicagoView items={items as NodeStanfordPublication[]} headingLevel={headingLevel} />
 
     case "sup_books--book_list":
-    case "sup_books--award_winners":
       return (
         <BookListView
+          items={items as NodeSupBook[]}
+          headingLevel={headingLevel}
+          loadPage={loadPage}
+          totalItems={totalItems}
+        />
+      )
+    case "sup_books--award_winners":
+      return (
+        <AwardListView
           items={items as NodeSupBook[]}
           headingLevel={headingLevel}
           loadPage={loadPage}

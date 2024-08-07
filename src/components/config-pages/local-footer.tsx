@@ -89,24 +89,27 @@ const LocalFooter = async () => {
         </div>
       </div>
 
-      {/* Social Links */}
-      {localFooterConfig.suLocalFootSocial && (
-        <ul className="list-unstyled rs-mb-0 mx-auto flex w-fit">
-          {localFooterConfig.suLocalFootSocial.map((link, index) => {
-            if (!link.url) return
-            return (
-              <li key={`footer-action-link-${index}`} className="rs-mr-0">
-                <Link href={link.url} className="text-white hocus:text-bay-light">
-                  <SocialIcon url={link.url} />
-                  <span className="sr-only">{link.title}</span>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-      )}
-      <div className="text-center text-white lg:centered lg:text-left [&_a]:text-21 [&_p]:text-21">
-        © 2024 Stanford University Press. All rights reserved.
+      <div className="gutters flex flex-col items-center text-center text-white lg:centered lg:flex-row lg:text-left [&_a]:text-21 [&_p]:text-21">
+        <p className="lg:w-1/4">© 2024 Stanford University Press. All rights reserved.</p>
+
+        <div className="lg:w-1/2">
+          {/* Social Links */}
+          {localFooterConfig.suLocalFootSocial && (
+            <ul className="list-unstyled rs-mb-0 mx-auto flex w-fit">
+              {localFooterConfig.suLocalFootSocial.map((link, index) => {
+                if (!link.url) return
+                return (
+                  <li key={`footer-action-link-${index}`} className="rs-mr-0">
+                    <Link href={link.url} className="text-white hocus:text-bay-light">
+                      <SocialIcon url={link.url} />
+                      <span className="sr-only">{link.title}</span>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   )

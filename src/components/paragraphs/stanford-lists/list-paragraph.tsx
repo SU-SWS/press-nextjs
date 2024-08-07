@@ -3,6 +3,7 @@ import View from "@components/views/view"
 import {H2} from "@components/elements/headers"
 import {cache, ElementType, HtmlHTMLAttributes, JSX} from "react"
 import {
+  InputMaybe,
   Maybe,
   NodeStanfordCourse,
   NodeStanfordEvent,
@@ -13,6 +14,7 @@ import {
   NodeSupBook,
   NodeUnion,
   ParagraphStanfordList,
+  SupBooksAwardWinnersFilterInput,
 } from "@lib/gql/__generated__/drupal.d"
 import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behaviors"
 import {graphqlClient} from "@lib/gql/gql-client"
@@ -31,11 +33,12 @@ const loadPage = async (
   displayId: string,
   contextualFilter: string[],
   hasHeadline: boolean,
-  page: number
+  page: number,
+  filters?: InputMaybe<SupBooksAwardWinnersFilterInput>
 ): Promise<JSX.Element> => {
   "use server"
 
-  const {items, totalItems} = await getViewItems(viewId, displayId, contextualFilter, page)
+  const {items, totalItems} = await getViewItems(viewId, displayId, contextualFilter, filters, page)
   return (
     <View
       viewId={viewId}
@@ -53,7 +56,14 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
   const displayId = paragraph.suListView?.display
   const {items: viewItems, totalItems} =
     viewId && displayId
-      ? await getViewItems(viewId, displayId, paragraph.suListView?.contextualFilter, 0, paragraph.suListView?.pageSize)
+      ? await getViewItems(
+          viewId,
+          displayId,
+          paragraph.suListView?.contextualFilter,
+          undefined,
+          0,
+          paragraph.suListView?.pageSize
+        )
       : {items: [], totalItems: 0}
   const addLoadMore = (paragraph.suListView?.pageSize || 3) > 99
 
@@ -138,10 +148,11 @@ const getViewItems = cache(
     viewId: string,
     displayId: string,
     contextualFilter?: Maybe<string[]>,
+    filters?: InputMaybe<SupBooksAwardWinnersFilterInput>,
     page: Maybe<number> = 0,
     limit?: Maybe<number>
   ): Promise<{items: NodeUnion[]; totalItems: number}> => {
-    const {items, totalItems} = await getViewPagedItems(viewId, displayId, contextualFilter, 30, page)
+    const {items, totalItems} = await getViewPagedItems(viewId, displayId, contextualFilter, 30, page, 0, filters)
     if (limit) {
       return {items: items.slice(0, limit), totalItems}
     }
@@ -156,7 +167,8 @@ const getViewPagedItems = cache(
     contextualFilter?: Maybe<string[]>,
     pageSize?: Maybe<number>,
     page?: Maybe<number>,
-    offset?: Maybe<number>
+    offset?: Maybe<number>,
+    filters?: InputMaybe<SupBooksAwardWinnersFilterInput>
   ): Promise<{items: NodeUnion[]; totalItems: number}> => {
     let items: NodeUnion[] = []
     let totalItems = 0
@@ -303,7 +315,7 @@ const getViewPagedItems = cache(
             ],
             contextualFilter
           )
-          graphqlResponse = await client.supBooksAwardWinners({contextualFilters, ...queryVariables})
+          graphqlResponse = await client.supBooksAwardWinners({contextualFilters, filters, ...queryVariables})
           items = graphqlResponse.supBooksAwardWinners?.results as unknown as NodeSupBook[]
           totalItems = graphqlResponse.supBooksAwardWinners?.pageInfo.total || 0
           break

@@ -101,9 +101,13 @@ const BookPage = async ({node, ...props}: Props) => {
                       Award Winner
                     </H2>
                     <BookAwards>
-                      {awards.map(award => (
-                        <div key={award.id}>{award.name}</div>
-                      ))}
+                      {awards
+                        .sort((a, b) => (a.supYear > b.supYear ? -1 : 1))
+                        .map(award => (
+                          <div key={award.id}>
+                            {award.supYear}: {award.name}
+                          </div>
+                        ))}
                     </BookAwards>
                   </div>
                 )}

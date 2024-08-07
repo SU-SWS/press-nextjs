@@ -105,8 +105,8 @@ query supBooks($contextualFilters: SupBooksViewContextualFilterInput, $pageSize:
     }
 }
 
-query supBooksAwardWinners($contextualFilters: SupBooksAwardWinnersContextualFilterInput, $pageSize: Int = 3, $page: Int $offset: Int) {
-    supBooksAwardWinners(contextualFilter: $contextualFilters, pageSize: $pageSize, page: $page, offset: $offset) {
+query supBooksAwardWinners($contextualFilters: SupBooksAwardWinnersContextualFilterInput, $filters: SupBooksAwardWinnersFilterInput, $pageSize: Int = 3, $page: Int $offset: Int) {
+    supBooksAwardWinners(contextualFilter: $contextualFilters, filter: $filters, pageSize: $pageSize, page: $page, offset: $offset) {
         results {
             ...FragmentNodeSupBookTeaser
         }
