@@ -64,15 +64,15 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
             <div className="order-first py-8 sm:pb-28 sm:pt-16">
               <Link
                 href="/books"
-                className="group flex w-fit items-center gap-5 text-18 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6"
+                className="group flex w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6"
               >
                 <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
-                <span>Back to Books</span>
+                <span className="text-18">Back to Books</span>
               </Link>
             </div>
           </div>
-          <div className="flex flex-col md:w-2/3 md:gap-32 lg:flex-row lg:gap-[7.6rem]">
-            <div className="lg:w-5/8">
+          <div className="flex flex-col justify-between md:w-[78%] md:gap-32 lg:flex-row lg:gap-[7.6rem]">
+            <div className="lg:w-5/8 2xl:w-full">
               <div className="rs-mb-0 rs-pb-3 flex flex-col border-b-2 border-fog">
                 <div className="mt-7 flex flex-col sm:mt-0 sm:hidden md:flex">
                   <H1 className="type-2 mb-0">{node.title}</H1>
@@ -160,7 +160,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
               </div>
             </div>
 
-            <div className="lg:w-3/8 xl:min-w-[200px] 2xl:min-w-[320px]">
+            <div className="lg:w-3/8 xl:min-w-[200px] 2xl:min-w-[320px] 2xl:max-w-[370px]">
               {node.supBookUrlIsw && (
                 <Button
                   href={node.supBookUrlIsw.startsWith("http") ? node.supBookUrlIsw : "https://" + node.supBookUrlIsw}
@@ -217,7 +217,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
             {hasExcerptAndMore && (
               <Link
                 href={`${node.path}/excerpts`}
-                className="group rs-py-1 rs-mt-2 rs-px-2 mx-auto flex w-fit items-center justify-center gap-5 border-2 border-press-sand font-normal text-stone-dark no-underline hocus:border-cardinal-red hocus:bg-cardinal-red hocus:text-white hocus:underline md:mt-0"
+                className="group rs-mt-2 mx-auto flex w-fit items-center justify-center gap-5 border-2 border-press-sand p-[1.8rem] pl-[2.1rem] text-09em font-normal text-stone-dark no-underline hocus:border-cardinal-red hocus:bg-cardinal-red hocus:text-white hocus:underline md:mt-0"
               >
                 <span>Excerpts + more</span>
                 <DocumentDuplicateIcon width={28} className="text-stone group-hocus:text-white" />
@@ -279,7 +279,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
         className="group rs-pt-1 hidden w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:flex md:gap-6"
       >
         <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
-        <span>Back to Books</span>
+        <span className="text-18">Back to Books</span>
       </Link>
     </div>
   )

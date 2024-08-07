@@ -80,7 +80,7 @@ const BookPreCart = ({
       {hasIntlCart && (
         <fieldset>
           <legend className="mb-3 text-18 font-semibold">Region</legend>
-          <div className="rs-mb-1 flex flex-wrap border-2 border-black-40 p-1">
+          <div className="rs-mb-neg1 flex flex-wrap border-2 border-black-40 p-1">
             <label className="block min-w-fit flex-1 cursor-pointer">
               <input
                 className="peer sr-only"
@@ -90,7 +90,7 @@ const BookPreCart = ({
                 checked={!isIntl}
                 onChange={() => setIntl(false)}
               />
-              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-2 peer-checked:border-press-sand-dark peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.85em]">
+              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-2 peer-checked:border-press-sand-dark peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.8em]">
                 US/Canada
               </span>
             </label>
@@ -103,7 +103,7 @@ const BookPreCart = ({
                 checked={isIntl}
                 onChange={() => setIntl(true)}
               />
-              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.85em]">
+              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.8em]">
                 International
               </span>
             </label>
