@@ -76,7 +76,7 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
     <ListWrapper
       {...props}
       className={twMerge(
-        "rs-mb-4 centered flex flex-col gap-10 border-t border-press-sand pt-14",
+        "rs-mb-4 centered flex flex-col gap-[5.5rem] border-t border-press-sand pt-14",
         clsx({
           "border-0": !paragraph.suListHeadline,
         }),
@@ -111,7 +111,7 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
         )}
       </div>
 
-      <Wysiwyg className="max-w-1000" html={paragraph.suListDescription?.processed} />
+      <Wysiwyg className="max-w-800" html={paragraph.suListDescription?.processed} />
 
       {viewId && displayId && viewItems && (
         <div className="mx-auto max-w-[1600px]">
