@@ -4,7 +4,6 @@ import clsx from "clsx"
 import {twMerge} from "tailwind-merge"
 
 const ActionLink = ({children, className, ...props}: LinkProps) => {
-  console.log("CLASSNAMES:", className)
   return (
     <Link
       {...props}
