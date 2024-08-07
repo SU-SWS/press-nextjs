@@ -30,7 +30,7 @@ const SupBookCard = ({node, headingLevel, darkBg, ...props}: Props) => {
             sizes="400px"
           />
           {node.supBookAwards && (
-            <div className="absolute left-5 top-0 flex max-w-[90%] items-center justify-between gap-3 bg-fog py-2 pl-3 pr-5 text-[0.85em]">
+            <div className="absolute left-5 top-0 flex max-w-[90%] items-center justify-between gap-3 bg-fog py-2 pl-3 pr-5 text-[0.8em]">
               <BookmarkIcon width={20} className={twMerge("fill-stone-dark", clsx({"text-fog": darkBg}))} />
               Award winner
             </div>
@@ -51,13 +51,13 @@ const SupBookCard = ({node, headingLevel, darkBg, ...props}: Props) => {
       </div>
 
       {node.supBookSubtitle && (
-        <div className={twMerge("rs-mb-3 text-[0.9em] text-press-sand-dark", clsx({"text-press-sand-light": darkBg}))}>
+        <div className={twMerge("rs-mb-0 text-[0.8em] text-press-sand-dark", clsx({"text-press-sand-light": darkBg}))}>
           {node.supBookSubtitle}
         </div>
       )}
 
       {node.supBookAuthorsFull && (
-        <div className={twMerge("mb-0 text-[0.9em] text-press-sand-dark", clsx({"text-press-sand-light": darkBg}))}>
+        <div className={twMerge("mb-0 text-[0.8em] text-press-sand-dark", clsx({"text-press-sand-light": darkBg}))}>
           {node.supBookAuthorsFull}
         </div>
       )}
