@@ -4,6 +4,7 @@ import {HTMLAttributes} from "react"
 import Link from "@components/elements/link"
 import Image from "next/image"
 import {ArrowLongLeftIcon} from "@heroicons/react/16/solid"
+import BackToLink from "@components/elements/back-to-link"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -196,13 +197,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
         </div>
       </article>
 
-      <Link
-        href={node.path}
-        className="group rs-pt-1 flex w-fit items-center gap-5 gap-6 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline"
-      >
-        <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
-        <span>Back to {node.title}</span>
-      </Link>
+      <BackToLink href={node.path} title={node.title} />
     </div>
   )
 }

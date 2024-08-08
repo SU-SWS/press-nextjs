@@ -2,9 +2,8 @@ import {NodeSupBookAncillary} from "@lib/gql/__generated__/drupal"
 import {H1} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import Rows from "@components/paragraphs/rows/rows"
-import Link from "@components/elements/link"
-import {ArrowLeftIcon} from "@heroicons/react/16/solid"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
+import BackToLink from "@components/elements/back-to-link"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBookAncillary
@@ -34,10 +33,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
         <Rows components={node.supAncillaryParagraphs} className="px-5" />
       </article>
 
-      <Link href={book.path} className="flex w-fit items-center gap-5 pt-20">
-        <ArrowLeftIcon width={20} className="text-fog-dark" />
-        <span>Back to {book.title}</span>
-      </Link>
+      <BackToLink href={book.path} className="flex w-fit items-center gap-5 pt-20" title={book.title} />
     </div>
   )
 }
