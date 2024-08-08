@@ -19,7 +19,7 @@ const BackToLink = ({className, href, title = "Books"}: BackToLinkProps) => {
       )}
     >
       <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
-      <span>Back to {title}</span>
+      <span className="text-18">Back to {title}</span>
     </Link>
   )
 }
