@@ -8,6 +8,7 @@ import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import {notFound} from "next/navigation"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
 import BackToLink from "@components/elements/back-to-link"
+import {twMerge} from "tailwind-merge"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -19,8 +20,8 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
   if (!hasExcerptAndMore) notFound()
 
   return (
-    <div className="centered flex flex-col">
-      <article className="order-last mx-auto max-w-900 gap-10 pt-32" {...props}>
+    <div {...props} className={twMerge("centered flex flex-col", props.className)}>
+      <BackToLink href={node.path} title={node.title} className="mx-auto max-w-900 gap-10 pt-32" isArticle>
         <H1 className="mb-32">Excerpts + More</H1>
         <div className="mb-36 flex flex-col gap-20 md:flex-row">
           <div className="flex flex-col gap-5">
@@ -51,9 +52,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
             <Wysiwyg html={node.supBookTableOfContents.processed} />
           </div>
         )}
-      </article>
-
-      <BackToLink href={node.path} title={node.title} />
+      </BackToLink>
     </div>
   )
 }

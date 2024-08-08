@@ -4,6 +4,7 @@ import {HTMLAttributes} from "react"
 import Link from "@components/elements/link"
 import Image from "next/image"
 import BackToLink from "@components/elements/back-to-link"
+import {twMerge} from "tailwind-merge"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -14,8 +15,8 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
   const hyphenTitle = node.title.replace(/ /, "-").replace(/[^\w-]/, "")
 
   return (
-    <div className="centered flex flex-col gap-10">
-      <article className="order-last mx-auto max-w-[800px] pt-32" {...props}>
+    <div {...props} className={twMerge("centered flex flex-col gap-10", props.className)}>
+      <BackToLink href={node.path} title={node.title} className="mx-auto max-w-[800px] pt-32" isArticle>
         <H1 className="mb-32">Desk, Examination, or Review copy request</H1>
         <div className="mb-36 flex flex-col gap-20 md:flex-row">
           <div className="flex flex-col gap-10">
@@ -194,9 +195,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
             </>
           )}
         </div>
-      </article>
-
-      <BackToLink href={node.path} title={node.title} />
+      </BackToLink>
     </div>
   )
 }

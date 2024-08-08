@@ -4,6 +4,7 @@ import {HTMLAttributes} from "react"
 import Rows from "@components/paragraphs/rows/rows"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
 import BackToLink from "@components/elements/back-to-link"
+import {twMerge} from "tailwind-merge"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBookAncillary
@@ -12,8 +13,14 @@ type Props = HTMLAttributes<HTMLElement> & {
 const SupBookAncillaryPage = async ({node, ...props}: Props) => {
   const book = node.supAncillaryBook
   return (
-    <div className="centered flex flex-col">
-      <article className="order-last mx-auto max-w-900 gap-10 pt-32" {...props}>
+    <div {...props} className={twMerge("centered flex flex-col", props.className)}>
+      <BackToLink
+        href={book.path}
+        linkClasses="flex w-fit items-center gap-5 pt-20"
+        title={book.title}
+        className="order-last mx-auto max-w-900 gap-10 pt-32"
+        isArticle
+      >
         <H1 className="mb-32">
           {book.title}: {node.title}
         </H1>
@@ -31,9 +38,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
           )}
         </div>
         <Rows components={node.supAncillaryParagraphs} className="px-5" />
-      </article>
-
-      <BackToLink href={book.path} className="flex w-fit items-center gap-5 pt-20" title={book.title} />
+      </BackToLink>
     </div>
   )
 }
