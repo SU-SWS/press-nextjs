@@ -18,7 +18,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
         href={book.path}
         linkClasses="flex w-fit items-center gap-5 pt-20"
         title={book.title}
-        className="order-last mx-auto max-w-900 gap-10 pt-32"
+        className="rs-mt-4 order-last mx-auto max-w-900 gap-10"
         isArticle
       >
         <H1 className="mb-32">

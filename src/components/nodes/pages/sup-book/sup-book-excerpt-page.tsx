@@ -21,7 +21,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
 
   return (
     <div {...props} className={twMerge("centered flex flex-col", props.className)}>
-      <BackToLink href={node.path} title={node.title} className="mx-auto max-w-900 gap-10 pt-32" isArticle>
+      <BackToLink href={node.path} title={node.title} className="rs-mt-4 mx-auto max-w-900 gap-10" isArticle>
         <H1 className="mb-32">Excerpts + More</H1>
         <div className="mb-36 flex flex-col gap-20 md:flex-row">
           <div className="flex flex-col gap-5">

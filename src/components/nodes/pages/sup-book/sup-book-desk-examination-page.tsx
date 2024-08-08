@@ -16,7 +16,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
 
   return (
     <div {...props} className={twMerge("centered flex flex-col gap-10", props.className)}>
-      <BackToLink href={node.path} title={node.title} className="mx-auto max-w-[800px] pt-32" isArticle>
+      <BackToLink href={node.path} title={node.title} className="rs-mt-4 mx-auto max-w-[800px]" isArticle>
         <H1 className="mb-32">Desk, Examination, or Review copy request</H1>
         <div className="mb-36 flex flex-col gap-20 md:flex-row">
           <div className="flex flex-col gap-10">
