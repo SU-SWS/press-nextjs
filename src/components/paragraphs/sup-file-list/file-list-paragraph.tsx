@@ -29,7 +29,7 @@ const FileListParagraph = ({paragraph, ...props}: Props) => {
   }
 
   return (
-    <div className={twMerge("centered max-w-800", props.className)} {...props}>
+    <div {...props} className={twMerge("centered max-w-800", props.className)}>
       {paragraph.supFileListLabel && <H2>{paragraph.supFileListLabel}</H2>}
       <ul className="list-unstyled">
         {fileOptions.map(media => (

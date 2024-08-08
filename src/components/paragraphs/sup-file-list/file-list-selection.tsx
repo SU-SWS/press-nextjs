@@ -19,7 +19,7 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
 
   const chosenItem = fileOptions.find(option => option.value === chosenFile)
   return (
-    <div className={twMerge("centered max-w-800", props.className)} {...props}>
+    <div {...props} className={twMerge("centered max-w-800", props.className)}>
       <div className="rs-mb-1 max-w-4xl">
         <div id={id} className="type-0 mb-3 font-medium">
           {label}
