@@ -3,7 +3,6 @@ import {H1, H2, H3} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import Link from "@components/elements/link"
 import Image from "next/image"
-import {ArrowLongLeftIcon} from "@heroicons/react/16/solid"
 import BackToLink from "@components/elements/back-to-link"
 
 type Props = HTMLAttributes<HTMLElement> & {
