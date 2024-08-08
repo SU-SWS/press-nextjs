@@ -62,7 +62,7 @@ const GalleryImage = ({
       <div className="relative aspect-[4/3] w-full">
         <Link
           href={`/gallery/${galleryId}/${image.id}`}
-          className="relative block h-full w-full"
+          className="border-sand-light relative block h-full w-full border"
           rel="nofollow"
           scroll={false}
           prefetch={false}
