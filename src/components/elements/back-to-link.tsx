@@ -5,29 +5,36 @@ import {twMerge} from "tailwind-merge"
 
 type BackToLinkProps = HtmlHTMLAttributes<HTMLDivElement> & {
   isArticle?: boolean
+  contentClasses?: string
   linkClasses?: string
   href: string
   title?: string
 }
 
-const BackToLink = ({isArticle, children, linkClasses, href, title = "Books", ...props}: BackToLinkProps) => {
+const BackToLink = ({
+  isArticle,
+  children,
+  contentClasses,
+  linkClasses,
+  href,
+  title = "Books",
+  ...props
+}: BackToLinkProps) => {
   const Wrapper: ElementType = isArticle ? "article" : "div"
   return (
-    <>
-      <Wrapper {...props} className={twMerge("order-last", props.className)}>
-        {children}
-      </Wrapper>
+    <Wrapper {...props} className={twMerge("flex flex-col", props.className)}>
+      <div className={contentClasses}>{children}</div>
       <Link
         href={href}
         className={twMerge(
-          "group rs-pt-1 flex w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6",
+          "group rs-pt-1 order-first flex w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6",
           linkClasses
         )}
       >
         <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
         <span className="text-18">Back to {title}</span>
       </Link>
-    </>
+    </Wrapper>
   )
 }
 
