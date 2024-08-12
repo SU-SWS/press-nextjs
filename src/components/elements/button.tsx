@@ -58,9 +58,9 @@ export const Button = ({
     "inline-block text-center w-fit": !centered,
     "btn btn--big transition text-5xl text-white *:text-white hocus:text-white bg-digital-red hocus:bg-cardinal-red no-underline hocus:underline py-6 px-12 font-normal border-2 border-cardinal-red":
       big && !secondary,
-    "btn btn--secondary transition text-stone-dark *:text-stone-dark hocus:*:text-white border-2 border-fog-dark hocus:border-cardinal-red hocus:bg-cardinal-red hocus:text-white no-underline hocus:underline py-4 px-8 font-normal":
+    "btn btn--secondary transition text-stone-dark *:text-stone-dark border-2 border-fog-dark hocus:border-cardinal-red hocus:bg-cardinal-red hocus:text-white hocus:*:text-white no-underline hocus:underline py-4 px-8 font-normal":
       !big && secondary,
-    "btn  btn--big btn--secondary transition text-5xl text-stone-dark *:text-stone-dark border-2 border-fog-dark hocus:border-cardinal-red hocus:bg-cardinal-red hocus:text-white no-underline hocus:underline py-6 px-12 font-normal":
+    "btn  btn--big btn--secondary transition text-5xl text-stone-dark *:text-stone-dark border-2 border-fog-dark hocus:border-cardinal-red hocus:bg-cardinal-red hocus:text-white hocus:*:text-white no-underline hocus:underline py-6 px-12 font-normal":
       big && secondary,
     "btn bg-digital-red font-normal text-white *:text-white hocus:bg-cardinal-red hocus:text-white py-4 px-8 no-underline hocus:underline transition border-2 border-cardinal-red":
       !big && !secondary,
