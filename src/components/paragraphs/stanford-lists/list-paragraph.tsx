@@ -20,9 +20,9 @@ import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behavi
 import {graphqlClient} from "@lib/gql/gql-client"
 import {twMerge} from "tailwind-merge"
 import Link from "@components/elements/link"
-import {ArrowRightIcon} from "@heroicons/react/16/solid"
 import {ListParagraphBehaviors} from "@lib/drupal/drupal-jsonapi.d"
 import clsx from "clsx"
+import {ArrowLongRightIcon} from "@heroicons/react/24/outline"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordList
@@ -106,7 +106,7 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
         {paragraph.suListButton?.url && (
           <Link href={paragraph.suListButton.url} className="mt-auto flex items-center gap-5 text-archway-dark">
             {paragraph.suListButton.title}
-            <ArrowRightIcon width={20} />
+            <ArrowLongRightIcon width={20} />
           </Link>
         )}
       </div>
