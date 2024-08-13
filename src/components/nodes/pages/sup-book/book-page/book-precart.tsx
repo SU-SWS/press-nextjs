@@ -90,7 +90,7 @@ const BookPreCart = ({
                 checked={!isIntl}
                 onChange={() => setIntl(false)}
               />
-              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-2 peer-checked:border-press-sand-dark peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.8em]">
+              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-0 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.8em]">
                 US/Canada
               </span>
             </label>
@@ -112,7 +112,7 @@ const BookPreCart = ({
       )}
 
       {isIntl && (
-        <p>
+        <p className="text-[0.8em]">
           For customer shipments outside the US and Canada, please use the button below to order from our partner,
           Combined Academic Publishers.
         </p>
@@ -122,7 +122,7 @@ const BookPreCart = ({
         <Button
           buttonElem
           type="submit"
-          className="flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]"
+          className="mt-5 flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]"
         >
           {!isIntl && "Add to cart"}
           {isIntl && "Purcase from CAP"}
