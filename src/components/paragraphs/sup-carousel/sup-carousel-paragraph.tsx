@@ -120,7 +120,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
               {((!leftImage && image) || eyebrow) && (
                 <div className="order-first">
                   {!leftImage && image && (
-                    <div className="rs-mb-3 relative mx-auto w-full">
+                    <div className="rs-mb-3 relative mx-auto w-fit">
                       <CarouselImageLink
                         href={slideParagraph.supSlideButton?.url}
                         title={slideParagraph.supSlideButton?.title}
@@ -154,18 +154,16 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
           />
 
           {slideParagraph.supSlideButton?.url && (
-            <div className={clsx({"rs-pt-3 border-t": !leftImage})}>
-              <Link
-                className={clsx(
-                  "group flex w-fit items-center gap-5 border p-6 text-white no-underline hocus:text-white",
-                  {"mx-auto": !leftImage}
-                )}
-                href={slideParagraph.supSlideButton.url}
-              >
-                <span className="group-hocus:underline">{slideParagraph.supSlideButton.title}</span>
-                <ArrowRightIcon width={20} />
-              </Link>
-            </div>
+            <Link
+              className={clsx(
+                "group flex w-fit items-center gap-5 border p-6 text-white no-underline hocus:text-white",
+                {"mx-auto": !leftImage}
+              )}
+              href={slideParagraph.supSlideButton.url}
+            >
+              <span className="group-hocus:underline">{slideParagraph.supSlideButton.title}</span>
+              <ArrowRightIcon width={20} />
+            </Link>
           )}
         </div>
         {leftImage && image && (
