@@ -1017,6 +1017,7 @@ export const FragmentNodeSupBookTeaserFragmentDoc = gql`
   supBookSubtitle
   supBookWorkIdNumber
   supBookAuthorsFull
+  supBookType
   supBookImage {
     ...FragmentMediaImage
   }

@@ -30,7 +30,7 @@ const BackToTop = () => {
         })
       }
     >
-      <span className="block flex gap-2">
+      <span className="flex items-center gap-2">
         <ChevronUpIcon width={30} />
         Return to Top
       </span>

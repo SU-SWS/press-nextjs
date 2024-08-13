@@ -408,6 +408,7 @@ fragment FragmentNodeSupBookTeaser on NodeSupBook {
     supBookSubtitle
     supBookWorkIdNumber
     supBookAuthorsFull
+    supBookType
     supBookImage {
         ...FragmentMediaImage
     }

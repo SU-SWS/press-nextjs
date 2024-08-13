@@ -18,10 +18,16 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 
 const SupBookCard = ({node, headingLevel, darkBg, ...props}: Props) => {
   const Heading = headingLevel === "h3" ? H3 : H2
+
   return (
     <div {...props} className={twMerge("mx-auto max-w-3xl", props.className)}>
       <div className="relative">
-        <div className="rs-mb-1 relative aspect-[2/3] w-full">
+        <div
+          className={twMerge(
+            "rs-mb-1 relative aspect-[2/3] w-full",
+            clsx({"aspect-[3/2]": node.supBookType === "digital_project"})
+          )}
+        >
           <Image
             className="ed11y-ignore object-cover"
             src={node.supBookImage?.mediaImage.url || "/default-book-image.jpg"}

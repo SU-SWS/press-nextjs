@@ -15,26 +15,32 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
   return (
     <BackToLink
       {...props}
-      href={book.path}
+      href={book.path + "/excerpts"}
       className={twMerge("centered", props.className)}
       linkClasses="flex w-fit items-center gap-5 pt-20"
-      title={book.title}
+      title="Excerpts + More"
       childrenProps={{className: "rs-mt-4 order-last mx-auto max-w-900 gap-10"}}
       isArticle
     >
       <H1 className="mb-32">
-        {book.title}: {node.title}
+        {node.title} for {book.title}
       </H1>
       <div className="mb-36 flex flex-col gap-20 md:flex-row">
-        <div className="flex flex-col gap-10">
-          {book.supBookSubtitle && <div className="type-2 font-medium">{book.supBookSubtitle}</div>}
+        <div className="flex flex-col gap-5">
+          <div className="type-3 font-medium">{node.title}</div>
 
-          {book.supBookAuthorsFull && <div className="type-1 text-press-sand-dark">{book.supBookAuthorsFull}</div>}
+          {node.supAncillaryBook.supBookSubtitle && (
+            <div className="type-2 font-medium">{node.supAncillaryBook.supBookSubtitle}</div>
+          )}
+
+          {node.supAncillaryBook.supBookAuthorsFull && (
+            <div className="type-1 text-press-sand-dark">{node.supAncillaryBook.supBookAuthorsFull}</div>
+          )}
         </div>
 
-        {book.supBookImage?.mediaImage && (
-          <div className="relative order-first w-full shrink-0 md:max-w-400">
-            <BookPageImage node={book} />
+        {node.supAncillaryBook.supBookImage?.mediaImage && (
+          <div className="relative order-first w-full shrink-0 md:max-w-200">
+            <BookPageImage node={node.supAncillaryBook} />
           </div>
         )}
       </div>
