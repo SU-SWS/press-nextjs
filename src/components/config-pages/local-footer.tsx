@@ -90,7 +90,11 @@ const LocalFooter = async () => {
       </div>
 
       <div className="gutters flex flex-col items-center text-center text-white lg:centered lg:flex-row lg:text-left [&_a]:text-21 [&_p]:text-21">
-        <p className="lg:w-1/4">© 2024 Stanford University Press. All rights reserved.</p>
+        <p className="lg:w-1/4">
+          © 2024 Stanford University Press.
+          <br />
+          All rights reserved.
+        </p>
 
         <div className="lg:w-1/2">
           {/* Social Links */}

@@ -7,10 +7,7 @@ const headingLinkClasses = "[&_a]:hocus:underline"
 
 export const H1 = ({children, className, ...props}: Props) => {
   return (
-    <h1
-      className={twMerge("font-medium", className && className.includes("type-") ? className : `type-4 ${className}`)}
-      {...props}
-    >
+    <h1 className={twMerge("font-medium", className?.includes("type-") ? className : ["type-4", className])} {...props}>
       {children}
     </h1>
   )
@@ -22,7 +19,7 @@ export const H2 = ({children, className, ...props}: Props) => {
       className={twMerge(
         headingLinkClasses,
         "font-medium",
-        className && className.includes("type-") ? className : `type-2 ${className}`
+        className?.includes("type-") ? className : ["type-2", className]
       )}
       {...props}
     >
@@ -37,7 +34,7 @@ export const H3 = ({children, className, ...props}: Props) => {
       className={twMerge(
         headingLinkClasses,
         "font-medium",
-        className && className.includes("type-") ? className : `type-1 ${className}`
+        className?.includes("type-") ? className : ["type-1", className]
       )}
       {...props}
     >
@@ -52,7 +49,7 @@ export const H4 = ({children, className, ...props}: Props) => {
       className={twMerge(
         headingLinkClasses,
         "font-bold",
-        className && className.includes("type-") ? className : `type-0 ${className}`
+        className?.includes("type-") ? className : ["type-0", className]
       )}
       {...props}
     >
@@ -67,7 +64,7 @@ export const H5 = ({children, className, ...props}: Props) => {
       className={twMerge(
         headingLinkClasses,
         "font-medium",
-        className && className.includes("type-") ? className : `type-0 ${className}`
+        className?.includes("type-") ? className : ["type-0", className]
       )}
       {...props}
     >
@@ -82,7 +79,7 @@ export const H6 = ({children, className, ...props}: Props) => {
       className={twMerge(
         headingLinkClasses,
         "font-medium",
-        className && className.includes("type-") ? className : `type-0 ${className}`
+        className?.includes("type-") ? className : ["type-0", className]
       )}
       {...props}
     >
