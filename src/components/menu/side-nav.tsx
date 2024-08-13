@@ -33,7 +33,7 @@ type MenuItemProps = MenuItemType & {
 
 const MenuItem = ({id, url, title, children, activeTrail, level}: MenuItemProps) => {
   // Need to list them out each so tailwind will include each for styling.
-  const leftPadding = ["pl-10", "pl-20", "pl-28", "pl-48"]
+  const leftPadding = ["pl-8", "pl-16", "pl-24", "pl-40"]
 
   const linkClasses = clsx(
     leftPadding[level],

@@ -197,7 +197,7 @@ const CarouselImageLink = ({
         title={title || undefined}
         aria-hidden
         tabIndex={-1}
-        className="*:transition hover:*:scale-[1.02]"
+        className="mx-auto block w-fit *:transition hover:*:scale-[1.02]"
       >
         {children}
       </Link>
