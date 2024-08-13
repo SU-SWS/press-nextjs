@@ -25,7 +25,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
       className={twMerge("centered", props.className)}
       href={node.path}
       title={node.title}
-      contentClasses="rs-mt-4 mx-auto max-w-900 gap-10"
+      childrenProps={{className: "rs-mt-4 mx-auto max-w-900 gap-10"}}
       isArticle
     >
       <H1 className="mb-32">Excerpts + More</H1>

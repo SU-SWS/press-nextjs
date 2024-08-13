@@ -19,7 +19,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
       className="gap-10"
       href={node.path}
       title={node.title}
-      contentClasses="rs-mt-4 mx-auto max-w-[800px]"
+      childrenProps={{className: "rs-mt-4 mx-auto max-w-[800px]"}}
       isArticle
     >
       <H1 className="mb-32">Desk, Examination, or Review copy request</H1>
