@@ -35,7 +35,7 @@ const BookPage = async ({node, ...props}: Props) => {
 
   const bookSubject = node.supBookSubjects && createLinkParams(node.supBookSubjects[0])
   return (
-    <article {...props} className="centered order-last">
+    <article {...props} className="centered">
       <div className="mb-20 flex flex-col md:rs-mt-4 md:flex-row md:gap-32 lg:gap-[7.6rem]">
         <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-col justify-center bg-fog-light px-20 md:hidden">
           <div className="flex flex-row gap-24">
