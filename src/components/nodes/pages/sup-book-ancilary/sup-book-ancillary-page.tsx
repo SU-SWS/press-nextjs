@@ -17,27 +17,27 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
       {...props}
       href={book.path + "/excerpts"}
       className={twMerge("centered", props.className)}
-      linkClasses="flex w-fit items-center gap-5 pt-20"
+      linkClasses="flex w-fit items-center gap-5"
       title="Excerpts + More"
       childrenProps={{className: "rs-mt-4 order-last mx-auto max-w-900 gap-10"}}
       isArticle
     >
-      <H1 className="mb-32">
+      <H1 className="type-2 mb-32">
         {node.title} for {book.title}
       </H1>
       <div className="mb-36 flex flex-col gap-20 md:flex-row">
         <div className="flex flex-col gap-5">
           {node.supAncillaryBook.supBookSubtitle && (
-            <div className="type-2 font-medium">{node.supAncillaryBook.supBookSubtitle}</div>
+            <div className="type-1 font-medium">{node.supAncillaryBook.supBookSubtitle}</div>
           )}
 
           {node.supAncillaryBook.supBookAuthorsFull && (
-            <div className="type-1 text-press-sand-dark">{node.supAncillaryBook.supBookAuthorsFull}</div>
+            <div className="type-0 text-press-sand-dark">{node.supAncillaryBook.supBookAuthorsFull}</div>
           )}
         </div>
 
         {node.supAncillaryBook.supBookImage?.mediaImage && (
-          <div className="relative order-first w-full shrink-0 md:max-w-200">
+          <div className="relative order-first w-full max-w-160 shrink-0">
             <BookPageImage node={node.supAncillaryBook} />
           </div>
         )}
