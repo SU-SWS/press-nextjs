@@ -31,11 +31,11 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
       <H1 className="mb-32">Excerpts + More</H1>
       <div className="mb-36 flex flex-col gap-20 md:flex-row">
         <div className="flex flex-col gap-5">
-          <div className="type-3 font-medium">{node.title}</div>
+          <div className="type-2 font-medium">{node.title}</div>
 
-          {node.supBookSubtitle && <div className="type-2 font-medium">{node.supBookSubtitle}</div>}
+          {node.supBookSubtitle && <div className="type-1 font-medium">{node.supBookSubtitle}</div>}
 
-          {node.supBookAuthorsFull && <div className="type-1 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
+          {node.supBookAuthorsFull && <div className="type-0 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
 
           {ancillaryPages.map(page => (
             <Link key={page.id} href={page.path}>
@@ -45,7 +45,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
         </div>
 
         {node.supBookImage?.mediaImage && (
-          <div className="relative order-first w-full shrink-0 md:max-w-200">
+          <div className="relative order-first w-full max-w-[160rem] shrink-0">
             <BookPageImage node={node} />
           </div>
         )}
