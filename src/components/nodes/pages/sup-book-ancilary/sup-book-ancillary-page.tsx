@@ -19,7 +19,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
       className={twMerge("centered", props.className)}
       linkClasses="flex w-fit items-center gap-5"
       title="Excerpts + More"
-      childrenProps={{className: "rs-mt-4 order-last mx-auto max-w-900 gap-10"}}
+      childrenProps={{className: "rs-mt-4 mx-auto max-w-900 gap-10"}}
       isArticle
     >
       <H1 className="type-2 mb-32">
