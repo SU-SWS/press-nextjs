@@ -59,7 +59,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                 <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
               )}
             </div>
-            <div className="order-first w-5/12">
+            <div className="order-first w-full">
               <BookPageImage node={node} />
             </div>
           </div>
