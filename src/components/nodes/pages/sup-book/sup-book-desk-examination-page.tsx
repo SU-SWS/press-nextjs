@@ -4,6 +4,7 @@ import {HTMLAttributes} from "react"
 import Link from "@components/elements/link"
 import Image from "next/image"
 import BackToLink from "@components/elements/back-to-link"
+import {twMerge} from "tailwind-merge"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -16,7 +17,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
   return (
     <BackToLink
       {...props}
-      className="gap-10"
+      className={twMerge("centered", props.className)}
       href={node.path}
       title={node.title}
       childrenProps={{className: "rs-mt-4 mx-auto max-w-[800px]"}}
