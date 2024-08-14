@@ -45,7 +45,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
         </div>
 
         {node.supBookImage?.mediaImage && (
-          <div className="relative order-first w-full max-w-[160rem] shrink-0">
+          <div className="relative order-first w-full max-w-[16rem] shrink-0">
             <BookPageImage node={node} />
           </div>
         )}
