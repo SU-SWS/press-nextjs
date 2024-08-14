@@ -20,6 +20,8 @@ type Props = {
   clothIsbn?: Maybe<string>
   paperIsbn?: Maybe<string>
   hasIntlCart?: boolean
+  preorder?: Maybe<boolean>
+  noCartButton?: Maybe<boolean>
 }
 
 const BookPreCart = ({
@@ -32,6 +34,8 @@ const BookPreCart = ({
   usPaperSaleDiscount,
   clothIsbn,
   paperIsbn,
+  preorder,
+  noCartButton,
   hasIntlCart = true,
 }: Props) => {
   const router = useRouter()
@@ -111,24 +115,26 @@ const BookPreCart = ({
         </fieldset>
       )}
 
-      {isIntl && (
+      {isIntl && !noCartButton && (
         <p className="text-[0.8em]">
           For customer shipments outside the US and Canada, please use the button below to order from our partner,
           Combined Academic Publishers.
         </p>
       )}
 
-      <div>
+      {!noCartButton && (
         <Button
           buttonElem
           type="submit"
           className="mt-5 flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]"
         >
-          {!isIntl && "Add to cart"}
-          {isIntl && "Purcase from CAP"}
+          {preorder && !isIntl && "Preorder"}
+          {!preorder && !isIntl && "Add to cart"}
+          {preorder && isIntl && "Preorder from CAP"}
+          {!preorder && isIntl && "Purchase from CAP"}
           <ArrowRightIcon width={24} />
         </Button>
-      </div>
+      )}
 
       {formatChoice === "cloth" && !isIntl && usClothPrice && usClothSalePrice && (
         <div className="rs-mt-1 text-18">

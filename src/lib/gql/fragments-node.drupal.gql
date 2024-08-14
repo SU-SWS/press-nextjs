@@ -135,6 +135,8 @@ fragment FragmentNodeSupBook on NodeSupBook {
         ...FragmentLink
     }
     supBookType
+    supBookPreorder
+    supBookNoCart
 }
 
 fragment FragmentNodeStanfordPage on NodeStanfordPage {

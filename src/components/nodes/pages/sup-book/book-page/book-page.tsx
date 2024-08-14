@@ -174,6 +174,8 @@ const BookPage = async ({node, ...props}: Props) => {
                 usPaperSaleDiscount={node.supBookPaperSalePercent}
                 clothIsbn={node.supBookIsbn13Cloth}
                 paperIsbn={node.supBookIsbn13Paper}
+                preorder={node.supBookPreorder}
+                noCartButton={node.supBookNoCart}
               />
             </div>
 
