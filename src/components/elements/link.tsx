@@ -4,7 +4,6 @@ import {EnvelopeIcon} from "@heroicons/react/24/outline"
 import ActionLink from "@components/elements/action-link"
 import Button from "@components/elements/button"
 import {LinkProps as NextLinkProps} from "next/dist/client/link"
-import clsx from "clsx"
 
 export type LinkProps = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement> &
   NextLinkProps & {
