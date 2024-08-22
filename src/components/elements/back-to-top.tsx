@@ -15,6 +15,18 @@ const BackToTop = () => {
 
   useEventListener("scroll", useDebounceCallback(onScroll, 200))
 
+  const handleClick = () => {
+    scrollTo({
+      left: 0,
+      top: 0,
+      behavior: !!window.matchMedia("(prefers-reduced-motion: reduce)")?.matches ? "instant" : "smooth",
+    })
+    const skipLink = document.querySelector(".skiplink") as HTMLElement
+    if (skipLink) {
+      skipLink.focus()
+    }
+  }
+
   return (
     <Button
       buttonElem
@@ -22,13 +34,7 @@ const BackToTop = () => {
         "fixed bottom-10 right-10 transition-all duration-300 " +
         (value ? "visible opacity-100" : "invisible opacity-0")
       }
-      onClick={() =>
-        scrollTo({
-          left: 0,
-          top: 0,
-          behavior: !!window.matchMedia("(prefers-reduced-motion: reduce)")?.matches ? "instant" : "smooth",
-        })
-      }
+      onClick={handleClick}
     >
       <span className="flex items-center gap-2">
         <ChevronUpIcon width={30} />
