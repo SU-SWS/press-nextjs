@@ -57,6 +57,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
   const {query, refine} = useSearchBox({})
   const {refine: clearRefinements} = useClearRefinements({})
   const {items: bookSubjectRefinementList, refine: refineBookSubjects} = useRefinementList({
+    sortBy: ["count:desc", "name:asc"],
     attribute: "book_subject",
     limit: 100,
   })
@@ -132,7 +133,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             autoCapitalize="off"
             spellCheck={false}
             maxLength={512}
-            type="search"
+            type="textfield"
             placeholder="Search"
             defaultValue={query}
             autoFocus
@@ -259,7 +260,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
               </span>
               <div className="flex-1 flex-grow">
                 <div id={`${id}-max-year`} className="mb-2 text-18 text-press-sand-dark">
-                  <span className="sr-only">Minimum&nbps;</span>Year
+                  <span className="sr-only">Maximum&nbps;</span>Year
                 </div>
                 <SelectList
                   options={yearOptions.filter(
@@ -332,9 +333,9 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
   return (
     <div>
       <div className="border-sand-light rs-pb-1 flex flex-col items-start justify-between border-b sm:flex-row sm:items-center">
-        <div aria-live="polite" className="type-0 font-medium">
+        <h2 aria-live="polite" className="type-0 font-medium">
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
-        </div>
+        </h2>
 
         <div className="flex min-w-[33rem] items-center gap-3">
           <div id="sort-by" className="text-16 text-press-sand-dark">

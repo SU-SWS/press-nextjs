@@ -1,5 +1,5 @@
 import {Hit as HitType, AlgoliaHit as BaseAlgliaHit} from "instantsearch.js/es/types/results"
-import {H2} from "@components/elements/headers"
+import {H3} from "@components/elements/headers"
 import Link from "@components/elements/link"
 import {Snippet} from "react-instantsearch"
 import Image from "next/image"
@@ -24,11 +24,11 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
     <article className="py-12 @container">
       <div className="flex flex-col justify-between gap-20 @3xl:flex-row">
         <div>
-          <H2 className="type-0">
+          <H3 className="type-0">
             <Link className="text-stone-dark hocus:text-digital-red" href={hit.url.replace(hitUrl.origin, "")}>
               {hit.title}
             </Link>
-          </H2>
+          </H3>
 
           {hit.summary && <p className="mb-10">{hit.summary}</p>}
           {hit.html && !hit.summary && (

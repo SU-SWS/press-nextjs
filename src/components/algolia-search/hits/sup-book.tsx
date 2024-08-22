@@ -1,5 +1,5 @@
 import {Hit as HitType} from "instantsearch.js/es/types/results"
-import {H2} from "@components/elements/headers"
+import {H3} from "@components/elements/headers"
 import Link from "@components/elements/link"
 import {Snippet} from "react-instantsearch"
 import Image from "next/image"
@@ -27,11 +27,11 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
     <article className="py-12 @container">
       <div className="flex flex-col justify-between gap-20 @2xl:flex-row">
         <div>
-          <H2 className="type-0 mb-2" id={hit.objectID}>
+          <H3 className="type-0 mb-2" id={hit.objectID}>
             <Link className="text-stone-dark hocus:text-digital-red" href={url} prefetch={false}>
               {hit.title}
             </Link>
-          </H2>
+          </H3>
 
           {hit.summary && <p className="card-paragraph mb-8">{hit.summary}</p>}
           {hit.html && !hit.summary && (
