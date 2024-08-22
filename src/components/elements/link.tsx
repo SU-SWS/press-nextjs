@@ -40,10 +40,10 @@ const DrupalLink = ({href, children, ...props}: LinkProps) => {
   if (props.className?.includes("button")) {
     return (
       <Button
+        {...props}
         href={href}
         big={props.className.includes("--big")}
         secondary={props.className.includes("--secondary")}
-        {...props}
       >
         {children}
       </Button>
@@ -51,14 +51,7 @@ const DrupalLink = ({href, children, ...props}: LinkProps) => {
   }
 
   return (
-    <Link
-      {...props}
-      href={href}
-      className={clsx(
-        "text-digital-red *:text-digital-red hocus:text-archway-dark *:hocus:text-archway-dark",
-        props.className
-      )}
-    >
+    <Link {...props} href={href} className={props.className}>
       {children}
       {href.startsWith("mailto") && <EnvelopeIcon width={20} className="ml-4 inline-block" />}
     </Link>
