@@ -1,6 +1,6 @@
 "use client"
 
-import {HTMLAttributes, JSX} from "react"
+import {HTMLAttributes, JSX, useEffect, useRef} from "react"
 import Slider, {CustomArrowProps, Settings} from "react-slick"
 import {ArrowLongRightIcon, ArrowLongLeftIcon} from "@heroicons/react/24/outline"
 import {twMerge} from "tailwind-merge"
@@ -48,7 +48,29 @@ type SlideshowProps = HTMLAttributes<HTMLDivElement> & {
 }
 
 const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
+  const slideShowRef = useRef<HTMLDivElement>(null)
+
+  const adjustSlideLinks = () => {
+    // Set tabindex attributes based on if the slides are visible or not.
+    const hiddenLinks = slideShowRef.current?.querySelectorAll(".slick-slide:not(.slick-active) a")
+    if (hiddenLinks) {
+      ;[...hiddenLinks].map(link => link.setAttribute("tabindex", "-1"))
+    }
+
+    const visibleLinks = slideShowRef.current?.querySelectorAll(".slick-slide.slick-active a")
+    if (visibleLinks) {
+      ;[...visibleLinks].map(link => link.removeAttribute("tabindex"))
+    }
+  }
+
+  useEffect(() => {
+    adjustSlideLinks()
+  }, [])
+
   const settings: Settings = {
+    afterChange: () => {
+      adjustSlideLinks()
+    },
     autoplay: false,
     centerMode: false,
     className:
@@ -74,7 +96,7 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
     ...slideshowProps,
   }
   return (
-    <div {...props} className={twMerge("relative", props.className)}>
+    <div ref={slideShowRef} {...props} className={twMerge("relative", props.className)}>
       <Slider {...settings}>{children}</Slider>
     </div>
   )
