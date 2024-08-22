@@ -30,7 +30,15 @@ const getTopicOptions = (
   return topicOptions.sort((a, b) => (a.label < b.label ? -1 : a.label > b.label ? 1 : 0))
 }
 
-const EventsFilteredListView = ({items, topics}: {items: NodeStanfordEvent[]; topics: TermStanfordEventType[]}) => {
+const EventsFilteredListView = ({
+  items,
+  topics,
+  totalItems,
+}: {
+  items: NodeStanfordEvent[]
+  topics: TermStanfordEventType[]
+  totalItems: number
+}) => {
   const [chosenTopic, setChosenTopic] = useState<string>("")
   const [displayedEvents, setDisplayedEvents] = useState<NodeStanfordEvent[]>(items)
 
@@ -86,6 +94,7 @@ const EventsFilteredListView = ({items, topics}: {items: NodeStanfordEvent[]; to
         ulProps={{className: "list-unstyled mb-20"}}
         liProps={{className: "border-b border-black-20 last-of-type:border-0 pb-10 last:pb-0 pt-10 first:pt-0"}}
         itemsPerPage={3}
+        totalItems={totalItems}
       >
         {displayedEvents.map(event => (
           <StanfordEventListItem key={event.id} node={event} />

@@ -1,6 +1,6 @@
 "use client"
 
-import algoliasearch from "algoliasearch/lite"
+import {liteClient} from "algoliasearch/lite"
 import {
   useHits,
   useSearchBox,
@@ -34,7 +34,7 @@ type Props = {
 }
 
 const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey, initialUiState = {}}: Props) => {
-  const searchClient = useMemo(() => algoliasearch(appId, searchApiKey), [appId, searchApiKey])
+  const searchClient = useMemo(() => liteClient(appId, searchApiKey), [appId, searchApiKey])
   return (
     <div>
       <InstantSearchNext

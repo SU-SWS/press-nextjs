@@ -1,5 +1,4 @@
 import {NodeSupBook} from "@lib/gql/__generated__/drupal"
-import type {RecommendResults} from "algoliasearch-helper"
 import {unstable_cache as nextCache} from "next/cache"
 import {BookHit} from "@components/algolia-search/hits/sup-book"
 import {H2, H3} from "@components/elements/headers"
@@ -7,6 +6,7 @@ import Image from "next/image"
 import {BookmarkIcon} from "@heroicons/react/24/outline"
 import Link from "@components/elements/link"
 import {getAlgoliaCredential} from "@lib/gql/gql-queries"
+import {RecommendHit} from "algoliasearch/lite"
 
 const getRelatedContent = nextCache(
   async (objectID: string): Promise<BookHit[]> => {
@@ -37,12 +37,12 @@ const getRelatedContent = nextCache(
       }),
     }
 
-    const recommendations: {results: RecommendResults<BookHit>["_rawResults"]} = await fetch(
+    const recommendations: {results: RecommendHit[]} = await fetch(
       `https://${appID}-dsn.algolia.net/1/indexes/*/recommendations`,
       options
     ).then(res => res.json())
 
-    const hits = recommendations?.results?.[0].hits || []
+    const hits = (recommendations?.results?.[0].hits as BookHit[]) || []
     hits.map(hit => {
       delete hit._highlightResult
       delete hit._snippetResult
