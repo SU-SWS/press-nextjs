@@ -4,7 +4,6 @@ import {EnvelopeIcon} from "@heroicons/react/24/outline"
 import ActionLink from "@components/elements/action-link"
 import Button from "@components/elements/button"
 import {LinkProps as NextLinkProps} from "next/dist/client/link"
-import clsx from "clsx"
 
 export type LinkProps = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement> &
   NextLinkProps & {
@@ -40,10 +39,10 @@ const DrupalLink = ({href, children, ...props}: LinkProps) => {
   if (props.className?.includes("button")) {
     return (
       <Button
+        {...props}
         href={href}
         big={props.className.includes("--big")}
         secondary={props.className.includes("--secondary")}
-        {...props}
       >
         {children}
       </Button>
@@ -51,14 +50,7 @@ const DrupalLink = ({href, children, ...props}: LinkProps) => {
   }
 
   return (
-    <Link
-      {...props}
-      href={href}
-      className={clsx(
-        "text-digital-red *:text-digital-red hocus:text-archway-dark *:hocus:text-archway-dark",
-        props.className
-      )}
-    >
+    <Link {...props} href={href}>
       {children}
       {href.startsWith("mailto") && <EnvelopeIcon width={20} className="ml-4 inline-block" />}
     </Link>
