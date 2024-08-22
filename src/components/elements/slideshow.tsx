@@ -57,7 +57,7 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
       ;[...hiddenLinks].map(link => link.setAttribute("tabindex", "-1"))
     }
 
-    const visibleLinks = slideShowRef.current?.querySelectorAll(".slick-slide.slick-active a")
+    const visibleLinks = slideShowRef.current?.querySelectorAll(".slick-slide.slick-active a:not([aria-hidden])")
     if (visibleLinks) {
       ;[...visibleLinks].map(link => link.removeAttribute("tabindex"))
     }
