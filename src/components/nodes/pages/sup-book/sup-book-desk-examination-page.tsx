@@ -24,8 +24,8 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
       isArticle
     >
       <H1 className="mb-32">Desk, Examination, or Review copy request</H1>
-      <div className="mb-36 flex flex-col gap-20 md:flex-row">
-        <div className="flex flex-col gap-10">
+      <div className="rs-mb-0 flex flex-col md:flex-row">
+        <div className="rs-ml-1 flex flex-col gap-[1.5rem]">
           <div className="type-2 font-medium">{node.title}</div>
 
           {node.supBookSubtitle && <div className="type-1 font-medium">{node.supBookSubtitle}</div>}
@@ -34,7 +34,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
         </div>
 
         {node.supBookImage?.mediaImage && (
-          <div className="relative order-first w-full shrink-0 md:w-1/3">
+          <div className="relative order-first w-full max-w-[16rem] shrink-0">
             <Image
               src={node.supBookImage.mediaImage.url}
               alt={node.supBookImage.mediaImage.alt || ""}
