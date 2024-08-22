@@ -21,10 +21,18 @@ import SelectList from "@components/elements/select-list"
 import {SelectOptionDefinition} from "@mui/base/useSelect"
 import {RangeBoundaries} from "instantsearch.js/es/connectors/range/connectRange"
 import {IndexUiState} from "instantsearch.js/es/types/ui-state"
-import {ArrowLongLeftIcon, ArrowLongRightIcon, MagnifyingGlassIcon, XMarkIcon} from "@heroicons/react/20/solid"
+import {
+  ArrowLongLeftIcon,
+  ArrowLongRightIcon,
+  ChevronDownIcon,
+  MagnifyingGlassIcon,
+  XMarkIcon,
+} from "@heroicons/react/20/solid"
 import DefaultHit, {AlgoliaHit} from "@components/algolia-search/hits/default"
 import {CheckIcon} from "@heroicons/react/20/solid"
 import clsx from "clsx"
+import {useBoolean} from "usehooks-ts"
+import {twMerge} from "tailwind-merge"
 
 type Props = {
   appId: string
@@ -117,16 +125,18 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     router.replace(`?${params.toString()}${window.location.hash || ""}`, {scroll: false})
   }, [router, searchParams, currentRefinements, query, pubYearRange])
 
+  const {value: expanded, toggle: toggleExpanded} = useBoolean(true)
+
   return (
     <div>
       <form role="search" aria-labelledby="page-title" onSubmit={e => e.preventDefault()}>
-        <div className="mx-auto mb-20 flex items-center gap-6 md:w-2/3 md:gap-8">
+        <div className="mx-auto mb-20 flex items-center justify-center gap-6 md:w-2/3 md:gap-8">
           <label className="sr-only" htmlFor="search-input">
             Keywords Search
           </label>
           <input
             id="search-input"
-            className="rs-pr-1 rs-pl-1 card-paragraph flex-grow border-0 border-b-2 border-black-30 pb-10 pt-8 md:rs-pr-2 md:rs-pl-3 md:py-12"
+            className="rs-pr-1 rs-pl-1 card-paragraph max-w-[80%] flex-grow border-0 border-b-2 border-black-30 pb-10 pt-8 md:rs-pr-2 md:rs-pl-3 md:max-w-full md:py-12"
             ref={inputRef}
             autoComplete="on"
             autoCorrect="on"
@@ -148,7 +158,26 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           </button>
         </div>
 
-        <div className="float-left hidden w-1/4 md:block">
+        <button
+          id="advanced-filters-toggle"
+          aria-controls="advanced-filters"
+          aria-expanded={expanded}
+          onClick={toggleExpanded}
+          className="mb-5 flex w-full items-center justify-center gap-5 p-5 md:hidden"
+          aria-label={expanded ? "Close Advanced Filters" : "Open Advanced Filters"}
+        >
+          Advanced Filters
+          <ChevronDownIcon
+            width={20}
+            className={twMerge("transition duration-150 ease-in-out", clsx({"rotate-180": expanded}))}
+          />
+        </button>
+
+        <div
+          id="advanced-filters"
+          className={twMerge("md:float-left md:w-1/4", clsx({"hidden md:block": !expanded}))}
+          aria-labelledby="advanced-filters-toggle"
+        >
           <div className="rs-mb-2 rs-pb-3 border-b border-black-30">
             <H2 className="type-0 mb-0">Filter by</H2>
 
@@ -333,15 +362,15 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
   return (
     <div>
       <div className="border-sand-light rs-pb-1 flex flex-col items-start justify-between border-b sm:flex-row sm:items-center">
-        <h2 aria-live="polite" className="type-0 font-medium">
+        <h2 aria-live="polite" className="type-0 ml-5 font-medium md:ml-0">
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
         </h2>
 
-        <div className="flex min-w-[33rem] items-center gap-3">
-          <div id="sort-by" className="text-16 text-press-sand-dark">
+        <div className="flex w-full flex-col items-center gap-3 md:w-fit md:flex-row">
+          <div id="sort-by" className="ml-10 w-full text-16 text-press-sand-dark md:ml-0 md:w-fit">
             Sort By:
           </div>
-          <div className="flex-grow">
+          <div className="w-full flex-grow md:w-auto md:min-w-96">
             <SelectList
               ariaLabelledby="sort-by"
               options={sortOptions}
