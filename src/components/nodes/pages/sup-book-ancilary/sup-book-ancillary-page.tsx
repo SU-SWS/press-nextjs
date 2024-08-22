@@ -25,14 +25,14 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
       <H1 className="type-2 mb-32">
         {node.title} for {book.title}
       </H1>
-      <div className="mb-36 flex flex-col gap-20 md:flex-row">
-        <div className="flex flex-col gap-5">
+      <div className="rs-mb-0 flex flex-col md:flex-row">
+        <div className="rs-ml-1 flex flex-col">
           {node.supAncillaryBook.supBookSubtitle && (
             <div className="type-1 font-medium">{node.supAncillaryBook.supBookSubtitle}</div>
           )}
 
           {node.supAncillaryBook.supBookAuthorsFull && (
-            <div className="type-0 text-press-sand-dark">{node.supAncillaryBook.supBookAuthorsFull}</div>
+            <div className="type-0 mt-5 text-press-sand-dark">{node.supAncillaryBook.supBookAuthorsFull}</div>
           )}
         </div>
 

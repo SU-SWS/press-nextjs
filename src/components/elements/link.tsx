@@ -52,12 +52,12 @@ const DrupalLink = ({href, children, ...props}: LinkProps) => {
 
   return (
     <Link
+      {...props}
       href={href}
       className={clsx(
         "text-digital-red *:text-digital-red hocus:text-archway-dark *:hocus:text-archway-dark",
         props.className
       )}
-      {...props}
     >
       {children}
       {href.startsWith("mailto") && <EnvelopeIcon width={20} className="ml-4 inline-block" />}
