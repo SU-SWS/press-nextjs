@@ -55,7 +55,7 @@ const MainMenu = ({menuItems}: Props) => {
         className="group flex w-0 flex-col items-center lg:hidden"
         onClick={toggleMenu}
         aria-expanded={menuOpen}
-        aria-labelledby={navId}
+        aria-label={menuOpen ? "Close Main Navigation Menu" : "Open Main Navigation Menu"}
       >
         <span className="mb-3 flex h-[30px] w-[30px] flex-col items-center justify-center">
           <span
