@@ -42,8 +42,15 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
           }}
           className="overflow-hidden"
         >
-          {paragraph.supCarouselSlides.map(slide => (
-            <div key={slide.id}>
+          {paragraph.supCarouselSlides.map((slide, slideIndex) => (
+            <div
+              key={slide.id}
+              aria-roledescription="slide"
+              aria-labelledby={slide.supSlideTitle ? slide.id : undefined}
+              aria-label={
+                slide.supSlideTitle ? undefined : `${slideIndex + 1} of ${paragraph.supCarouselSlides.length}`
+              }
+            >
               <Slide key={slide.id} slideParagraph={slide} isTopHero={isTopHero} />
             </div>
           ))}

@@ -96,7 +96,7 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
     ...slideshowProps,
   }
   return (
-    <div ref={slideShowRef} {...props} className={twMerge("relative", props.className)}>
+    <div ref={slideShowRef} {...props} aria-roledescription="carousel" className={twMerge("relative", props.className)}>
       <Slider {...settings}>{children}</Slider>
     </div>
   )

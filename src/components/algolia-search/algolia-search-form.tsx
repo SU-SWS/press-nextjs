@@ -191,15 +191,9 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                         key={`refinement-${i}`}
                         className="mb-4 flex w-fit items-center gap-8 border-2 border-press-sand px-8 pb-5 pt-4 text-18"
                       >
-                        {item.value}
+                        <span id={`refinement-${i}`}>{item.value}</span>
                         <button
-                          aria-labelledby={
-                            "subject-" +
-                            item.value
-                              .toString()
-                              .toLowerCase()
-                              .replaceAll(/[^a-z0-9]/g, "-")
-                          }
+                          aria-labelledby={`refinement-${i}`}
                           disabled={!canRefineCurrent}
                           onClick={() => removeRefinement(item)}
                         >
