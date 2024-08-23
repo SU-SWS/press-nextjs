@@ -49,6 +49,10 @@ const options: HTMLReactParserOptions = {
 
       switch (domNode.name) {
         case "a":
+          // No href for a link, change it to a span tag and keep all other attributes.
+          if (!nodeProps.href) {
+            return <span {...nodeProps}>{domToReact(children, options)}</span>
+          }
           delete nodeProps["data-entity-substitution"]
           delete nodeProps["data-entity-type"]
           delete nodeProps["data-entity-uuid"]
