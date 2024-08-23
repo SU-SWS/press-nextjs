@@ -153,17 +153,23 @@ const SelectList = ({
     <div className="relative h-[45px]">
       <button
         {...getButtonProps()}
-        className={clsx("w-full p-5 text-left", {
-          "rounded border border-black-40": !borderless,
-          "bg-black-30": props.disabled,
-        })}
+        className={twMerge(
+          "w-full p-5 text-left",
+          clsx({
+            "rounded border border-black-40": !borderless,
+            "bg-black-30": props.disabled,
+          })
+        )}
         aria-labelledby={labeledBy}
       >
         {label && (
           <span
-            className={clsx("relative block max-w-[calc(100%-30px)]", {
-              "top-[-15px] w-full": optionChosen,
-            })}
+            className={twMerge(
+              "relative block max-w-[calc(100%-30px)]",
+              clsx({
+                "top-[-15px] w-full": optionChosen,
+              })
+            )}
           >
             <span id={labelId} className={twMerge("block w-fit px-5 text-16", clsx({"bg-black-30": props.disabled}))}>
               {label}
@@ -172,7 +178,7 @@ const SelectList = ({
         )}
 
         {!label && emptyLabel && !optionChosen && (
-          <span className={clsx("relative block max-w-[calc(100%-30px)]")}>
+          <span className="relative block max-w-[calc(100%-30px)]">
             <span id={labelId} className={twMerge("block w-fit px-5 text-16", clsx({"bg-black-30": props.disabled}))}>
               {emptyLabel}
             </span>
@@ -199,7 +205,7 @@ const SelectList = ({
       >
         <ul
           {...getListboxProps()}
-          className={clsx("list-unstyled my-5 *:text-16", {hidden: !listboxVisible})}
+          className={twMerge("list-unstyled my-5 *:text-16", clsx({hidden: !listboxVisible}))}
           aria-hidden={!listboxVisible}
           aria-labelledby={labeledBy}
         >

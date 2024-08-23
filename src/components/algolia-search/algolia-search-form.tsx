@@ -401,10 +401,13 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
               <li
                 key={`page-${pageNum}`}
                 aria-current={currentPage === pageNum}
-                className={clsx("h-fit border-b-2 px-4 pb-3", {
-                  "border-transparent": currentPage !== pageNum,
-                  "border-press-sand-dark": currentPage === pageNum,
-                })}
+                className={twMerge(
+                  "h-fit border-b-2 px-4 pb-3",
+                  clsx({
+                    "border-transparent": currentPage !== pageNum,
+                    "border-press-sand-dark": currentPage === pageNum,
+                  })
+                )}
               >
                 <button className="no-underline hocus:underline" onClick={() => goToPage(pageNum)}>
                   {pageNum + 1}

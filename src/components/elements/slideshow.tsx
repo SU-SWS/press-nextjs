@@ -1,6 +1,6 @@
 "use client"
 
-import {HTMLAttributes, JSX, useEffect, useRef} from "react"
+import {HTMLAttributes, JSX, useRef} from "react"
 import Slider, {CustomArrowProps, Settings} from "react-slick"
 import {ArrowLongRightIcon, ArrowLongLeftIcon} from "@heroicons/react/24/outline"
 import {twMerge} from "tailwind-merge"
@@ -14,7 +14,7 @@ export const NextArrow = ({
   const slickDisabled = slickClassNames?.includes("slick-disabled")
   return (
     <button
-      className={twMerge("absolute right-5 top-1/2 z-50 h-16 w-16 sm:h-20 sm:w-20 lg:right-20", customClassName)}
+      className={twMerge("absolute right-5 top-1/2 z-[1] h-16 w-16 sm:h-20 sm:w-20 lg:right-20", customClassName)}
       onClick={onClick}
       aria-label="Next"
       disabled={slickDisabled}
@@ -32,7 +32,7 @@ export const PrevArrow = ({
   const slickDisabled = slickClassNames?.includes("slick-disabled")
   return (
     <button
-      className={twMerge("absolute left-5 top-1/2 z-50 h-16 w-16 sm:h-20 sm:w-20 lg:left-20", customClassName)}
+      className={twMerge("absolute left-5 top-1/2 z-[1] h-16 w-16 sm:h-20 sm:w-20 lg:left-20", customClassName)}
       onClick={onClick}
       aria-label="Previous"
       disabled={slickDisabled}
@@ -63,14 +63,8 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
     }
   }
 
-  useEffect(() => {
-    adjustSlideLinks()
-  }, [])
-
   const settings: Settings = {
-    afterChange: () => {
-      adjustSlideLinks()
-    },
+    afterChange: () => adjustSlideLinks(),
     autoplay: false,
     centerMode: false,
     className:
@@ -79,6 +73,7 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
     infinite: false,
     initialSlide: 0,
     nextArrow: <NextArrow />,
+    onInit: () => adjustSlideLinks(),
     prevArrow: <PrevArrow />,
     slidesToScroll: 1,
     slidesToShow: 3,
@@ -98,6 +93,26 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
   return (
     <div ref={slideShowRef} {...props} aria-roledescription="carousel" className={twMerge("relative", props.className)}>
       <Slider {...settings}>{children}</Slider>
+    </div>
+  )
+}
+
+export const Slide = ({
+  slideNumber,
+  totalSlides,
+  children,
+  ...props
+}: HTMLAttributes<HTMLDivElement> & {
+  slideNumber: number
+  totalSlides: number
+}) => {
+  return (
+    <div
+      {...props}
+      aria-roledescription="slide"
+      aria-label={props["aria-labelledby"] || props["aria-label"] ? undefined : `${slideNumber} of ${totalSlides}`}
+    >
+      {children}
     </div>
   )
 }

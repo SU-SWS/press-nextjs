@@ -184,9 +184,12 @@ const PaginationButton = ({
   return (
     <li className="m-0 flex items-center">
       <button
-        className={clsx("group type-1 font-medium hocus:text-stone-dark hocus:underline", {
-          "p-4 hocus:rounded-full hocus:bg-cardinal-red": page === "leftArrow" || page === "rightArrow",
-        })}
+        className={twMerge(
+          "group type-1 font-medium hocus:text-stone-dark hocus:underline",
+          clsx({
+            "p-4 hocus:rounded-full hocus:bg-cardinal-red": page === "leftArrow" || page === "rightArrow",
+          })
+        )}
         onClick={handleClick}
         aria-current={isCurrent ? "page" : undefined}
         disabled={disabled}

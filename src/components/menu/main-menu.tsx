@@ -59,22 +59,31 @@ const MainMenu = ({menuItems}: Props) => {
       >
         <span className="mb-3 flex h-[30px] w-[30px] flex-col items-center justify-center">
           <span
-            className={clsx("block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
-              "translate-y-4 rotate-45": menuOpen,
-              "-translate-y-0.5": !menuOpen,
-            })}
+            className={twMerge(
+              "block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out",
+              clsx({
+                "translate-y-4 rotate-45": menuOpen,
+                "-translate-y-0.5": !menuOpen,
+              })
+            )}
           />
           <span
-            className={clsx("my-3 block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
-              "opacity-0": menuOpen,
-              "opacity-100": !menuOpen,
-            })}
+            className={twMerge(
+              "my-3 block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out",
+              clsx({
+                "opacity-0": menuOpen,
+                "opacity-100": !menuOpen,
+              })
+            )}
           />
           <span
-            className={clsx("block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
-              "-translate-y-4 -rotate-45": menuOpen,
-              "translate-y-0.5": !menuOpen,
-            })}
+            className={twMerge(
+              "block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out",
+              clsx({
+                "-translate-y-4 -rotate-45": menuOpen,
+                "translate-y-0.5": !menuOpen,
+              })
+            )}
           />
         </span>
         <span className="group-hocus:underline" aria-hidden>
@@ -104,10 +113,13 @@ const MainMenu = ({menuItems}: Props) => {
             >
               <MagnifyingGlassIcon
                 width={25}
-                className={clsx("-translate-y-2 border-b border-transparent", {
-                  "text-white group-hocus:border-b-white": pageHasBanner,
-                  "text-stone-dark group-hocus:border-b-stone-dark": !pageHasBanner,
-                })}
+                className={twMerge(
+                  "-translate-y-2 border-b border-transparent",
+                  clsx({
+                    "text-white group-hocus:border-b-white": pageHasBanner,
+                    "text-stone-dark group-hocus:border-b-stone-dark": !pageHasBanner,
+                  })
+                )}
               />
             </Link>
           </li>
@@ -230,9 +242,12 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
             >
               <ChevronDownIcon
                 height={35}
-                className={clsx("transition duration-150 ease-in-out group-hocus:scale-125 group-hocus:text-black", {
-                  "rotate-180": submenuOpen,
-                })}
+                className={twMerge(
+                  "transition duration-150 ease-in-out group-hocus:scale-125 group-hocus:text-black",
+                  clsx({
+                    "rotate-180": submenuOpen,
+                  })
+                )}
               />
             </button>
           </>

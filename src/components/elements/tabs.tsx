@@ -85,7 +85,7 @@ export const TabsList = ({containerProps, className, children, ...props}: TabsLi
       <div
         {...getRootProps()}
         {...containerProps}
-        className={twMerge(clsx("flex", {"flex-col": isVertical}), className)}
+        className={twMerge("flex", clsx({"flex-col": isVertical}), className)}
       >
         {children}
       </div>
@@ -117,7 +117,8 @@ export const Tab = ({buttonProps, className, children, ...props}: TabProps) => {
       {...getRootProps()}
       {...buttonProps}
       className={twMerge(
-        clsx("card-paragraph border-b-3 border-transparent p-3 text-left", {"border-[#6AA083]": selected}),
+        "card-paragraph border-b-3 border-transparent p-3 text-left",
+        clsx({"border-[#6AA083]": selected}),
         className
       )}
     >

@@ -39,7 +39,7 @@ const CardParagraph = ({paragraph, ...props}: Props) => {
       color={behaviors.su_card_styles?.bg_color}
     >
       {paragraph.suCardHeader && (
-        <div id={paragraph.id} className={clsx("order-2", {"sr-only": hideHeader})}>
+        <div id={paragraph.id} className={twMerge("order-2", clsx({"sr-only": hideHeader}))}>
           {headerTag === "h2" && (
             <H2 className={twMerge("mb-0 flex items-center", headerClasses)}>{paragraph.suCardHeader}</H2>
           )}

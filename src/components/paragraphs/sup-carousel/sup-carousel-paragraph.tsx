@@ -94,12 +94,15 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
         />
       </figure>
       <div
-        className={clsx("absolute left-0 top-0 block h-full w-full bg-opacity-80", {
-          "bg-plum": color === "magenta",
-          "bg-press-grass": color === "grass",
-          "bg-black-true": color === "steel",
-          "bg-press-indigo": color === "indigo",
-        })}
+        className={twMerge(
+          "absolute left-0 top-0 block h-full w-full bg-opacity-80",
+          clsx({
+            "bg-plum": color === "magenta",
+            "bg-press-grass": color === "grass",
+            "bg-black-true": color === "steel",
+            "bg-press-indigo": color === "indigo",
+          })
+        )}
       />
 
       <div
@@ -112,7 +115,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
       >
         <div className="rs-px-8 w-full lg:px-0">
           {(slideTitle || (!leftImage && image) || eyebrow || subtitle) && (
-            <div className={clsx("flex flex-col", {"text-left": leftImage, "text-center": !leftImage})}>
+            <div className={twMerge("flex flex-col", clsx({"text-left": leftImage, "text-center": !leftImage}))}>
               {slideTitle && (
                 <H2
                   className={twMerge("type-4", clsx({"type-0": slideParagraph.supSlideTitleSize === "small"}))}

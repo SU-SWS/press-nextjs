@@ -37,12 +37,15 @@ const BackgroundImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children,
       className={twMerge("centered relative w-full border border-black-10 shadow-lg lg:max-w-[980px]", props.className)}
     >
       <div
-        className={clsx("absolute left-0 top-0 -z-10 h-full w-full", {
-          "bg-plum": color === "magenta",
-          "bg-press-grass": color === "grass",
-          "bg-black-true bg-opacity-70": color === "steel",
-          "bg-press-indigo": color === "indigo",
-        })}
+        className={twMerge(
+          "absolute left-0 top-0 -z-10 h-full w-full",
+          clsx({
+            "bg-plum": color === "magenta",
+            "bg-press-grass": color === "grass",
+            "bg-black-true bg-opacity-70": color === "steel",
+            "bg-press-indigo": color === "indigo",
+          })
+        )}
       >
         {imageUrl && (
           <Image
@@ -57,7 +60,7 @@ const BackgroundImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children,
 
       {videoUrl && <Oembed url={videoUrl} />}
 
-      <div className={clsx("p-20", {"text-white": !!color})}>{children}</div>
+      <div className={twMerge("p-20", clsx({"text-white": !!color}))}>{children}</div>
     </CardWrapper>
   )
 }

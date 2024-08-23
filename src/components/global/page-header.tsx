@@ -13,7 +13,7 @@ const PageHeader = async () => {
   return (
     <HeaderForCarousel id="site-header">
       <GlobalMessage />
-      <div className="min-h-50 relative z-[1] border-b border-fog">
+      <div className="min-h-50 relative z-[2] border-b border-fog">
         <div className="centered flex w-full items-center justify-between gap-20 pr-24 lg:pr-0">
           <div className="rs-pt-0 rs-pb-1 lg:rs-pt-1 lg:rs-pb-2">
             <Link
