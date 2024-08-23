@@ -142,7 +142,7 @@ const BookPreCart = ({
             List Price: <del className="italic">{formatCurrency(usClothPrice)}</del>
           </div>
           <div>
-            Save{" "}
+            Save&nbsp;
             <ins className="no-underline">
               {formatCurrency(usClothPrice - usClothSalePrice)} ({usClothSaleDiscount}%)
             </ins>
