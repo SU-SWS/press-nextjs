@@ -139,10 +139,13 @@ const BookPreCart = ({
       {formatChoice === "cloth" && !isIntl && usClothPrice && usClothSalePrice && (
         <div className="rs-mt-1 text-18">
           <div>
-            List Price: <span className="italic line-through">{formatCurrency(usClothPrice)}</span>
+            List Price: <del className="italic">{formatCurrency(usClothPrice)}</del>
           </div>
           <div>
-            Save {formatCurrency(usClothPrice - usClothSalePrice)} ({usClothSaleDiscount}%)
+            Save{" "}
+            <ins className="no-underline">
+              {formatCurrency(usClothPrice - usClothSalePrice)} ({usClothSaleDiscount}%)
+            </ins>
           </div>
         </div>
       )}
@@ -150,10 +153,13 @@ const BookPreCart = ({
       {formatChoice === "paper" && !isIntl && usPaperPrice && usPaperSalePrice && (
         <div className="rs-mt-1 text-18">
           <div>
-            List Price: <span className="line-through">{formatCurrency(usPaperPrice)}</span>
+            List Price: <del className="italic">{formatCurrency(usPaperPrice)}</del>
           </div>
           <div>
-            Save {formatCurrency(usPaperPrice - usPaperSalePrice)} ({usPaperSaleDiscount}%)
+            Save{" "}
+            <ins className="no-underline">
+              {formatCurrency(usPaperPrice - usPaperSalePrice)} ({usPaperSaleDiscount}%)
+            </ins>
           </div>
         </div>
       )}
