@@ -30,7 +30,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
     >
       <H1 className="mb-32">Excerpts + More</H1>
       <div className="rs-mb-0 flex flex-col md:flex-row">
-        <div className="rs-ml-1 flex flex-col">
+        <div className="rs-ml-1 flex flex-col gap-[1.5rem]">
           <div className="type-2 font-medium">{node.title}</div>
 
           {node.supBookSubtitle && <div className="type-1 mt-5 font-medium">{node.supBookSubtitle}</div>}
