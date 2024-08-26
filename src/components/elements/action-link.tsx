@@ -10,14 +10,16 @@ const ActionLink = ({children, className, ...props}: LinkProps) => {
       className={twMerge(
         "relative",
         clsx({
-          "text-digital-red *:text-digital-red hocus:text-archway-dark *:hocus:text-archway-dark":
-            !className?.includes("button"),
+          "group text-digital-red hocus:text-archway-dark": !className?.includes("button"),
         }),
         className?.replace("link--action", "")
       )}
     >
       {children}
-      <ArrowLongRightIcon height={20} className="mb-2 ml-2 inline-block" />
+      <ArrowLongRightIcon
+        height={20}
+        className="mb-2 ml-2 inline-block text-digital-red group-hocus:text-archway-dark"
+      />
     </Link>
   )
 }
