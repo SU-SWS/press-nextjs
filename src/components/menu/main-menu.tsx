@@ -243,7 +243,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
               <ChevronDownIcon
                 height={35}
                 className={twMerge(
-                  "transition duration-150 ease-in-out group-hocus:scale-125 group-hocus:text-black",
+                  "transition duration-300 group-hocus:scale-125 group-hocus:text-black",
                   clsx({
                     "rotate-180": submenuOpen,
                   })

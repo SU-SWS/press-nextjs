@@ -1,12 +1,12 @@
 import {notFound, redirect} from "next/navigation"
 import {getBookPathFromWorkId} from "../getBookPathFromWorkId"
 
-const LegacyBookCompPage = async ({searchParams}: {searchParams?: {[_key: string]: string}}) => {
+const LegacyBookExtraPage = async ({searchParams}: {searchParams?: {[_key: string]: string}}) => {
   if (!searchParams || !parseInt(searchParams.id)) notFound()
   const bookNodePath = await getBookPathFromWorkId(parseInt(searchParams.id))
 
-  if (bookNodePath) redirect(`${bookNodePath}/desk-examination-copy-requests`)
+  if (bookNodePath) redirect(`${bookNodePath}/excerpts`)
   notFound()
 }
 
-export default LegacyBookCompPage
+export default LegacyBookExtraPage

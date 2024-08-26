@@ -1,11 +1,11 @@
 import {notFound, redirect} from "next/navigation"
-import {getBookFromWorkId} from "../getBookFromWorkId"
+import {getBookPathFromWorkId} from "../getBookPathFromWorkId"
 
 const LegacyBookPage = async ({searchParams}: {searchParams?: {[_key: string]: string}}) => {
-  if (!searchParams || !searchParams.id) notFound()
-  const bookNode = await getBookFromWorkId(parseInt(searchParams.id))
+  if (!searchParams || !parseInt(searchParams.id)) notFound()
+  const bookNodePath = await getBookPathFromWorkId(parseInt(searchParams.id))
 
-  if (bookNode) redirect(bookNode.path)
+  if (bookNodePath) redirect(bookNodePath)
   notFound()
 }
 

@@ -125,7 +125,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     router.replace(`?${params.toString()}${window.location.hash || ""}`, {scroll: false})
   }, [router, searchParams, currentRefinements, query, pubYearRange])
 
-  const {value: expanded, toggle: toggleExpanded} = useBoolean(true)
+  const {value: expanded, toggle: toggleExpanded} = useBoolean(false)
 
   return (
     <div>
@@ -158,164 +158,169 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           </button>
         </div>
 
-        <button
-          id="advanced-filters-toggle"
-          aria-controls="advanced-filters"
-          aria-expanded={expanded}
-          onClick={toggleExpanded}
-          className="mb-5 flex w-full items-center justify-center gap-5 p-5 md:hidden"
-          aria-label={expanded ? "Close Advanced Filters" : "Open Advanced Filters"}
-        >
-          Advanced Filters
-          <ChevronDownIcon
-            width={20}
-            className={twMerge("transition duration-150 ease-in-out", clsx({"rotate-180": expanded}))}
-          />
-        </button>
+        <div className="mb-10 border-2 border-press-sand p-4 sm:p-8 md:mb-0 md:border-0 md:p-0">
+          <button
+            id="advanced-filters-toggle"
+            aria-controls="advanced-filters"
+            aria-expanded={expanded}
+            onClick={toggleExpanded}
+            className="type-0 flex w-full items-center justify-between gap-5 font-medium hocus:underline md:hidden"
+            aria-label={expanded ? "Close Filters" : "Open Filters"}
+          >
+            Filter by
+            <ChevronDownIcon
+              width={20}
+              className={twMerge("transition duration-300", clsx({"rotate-180": expanded}))}
+            />
+          </button>
 
-        <div
-          id="advanced-filters"
-          className={twMerge("md:float-left md:w-1/4", clsx({"hidden md:block": !expanded}))}
-          aria-labelledby="advanced-filters-toggle"
-        >
-          <div className="rs-mb-2 rs-pb-3 border-b border-black-30">
-            <H2 className="type-0 mb-0">Filter by</H2>
+          <div
+            id="advanced-filters"
+            className={twMerge("md:float-left md:w-1/4", clsx({"hidden md:block": !expanded}))}
+            aria-labelledby="advanced-filters-toggle"
+          >
+            <div className="rs-mb-2 rs-pb-3 border-b border-black-30">
+              <H2 className="type-0 mb-0 hidden md:block">Filter by</H2>
 
-            {currentRefinements.filter(refinement => refinement.attribute === "book_subject").length > 0 && (
-              <ul className="list-unstyled first:children:rs-mt-0">
-                {currentRefinements
-                  .filter(refinement => refinement.attribute === "book_subject")
-                  .map(refinement => {
-                    return refinement.refinements.map((item, i) => (
-                      <li
-                        key={`refinement-${i}`}
-                        className="mb-4 flex w-fit items-center gap-8 border-2 border-press-sand px-8 pb-5 pt-4 text-18"
-                      >
-                        <span id={`refinement-${i}`}>{item.value}</span>
-                        <button
-                          aria-labelledby={`refinement-${i}`}
-                          disabled={!canRefineCurrent}
-                          onClick={() => removeRefinement(item)}
+              {currentRefinements.filter(refinement => refinement.attribute === "book_subject").length > 0 && (
+                <ul className="list-unstyled first:children:rs-mt-0">
+                  {currentRefinements
+                    .filter(refinement => refinement.attribute === "book_subject")
+                    .map(refinement => {
+                      return refinement.refinements.map((item, i) => (
+                        <li
+                          key={`refinement-${i}`}
+                          className="mb-4 flex w-fit items-center gap-8 border-2 border-press-sand px-8 pb-5 pt-4 text-18"
                         >
-                          <span className="sr-only">Clear</span>
-                          <XMarkIcon width={30} />
-                        </button>
-                      </li>
-                    ))
-                  })}
-              </ul>
-            )}
-          </div>
+                          <span id={`refinement-${i}`}>{item.value}</span>
+                          <button
+                            aria-labelledby={`refinement-${i}`}
+                            disabled={!canRefineCurrent}
+                            onClick={() => removeRefinement(item)}
+                          >
+                            <span className="sr-only">Clear</span>
+                            <XMarkIcon width={30} />
+                          </button>
+                        </li>
+                      ))
+                    })}
+                </ul>
+              )}
+            </div>
 
-          <div className="rs-mb-1 rs-pb-2 border-b border-black-30">
-            <label className="flex cursor-pointer items-center justify-between gap-10">
-              <span className="text-18">Search only books</span>
+            <div className="rs-mb-1 rs-pb-2 border-b border-black-30">
+              <label className="flex cursor-pointer items-center justify-between gap-10">
+                <span className="text-18">Search only books</span>
 
-              <div className="group relative">
-                <input
-                  className="peer sr-only"
-                  type="checkbox"
-                  checked={!!bookTypeRefinementItems.find(item => item.isRefined)}
-                  onChange={() => refineBookType("book")}
-                />
-                <div className="h-6 w-16 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
-                <div className="absolute -left-1 -top-2 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-8 outline-press-bay/60 transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline group-hocus:outline" />
-              </div>
-            </label>
-          </div>
-
-          <fieldset className="rs-mb-1 rs-pb-2 border-b border-black-30">
-            <legend className="rs-mb-0 card-paragraph font-medium">Subject</legend>
-            {bookSubjectRefinementList.map(refinementOption => (
-              <label key={refinementOption.value} className="group mx-5 flex cursor-pointer items-center gap-5 text-16">
                 <div className="group relative">
                   <input
                     className="peer sr-only"
                     type="checkbox"
-                    checked={refinementOption.isRefined}
-                    name="subject"
-                    onChange={() => refineBookSubjects(refinementOption.value)}
+                    checked={!!bookTypeRefinementItems.find(item => item.isRefined)}
+                    onChange={() => refineBookType("book")}
                   />
-                  <div className="h-14 w-14 rounded-full peer-focus-visible:bg-press-bay group-hocus:bg-press-bay/60" />
-                  <div className="absolute left-3 top-3 h-8 w-8 rounded border-2 border-press-sand-light peer-checked:border-press-grass peer-checked:bg-press-bay-dark peer-focus-visible:border-press-grass group-hocus:border-press-grass" />
-                  <CheckIcon width={15} className="absolute left-4 top-4 hidden text-white peer-checked:block" />
+                  <div className="h-6 w-16 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
+                  <div className="absolute -left-1 -top-2 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-8 outline-press-bay/60 transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline group-hocus:outline" />
                 </div>
-                <span
-                  id={
-                    "subject-" +
-                    refinementOption.value
-                      .toString()
-                      .toLowerCase()
-                      .replaceAll(/[^a-z0-9]/g, "-")
-                  }
-                  className="group-hocus:underline"
-                >
-                  {refinementOption.value}
-                </span>
               </label>
-            ))}
-          </fieldset>
-
-          <fieldset>
-            <legend className="rs-mb-1 card-paragraph font-medium">Published Date</legend>
-
-            <div className="flex items-center gap-5">
-              <div className="flex-1 flex-grow">
-                <div id={`${id}-min-year`} className="mb-2 text-18 text-press-sand-dark">
-                  <span className="sr-only">Minimum&nbps;</span>Year
-                </div>
-                <SelectList
-                  options={yearOptions.filter(
-                    option =>
-                      parseInt(option.value) < (rangeChoices[1] || 3000) && parseInt(option.value) > (minYear || 0)
-                  )}
-                  value={!rangeChoices[0] || !minYear || rangeChoices[0] <= minYear ? null : `${rangeChoices[0]}`}
-                  ariaLabelledby={`${id}-min-year`}
-                  disabled={!canRefinePubYear}
-                  emptyLabel="Any"
-                  onChange={(_e, value) =>
-                    setRangeChoices(prevState => [parseInt(value as string) || undefined, prevState[1]])
-                  }
-                />
-              </div>
-              <span aria-hidden className="relative top-5">
-                to
-              </span>
-              <div className="flex-1 flex-grow">
-                <div id={`${id}-max-year`} className="mb-2 text-18 text-press-sand-dark">
-                  <span className="sr-only">Maximum&nbps;</span>Year
-                </div>
-                <SelectList
-                  options={yearOptions.filter(
-                    option =>
-                      parseInt(option.value) > (rangeChoices[0] || 0) && parseInt(option.value) < (maxYear || 3000)
-                  )}
-                  value={!rangeChoices[1] || !maxYear || rangeChoices[1] >= maxYear ? null : `${rangeChoices[1]}`}
-                  ariaLabelledby={`${id}-max-year`}
-                  disabled={!canRefinePubYear}
-                  emptyLabel="Any"
-                  onChange={(_e, value) =>
-                    setRangeChoices(prevState => [prevState[0], parseInt(value as string) || undefined])
-                  }
-                  className="h-[45px] text-16 *:text-16"
-                />
-              </div>
             </div>
-          </fieldset>
 
-          <Button
-            className="my-16"
-            centered
-            buttonElem
-            onClick={() => {
-              clearRefinements()
-              refine("")
-              setRangeChoices([0, 3000])
-              if (inputRef.current) inputRef.current.value = ""
-            }}
-          >
-            Reset
-          </Button>
+            <fieldset className="rs-mb-1 rs-pb-2 border-b border-black-30">
+              <legend className="rs-mb-0 card-paragraph font-medium">Subject</legend>
+              {bookSubjectRefinementList.map(refinementOption => (
+                <label
+                  key={refinementOption.value}
+                  className="group mx-5 flex cursor-pointer items-center gap-5 text-16"
+                >
+                  <div className="group relative">
+                    <input
+                      className="peer sr-only"
+                      type="checkbox"
+                      checked={refinementOption.isRefined}
+                      name="subject"
+                      onChange={() => refineBookSubjects(refinementOption.value)}
+                    />
+                    <div className="h-14 w-14 rounded-full peer-focus-visible:bg-press-bay group-hocus:bg-press-bay/60" />
+                    <div className="absolute left-3 top-3 h-8 w-8 rounded border-2 border-press-sand-light peer-checked:border-press-grass peer-checked:bg-press-bay-dark peer-focus-visible:border-press-grass group-hocus:border-press-grass" />
+                    <CheckIcon width={15} className="absolute left-4 top-4 hidden text-white peer-checked:block" />
+                  </div>
+                  <span
+                    id={
+                      "subject-" +
+                      refinementOption.value
+                        .toString()
+                        .toLowerCase()
+                        .replaceAll(/[^a-z0-9]/g, "-")
+                    }
+                    className="group-hocus:underline"
+                  >
+                    {refinementOption.value}
+                  </span>
+                </label>
+              ))}
+            </fieldset>
+
+            <fieldset>
+              <legend className="rs-mb-1 card-paragraph font-medium">Published Date</legend>
+
+              <div className="flex items-center gap-5">
+                <div className="flex-1 flex-grow">
+                  <div id={`${id}-min-year`} className="mb-2 text-18 text-press-sand-dark">
+                    <span className="sr-only">Minimum&nbps;</span>Year
+                  </div>
+                  <SelectList
+                    options={yearOptions.filter(
+                      option =>
+                        parseInt(option.value) < (rangeChoices[1] || 3000) && parseInt(option.value) > (minYear || 0)
+                    )}
+                    value={!rangeChoices[0] || !minYear || rangeChoices[0] <= minYear ? null : `${rangeChoices[0]}`}
+                    ariaLabelledby={`${id}-min-year`}
+                    disabled={!canRefinePubYear}
+                    emptyLabel="Any"
+                    onChange={(_e, value) =>
+                      setRangeChoices(prevState => [parseInt(value as string) || undefined, prevState[1]])
+                    }
+                  />
+                </div>
+                <span aria-hidden className="relative top-5">
+                  to
+                </span>
+                <div className="flex-1 flex-grow">
+                  <div id={`${id}-max-year`} className="mb-2 text-18 text-press-sand-dark">
+                    <span className="sr-only">Maximum&nbps;</span>Year
+                  </div>
+                  <SelectList
+                    options={yearOptions.filter(
+                      option =>
+                        parseInt(option.value) > (rangeChoices[0] || 0) && parseInt(option.value) < (maxYear || 3000)
+                    )}
+                    value={!rangeChoices[1] || !maxYear || rangeChoices[1] >= maxYear ? null : `${rangeChoices[1]}`}
+                    ariaLabelledby={`${id}-max-year`}
+                    disabled={!canRefinePubYear}
+                    emptyLabel="Any"
+                    onChange={(_e, value) =>
+                      setRangeChoices(prevState => [prevState[0], parseInt(value as string) || undefined])
+                    }
+                    className="h-[45px] text-16 *:text-16"
+                  />
+                </div>
+              </div>
+            </fieldset>
+
+            <Button
+              className="my-16"
+              centered
+              buttonElem
+              onClick={() => {
+                clearRefinements()
+                refine("")
+                setRangeChoices([0, 3000])
+                if (inputRef.current) inputRef.current.value = ""
+              }}
+            >
+              Reset
+            </Button>
+          </div>
         </div>
       </form>
 
@@ -360,11 +365,11 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
         </h2>
 
-        <div className="flex w-full flex-col items-center gap-3 md:w-fit md:flex-row">
-          <div id="sort-by" className="ml-10 w-full text-16 text-press-sand-dark md:ml-0 md:w-fit">
+        <div className="flex w-full flex-col items-center gap-3 sm:w-fit sm:flex-row">
+          <div id="sort-by" className="ml-10 w-full text-16 text-press-sand-dark sm:ml-0 sm:w-fit">
             Sort By:
           </div>
-          <div className="w-full flex-grow md:w-auto md:min-w-96">
+          <div className="w-full flex-grow sm:w-auto sm:min-w-96">
             <SelectList
               ariaLabelledby="sort-by"
               options={sortOptions}
