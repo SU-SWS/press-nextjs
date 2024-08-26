@@ -5,6 +5,7 @@ import Link from "@components/elements/link"
 import Image from "next/image"
 import BackToLink from "@components/elements/back-to-link"
 import {twMerge} from "tailwind-merge"
+import BookPageImage from "./book-page-image"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -25,22 +26,17 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
     >
       <H1 className="mb-32">Desk, Examination, or Review copy request</H1>
       <div className="rs-mb-0 flex flex-col md:flex-row">
-        <div className="rs-ml-1 flex flex-col gap-[1.5rem]">
+        <div className="flex flex-col md:rs-ml-1">
           <div className="type-2 font-medium">{node.title}</div>
 
-          {node.supBookSubtitle && <div className="type-1 font-medium">{node.supBookSubtitle}</div>}
+          {node.supBookSubtitle && <div className="type-1 mt-5 font-medium">{node.supBookSubtitle}</div>}
 
-          {node.supBookAuthorsFull && <div className="type-0 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
+          {node.supBookAuthorsFull && <div className="type-0 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
         </div>
 
         {node.supBookImage?.mediaImage && (
           <div className="relative order-first w-full max-w-[16rem] shrink-0">
-            <Image
-              src={node.supBookImage.mediaImage.url}
-              alt={node.supBookImage.mediaImage.alt || ""}
-              height={node.supBookImage.mediaImage.height}
-              width={node.supBookImage.mediaImage.width}
-            />
+            <BookPageImage node={node} />
           </div>
         )}
       </div>
