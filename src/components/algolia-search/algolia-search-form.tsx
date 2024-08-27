@@ -129,7 +129,14 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
 
   return (
     <div>
-      <form role="search" aria-labelledby="page-title" onSubmit={e => e.preventDefault()}>
+      <form
+        role="search"
+        aria-labelledby="page-title"
+        onSubmit={e => {
+          e.preventDefault()
+          document.getElementById("result-summary")?.focus()
+        }}
+      >
         <div className="mx-auto mb-20 flex items-center justify-center gap-6 md:w-2/3 md:gap-8">
           <label className="sr-only" htmlFor="search-input">
             Keywords Search
@@ -140,7 +147,6 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             ref={inputRef}
             autoComplete="on"
             autoCorrect="on"
-            autoCapitalize="off"
             spellCheck={false}
             maxLength={512}
             type="textfield"
@@ -361,7 +367,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
   return (
     <div>
       <div className="border-sand-light rs-pb-1 flex flex-col items-start justify-between border-b sm:flex-row sm:items-center">
-        <h2 aria-live="polite" className="type-0 ml-5 font-medium md:ml-0">
+        <h2 id="result-summary" tabIndex={-1} aria-live="polite" className="type-0 ml-5 font-medium md:ml-0">
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
         </h2>
 

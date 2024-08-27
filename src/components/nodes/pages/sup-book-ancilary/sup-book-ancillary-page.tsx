@@ -23,7 +23,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
       isArticle
     >
       <H1 className="type-2 mb-32">
-        {node.title} for {book.title}
+        {node.title} for <em>{book.title}</em>
       </H1>
       <div className="rs-mb-0 flex flex-col md:flex-row">
         <div className="rs-ml-1 flex flex-col">

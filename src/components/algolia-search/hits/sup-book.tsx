@@ -45,7 +45,11 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
         </div>
 
         {hit.photo && (
-          <div
+          <Link
+            href={url}
+            aria-hidden
+            tabIndex={-1}
+            prefetch={false}
             className={twMerge(
               "relative mx-auto shrink-0 @2xl:mr-0",
               clsx({
@@ -54,16 +58,14 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
               })
             )}
           >
-            <Link href={url} aria-hidden tabIndex={-1} prefetch={false}>
-              <Image
-                className="object-cover"
-                src={hit.photo.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)}
-                alt=""
-                fill
-                sizes="300px"
-              />
-            </Link>
-          </div>
+            <Image
+              className="object-cover"
+              src={hit.photo.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)}
+              alt=""
+              fill
+              sizes="300px"
+            />
+          </Link>
         )}
       </div>
     </article>
