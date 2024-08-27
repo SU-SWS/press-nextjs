@@ -36,7 +36,7 @@ const Page = async ({searchParams}: {searchParams?: {[_key: string]: string}}) =
     <div className="centered mt-32">
       <div className="mx-auto 3xl:w-10/12">
         <H1 className="rs-mb-2" id="page-title">
-          Search
+          Search Our Site
         </H1>
 
         {appId && indexName && initialState && apiKey && (
