@@ -94,9 +94,14 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
     ...slideshowProps,
   }
   return (
-    <div ref={slideShowRef} {...props} aria-roledescription="carousel" className={twMerge("relative", props.className)}>
+    <section
+      ref={slideShowRef}
+      {...props}
+      aria-roledescription="carousel"
+      className={twMerge("relative", props.className)}
+    >
       <Slider {...settings}>{children}</Slider>
-    </div>
+    </section>
   )
 }
 
@@ -112,6 +117,7 @@ export const Slide = ({
   return (
     <div
       {...props}
+      role="group"
       aria-roledescription="slide"
       aria-label={props["aria-labelledby"] || props["aria-label"] ? undefined : `${slideNumber} of ${totalSlides}`}
     >

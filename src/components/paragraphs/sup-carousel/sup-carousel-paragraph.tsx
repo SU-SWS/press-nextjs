@@ -45,6 +45,7 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
           {paragraph.supCarouselSlides.map((slide, slideIndex) => (
             <div
               key={slide.id}
+              role="group"
               aria-roledescription="slide"
               aria-labelledby={slide.supSlideTitle ? slide.id : undefined}
               aria-label={
