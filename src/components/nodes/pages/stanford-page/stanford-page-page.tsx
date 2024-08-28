@@ -20,7 +20,7 @@ const StanfordPagePage = ({node, ...props}: Props) => {
   return (
     <article {...props}>
       {node.suPageBanner?.__typename && (
-        <header className="mb-32">
+        <header>
           {node.suPageBanner?.__typename === "ParagraphStanfordBanner" && (
             <BannerParagraph paragraph={node.suPageBanner} eagerLoadImage />
           )}
@@ -36,7 +36,7 @@ const StanfordPagePage = ({node, ...props}: Props) => {
       )}
 
       {node.suPageBanner?.__typename !== "ParagraphStanfordPageTitleBanner" && (
-        <H1 className={twMerge("rs-mb-7 centered mt-32", clsx({"lg:max-w-1200": fullWidth}))}>{node.title}</H1>
+        <H1 className={twMerge("centered mt-32", clsx({"lg:max-w-1200": fullWidth}))}>{node.title}</H1>
       )}
 
       {!fullWidth && (
