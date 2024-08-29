@@ -49,7 +49,7 @@ const MainMenu = ({menuItems}: Props) => {
   const pageHasBanner = usePageHasTopBanner()
 
   return (
-    <nav id={navId} aria-label="Main Navigation" ref={menuRef}>
+    <nav id={navId} className="shrink-0" aria-label="Main Navigation" ref={menuRef}>
       <button
         ref={buttonRef}
         className="group flex w-0 flex-col items-center lg:hidden"

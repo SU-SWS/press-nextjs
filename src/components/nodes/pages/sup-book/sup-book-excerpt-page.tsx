@@ -28,7 +28,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
       childrenProps={{className: "rs-mt-4 mx-auto max-w-900 gap-10"}}
       isArticle
     >
-      <H1 className="mb-32">Excerpts + More</H1>
+      <H1>Excerpts + More</H1>
       <div className="rs-mb-0 flex flex-col md:flex-row">
         <div className="flex flex-col md:rs-ml-1">
           <div className="type-2 font-medium">{node.title}</div>
