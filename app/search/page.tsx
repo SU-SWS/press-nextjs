@@ -18,13 +18,14 @@ export const metadata = {
 const Page = async ({searchParams}: {searchParams?: {[_key: string]: string}}) => {
   const [appId, indexName, apiKey] = await getAlgoliaCredential()
 
-  const initialState: IndexUiState = {refinementList: {}}
+  const initialState: IndexUiState = {refinementList: {book_type: ["book"]}}
   if (searchParams?.q) initialState.query = searchParams.q as string
   if (searchParams?.subjects && initialState.refinementList) {
     initialState.refinementList.book_subject = searchParams.subjects.split(",")
   }
-  if (!!searchParams?.books && initialState.refinementList) {
-    initialState.refinementList.book_type = ["book"]
+
+  if (!!searchParams?.["only-books"] && initialState.refinementList) {
+    delete initialState.refinementList.book_type
   }
   if (searchParams?.["published-min"] || searchParams?.["published-max"]) {
     initialState.range = {

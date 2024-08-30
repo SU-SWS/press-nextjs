@@ -8,6 +8,7 @@ type Props = HTMLAttributes<HTMLDivElement> & {
 
 const SupSearchFormParagraph = ({paragraph, ...props}: Props) => {
   const inputId = useId()
+
   return (
     <div {...props}>
       <form className="mx-auto max-w-6xl" aria-label="Site Search" action="/search">
@@ -28,7 +29,7 @@ const SupSearchFormParagraph = ({paragraph, ...props}: Props) => {
           {paragraph.supSearchSubject && (
             <input type="hidden" name="subjects" value={paragraph.supSearchSubject.name} />
           )}
-          {paragraph.supSearchBooksOnly && <input type="hidden" name="books" value="1" />}
+          {!paragraph.supSearchBooksOnly && <input type="hidden" name="only-books" value="false" />}
 
           <button type="submit" className="group">
             <span className="sr-only">Submit Search</span>

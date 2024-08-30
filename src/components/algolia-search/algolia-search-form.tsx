@@ -103,7 +103,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     params.delete("published-min")
     params.delete("published-max")
     params.delete("subjects")
-    params.delete("books")
+    params.delete("only-books")
     params.delete("q")
 
     // Keyword search.
@@ -114,7 +114,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     if (Number.isFinite(pubYearRange[1])) params.set("published-max", `${pubYearRange[1]}`)
 
     // Books only.
-    if (!!currentRefinements.find(refinement => refinement.attribute === "book_type")) params.set("books", "1")
+    if (!currentRefinements.find(refinement => refinement.attribute === "book_type")) params.set("only-books", "false")
 
     // Book subjects.
     const chosenSubjects = currentRefinements
@@ -167,6 +167,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
         <div className="mb-10 border-2 border-press-sand p-4 sm:p-8 md:mb-0 md:border-0 md:p-0">
           <button
             id="advanced-filters-toggle"
+            type="button"
             aria-controls="advanced-filters"
             aria-expanded={expanded}
             onClick={toggleExpanded}
@@ -226,7 +227,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                     onChange={() => refineBookType("book")}
                   />
                   <div className="h-6 w-16 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
-                  <div className="absolute -left-1 -top-2 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-8 outline-press-bay/60 transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline group-hocus:outline" />
+                  <div className="absolute -left-1 -top-2 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-8 outline-press-bay transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline group-hocus:outline" />
                 </div>
               </label>
             </div>

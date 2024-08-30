@@ -21,15 +21,12 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
   )
 
   const createLinkParams = (subject: TermSupBookSubject) => {
-    const linkParams = new URLSearchParams()
+    const linkParams = new URLSearchParams({"only-books": "false", subjects: subject.name})
 
     if (subject.parent?.name) {
       linkParams.set("subjects", subject.parent.name)
       linkParams.set("q", subject.name)
-    } else {
-      linkParams.set("subjects", subject.name)
     }
-
     return linkParams.toString()
   }
 
@@ -142,7 +139,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                   <br />
                   <Link
                     prefetch={false}
-                    href={`/search?q=${node.supBookSeries.name}`}
+                    href={`/search?q=${node.supBookSeries.name}&only-books=false`}
                     className="text-18 font-normal text-stone-dark"
                   >
                     {node.supBookSeries.name}
