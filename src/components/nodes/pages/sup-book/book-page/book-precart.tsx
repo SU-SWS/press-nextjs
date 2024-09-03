@@ -9,6 +9,8 @@ import {BookmarkIcon} from "@heroicons/react/24/outline"
 import {BookOpenIcon} from "@heroicons/react/24/solid"
 import {useRouter} from "next/navigation"
 import {formatCurrency} from "@lib/utils/format-currency"
+import {twMerge} from "tailwind-merge"
+import {clsx} from "clsx"
 
 type Props = {
   bookTitle: string
@@ -22,7 +24,7 @@ type Props = {
   paperIsbn?: Maybe<string>
   hasIntlCart?: boolean
   preorder?: Maybe<boolean>
-  noCartButton?: Maybe<boolean>
+  comingSoon?: Maybe<boolean>
 }
 
 const BookPreCart = ({
@@ -36,7 +38,7 @@ const BookPreCart = ({
   clothIsbn,
   paperIsbn,
   preorder,
-  noCartButton,
+  comingSoon,
   hasIntlCart = true,
 }: Props) => {
   const router = useRouter()
@@ -116,26 +118,32 @@ const BookPreCart = ({
         </fieldset>
       )}
 
-      {isIntl && !noCartButton && (
+      {isIntl && !comingSoon && (
         <p className="text-[0.8em]">
           For customer shipments outside the US and Canada, please use the button below to order from our partner,
           Combined Academic Publishers.
         </p>
       )}
 
-      {!noCartButton && (
-        <Button
-          buttonElem
-          type="submit"
-          className="mt-5 flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]"
-        >
-          {preorder && !isIntl && "Preorder"}
-          {!preorder && !isIntl && "Add to cart"}
-          {preorder && isIntl && "Preorder from CAP"}
-          {!preorder && isIntl && "Purchase from CAP"}
-          <ArrowRightIcon width={24} />
-        </Button>
-      )}
+      <Button
+        buttonElem
+        type="submit"
+        className={twMerge(
+          "mt-5 flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]",
+          clsx({
+            "border-0 bg-black-70 hocus:bg-black-80": comingSoon,
+          })
+        )}
+        disabled={!!comingSoon}
+      >
+        {!comingSoon && preorder && !isIntl && "Preorder"}
+        {!comingSoon && !preorder && !isIntl && "Add to cart"}
+        {!comingSoon && preorder && isIntl && "Preorder from CAP"}
+        {!comingSoon && !preorder && isIntl && "Purchase from CAP"}
+        {comingSoon && "Coming Soon"}
+
+        {!comingSoon && <ArrowRightIcon width={24} />}
+      </Button>
 
       {formatChoice === "cloth" && !isIntl && usClothPrice && usClothSalePrice && (
         <div className="rs-mt-1 text-18">
