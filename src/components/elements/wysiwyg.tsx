@@ -11,6 +11,7 @@ import Button from "@components/elements/button"
 import ActionLink from "@components/elements/action-link"
 import clsx from "clsx"
 import Link from "@components/elements/link"
+import Blockquote from "@components/elements/blockquote"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -106,12 +107,18 @@ const options: HTMLReactParserOptions = {
           return cleanMediaMarkup(domNode)
 
         case "p":
+          if (nodeProps?.className.includes("blockquote")) {
+            return <Blockquote>{domToReact(children, options)}</Blockquote>
+          }
           nodeProps.className = twMerge(
             nodeProps.className,
             "max-w-[100ch]",
             clsx({"type-0": !nodeProps.className.includes("type-")})
           )
           return <NodeName {...nodeProps}>{domToReact(children, options)}</NodeName>
+
+        case "blockquote":
+          return <Blockquote>{domToReact(children, options)}</Blockquote>
 
         case "script":
           return <Script {...nodeProps}>{domToReact(children, options)}</Script>
