@@ -5,7 +5,8 @@ import Button from "@components/elements/button"
 import {FormEvent, useState} from "react"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
 import {Maybe} from "@lib/gql/__generated__/drupal"
-import {BookmarkIcon, BookOpenIcon} from "@heroicons/react/24/outline"
+import {BookmarkIcon} from "@heroicons/react/24/outline"
+import {BookOpenIcon} from "@heroicons/react/24/solid"
 import {useRouter} from "next/navigation"
 import {formatCurrency} from "@lib/utils/format-currency"
 
@@ -198,7 +199,7 @@ const UsFormatChoices = ({
                   <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(clothPrice)}</span>
                 </span>
               </span>
-              <BookmarkIcon width={24} className="text-fog-dark" />
+              <BookOpenIcon width={24} className="text-fog-dark" />
             </span>
           </span>
         </label>

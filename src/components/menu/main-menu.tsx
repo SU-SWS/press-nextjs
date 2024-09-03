@@ -100,7 +100,7 @@ const MainMenu = ({menuItems}: Props) => {
         )}
       >
         <SiteSearchForm className="px-10 lg:hidden" />
-        <ul className="list-unstyled m-0 ml-auto flex-wrap p-0 lg:flex lg:justify-end">
+        <ul className="list-unstyled m-0 ml-auto mt-4 flex-wrap p-0 lg:flex lg:justify-end">
           {menuItems.map(item => (
             <MenuItem key={item.id} {...item} activeTrail={activeTrail} level={0} />
           ))}
