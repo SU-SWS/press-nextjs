@@ -1,7 +1,12 @@
 import {getPathFromContext, PageProps} from "@lib/drupal/utils"
 import FlushCache from "@components/elements/flush-cache"
+import {ReactNode} from "react"
 
-const Layout = ({children, params}: PageProps & {children: React.ReactNode}) => {
+type Props = Omit<PageProps, "searchParams"> & {
+  children: ReactNode
+}
+
+const Layout = ({children, params}: Props) => {
   const currentPath = getPathFromContext({params})
   return (
     <>
