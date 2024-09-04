@@ -135,7 +135,7 @@ const BookPage = async ({node, ...props}: Props) => {
               {!!node.supBookPages && <div className="text-18 text-press-sand-dark">{node.supBookPages} Pages</div>}
 
               {node.supBookSeries?.name && (
-                <div>
+                <div className="rs-mt-0 text-18">
                   Series
                   <br />
                   <Link

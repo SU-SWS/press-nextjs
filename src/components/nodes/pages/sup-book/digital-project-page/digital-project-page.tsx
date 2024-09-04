@@ -136,7 +136,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
               {!!node.supBookPages && <div className="text-18 text-press-sand-dark">{node.supBookPages} Pages</div>}
 
               {node.supBookSeries?.name && (
-                <div>
+                <div className="text-18 rs-mt-0">
                   Series
                   <br />
                   <Link
