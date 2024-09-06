@@ -26,11 +26,13 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
       <H1>Desk, Examination, or Review copy request</H1>
       <div className="rs-mb-0 flex flex-col md:flex-row">
         <div className="flex flex-col md:rs-ml-1">
-          <div className="type-2 font-medium">{node.title}</div>
+          <div className="type-2 font-medium xl:text-[3.3rem]">{node.title}</div>
 
-          {node.supBookSubtitle && <div className="type-1 mt-5 font-medium">{node.supBookSubtitle}</div>}
+          {node.supBookSubtitle && <div className="type-1 mt-5 font-medium xl:text-26">{node.supBookSubtitle}</div>}
 
-          {node.supBookAuthorsFull && <div className="type-0 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
+          {node.supBookAuthorsFull && (
+            <div className="type-0 mt-5 text-press-sand-dark xl:text-21">{node.supBookAuthorsFull}</div>
+          )}
         </div>
 
         {node.supBookImage?.mediaImage && (
@@ -42,10 +44,10 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
 
       <div>
         {node.supBookAvailDesc && (
-          <div className="type-0 mb-16 font-semibold text-archway-dark">{node.supBookAvailDesc}</div>
+          <div className="type-0 mb-16 font-semibold text-archway-dark xl:text-21">{node.supBookAvailDesc}</div>
         )}
 
-        <H2 className="rs-mt-4 type-1">Request Types</H2>
+        <H2 className="rs-mt-4 type-1 xl:text-26">Request Types</H2>
         <ul className="rs-mb-2">
           <li>
             <b>Review copies</b> are for media who plan to give the book to a reviewer.
@@ -59,7 +61,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
           </li>
         </ul>
 
-        <H2 className="rs-mt-4 type-1">Review Copy Requests</H2>
+        <H2 className="rs-mt-4 type-1 xl:text-26">Review Copy Requests</H2>
         <p>
           If you would like to review one of our titles for a periodical or other publication, please email{" "}
           <Link href="mailto:publicity@www.sup.org">publicity@www.sup.org</Link> with the following information:
@@ -79,7 +81,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
 
         {node.supBookDigitalCompLink && (
           <>
-            <H2 className="rs-mt-4 type-1">Desk and Examination Copies—Digital</H2>
+            <H2 className="rs-mt-4 type-1 xl:text-26">Desk and Examination Copies—Digital</H2>
             <p>
               Please scroll to <span className="font-semibold">Desk and Examination Copies—Print</span> at the end of
               this page if you are looking for a print copy.
@@ -164,7 +166,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
 
             {!node.supBookPrintDeskCopies && (
               <>
-                <H2 className="rs-mt-4 type-1">Digital Only</H2>
+                <H2 className="rs-mt-4 type-1 xl:text-26">Digital Only</H2>
                 <p>This title is only available as a digital copy.</p>
               </>
             )}

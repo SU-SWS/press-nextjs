@@ -43,7 +43,7 @@ const SupBookCard = ({node, headingLevel, darkBg, ...props}: Props) => {
           )}
         </div>
 
-        <Heading className="type-0 mb-5 font-normal">
+        <Heading className="type-0 mb-5 font-normal xl:text-21">
           <Link
             className={twMerge(
               "stretched-link font-medium text-stone-dark",

@@ -21,7 +21,7 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
   return (
     <div {...props} className={twMerge("centered max-w-800", props.className)}>
       <div className="rs-mb-1 max-w-4xl">
-        <div id={id} className="type-0 mb-3 font-medium">
+        <div id={id} className="type-0 mb-3 font-medium xl:text-21">
           {label}
         </div>
         <SelectList
@@ -35,7 +35,7 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
         <Button
           href={chosenItem.url}
           prefetch={false}
-          className="type-0 flex items-center gap-10 py-[1.2rem] pl-[2.1rem] pr-[1.8rem]"
+          className="type-0 flex items-center gap-10 py-[1.2rem] pl-[2.1rem] pr-[1.8rem] xl:text-21"
         >
           Download {chosenItem.label} <DocumentArrowDownIcon width={28} />
         </Button>

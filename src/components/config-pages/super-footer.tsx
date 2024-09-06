@@ -13,7 +13,9 @@ const SuperFooter = async () => {
     <div className="border-b border-black-20 bg-foggy-light py-20">
       <div className="centered flex justify-between">
         <div className="flex-1">
-          {superFooterConfig.suSuperFootTitle && <H2 className="type-1">{superFooterConfig.suSuperFootTitle}</H2>}
+          {superFooterConfig.suSuperFootTitle && (
+            <H2 className="type-1 xl:text-26">{superFooterConfig.suSuperFootTitle}</H2>
+          )}
 
           <Wysiwyg html={superFooterConfig.suSuperFootText?.processed} />
         </div>

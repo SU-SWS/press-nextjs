@@ -107,7 +107,7 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
 const AuthorItem = ({authorName, books}: {authorName: string; books?: JSX.Element[]}) => {
   return (
     <div>
-      <div className="type-0 pr-4">{authorName},</div>
+      <div className="type-0 pr-4 xl:text-21">{authorName},</div>
       <div className="ml-20">{books}</div>
     </div>
   )

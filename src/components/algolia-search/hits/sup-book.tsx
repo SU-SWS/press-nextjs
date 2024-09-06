@@ -27,7 +27,7 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
     <article className="py-12 @container">
       <div className="flex flex-col justify-between gap-20 @2xl:flex-row">
         <div>
-          <H3 className="type-0 mb-2" id={hit.objectID}>
+          <H3 className="type-0 mb-2 xl:text-21" id={hit.objectID}>
             <Link className="text-stone-dark hocus:text-digital-red" href={url} prefetch={false}>
               {hit.title}
             </Link>

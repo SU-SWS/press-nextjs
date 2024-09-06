@@ -31,11 +31,13 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
       <H1>Excerpts + More</H1>
       <div className="rs-mb-0 flex flex-col md:flex-row">
         <div className="flex flex-col md:rs-ml-1">
-          <div className="type-2 font-medium">{node.title}</div>
+          <div className="type-2 font-medium xl:text-[3.3rem]">{node.title}</div>
 
-          {node.supBookSubtitle && <div className="type-1 mt-5 font-medium">{node.supBookSubtitle}</div>}
+          {node.supBookSubtitle && <div className="type-1 mt-5 font-medium xl:text-26">{node.supBookSubtitle}</div>}
 
-          {node.supBookAuthorsFull && <div className="type-0 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>}
+          {node.supBookAuthorsFull && (
+            <div className="type-0 mt-5 text-press-sand-dark xl:text-21">{node.supBookAuthorsFull}</div>
+          )}
 
           {ancillaryPages.map(page => (
             <Link className="rs-pt-1 rs-mt-2 border-t-2 border-fog" key={page.id} href={page.path}>

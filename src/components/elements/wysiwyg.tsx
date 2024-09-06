@@ -98,7 +98,7 @@ const options: HTMLReactParserOptions = {
           }
 
           if (nodeProps.className?.includes("chapnumandtitle")) {
-            nodeProps.className += " font-semibold type-3"
+            nodeProps.className += " font-semibold type-3 xl:text-[4.1rem]"
           }
 
           return <NodeName {...nodeProps}>{domToReact(children, options)}</NodeName>
@@ -113,7 +113,7 @@ const options: HTMLReactParserOptions = {
           nodeProps.className = twMerge(
             nodeProps.className,
             "max-w-[100ch]",
-            clsx({"type-0": !nodeProps.className.includes("type-")})
+            clsx({"type-0 xl:text-21": !nodeProps.className.includes("type-")})
           )
           return <NodeName {...nodeProps}>{domToReact(children, options)}</NodeName>
 
@@ -161,14 +161,14 @@ const fixClasses = (classes?: string | boolean): string => {
     .replaceAll(" align-left ", " float-left mr-10 mb-10 ")
     .replaceAll(" align-right ", " float-right ml-10 mb-10 ")
     .replaceAll(" visually-hidden ", " sr-only ")
-    .replaceAll(" font-splash ", " splash-text type-4 ")
-    .replaceAll(" callout-text ", " font-bold type-3 ")
+    .replaceAll(" font-splash ", " splash-text type-4 xl:text-[5.1rem] ")
+    .replaceAll(" callout-text ", " font-bold type-3 xl:text-[4.1rem] ")
     .replaceAll(" related-text ", " shadow-lg border border-black-20 p-16 ")
     .replaceAll(
       " drop-cap ",
-      " type-2 first-letter:font-bold first-letter:type-6 first-letter:float-left first-letter:my-2 first-letter:mr-4 "
+      " type-2 xl:text-[3.3rem] first-letter:font-bold first-letter:type-6 first-letter:float-left first-letter:my-2 first-letter:mr-4 "
     )
-    .replaceAll(" intro-text ", " type-1 ")
+    .replaceAll(" intro-text ", " type-1 xl:text-26 ")
     .replace(/ tablesaw.*? /g, " ")
     .replace(/ +/g, " ")
     .trim()

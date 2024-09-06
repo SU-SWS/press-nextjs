@@ -98,7 +98,9 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
           )}
 
           {paragraph.supListEyebrow && (
-            <div className="rs-mb-neg2 type-0 order-first text-press-sand-dark">{paragraph.supListEyebrow}</div>
+            <div className="rs-mb-neg2 type-0 order-first text-press-sand-dark xl:text-21">
+              {paragraph.supListEyebrow}
+            </div>
           )}
         </div>
 

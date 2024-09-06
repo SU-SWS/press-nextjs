@@ -119,14 +119,17 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
             <div className={twMerge("flex flex-col", clsx({"text-left": leftImage, "text-center": !leftImage}))}>
               {slideTitle && (
                 <H2
-                  className={twMerge("type-4", clsx({"type-0": slideParagraph.supSlideTitleSize === "small"}))}
+                  className={twMerge(
+                    "type-4 xl:text-[5.1rem]",
+                    clsx({"type-0 xl:text-21": slideParagraph.supSlideTitleSize === "small"})
+                  )}
                   id={slideParagraph.id}
                 >
                   {slideTitle}
                 </H2>
               )}
 
-              {subtitle && <div className="rs-mb-3 type-2">{subtitle}</div>}
+              {subtitle && <div className="rs-mb-3 type-2 xl:text-[3.3rem]">{subtitle}</div>}
 
               {((!leftImage && image) || eyebrow) && (
                 <div className="order-first">
@@ -148,7 +151,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
                     </div>
                   )}
 
-                  {eyebrow && <div className="type-1 mb-5">{eyebrow}</div>}
+                  {eyebrow && <div className="type-1 mb-5 xl:text-26">{eyebrow}</div>}
                 </div>
               )}
             </div>
