@@ -967,6 +967,9 @@ ${FragmentTermInterfaceFragmentDoc}`;
 export const FragmentNodeSupBookAncillaryFragmentDoc = gql`
     fragment FragmentNodeSupBookAncillary on NodeSupBookAncillary {
   ...FragmentNodeInterface
+  body {
+    processed
+  }
   supAncillaryBook {
     ...FragmentNodeInterface
     supBookSubtitle

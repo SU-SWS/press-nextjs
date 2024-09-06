@@ -5,6 +5,7 @@ import Rows from "@components/paragraphs/rows/rows"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
 import BackToLink from "@components/elements/back-to-link"
 import {twMerge} from "tailwind-merge"
+import Wysiwyg from "@components/elements/wysiwyg"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBookAncillary
@@ -42,6 +43,8 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
           </div>
         )}
       </div>
+
+      <Wysiwyg html={node.body?.processed} />
       <Rows components={node.supAncillaryParagraphs} className="px-5" />
     </BackToLink>
   )

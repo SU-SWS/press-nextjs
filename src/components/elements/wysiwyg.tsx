@@ -12,6 +12,7 @@ import ActionLink from "@components/elements/action-link"
 import clsx from "clsx"
 import Link from "@components/elements/link"
 import Blockquote from "@components/elements/blockquote"
+import Iframe from "@components/elements/iframe"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -89,18 +90,17 @@ const options: HTMLReactParserOptions = {
         case "div":
         case "article":
           delete nodeProps.role
-          if (nodeProps.className) {
-            if (nodeProps.className.includes("media-entity-wrapper")) {
-              return cleanMediaMarkup(domNode)
-            }
-            if (nodeProps.className.includes("trigger")) {
-              return <></>
-            }
-
-            if (nodeProps.className.includes("chapnumandtitle")) {
-              nodeProps.className += " font-semibold type-3"
-            }
+          if (nodeProps.className?.includes("media-entity-wrapper")) {
+            return cleanMediaMarkup(domNode)
           }
+          if (nodeProps.className?.includes("trigger")) {
+            return <></>
+          }
+
+          if (nodeProps.className?.includes("chapnumandtitle")) {
+            nodeProps.className += " font-semibold type-3"
+          }
+
           return <NodeName {...nodeProps}>{domToReact(children, options)}</NodeName>
 
         case "figure":
@@ -137,6 +137,9 @@ const options: HTMLReactParserOptions = {
         case "hr":
           nodeProps.className = twMerge(nodeProps.className, "border-t border-press-sand-light")
           return <hr {...nodeProps} />
+
+        case "iframe":
+          return <Iframe {...nodeProps}></Iframe>
 
         default:
           return null

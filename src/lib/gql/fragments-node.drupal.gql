@@ -15,6 +15,9 @@ fragment FragmentNodeInterface on NodeInterface {
 
 fragment FragmentNodeSupBookAncillary on NodeSupBookAncillary {
     ...FragmentNodeInterface
+    body {
+        processed
+    }
     supAncillaryBook {
         ...FragmentNodeInterface
         supBookSubtitle
