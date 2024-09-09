@@ -5,7 +5,7 @@ import Button from "@components/elements/button"
 import {FormEvent, useState} from "react"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
 import {Maybe} from "@lib/gql/__generated__/drupal"
-import {BookmarkIcon} from "@heroicons/react/24/outline"
+import {BookOpenIcon as BookOpenIconOutline} from "@heroicons/react/24/outline"
 import {BookOpenIcon} from "@heroicons/react/24/solid"
 import {useRouter} from "next/navigation"
 import {formatCurrency} from "@lib/utils/format-currency"
@@ -231,7 +231,7 @@ const UsFormatChoices = ({
                   <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(paperPrice)}</span>
                 </span>
               </span>
-              <BookOpenIcon width={24} className="text-fog-dark" />
+              <BookOpenIconOutline width={24} className="text-fog-dark" />
             </span>
           </span>
         </label>
@@ -265,7 +265,7 @@ const IntlFormatChoices = ({
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center justify-between font-semibold">
               <span className="group-hover:underline md:text-[0.85em]">Hardcover</span>
-              <BookmarkIcon width={24} className="text-fog-dark" />
+              <BookOpenIcon width={24} className="text-fog-dark" />
             </span>
           </span>
         </label>
@@ -283,7 +283,7 @@ const IntlFormatChoices = ({
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center justify-between font-semibold">
               <span className="group-hover:underline md:text-[0.85em]">Paperback</span>
-              <BookOpenIcon width={24} className="text-fog-dark" />
+              <BookOpenIconOutline width={24} className="text-fog-dark" />
             </span>
           </span>
         </label>

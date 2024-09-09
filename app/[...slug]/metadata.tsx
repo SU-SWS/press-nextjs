@@ -6,6 +6,7 @@ import {
   NodeStanfordPerson,
   NodeStanfordPolicy,
   NodeSupBook,
+  NodeSupBookAncillary,
   NodeUnion,
   ParagraphStanfordWysiwyg,
   ParagraphUnion,
@@ -54,9 +55,33 @@ export const getNodeMetadata = (node: NodeUnion, page: "excerpt" | "copy-request
         ...defaultData,
         ...getBookMetaData(node, page),
       }
-  }
 
+    case "NodeSupBookAncillary":
+      return {
+        ...defaultData,
+        ...getBookAncillaryMetaData(node),
+      }
+  }
   return defaultData
+}
+
+const getBookAncillaryMetaData = (node: NodeSupBookAncillary) => {
+  const image = node.supAncillaryBook.supBookImage?.mediaImage
+  const description = getCleanDescription(node.body?.processed) || getFirstText(node.supAncillaryParagraphs)
+
+  return {
+    title: node.supAncillaryBook.title + ": " + node.title + " | Stanford University Press",
+    description: description,
+    openGraph: {
+      type: "website",
+      title: node.supAncillaryBook.title + ": " + node.title + " | Stanford University Press",
+      description: description,
+      images: image ? getOpenGraphImage(image.url, image.alt || "") : [],
+      locale: "en_IE",
+      url: "https://sup.org" + node.path,
+      siteName: "Stanford University Press",
+    },
+  }
 }
 
 const getBookMetaData = (node: NodeSupBook, page: "excerpt" | "copy-requests" | "detail") => {

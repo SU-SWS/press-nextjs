@@ -8,13 +8,13 @@ type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
 }
 const SupBookPage = async ({node, ...props}: Props) => {
-  return node.supBookType === "book" ? (
+  if (node.supBookType !== "book") return <DigitalProjectPage node={node} {...props} />
+
+  return (
     <>
       <BookPage node={node} {...props} />
       <AlgoliaRelatedBooks objectId={node.id} />
     </>
-  ) : (
-    <DigitalProjectPage node={node} {...props} />
   )
 }
 export default SupBookPage
