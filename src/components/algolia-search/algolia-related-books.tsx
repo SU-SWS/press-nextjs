@@ -93,7 +93,7 @@ const RelatedBook = ({item}: {item: BookHit}) => {
           )}
         </div>
 
-        <H3 className="type-0 mb-5 font-normal">
+        <H3 className="type-0 mb-5 font-normal xl:text-21">
           <Link
             className="stretched-link font-medium text-stone-dark"
             href={item.url.replace(new URL(item.url).origin, "")}

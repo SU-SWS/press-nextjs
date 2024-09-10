@@ -171,7 +171,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             aria-controls="advanced-filters"
             aria-expanded={expanded}
             onClick={toggleExpanded}
-            className="type-0 flex w-full items-center justify-between gap-5 font-medium hocus:underline md:hidden"
+            className="type-0 flex w-full items-center justify-between gap-5 font-medium hocus:underline md:hidden xl:text-21"
             aria-label={expanded ? "Close Filters" : "Open Filters"}
           >
             Filter by
@@ -187,7 +187,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             aria-labelledby="advanced-filters-toggle"
           >
             <div className="rs-mb-2 rs-pb-3 border-b border-black-30">
-              <H2 className="type-0 mb-0 hidden md:block">Filter by</H2>
+              <H2 className="type-0 mb-0 hidden md:block xl:text-21">Filter by</H2>
 
               {currentRefinements.filter(refinement => refinement.attribute === "book_subject").length > 0 && (
                 <ul className="list-unstyled first:children:rs-mt-0">
@@ -368,7 +368,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
   return (
     <div>
       <div className="border-sand-light rs-pb-1 flex flex-col items-start justify-between border-b sm:flex-row sm:items-center">
-        <h2 id="result-summary" tabIndex={-1} aria-live="polite" className="type-0 ml-5 font-medium md:ml-0">
+        <h2 id="result-summary" tabIndex={-1} aria-live="polite" className="type-0 ml-5 font-medium md:ml-0 xl:text-21">
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
         </h2>
 

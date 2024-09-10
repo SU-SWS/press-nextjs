@@ -44,7 +44,7 @@ const LocalFooter = async () => {
             <Wysiwyg html={localFooterConfig.suLocalFootTr2Co?.processed} className="max-w-[250px]" />
             {/* Primary Links */}
             {localFooterConfig.suLocalFootPrimeH && (
-              <H2 className="rs-pt-4 type-2 text-white">{localFooterConfig.suLocalFootPrimeH}</H2>
+              <H2 className="rs-pt-4 type-2 text-white xl:text-[3.3rem]">{localFooterConfig.suLocalFootPrimeH}</H2>
             )}
             {localFooterConfig.suLocalFootPrimary && (
               <ul className="list-unstyled">
@@ -65,7 +65,7 @@ const LocalFooter = async () => {
             <Wysiwyg html={localFooterConfig.suLocalFootSeCo?.processed} className="max-w-[250px]" />
             {/* Secondary links */}
             {localFooterConfig.suLocalFootSecondH && (
-              <H2 className="rs-pt-4 type-2 text-white">{localFooterConfig.suLocalFootSecondH}</H2>
+              <H2 className="rs-pt-4 type-2 text-white xl:text-[3.3rem]">{localFooterConfig.suLocalFootSecondH}</H2>
             )}
 
             {localFooterConfig.suLocalFootSecond && (

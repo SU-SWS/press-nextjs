@@ -24,7 +24,7 @@ const CardParagraph = ({paragraph, ...props}: Props) => {
 
   const headerTagChoice = (behaviors.su_card_styles?.heading || "h2").split(".", 2)
   const headerTag = headerTagChoice[0]
-  const headerClasses = headerTagChoice[1]?.replace(".", " ").replace("su-font-splash", "type-1 font-medium")
+  const headerClasses = headerTagChoice[1]?.replace(".", " ").replace("su-font-splash", "type-1 xl:text-26 font-medium")
 
   const hideHeader = behaviors.su_card_styles?.hide_heading
   const Component = behaviors.su_card_styles?.card_style === "bg-image" ? BackgroundImageCard : ImageCard

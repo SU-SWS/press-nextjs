@@ -24,7 +24,7 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
     <article className="py-12 @container">
       <div className="flex flex-col justify-between gap-20 @3xl:flex-row">
         <div>
-          <H3 className="type-0">
+          <H3 className="type-0 xl:text-21">
             <Link className="text-stone-dark hocus:text-digital-red" href={hit.url.replace(hitUrl.origin, "")}>
               {hit.title}
             </Link>

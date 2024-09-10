@@ -38,7 +38,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
         <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-col justify-center bg-fog-light px-20 md:hidden">
           <div className="flex flex-row gap-24">
             <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
-              <H1 className="type-2 mb-0">{node.title}</H1>
+              <H1 className="type-2 mb-0 xl:text-[3.3rem]">{node.title}</H1>
 
               {node.supBookSubjects && (
                 <Link
@@ -50,10 +50,10 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                 </Link>
               )}
 
-              {node.supBookSubtitle && <div className="type-0 mt-5 font-medium">{node.supBookSubtitle}</div>}
+              {node.supBookSubtitle && <div className="type-0 mt-5 font-medium xl:text-21">{node.supBookSubtitle}</div>}
 
               {node.supBookAuthorsFull && (
-                <div className="type-1 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
+                <div className="type-1 mt-5 text-press-sand-dark xl:text-26">{node.supBookAuthorsFull}</div>
               )}
             </div>
             <div className="order-first w-full">
@@ -74,7 +74,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
           <div className="lg:w-5/8 2xl:w-full">
             <div className="rs-mb-0 rs-pb-3 flex flex-col border-b-2 border-fog">
               <div className="mt-7 flex flex-col sm:mt-0 sm:hidden md:flex">
-                <H1 className="type-2 mb-0">{node.title}</H1>
+                <H1 className="type-2 mb-0 xl:text-[3.3rem]">{node.title}</H1>
 
                 {node.supBookSubjects && (
                   <Link
@@ -86,10 +86,12 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                   </Link>
                 )}
 
-                {node.supBookSubtitle && <div className="type-0 mt-5 font-medium">{node.supBookSubtitle}</div>}
+                {node.supBookSubtitle && (
+                  <div className="type-0 mt-5 font-medium xl:text-21">{node.supBookSubtitle}</div>
+                )}
 
                 {node.supBookAuthorsFull && (
-                  <div className="type-0 mt-5 text-press-sand-dark">{node.supBookAuthorsFull}</div>
+                  <div className="type-0 mt-5 text-press-sand-dark xl:text-21">{node.supBookAuthorsFull}</div>
                 )}
               </div>
 
@@ -102,7 +104,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                   <BookAwards>
                     {awards.map(award => (
                       <div key={award.id}>
-                        <H3 className="type-0">
+                        <H3 className="type-0 xl:text-21">
                           {award.supYear}: {award.name}
                         </H3>
                         <Wysiwyg html={award.supDescription?.processed} className="ml-10" />
@@ -266,7 +268,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
 
       {node.supBookSubjects && (
         <div className="mx-auto max-w-5xl">
-          <H2 className="type-0 font-bold">Related Subjects</H2>
+          <H2 className="type-0 font-bold xl:text-21">Related Subjects</H2>
           <ul className="list-unstyled flex flex-col md:flex-row md:flex-wrap">
             {node.supBookSubjects.map(subject => (
               <li key={subject.id} className="min-w-fit flex-1">
