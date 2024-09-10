@@ -44,6 +44,7 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
                 month: "long",
                 day: "numeric",
                 year: "numeric",
+                timeZone: "America/Los_Angeles",
               })}
             </div>
           )}

@@ -13,7 +13,7 @@ import {
 } from "react-instantsearch"
 import {InstantSearchNext} from "react-instantsearch-nextjs"
 import {H2} from "@components/elements/headers"
-import {useEffect, useId, useMemo, useRef, useState} from "react"
+import {HTMLAttributes, useEffect, useId, useLayoutEffect, useMemo, useRef, useState} from "react"
 import Button from "@components/elements/button"
 import {useRouter, useSearchParams} from "next/navigation"
 import {Hit as HitType} from "instantsearch.js"
@@ -390,10 +390,13 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
       </div>
 
       <ul className="list-unstyled">
-        {hits.map(hit => (
-          <li key={hit.objectID} className="border-sand-light border-b last:border-0">
-            <DefaultHit hit={hit} />
-          </li>
+        {hits.map((hit, position) => (
+          <HitItem
+            key={hit.objectID}
+            focusOnItem={position === 0 && currentPage > 0}
+            className="border-sand-light border-b last:border-0"
+            hit={hit}
+          />
         ))}
       </ul>
 
@@ -442,6 +445,29 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
         </nav>
       )}
     </div>
+  )
+}
+
+const HitItem = ({
+  focusOnItem,
+  hit,
+  ...props
+}: HTMLAttributes<HTMLLIElement> & {focusOnItem?: boolean; hit: HitType<AlgoliaHit>}) => {
+  const ref = useRef<HTMLLIElement>(null)
+  const {value: focus, setFalse: disableFocus} = useBoolean(focusOnItem)
+
+  useLayoutEffect(() => {
+    if (focus) {
+      const reduceMotion = !!window.matchMedia("(prefers-reduced-motion: reduce)")?.matches
+      ref.current?.scrollIntoView({behavior: reduceMotion ? "instant" : "smooth", block: "end", inline: "nearest"})
+      ref.current?.focus({preventScroll: true})
+    }
+  }, [focus])
+
+  return (
+    <li {...props} tabIndex={focus ? 0 : undefined} ref={focus ? ref : undefined} onBlur={disableFocus}>
+      <DefaultHit hit={hit} />
+    </li>
   )
 }
 
