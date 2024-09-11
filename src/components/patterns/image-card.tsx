@@ -50,9 +50,7 @@ const ImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children, hasBorder
 
       {videoUrl && <Oembed url={videoUrl} />}
 
-      <div
-        className={twMerge("flex flex-col gap-5", clsx({"rs-px-1 rs-py-2": hasBorder, "rs-pr-2 rs-py-2": !hasBorder}))}
-      >
+      <div className={twMerge("flex flex-col gap-5", clsx({"rs-p-1": hasBorder, "rs-pr-2 rs-py-2": !hasBorder}))}>
         {children}
       </div>
     </CardWrapper>
