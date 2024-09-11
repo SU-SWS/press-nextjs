@@ -8,7 +8,7 @@ const ActionLink = ({children, className, ...props}: LinkProps) => {
     <Link
       {...props}
       className={twMerge(
-        "relative",
+        "relative flex w-fit items-center",
         clsx({
           "group text-digital-red hocus:text-archway-dark": !className?.includes("button"),
         }),
@@ -16,10 +16,7 @@ const ActionLink = ({children, className, ...props}: LinkProps) => {
       )}
     >
       {children}
-      <ArrowLongRightIcon
-        height={20}
-        className="mb-2 ml-2 inline-block text-digital-red group-hocus:text-archway-dark"
-      />
+      <ArrowLongRightIcon height={20} className="ml-2 text-digital-red group-hocus:text-archway-dark" />
     </Link>
   )
 }
