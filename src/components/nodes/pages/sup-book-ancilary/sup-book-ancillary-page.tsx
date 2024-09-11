@@ -34,8 +34,8 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
       href={book.path + "/excerpts"}
       className={twMerge("centered", props.className)}
       linkClasses="flex w-fit items-center gap-5"
-      title="Excerpts + More"
-      childrenProps={{className: "centered flex gap-[17.1rem]"}}
+      title="Excerpts + more"
+      childrenProps={{className: "centered rs-mt-4 flex gap-[17.1rem]"}}
       isArticle
     >
       <H1 className="sr-only">
@@ -47,18 +47,19 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
           Skip secondary navigation
         </a>
         {node.supAncillaryBook.supBookImage?.mediaImage && (
-          <div className="relative order-first w-full max-w-[16rem] shrink-0">
+          <div className="rs-mb-3 relative order-first w-full shrink-0">
             <BookPageImage node={node.supAncillaryBook} />
           </div>
         )}
         <SideNav menuItems={ancillaryMenuItems} activeTrail={[node.id]} />
       </aside>
 
-      <div id="page-content" className="flex-grow">
-        <div className="rs-mb-0 flex flex-col md:flex-row">
-          <div className="rs-ml-1 flex flex-col">
+      <div id="page-content" className="centered flex-grow lg:max-w-[900px]">
+        <div className="rs-mb-4 flex flex-col md:flex-row">
+          <div className="flex flex-col">
+            <div className="type-2 font-medium xl:text-[3.3rem]">{book.title}</div>
             {node.supAncillaryBook.supBookSubtitle && (
-              <div className="type-1 font-medium xl:text-26">{node.supAncillaryBook.supBookSubtitle}</div>
+              <div className="type-1 mt-5 font-medium xl:text-26">{node.supAncillaryBook.supBookSubtitle}</div>
             )}
 
             {node.supAncillaryBook.supBookAuthorsFull && (
@@ -70,7 +71,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
         </div>
 
         <Wysiwyg html={node.body?.processed} />
-        <Rows components={node.supAncillaryParagraphs} className="px-5" />
+        <Rows components={node.supAncillaryParagraphs} />
       </div>
     </BackToLink>
   )
