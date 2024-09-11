@@ -17,7 +17,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
   const book = node.supAncillaryBook
 
   const ancillaryPages = await getBookAncillaryContents(node.supAncillaryBook.id, node.path)
-  const ancillarryMenuItems: MenuItemType[] = ancillaryPages.map(page => ({
+  const ancillaryMenuItems: MenuItemType[] = ancillaryPages.map(page => ({
     id: page.id,
     children: [],
     url: page.path,
@@ -51,7 +51,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
             <BookPageImage node={node.supAncillaryBook} />
           </div>
         )}
-        <SideNav menuItems={ancillarryMenuItems} activeTrail={[node.id]} />
+        <SideNav menuItems={ancillaryMenuItems} activeTrail={[node.id]} />
       </aside>
 
       <div id="page-content" className="flex-grow">
