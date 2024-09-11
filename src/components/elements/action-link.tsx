@@ -1,4 +1,5 @@
-import Link, {LinkProps} from "@components/elements/link"
+import Link from "next/link"
+import {LinkProps} from "@components/elements/link"
 import {ArrowLongRightIcon} from "@heroicons/react/20/solid"
 import clsx from "clsx"
 import {twMerge} from "tailwind-merge"
