@@ -155,7 +155,7 @@ const fixClasses = (classes?: string | boolean): string => {
 
   classes = classes
     .replaceAll(" su-", " ")
-    .replaceAll(" text-align-center ", " text-center ")
+    .replaceAll(" text-align-center ", " text-center *:mx-auto ")
     .replace(" text-align-right ", " text-right ")
     .replaceAll(" align-center ", " mx-auto ")
     .replaceAll(" align-left ", " float-left mr-10 mb-10 ")
