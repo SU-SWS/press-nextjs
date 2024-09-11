@@ -11,7 +11,7 @@ export const H1 = ({children, className, ...props}: Props) => {
       {...props}
       className={twMerge(
         "rs-mb-5 font-medium",
-        className?.match(/(type-|text-)/) ? className : ["type-3 xl:text-[4.1rem]", className]
+        className?.match(/type-\btext-\d+\b/g) ? className : ["type-3 xl:text-[4.1rem]", className]
       )}
     >
       {children}
@@ -26,7 +26,7 @@ export const H2 = ({children, className, ...props}: Props) => {
       className={twMerge(
         headingLinkClasses,
         "font-medium",
-        className?.match(/(type-|text-)/) ? className : ["type-2 xl:text-[3.3rem]", className]
+        className?.match(/type-\btext-\d+\b/g) ? className : ["type-2 xl:text-[3.3rem]", className]
       )}
     >
       {children}
@@ -41,7 +41,7 @@ export const H3 = ({children, className, ...props}: Props) => {
       className={twMerge(
         headingLinkClasses,
         "font-medium",
-        className?.match(/(type-|text-)/) ? className : ["type-1 xl:text-26", className]
+        className?.match(/type-\btext-\d+\b/g) ? className : ["type-1 xl:text-26", className]
       )}
     >
       {children}
@@ -56,7 +56,7 @@ export const H4 = ({children, className, ...props}: Props) => {
       className={twMerge(
         headingLinkClasses,
         "font-bold",
-        className?.match(/(type-|text-)/) ? className : ["type-0 xl:text-21", className]
+        className?.match(/type-\btext-\d+\b/g) ? className : ["type-0 xl:text-21", className]
       )}
     >
       {children}
@@ -71,7 +71,7 @@ export const H5 = ({children, className, ...props}: Props) => {
       className={twMerge(
         headingLinkClasses,
         "font-medium",
-        className?.match(/(type-|text-)/) ? className : ["type-0 xl:text-21", className]
+        className?.match(/type-\btext-\d+\b/g) ? className : ["type-0 xl:text-21", className]
       )}
     >
       {children}
@@ -86,7 +86,7 @@ export const H6 = ({children, className, ...props}: Props) => {
       className={twMerge(
         headingLinkClasses,
         "font-medium",
-        className?.match(/(type-|text-)/) ? className : ["type-0 xl:text-21", className]
+        className?.match(/type-\btext-\d+\b/g) ? className : ["type-0 xl:text-21", className]
       )}
     >
       {children}
