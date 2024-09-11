@@ -14,14 +14,14 @@ const PageHeader = async () => {
     <HeaderForCarousel id="site-header">
       <GlobalMessage />
       <div className="min-h-50 relative z-[2] border-b border-fog">
-        <div className="centered flex w-full items-center justify-between gap-20 pr-24 lg:pr-0">
-          <div className="rs-pt-0 rs-pb-1 lg:rs-pt-1 lg:rs-pb-2">
+        <div className="grow-1 centered flex items-center justify-between gap-20 pr-24 lg:pr-0">
+          <div className="rs-pt-0 rs-pb-1 w-full lg:rs-pt-1 lg:rs-pb-2">
             <Link
               href="/"
               className="flex flex-col gap-4 no-underline lg:flex-row"
               aria-label="Stanford University Press Home"
             >
-              <div className="hidden sm:block">
+              <div className="hidden w-full sm:block">
                 <HeaderLogoLg />
               </div>
               <div className="sm:hidden">
