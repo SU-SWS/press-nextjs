@@ -534,9 +534,6 @@ export const FragmentNodeSupBookFragmentDoc = gql`
     }
   }
   supBookSubtitle
-  supBookTableOfContents {
-    processed
-  }
   supBookUrlIsw
   supBookWebCodeCloth
   supBookWebCodePaper

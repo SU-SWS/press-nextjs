@@ -127,9 +127,6 @@ fragment FragmentNodeSupBook on NodeSupBook {
         }
     }
     supBookSubtitle
-    supBookTableOfContents {
-        processed
-    }
     supBookUrlIsw
     supBookWebCodeCloth
     supBookWebCodePaper

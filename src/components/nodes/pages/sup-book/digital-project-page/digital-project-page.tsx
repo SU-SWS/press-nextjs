@@ -14,8 +14,7 @@ type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
 }
 const DigitalProjectPage = async ({node, ...props}: Props) => {
-  const hasExcerptAndMore =
-    node.supBookExcerpts || node.supBookTableOfContents || !!(await getBookAncillaryContents(node.id, node.path)).length
+  const hasExcerptAndMore = node.supBookExcerpts || !!(await getBookAncillaryContents(node.id, node.path)).length
   const awards = node.supBookAwards?.sort((a, b) =>
     a.supYear < b.supYear ? 1 : a.supYear === b.supYear && a.supRank && b.supRank && a.supRank > b.supRank ? -1 : -1
   )

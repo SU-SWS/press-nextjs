@@ -1,9 +1,8 @@
 import {NodeSupBook} from "@lib/gql/__generated__/drupal"
-import {H1, H2} from "@components/elements/headers"
+import {H1} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import Rows from "@components/paragraphs/rows/rows"
 import Link from "@components/elements/link"
-import Wysiwyg from "@components/elements/wysiwyg"
 import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import {notFound} from "next/navigation"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
@@ -16,7 +15,7 @@ type Props = HTMLAttributes<HTMLElement> & {
 
 const SupBookExcerptPage = async ({node, ...props}: Props) => {
   const ancillaryPages = await getBookAncillaryContents(node.id, node.path)
-  const hasExcerptAndMore = node.supBookExcerpts || node.supBookTableOfContents || !!ancillaryPages.length
+  const hasExcerptAndMore = node.supBookExcerpts || !!ancillaryPages.length
   if (!hasExcerptAndMore) notFound()
 
   return (
@@ -55,13 +54,6 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
         )}
       </div>
       <Rows components={node.supBookExcerpts} className="px-5" />
-
-      {node.supBookTableOfContents && (
-        <div className="centered lg:max-w-[980px]">
-          <H2>Contents</H2>
-          <Wysiwyg html={node.supBookTableOfContents.processed} />
-        </div>
-      )}
     </BackToLink>
   )
 }
