@@ -11,6 +11,14 @@ export const buildUrl = (path: string, params?: string | Record<string, string> 
 
 export const buildHeaders = (headers?: HeadersInit, isPreviewMode?: boolean): Headers => {
   const requestHeaders = new Headers(headers)
+
+  if (process.env.DRUPAL_REQUEST_HEADERS) {
+    const envRequestHeaders: Record<string, string> = JSON.parse(process.env.DRUPAL_REQUEST_HEADERS)
+    Object.keys(envRequestHeaders).map(key => {
+      requestHeaders.set(key, envRequestHeaders[key])
+    })
+  }
+
   const authCreds = (
     isPreviewMode ? process.env.DRUPAL_BASIC_AUTH_ADMIN || process.env.DRUPAL_BASIC_AUTH : process.env.DRUPAL_BASIC_AUTH
   ) as string
