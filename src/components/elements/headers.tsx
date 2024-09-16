@@ -10,7 +10,7 @@ const handleHeadingClasses = (classes: string | undefined, headingClasses: strin
     return [headingClasses]
   }
 
-  return classes.match(/(type-\d|text-\d)/g) ? [classes] : [headingClasses, classes]
+  return classes.match(/(type-\d|text-(\[\d|\d))/g) ? [classes] : [headingClasses, classes]
 }
 
 export const H1 = ({children, className, ...props}: Props) => {
