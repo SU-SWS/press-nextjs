@@ -12,7 +12,7 @@ type Props = HTMLAttributes<HTMLDivElement> & {
 
 const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
   return (
-    <div {...props} className={twMerge("centered lg:max-w-1200", props.className)}>
+    <div {...props} className={twMerge("centered 2xl:max-w-1200", props.className)}>
       <div className="flex items-center justify-between">
         {paragraph.supBlogTeaserHeader && <H2>{paragraph.supBlogTeaserHeader}</H2>}
         {paragraph.supBlogTeaserLink?.url && (
@@ -30,7 +30,7 @@ const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
         <ul className="list-unstyled grid gap-10 @7xl:grid-cols-2">
           {paragraph.supBlogTeaserItems.map(blogItem => (
             <li key={blogItem.id} className="relative h-full min-h-[400px] w-full">
-              <div className="h-full w-full bg-gradient-to-b from-black-true/70 from-60% to-black-40/70 p-20">
+              <div className="h-full w-full bg-black-true/80 p-20">
                 {/* URL will always be populated. */}
                 <Link
                   href={blogItem.supBlogUrl.url || "#"}
