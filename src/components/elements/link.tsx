@@ -4,7 +4,7 @@ import {EnvelopeIcon} from "@heroicons/react/24/outline"
 import ActionLink from "@components/elements/action-link"
 import Button from "@components/elements/button"
 import {LinkProps as NextLinkProps} from "next/dist/client/link"
-import {twMerge} from "tailwind-merge"
+import clsx from "clsx"
 
 export type LinkProps = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement> &
   NextLinkProps & {
@@ -51,7 +51,7 @@ const DrupalLink = ({href, children, ...props}: LinkProps) => {
   }
 
   return (
-    <Link {...props} href={href} className={twMerge("group text-digital-red hocus:text-archway-dark", props.className)}>
+    <Link {...props} href={href} className={clsx("group text-digital-red hocus:text-archway-dark", props.className)}>
       {children}
       {href.startsWith("mailto") && (
         <EnvelopeIcon width={20} className="ml-4 inline-block text-digital-red group-hocus:text-archway-dark" />
