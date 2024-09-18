@@ -217,12 +217,14 @@ const getViewPagedItems = cache(
 
       case "sup_books--book_list":
       case "sup_books--award_winners":
+      case "sup_books--seasonal_list":
         tags.push("views:sup_book")
         break
     }
 
     const client = graphqlClient({next: {tags}})
     let contextualFilters = getContextualFilters(["term_node_taxonomy_name_depth"], contextualFilter)
+    let fieldFilters: Record<string, any> = {}
     let graphqlResponse
 
     try {
@@ -291,6 +293,10 @@ const getViewPagedItems = cache(
           totalItems = graphqlResponse.stanfordSharedTags?.pageInfo.total || 0
           break
 
+        case "sup_books--seasonal_list":
+          fieldFilters = {season: contextualFilter?.[0]}
+          contextualFilter = []
+
         case "sup_books--book_list":
           contextualFilters = getContextualFilters(
             [
@@ -302,7 +308,7 @@ const getViewPagedItems = cache(
             ],
             contextualFilter
           )
-          graphqlResponse = await client.supBooks({contextualFilters, ...queryVariables})
+          graphqlResponse = await client.supBooks({contextualFilters, filters: fieldFilters, ...queryVariables})
           items = graphqlResponse.supBooksView?.results as unknown as NodeSupBook[]
           totalItems = graphqlResponse.supBooksView?.pageInfo.total || 0
           break

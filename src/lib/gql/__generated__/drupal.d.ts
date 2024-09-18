@@ -2734,6 +2734,7 @@ export type QuerySupBooksAwardWinnersArgs = {
 /** The schema's entry-point for queries. */
 export type QuerySupBooksViewArgs = {
   contextualFilter?: InputMaybe<SupBooksViewContextualFilterInput>;
+  filter?: InputMaybe<SupBooksViewFilterInput>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
@@ -3725,6 +3726,11 @@ export type SupBooksViewContextualFilterInput = {
   term_node_taxonomy_name_depth_1?: InputMaybe<Scalars['String']['input']>;
   term_node_taxonomy_name_depth_2?: InputMaybe<Scalars['String']['input']>;
   term_node_taxonomy_name_depth_3?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SupBooksViewFilterInput = {
+  /** Catalog Season  */
+  season?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Result for view sup_books display book_list_graphql. */
@@ -4862,6 +4868,7 @@ export type StanfordSharedTagsQuery = { __typename?: 'Query', stanfordSharedTags
 
 export type SupBooksQueryVariables = Exact<{
   contextualFilters?: InputMaybe<SupBooksViewContextualFilterInput>;
+  filters?: InputMaybe<SupBooksViewFilterInput>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;

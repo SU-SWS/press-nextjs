@@ -1752,9 +1752,10 @@ export const StanfordSharedTagsDocument = gql`
     ${FragmentNodeTeaserUnionFragmentDoc}
 ${FragmentViewPageInfoFragmentDoc}`;
 export const SupBooksDocument = gql`
-    query supBooks($contextualFilters: SupBooksViewContextualFilterInput, $pageSize: Int = 3, $page: Int, $offset: Int) {
+    query supBooks($contextualFilters: SupBooksViewContextualFilterInput, $filters: SupBooksViewFilterInput, $pageSize: Int = 3, $page: Int, $offset: Int) {
   supBooksView(
     contextualFilter: $contextualFilters
+    filter: $filters
     pageSize: $pageSize
     page: $page
     offset: $offset

@@ -118,6 +118,7 @@ const View = async ({viewId, displayId, items, totalItems, loadPage, headingLeve
       )
 
     case "sup_books--book_list":
+    case "sup_books--seasonal_list":
       return (
         <BookListView
           items={items as NodeSupBook[]}
