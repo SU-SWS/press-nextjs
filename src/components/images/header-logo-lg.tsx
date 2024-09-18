@@ -15,7 +15,7 @@ const HeaderLogoLg = (props: Props) => {
 
   return (
     <svg
-      className="h-auto w-full lg:h-[84px]"
+      className="h-auto w-[400px] lg:w-[356px] xl:w-[476px] 2xl:w-[700px]"
       width="100%"
       height="100%"
       viewBox="0 0 705 87"
