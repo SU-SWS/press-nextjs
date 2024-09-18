@@ -198,7 +198,7 @@ const BookPage = async ({node, ...props}: Props) => {
 
             <Link
               href={node.path + "/desk-examination-copy-requests"}
-              className="flex items-start gap-3 text-18 font-normal leading-snug text-stone-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+              className="flex items-start gap-3 text-[1.8rem] font-normal leading-snug text-stone-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
             >
               <ClipboardIcon width={24} className="mt-1 shrink-0 text-fog-dark" /> Desk, Examination, or Review Copy
               Requests
