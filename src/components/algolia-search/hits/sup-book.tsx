@@ -23,6 +23,10 @@ export type BookHit = AlgoliaHit & {
 const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
   const hitUrl = new URL(hit.url)
   const url = hit.url.replace(hitUrl.origin, "")
+
+  const imageUrl =
+    hit.photo?.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string) || "/default-book-image.jpg"
+
   return (
     <article className="py-12 @container">
       <div className="flex flex-col justify-between gap-20 @2xl:flex-row">
@@ -44,29 +48,21 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
           {hit.book_published && <div className="text-18">{hit.book_published}</div>}
         </div>
 
-        {hit.photo && (
-          <Link
-            href={url}
-            aria-hidden
-            tabIndex={-1}
-            prefetch={false}
-            className={twMerge(
-              "relative mx-auto shrink-0 @2xl:mr-0",
-              clsx({
-                "aspect-[2/3] w-[150px]": hit.book_type === "book",
-                "aspect-[4/3] h-[150px]": hit.book_type === "digital_project",
-              })
-            )}
-          >
-            <Image
-              className="object-cover"
-              src={hit.photo.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)}
-              alt=""
-              fill
-              sizes="300px"
-            />
-          </Link>
-        )}
+        <Link
+          href={url}
+          aria-hidden
+          tabIndex={-1}
+          prefetch={false}
+          className={twMerge(
+            "relative mx-auto shrink-0 @2xl:mr-0",
+            clsx({
+              "aspect-[2/3] w-[150px]": hit.book_type === "book",
+              "aspect-[4/3] h-[150px]": hit.book_type === "digital_project",
+            })
+          )}
+        >
+          <Image className="object-cover" src={imageUrl} alt="" fill sizes="300px" />
+        </Link>
       </div>
     </article>
   )
