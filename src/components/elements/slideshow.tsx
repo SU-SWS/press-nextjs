@@ -14,12 +14,17 @@ export const NextArrow = ({
   const slickDisabled = slickClassNames?.includes("slick-disabled")
   return (
     <button
-      className={twMerge("absolute right-5 top-1/2 z-[1] h-16 w-16 sm:h-20 sm:w-20 lg:right-20", customClassName)}
+      className={twMerge("group absolute right-5 top-1/2 z-[1] h-16 w-16 sm:h-20 sm:w-20 lg:right-20", customClassName)}
       onClick={onClick}
       aria-label="Next"
       disabled={slickDisabled}
     >
-      <ArrowLongRightIcon className={twMerge("text-white", clsx({"text-fog-dark": slickDisabled}))} />
+      <ArrowLongRightIcon
+        className={twMerge(
+          "text-white transition-all group-hocus-visible:translate-x-2",
+          clsx({"text-fog-dark": slickDisabled})
+        )}
+      />
     </button>
   )
 }
@@ -32,12 +37,17 @@ export const PrevArrow = ({
   const slickDisabled = slickClassNames?.includes("slick-disabled")
   return (
     <button
-      className={twMerge("absolute left-5 top-1/2 z-[1] h-16 w-16 sm:h-20 sm:w-20 lg:left-20", customClassName)}
+      className={twMerge("group absolute left-5 top-1/2 z-[1] h-16 w-16 sm:h-20 sm:w-20 lg:left-20", customClassName)}
       onClick={onClick}
       aria-label="Previous"
       disabled={slickDisabled}
     >
-      <ArrowLongLeftIcon className={twMerge("text-white", clsx({"text-fog-dark": slickDisabled}))} />
+      <ArrowLongLeftIcon
+        className={twMerge(
+          "text-white transition-all group-hocus-visible:-translate-x-2",
+          clsx({"text-fog-dark": slickDisabled})
+        )}
+      />
     </button>
   )
 }

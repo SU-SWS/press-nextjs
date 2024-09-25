@@ -31,7 +31,10 @@ const BackToLink = ({
           linkClasses
         )}
       >
-        <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
+        <ArrowLongLeftIcon
+          width={25}
+          className="text-stone-dark transition-all group-hocus:text-archway-dark group-hocus-visible:-translate-x-2"
+        />
         <span className="text-18">Back to {title}</span>
       </Link>
     </Wrapper>

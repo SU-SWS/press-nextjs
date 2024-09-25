@@ -129,7 +129,7 @@ const BookPreCart = ({
         buttonElem
         type="submit"
         className={twMerge(
-          "mt-5 flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]",
+          "group mt-5 flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]",
           clsx({
             "border-0 bg-black-70 hocus:bg-black-80": comingSoon,
           })
@@ -142,7 +142,7 @@ const BookPreCart = ({
         {!comingSoon && !preorder && isIntl && "Purchase from CAP"}
         {comingSoon && "Coming Soon"}
 
-        {!comingSoon && <ArrowRightIcon width={24} />}
+        {!comingSoon && <ArrowRightIcon width={24} className="transition-all group-hocus:translate-x-2" />}
       </Button>
 
       {formatChoice === "cloth" && !isIntl && usClothPrice && usClothSalePrice && (

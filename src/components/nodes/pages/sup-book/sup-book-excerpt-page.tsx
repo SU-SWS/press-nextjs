@@ -48,7 +48,10 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
               href={page.path}
             >
               {page.title}
-              <ChevronRightIcon width={24} className="shrink-0 text-digital-red" />
+              <ChevronRightIcon
+                width={24}
+                className="shrink-0 text-digital-red transition-all group-hocus-visible:translate-x-2"
+              />
             </Link>
           ))}
         </div>

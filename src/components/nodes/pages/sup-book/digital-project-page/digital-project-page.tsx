@@ -64,7 +64,10 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
               href="/books"
               className="group flex w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6"
             >
-              <ArrowLongLeftIcon width={25} className="text-stone-dark group-hocus:text-archway-dark" />
+              <ArrowLongLeftIcon
+                width={25}
+                className="text-stone-dark transition-all group-hocus:-translate-x-2 group-hocus:text-archway-dark"
+              />
               <span className="text-18">Back to Books</span>
             </Link>
           </div>
@@ -172,10 +175,10 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
             {node.supBookUrlIsw && (
               <Button
                 href={node.supBookUrlIsw.startsWith("http") ? node.supBookUrlIsw : "https://" + node.supBookUrlIsw}
-                className="flex w-full items-center justify-center gap-2"
+                className="group flex w-full items-center justify-center gap-2"
               >
                 Start Exploring
-                <ArrowRightIcon width={24} />
+                <ArrowRightIcon width={24} className="transition-all group-hocus:translate-x-2" />
               </Button>
             )}
 

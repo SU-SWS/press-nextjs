@@ -176,7 +176,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
               href={slideParagraph.supSlideButton.url}
             >
               <span className="group-hocus:underline">{slideParagraph.supSlideButton.title}</span>
-              <ArrowRightIcon width={20} />
+              <ArrowRightIcon width={20} className="transition-all group-hocus-visible:translate-x-2" />
             </Link>
           )}
         </div>
