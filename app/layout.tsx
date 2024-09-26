@@ -9,15 +9,12 @@ import UserAnalytics from "@components/elements/user-analytics"
 import Editori11y from "@components/tools/editorially"
 
 const appleIcons: Icon[] = [60, 72, 76, 114, 120, 144, 152, 180].map(size => ({
-  url: `https://www-media.stanford.edu/assets/favicon/apple-touch-icon-${size}x${size}.png`,
+  url: "/favicon.ico",
   sizes: `${size}x${size}`,
 }))
 
-const icons: Icon[] = [16, 32, 96, 128, 192, 196].map(size => ({
-  url:
-    size === 128
-      ? `https://www-media.stanford.edu/assets/favicon/favicon-${size}.png`
-      : `https://www-media.stanford.edu/assets/favicon/favicon-${size}x${size}.png`,
+const icons: Icon[] = [].map(size => ({
+  url: "/favicon.ico",
   sizes: `${size}x${size}`,
 }))
 
@@ -39,7 +36,7 @@ export const metadata = {
     creator: "@stanfordpress",
   },
   icons: {
-    icon: [{url: "/favicon.ico"}, ...icons],
+    icon: [...icons, {url: "/favicon.ico"}],
     apple: appleIcons,
   },
 }
