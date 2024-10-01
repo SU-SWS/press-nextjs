@@ -73,7 +73,7 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
         ulProps={{className: "list-unstyled mb-36"}}
         pageKey={false}
         key={alphaChosen}
-        pagerSiblingCount={3}
+        pagerSiblingCount={2}
         loadPage={loadPage}
       >
         {[...displayedAuthors.keys()]

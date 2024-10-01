@@ -52,7 +52,7 @@ const MainMenu = ({menuItems}: Props) => {
     <nav id={navId} className="shrink-0" aria-label="Main Navigation" ref={menuRef}>
       <button
         ref={buttonRef}
-        className="group flex w-0 flex-col items-center lg:hidden"
+        className="group absolute right-12 top-16 flex flex-col items-center sm:top-8 lg:hidden"
         onClick={toggleMenu}
         aria-expanded={menuOpen}
         aria-label={menuOpen ? "Close Main Navigation Menu" : "Open Main Navigation Menu"}
@@ -86,7 +86,7 @@ const MainMenu = ({menuItems}: Props) => {
             )}
           />
         </span>
-        <span className="group-hocus:underline" aria-hidden>
+        <span className="group-hocus-visible:underline" aria-hidden>
           {menuOpen ? "Close" : "Menu"}
         </span>
       </button>
@@ -116,8 +116,8 @@ const MainMenu = ({menuItems}: Props) => {
                 className={twMerge(
                   "-translate-y-2 border-b border-transparent",
                   clsx({
-                    "text-white group-hocus:border-b-white": pageHasBanner,
-                    "text-stone-dark group-hocus:border-b-stone-dark": !pageHasBanner,
+                    "text-white group-hocus-visible:border-b-white": pageHasBanner,
+                    "text-stone-dark group-hocus-visible:border-b-stone-dark": !pageHasBanner,
                   })
                 )}
               />
@@ -178,7 +178,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
   const inTrail = activeTrail.includes(id) && !isCurrent
 
   const linkStyles = clsx(
-    "font-normal w-full relative inline-block text-white hocus:text-white no-underline hocus:underline pt-5 rs-pb-0 lg:pl-0 border-l-[4px]",
+    "font-normal w-full relative inline-block text-white hocus:text-white no-underline hocus-visible:underline pt-5 rs-pb-0 lg:pl-0 border-l-[4px]",
     leftPadding[level],
     // Top menu item styles.
     {
@@ -235,7 +235,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
             )}
             <button
               ref={buttonRef}
-              className="group relative right-10 shrink-0 rounded-full border-b border-transparent bg-digital-red text-white hocus:border-black hocus:bg-white lg:right-0 lg:hidden lg:rounded-none lg:bg-transparent lg:text-digital-red"
+              className="group relative right-10 shrink-0 rounded-full border-b border-transparent bg-digital-red text-white hocus-visible:border-black hocus-visible:bg-white lg:right-0 lg:hidden lg:rounded-none lg:bg-transparent lg:text-digital-red"
               onClick={toggleSubmenu}
               aria-expanded={submenuOpen}
               aria-labelledby={linkId}
@@ -243,7 +243,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
               <ChevronDownIcon
                 height={35}
                 className={twMerge(
-                  "transition duration-300 group-hocus:scale-125 group-hocus:text-black",
+                  "transition duration-300 group-hocus:scale-125 group-hocus-visible:text-black",
                   clsx({
                     "rotate-180": submenuOpen,
                   })

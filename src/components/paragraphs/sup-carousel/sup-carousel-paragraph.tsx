@@ -8,6 +8,7 @@ import Image from "next/image"
 import {clsx} from "clsx"
 import {twMerge} from "tailwind-merge"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
+import {getImagePlaceholder} from "@lib/utils/placeholder-image"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphSupCarousel
@@ -61,7 +62,7 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
   )
 }
 
-const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouselSlide; isTopHero?: boolean}) => {
+const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouselSlide; isTopHero?: boolean}) => {
   const slideTitle = slideParagraph.supSlideTitle
   const eyebrow = slideParagraph.supSlideEyebrow
   const subtitle = slideParagraph.supSlideSubtitle
@@ -91,7 +92,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
           alt=""
           fill
           sizes="100vw"
-          loading="eager"
+          {...await getImagePlaceholder(bgImage.url)}
         />
       </figure>
       <div
@@ -146,6 +147,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
                           sizes="(max-width: 768px) 100vw, 1200px"
                           height={image.height}
                           width={image.width}
+                          {...await getImagePlaceholder(image.url)}
                         />
                       </CarouselImageLink>
                     </div>
