@@ -157,6 +157,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Production version on Vercel uses the `main` branch. `1.x` branch is used for releases and is merged into `main` when a 
+release is to be performed. `dev` and `test` branches have their respective vercel and Acquia environments and are used as sandboxes.
