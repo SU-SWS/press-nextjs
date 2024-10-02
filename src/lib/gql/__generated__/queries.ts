@@ -1802,6 +1802,32 @@ export const SupBookAncillaryDocument = gql`
   }
 }
     `;
+export const SupBooksBestSellersDocument = gql`
+    query supBooksBestSellers($pageSize: Int = 3, $page: Int, $offset: Int) {
+  supBooksBestSellers(pageSize: $pageSize, page: $page, offset: $offset) {
+    results {
+      ...FragmentNodeSupBookTeaser
+    }
+    pageInfo {
+      ...FragmentViewPageInfo
+    }
+  }
+}
+    ${FragmentNodeSupBookTeaserFragmentDoc}
+${FragmentViewPageInfoFragmentDoc}`;
+export const SupBooksNewReleasesDocument = gql`
+    query supBooksNewReleases($pageSize: Int = 3, $page: Int, $offset: Int) {
+  supBooksNewReleases(pageSize: $pageSize, page: $page, offset: $offset) {
+    results {
+      ...FragmentNodeSupBookTeaser
+    }
+    pageInfo {
+      ...FragmentViewPageInfo
+    }
+  }
+}
+    ${FragmentNodeSupBookTeaserFragmentDoc}
+${FragmentViewPageInfoFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -1896,6 +1922,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     supBookAncillary(variables?: DrupalTypes.SupBookAncillaryQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.SupBookAncillaryQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.SupBookAncillaryQuery>(SupBookAncillaryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'supBookAncillary', 'query', variables);
+    },
+    supBooksBestSellers(variables?: DrupalTypes.SupBooksBestSellersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.SupBooksBestSellersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.SupBooksBestSellersQuery>(SupBooksBestSellersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'supBooksBestSellers', 'query', variables);
+    },
+    supBooksNewReleases(variables?: DrupalTypes.SupBooksNewReleasesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.SupBooksNewReleasesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.SupBooksNewReleasesQuery>(SupBooksNewReleasesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'supBooksNewReleases', 'query', variables);
     }
   };
 }

@@ -2387,6 +2387,10 @@ export type Query = {
   supBookAncillary?: Maybe<SupBookAncillaryResult>;
   /** Query for view sup_books display award_winners_graphql. */
   supBooksAwardWinners?: Maybe<SupBooksAwardWinnersResult>;
+  /** Query for view sup_books display graphql_best_sellers. */
+  supBooksBestSellers?: Maybe<SupBooksBestSellersResult>;
+  /** Query for view sup_books display graphql_new_releases. */
+  supBooksNewReleases?: Maybe<SupBooksNewReleasesResult>;
   /** Query for view sup_books display book_list_graphql. */
   supBooksView?: Maybe<SupBooksViewResult>;
   /** Load a Term entity by id. */
@@ -2725,6 +2729,22 @@ export type QuerySupBookAncillaryArgs = {
 export type QuerySupBooksAwardWinnersArgs = {
   contextualFilter?: InputMaybe<SupBooksAwardWinnersContextualFilterInput>;
   filter?: InputMaybe<SupBooksAwardWinnersFilterInput>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The schema's entry-point for queries. */
+export type QuerySupBooksBestSellersArgs = {
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The schema's entry-point for queries. */
+export type QuerySupBooksNewReleasesArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
@@ -3720,6 +3740,52 @@ export type SupBooksAwardWinnersResult = View & {
   view: Scalars['String']['output'];
 };
 
+/** Result for view sup_books display graphql_best_sellers. */
+export type SupBooksBestSellersResult = View & {
+  __typename?: 'SupBooksBestSellersResult';
+  /** The description of the view. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The machine name of the display. */
+  display: Scalars['String']['output'];
+  /** Exposed filters for the view. */
+  filters: Array<Maybe<ViewFilter>>;
+  /** The ID of the view. */
+  id: Scalars['ID']['output'];
+  /** The human friendly label of the view. */
+  label?: Maybe<Scalars['String']['output']>;
+  /** The language code of the view. */
+  langcode?: Maybe<Scalars['String']['output']>;
+  /** Information about the page in the view. */
+  pageInfo: ViewPageInfo;
+  /** The results of the view. */
+  results: Array<NodeUnion>;
+  /** The machine name of the view. */
+  view: Scalars['String']['output'];
+};
+
+/** Result for view sup_books display graphql_new_releases. */
+export type SupBooksNewReleasesResult = View & {
+  __typename?: 'SupBooksNewReleasesResult';
+  /** The description of the view. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The machine name of the display. */
+  display: Scalars['String']['output'];
+  /** Exposed filters for the view. */
+  filters: Array<Maybe<ViewFilter>>;
+  /** The ID of the view. */
+  id: Scalars['ID']['output'];
+  /** The human friendly label of the view. */
+  label?: Maybe<Scalars['String']['output']>;
+  /** The language code of the view. */
+  langcode?: Maybe<Scalars['String']['output']>;
+  /** Information about the page in the view. */
+  pageInfo: ViewPageInfo;
+  /** The results of the view. */
+  results: Array<NodeUnion>;
+  /** The machine name of the view. */
+  view: Scalars['String']['output'];
+};
+
 export type SupBooksViewContextualFilterInput = {
   sup_book_work_id_number_value?: InputMaybe<Scalars['String']['input']>;
   term_node_taxonomy_name_depth?: InputMaybe<Scalars['String']['input']>;
@@ -4289,7 +4355,7 @@ export type ViewReference = {
 };
 
 /** All available view result types. */
-export type ViewResultUnion = StanfordBasicPagesResult | StanfordCoursesResult | StanfordEventsPastEventsResult | StanfordEventsResult | StanfordNewsResult | StanfordPersonResult | StanfordPublicationsResult | StanfordSharedTagsResult | SupBookAncillaryResult | SupBooksAwardWinnersResult | SupBooksViewResult;
+export type ViewResultUnion = StanfordBasicPagesResult | StanfordCoursesResult | StanfordEventsPastEventsResult | StanfordEventsResult | StanfordNewsResult | StanfordPersonResult | StanfordPublicationsResult | StanfordSharedTagsResult | SupBookAncillaryResult | SupBooksAwardWinnersResult | SupBooksBestSellersResult | SupBooksNewReleasesResult | SupBooksViewResult;
 
 export type NodeQueryVariables = Exact<{
   uuid: Scalars['ID']['input'];
@@ -4894,3 +4960,21 @@ export type SupBookAncillaryQueryVariables = Exact<{
 
 
 export type SupBookAncillaryQuery = { __typename?: 'Query', supBookAncillary?: { __typename?: 'SupBookAncillaryResult', results: Array<{ __typename?: 'NodeStanfordCourse', id: string, path: string, title: string } | { __typename?: 'NodeStanfordEvent', id: string, path: string, title: string } | { __typename?: 'NodeStanfordEventSeries', id: string, path: string, title: string } | { __typename?: 'NodeStanfordNews', id: string, path: string, title: string } | { __typename?: 'NodeStanfordPage', id: string, path: string, title: string } | { __typename?: 'NodeStanfordPerson', id: string, path: string, title: string } | { __typename?: 'NodeStanfordPolicy', id: string, path: string, title: string } | { __typename?: 'NodeStanfordPublication', id: string, path: string, title: string } | { __typename?: 'NodeSupBook', id: string, path: string, title: string } | { __typename?: 'NodeSupBookAncillary', id: string, path: string, title: string }> } | null };
+
+export type SupBooksBestSellersQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type SupBooksBestSellersQuery = { __typename?: 'Query', supBooksBestSellers?: { __typename?: 'SupBooksBestSellersResult', results: Array<{ __typename?: 'NodeStanfordCourse' } | { __typename?: 'NodeStanfordEvent' } | { __typename?: 'NodeStanfordEventSeries' } | { __typename?: 'NodeStanfordNews' } | { __typename?: 'NodeStanfordPage' } | { __typename?: 'NodeStanfordPerson' } | { __typename?: 'NodeStanfordPolicy' } | { __typename?: 'NodeStanfordPublication' } | { __typename: 'NodeSupBook', supBookSubtitle?: string | null, supBookWorkIdNumber?: number | null, supBookAuthorsFull?: string | null, supBookType: string, id: string, title: string, status: boolean, path: string, supBookAuthors?: Array<{ __typename?: 'NameType', title?: string | null, given?: string | null, middle?: string | null, family?: string | null, generational?: string | null, credentials?: string | null }> | null, supBookAwards?: Array<{ __typename?: 'SupAward', id: string, name: string, supAssociation?: string | null, supPlace?: string | null, supRank?: number | null, supWorkId: number, supYear: number, supDescription?: { __typename?: 'Text', processed?: any | null } | null }> | null, supBookImage?: { __typename: 'MediaImage', id: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number } } | null, changed: { __typename?: 'DateTime', timezone: any, time: any }, created: { __typename?: 'DateTime', timezone: any, time: any } } | { __typename?: 'NodeSupBookAncillary' }>, pageInfo: { __typename?: 'ViewPageInfo', page: number, total: number } } | null };
+
+export type SupBooksNewReleasesQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type SupBooksNewReleasesQuery = { __typename?: 'Query', supBooksNewReleases?: { __typename?: 'SupBooksNewReleasesResult', results: Array<{ __typename?: 'NodeStanfordCourse' } | { __typename?: 'NodeStanfordEvent' } | { __typename?: 'NodeStanfordEventSeries' } | { __typename?: 'NodeStanfordNews' } | { __typename?: 'NodeStanfordPage' } | { __typename?: 'NodeStanfordPerson' } | { __typename?: 'NodeStanfordPolicy' } | { __typename?: 'NodeStanfordPublication' } | { __typename: 'NodeSupBook', supBookSubtitle?: string | null, supBookWorkIdNumber?: number | null, supBookAuthorsFull?: string | null, supBookType: string, id: string, title: string, status: boolean, path: string, supBookAuthors?: Array<{ __typename?: 'NameType', title?: string | null, given?: string | null, middle?: string | null, family?: string | null, generational?: string | null, credentials?: string | null }> | null, supBookAwards?: Array<{ __typename?: 'SupAward', id: string, name: string, supAssociation?: string | null, supPlace?: string | null, supRank?: number | null, supWorkId: number, supYear: number, supDescription?: { __typename?: 'Text', processed?: any | null } | null }> | null, supBookImage?: { __typename: 'MediaImage', id: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number } } | null, changed: { __typename?: 'DateTime', timezone: any, time: any }, created: { __typename?: 'DateTime', timezone: any, time: any } } | { __typename?: 'NodeSupBookAncillary' }>, pageInfo: { __typename?: 'ViewPageInfo', page: number, total: number } } | null };

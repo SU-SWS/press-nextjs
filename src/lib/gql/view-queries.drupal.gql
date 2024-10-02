@@ -127,3 +127,25 @@ query supBookAncillary($contextualFilters: SupBookAncillaryContextualFilterInput
         }
     }
 }
+
+query supBooksBestSellers($pageSize: Int = 3, $page: Int $offset: Int) {
+    supBooksBestSellers(pageSize: $pageSize, page: $page, offset: $offset) {
+        results {
+            ...FragmentNodeSupBookTeaser
+        }
+        pageInfo {
+            ...FragmentViewPageInfo
+        }
+    }
+}
+
+query supBooksNewReleases($pageSize: Int = 3, $page: Int $offset: Int) {
+    supBooksNewReleases(pageSize: $pageSize, page: $page, offset: $offset) {
+        results {
+            ...FragmentNodeSupBookTeaser
+        }
+        pageInfo {
+            ...FragmentViewPageInfo
+        }
+    }
+}

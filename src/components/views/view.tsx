@@ -117,7 +117,9 @@ const View = async ({viewId, displayId, items, totalItems, loadPage, headingLeve
         />
       )
 
+    case "sup_books--best_sellers":
     case "sup_books--book_list":
+    case "sup_books--new_releases":
     case "sup_books--seasonal_list":
       return (
         <BookListView
