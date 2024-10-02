@@ -34,6 +34,10 @@ const nextConfig = {
     return {
       beforeFiles: [
         {
+          source: '/img/:path*',
+          destination: '/not-found',
+        },
+        {
           source: '/wp-:path*',
           destination: '/not-found',
         }
