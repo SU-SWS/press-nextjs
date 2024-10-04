@@ -1,4 +1,4 @@
-import {NodeSupBook} from "@lib/gql/__generated__/drupal"
+import {Maybe, NodeSupBook} from "@lib/gql/__generated__/drupal"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {unstable_cache as nextCache} from "next/cache"
 
@@ -13,8 +13,8 @@ export const getBookPathFromWorkId = nextCache(
     }
 
     const graphqlResponse = await graphqlClient({cache: "no-store"}).supBooks({contextualFilters})
-    const book = graphqlResponse.supBooksView?.results.pop() as NodeSupBook
-    return book.path
+    const book = graphqlResponse.supBooksView?.results.pop() as Maybe<NodeSupBook>
+    return book?.path
   },
   ["legacy-book"],
   {tags: ["legacy-books"]}
