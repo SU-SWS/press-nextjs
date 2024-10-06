@@ -2,7 +2,7 @@ import {MetadataRoute} from "next"
 import {getAllNodes} from "@lib/gql/gql-queries"
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
-export const revalidate = false
+export const revalidate = 25200
 export const dynamic = "force-static"
 
 const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
@@ -11,8 +11,9 @@ const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const sitemap: MetadataRoute.Sitemap = []
 
   nodes.map(node => {
+    const path = node.path === "/home" ? "/" : node.path
     sitemap.push({
-      url: `https://sup.org${node.path}`,
+      url: `https://www.sup.org${path}`,
       lastModified: new Date(node.changed.time),
       priority: node.__typename === "NodeStanfordPage" ? 1 : 0.8,
       changeFrequency: node.__typename === "NodeStanfordPage" ? "weekly" : "monthly",
@@ -21,7 +22,7 @@ const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     // Add excerpts page for each book as appropriate.
     if (node.__typename === "NodeSupBook" && node.supBookExcerpts) {
       sitemap.push({
-        url: `https://sup.org${node.path}/excerpts`,
+        url: `https://www.sup.org${node.path}/excerpts`,
         lastModified: new Date(node.changed.time),
         priority: 0.8,
         changeFrequency: "monthly",

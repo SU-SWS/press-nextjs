@@ -150,7 +150,7 @@ export const getAllNodes = nextCache(
     return nodes
   }),
   ["node-paths"],
-  {revalidate: 60 * 60 * 7}
+  {revalidate: 25200}
 )
 
 /**
