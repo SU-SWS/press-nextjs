@@ -129,6 +129,31 @@ export type BlockPlugin = BlockInterface & {
 /** Block types that can exist in the system. */
 export type BlockUnion = BlockContent | BlockPlugin;
 
+/** A menu item defined in the CMS. */
+export type BookLink = {
+  __typename?: 'BookLink';
+  /** Attributes of this menu item. */
+  attributes: MenuItemAttributes;
+  /** Child menu items of this menu item. */
+  children: Array<BookLink>;
+  /** The description of the menu item. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** Whether this menu item is intended to be expanded. */
+  expanded: Scalars['Boolean']['output'];
+  /** The Universally Unique Identifier (UUID). */
+  id: Scalars['ID']['output'];
+  /** Whether this menu item links to an internal route. */
+  internal: Scalars['Boolean']['output'];
+  /** The language of the menu item. */
+  langcode: Language;
+  /** The route this menu item uses. Route loading can be disabled per menu type. */
+  route?: Maybe<RouteUnion>;
+  /** The title of the menu item. */
+  title: Scalars['String']['output'];
+  /** The URL of the menu item. */
+  url?: Maybe<Scalars['String']['output']>;
+};
+
 /** Entity type citation. */
 export type CitationInterface = {
   /** The Universally Unique IDentifier (UUID). */
@@ -1431,6 +1456,7 @@ export type NodeStanfordPolicy = EdgeNode & MetaTagInterface & NodeInterface & {
    * title - in smaller font - on the list and teaser display.</em>
    */
   body?: Maybe<TextSummary>;
+  book?: Maybe<BookLink>;
   /** The time that the node was last edited. */
   changed: DateTime;
   /** The date and time that the content was created. */

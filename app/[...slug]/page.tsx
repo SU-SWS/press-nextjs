@@ -17,11 +17,10 @@ export const maxDuration = 60
 const Page = async ({params}: PageProps) => {
   const {path, page} = getBookPageRequested(getPathFromContext({params}))
 
-  const {redirect: redirectPath, entity, error} = await getEntityFromPath<NodeUnion>(path)
+  const {redirect: redirectPath, entity} = await getEntityFromPath<NodeUnion>(path)
 
-  if (error) throw new Error(error)
-  if (redirectPath?.url) redirect(redirectPath.url)
   if (!entity) notFound()
+  if (redirectPath) redirect(redirectPath)
 
   if (entity.__typename === "NodeSupBook") {
     if (page === "excerpt") return <SupBookExcerptPage node={entity} />
