@@ -14,6 +14,7 @@ const LegacyBookPage = async ({params}: {params: {id: string}}) => {
 }
 
 export const generateStaticParams = async (): Promise<Array<{id: string}>> => {
+  if (process.env.VERCEL_ENV === "preview") return []
   const params = await getLegacyBookPaths()
   return params.map(item => ({id: item.id.toString()}))
 }
