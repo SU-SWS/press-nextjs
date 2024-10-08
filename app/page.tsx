@@ -12,9 +12,8 @@ export const revalidate = false
 export const dynamic = "force-static"
 
 const Home = async () => {
-  const {entity, error} = await getEntityFromPath<NodeStanfordPage>("/", isPreviewMode())
+  const {entity} = await getEntityFromPath<NodeStanfordPage>("/", isPreviewMode())
 
-  if (error) throw new Error(error)
   if (!entity) notFound()
 
   return (
