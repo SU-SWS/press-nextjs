@@ -4438,6 +4438,14 @@ export type BooksAuthorsQueryVariables = Exact<{
 
 export type BooksAuthorsQuery = { __typename?: 'Query', nodeSupBooks: { __typename?: 'NodeSupBookConnection', nodes: Array<{ __typename?: 'NodeSupBook', id: string, title: string, path: string, supBookSubtitle?: string | null, supBookAuthors?: Array<{ __typename?: 'NameType', title?: string | null, given?: string | null, middle?: string | null, family?: string | null, generational?: string | null, credentials?: string | null }> | null }>, pageInfo: { __typename?: 'ConnectionPageInfo', hasNextPage: boolean, endCursor?: any | null } } };
 
+export type BooksWorkIdQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+}>;
+
+
+export type BooksWorkIdQuery = { __typename?: 'Query', nodeSupBooks: { __typename?: 'NodeSupBookConnection', nodes: Array<{ __typename?: 'NodeSupBook', path: string, supBookWorkIdNumber?: number | null }>, pageInfo: { __typename?: 'ConnectionPageInfo', hasNextPage: boolean, endCursor?: any | null } } };
+
 export type CoursesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   after?: InputMaybe<Scalars['Cursor']['input']>;

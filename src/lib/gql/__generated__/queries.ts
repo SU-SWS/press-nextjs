@@ -1266,6 +1266,19 @@ export const BooksAuthorsDocument = gql`
 }
     ${FragmentNameTypeFragmentDoc}
 ${FragmentPageInfoFragmentDoc}`;
+export const BooksWorkIdDocument = gql`
+    query BooksWorkId($first: Int = 1000, $after: Cursor) {
+  nodeSupBooks(first: $first, after: $after, sortKey: CREATED_AT) {
+    nodes {
+      path
+      supBookWorkIdNumber
+    }
+    pageInfo {
+      ...FragmentPageInfo
+    }
+  }
+}
+    ${FragmentPageInfoFragmentDoc}`;
 export const CoursesDocument = gql`
     query Courses($first: Int = 1000, $after: Cursor) {
   nodeStanfordCourses(first: $first, after: $after, sortKey: CREATED_AT) {
@@ -1844,6 +1857,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     BooksAuthors(variables?: DrupalTypes.BooksAuthorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.BooksAuthorsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.BooksAuthorsQuery>(BooksAuthorsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'BooksAuthors', 'query', variables);
+    },
+    BooksWorkId(variables?: DrupalTypes.BooksWorkIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.BooksWorkIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.BooksWorkIdQuery>(BooksWorkIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'BooksWorkId', 'query', variables);
     },
     Courses(variables?: DrupalTypes.CoursesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.CoursesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.CoursesQuery>(CoursesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Courses', 'query', variables);
