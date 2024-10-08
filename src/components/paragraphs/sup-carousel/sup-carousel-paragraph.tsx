@@ -109,7 +109,7 @@ const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupC
 
       <div
         className={twMerge(
-          "relative mx-auto flex w-full max-w-1000 flex-col items-center justify-center py-32",
+          "relative mx-auto flex w-full max-w-1000 flex-col items-center py-32 lg:justify-center",
           clsx({
             "gap-20 lg:flex-row": leftImage,
           })

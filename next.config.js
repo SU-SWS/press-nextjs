@@ -34,6 +34,39 @@ const nextConfig = {
     return {
       beforeFiles: [
         {
+          source: "/books/(title|awards|precart)",
+          destination:  "/books/legacy/:workId",
+          has: [
+            {
+              type: "query",
+              key: "id",
+              value: "(?<workId>.*)"
+            }
+          ]
+        },
+        {
+          source: "/books/comp",
+          destination:  "/books/legacy/:workId/comp",
+          has: [
+            {
+              type: "query",
+              key: "id",
+              value: "(?<workId>.*)"
+            }
+          ]
+        },
+        {
+          source: "/books/extra",
+          destination:  "/books/legacy/:workId/extra",
+          has: [
+            {
+              type: "query",
+              key: "id",
+              value: "(?<workId>.*)"
+            }
+          ]
+        },
+        {
           source: '/img/:path*',
           destination: '/not-found',
         },

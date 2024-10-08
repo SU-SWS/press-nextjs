@@ -21,7 +21,7 @@ export const GET = async (request: NextRequest) => {
   let path = request.nextUrl.searchParams.get("slug")
   if (!path || path.startsWith("/node/")) return NextResponse.json({message: "Invalid slug"}, {status: 400})
 
-  const tagsInvalidated = ["paths", `paths:${path}`]
+  const tagsInvalidated = path.startsWith("/tags/") ? [] : [`paths:${path}`]
   if (path.startsWith("/tags/"))
     path
       .substring(6)
@@ -30,7 +30,7 @@ export const GET = async (request: NextRequest) => {
 
   // When the home page is saved, it's url slug might be like `/home`. If the home page matches the slug, invalidate
   // the home page path.
-  if ((await getHomePagePath()) === path) tagsInvalidated.push("paths:/")
+  if (!path.startsWith("/tags/") && (await getHomePagePath()) === path) tagsInvalidated.push("paths:/")
 
   // Invalidate the book path if the path is an excerpt page.
   if (path.includes("/excerpt/")) tagsInvalidated.push(`excerpts:${path.substring(0, path.indexOf("/excerpt"))}`)

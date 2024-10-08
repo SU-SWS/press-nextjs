@@ -110,6 +110,18 @@ query BooksAuthors($first: Int = 1000, $after: Cursor) {
     }
 }
 
+query BooksWorkId($first: Int = 1000, $after: Cursor) {
+    nodeSupBooks(first: $first, after: $after, sortKey: CREATED_AT) {
+        nodes {
+            path
+            supBookWorkIdNumber
+        }
+        pageInfo {
+            ...FragmentPageInfo
+        }
+    }
+}
+
 query Courses($first: Int = 1000, $after: Cursor) {
     nodeStanfordCourses(first: $first, after: $after, sortKey: CREATED_AT) {
         nodes {
