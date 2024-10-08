@@ -1,6 +1,4 @@
-import {NextRequest, NextResponse} from "next/server"
-import {revalidateTag, unstable_cache as nextCache} from "next/cache"
-import {getEntityFromPath} from "@lib/gql/gql-queries"
+import {NextResponse} from "next/server"
 import {getLegacyBookPaths} from "@lib/utils/getLegacyBookPaths"
 
 export const revalidate = 86400
