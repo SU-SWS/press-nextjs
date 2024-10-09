@@ -3,7 +3,6 @@ import {getLegacyBookPaths} from "@lib/utils/getLegacyBookPaths"
 
 export const revalidate = false
 export const dynamic = "force-static"
-export const dynamicParams = false
 
 const LegacyBookPage = async ({params}: {params: {id: string}}) => {
   const legacyPaths = await getLegacyBookPaths()
