@@ -19,8 +19,8 @@ const Page = async ({params}: PageProps) => {
 
   const {redirect: redirectPath, entity} = await getEntityFromPath<NodeUnion>(path)
 
-  if (!entity) notFound()
   if (redirectPath) redirect(redirectPath)
+  if (!entity) notFound()
 
   if (entity.__typename === "NodeSupBook") {
     if (page === "excerpt") return <SupBookExcerptPage node={entity} />
