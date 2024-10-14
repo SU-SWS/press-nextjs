@@ -25,7 +25,8 @@ type DrupalClientError = GraphQLError & {
 export const getEntityFromPath = cache(
   async <T extends NodeUnion | TermUnion>(
     path: string,
-    previewMode?: boolean
+    previewMode?: boolean,
+    teaser?: boolean
   ): Promise<{
     entity?: T
     redirect?: RouteRedirect["url"]
@@ -41,7 +42,7 @@ export const getEntityFromPath = cache(
         if (path.startsWith("/node/")) return {}
 
         try {
-          query = await graphqlClient({cache: "no-cache"}, previewMode).Route({path})
+          query = await graphqlClient({cache: "no-cache"}, previewMode).Route({path, teaser: !!teaser})
         } catch (e) {
           const messagePrefix = `Error fetching data for path ${path}: `
           if (e instanceof ClientError) {
@@ -59,7 +60,7 @@ export const getEntityFromPath = cache(
           query.route?.__typename === "RouteInternal" && query.route.entity ? (query.route.entity as T) : undefined
         return {entity, redirect: undefined}
       },
-      ["entities", path, previewMode ? "preview" : "anonymous"],
+      [path, previewMode ? "preview" : "anonymous", teaser ? "teaser" : "full"],
       {tags: ["all-entities", `paths:${path}`]}
     )
 

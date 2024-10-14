@@ -452,14 +452,11 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   supBookAwards {
     ...FragmentSupAward
   }
-  supBookCatalogMonth
-  supBookCatalogPage
   supBookCatalogSeasonYyyy
   supBookClothSalePercent
   supBookClothSalePrice
+  supBookPublisher
   supBookCopublisherName
-  supBookCopublisherYn
-  supBookCopyright
   supBookDescription {
     processed
   }
@@ -467,43 +464,28 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   supBookExcerpts {
     ...FragmentParagraphUnion
   }
-  supBookHtmlPageTitle
-  supBookIllustrations
   supBookImage {
     ...FragmentMediaImage
   }
   supBookImprint {
     ...FragmentTermInterface
   }
-  supBookInPrintStatus
-  supBookInstructorRecommended
   supBookIntlCart
   supBookIsbn13Alt
   supBookIsbn13Cloth
   supBookIsbn13Digital
   supBookIsbn13Isw
   supBookIsbn13Paper
-  supBookLocalWebBlurb {
-    processed
-  }
-  supBookNewPaperbackYn
   supBookPages
   supBookPaperSalePercent
   supBookPaperSalePrice
   supBookPriceCloth
-  supBookPriceDigital
   supBookPricePaper
   supBookPrintDeskCopies
   supBookPubDateCloth {
     ...FragmentDateTime
   }
-  supBookPubDateDigital {
-    ...FragmentDateTime
-  }
   supBookPubDateFirst {
-    ...FragmentDateTime
-  }
-  supBookPubDatePaper {
     ...FragmentDateTime
   }
   supBookPubYearFirst
@@ -513,14 +495,10 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   supBookReviews {
     processed
   }
-  supBookRightsDescription
   supBookSalesRank
   supBookSeries {
     ...FragmentTermInterface
   }
-  supBookStatusCloth
-  supBookStatusDigital
-  supBookStatusPaper
   supBookSubjects {
     __typename
     id
@@ -535,8 +513,6 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   }
   supBookSubtitle
   supBookUrlIsw
-  supBookWebCodeCloth
-  supBookWebCodePaper
   supBookWorkIdNumber
   supBookERetailers {
     ...FragmentLink
@@ -1075,11 +1051,15 @@ export const FragmentNodeStanfordPageTeaserFragmentDoc = gql`
   }
   suPageBanner {
     ...FragmentParagraphStanfordBanner
+    ...FragmentParagraphStanfordPageTitleBanner
+    ...FragmentParagraphSupCarousel
   }
 }
     ${FragmentNodeInterfaceFragmentDoc}
 ${FragmentMediaImageFragmentDoc}
-${FragmentParagraphStanfordBannerFragmentDoc}`;
+${FragmentParagraphStanfordBannerFragmentDoc}
+${FragmentParagraphStanfordPageTitleBannerFragmentDoc}
+${FragmentParagraphSupCarouselFragmentDoc}`;
 export const FragmentNodeStanfordPolicyTeaserFragmentDoc = gql`
     fragment FragmentNodeStanfordPolicyTeaser on NodeStanfordPolicy {
   ...FragmentNodeInterface
@@ -1580,7 +1560,7 @@ export const MenuDocument = gql`
 }
     ${FragmentMenuLinkFragmentDoc}`;
 export const RouteDocument = gql`
-    query Route($path: String!) {
+    query Route($path: String!, $teaser: Boolean = false) {
   route(path: $path) {
     __typename
     ... on RouteRedirect {
@@ -1591,14 +1571,14 @@ export const RouteDocument = gql`
     }
     ... on RouteInternal {
       entity {
-        ...FragmentNodeUnion
-        ...FragmentTermInterface
+        ...FragmentNodeUnion @skip(if: $teaser)
+        ...FragmentNodeTeaserUnion @include(if: $teaser)
       }
     }
   }
 }
     ${FragmentNodeUnionFragmentDoc}
-${FragmentTermInterfaceFragmentDoc}`;
+${FragmentNodeTeaserUnionFragmentDoc}`;
 export const RedirectsDocument = gql`
     query Redirects($first: Int = 1000, $after: Cursor) {
   redirects(first: $first, after: $after) {

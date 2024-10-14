@@ -123,7 +123,12 @@ const BookPage = async ({node, ...props}: Props) => {
                 </div>
               )}
 
-              {node.supBookCopublisherName && <div className="text-press-sand-dark">{node.supBookCopublisherName}</div>}
+              {node.supBookPublisher && (
+                <div className="rs-pb-3 text-press-sand-dark">Published by {node.supBookPublisher}</div>
+              )}
+              {node.supBookCopublisherName && (
+                <div className="rs-pb-3 text-press-sand-dark">{node.supBookCopublisherName}</div>
+              )}
 
               {node.supBookPubDateCloth?.time && (
                 <div className="text-18 text-press-sand-dark">
@@ -177,6 +182,7 @@ const BookPage = async ({node, ...props}: Props) => {
                 paperIsbn={node.supBookIsbn13Paper}
                 preorder={node.supBookPreorder}
                 comingSoon={node.supBookNoCart}
+                hasIntlCart={node.supBookIntlCart}
               />
             </div>
 
