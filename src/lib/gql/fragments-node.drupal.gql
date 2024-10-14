@@ -45,14 +45,11 @@ fragment FragmentNodeSupBook on NodeSupBook {
     supBookAwards {
         ...FragmentSupAward
     }
-    supBookCatalogMonth
-    supBookCatalogPage
     supBookCatalogSeasonYyyy
     supBookClothSalePercent
     supBookClothSalePrice
+    supBookPublisher
     supBookCopublisherName
-    supBookCopublisherYn
-    supBookCopyright
     supBookDescription {
         processed
     }
@@ -60,43 +57,28 @@ fragment FragmentNodeSupBook on NodeSupBook {
     supBookExcerpts {
         ...FragmentParagraphUnion
     }
-    supBookHtmlPageTitle
-    supBookIllustrations
     supBookImage {
         ...FragmentMediaImage
     }
     supBookImprint {
         ...FragmentTermInterface
     }
-    supBookInPrintStatus
-    supBookInstructorRecommended
     supBookIntlCart
     supBookIsbn13Alt
     supBookIsbn13Cloth
     supBookIsbn13Digital
     supBookIsbn13Isw
     supBookIsbn13Paper
-    supBookLocalWebBlurb {
-        processed
-    }
-    supBookNewPaperbackYn
     supBookPages
     supBookPaperSalePercent
     supBookPaperSalePrice
     supBookPriceCloth
-    supBookPriceDigital
     supBookPricePaper
     supBookPrintDeskCopies
     supBookPubDateCloth {
         ...FragmentDateTime
     }
-    supBookPubDateDigital {
-        ...FragmentDateTime
-    }
     supBookPubDateFirst {
-        ...FragmentDateTime
-    }
-    supBookPubDatePaper {
         ...FragmentDateTime
     }
     supBookPubYearFirst
@@ -106,14 +88,10 @@ fragment FragmentNodeSupBook on NodeSupBook {
     supBookReviews {
         processed
     }
-    supBookRightsDescription
     supBookSalesRank
     supBookSeries {
         ...FragmentTermInterface
     }
-    supBookStatusCloth
-    supBookStatusDigital
-    supBookStatusPaper
     supBookSubjects {
         __typename
         id
@@ -128,8 +106,6 @@ fragment FragmentNodeSupBook on NodeSupBook {
     }
     supBookSubtitle
     supBookUrlIsw
-    supBookWebCodeCloth
-    supBookWebCodePaper
     supBookWorkIdNumber
     supBookERetailers {
         ...FragmentLink
@@ -475,6 +451,8 @@ fragment FragmentNodeStanfordPageTeaser on NodeStanfordPage {
     }
     suPageBanner {
         ...FragmentParagraphStanfordBanner
+        ...FragmentParagraphStanfordPageTitleBanner
+        ...FragmentParagraphSupCarousel
     }
 }
 

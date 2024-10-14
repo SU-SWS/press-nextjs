@@ -22,7 +22,7 @@ type Props = {
   usPaperSaleDiscount?: Maybe<number>
   clothIsbn?: Maybe<string>
   paperIsbn?: Maybe<string>
-  hasIntlCart?: boolean
+  hasIntlCart?: Maybe<boolean>
   preorder?: Maybe<boolean>
   comingSoon?: Maybe<boolean>
 }
@@ -145,10 +145,10 @@ const BookPreCart = ({
         {!comingSoon && <ArrowRightIcon width={24} className="transition-all group-hocus:translate-x-2" />}
       </Button>
 
-      {formatChoice === "cloth" && !isIntl && usClothPrice && usClothSalePrice && (
+      {!isIntl && usClothPrice && usClothSalePrice && (
         <div className="rs-mt-1 text-18">
           <div>
-            List Price: <del className="italic">{formatCurrency(usClothPrice)}</del>
+            Hardcover List Price: <del className="italic">{formatCurrency(usClothPrice)}</del>
           </div>
           <div>
             Save&nbsp;
@@ -159,10 +159,10 @@ const BookPreCart = ({
         </div>
       )}
 
-      {formatChoice === "paper" && !isIntl && usPaperPrice && usPaperSalePrice && (
+      {!isIntl && usPaperPrice && usPaperSalePrice && (
         <div className="rs-mt-1 text-18">
           <div>
-            List Price: <del className="italic">{formatCurrency(usPaperPrice)}</del>
+            Paperback List Price: <del className="italic">{formatCurrency(usPaperPrice)}</del>
           </div>
           <div>
             Save{" "}
