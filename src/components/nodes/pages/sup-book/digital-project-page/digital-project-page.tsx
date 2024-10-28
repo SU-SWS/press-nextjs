@@ -1,4 +1,4 @@
-import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/drupal"
+import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/drupal.d"
 import {H1, H2, H3} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
@@ -9,6 +9,7 @@ import BookAwards from "@components/nodes/pages/sup-book/book-awards"
 import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
 import Button from "@components/elements/button"
+import SupBookMetadata from "@components/nodes/pages/sup-book/sup-book-metadata"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -33,6 +34,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
 
   return (
     <article {...props} className="centered">
+      <SupBookMetadata node={node} />
       <div className="mb-20 flex flex-col md:rs-mt-4 md:flex-row md:gap-32 lg:gap-[7.6rem]">
         <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-col justify-center bg-fog-light px-20 md:hidden">
           <div className="flex flex-row gap-24">

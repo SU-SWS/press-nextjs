@@ -1,4 +1,4 @@
-import {NodeSupBook} from "@lib/gql/__generated__/drupal"
+import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import Image from "next/image"
 import {getImagePlaceholder} from "@lib/utils/placeholder-image"
 

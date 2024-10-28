@@ -11,7 +11,7 @@ type Props = HTMLAttributes<HTMLDivElement> & {
   /**
    * Server action to load a page.
    */
-  loadPage?: (_page: number, _filters?: Record<string, any>) => Promise<JSX.Element>
+  loadPage?: (_page: number, _filters?: Record<string, string | number | undefined>) => Promise<JSX.Element>
   /**
    * Total number of items to build the pager.
    */
@@ -33,13 +33,21 @@ const AwardListViewClient = ({totalItems, loadPage, children, ...props}: Props) 
     [setTotalResults, setItems]
   )
 
-  const [runAction, isPending] = useServerAction<[number, Record<string, any>], JSX.Element>(loadPage, onActionFinished)
+  const [runAction, isPending] = useServerAction<[number, Record<string, string | number | undefined>], JSX.Element>(
+    loadPage,
+    onActionFinished
+  )
 
   const numItems = items.length
 
   const onYearChosen = (year_min?: number) => {
     const year_max = !year_min || year_min === 2010 ? undefined : year_min + 10
-    runAction(0, {year_min, year_max}).then(() => setMinYear(year_min))
+    runAction(0, {
+      year_min,
+      year_max,
+    })
+      .then(() => setMinYear(year_min))
+      .catch(_e => console.warn("An error occurred when filtering the awards."))
   }
 
   let pagerLoadPage

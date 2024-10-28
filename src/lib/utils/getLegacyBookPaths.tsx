@@ -1,4 +1,4 @@
-import {BooksWorkIdQuery, BooksWorkIdQueryVariables} from "@lib/gql/__generated__/drupal"
+import {BooksWorkIdQuery, BooksWorkIdQueryVariables} from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {unstable_cache as nextCache} from "next/cache"
 

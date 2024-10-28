@@ -8,6 +8,7 @@ import PageTitleBannerParagraph from "@components/paragraphs/stanford-page-title
 import SupCarouselParagraph from "@components/paragraphs/sup-carousel/sup-carousel-paragraph"
 import clsx from "clsx"
 import {twMerge} from "tailwind-merge"
+import StanfordPageMetadata from "@components/nodes/pages/stanford-page/stanford-page-metadata"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordPage
@@ -19,6 +20,7 @@ const StanfordPagePage = ({node, ...props}: Props) => {
 
   return (
     <article {...props}>
+      <StanfordPageMetadata node={node} />
       {node.suPageBanner?.__typename && (
         <header>
           {node.suPageBanner?.__typename === "ParagraphStanfordBanner" && (

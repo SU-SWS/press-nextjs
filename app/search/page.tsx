@@ -15,11 +15,12 @@ export const metadata = {
     noarchive: true,
   },
 }
-const Page = async ({searchParams}: {searchParams?: {[_key: string]: string}}) => {
+const Page = async (props: {searchParams?: Promise<{[_key: string]: string}>}) => {
+  const searchParams = await props.searchParams
   const [appId, indexName, apiKey] = await getAlgoliaCredential()
 
   const initialState: IndexUiState = {refinementList: {book_type: ["book"]}}
-  if (searchParams?.q) initialState.query = searchParams.q as string
+  if (searchParams?.q) initialState.query = searchParams.q
   if (searchParams?.subjects && initialState.refinementList) {
     initialState.refinementList.book_subject = searchParams.subjects.split(",")
   }

@@ -11,7 +11,7 @@ import {
   NodeSupBook,
   NodeUnion,
   SupBooksAwardWinnersFilterInput,
-} from "@lib/gql/__generated__/drupal"
+} from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import View from "@components/views/view"
 
@@ -117,7 +117,7 @@ export const getViewPagedItems = cache(
 
     const client = graphqlClient({next: {tags}})
     let contextualFilters = getContextualFilters(["term_node_taxonomy_name_depth"], contextualFilter)
-    let fieldFilters: Record<string, any> = {}
+    let fieldFilters: Record<string, string | number | Array<string | number> | undefined> = {}
     let graphqlResponse
 
     try {

@@ -1,10 +1,11 @@
-import {NodeSupBook} from "@lib/gql/__generated__/drupal"
+import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import {H1, H2, H3} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import Link from "@components/elements/link"
 import BackToLink from "@components/elements/back-to-link"
 import {twMerge} from "tailwind-merge"
 import BookPageImage from "./book-page-image"
+import SupBookMetadata from "@components/nodes/pages/sup-book/sup-book-metadata"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -23,6 +24,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
       childrenProps={{className: "rs-mt-4 mx-auto max-w-[800px]"}}
       isArticle
     >
+      <SupBookMetadata node={node} isCopyRequestPage />
       <H1>
         Desk, Examination, or Review copy request<span className="sr-only">&nbps;{node.title}</span>
       </H1>

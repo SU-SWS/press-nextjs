@@ -21,7 +21,7 @@ const BackToTop = () => {
     scrollTo({
       left: 0,
       top: 0,
-      behavior: !!window.matchMedia("(prefers-reduced-motion: reduce)")?.matches ? "instant" : "smooth",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)")?.matches ? "instant" : "smooth",
     })
     const mainContent = document.getElementById("main-content")
     mainContent?.setAttribute("tabindex", "-1")

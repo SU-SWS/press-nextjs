@@ -1,7 +1,7 @@
 import {H1} from "@components/elements/headers"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {notFound} from "next/navigation"
-import {ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal"
+import {ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d"
 import Image from "next/image"
 
 export const metadata = {
@@ -12,11 +12,12 @@ export const metadata = {
 }
 
 type Props = {
-  params: {uuid: string[]}
+  params: Promise<{uuid: string[]}>
 }
 
-const Page = async ({params: {uuid}}: Props) => {
-  const [paragraphId, mediaUuid] = uuid
+const Page = async (props: Props) => {
+  const params = await props.params
+  const [paragraphId, mediaUuid] = params.uuid
 
   const paragraphQuery = await graphqlClient().Paragraph({uuid: paragraphId})
   if (paragraphQuery.paragraph?.__typename !== "ParagraphStanfordGallery") notFound()

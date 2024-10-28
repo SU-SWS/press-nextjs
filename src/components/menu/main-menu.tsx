@@ -7,7 +7,7 @@ import {ChevronDownIcon, MagnifyingGlassIcon} from "@heroicons/react/20/solid"
 import {MenuItem as MenuItemType} from "@lib/gql/__generated__/drupal.d"
 import {clsx} from "clsx"
 import {useBoolean, useEventListener} from "usehooks-ts"
-import {useCallback, useEffect, useId, useLayoutEffect, useRef, useState} from "react"
+import {RefObject, useCallback, useEffect, useId, useLayoutEffect, useRef, useState} from "react"
 import {usePathname} from "next/navigation"
 import usePageHasTopBanner from "@lib/hooks/usePageHasTopBanner"
 import getActiveTrail from "@lib/drupal/utils"
@@ -45,7 +45,7 @@ const MainMenu = ({menuItems}: Props) => {
   )
 
   useEffect(() => closeMenu(), [browserUrl, closeMenu])
-  useEventListener("keydown", handleEscape, menuRef)
+  useEventListener("keydown", handleEscape, menuRef as RefObject<HTMLDivElement>)
   const pageHasBanner = usePageHasTopBanner()
 
   return (
@@ -166,7 +166,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
     [level, submenuOpen, closeSubmenu]
   )
 
-  useEventListener("keydown", handleEscape, menuItemRef)
+  useEventListener("keydown", handleEscape, menuItemRef as unknown as RefObject<HTMLDivElement>)
   const pageHasBanner = usePageHasTopBanner()
 
   // List out the specific classes so tailwind will include them. Dynamic classes values don"t get compiled.

@@ -9,7 +9,6 @@ import {
   NodeUnion,
   RouteQuery,
   RouteRedirect,
-  TermUnion,
   StanfordBasicSiteSetting,
 } from "@lib/gql/__generated__/drupal.d"
 import {cache} from "react"
@@ -18,55 +17,50 @@ import {unstable_cache as nextCache} from "next/cache"
 import {ClientError} from "graphql-request"
 import {GraphQLError} from "graphql/error"
 
-type DrupalClientError = GraphQLError & {
-  debugMessage: string
-}
+type DrupalGraphqlError = GraphQLError & {debugMessage: string}
 
-export const getEntityFromPath = cache(
-  async <T extends NodeUnion | TermUnion>(
-    path: string,
-    previewMode?: boolean,
-    teaser?: boolean
-  ): Promise<{
-    entity?: T
-    redirect?: RouteRedirect["url"]
-  }> => {
-    "use server"
+export const getEntityFromPath = async <T extends NodeUnion>(
+  path: string,
+  previewMode?: boolean,
+  teaser?: boolean
+): Promise<{
+  entity?: T
+  redirect?: RouteRedirect["url"]
+}> => {
+  const getData = nextCache(
+    async () => {
+      // Paths that start with /node/ should not be used.
+      if (path.startsWith("/node/")) return {}
 
-    const getData = nextCache(
-      async () => {
-        let entity: T | undefined
-        let query: RouteQuery
+      let query: RouteQuery
 
-        // Paths that start with /node/ should not be used.
-        if (path.startsWith("/node/")) return {}
-
-        try {
-          query = await graphqlClient({cache: "no-cache"}, previewMode).Route({path, teaser: !!teaser})
-        } catch (e) {
-          const messagePrefix = `Error fetching data for path ${path}: `
-          if (e instanceof ClientError) {
-            // @ts-ignore
-            const messages = e.response.errors?.map((error: DrupalClientError) => error.debugMessage)
-            console.warn(messagePrefix + [...new Set(messages)].join(" "))
-          } else {
-            console.warn(messagePrefix + (e instanceof Error ? e.message : "An error occurred"))
-          }
-          return {entity: undefined, redirect: undefined}
+      try {
+        query = await graphqlClient(undefined, previewMode).Route({
+          path,
+          teaser: !!teaser,
+        })
+      } catch (e) {
+        if (e instanceof ClientError) {
+          // @ts-expect-error Client error type doesn't define the debugMessage, but it's there.
+          const messages = e.response.errors?.map((error: DrupalGraphqlError) => error.debugMessage || error.message)
+          console.warn([...new Set(messages)].join(" "))
+        } else {
+          console.warn(e instanceof Error ? e.message : "An error occurred")
         }
+        return {}
+      }
 
-        if (query.route?.__typename === "RouteRedirect") return {redirect: query.route.url, entity: undefined}
-        entity =
-          query.route?.__typename === "RouteInternal" && query.route.entity ? (query.route.entity as T) : undefined
-        return {entity, redirect: undefined}
-      },
-      [path, previewMode ? "preview" : "anonymous", teaser ? "teaser" : "full"],
-      {tags: ["all-entities", `paths:${path}`]}
-    )
+      if (query.route?.__typename === "RouteRedirect") return {redirect: query.route.url}
+      const entity: T | undefined =
+        query.route?.__typename === "RouteInternal" && query.route.entity ? (query.route.entity as T) : undefined
+      return {entity}
+    },
+    [path, previewMode ? "preview" : "anonymous", teaser ? "teaser" : "full"],
+    {tags: ["all-entities", `paths:${path}`]}
+  )
 
-    return getData()
-  }
-)
+  return getData()
+}
 
 export const getConfigPage = async <T extends ConfigPagesUnion>(
   configPageType: ConfigPagesUnion["__typename"]

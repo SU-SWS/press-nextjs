@@ -1,4 +1,4 @@
-import {NodeSupBook} from "@lib/gql/__generated__/drupal"
+import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import SupBookCard from "@components/nodes/cards/sup-book/sup-book-card"
 import {JSX} from "react"
 import AwardListViewClient from "@components/views/sup-books/award-list-view/award-list-view.client"

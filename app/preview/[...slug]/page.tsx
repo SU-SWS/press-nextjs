@@ -6,9 +6,10 @@ import {notFound} from "next/navigation"
 import {getPathFromContext, PageProps} from "@lib/drupal/utils"
 import {isPreviewMode} from "@lib/drupal/is-preview-mode"
 
-const PreviewPage = async ({params}: PageProps) => {
+const PreviewPage = async (props: PageProps) => {
+  const params = await props.params
   if (!isPreviewMode()) notFound()
-  const {entity} = await getEntityFromPath<NodeUnion>(getPathFromContext({params}), true)
+  const {entity} = await getEntityFromPath<NodeUnion>(getPathFromContext(params.slug), true)
 
   if (!entity) notFound()
 

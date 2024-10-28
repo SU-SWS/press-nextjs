@@ -45,6 +45,7 @@ const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey, initialUiState = {
   const searchClient = useMemo(() => liteClient(appId, searchApiKey), [appId, searchApiKey])
   return (
     <div>
+      {/* @ts-expect-error React types don't match the library. */}
       <InstantSearchNext
         indexName={searchIndex}
         searchClient={searchClient}
@@ -120,7 +121,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     const chosenSubjects = currentRefinements
       .find(refinement => refinement.attribute === "book_subject")
       ?.refinements.map(item => item.value)
-    chosenSubjects && params.set("subjects", chosenSubjects.join(","))
+    if (chosenSubjects) params.set("subjects", chosenSubjects.join(","))
 
     router.replace(`?${params.toString()}${window.location.hash || ""}`, {scroll: false})
   }, [router, searchParams, currentRefinements, query, pubYearRange])
@@ -149,7 +150,6 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             autoCorrect="on"
             spellCheck={false}
             maxLength={512}
-            type="textfield"
             placeholder="Search"
             defaultValue={query}
             autoFocus
@@ -330,7 +330,6 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           </div>
         </div>
       </form>
-
       <div className="md:float-right md:ml-20 md:w-[calc(70%-5rem)]">
         <HitList searchIndex={searchIndex} />
       </div>

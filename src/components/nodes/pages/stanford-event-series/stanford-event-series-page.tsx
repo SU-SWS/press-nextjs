@@ -1,7 +1,7 @@
 import StanfordEventListItem from "@components/nodes/list-item/stanford-event/stanford-event-list-item"
 import {H1} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordEvent, NodeStanfordEventSeries} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordEventSeries} from "@lib/gql/__generated__/drupal.d"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordEventSeries
@@ -19,7 +19,7 @@ const StanfordEventSeriesPage = ({node, ...props}: Props) => {
         <div className="mb-20">
           {node.suEventSeriesEvent.map(event => (
             <div key={event.id} className="border-b border-black-20 py-20 last:border-0">
-              <StanfordEventListItem node={event as NodeStanfordEvent} />
+              <StanfordEventListItem node={event} />
             </div>
           ))}
         </div>

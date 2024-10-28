@@ -1,6 +1,6 @@
 import {HTMLAttributes, JSX} from "react"
 import {graphqlClient} from "@lib/gql/gql-client"
-import {BooksAuthorsQuery, NodeSupBook} from "@lib/gql/__generated__/drupal"
+import {BooksAuthorsQuery, NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import Link from "@components/elements/link"
 import FilteringAuthorList from "@components/paragraphs/sup-author-list/filtering-author-list"
 import {unstable_cache as nextCache} from "next/cache"

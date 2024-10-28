@@ -76,7 +76,7 @@ const EventsFilteredListView = ({
             options={topicOptions}
             emptyLabel="- All -"
             label="Event Topics"
-            onChange={(e, value: SelectValue<string, boolean>) => setChosenTopic((value as string) || "")}
+            onChange={(_e, value: SelectValue<string, boolean>) => setChosenTopic((value as string) || "")}
           />
         </div>
         <Button onClick={filterEvents}>Filter</Button>

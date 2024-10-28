@@ -1,4 +1,4 @@
-import {NodeSupBook} from "@lib/gql/__generated__/drupal"
+import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import SupBookCard from "@components/nodes/cards/sup-book/sup-book-card"
 import {clsx} from "clsx"
 import {twMerge} from "tailwind-merge"

@@ -10,7 +10,7 @@ const usePageHasTopBanner = () => {
   const {value, setTrue, setFalse} = useBoolean(false)
 
   useEffect(() => {
-    if (!!document.querySelectorAll("[data-top-hero]").length) setTrue()
+    if (document.querySelectorAll("[data-top-hero]").length) setTrue()
     return () => setFalse()
   }, [setTrue, setFalse, currentPath])
   return value
