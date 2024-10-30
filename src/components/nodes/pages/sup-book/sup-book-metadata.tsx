@@ -29,7 +29,7 @@ const SupBookMetadata = async ({node, isExcerptPage, isCopyRequestPage}: Props) 
     <>
       <title>{pageTitle}</title>
       <meta name="description" content={description} />
-      <meta property="og:title" content="Stanford Sites User Guide" />
+      <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content="book" />
       <meta

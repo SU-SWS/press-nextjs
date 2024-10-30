@@ -15,7 +15,7 @@ const SupAncillaryMetadata = async ({node}: Props) => {
     <>
       <title>{pageTitle}</title>
       <meta name="description" content={description} />
-      <meta property="og:title" content="Stanford Sites User Guide" />
+      <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
 
       {image && (
