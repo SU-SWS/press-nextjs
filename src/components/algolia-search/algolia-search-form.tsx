@@ -77,7 +77,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     range: pubYearRangeBounds,
     refine: refineRange,
     canRefine: canRefinePubYear,
-  } = useRange({attribute: "book_published"})
+  } = useRange({attribute: "book_published_year"})
   const {min: minYear, max: maxYear} = pubYearRangeBounds
   const {items: currentRefinements, canRefine: canRefineCurrent, refine: removeRefinement} = useCurrentRefinements({})
 
@@ -88,6 +88,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
   ])
 
   const yearOptions: SelectOptionDefinition<string>[] = []
+
   for (let i = maxYear || new Date().getFullYear(); i >= (minYear || 1990); i--) {
     yearOptions.push({value: `${i}`, label: `${i}`})
   }
