@@ -1,4 +1,4 @@
-import {NodeSupBook} from "@lib/gql/__generated__/drupal"
+import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import {HTMLAttributes} from "react"
 import BookPage from "@components/nodes/pages/sup-book/book-page/book-page"
 import DigitalProjectPage from "@components/nodes/pages/sup-book/digital-project-page/digital-project-page"

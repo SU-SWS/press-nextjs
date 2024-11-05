@@ -1,22 +1,27 @@
-import CardViewGrid from "@components/views/card-view-grid"
 import {NodeStanfordPublication} from "@lib/gql/__generated__/drupal.d"
+import {ViewDisplayProps} from "@components/views/view"
+import LoadMoreList from "@components/elements/load-more-list"
+import StanfordPublicationListItem from "@components/nodes/list-item/stanford-publication/stanford-publication-list-item"
 
-interface Props {
-  /**
-   * List of nodes to display.
-   */
-  items: NodeStanfordPublication[]
-  /**
-   * If those nodes titles should display as <h2> or <h3>
-   */
-  headingLevel?: "h2" | "h3"
-  /**
-   * Total number of items on all pages.
-   */
-  totalItems: number
-}
-
-const PublicationsApaView = async ({items = [], headingLevel, totalItems}: Props) => {
-  return <CardViewGrid items={items} headingLevel={headingLevel} totalItems={totalItems} />
+const PublicationsApaView = async ({
+  items,
+  headingLevel,
+  totalItems,
+  loadPage,
+}: ViewDisplayProps<NodeStanfordPublication>) => {
+  return (
+    <LoadMoreList
+      ulProps={{className: "list-unstyled mb-20"}}
+      liProps={{
+        className: "border-b border-black-20 last-of-type:border-0 pb-10 last:pb-0 pt-10 first:pt-0",
+      }}
+      totalItems={totalItems}
+      loadPage={loadPage}
+    >
+      {items.map(item => (
+        <StanfordPublicationListItem key={item.id} node={item} headingLevel={headingLevel} />
+      ))}
+    </LoadMoreList>
+  )
 }
 export default PublicationsApaView

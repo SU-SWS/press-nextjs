@@ -4,15 +4,14 @@ import Link from "@components/elements/link"
 import {ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {notFound} from "next/navigation"
-import crypto from "crypto"
 
 type Props = {
-  params: {uuid: string[]}
+  params: Promise<{uuid: string[]}>
 }
 
-const Page = async ({params: {uuid}}: Props) => {
-  const captionId = crypto.randomBytes(4).toString("hex")
-  const [paragraphId, mediaUuid] = uuid
+const Page = async (props: Props) => {
+  const params = await props.params
+  const [paragraphId, mediaUuid] = params.uuid
 
   const paragraphQuery = await graphqlClient().Paragraph({uuid: paragraphId})
   if (paragraphQuery.paragraph?.__typename !== "ParagraphStanfordGallery") notFound()
@@ -30,7 +29,7 @@ const Page = async ({params: {uuid}}: Props) => {
   galleryImages = galleryImages?.filter(image => !!image.suGalleryImage?.url)
 
   return (
-    <InterceptionModal aria-labelledby={captionId}>
+    <InterceptionModal aria-labelledby={mediaUuid}>
       {galleryImages?.map(galleryImage => {
         if (!galleryImage.suGalleryImage?.url) return
 
@@ -47,7 +46,7 @@ const Page = async ({params: {uuid}}: Props) => {
                 />
               </picture>
               {galleryImage.suGalleryCaption && (
-                <figcaption id={captionId} className="m-0 table-caption w-full caption-bottom bg-white p-5 text-right">
+                <figcaption id={mediaUuid} className="m-0 table-caption w-full caption-bottom bg-white p-5 text-right">
                   {galleryImage.suGalleryCaption}
                 </figcaption>
               )}

@@ -185,7 +185,7 @@ const cleanMediaMarkup = (node: Element) => {
   const nodeProps = attributesToProps(node.attribs)
   nodeProps.className = fixClasses(nodeProps.className)
 
-  const getImage = (node: Element): ComponentProps<any> | undefined => {
+  const getImage = (node: Element): ComponentProps<"img"> | undefined => {
     let img
     if (node.name === "img") {
       const attribs = node.attribs
@@ -194,7 +194,8 @@ const cleanMediaMarkup = (node: Element) => {
       return attribs
     }
     if (node.children.length > 0) {
-      for (let child of node.children) {
+      let child
+      for (child of node.children) {
         if (child instanceof Element) {
           img = getImage(child)
           if (img) return img
@@ -208,7 +209,8 @@ const cleanMediaMarkup = (node: Element) => {
       return node.children as DOMNode[]
     }
     if (node.children.length > 0) {
-      for (let child of node.children) {
+      let child
+      for (child of node.children) {
         if (child instanceof Element) {
           caption = getFigCaption(child)
           if (caption) return caption
@@ -220,10 +222,11 @@ const cleanMediaMarkup = (node: Element) => {
   const getOembedUrl = (node: Element): string | undefined => {
     const src = node.attribs?.src || node.attribs["data-src"]
     if (src?.includes("/media/oembed")) {
-      return decodeURIComponent(src as string).replace(/^.*url=(.*)?&.*$/, "$1")
+      return decodeURIComponent(src).replace(/^.*url=(.*)?&.*$/, "$1")
     }
     if (node.children.length > 0) {
-      for (let child of node.children) {
+      let child
+      for (child of node.children) {
         if (child instanceof Element) {
           const url: string | undefined = getOembedUrl(child)
           if (url) return url
@@ -240,7 +243,9 @@ const cleanMediaMarkup = (node: Element) => {
 
   const image = getImage(node)
   if (image) {
-    let {src, alt, width, height} = image
+    let {src} = image
+    const {alt, width, height} = image
+    if (!src) return
 
     if (src?.startsWith("/")) {
       src = process.env.NEXT_PUBLIC_DRUPAL_BASE_URL + src
@@ -275,8 +280,8 @@ const WysiwygImage = ({
 }: {
   src: string
   alt?: Maybe<string>
-  height?: Maybe<string>
-  width?: Maybe<string>
+  height?: Maybe<string | number>
+  width?: Maybe<string | number>
   className?: string
 }) => {
   if (width && height) {
@@ -285,8 +290,8 @@ const WysiwygImage = ({
         className={twMerge(fixClasses(className), "mb-10")}
         src={src.trim()}
         alt={alt ? alt.trim() : ""}
-        height={parseInt(height)}
-        width={parseInt(width)}
+        height={parseInt(`${height}`)}
+        width={parseInt(`${width}`)}
       />
     )
   }

@@ -9,6 +9,7 @@ const FlushCache = ({currentPath}: {currentPath: string}) => {
   }
 
   return (
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form action={clearCache} className="fixed bottom-0 z-50">
       <button
         type="submit"

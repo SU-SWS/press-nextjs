@@ -91,6 +91,9 @@ fragment FragmentNodeSupBook on NodeSupBook {
     supBookSalesRank
     supBookSeries {
         ...FragmentTermInterface
+        supSeriesPage {
+            url
+        }
     }
     supBookSubjects {
         __typename

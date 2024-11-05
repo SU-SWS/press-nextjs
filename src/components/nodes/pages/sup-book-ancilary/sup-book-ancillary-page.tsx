@@ -1,4 +1,4 @@
-import {MenuItem as MenuItemType, NodeSupBookAncillary} from "@lib/gql/__generated__/drupal"
+import {MenuItem as MenuItemType, NodeSupBookAncillary} from "@lib/gql/__generated__/drupal.d"
 import {H1} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import Rows from "@components/paragraphs/rows/rows"
@@ -8,6 +8,7 @@ import {twMerge} from "tailwind-merge"
 import Wysiwyg from "@components/elements/wysiwyg"
 import SideNav from "@components/menu/side-nav"
 import {getBookAncillaryContents} from "@lib/gql/gql-queries"
+import SupAncillaryMetadata from "@components/nodes/pages/sup-book-ancilary/sup-ancillary-metadata"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBookAncillary
@@ -38,6 +39,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
       childrenProps={{className: "centered rs-mt-4 flex gap-[17.1rem]"}}
       isArticle
     >
+      <SupAncillaryMetadata node={node} />
       <H1 className="sr-only">
         {node.title} for <em>{book.title}</em>
       </H1>

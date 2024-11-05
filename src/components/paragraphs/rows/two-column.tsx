@@ -4,7 +4,12 @@ import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behavi
 import {isPreviewMode} from "@lib/drupal/is-preview-mode"
 import {twMerge} from "tailwind-merge"
 
-const TwoColumn = ({items, config}: {items: ParagraphUnion[]; config?: Record<string, any>}) => {
+export type TwoColumnConfig = Record<string, string>
+type Props = {
+  items: ParagraphUnion[]
+  config?: TwoColumnConfig
+}
+const TwoColumn = ({items, config}: Props) => {
   const leftItems = items.filter(item => getParagraphBehaviors(item).layout_paragraphs?.region === "left")
   const rightItems = items.filter(item => getParagraphBehaviors(item).layout_paragraphs?.region !== "left")
 

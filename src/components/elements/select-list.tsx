@@ -21,7 +21,7 @@ import {twMerge} from "tailwind-merge"
 import {clsx} from "clsx"
 
 type OptionProps = {
-  rootRef: RefObject<HTMLUListElement>
+  rootRef: RefObject<HTMLUListElement | null>
   children?: ReactNode
   value: string
   disabled?: boolean

@@ -45,6 +45,7 @@ const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey, initialUiState = {
   const searchClient = useMemo(() => liteClient(appId, searchApiKey), [appId, searchApiKey])
   return (
     <div>
+      {/* @ts-expect-error React types don't match the library. */}
       <InstantSearchNext
         indexName={searchIndex}
         searchClient={searchClient}
@@ -60,6 +61,7 @@ const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey, initialUiState = {
 const Form = ({searchIndex}: {searchIndex: string}) => {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const {value: onlyBooks, setValue: setOnlyBooks} = useBoolean(true)
 
   const inputRef = useRef<HTMLInputElement>(null)
   const {query, refine} = useSearchBox({})
@@ -69,7 +71,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     attribute: "book_subject",
     limit: 100,
   })
-  const {items: bookTypeRefinementItems, refine: refineBookType} = useRefinementList({attribute: "book_type"})
+  const {refine: refineBookType} = useRefinementList({attribute: "book_type"})
   const {
     start: pubYearRange,
     range: pubYearRangeBounds,
@@ -120,9 +122,11 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     const chosenSubjects = currentRefinements
       .find(refinement => refinement.attribute === "book_subject")
       ?.refinements.map(item => item.value)
-    chosenSubjects && params.set("subjects", chosenSubjects.join(","))
+    if (chosenSubjects) params.set("subjects", chosenSubjects.join(","))
 
-    router.replace(`?${params.toString()}${window.location.hash || ""}`, {scroll: false})
+    const newSearch = params.toString()
+    if (window.location.search.replace(/^\?/, "") != newSearch)
+      router.replace(`?${newSearch}${window.location.hash || ""}`, {scroll: false})
   }, [router, searchParams, currentRefinements, query, pubYearRange])
 
   const {value: expanded, toggle: toggleExpanded} = useBoolean(false)
@@ -149,7 +153,6 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             autoCorrect="on"
             spellCheck={false}
             maxLength={512}
-            type="textfield"
             placeholder="Search"
             defaultValue={query}
             autoFocus
@@ -223,8 +226,11 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                   <input
                     className="peer sr-only"
                     type="checkbox"
-                    checked={!!bookTypeRefinementItems.find(item => item.isRefined)}
-                    onChange={() => refineBookType("book")}
+                    checked={onlyBooks}
+                    onChange={() => {
+                      setOnlyBooks(!onlyBooks)
+                      refineBookType("book")
+                    }}
                   />
                   <div className="h-6 w-16 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
                   <div className="absolute -left-1 -top-2 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-8 outline-press-bay transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline group-hocus:outline" />
@@ -330,7 +336,6 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           </div>
         </div>
       </form>
-
       <div className="md:float-right md:ml-20 md:w-[calc(70%-5rem)]">
         <HitList searchIndex={searchIndex} />
       </div>
@@ -350,10 +355,9 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
   } = useSortBy({
     items: [
       {label: "Relevance", value: searchIndex},
-      {label: "Last Name, A-Z", value: `${searchIndex}_authors_asc`},
-      {label: "Last Name, Z-A", value: `${searchIndex}_authors_desc`},
-      {label: "Published Year, Asc", value: `${searchIndex}_published_asc`},
-      {label: "Published Year, Desc", value: `${searchIndex}_published_desc`},
+      {label: "Author, A-Z", value: `${searchIndex}_authors_asc`},
+      {label: "Author, Z-A", value: `${searchIndex}_authors_desc`},
+      {label: "Publication Year, Desc", value: `${searchIndex}_published_desc`},
     ],
   })
 

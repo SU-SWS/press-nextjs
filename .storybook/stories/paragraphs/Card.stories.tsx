@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from "@storybook/react"
 import {ComponentProps} from "react"
-import {ParagraphStanfordCard, Text} from "@lib/gql/__generated__/drupal"
+import {ParagraphStanfordCard, Text} from "@lib/gql/__generated__/drupal.d"
 import CardParagraph from "@components/paragraphs/stanford-card/card-paragraph"
 import {getStoryBookImage} from "../storybook-entities"
 
@@ -37,9 +37,11 @@ export const Card: Story = {
         timezone: "America/Los_Angeles",
       },
       id: "9954cc81-919b-4498-9151-bf930831fca7",
-      suCardHeader: "Nam scelerisque, urna vitae auctor efficitur, tortor nunc cursus tortor, ut blandit purus arcu quis sapien",
+      suCardHeader:
+        "Nam scelerisque, urna vitae auctor efficitur, tortor nunc cursus tortor, ut blandit purus arcu quis sapien",
       suCardBody: {
-        processed: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae dignissim felis. Nullam nulla leo, venenatis at feugiat sit amet, ultricies non lorem.</p>",
+        processed:
+          "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae dignissim felis. Nullam nulla leo, venenatis at feugiat sit amet, ultricies non lorem.</p>",
       },
       suCardLink: {
         title: "Button",

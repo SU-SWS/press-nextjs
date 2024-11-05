@@ -1,4 +1,4 @@
-import {NodeSupBook} from "@lib/gql/__generated__/drupal"
+import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import {unstable_cache as nextCache} from "next/cache"
 import {BookHit} from "@components/algolia-search/hits/sup-book"
 import {H2, H3} from "@components/elements/headers"

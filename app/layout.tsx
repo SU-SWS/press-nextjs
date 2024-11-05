@@ -13,30 +13,18 @@ const appleIcons: Icon[] = [60, 72, 76, 114, 120, 144, 152, 180].map(size => ({
   sizes: `${size}x${size}`,
 }))
 
-const icons: Icon[] = [].map(size => ({
-  url: "/favicon.ico",
-  sizes: `${size}x${size}`,
-}))
-
 /**
  * Metadata that does not change often.
  */
 export const metadata = {
   metadataBase: new URL("https://sup.org"),
-  title: "Stanford University",
-  openGraph: {
-    type: "website",
-    locale: "en_IE",
-    url: "https://sup.org",
-    siteName: "Stanford University Press",
-  },
   twitter: {
     card: "summary_large_image",
     site: "@stanfordpress",
     creator: "@stanfordpress",
   },
   icons: {
-    icon: [...icons, {url: "/favicon.ico"}],
+    icon: [{url: "/favicon.ico"}],
     apple: appleIcons,
   },
 }
