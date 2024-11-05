@@ -39,7 +39,9 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
     params.delete("author")
     if (alphaChosen !== "") params.set("author", alphaChosen)
 
-    router.replace(`?${params.toString()}${window.location.hash || ""}`, {scroll: false})
+    const newSearch = params.toString()
+    if (window.location.search.replace(/^\?/, "") !== newSearch)
+      router.replace(`?${newSearch}${window.location.hash || ""}`, {scroll: false})
   }, [router, searchParams, alphaChosen])
 
   const loadPage = useCallback(

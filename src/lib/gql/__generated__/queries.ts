@@ -498,6 +498,9 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   supBookSalesRank
   supBookSeries {
     ...FragmentTermInterface
+    supSeriesPage {
+      url
+    }
   }
   supBookSubjects {
     __typename

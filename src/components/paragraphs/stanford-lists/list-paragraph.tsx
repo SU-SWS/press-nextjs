@@ -29,7 +29,7 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
           paragraph.suListView?.pageSize
         )
       : {items: [], totalItems: 0}
-  const addLoadMore = (paragraph.suListView?.pageSize || 3) > 99
+  const addLoadMore = (paragraph.suListView?.pageSize || 3) > 30
 
   if (behaviors.list_paragraph?.hide_empty && viewItems.length === 0) return null
 

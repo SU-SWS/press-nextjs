@@ -4473,6 +4473,8 @@ export type TermSupSeries = MetaTagInterface &
     path: Scalars["String"]["output"]
     /** Published */
     status: Scalars["Boolean"]["output"]
+    /** Series Page */
+    supSeriesPage?: Maybe<Link>
     /** The weight of this term in relation to other terms. */
     weight: Scalars["Int"]["output"]
   }
@@ -6370,6 +6372,7 @@ export type NodeQuery = {
           name: string
           path: string
           weight: number
+          supSeriesPage?: {__typename?: "Link"; url?: string | null} | null
           parent?:
             | {__typename?: "TermBasicPageType"; id: string}
             | {__typename?: "TermEventAudience"; id: string}
@@ -10225,6 +10228,7 @@ export type FragmentNodeSupBookFragment = {
     name: string
     path: string
     weight: number
+    supSeriesPage?: {__typename?: "Link"; url?: string | null} | null
     parent?:
       | {__typename?: "TermBasicPageType"; id: string}
       | {__typename?: "TermEventAudience"; id: string}
@@ -13599,6 +13603,7 @@ type FragmentNodeUnion_NodeSupBook_Fragment = {
     name: string
     path: string
     weight: number
+    supSeriesPage?: {__typename?: "Link"; url?: string | null} | null
     parent?:
       | {__typename?: "TermBasicPageType"; id: string}
       | {__typename?: "TermEventAudience"; id: string}
@@ -17240,6 +17245,7 @@ export type RouteQuery = {
                 name: string
                 path: string
                 weight: number
+                supSeriesPage?: {__typename?: "Link"; url?: string | null} | null
                 parent?:
                   | {__typename?: "TermBasicPageType"; id: string}
                   | {__typename?: "TermEventAudience"; id: string}

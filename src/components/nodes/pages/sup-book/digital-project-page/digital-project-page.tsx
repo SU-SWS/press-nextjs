@@ -30,8 +30,6 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
     return linkParams.toString()
   }
 
-  const bookSubjectLinkParams = node.supBookSubjects && createLinkParams(node.supBookSubjects[0])
-
   return (
     <article {...props} className="centered">
       <SupBookMetadata node={node} />
@@ -40,16 +38,6 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
           <div className="flex flex-row gap-24">
             <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
               <H1 className="type-2 mb-0 xl:text-[3.3rem]">{node.title}</H1>
-
-              {node.supBookSubjects && (
-                <Link
-                  prefetch={false}
-                  href={`/search?${bookSubjectLinkParams}`}
-                  className="rs-mb-2 order-first text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
-                >
-                  {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
-                </Link>
-              )}
 
               {node.supBookSubtitle && <div className="type-0 mt-5 font-medium xl:text-21">{node.supBookSubtitle}</div>}
 
@@ -79,16 +67,6 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
             <div className="rs-mb-0 rs-pb-3 flex flex-col border-b-2 border-fog">
               <div className="mt-7 flex flex-col sm:mt-0 sm:hidden md:flex">
                 <H1 className="type-2 mb-0 xl:text-[3.3rem]">{node.title}</H1>
-
-                {node.supBookSubjects && (
-                  <Link
-                    prefetch={false}
-                    href={`/search?${bookSubjectLinkParams}`}
-                    className="rs-mb-2 order-first text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
-                  >
-                    {node.supBookSubjects[0].parent?.name || node.supBookSubjects[0].name}
-                  </Link>
-                )}
 
                 {node.supBookSubtitle && (
                   <div className="type-0 mt-5 font-medium xl:text-21">{node.supBookSubtitle}</div>
@@ -145,7 +123,9 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                   <br />
                   <Link
                     prefetch={false}
-                    href={`/search?q=${node.supBookSeries.name}&only-books=false`}
+                    href={
+                      node.supBookSeries.supSeriesPage?.url || `/search?q=${node.supBookSeries.name}&only-books=false`
+                    }
                     className="text-18 font-normal text-stone-dark"
                   >
                     {node.supBookSeries.name}
