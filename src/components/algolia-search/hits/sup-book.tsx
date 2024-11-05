@@ -9,6 +9,7 @@ import {twMerge} from "tailwind-merge"
 
 export type BookHit = AlgoliaHit & {
   book_published?: number
+  book_published_year?: number
   book_authors?: string
   book_type?: "book" | "digital_project"
   book_authors_last_name?: string | string[]
@@ -46,7 +47,7 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
           )}
 
           {hit.book_authors && <div className="text-18">{hit.book_authors}</div>}
-          {hit.book_published && <div className="text-18">{hit.book_published}</div>}
+          {hit.book_published_year && <div className="text-18">{hit.book_published_year}</div>}
         </div>
 
         <Link
