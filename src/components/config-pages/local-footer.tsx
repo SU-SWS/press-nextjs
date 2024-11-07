@@ -8,6 +8,8 @@ import FacebookIcon from "@components/elements/icons/FacebookIcon"
 import InstagramIcon from "@components/elements/icons/InstagramIcon"
 import {StanfordLocalFooter} from "@lib/gql/__generated__/drupal.d"
 import {getConfigPage} from "@lib/gql/gql-queries"
+import BlueSkyIcon from "@components/elements/icons/BlueSkyIcon"
+import LinkedInIcon from "@components/elements/icons/LinkedInIcon"
 
 const LocalFooter = async () => {
   const localFooterConfig = await getConfigPage<StanfordLocalFooter>("StanfordLocalFooter")
@@ -124,6 +126,8 @@ const SocialIcon = ({url}: {url: string}) => {
   if (url.includes("twitter.com")) return <TwitterIcon />
   if (url.includes("youtube.com")) return <YoutubeIcon />
   if (url.includes("instagram.com")) return <InstagramIcon />
+  if (url.includes("bsky.app")) return <BlueSkyIcon />
+  if (url.includes("linkedin.com")) return <LinkedInIcon />
   return null
 }
 
