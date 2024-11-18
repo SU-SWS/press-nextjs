@@ -1,11 +1,13 @@
-import {NextRequest} from "next/server"
+"use server"
+
 import {redirect} from "next/navigation"
 
-export const revalidate = false
-export const dynamic = "force-static"
+export const submitForm = async (formData: FormData) => {
+  "use server"
 
-export const POST = async (request: NextRequest) => {
-  const formData = await request.formData()
+  // Honeypot field.
+  if (formData.get("email")) return
+
   const bookTitle = formData.get("title") as string
   const formatIsbn = formData.get("format") as string
   const isIntl = formData.get("intl") !== "us"

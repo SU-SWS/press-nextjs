@@ -2,15 +2,15 @@
 
 import useIsInternational from "@lib/hooks/useIsInternational"
 import Button from "@components/elements/button"
-import {FormEvent, useEffect, useState} from "react"
+import {useEffect, useState} from "react"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
 import {Maybe, PressPrice} from "@lib/gql/__generated__/drupal.d"
 import {BookOpenIcon as BookOpenIconOutline} from "@heroicons/react/24/outline"
 import {BookOpenIcon} from "@heroicons/react/24/solid"
-import {useRouter} from "next/navigation"
 import {formatCurrency} from "@lib/utils/format-currency"
 import {twMerge} from "tailwind-merge"
 import {clsx} from "clsx"
+import {submitForm} from "@components/nodes/pages/sup-book/precart/precart.server"
 
 type PriceProps = PressPrice & {}
 
@@ -32,31 +32,16 @@ const PrecartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle}: 
       .catch(_e => console.warn(`Something went wrong fetching ${priceId}`))
   }, [priceId])
 
-  const router = useRouter()
-
   const [isIntl, setIntl] = useIsInternational()
 
-  const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    // @ts-expect-error Format exists in the form data.
-    const isbn = e.target.format.value
-
-    if (isIntl) {
-      const title = bookTitle.replace(/[^a-zA-Z\d\s:]/, "").replace(/ /, "-")
-      router.push(`https://www.combinedacademic.co.uk/${isbn}/${title}`)
-      return
-    }
-    router.push(`https://add-to-cart-2.supadu.com/add-to-cart?isbn=${isbn}&client=indiepubs-stanford-university-press`)
-  }
-
   return (
-    <form
-      className="rs-mb-1 rs-pb-1 border-b-2 border-fog @container"
-      onSubmit={onFormSubmit}
-      action="/add-to-cart"
-      method="post"
-    >
+    /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
+    <form className="rs-mb-1 rs-pb-1 border-b-2 border-fog @container" action={submitForm}>
       <input type="hidden" name="title" value={bookTitle} />
+      <label className="sr-only">
+        Do not fill with any information
+        <input name="email" type="email" />
+      </label>
 
       <fieldset className="rs-mb-1">
         <legend className="sr-only">Format</legend>
