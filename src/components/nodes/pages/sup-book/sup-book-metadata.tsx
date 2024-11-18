@@ -11,7 +11,7 @@ const SupBookMetadata = async ({node, isExcerptPage, isCopyRequestPage}: Props) 
 
   const image = node.supBookImage?.mediaImage
 
-  let description = getCleanDescription(node.supBookDescription?.processed)
+  let description = getCleanDescription(node.body?.processed)
 
   let title = node.title
   if (isExcerptPage) {
@@ -42,6 +42,7 @@ const SupBookMetadata = async ({node, isExcerptPage, isCopyRequestPage}: Props) 
           undefined
         }
       />
+
       <meta property="book:release_date" content={node.supBookPubYearFirst || undefined} />
 
       {node.supBookAuthors?.map(author => (

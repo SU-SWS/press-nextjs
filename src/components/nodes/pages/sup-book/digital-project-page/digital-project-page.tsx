@@ -17,7 +17,11 @@ type Props = HTMLAttributes<HTMLElement> & {
 const DigitalProjectPage = async ({node, ...props}: Props) => {
   const hasExcerptAndMore = node.supBookExcerpts || !!(await getBookAncillaryContents(node.id, node.path)).length
   const awards = node.supBookAwards?.sort((a, b) =>
-    a.supYear < b.supYear ? 1 : a.supYear === b.supYear && a.supRank && b.supRank && a.supRank > b.supRank ? -1 : -1
+    a.supYear && b.supYear && a.supYear < b.supYear
+      ? 1
+      : a.supYear === b.supYear && a.supRank && b.supRank && a.supRank > b.supRank
+        ? -1
+        : -1
   )
 
   const createLinkParams = (subject: TermSupBookSubject) => {
@@ -87,7 +91,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                     {awards.map(award => (
                       <div key={award.id}>
                         <H3 className="type-0 xl:text-21">
-                          {award.supYear}: {award.name}
+                          {award.supYear}: {award.title}
                         </H3>
                         <Wysiwyg html={award.supDescription?.processed} className="ml-10" />
                       </div>
@@ -221,19 +225,19 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
         </div>
       </div>
 
-      {(node.supBookDescription?.processed || node.supBookReviews || node.supBookAuthorInfo) && (
+      {(node.body?.processed || node.supBookReviews || node.supBookAuthorInfo) && (
         <Tabs className="mb-20 border-b border-fog pb-20">
           <div className="mb-20 border-b border-fog">
             <TabsList className="mx-auto max-w-5xl">
-              {node.supBookDescription?.processed && <Tab className="p-10">Description</Tab>}
+              {node.body?.processed && <Tab className="p-10">Description</Tab>}
               {node.supBookReviews && <Tab className="p-10">Reviews</Tab>}
               {node.supBookAuthorInfo && <Tab className="p-10">About the Author</Tab>}
             </TabsList>
           </div>
           <div className="mx-auto max-w-5xl">
-            {node.supBookDescription?.processed && (
+            {node.body?.processed && (
               <TabPanel>
-                <Wysiwyg html={node.supBookDescription?.processed} />
+                <Wysiwyg html={node.body?.processed} />
               </TabPanel>
             )}
             {node.supBookReviews && (

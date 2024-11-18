@@ -50,17 +50,16 @@ export const FragmentNameTypeFragmentDoc = gql`
   credentials
 }
     `;
-export const FragmentSupAwardFragmentDoc = gql`
-    fragment FragmentSupAward on SupAward {
+export const FragmentAwardFragmentDoc = gql`
+    fragment FragmentAward on PressAward {
   id
-  name
+  title
   supAssociation
   supDescription {
     processed
   }
   supPlace
   supRank
-  supWorkId
   supYear
 }
     `;
@@ -450,14 +449,12 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   supBookAuthorsFull
   supBookAvailDesc
   supBookAwards {
-    ...FragmentSupAward
+    ...FragmentAward
   }
   supBookCatalogSeasonYyyy
-  supBookClothSalePercent
-  supBookClothSalePrice
   supBookPublisher
   supBookCopublisherName
-  supBookDescription {
+  body {
     processed
   }
   supBookDigitalCompLink
@@ -470,17 +467,12 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   supBookImprint {
     ...FragmentTermInterface
   }
-  supBookIntlCart
   supBookIsbn13Alt
   supBookIsbn13Cloth
   supBookIsbn13Digital
   supBookIsbn13Isw
   supBookIsbn13Paper
   supBookPages
-  supBookPaperSalePercent
-  supBookPaperSalePrice
-  supBookPriceCloth
-  supBookPricePaper
   supBookPrintDeskCopies
   supBookPubDateCloth {
     ...FragmentDateTime
@@ -521,12 +513,17 @@ export const FragmentNodeSupBookFragmentDoc = gql`
     ...FragmentLink
   }
   supBookType
-  supBookPreorder
   supBookNoCart
+  supBookPriceData {
+    id
+    ... on PressPrice {
+      supIntlCart
+    }
+  }
 }
     ${FragmentNodeInterfaceFragmentDoc}
 ${FragmentNameTypeFragmentDoc}
-${FragmentSupAwardFragmentDoc}
+${FragmentAwardFragmentDoc}
 ${FragmentParagraphUnionFragmentDoc}
 ${FragmentMediaImageFragmentDoc}
 ${FragmentTermInterfaceFragmentDoc}
@@ -993,7 +990,7 @@ export const FragmentNodeSupBookTeaserFragmentDoc = gql`
     ...FragmentNameType
   }
   supBookAwards {
-    ...FragmentSupAward
+    id
   }
   supBookSubtitle
   supBookWorkIdNumber
@@ -1005,7 +1002,6 @@ export const FragmentNodeSupBookTeaserFragmentDoc = gql`
 }
     ${FragmentNodeInterfaceFragmentDoc}
 ${FragmentNameTypeFragmentDoc}
-${FragmentSupAwardFragmentDoc}
 ${FragmentMediaImageFragmentDoc}`;
 export const FragmentNodeStanfordCourseTeaserFragmentDoc = gql`
     fragment FragmentNodeStanfordCourseTeaser on NodeStanfordCourse {
@@ -1541,6 +1537,26 @@ export const ConfigPagesDocument = gql`
   }
 }
     `;
+export const BookPriceDocument = gql`
+    query BookPrice($id: ID!) {
+  press(id: $id) {
+    __typename
+    ... on PressPrice {
+      id
+      supClothPrice
+      supClothDiscount
+      supClothSale
+      supComingSoon
+      supIntlCart
+      supPaperPrice
+      supPaperDiscount
+      supPaperSale
+      supPreorder
+      workId
+    }
+  }
+}
+    `;
 export const MenuDocument = gql`
     query Menu($name: MenuAvailable = MAIN) {
   menu(name: $name) {
@@ -1879,6 +1895,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ConfigPages(variables?: DrupalTypes.ConfigPagesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.ConfigPagesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.ConfigPagesQuery>(ConfigPagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ConfigPages', 'query', variables);
+    },
+    BookPrice(variables: DrupalTypes.BookPriceQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.BookPriceQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.BookPriceQuery>(BookPriceDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'BookPrice', 'query', variables);
     },
     Menu(variables?: DrupalTypes.MenuQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DrupalTypes.MenuQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<DrupalTypes.MenuQuery>(MenuDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Menu', 'query', variables);

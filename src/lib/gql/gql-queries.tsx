@@ -173,7 +173,7 @@ export const getAllNodes = nextCache(
 export const getBookAncillaryContents = async (uuid: string, bookPath: string): Promise<NodeSupBookAncillary[]> => {
   const getData = nextCache(
     async () => {
-      const ancillaryPages = await graphqlClient({cache: "no-cache"}).supBookAncillary({
+      const ancillaryPages = await graphqlClient().supBookAncillary({
         contextualFilters: {uuid},
       })
       return (ancillaryPages.supBookAncillary?.results as NodeSupBookAncillary[]) || []

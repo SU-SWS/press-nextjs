@@ -1708,6 +1708,8 @@ export type NodeSupBook = EdgeNode &
   MetaTagInterface &
   NodeInterface & {
     __typename?: "NodeSupBook"
+    /** Description */
+    body?: Maybe<TextSummary>
     /** The time that the node was last edited. */
     changed: DateTime
     /** The date and time that the content was created. */
@@ -1735,17 +1737,11 @@ export type NodeSupBook = EdgeNode &
     /** Availability Description */
     supBookAvailDesc?: Maybe<Scalars["String"]["output"]>
     /** Awards */
-    supBookAwards?: Maybe<Array<SupAward>>
+    supBookAwards?: Maybe<Array<PressAward>>
     /** Catalog Season  */
     supBookCatalogSeasonYyyy?: Maybe<Scalars["String"]["output"]>
-    /** Cloth Sale Percent */
-    supBookClothSalePercent?: Maybe<Scalars["Int"]["output"]>
-    /** Cloth Sale Price */
-    supBookClothSalePrice?: Maybe<Scalars["Float"]["output"]>
     /** Copublisher Name */
     supBookCopublisherName?: Maybe<Scalars["String"]["output"]>
-    /** Description */
-    supBookDescription?: Maybe<Text>
     /** Digital Comp Link? */
     supBookDigitalCompLink?: Maybe<Scalars["Boolean"]["output"]>
     /** Ebook Retailers */
@@ -1756,8 +1752,6 @@ export type NodeSupBook = EdgeNode &
     supBookImage?: Maybe<MediaImage>
     /** Imprint */
     supBookImprint?: Maybe<TermSupImprint>
-    /** International Cart */
-    supBookIntlCart?: Maybe<Scalars["Boolean"]["output"]>
     /** ISBN 13 Alternative */
     supBookIsbn13Alt?: Maybe<Scalars["String"]["output"]>
     /** ISBN 13 Cloth */
@@ -1772,16 +1766,8 @@ export type NodeSupBook = EdgeNode &
     supBookNoCart?: Maybe<Scalars["Boolean"]["output"]>
     /** Pages */
     supBookPages?: Maybe<Scalars["Int"]["output"]>
-    /** Paper Sale Percent */
-    supBookPaperSalePercent?: Maybe<Scalars["Int"]["output"]>
-    /** Paper Sale Price */
-    supBookPaperSalePrice?: Maybe<Scalars["Float"]["output"]>
-    /** Preorder */
-    supBookPreorder?: Maybe<Scalars["Boolean"]["output"]>
-    /** Price Cloth */
-    supBookPriceCloth?: Maybe<Scalars["Float"]["output"]>
-    /** Price Paper */
-    supBookPricePaper?: Maybe<Scalars["Float"]["output"]>
+    /** Price Data */
+    supBookPriceData?: Maybe<PressPrice>
     /** Print Desk Copies */
     supBookPrintDeskCopies?: Maybe<Scalars["Boolean"]["output"]>
     /** Publication Date Cloth */
@@ -2486,6 +2472,77 @@ export type ParagraphUnion =
   | ParagraphSupFileList
   | ParagraphSupSearchForm
 
+/** Entity type press. */
+export type PressAward = MetaTagInterface &
+  PressInterface & {
+    __typename?: "PressAward"
+    /** The Universally Unique IDentifier (UUID). */
+    id: Scalars["ID"]["output"]
+    /** The computed meta tags for the entity. */
+    metatag: Array<MetaTagUnion>
+    /** Association */
+    supAssociation?: Maybe<Scalars["String"]["output"]>
+    /** Description */
+    supDescription?: Maybe<Text>
+    /** Place */
+    supPlace?: Maybe<Scalars["String"]["output"]>
+    /** Rank */
+    supRank?: Maybe<Scalars["Int"]["output"]>
+    /** Year */
+    supYear?: Maybe<Scalars["Int"]["output"]>
+    /** Title */
+    title: Scalars["String"]["output"]
+    /** Work ID */
+    workId: Scalars["Int"]["output"]
+  }
+
+/** Entity type press. */
+export type PressInterface = {
+  /** The Universally Unique IDentifier (UUID). */
+  id: Scalars["ID"]["output"]
+  /** The computed meta tags for the entity. */
+  metatag: Array<MetaTagUnion>
+  /** Title */
+  title: Scalars["String"]["output"]
+  /** Work ID */
+  workId: Scalars["Int"]["output"]
+}
+
+/** Entity type press. */
+export type PressPrice = MetaTagInterface &
+  PressInterface & {
+    __typename?: "PressPrice"
+    /** The Universally Unique IDentifier (UUID). */
+    id: Scalars["ID"]["output"]
+    /** The computed meta tags for the entity. */
+    metatag: Array<MetaTagUnion>
+    /** Cloth Sale Discount */
+    supClothDiscount?: Maybe<Scalars["Float"]["output"]>
+    /** Cloth Price */
+    supClothPrice?: Maybe<Scalars["Float"]["output"]>
+    /** Cloth Sale Price */
+    supClothSale?: Maybe<Scalars["Float"]["output"]>
+    /** Coming Soon */
+    supComingSoon?: Maybe<Scalars["Boolean"]["output"]>
+    /** Has International Cart */
+    supIntlCart?: Maybe<Scalars["Boolean"]["output"]>
+    /** Paper Sale Discount */
+    supPaperDiscount?: Maybe<Scalars["Float"]["output"]>
+    /** Paper Price */
+    supPaperPrice?: Maybe<Scalars["Float"]["output"]>
+    /** Paper Sale Price */
+    supPaperSale?: Maybe<Scalars["Float"]["output"]>
+    /** Preorder */
+    supPreorder?: Maybe<Scalars["Boolean"]["output"]>
+    /** Title */
+    title: Scalars["String"]["output"]
+    /** Work ID */
+    workId: Scalars["Int"]["output"]
+  }
+
+/** Entity type press. */
+export type PressUnion = PressAward | PressPrice
+
 /** The schema's entry-point for queries. */
 export type Query = {
   __typename?: "Query"
@@ -2527,6 +2584,8 @@ export type Query = {
   nodeSupBooks: NodeSupBookConnection
   /** Load a Paragraph entity by id. */
   paragraph?: Maybe<ParagraphUnion>
+  /** Load a Press entity by id. */
+  press?: Maybe<PressUnion>
   /** Load a Redirect entity by id. */
   redirect?: Maybe<Redirect>
   /** List of all Redirect on the platform. */
@@ -2559,8 +2618,6 @@ export type Query = {
   stanfordSharedTags?: Maybe<StanfordSharedTagsResult>
   /** List of all StanfordSuperFooter on the platform. */
   stanfordSuperFooters: StanfordSuperFooterConnection
-  /** Load a SupAward entity by id. */
-  supAward?: Maybe<SupAward>
   /** Query for view sup_books display book_ancillary. */
   supBookAncillary?: Maybe<SupBookAncillaryResult>
   /** Query for view sup_books display award_winners_graphql. */
@@ -2725,6 +2782,11 @@ export type QueryParagraphArgs = {
 }
 
 /** The schema's entry-point for queries. */
+export type QueryPressArgs = {
+  id: Scalars["ID"]["input"]
+}
+
+/** The schema's entry-point for queries. */
 export type QueryRedirectArgs = {
   id: Scalars["ID"]["input"]
 }
@@ -2869,11 +2931,6 @@ export type QueryStanfordSuperFootersArgs = {
   last?: InputMaybe<Scalars["Int"]["input"]>
   reverse?: InputMaybe<Scalars["Boolean"]["input"]>
   sortKey?: InputMaybe<ConnectionSortKeys>
-}
-
-/** The schema's entry-point for queries. */
-export type QuerySupAwardArgs = {
-  id: Scalars["ID"]["input"]
 }
 
 /** The schema's entry-point for queries. */
@@ -3861,43 +3918,6 @@ export type Subscription = {
   /** Placeholder for subscription extension. */
   _: Scalars["Boolean"]["output"]
 }
-
-/** Entity type sup_award. */
-export type SupAward = MetaTagInterface &
-  SupAwardInterface & {
-    __typename?: "SupAward"
-    /** The Universally Unique IDentifier (UUID). */
-    id: Scalars["ID"]["output"]
-    /** The computed meta tags for the entity. */
-    metatag: Array<MetaTagUnion>
-    /** Name */
-    name: Scalars["String"]["output"]
-    /** Association */
-    supAssociation?: Maybe<Scalars["String"]["output"]>
-    /** Description */
-    supDescription?: Maybe<Text>
-    /** Place */
-    supPlace?: Maybe<Scalars["String"]["output"]>
-    /** Rank */
-    supRank?: Maybe<Scalars["Int"]["output"]>
-    /** Work Id */
-    supWorkId: Scalars["Int"]["output"]
-    /** Year */
-    supYear: Scalars["Int"]["output"]
-  }
-
-/** Entity type sup_award. */
-export type SupAwardInterface = {
-  /** The Universally Unique IDentifier (UUID). */
-  id: Scalars["ID"]["output"]
-  /** The computed meta tags for the entity. */
-  metatag: Array<MetaTagUnion>
-  /** Name */
-  name: Scalars["String"]["output"]
-}
-
-/** Entity type sup_award. */
-export type SupAwardUnion = SupAward
 
 export type SupBookAncillaryContextualFilterInput = {
   uuid?: InputMaybe<Scalars["String"]["input"]>
@@ -6204,22 +6224,15 @@ export type NodeQuery = {
         supBookAuthorsFull?: string | null
         supBookAvailDesc?: string | null
         supBookCatalogSeasonYyyy?: string | null
-        supBookClothSalePercent?: number | null
-        supBookClothSalePrice?: number | null
         supBookPublisher?: string | null
         supBookCopublisherName?: string | null
         supBookDigitalCompLink?: boolean | null
-        supBookIntlCart?: boolean | null
         supBookIsbn13Alt?: string | null
         supBookIsbn13Cloth?: string | null
         supBookIsbn13Digital?: string | null
         supBookIsbn13Isw?: string | null
         supBookIsbn13Paper?: string | null
         supBookPages?: number | null
-        supBookPaperSalePercent?: number | null
-        supBookPaperSalePrice?: number | null
-        supBookPriceCloth?: number | null
-        supBookPricePaper?: number | null
         supBookPrintDeskCopies?: boolean | null
         supBookPubYearFirst?: string | null
         supBookSalesRank?: number | null
@@ -6227,7 +6240,6 @@ export type NodeQuery = {
         supBookUrlIsw?: string | null
         supBookWorkIdNumber?: number | null
         supBookType: string
-        supBookPreorder?: boolean | null
         supBookNoCart?: boolean | null
         id: string
         title: string
@@ -6244,17 +6256,16 @@ export type NodeQuery = {
           credentials?: string | null
         }> | null
         supBookAwards?: Array<{
-          __typename?: "SupAward"
+          __typename?: "PressAward"
           id: string
-          name: string
+          title: string
           supAssociation?: string | null
           supPlace?: string | null
           supRank?: number | null
-          supWorkId: number
-          supYear: number
+          supYear?: number | null
           supDescription?: {__typename?: "Text"; processed?: any | null} | null
         }> | null
-        supBookDescription?: {__typename?: "Text"; processed?: any | null} | null
+        body?: {__typename?: "TextSummary"; processed?: any | null} | null
         supBookExcerpts?: Array<
           | {
               __typename: "ParagraphStanfordCard"
@@ -6424,6 +6435,7 @@ export type NodeQuery = {
             | null
         }> | null
         supBookERetailers?: Array<{__typename?: "Link"; title?: string | null; url?: string | null}> | null
+        supBookPriceData?: {__typename?: "PressPrice"; supIntlCart?: boolean | null; id: string} | null
         changed: {__typename?: "DateTime"; timezone: any; time: any}
         created: {__typename?: "DateTime"; timezone: any; time: any}
       }
@@ -9656,18 +9668,6 @@ export type FragmentTermInterfaceFragment =
   | FragmentTermInterface_TermSupImprint_Fragment
   | FragmentTermInterface_TermSupSeries_Fragment
 
-export type FragmentSupAwardFragment = {
-  __typename?: "SupAward"
-  id: string
-  name: string
-  supAssociation?: string | null
-  supPlace?: string | null
-  supRank?: number | null
-  supWorkId: number
-  supYear: number
-  supDescription?: {__typename?: "Text"; processed?: any | null} | null
-}
-
 export type FragmentLinkFragment = {__typename?: "Link"; title?: string | null; url?: string | null}
 
 export type FragmentNameTypeFragment = {
@@ -10060,22 +10060,15 @@ export type FragmentNodeSupBookFragment = {
   supBookAuthorsFull?: string | null
   supBookAvailDesc?: string | null
   supBookCatalogSeasonYyyy?: string | null
-  supBookClothSalePercent?: number | null
-  supBookClothSalePrice?: number | null
   supBookPublisher?: string | null
   supBookCopublisherName?: string | null
   supBookDigitalCompLink?: boolean | null
-  supBookIntlCart?: boolean | null
   supBookIsbn13Alt?: string | null
   supBookIsbn13Cloth?: string | null
   supBookIsbn13Digital?: string | null
   supBookIsbn13Isw?: string | null
   supBookIsbn13Paper?: string | null
   supBookPages?: number | null
-  supBookPaperSalePercent?: number | null
-  supBookPaperSalePrice?: number | null
-  supBookPriceCloth?: number | null
-  supBookPricePaper?: number | null
   supBookPrintDeskCopies?: boolean | null
   supBookPubYearFirst?: string | null
   supBookSalesRank?: number | null
@@ -10083,7 +10076,6 @@ export type FragmentNodeSupBookFragment = {
   supBookUrlIsw?: string | null
   supBookWorkIdNumber?: number | null
   supBookType: string
-  supBookPreorder?: boolean | null
   supBookNoCart?: boolean | null
   id: string
   title: string
@@ -10100,17 +10092,16 @@ export type FragmentNodeSupBookFragment = {
     credentials?: string | null
   }> | null
   supBookAwards?: Array<{
-    __typename?: "SupAward"
+    __typename?: "PressAward"
     id: string
-    name: string
+    title: string
     supAssociation?: string | null
     supPlace?: string | null
     supRank?: number | null
-    supWorkId: number
-    supYear: number
+    supYear?: number | null
     supDescription?: {__typename?: "Text"; processed?: any | null} | null
   }> | null
-  supBookDescription?: {__typename?: "Text"; processed?: any | null} | null
+  body?: {__typename?: "TextSummary"; processed?: any | null} | null
   supBookExcerpts?: Array<
     | {
         __typename: "ParagraphStanfordCard"
@@ -10280,6 +10271,7 @@ export type FragmentNodeSupBookFragment = {
       | null
   }> | null
   supBookERetailers?: Array<{__typename?: "Link"; title?: string | null; url?: string | null}> | null
+  supBookPriceData?: {__typename?: "PressPrice"; supIntlCart?: boolean | null; id: string} | null
   changed: {__typename?: "DateTime"; timezone: any; time: any}
   created: {__typename?: "DateTime"; timezone: any; time: any}
 }
@@ -13435,22 +13427,15 @@ type FragmentNodeUnion_NodeSupBook_Fragment = {
   supBookAuthorsFull?: string | null
   supBookAvailDesc?: string | null
   supBookCatalogSeasonYyyy?: string | null
-  supBookClothSalePercent?: number | null
-  supBookClothSalePrice?: number | null
   supBookPublisher?: string | null
   supBookCopublisherName?: string | null
   supBookDigitalCompLink?: boolean | null
-  supBookIntlCart?: boolean | null
   supBookIsbn13Alt?: string | null
   supBookIsbn13Cloth?: string | null
   supBookIsbn13Digital?: string | null
   supBookIsbn13Isw?: string | null
   supBookIsbn13Paper?: string | null
   supBookPages?: number | null
-  supBookPaperSalePercent?: number | null
-  supBookPaperSalePrice?: number | null
-  supBookPriceCloth?: number | null
-  supBookPricePaper?: number | null
   supBookPrintDeskCopies?: boolean | null
   supBookPubYearFirst?: string | null
   supBookSalesRank?: number | null
@@ -13458,7 +13443,6 @@ type FragmentNodeUnion_NodeSupBook_Fragment = {
   supBookUrlIsw?: string | null
   supBookWorkIdNumber?: number | null
   supBookType: string
-  supBookPreorder?: boolean | null
   supBookNoCart?: boolean | null
   id: string
   title: string
@@ -13475,17 +13459,16 @@ type FragmentNodeUnion_NodeSupBook_Fragment = {
     credentials?: string | null
   }> | null
   supBookAwards?: Array<{
-    __typename?: "SupAward"
+    __typename?: "PressAward"
     id: string
-    name: string
+    title: string
     supAssociation?: string | null
     supPlace?: string | null
     supRank?: number | null
-    supWorkId: number
-    supYear: number
+    supYear?: number | null
     supDescription?: {__typename?: "Text"; processed?: any | null} | null
   }> | null
-  supBookDescription?: {__typename?: "Text"; processed?: any | null} | null
+  body?: {__typename?: "TextSummary"; processed?: any | null} | null
   supBookExcerpts?: Array<
     | {
         __typename: "ParagraphStanfordCard"
@@ -13655,6 +13638,7 @@ type FragmentNodeUnion_NodeSupBook_Fragment = {
       | null
   }> | null
   supBookERetailers?: Array<{__typename?: "Link"; title?: string | null; url?: string | null}> | null
+  supBookPriceData?: {__typename?: "PressPrice"; supIntlCart?: boolean | null; id: string} | null
   changed: {__typename?: "DateTime"; timezone: any; time: any}
   created: {__typename?: "DateTime"; timezone: any; time: any}
 }
@@ -13793,17 +13777,7 @@ export type FragmentNodeSupBookTeaserFragment = {
     generational?: string | null
     credentials?: string | null
   }> | null
-  supBookAwards?: Array<{
-    __typename?: "SupAward"
-    id: string
-    name: string
-    supAssociation?: string | null
-    supPlace?: string | null
-    supRank?: number | null
-    supWorkId: number
-    supYear: number
-    supDescription?: {__typename?: "Text"; processed?: any | null} | null
-  }> | null
+  supBookAwards?: Array<{__typename?: "PressAward"; id: string}> | null
   supBookImage?: {
     __typename: "MediaImage"
     id: string
@@ -14431,17 +14405,7 @@ type FragmentNodeTeaserUnion_NodeSupBook_Fragment = {
     generational?: string | null
     credentials?: string | null
   }> | null
-  supBookAwards?: Array<{
-    __typename?: "SupAward"
-    id: string
-    name: string
-    supAssociation?: string | null
-    supPlace?: string | null
-    supRank?: number | null
-    supWorkId: number
-    supYear: number
-    supDescription?: {__typename?: "Text"; processed?: any | null} | null
-  }> | null
+  supBookAwards?: Array<{__typename?: "PressAward"; id: string}> | null
   supBookImage?: {
     __typename: "MediaImage"
     id: string
@@ -15274,6 +15238,42 @@ export type FragmentParagraphUnionFragment =
   | FragmentParagraphUnion_ParagraphSupCarouselSlide_Fragment
   | FragmentParagraphUnion_ParagraphSupFileList_Fragment
   | FragmentParagraphUnion_ParagraphSupSearchForm_Fragment
+
+export type BookPriceQueryVariables = Exact<{
+  id: Scalars["ID"]["input"]
+}>
+
+export type BookPriceQuery = {
+  __typename?: "Query"
+  press?:
+    | {__typename: "PressAward"}
+    | {
+        __typename: "PressPrice"
+        id: string
+        supClothPrice?: number | null
+        supClothDiscount?: number | null
+        supClothSale?: number | null
+        supComingSoon?: boolean | null
+        supIntlCart?: boolean | null
+        supPaperPrice?: number | null
+        supPaperDiscount?: number | null
+        supPaperSale?: number | null
+        supPreorder?: boolean | null
+        workId: number
+      }
+    | null
+}
+
+export type FragmentAwardFragment = {
+  __typename?: "PressAward"
+  id: string
+  title: string
+  supAssociation?: string | null
+  supPlace?: string | null
+  supRank?: number | null
+  supYear?: number | null
+  supDescription?: {__typename?: "Text"; processed?: any | null} | null
+}
 
 export type FragmentMenuLinkFragment = {
   __typename?: "MenuItem"
@@ -17066,22 +17066,15 @@ export type RouteQuery = {
               supBookAuthorsFull?: string | null
               supBookAvailDesc?: string | null
               supBookCatalogSeasonYyyy?: string | null
-              supBookClothSalePercent?: number | null
-              supBookClothSalePrice?: number | null
               supBookPublisher?: string | null
               supBookCopublisherName?: string | null
               supBookDigitalCompLink?: boolean | null
-              supBookIntlCart?: boolean | null
               supBookIsbn13Alt?: string | null
               supBookIsbn13Cloth?: string | null
               supBookIsbn13Digital?: string | null
               supBookIsbn13Isw?: string | null
               supBookIsbn13Paper?: string | null
               supBookPages?: number | null
-              supBookPaperSalePercent?: number | null
-              supBookPaperSalePrice?: number | null
-              supBookPriceCloth?: number | null
-              supBookPricePaper?: number | null
               supBookPrintDeskCopies?: boolean | null
               supBookPubYearFirst?: string | null
               supBookSalesRank?: number | null
@@ -17089,7 +17082,6 @@ export type RouteQuery = {
               supBookUrlIsw?: string | null
               supBookWorkIdNumber?: number | null
               supBookType: string
-              supBookPreorder?: boolean | null
               supBookNoCart?: boolean | null
               id: string
               title: string
@@ -17106,17 +17098,16 @@ export type RouteQuery = {
                 credentials?: string | null
               }> | null
               supBookAwards?: Array<{
-                __typename?: "SupAward"
+                __typename?: "PressAward"
                 id: string
-                name: string
+                title: string
                 supAssociation?: string | null
                 supPlace?: string | null
                 supRank?: number | null
-                supWorkId: number
-                supYear: number
+                supYear?: number | null
                 supDescription?: {__typename?: "Text"; processed?: any | null} | null
               }> | null
-              supBookDescription?: {__typename?: "Text"; processed?: any | null} | null
+              body?: {__typename?: "TextSummary"; processed?: any | null} | null
               supBookExcerpts?: Array<
                 | {
                     __typename: "ParagraphStanfordCard"
@@ -17297,6 +17288,7 @@ export type RouteQuery = {
                   | null
               }> | null
               supBookERetailers?: Array<{__typename?: "Link"; title?: string | null; url?: string | null}> | null
+              supBookPriceData?: {__typename?: "PressPrice"; supIntlCart?: boolean | null; id: string} | null
               changed: {__typename?: "DateTime"; timezone: any; time: any}
               created: {__typename?: "DateTime"; timezone: any; time: any}
             }
@@ -18342,17 +18334,7 @@ export type StanfordSharedTagsQuery = {
             generational?: string | null
             credentials?: string | null
           }> | null
-          supBookAwards?: Array<{
-            __typename?: "SupAward"
-            id: string
-            name: string
-            supAssociation?: string | null
-            supPlace?: string | null
-            supRank?: number | null
-            supWorkId: number
-            supYear: number
-            supDescription?: {__typename?: "Text"; processed?: any | null} | null
-          }> | null
+          supBookAwards?: Array<{__typename?: "PressAward"; id: string}> | null
           supBookImage?: {
             __typename: "MediaImage"
             id: string
@@ -18416,17 +18398,7 @@ export type SupBooksQuery = {
             generational?: string | null
             credentials?: string | null
           }> | null
-          supBookAwards?: Array<{
-            __typename?: "SupAward"
-            id: string
-            name: string
-            supAssociation?: string | null
-            supPlace?: string | null
-            supRank?: number | null
-            supWorkId: number
-            supYear: number
-            supDescription?: {__typename?: "Text"; processed?: any | null} | null
-          }> | null
+          supBookAwards?: Array<{__typename?: "PressAward"; id: string}> | null
           supBookImage?: {
             __typename: "MediaImage"
             id: string
@@ -18482,17 +18454,7 @@ export type SupBooksAwardWinnersQuery = {
             generational?: string | null
             credentials?: string | null
           }> | null
-          supBookAwards?: Array<{
-            __typename?: "SupAward"
-            id: string
-            name: string
-            supAssociation?: string | null
-            supPlace?: string | null
-            supRank?: number | null
-            supWorkId: number
-            supYear: number
-            supDescription?: {__typename?: "Text"; processed?: any | null} | null
-          }> | null
+          supBookAwards?: Array<{__typename?: "PressAward"; id: string}> | null
           supBookImage?: {
             __typename: "MediaImage"
             id: string
@@ -18569,17 +18531,7 @@ export type SupBooksBestSellersQuery = {
             generational?: string | null
             credentials?: string | null
           }> | null
-          supBookAwards?: Array<{
-            __typename?: "SupAward"
-            id: string
-            name: string
-            supAssociation?: string | null
-            supPlace?: string | null
-            supRank?: number | null
-            supWorkId: number
-            supYear: number
-            supDescription?: {__typename?: "Text"; processed?: any | null} | null
-          }> | null
+          supBookAwards?: Array<{__typename?: "PressAward"; id: string}> | null
           supBookImage?: {
             __typename: "MediaImage"
             id: string
@@ -18633,17 +18585,7 @@ export type SupBooksNewReleasesQuery = {
             generational?: string | null
             credentials?: string | null
           }> | null
-          supBookAwards?: Array<{
-            __typename?: "SupAward"
-            id: string
-            name: string
-            supAssociation?: string | null
-            supPlace?: string | null
-            supRank?: number | null
-            supWorkId: number
-            supYear: number
-            supDescription?: {__typename?: "Text"; processed?: any | null} | null
-          }> | null
+          supBookAwards?: Array<{__typename?: "PressAward"; id: string}> | null
           supBookImage?: {
             __typename: "MediaImage"
             id: string

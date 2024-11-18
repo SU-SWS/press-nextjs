@@ -37,17 +37,18 @@ export const Tabs = ({paramId = "tab", orientation, defaultTab, children, ...pro
   const searchParams = useSearchParams()
   const router = useRouter()
   const onChange = (_e: SyntheticEvent | null, value: number | string | null) => {
-    const params = new URLSearchParams(searchParams)
+    const params = new URLSearchParams(window.location.search)
     params.delete(paramId)
     if (value) params.set(paramId, `${value}`)
     router.replace(`?${params.toString()}${window.location.hash || ""}`, {scroll: false})
   }
+
   const paramValue = searchParams.get(paramId)
-  const initialTab = defaultTab || (paramValue && parseInt(paramValue))
+  const initialTab = useRef(defaultTab || (paramValue && parseInt(paramValue)))
 
   const {contextValue} = useTabs({
     orientation: isVertical ? "vertical" : "horizontal",
-    defaultValue: initialTab || 0,
+    defaultValue: initialTab.current || 0,
     onChange,
     selectionFollowsFocus: true,
   })

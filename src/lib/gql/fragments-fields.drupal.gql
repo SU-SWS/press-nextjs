@@ -23,19 +23,6 @@ fragment FragmentTermInterface on TermInterface {
     }
 }
 
-fragment FragmentSupAward on SupAward {
-    id
-    name
-    supAssociation
-    supDescription {
-        processed
-    }
-    supPlace
-    supRank
-    supWorkId
-    supYear
-}
-
 fragment FragmentLink on Link {
     title
     url

@@ -43,14 +43,12 @@ fragment FragmentNodeSupBook on NodeSupBook {
     supBookAuthorsFull
     supBookAvailDesc
     supBookAwards {
-        ...FragmentSupAward
+        ...FragmentAward
     }
     supBookCatalogSeasonYyyy
-    supBookClothSalePercent
-    supBookClothSalePrice
     supBookPublisher
     supBookCopublisherName
-    supBookDescription {
+    body {
         processed
     }
     supBookDigitalCompLink
@@ -63,17 +61,12 @@ fragment FragmentNodeSupBook on NodeSupBook {
     supBookImprint {
         ...FragmentTermInterface
     }
-    supBookIntlCart
     supBookIsbn13Alt
     supBookIsbn13Cloth
     supBookIsbn13Digital
     supBookIsbn13Isw
     supBookIsbn13Paper
     supBookPages
-    supBookPaperSalePercent
-    supBookPaperSalePrice
-    supBookPriceCloth
-    supBookPricePaper
     supBookPrintDeskCopies
     supBookPubDateCloth {
         ...FragmentDateTime
@@ -114,8 +107,13 @@ fragment FragmentNodeSupBook on NodeSupBook {
         ...FragmentLink
     }
     supBookType
-    supBookPreorder
     supBookNoCart
+    supBookPriceData {
+        id
+        ... on PressPrice {
+            supIntlCart
+        }
+    }
 }
 
 fragment FragmentNodeStanfordPage on NodeStanfordPage {
@@ -384,7 +382,7 @@ fragment FragmentNodeSupBookTeaser on NodeSupBook {
         ...FragmentNameType
     }
     supBookAwards {
-        ...FragmentSupAward
+        id
     }
     supBookSubtitle
     supBookWorkIdNumber

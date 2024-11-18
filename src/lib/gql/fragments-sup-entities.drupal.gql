@@ -1,0 +1,30 @@
+query BookPrice($id: ID!) {
+    press(id: $id) {
+        __typename
+        ... on PressPrice {
+            id
+            supClothPrice
+            supClothDiscount
+            supClothSale
+            supComingSoon
+            supIntlCart
+            supPaperPrice
+            supPaperDiscount
+            supPaperSale
+            supPreorder
+            workId
+        }
+    }
+}
+
+fragment FragmentAward on PressAward {
+    id
+    title
+    supAssociation
+    supDescription {
+        processed
+    }
+    supPlace
+    supRank
+    supYear
+}
