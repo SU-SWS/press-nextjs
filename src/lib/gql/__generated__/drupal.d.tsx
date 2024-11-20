@@ -1746,8 +1746,6 @@ export type NodeSupBook = EdgeNode &
     supBookDigitalCompLink?: Maybe<Scalars["Boolean"]["output"]>
     /** Ebook Retailers */
     supBookERetailers?: Maybe<Array<Link>>
-    /** Excerpts and More */
-    supBookExcerpts?: Maybe<Array<NodeSupBookSupBookExcerptsUnion>>
     /** Book Image */
     supBookImage?: Maybe<MediaImage>
     /** Imprint */
@@ -1871,15 +1869,6 @@ export type NodeSupBookEdge = Edge & {
   cursor: Scalars["Cursor"]["output"]
   node: NodeSupBook
 }
-
-/** Excerpts and More */
-export type NodeSupBookSupBookExcerptsUnion =
-  | ParagraphStanfordCard
-  | ParagraphStanfordGallery
-  | ParagraphStanfordLayout
-  | ParagraphStanfordSpacer
-  | ParagraphStanfordWysiwyg
-  | ParagraphSupFileList
 
 /** Entity type node. */
 export type NodeUnion =
@@ -2516,7 +2505,7 @@ export type PressPrice = MetaTagInterface &
     id: Scalars["ID"]["output"]
     /** The computed meta tags for the entity. */
     metatag: Array<MetaTagUnion>
-    /** Cloth Sale Discount */
+    /** Cloth Sale Percent */
     supClothDiscount?: Maybe<Scalars["Float"]["output"]>
     /** Cloth Price */
     supClothPrice?: Maybe<Scalars["Float"]["output"]>
@@ -2526,7 +2515,7 @@ export type PressPrice = MetaTagInterface &
     supComingSoon?: Maybe<Scalars["Boolean"]["output"]>
     /** Has International Cart */
     supIntlCart?: Maybe<Scalars["Boolean"]["output"]>
-    /** Paper Sale Discount */
+    /** Paper Sale Percent */
     supPaperDiscount?: Maybe<Scalars["Float"]["output"]>
     /** Paper Price */
     supPaperPrice?: Maybe<Scalars["Float"]["output"]>
@@ -6266,81 +6255,6 @@ export type NodeQuery = {
           supDescription?: {__typename?: "Text"; processed?: any | null} | null
         }> | null
         body?: {__typename?: "TextSummary"; processed?: any | null} | null
-        supBookExcerpts?: Array<
-          | {
-              __typename: "ParagraphStanfordCard"
-              id: string
-              behaviors?: string | null
-              status: boolean
-              suCardHeader?: string | null
-              suCardSuperHeader?: string | null
-              suCardBody?: {__typename?: "Text"; processed?: any | null} | null
-              suCardLink?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
-              suCardMedia?:
-                | {
-                    __typename: "MediaImage"
-                    id: string
-                    name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
-                  }
-                | {__typename: "MediaVideo"; mediaOembedVideo: string; id: string; name: string}
-                | null
-            }
-          | {
-              __typename: "ParagraphStanfordGallery"
-              id: string
-              behaviors?: string | null
-              status: boolean
-              suGalleryHeadline?: string | null
-              suGalleryDescription?: {__typename?: "Text"; processed?: any | null} | null
-              suGalleryButton?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
-              suGalleryImages?: Array<{
-                __typename: "MediaStanfordGalleryImage"
-                suGalleryCaption?: string | null
-                id: string
-                name: string
-                suGalleryImage?: {
-                  __typename?: "Image"
-                  url: string
-                  alt?: string | null
-                  height: number
-                  width: number
-                } | null
-              }> | null
-            }
-          | {__typename: "ParagraphStanfordLayout"; id: string; behaviors?: string | null; status: boolean}
-          | {
-              __typename: "ParagraphStanfordSpacer"
-              id: string
-              behaviors?: string | null
-              status: boolean
-              suSpacerSize?: string | null
-            }
-          | {
-              __typename: "ParagraphStanfordWysiwyg"
-              id: string
-              behaviors?: string | null
-              status: boolean
-              suWysiwygText?: {__typename?: "Text"; processed?: any | null} | null
-            }
-          | {
-              __typename: "ParagraphSupFileList"
-              id: string
-              behaviors?: string | null
-              status: boolean
-              supFileListLabel?: string | null
-              supFileListDisplay?: string | null
-              supFileListFiles: Array<
-                | {__typename: "MediaFile"; id: string; name: string; mediaFile: {__typename?: "File"; url: string}}
-                | {
-                    __typename: "MediaSupProtectedFile"
-                    id: string
-                    name: string
-                    supMediaFile: {__typename?: "File"; url: string}
-                  }
-              >
-            }
-        > | null
         supBookImage?: {
           __typename: "MediaImage"
           id: string
@@ -10102,81 +10016,6 @@ export type FragmentNodeSupBookFragment = {
     supDescription?: {__typename?: "Text"; processed?: any | null} | null
   }> | null
   body?: {__typename?: "TextSummary"; processed?: any | null} | null
-  supBookExcerpts?: Array<
-    | {
-        __typename: "ParagraphStanfordCard"
-        id: string
-        behaviors?: string | null
-        status: boolean
-        suCardHeader?: string | null
-        suCardSuperHeader?: string | null
-        suCardBody?: {__typename?: "Text"; processed?: any | null} | null
-        suCardLink?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
-        suCardMedia?:
-          | {
-              __typename: "MediaImage"
-              id: string
-              name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
-            }
-          | {__typename: "MediaVideo"; mediaOembedVideo: string; id: string; name: string}
-          | null
-      }
-    | {
-        __typename: "ParagraphStanfordGallery"
-        id: string
-        behaviors?: string | null
-        status: boolean
-        suGalleryHeadline?: string | null
-        suGalleryDescription?: {__typename?: "Text"; processed?: any | null} | null
-        suGalleryButton?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
-        suGalleryImages?: Array<{
-          __typename: "MediaStanfordGalleryImage"
-          suGalleryCaption?: string | null
-          id: string
-          name: string
-          suGalleryImage?: {
-            __typename?: "Image"
-            url: string
-            alt?: string | null
-            height: number
-            width: number
-          } | null
-        }> | null
-      }
-    | {__typename: "ParagraphStanfordLayout"; id: string; behaviors?: string | null; status: boolean}
-    | {
-        __typename: "ParagraphStanfordSpacer"
-        id: string
-        behaviors?: string | null
-        status: boolean
-        suSpacerSize?: string | null
-      }
-    | {
-        __typename: "ParagraphStanfordWysiwyg"
-        id: string
-        behaviors?: string | null
-        status: boolean
-        suWysiwygText?: {__typename?: "Text"; processed?: any | null} | null
-      }
-    | {
-        __typename: "ParagraphSupFileList"
-        id: string
-        behaviors?: string | null
-        status: boolean
-        supFileListLabel?: string | null
-        supFileListDisplay?: string | null
-        supFileListFiles: Array<
-          | {__typename: "MediaFile"; id: string; name: string; mediaFile: {__typename?: "File"; url: string}}
-          | {
-              __typename: "MediaSupProtectedFile"
-              id: string
-              name: string
-              supMediaFile: {__typename?: "File"; url: string}
-            }
-        >
-      }
-  > | null
   supBookImage?: {
     __typename: "MediaImage"
     id: string
@@ -13469,81 +13308,6 @@ type FragmentNodeUnion_NodeSupBook_Fragment = {
     supDescription?: {__typename?: "Text"; processed?: any | null} | null
   }> | null
   body?: {__typename?: "TextSummary"; processed?: any | null} | null
-  supBookExcerpts?: Array<
-    | {
-        __typename: "ParagraphStanfordCard"
-        id: string
-        behaviors?: string | null
-        status: boolean
-        suCardHeader?: string | null
-        suCardSuperHeader?: string | null
-        suCardBody?: {__typename?: "Text"; processed?: any | null} | null
-        suCardLink?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
-        suCardMedia?:
-          | {
-              __typename: "MediaImage"
-              id: string
-              name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
-            }
-          | {__typename: "MediaVideo"; mediaOembedVideo: string; id: string; name: string}
-          | null
-      }
-    | {
-        __typename: "ParagraphStanfordGallery"
-        id: string
-        behaviors?: string | null
-        status: boolean
-        suGalleryHeadline?: string | null
-        suGalleryDescription?: {__typename?: "Text"; processed?: any | null} | null
-        suGalleryButton?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
-        suGalleryImages?: Array<{
-          __typename: "MediaStanfordGalleryImage"
-          suGalleryCaption?: string | null
-          id: string
-          name: string
-          suGalleryImage?: {
-            __typename?: "Image"
-            url: string
-            alt?: string | null
-            height: number
-            width: number
-          } | null
-        }> | null
-      }
-    | {__typename: "ParagraphStanfordLayout"; id: string; behaviors?: string | null; status: boolean}
-    | {
-        __typename: "ParagraphStanfordSpacer"
-        id: string
-        behaviors?: string | null
-        status: boolean
-        suSpacerSize?: string | null
-      }
-    | {
-        __typename: "ParagraphStanfordWysiwyg"
-        id: string
-        behaviors?: string | null
-        status: boolean
-        suWysiwygText?: {__typename?: "Text"; processed?: any | null} | null
-      }
-    | {
-        __typename: "ParagraphSupFileList"
-        id: string
-        behaviors?: string | null
-        status: boolean
-        supFileListLabel?: string | null
-        supFileListDisplay?: string | null
-        supFileListFiles: Array<
-          | {__typename: "MediaFile"; id: string; name: string; mediaFile: {__typename?: "File"; url: string}}
-          | {
-              __typename: "MediaSupProtectedFile"
-              id: string
-              name: string
-              supMediaFile: {__typename?: "File"; url: string}
-            }
-        >
-      }
-  > | null
   supBookImage?: {
     __typename: "MediaImage"
     id: string
@@ -17108,92 +16872,6 @@ export type RouteQuery = {
                 supDescription?: {__typename?: "Text"; processed?: any | null} | null
               }> | null
               body?: {__typename?: "TextSummary"; processed?: any | null} | null
-              supBookExcerpts?: Array<
-                | {
-                    __typename: "ParagraphStanfordCard"
-                    id: string
-                    behaviors?: string | null
-                    status: boolean
-                    suCardHeader?: string | null
-                    suCardSuperHeader?: string | null
-                    suCardBody?: {__typename?: "Text"; processed?: any | null} | null
-                    suCardLink?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
-                    suCardMedia?:
-                      | {
-                          __typename: "MediaImage"
-                          id: string
-                          name: string
-                          mediaImage: {
-                            __typename?: "Image"
-                            url: string
-                            alt?: string | null
-                            height: number
-                            width: number
-                          }
-                        }
-                      | {__typename: "MediaVideo"; mediaOembedVideo: string; id: string; name: string}
-                      | null
-                  }
-                | {
-                    __typename: "ParagraphStanfordGallery"
-                    id: string
-                    behaviors?: string | null
-                    status: boolean
-                    suGalleryHeadline?: string | null
-                    suGalleryDescription?: {__typename?: "Text"; processed?: any | null} | null
-                    suGalleryButton?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
-                    suGalleryImages?: Array<{
-                      __typename: "MediaStanfordGalleryImage"
-                      suGalleryCaption?: string | null
-                      id: string
-                      name: string
-                      suGalleryImage?: {
-                        __typename?: "Image"
-                        url: string
-                        alt?: string | null
-                        height: number
-                        width: number
-                      } | null
-                    }> | null
-                  }
-                | {__typename: "ParagraphStanfordLayout"; id: string; behaviors?: string | null; status: boolean}
-                | {
-                    __typename: "ParagraphStanfordSpacer"
-                    id: string
-                    behaviors?: string | null
-                    status: boolean
-                    suSpacerSize?: string | null
-                  }
-                | {
-                    __typename: "ParagraphStanfordWysiwyg"
-                    id: string
-                    behaviors?: string | null
-                    status: boolean
-                    suWysiwygText?: {__typename?: "Text"; processed?: any | null} | null
-                  }
-                | {
-                    __typename: "ParagraphSupFileList"
-                    id: string
-                    behaviors?: string | null
-                    status: boolean
-                    supFileListLabel?: string | null
-                    supFileListDisplay?: string | null
-                    supFileListFiles: Array<
-                      | {
-                          __typename: "MediaFile"
-                          id: string
-                          name: string
-                          mediaFile: {__typename?: "File"; url: string}
-                        }
-                      | {
-                          __typename: "MediaSupProtectedFile"
-                          id: string
-                          name: string
-                          supMediaFile: {__typename?: "File"; url: string}
-                        }
-                    >
-                  }
-              > | null
               supBookImage?: {
                 __typename: "MediaImage"
                 id: string

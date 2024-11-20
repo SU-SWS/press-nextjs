@@ -33,6 +33,6 @@ export const GET = async (request: NextRequest) => {
   if ((await getHomePagePath()) === path) tagsInvalidated.push("paths:/")
 
   tagsInvalidated.map(tag => revalidateTag(tag))
-  console.warn(tagsInvalidated)
+
   return NextResponse.json({revalidated: true, tags: tagsInvalidated})
 }

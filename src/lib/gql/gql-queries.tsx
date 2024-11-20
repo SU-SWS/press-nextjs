@@ -167,10 +167,8 @@ export const getAllNodes = nextCache(
  *
  * @param uuid
  *   Parent book node UUID.
- * @param bookPath
- *   Path of book node for cache invalidation.
  */
-export const getBookAncillaryContents = async (uuid: string, bookPath: string): Promise<NodeSupBookAncillary[]> => {
+export const getBookAncillaryContents = async (uuid: string): Promise<NodeSupBookAncillary[]> => {
   const getData = nextCache(
     async () => {
       const ancillaryPages = await graphqlClient().supBookAncillary({
@@ -179,7 +177,7 @@ export const getBookAncillaryContents = async (uuid: string, bookPath: string): 
       return (ancillaryPages.supBookAncillary?.results as NodeSupBookAncillary[]) || []
     },
     ["ancillary-pages", uuid],
-    {tags: [`excerpts:${bookPath}`, "ancillary-pages"]}
+    {tags: [`excerpts:${uuid}`, "ancillary-pages"]}
   )
   return getData()
 }
