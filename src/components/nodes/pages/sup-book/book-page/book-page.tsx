@@ -153,7 +153,7 @@ const BookPage = async ({node, ...props}: Props) => {
           </div>
 
           <div className="lg:w-3/8 xl:min-w-[200px] 2xl:min-w-[320px] 2xl:max-w-[370px]">
-            {node.supBookPriceData?.id && (
+            {!node.supBookNoCart && (node.supBookIsbn13Cloth || node.supBookIsbn13Paper) && (
               <PrecartClient
                 priceId={node.supBookPriceData?.id}
                 bookTitle={node.title}

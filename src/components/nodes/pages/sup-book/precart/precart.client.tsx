@@ -15,7 +15,7 @@ import {submitForm} from "@components/nodes/pages/sup-book/precart/precart.serve
 type PriceProps = PressPrice & {}
 
 type Props = {
-  priceId: string
+  priceId?: string
   clothIsbn?: Maybe<string>
   paperIsbn?: Maybe<string>
   bookTitle: string
@@ -26,10 +26,12 @@ const PrecartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle}: 
   const [priceData, setPriceData] = useState<PriceProps>()
 
   useEffect(() => {
-    fetch(`/api/books/price/${priceId}`)
-      .then(res => res.json())
-      .then((data: PressPrice) => setPriceData(data))
-      .catch(_e => console.warn(`Something went wrong fetching ${priceId}`))
+    if (priceId) {
+      fetch(`/api/books/price/${priceId}`)
+        .then(res => res.json())
+        .then((data: PressPrice) => setPriceData(data))
+        .catch(_e => console.warn(`Something went wrong fetching ${priceId}`))
+    }
   }, [priceId])
 
   const [isIntl, setIntl] = useIsInternational()
