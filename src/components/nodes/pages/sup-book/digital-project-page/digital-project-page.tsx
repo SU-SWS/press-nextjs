@@ -3,19 +3,18 @@ import {H1, H2, H3} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
 import Wysiwyg from "@components/elements/wysiwyg"
-import {ArrowLongLeftIcon, ArrowRightIcon, BookmarkIcon, DocumentDuplicateIcon} from "@heroicons/react/24/outline"
+import {ArrowLongLeftIcon, ArrowRightIcon, BookmarkIcon} from "@heroicons/react/24/outline"
 import Link from "@components/elements/link"
 import BookAwards from "@components/nodes/pages/sup-book/book-awards"
-import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
 import Button from "@components/elements/button"
 import SupBookMetadata from "@components/nodes/pages/sup-book/sup-book-metadata"
+import ExcerptButton from "@components/elements/excerpt-button"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
 }
 const DigitalProjectPage = async ({node, ...props}: Props) => {
-  const hasExcerptAndMore = node.supBookExcerpts || !!(await getBookAncillaryContents(node.id, node.path)).length
   const awards = node.supBookAwards?.sort((a, b) =>
     a.supYear && b.supYear && a.supYear < b.supYear
       ? 1
@@ -212,16 +211,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
           <div className="hidden md:block">
             <BookPageImage node={node} />
           </div>
-
-          {hasExcerptAndMore && (
-            <Link
-              href={`${node.path}/excerpts`}
-              className="group rs-mt-2 mx-auto flex w-fit items-center justify-center gap-5 border-2 border-press-sand p-[1.8rem] pl-[2.1rem] text-09em font-normal text-stone-dark no-underline hocus:border-cardinal-red hocus:bg-cardinal-red hocus:text-white hocus:underline md:mt-0"
-            >
-              <span>Excerpts + more</span>
-              <DocumentDuplicateIcon width={28} className="text-stone group-hocus:text-white" />
-            </Link>
-          )}
+          <ExcerptButton id={node.id} path={node.path} />
         </div>
       </div>
 

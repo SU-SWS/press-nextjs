@@ -1,5 +1,5 @@
 import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
-import {getCleanDescription, getFirstText} from "@lib/utils/text-tools"
+import {getCleanDescription} from "@lib/utils/text-tools"
 
 type Props = {
   node: NodeSupBook
@@ -16,7 +16,6 @@ const SupBookMetadata = async ({node, isExcerptPage, isCopyRequestPage}: Props) 
   let title = node.title
   if (isExcerptPage) {
     title += ": Excerpt & More"
-    description = getFirstText(node.supBookExcerpts)
   }
   if (isCopyRequestPage) {
     title += ": Copy Requests"

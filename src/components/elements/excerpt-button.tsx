@@ -15,7 +15,7 @@ const ExcerptButton = ({id, path}: Props) => {
       .then(res => res.json())
       .then(data => setExcerpts(data))
       .catch(_e => console.warn("An error occurred fetching excerpt data"))
-  }, [id, path])
+  }, [id])
 
   if (excerpts.length === 0) return
 

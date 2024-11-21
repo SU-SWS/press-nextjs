@@ -1,7 +1,6 @@
 import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import {H1} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
-import Rows from "@components/paragraphs/rows/rows"
 import Link from "@components/elements/link"
 import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import {notFound} from "next/navigation"
@@ -16,9 +15,8 @@ type Props = HTMLAttributes<HTMLElement> & {
 }
 
 const SupBookExcerptPage = async ({node, ...props}: Props) => {
-  const ancillaryPages = await getBookAncillaryContents(node.id, node.path)
-  const hasExcerptAndMore = node.supBookExcerpts || !!ancillaryPages.length
-  if (!hasExcerptAndMore) notFound()
+  const ancillaryPages = await getBookAncillaryContents(node.id)
+  if (!ancillaryPages.length) notFound()
 
   return (
     <BackToLink
@@ -64,7 +62,6 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
           </div>
         )}
       </div>
-      <Rows components={node.supBookExcerpts} className="px-5" />
     </BackToLink>
   )
 }

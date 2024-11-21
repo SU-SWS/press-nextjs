@@ -17,7 +17,7 @@ type Props = HTMLAttributes<HTMLElement> & {
 const SupBookAncillaryPage = async ({node, ...props}: Props) => {
   const book = node.supAncillaryBook
 
-  const ancillaryPages = await getBookAncillaryContents(node.supAncillaryBook.id, node.path)
+  const ancillaryPages = await getBookAncillaryContents(node.supAncillaryBook.id)
   const ancillaryMenuItems: MenuItemType[] = ancillaryPages.map(page => ({
     id: page.id,
     children: [],
