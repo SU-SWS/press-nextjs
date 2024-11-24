@@ -6,6 +6,7 @@ import {H1} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
 import {NodeStanfordNews} from "@lib/gql/__generated__/drupal.d"
 import {isPreviewMode} from "@lib/drupal/is-preview-mode"
+import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordNews
@@ -35,6 +36,7 @@ const StanfordNewsPage = ({node, ...props}: Props) => {
 
   return (
     <article className="centered mt-32" {...props}>
+      <NodePageMetadata metatags={node.metatag} pageTitle={node.title} />
       <div className="mx-auto mb-48 lg:w-10/12">
         <div className="flex flex-col">
           <H1 className="order-2">{node.title}</H1>

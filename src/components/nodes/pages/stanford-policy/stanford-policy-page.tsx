@@ -6,6 +6,7 @@ import {H1, H2, H3} from "@components/elements/headers"
 import {NodeStanfordPolicy} from "@lib/gql/__generated__/drupal.d"
 import {getEntityFromPath} from "@lib/gql/gql-queries"
 import {ImageCardSkeleton} from "@components/patterns/image-card"
+import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordPolicy
@@ -16,6 +17,7 @@ const StanfordPolicyPage = async ({node, ...props}: Props) => {
   const changeLog = node.suPolicyChangelog?.filter(change => change.suPolicyPublic) || []
   return (
     <article className="centered pt-32" {...props}>
+      <NodePageMetadata metatags={node.metatag} pageTitle={node.title} />
       <H1>{node.title}</H1>
       <div className="flex flex-col gap-20">
         {(node.suPolicyAuthority || node.suPolicyUpdated || node.suPolicyEffective) && (

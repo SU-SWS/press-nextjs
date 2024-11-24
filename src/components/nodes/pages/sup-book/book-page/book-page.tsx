@@ -7,7 +7,6 @@ import {ArrowLongLeftIcon, BookmarkIcon, ClipboardIcon} from "@heroicons/react/2
 import Link from "@components/elements/link"
 import BookAwards from "@components/nodes/pages/sup-book/book-awards"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
-import SupBookMetadata from "@components/nodes/pages/sup-book/sup-book-metadata"
 import PrecartClient from "@components/nodes/pages/sup-book/precart/precart.client"
 import ExcerptButton from "@components/elements/excerpt-button"
 
@@ -35,7 +34,6 @@ const BookPage = async ({node, ...props}: Props) => {
 
   return (
     <article {...props} className="centered">
-      <SupBookMetadata node={node} />
       <div className="mb-20 flex flex-col md:rs-mt-4 md:flex-row md:gap-32 lg:gap-[7.6rem]">
         <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-col justify-center bg-fog-light px-20 md:hidden">
           <div className="flex flex-row gap-24">

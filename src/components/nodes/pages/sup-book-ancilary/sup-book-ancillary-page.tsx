@@ -8,7 +8,7 @@ import {twMerge} from "tailwind-merge"
 import Wysiwyg from "@components/elements/wysiwyg"
 import SideNav from "@components/menu/side-nav"
 import {getBookAncillaryContents} from "@lib/gql/gql-queries"
-import SupAncillaryMetadata from "@components/nodes/pages/sup-book-ancilary/sup-ancillary-metadata"
+import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBookAncillary
@@ -39,7 +39,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
       childrenProps={{className: "centered rs-mt-4 flex gap-[17.1rem]"}}
       isArticle
     >
-      <SupAncillaryMetadata node={node} />
+      <NodePageMetadata metatags={node.metatag} pageTitle={`${book.title}: ${node.title}`} />
       <H1 className="sr-only">
         {node.title} for <em>{book.title}</em>
       </H1>
