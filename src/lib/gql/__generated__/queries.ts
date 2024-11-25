@@ -536,6 +536,19 @@ export const FragmentParagraphSupBlogTeaserFragmentDoc = gql`
     ${FragmentParagraphInterfaceFragmentDoc}
 ${FragmentParagraphSupBlogFragmentDoc}
 ${FragmentLinkFragmentDoc}`;
+export const FragmentParagraphStanfordFaqFragmentDoc = gql`
+    fragment FragmentParagraphStanfordFaq on ParagraphStanfordFaq {
+  ...FragmentParagraphInterface
+  suFaqHeadline
+  suFaqDescription {
+    processed
+  }
+  suFaqQuestions {
+    ...FragmentParagraphStanfordAccordion
+  }
+}
+    ${FragmentParagraphInterfaceFragmentDoc}
+${FragmentParagraphStanfordAccordionFragmentDoc}`;
 export const FragmentParagraphUnionFragmentDoc = gql`
     fragment FragmentParagraphUnion on ParagraphUnion {
   ...FragmentParagraphInterface
@@ -554,6 +567,7 @@ export const FragmentParagraphUnionFragmentDoc = gql`
   ...FragmentParagraphSupAuthorList
   ...FragmentParagraphSupSearchForm
   ...FragmentParagraphSupBlogTeaser
+  ...FragmentParagraphStanfordFaq
 }
     ${FragmentParagraphInterfaceFragmentDoc}
 ${FragmentParagraphStanfordAccordionFragmentDoc}
@@ -570,7 +584,8 @@ ${FragmentParagraphSupCarouselFragmentDoc}
 ${FragmentParagraphSupFileListFragmentDoc}
 ${FragmentParagraphSupAuthorListFragmentDoc}
 ${FragmentParagraphSupSearchFormFragmentDoc}
-${FragmentParagraphSupBlogTeaserFragmentDoc}`;
+${FragmentParagraphSupBlogTeaserFragmentDoc}
+${FragmentParagraphStanfordFaqFragmentDoc}`;
 export const FragmentSmartDateTypeFragmentDoc = gql`
     fragment FragmentSmartDateType on SmartDateType {
   value
