@@ -41,9 +41,19 @@ export type TeaserParagraphBehaviors = {
   }
 }
 
+export type FAQParagraphBehaviors = {
+  faq_accordions?: {heading?: "h2" | "h3" | "h4"}
+}
+
 type ParagraphBehaviorBase = {
   layout_paragraphs?: LayoutParagraphBehaviors
 }
 
 export type ParagraphBehaviors = ParagraphBehaviorBase &
-  (ListParagraphBehaviors | CardParagraphBehaviors | BannerParagraphBehaviors | TeaserParagraphBehaviors)
+  (
+    | ListParagraphBehaviors
+    | CardParagraphBehaviors
+    | BannerParagraphBehaviors
+    | TeaserParagraphBehaviors
+    | FAQParagraphBehaviors
+  )
