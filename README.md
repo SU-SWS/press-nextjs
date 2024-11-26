@@ -110,6 +110,13 @@ for `foo:bar` using the [revalidateTag](https://nextjs.org/docs/app/api-referenc
 reason for this is the Next.js Drupal module only provides a single API url for on demand invalidation. So we have to 
 implement our own logic.
 
+See [architecture flowchart](docs/press-architecture.drawio.svg) for content flow cache information.
+
+If there is a page that needs a heavier hammer, use the path `/api/revalidate/page` to clear all caches used for the entire
+page. Use this method with care. It will invalidate the config pages and menu caches that is used to generate the requested
+page. This will cause every page to rebuild. If there are any errors fetching the data from Drupal, it can cause the home
+page to produce a 404 response.
+
 ### Layout
 
 The layout consists of the global elements on all pages. This consists of the global header, footer, and the menu. Any
