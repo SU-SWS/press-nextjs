@@ -31,7 +31,7 @@ const FaqParagraph = ({paragraph, ...props}: Props) => {
 
   return (
     <div {...props} className={twMerge("space-y-20", props.className)}>
-      <div className="flex items-center justify-between gap-20">
+      <div className="flex flex-col items-center justify-between gap-20 @3xl:flex-row">
         {heading && (
           <Header id={paragraph.id} className="mb-0">
             {heading}

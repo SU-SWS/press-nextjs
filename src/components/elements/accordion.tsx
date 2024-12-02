@@ -5,7 +5,7 @@ import {useBoolean} from "usehooks-ts"
 import {H2, H3, H4, H5} from "@components/elements/headers"
 import {ChevronDownIcon} from "@heroicons/react/20/solid"
 import {clsx} from "clsx"
-import {twMerge} from "tailwind-merge"
+import twMerge from "@lib/utils/twMergeConfig"
 
 export type AccordionHeaderChoice = "h2" | "h3" | "h4" | "h5"
 
@@ -82,15 +82,13 @@ const Accordion = ({
     default:
       Heading = H2
   }
+
   return (
     <section aria-labelledby={`${id}-button`} {...props}>
       <Heading>
         <button
           {...buttonProps}
-          className={twMerge(
-            "flex w-full items-center border-b border-transparent hocus:border-black-true",
-            buttonProps?.className
-          )}
+          className={twMerge("flex w-full items-center text-left hocus-visible:underline", buttonProps?.className)}
           id={`${id}-button`}
           aria-expanded={isExpanded}
           aria-controls={`${id}-panel`}
@@ -107,7 +105,7 @@ const Accordion = ({
       <div
         {...panelProps}
         id={`${id}-panel`}
-        className={twMerge(isExpanded ? "block" : "hidden", panelProps?.className)}
+        className={twMerge(isExpanded ? "mb-20 block" : "hidden", panelProps?.className)}
         role="region"
         aria-labelledby={`${id}-button`}
       >
