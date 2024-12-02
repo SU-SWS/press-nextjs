@@ -58,7 +58,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: "SU-SWS/ace-stanfordlagunita"
-          ref: sup-refactor-entities
       - uses: actions/checkout@v4
         with:
           path: frontend
