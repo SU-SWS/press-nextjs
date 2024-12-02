@@ -1,7 +1,6 @@
 import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import {H1} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
-import Rows from "@components/paragraphs/rows/rows"
 import Link from "@components/elements/link"
 import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import {notFound} from "next/navigation"
@@ -9,16 +8,15 @@ import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
 import BackToLink from "@components/elements/back-to-link"
 import {twMerge} from "tailwind-merge"
 import {ChevronRightIcon} from "@heroicons/react/24/outline"
-import SupBookMetadata from "@components/nodes/pages/sup-book/sup-book-metadata"
+import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
 }
 
 const SupBookExcerptPage = async ({node, ...props}: Props) => {
-  const ancillaryPages = await getBookAncillaryContents(node.id, node.path)
-  const hasExcerptAndMore = node.supBookExcerpts || !!ancillaryPages.length
-  if (!hasExcerptAndMore) notFound()
+  const ancillaryPages = await getBookAncillaryContents(node.id)
+  if (!ancillaryPages.length) notFound()
 
   return (
     <BackToLink
@@ -29,7 +27,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
       childrenProps={{className: "rs-mt-4 centered"}}
       isArticle
     >
-      <SupBookMetadata node={node} isExcerptPage />
+      <NodePageMetadata metatags={node.metatag} pageTitle={`${node.title}: Excerpts & More`} />
       <H1>
         Excerpts + more<span className="sr-only">&nbps;{node.title}</span>
       </H1>
@@ -64,7 +62,6 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
           </div>
         )}
       </div>
-      <Rows components={node.supBookExcerpts} className="px-5" />
     </BackToLink>
   )
 }

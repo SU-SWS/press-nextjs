@@ -4,7 +4,7 @@ import {getEntityFromPath} from "@lib/gql/gql-queries"
 import {NodeStanfordPage} from "@lib/gql/__generated__/drupal.d"
 import {isPreviewMode} from "@lib/drupal/is-preview-mode"
 import SupCarouselParagraph from "@components/paragraphs/sup-carousel/sup-carousel-paragraph"
-import StanfordPageMetadata from "@components/nodes/pages/stanford-page/stanford-page-metadata"
+import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
 export const revalidate = false
@@ -17,7 +17,7 @@ const Home = async () => {
 
   return (
     <article>
-      <StanfordPageMetadata node={entity} isHome />
+      <NodePageMetadata metatags={entity.metatag} />
       {entity.suPageBanner?.__typename === "ParagraphSupCarousel" && (
         <header className="mb-32">
           <SupCarouselParagraph paragraph={entity.suPageBanner} isTopBanner />

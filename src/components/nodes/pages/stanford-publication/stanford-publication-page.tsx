@@ -5,6 +5,7 @@ import {H1} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
 import {NodeStanfordPublication} from "@lib/gql/__generated__/drupal.d"
 import {redirect} from "next/navigation"
+import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordPublication
@@ -16,6 +17,7 @@ const StanfordPublicationPage = ({node, ...props}: Props) => {
   if (citationUrl) redirect(citationUrl)
   return (
     <article className="centered pt-32" {...props}>
+      <NodePageMetadata metatags={node.metatag} pageTitle={node.title} />
       <div className="flex flex-col gap-10">
         <H1 className="order-2">{node.title}</H1>
 

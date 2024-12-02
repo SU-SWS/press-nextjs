@@ -19,6 +19,6 @@ export const getCleanDescription = (description: string | undefined): string | u
         .split(".")
         .slice(0, 1)
         .join(".") + "."
-    return text?.length > 1 ? decode(text) : undefined
+    return text?.length > 1 ? decode(text).trim() : undefined
   }
 }

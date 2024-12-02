@@ -13,6 +13,17 @@ fragment FragmentParagraphStanfordAccordion on ParagraphStanfordAccordion {
   suAccordionTitle
 }
 
+fragment FragmentParagraphStanfordFaq on ParagraphStanfordFaq {
+  ...FragmentParagraphInterface
+  suFaqHeadline
+  suFaqDescription {
+    processed
+  }
+  suFaqQuestions {
+    ...FragmentParagraphStanfordAccordion
+  }
+}
+
 fragment FragmentParagraphStanfordBanner on ParagraphStanfordBanner {
   ...FragmentParagraphInterface
   suBannerHeader
@@ -264,4 +275,5 @@ fragment FragmentParagraphUnion on ParagraphUnion {
   ...FragmentParagraphSupAuthorList
   ...FragmentParagraphSupSearchForm
   ...FragmentParagraphSupBlogTeaser
+  ...FragmentParagraphStanfordFaq
 }

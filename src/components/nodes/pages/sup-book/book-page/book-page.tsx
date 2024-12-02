@@ -3,21 +3,23 @@ import {H1, H2, H3} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
 import Wysiwyg from "@components/elements/wysiwyg"
-import {ArrowLongLeftIcon, BookmarkIcon, ClipboardIcon, DocumentDuplicateIcon} from "@heroicons/react/24/outline"
+import {ArrowLongLeftIcon, BookmarkIcon, ClipboardIcon} from "@heroicons/react/24/outline"
 import Link from "@components/elements/link"
 import BookAwards from "@components/nodes/pages/sup-book/book-awards"
-import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
-import BookPrecart from "@components/nodes/pages/sup-book/book-page/book-precart"
-import SupBookMetadata from "@components/nodes/pages/sup-book/sup-book-metadata"
+import PrecartClient from "@components/nodes/pages/sup-book/precart/precart.client"
+import ExcerptButton from "@components/elements/excerpt-button"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
 }
 const BookPage = async ({node, ...props}: Props) => {
-  const hasExcerptAndMore = node.supBookExcerpts || !!(await getBookAncillaryContents(node.id, node.path)).length
   const awards = node.supBookAwards?.sort((a, b) =>
-    a.supYear < b.supYear ? 1 : a.supYear === b.supYear && a.supRank && b.supRank && a.supRank > b.supRank ? -1 : -1
+    a.supYear && b.supYear && a.supYear < b.supYear
+      ? 1
+      : a.supYear === b.supYear && a.supRank && b.supRank && a.supRank > b.supRank
+        ? -1
+        : -1
   )
 
   function createLinkParams(subject: TermSupBookSubject) {
@@ -32,7 +34,6 @@ const BookPage = async ({node, ...props}: Props) => {
 
   return (
     <article {...props} className="centered">
-      <SupBookMetadata node={node} />
       <div className="mb-20 flex flex-col md:rs-mt-4 md:flex-row md:gap-32 lg:gap-[7.6rem]">
         <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-col justify-center bg-fog-light px-20 md:hidden">
           <div className="flex flex-row gap-24">
@@ -87,7 +88,7 @@ const BookPage = async ({node, ...props}: Props) => {
                     {awards.map(award => (
                       <div key={award.id}>
                         <H3 className="type-0 xl:text-21">
-                          {award.supYear}: {award.name}
+                          {award.supYear}: {award.title}
                         </H3>
                         <Wysiwyg html={award.supDescription?.processed} className="ml-10" />
                       </div>
@@ -150,22 +151,15 @@ const BookPage = async ({node, ...props}: Props) => {
           </div>
 
           <div className="lg:w-3/8 xl:min-w-[200px] 2xl:min-w-[320px] 2xl:max-w-[370px]">
-            <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog">
-              <BookPrecart
+            {!node.supBookNoCart && (node.supBookIsbn13Cloth || node.supBookIsbn13Paper) && (
+              <PrecartClient
+                priceId={node.supBookPriceData?.id}
                 bookTitle={node.title}
-                usClothPrice={node.supBookPriceCloth}
-                usClothSalePrice={node.supBookClothSalePrice}
-                usClothSaleDiscount={node.supBookClothSalePercent}
-                usPaperPrice={node.supBookPricePaper}
-                usPaperSalePrice={node.supBookPaperSalePrice}
-                usPaperSaleDiscount={node.supBookPaperSalePercent}
                 clothIsbn={node.supBookIsbn13Cloth}
                 paperIsbn={node.supBookIsbn13Paper}
-                preorder={node.supBookPreorder}
-                comingSoon={node.supBookNoCart}
-                hasIntlCart={node.supBookIntlCart}
+                hasIntlCart={node.supBookPriceData?.supIntlCart}
               />
-            </div>
+            )}
 
             {node.supBookERetailers && (
               <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog text-18">
@@ -201,31 +195,23 @@ const BookPage = async ({node, ...props}: Props) => {
             <BookPageImage node={node} />
           </div>
 
-          {hasExcerptAndMore && (
-            <Link
-              href={`${node.path}/excerpts`}
-              className="group rs-mt-2 mx-auto flex w-fit items-center justify-center gap-5 border-2 border-press-sand p-[1.8rem] pl-[2.1rem] text-09em font-normal text-stone-dark no-underline hocus:border-cardinal-red hocus:bg-cardinal-red hocus:text-white hocus:underline md:mt-0"
-            >
-              <span>Excerpts + more</span>
-              <DocumentDuplicateIcon width={28} className="text-stone group-hocus:text-white" />
-            </Link>
-          )}
+          <ExcerptButton id={node.id} path={node.path} />
         </div>
       </div>
 
-      {(node.supBookDescription?.processed || node.supBookReviews || node.supBookAuthorInfo) && (
+      {(node.body?.processed || node.supBookReviews || node.supBookAuthorInfo) && (
         <Tabs className="mb-20 border-b border-fog pb-20">
           <div className="mb-20 border-b border-fog">
             <TabsList className="mx-auto max-w-5xl">
-              {node.supBookDescription?.processed && <Tab className="p-10">Description</Tab>}
+              {node.body?.processed && <Tab className="p-10">Description</Tab>}
               {node.supBookReviews && <Tab className="p-10">Reviews</Tab>}
               {node.supBookAuthorInfo && <Tab className="p-10">About the Author</Tab>}
             </TabsList>
           </div>
           <div className="mx-auto max-w-5xl">
-            {node.supBookDescription?.processed && (
+            {node.body?.processed && (
               <TabPanel>
-                <Wysiwyg html={node.supBookDescription?.processed} />
+                <Wysiwyg html={node.body?.processed} />
               </TabPanel>
             )}
             {node.supBookReviews && (

@@ -13,6 +13,7 @@ import Email from "@components/elements/email"
 import Telephone from "@components/elements/telephone"
 import Link from "@components/elements/link"
 import {isPreviewMode} from "@lib/drupal/is-preview-mode"
+import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordEvent
@@ -28,6 +29,7 @@ const StanfordEventPage = ({node, ...props}: Props) => {
 
   return (
     <article className="centered mt-32 flex flex-col gap-20" {...props}>
+      <NodePageMetadata metatags={node.metatag} pageTitle={node.title} />
       <div className="flex flex-col">
         <H1 className="order-2">{node.title}</H1>
 

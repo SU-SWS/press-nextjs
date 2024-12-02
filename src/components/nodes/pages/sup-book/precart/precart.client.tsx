@@ -2,89 +2,64 @@
 
 import useIsInternational from "@lib/hooks/useIsInternational"
 import Button from "@components/elements/button"
-import {FormEvent, useState} from "react"
+import {useEffect, useState} from "react"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
-import {Maybe} from "@lib/gql/__generated__/drupal.d"
+import {Maybe, PressPrice} from "@lib/gql/__generated__/drupal.d"
 import {BookOpenIcon as BookOpenIconOutline} from "@heroicons/react/24/outline"
 import {BookOpenIcon} from "@heroicons/react/24/solid"
-import {useRouter} from "next/navigation"
 import {formatCurrency} from "@lib/utils/format-currency"
 import {twMerge} from "tailwind-merge"
 import {clsx} from "clsx"
+import {submitForm} from "@components/nodes/pages/sup-book/precart/precart.server"
+
+type PriceProps = PressPrice & {}
 
 type Props = {
-  bookTitle: string
-  usClothPrice?: Maybe<number>
-  usClothSalePrice?: Maybe<number>
-  usClothSaleDiscount?: Maybe<number>
-  usPaperPrice?: Maybe<number>
-  usPaperSalePrice?: Maybe<number>
-  usPaperSaleDiscount?: Maybe<number>
+  priceId?: string
   clothIsbn?: Maybe<string>
   paperIsbn?: Maybe<string>
+  bookTitle: string
   hasIntlCart?: Maybe<boolean>
-  preorder?: Maybe<boolean>
-  comingSoon?: Maybe<boolean>
 }
 
-const BookPreCart = ({
-  bookTitle,
-  usClothPrice,
-  usClothSalePrice,
-  usClothSaleDiscount,
-  usPaperPrice,
-  usPaperSalePrice,
-  usPaperSaleDiscount,
-  clothIsbn,
-  paperIsbn,
-  preorder,
-  comingSoon,
-  hasIntlCart = true,
-}: Props) => {
-  const router = useRouter()
-  const defaultChoice = usClothPrice ? "cloth" : "paper"
-  const [formatChoice, setFormatChoice] = useState(defaultChoice)
+const PrecartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle}: Props) => {
+  const [priceData, setPriceData] = useState<PriceProps>()
+
+  useEffect(() => {
+    if (priceId) {
+      fetch(`/api/books/price/${priceId}`)
+        .then(res => res.json())
+        .then((data: PressPrice) => setPriceData(data))
+        .catch(_e => console.warn(`Something went wrong fetching ${priceId}`))
+    }
+  }, [priceId])
 
   const [isIntl, setIntl] = useIsInternational()
 
-  const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    let isbn: Maybe<string> | undefined = ""
-    switch (formatChoice) {
-      case "cloth":
-        isbn = clothIsbn
-        break
-
-      case "paper":
-        isbn = paperIsbn
-        break
-    }
-
-    if (isIntl) {
-      const title = bookTitle.replace(/[^a-zA-Z\d\s:]/, "").replace(/ /, "-")
-      router.push(`https://www.combinedacademic.co.uk/${isbn}/${title}`)
-      return
-    }
-    router.push(`https://add-to-cart-2.supadu.com/add-to-cart?isbn=${isbn}&client=indiepubs-stanford-university-press`)
-  }
-
   return (
-    <form className="@container" onSubmit={onFormSubmit}>
+    /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
+    <form className="rs-mb-1 rs-pb-1 border-b-2 border-fog @container" action={submitForm}>
+      <input type="hidden" name="title" value={bookTitle} />
+      <label className="sr-only">
+        Do not fill with any information
+        <input name="email" type="email" />
+      </label>
+
       <fieldset className="rs-mb-1">
         <legend className="sr-only">Format</legend>
         {!isIntl && (
           <UsFormatChoices
-            clothPrice={clothIsbn ? usClothSalePrice || usClothPrice : undefined}
-            paperPrice={paperIsbn ? usPaperSalePrice || usPaperPrice : undefined}
-            onChange={setFormatChoice}
+            clothIsbn={clothIsbn}
+            clothPrice={clothIsbn ? priceData?.supClothSale || priceData?.supClothPrice || false : undefined}
+            paperIsbn={paperIsbn}
+            paperPrice={paperIsbn ? priceData?.supPaperSale || priceData?.supPaperPrice || false : undefined}
           />
         )}
 
-        {isIntl && <IntlFormatChoices clothIsbn={clothIsbn} paperIsbn={paperIsbn} onChange={setFormatChoice} />}
+        {isIntl && <IntlFormatChoices clothIsbn={clothIsbn} paperIsbn={paperIsbn} />}
       </fieldset>
 
-      {hasIntlCart && (
+      {(hasIntlCart || priceData?.supIntlCart) && (
         <fieldset>
           <legend className="mb-3 text-18 font-semibold">Region</legend>
           <div className="rs-mb-neg1 flex flex-wrap border-2 border-black-40 p-1">
@@ -118,7 +93,7 @@ const BookPreCart = ({
         </fieldset>
       )}
 
-      {isIntl && !comingSoon && (
+      {isIntl && !priceData?.supComingSoon && (
         <p className="text-[0.8em]">
           For customer shipments outside the US and Canada, please use the button below to order from our partner,
           Combined Academic Publishers.
@@ -131,43 +106,45 @@ const BookPreCart = ({
         className={twMerge(
           "group mt-5 flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]",
           clsx({
-            "border-0 bg-black-70 hocus:bg-black-80": comingSoon,
+            "border-0 bg-black-70 hocus:bg-black-80": priceData?.supComingSoon,
           })
         )}
-        disabled={!!comingSoon}
+        disabled={!!priceData?.supComingSoon}
       >
-        {!comingSoon && preorder && !isIntl && "Preorder"}
-        {!comingSoon && !preorder && !isIntl && "Add to cart"}
-        {!comingSoon && preorder && isIntl && "Preorder from CAP"}
-        {!comingSoon && !preorder && isIntl && "Purchase from CAP"}
-        {comingSoon && "Coming Soon"}
+        {!priceData?.supComingSoon && priceData?.supPreorder && !isIntl && "Preorder"}
+        {!priceData?.supComingSoon && !priceData?.supPreorder && !isIntl && "Add to cart"}
+        {!priceData?.supComingSoon && priceData?.supPreorder && isIntl && "Preorder from CAP"}
+        {!priceData?.supComingSoon && !priceData?.supPreorder && isIntl && "Purchase from CAP"}
+        {priceData?.supComingSoon && "Coming Soon"}
 
-        {!comingSoon && <ArrowRightIcon width={24} className="transition-all group-hocus:translate-x-2" />}
+        {!priceData?.supComingSoon && (
+          <ArrowRightIcon width={24} className="transition-all group-hocus:translate-x-2" />
+        )}
       </Button>
 
-      {!isIntl && usClothPrice && usClothSalePrice && (
+      {!isIntl && priceData?.supClothPrice && priceData?.supClothSale && (
         <div className="rs-mt-1 text-18">
           <div>
-            Hardcover List Price: <del className="italic">{formatCurrency(usClothPrice)}</del>
+            Hardcover List Price: <del className="italic">{formatCurrency(priceData?.supClothPrice)}</del>
           </div>
           <div>
             Save&nbsp;
             <ins className="no-underline">
-              {formatCurrency(usClothPrice - usClothSalePrice)} ({usClothSaleDiscount}%)
+              {formatCurrency(priceData?.supClothPrice - priceData?.supClothSale)} ({priceData?.supClothDiscount}%)
             </ins>
           </div>
         </div>
       )}
 
-      {!isIntl && usPaperPrice && usPaperSalePrice && (
+      {!isIntl && priceData?.supPaperPrice && priceData?.supPaperSale && (
         <div className="rs-mt-1 text-18">
           <div>
-            Paperback List Price: <del className="italic">{formatCurrency(usPaperPrice)}</del>
+            Paperback List Price: <del className="italic">{formatCurrency(priceData?.supPaperPrice)}</del>
           </div>
           <div>
             Save{" "}
             <ins className="no-underline">
-              {formatCurrency(usPaperPrice - usPaperSalePrice)} ({usPaperSaleDiscount}%)
+              {formatCurrency(priceData?.supPaperPrice - priceData?.supPaperSale)} ({priceData?.supPaperDiscount}%)
             </ins>
           </div>
         </div>
@@ -177,34 +154,38 @@ const BookPreCart = ({
 }
 
 const UsFormatChoices = ({
+  clothIsbn,
   clothPrice,
+  paperIsbn,
   paperPrice,
-  onChange,
 }: {
-  clothPrice?: Maybe<number>
-  paperPrice?: Maybe<number>
-  onChange: (_format: string) => void
+  clothIsbn?: Maybe<string>
+  clothPrice?: Maybe<number | false>
+  paperIsbn?: Maybe<string>
+  paperPrice?: Maybe<number | false>
 }) => {
-  const defaultChoice = clothPrice ? "cloth" : "paper"
+  const defaultChoice = clothIsbn ? "cloth" : "paper"
+
   return (
     <>
-      {clothPrice && (
+      {clothIsbn && clothPrice !== undefined && (
         <label className="mb-3 block cursor-pointer">
           <input
             className="peer sr-only"
             type="radio"
             name="format"
-            value="cloth"
+            value={clothIsbn}
             defaultChecked={defaultChoice === "cloth"}
-            onChange={() => onChange("cloth")}
           />
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center gap-2">
               <span className="flex w-full flex-col justify-between gap-2 @lg:flex-row @lg:gap-0">
                 <span className="font-semibold group-hover:underline md:text-[0.85em]">Hardcover</span>
                 <span className="flex items-center">
-                  <span className="mr-2 text-press-sand-dark md:text-[0.85em]">US/CAN</span>
-                  <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(clothPrice)}</span>
+                  <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
+                  {clothPrice && (
+                    <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(clothPrice)}</span>
+                  )}
                 </span>
               </span>
               <BookOpenIcon width={24} className="text-fog-dark" />
@@ -212,23 +193,24 @@ const UsFormatChoices = ({
           </span>
         </label>
       )}
-      {paperPrice && (
+      {paperIsbn && paperPrice !== undefined && (
         <label className="mb-3 block cursor-pointer">
           <input
             className="peer sr-only"
             type="radio"
             name="format"
-            value="paper"
+            value={paperIsbn}
             defaultChecked={defaultChoice === "paper"}
-            onChange={() => onChange("paper")}
           />
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center gap-2">
               <span className="flex w-full flex-col justify-between gap-2 @lg:flex-row @lg:gap-0">
                 <span className="font-semibold group-hover:underline md:text-[0.85em]">Paperback</span>
                 <span className="flex items-center">
-                  <span className="mr-2 text-press-sand-dark md:text-[0.85em]">US/CAN</span>
-                  <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(paperPrice)}</span>
+                  <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
+                  {paperPrice && (
+                    <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(paperPrice)}</span>
+                  )}
                 </span>
               </span>
               <BookOpenIconOutline width={24} className="text-fog-dark" />
@@ -240,15 +222,7 @@ const UsFormatChoices = ({
   )
 }
 
-const IntlFormatChoices = ({
-  clothIsbn,
-  paperIsbn,
-  onChange,
-}: {
-  clothIsbn?: Maybe<string>
-  paperIsbn?: Maybe<string>
-  onChange: (_format: string) => void
-}) => {
+const IntlFormatChoices = ({clothIsbn, paperIsbn}: {clothIsbn?: Maybe<string>; paperIsbn?: Maybe<string>}) => {
   const defaultChoice = clothIsbn ? "cloth" : "paper"
   return (
     <>
@@ -258,9 +232,8 @@ const IntlFormatChoices = ({
             className="peer sr-only"
             type="radio"
             name="format"
-            value="cloth"
+            value={clothIsbn}
             defaultChecked={defaultChoice === "cloth"}
-            onChange={() => onChange("cloth")}
           />
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center justify-between font-semibold">
@@ -276,9 +249,8 @@ const IntlFormatChoices = ({
             className="peer sr-only"
             type="radio"
             name="format"
-            value="paper"
+            value={paperIsbn}
             defaultChecked={defaultChoice === "paper"}
-            onChange={() => onChange("paper")}
           />
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center justify-between font-semibold">
@@ -292,4 +264,4 @@ const IntlFormatChoices = ({
   )
 }
 
-export default BookPreCart
+export default PrecartClient

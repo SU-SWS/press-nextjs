@@ -5,7 +5,7 @@ import Link from "@components/elements/link"
 import BackToLink from "@components/elements/back-to-link"
 import {twMerge} from "tailwind-merge"
 import BookPageImage from "./book-page-image"
-import SupBookMetadata from "@components/nodes/pages/sup-book/sup-book-metadata"
+import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -24,7 +24,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
       childrenProps={{className: "rs-mt-4 mx-auto max-w-[800px]"}}
       isArticle
     >
-      <SupBookMetadata node={node} isCopyRequestPage />
+      <NodePageMetadata metatags={node.metatag} pageTitle={`${node.title}: Copy Requests`} />
       <H1>
         Desk, Examination, or Review copy request<span className="sr-only">&nbps;{node.title}</span>
       </H1>

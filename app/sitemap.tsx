@@ -19,16 +19,6 @@ const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
       priority: node.__typename === "NodeStanfordPage" ? 1 : 0.8,
       changeFrequency: node.__typename === "NodeStanfordPage" ? "weekly" : "monthly",
     })
-
-    // Add excerpts page for each book as appropriate.
-    if (node.__typename === "NodeSupBook" && node.supBookExcerpts) {
-      sitemap.push({
-        url: `https://www.sup.org${node.path}/excerpts`,
-        lastModified: new Date(node.changed.time),
-        priority: 0.8,
-        changeFrequency: "monthly",
-      })
-    }
   })
 
   return sitemap

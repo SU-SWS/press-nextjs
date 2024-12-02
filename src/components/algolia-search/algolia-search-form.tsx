@@ -51,6 +51,7 @@ const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey, initialUiState = {
         searchClient={searchClient}
         initialUiState={{[searchIndex]: initialUiState}}
         future={{preserveSharedStateOnUnmount: true}}
+        insights={true}
       >
         <Form searchIndex={searchIndex} />
       </InstantSearchNext>

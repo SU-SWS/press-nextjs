@@ -3,18 +3,17 @@ fragment FragmentNodeInterface on NodeInterface {
     __typename
     id
     title
-    status
     path
-    changed {
-        ...FragmentDateTime
-    }
-    created {
-        ...FragmentDateTime
+}
+
+fragment FragmentNodePage on NodeInterface {
+    ...FragmentNodeInterface
+    metatag {
+        ...FragmentMetaTag
     }
 }
 
 fragment FragmentNodeSupBookAncillary on NodeSupBookAncillary {
-    ...FragmentNodeInterface
     body {
         processed
     }
@@ -33,7 +32,6 @@ fragment FragmentNodeSupBookAncillary on NodeSupBookAncillary {
 }
 
 fragment FragmentNodeSupBook on NodeSupBook {
-    ...FragmentNodeInterface
     supBookAuthorInfo {
         processed
     }
@@ -43,37 +41,27 @@ fragment FragmentNodeSupBook on NodeSupBook {
     supBookAuthorsFull
     supBookAvailDesc
     supBookAwards {
-        ...FragmentSupAward
+        ...FragmentAward
     }
     supBookCatalogSeasonYyyy
-    supBookClothSalePercent
-    supBookClothSalePrice
     supBookPublisher
     supBookCopublisherName
-    supBookDescription {
+    body {
         processed
     }
     supBookDigitalCompLink
-    supBookExcerpts {
-        ...FragmentParagraphUnion
-    }
     supBookImage {
         ...FragmentMediaImage
     }
     supBookImprint {
         ...FragmentTermInterface
     }
-    supBookIntlCart
     supBookIsbn13Alt
     supBookIsbn13Cloth
     supBookIsbn13Digital
     supBookIsbn13Isw
     supBookIsbn13Paper
     supBookPages
-    supBookPaperSalePercent
-    supBookPaperSalePrice
-    supBookPriceCloth
-    supBookPricePaper
     supBookPrintDeskCopies
     supBookPubDateCloth {
         ...FragmentDateTime
@@ -114,12 +102,16 @@ fragment FragmentNodeSupBook on NodeSupBook {
         ...FragmentLink
     }
     supBookType
-    supBookPreorder
     supBookNoCart
+    supBookPriceData {
+        id
+        ... on PressPrice {
+            supIntlCart
+        }
+    }
 }
 
 fragment FragmentNodeStanfordPage on NodeStanfordPage {
-    ...FragmentNodeInterface
     layoutSelection {
         id
     }
@@ -141,7 +133,6 @@ fragment FragmentNodeStanfordPage on NodeStanfordPage {
 }
 
 fragment FragmentNodeStanfordCourse on NodeStanfordCourse {
-    ...FragmentNodeInterface
     body {
         processed
     }
@@ -166,7 +157,6 @@ fragment FragmentNodeStanfordCourse on NodeStanfordCourse {
 }
 
 fragment FragmentNodeStanfordEvent on NodeStanfordEvent {
-    ...FragmentNodeInterface
     body {
         processed
     }
@@ -219,7 +209,6 @@ fragment FragmentNodeStanfordEvent on NodeStanfordEvent {
 }
 
 fragment FragmentNodeStanfordEventSeries on NodeStanfordEventSeries {
-    ...FragmentNodeInterface
     suEventSeriesComponents {
         ...FragmentParagraphUnion
     }
@@ -234,7 +223,6 @@ fragment FragmentNodeStanfordEventSeries on NodeStanfordEventSeries {
 }
 
 fragment FragmentNodeStanfordNews on NodeStanfordNews {
-    ...FragmentNodeInterface
     suNewsBanner {
         ...FragmentMediaUnion
     }
@@ -261,7 +249,6 @@ fragment FragmentNodeStanfordNews on NodeStanfordNews {
 }
 
 fragment FragmentNodeStanfordPerson on NodeStanfordPerson {
-    ...FragmentNodeInterface
     body {
         processed
     }
@@ -317,7 +304,6 @@ fragment FragmentNodeStanfordPerson on NodeStanfordPerson {
 }
 
 fragment FragmentNodeStanfordPolicy on NodeStanfordPolicy {
-    ...FragmentNodeInterface
     body {
         processed
     }
@@ -345,7 +331,6 @@ fragment FragmentNodeStanfordPolicy on NodeStanfordPolicy {
 }
 
 fragment FragmentNodeStanfordPublication on NodeStanfordPublication {
-    ...FragmentNodeInterface
     suPublicationAuthorRef {
         ...FragmentNodeStanfordPersonTeaser
     }
@@ -365,8 +350,8 @@ fragment FragmentNodeStanfordPublication on NodeStanfordPublication {
 }
 
 fragment FragmentNodeUnion on NodeUnion {
+    ...FragmentNodePage
     ...FragmentNodeSupBook
-    ...FragmentNodeInterface
     ...FragmentNodeStanfordCourse
     ...FragmentNodeStanfordEvent
     ...FragmentNodeStanfordEventSeries
@@ -384,7 +369,7 @@ fragment FragmentNodeSupBookTeaser on NodeSupBook {
         ...FragmentNameType
     }
     supBookAwards {
-        ...FragmentSupAward
+        id
     }
     supBookSubtitle
     supBookWorkIdNumber
