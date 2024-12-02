@@ -179,14 +179,12 @@ const UsFormatChoices = ({
           />
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center gap-2">
-              <span className="flex w-full flex-col justify-between gap-2 @lg:flex-row @lg:gap-0">
+              <span className="flex w-full flex-col items-center justify-between gap-5 @lg:flex-row @lg:gap-0">
                 <span className="font-semibold group-hover:underline md:text-[0.85em]">Hardcover</span>
-                <span className="flex items-center">
-                  <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
-                  {clothPrice && (
-                    <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(clothPrice)}</span>
-                  )}
-                </span>
+                <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
+                {clothPrice && (
+                  <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(clothPrice)}</span>
+                )}
               </span>
               <BookOpenIcon width={24} className="text-fog-dark" />
             </span>
@@ -204,14 +202,13 @@ const UsFormatChoices = ({
           />
           <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
             <span className="flex w-full items-center gap-2">
-              <span className="flex w-full flex-col justify-between gap-2 @lg:flex-row @lg:gap-0">
+              <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
                 <span className="font-semibold group-hover:underline md:text-[0.85em]">Paperback</span>
-                <span className="flex items-center">
-                  <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
-                  {paperPrice && (
-                    <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(paperPrice)}</span>
-                  )}
-                </span>
+
+                <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
+                {paperPrice && (
+                  <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(paperPrice)}</span>
+                )}
               </span>
               <BookOpenIconOutline width={24} className="text-fog-dark" />
             </span>
