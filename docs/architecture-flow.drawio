@@ -111,7 +111,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-16" value="Update &quot;Book&quot; node" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="540" y="210" width="80" height="80" as="geometry" />
+          <mxGeometry x="550" y="210" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="gXQ1bGzr18bKDSAEKjB8-17" target="gXQ1bGzr18bKDSAEKjB8-19" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -123,13 +123,13 @@
           <mxGeometry x="15" y="315" width="155" height="160" as="geometry" />
         </mxCell>
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-21" value="&lt;div&gt;Invalidate Node page (slug=/path/to/page) &amp;amp; View Lists (slug=/tags/views:sup_book)&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="505" y="315" width="150" height="165" as="geometry" />
+          <mxGeometry x="515" y="315" width="150" height="165" as="geometry" />
         </mxCell>
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-23" value="Invalidate Node page (slug=/path/to/page) and Excerpt list for respective book (slug=/tags/excerpts:[book-uuid])" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="262.5" y="310" width="145" height="165" as="geometry" />
         </mxCell>
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-24" value="&lt;div&gt;Search API module sends data to Algolia API&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="720" y="210" width="80" height="80" as="geometry" />
+          <mxGeometry x="710" y="210" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="gXQ1bGzr18bKDSAEKjB8-48" edge="1">
           <mxGeometry relative="1" as="geometry">
