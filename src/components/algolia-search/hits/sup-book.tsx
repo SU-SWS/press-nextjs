@@ -38,8 +38,8 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
             </Link>
           </H3>
 
-          {hit.summary && <p className="card-paragraph mb-8">{hit.summary}</p>}
-          {hit.html && !hit.summary && (
+          {hit.book_subtitle && <div className="card-paragraph mb-8">{hit.book_subtitle}</div>}
+          {hit.html && !hit.book_subtitle && (
             <p className="card-paragraph mb-8">
               {/* @ts-expect-error React types don't match the library. */}
               <Snippet hit={hit} attribute="html" />
@@ -49,22 +49,23 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
           {hit.book_authors && <div className="text-18">{hit.book_authors}</div>}
           {hit.book_published_year && <div className="text-18">{hit.book_published_year}</div>}
         </div>
-
-        <Link
-          href={url}
-          aria-hidden
-          tabIndex={-1}
-          prefetch={false}
-          className={twMerge(
-            "relative mx-auto shrink-0 @2xl:mr-0",
-            clsx({
-              "aspect-[2/3] w-[150px]": hit.book_type === "book",
-              "aspect-[4/3] h-[150px]": hit.book_type === "digital_project",
-            })
-          )}
-        >
-          <Image className="object-cover" src={imageUrl} alt="" fill sizes="300px" />
-        </Link>
+        <div className="mx-auto flex shrink-0 items-center @2xl:mr-0">
+          <Link
+            href={url}
+            aria-hidden
+            tabIndex={-1}
+            prefetch={false}
+            className={twMerge(
+              "relative block",
+              clsx({
+                "aspect-[2/3] w-[150px]": hit.book_type === "book",
+                "aspect-[4/3] h-[150px]": hit.book_type !== "book",
+              })
+            )}
+          >
+            <Image className="object-cover" src={imageUrl} alt="" fill sizes="300px" />
+          </Link>
+        </div>
       </div>
     </article>
   )
