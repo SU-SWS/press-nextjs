@@ -63,7 +63,7 @@ export const getEntityFromPath = async <T extends NodeUnion>(
 }
 
 export const getConfigPage = nextCache(
-  cache(async <T extends ConfigPagesUnion>(configPageType: ConfigPagesUnion["__typename"]): Promise<T | undefined> => {
+  async <T extends ConfigPagesUnion>(configPageType: ConfigPagesUnion["__typename"]): Promise<T | undefined> => {
     let query: ConfigPagesQuery
     try {
       query = await graphqlClient({next: {tags: ["config-pages"]}}).ConfigPages()
@@ -79,16 +79,16 @@ export const getConfigPage = nextCache(
         return query[queryKey].nodes[0] as T
       }
     }
-  }),
+  },
   [],
   {tags: ["config-pages"]}
 )
 
 export const getConfigPageField = nextCache(
-  cache(async <T extends ConfigPagesUnion, F>(configPageType: ConfigPagesUnion["__typename"], fieldName: keyof T) => {
+  async <T extends ConfigPagesUnion, F>(configPageType: ConfigPagesUnion["__typename"], fieldName: keyof T) => {
     const configPage = await getConfigPage<T>(configPageType)
     return configPage?.[fieldName] as F
-  }),
+  },
   [],
   {tags: ["config-pages"]}
 )
