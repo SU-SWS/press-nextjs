@@ -12,7 +12,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 const StanfordEventSeriesPage = ({node, ...props}: Props) => {
   return (
     <article className="centered" {...props}>
-      <NodePageMetadata metatags={node.metatag} pageTitle={node.title} />
+      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={node.title} />
       <H1 className="mt-32">{node.title}</H1>
 
       {node.suEventSeriesDek && <div className="type-2 mb-20 font-bold xl:text-[3.3rem]">{node.suEventSeriesDek}</div>}

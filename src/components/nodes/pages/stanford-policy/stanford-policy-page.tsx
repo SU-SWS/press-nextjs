@@ -17,7 +17,7 @@ const StanfordPolicyPage = async ({node, ...props}: Props) => {
   const changeLog = node.suPolicyChangelog?.filter(change => change.suPolicyPublic) || []
   return (
     <article className="centered pt-32" {...props}>
-      <NodePageMetadata metatags={node.metatag} pageTitle={node.title} />
+      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={node.title} />
       <H1>{node.title}</H1>
       <div className="flex flex-col gap-20">
         {(node.suPolicyAuthority || node.suPolicyUpdated || node.suPolicyEffective) && (

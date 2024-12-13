@@ -30,7 +30,7 @@ const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
         <ul className="list-unstyled grid gap-10 @7xl:grid-cols-2">
           {paragraph.supBlogTeaserItems.map(blogItem => (
             <li key={blogItem.id} className="relative h-full min-h-[400px] w-full">
-              <div className="h-full w-full bg-black-true/80 p-20">
+              <div className="relative h-full w-full bg-black-true/80 p-20">
                 {/* URL will always be populated. */}
                 <Link
                   href={blogItem.supBlogUrl.url || "#"}
@@ -51,6 +51,7 @@ const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
                   src={blogItem.supBlogImage.mediaImage.url}
                   alt=""
                   fill
+                  sizes="(max-width: 768px) 100vw, 800px"
                 />
               )}
             </li>

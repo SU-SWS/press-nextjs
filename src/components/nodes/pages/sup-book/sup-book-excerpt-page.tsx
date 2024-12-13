@@ -27,7 +27,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
       childrenProps={{className: "rs-mt-4 centered"}}
       isArticle
     >
-      <NodePageMetadata metatags={node.metatag} pageTitle={`${node.title}: Excerpts & More`} />
+      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={`${node.title}: Excerpts & More`} />
       <H1>
         Excerpts + more<span className="sr-only">&nbps;{node.title}</span>
       </H1>

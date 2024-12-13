@@ -12,7 +12,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
   if (node.supBookType !== "book") return <DigitalProjectPage node={node} {...props} />
 
   return (
-    <>
+    <div>
       <NodePageMetadata metatags={node.metatag} pageTitle={node.title} backupDescription={node.supBookSubtitle}>
         {node.supBookAuthors?.map(author => (
           <>
@@ -23,7 +23,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
       </NodePageMetadata>
       <BookPage node={node} {...props} />
       <AlgoliaRelatedBooks objectId={node.id} />
-    </>
+    </div>
   )
 }
 export default SupBookPage

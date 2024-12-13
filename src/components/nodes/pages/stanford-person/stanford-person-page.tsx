@@ -21,7 +21,7 @@ const StanfordPersonPage = ({node, ...props}: Props) => {
 
   return (
     <article className="centered mt-32" {...props}>
-      <NodePageMetadata metatags={node.metatag} pageTitle={node.title} />
+      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={node.title} />
       <div className="mb-32 flex flex-col gap-20 lg:flex-row">
         {imageUrl && (
           <div className="relative mx-auto aspect-[1/1] w-[250px] shrink-0 lg:mx-0">

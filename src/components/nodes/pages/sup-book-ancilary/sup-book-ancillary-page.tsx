@@ -39,7 +39,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
       childrenProps={{className: "centered rs-mt-4 flex gap-[17.1rem]"}}
       isArticle
     >
-      <NodePageMetadata metatags={node.metatag} pageTitle={`${book.title}: ${node.title}`} />
+      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={`${book.title}: ${node.title}`} />
       <H1 className="sr-only">
         {node.title} for <em>{book.title}</em>
       </H1>

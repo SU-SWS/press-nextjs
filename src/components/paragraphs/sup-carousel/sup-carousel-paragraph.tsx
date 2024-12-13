@@ -117,7 +117,15 @@ const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupC
       >
         <div className="rs-px-8 w-full lg:px-0">
           {(slideTitle || (!leftImage && image) || eyebrow || subtitle) && (
-            <div className={twMerge("flex flex-col", clsx({"text-left": leftImage, "text-center": !leftImage}))}>
+            <div
+              className={twMerge(
+                "flex flex-col",
+                clsx({
+                  "text-left": leftImage,
+                  "text-center": !leftImage,
+                })
+              )}
+            >
               {slideTitle && (
                 <H2
                   className={twMerge(
@@ -183,7 +191,7 @@ const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupC
           )}
         </div>
         {leftImage && image && (
-          <div className="relative order-first aspect-[11/16] h-auto w-full max-w-[21rem] shrink-0 md:w-1/2 md:max-w-[34rem]">
+          <div className="order-first aspect-[11/16] h-auto w-full max-w-[21rem] shrink-0 md:w-1/2 md:max-w-[34rem]">
             <CarouselImageLink href={slideParagraph.supSlideButton?.url} title={slideParagraph.supSlideButton?.title}>
               <Image className="object-contain" src={image.url} alt={image.alt || ""} fill sizes="500px" />
             </CarouselImageLink>
@@ -211,7 +219,7 @@ const CarouselImageLink = ({
         title={title || undefined}
         aria-hidden
         tabIndex={-1}
-        className="mx-auto block w-fit *:transition hover:*:scale-[1.02]"
+        className="relative mx-auto block h-full w-full *:transition hover:*:scale-[1.02]"
       >
         {children}
       </Link>

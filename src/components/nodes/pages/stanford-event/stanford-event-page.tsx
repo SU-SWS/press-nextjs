@@ -29,7 +29,7 @@ const StanfordEventPage = ({node, ...props}: Props) => {
 
   return (
     <article className="centered mt-32 flex flex-col gap-20" {...props}>
-      <NodePageMetadata metatags={node.metatag} pageTitle={node.title} />
+      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={node.title} />
       <div className="flex flex-col">
         <H1 className="order-2">{node.title}</H1>
 

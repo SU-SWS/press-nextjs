@@ -22,6 +22,7 @@ const StanfordPagePage = ({node, ...props}: Props) => {
   return (
     <article {...props}>
       <NodePageMetadata
+        key={node.id}
         metatags={node.metatag}
         pageTitle={node.title}
         backupDescription={getFirstText(node.suPageComponents)}
