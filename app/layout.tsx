@@ -8,8 +8,8 @@ import DrupalWindowSync from "@components/elements/drupal-window-sync"
 import UserAnalytics from "@components/elements/user-analytics"
 import Editori11y from "@components/tools/editorially"
 
-const appleIcons: Icon[] = [60, 72, 76, 114, 120, 144, 152, 180].map(size => ({
-  url: "/favicon.ico",
+const appleIcons: Icon[] = [57, 72, 76, 114, 120, 144, 152, 180].map(size => ({
+  url: `/apple-touch-icon-${size}x${size}.png`,
   sizes: `${size}x${size}`,
 }))
 
@@ -25,7 +25,7 @@ export const metadata = {
   },
   icons: {
     icon: [{url: "/favicon.ico"}],
-    apple: appleIcons,
+    apple: [{url: "/apple-touch-icon.png"}, ...appleIcons],
   },
 }
 

@@ -13,7 +13,7 @@ export const submitForm = async (formData: FormData) => {
   const isIntl = formData.get("intl") !== "us"
 
   if (isIntl) {
-    const title = bookTitle.replace(/[^a-zA-Z\d\s:]/, "").replace(/ /, "-")
+    const title = bookTitle.replaceAll(/[^a-zA-Z\d\s:]/g, "").replaceAll(/\s/g, "-")
     redirect(`https://www.combinedacademic.co.uk/${formatIsbn}/${title}`)
   }
   redirect(`https://add-to-cart-2.supadu.com/add-to-cart?isbn=${formatIsbn}&client=indiepubs-stanford-university-press`)
