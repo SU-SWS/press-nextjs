@@ -9,6 +9,7 @@ import BookAwards from "@components/nodes/pages/sup-book/book-awards"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
 import Button from "@components/elements/button"
 import ExcerptButton from "@components/elements/excerpt-button"
+import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -34,6 +35,14 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
 
   return (
     <article {...props} className="centered">
+      <NodePageMetadata metatags={node.metatag} pageTitle={node.title} backupDescription={node.supBookSubtitle}>
+        {node.supBookAuthors?.map(author => (
+          <>
+            <meta property="book:author:profile:first_name" content={author.given || undefined} />
+            <meta property="book:author:profile:last_name" content={author.family || undefined} />
+          </>
+        ))}
+      </NodePageMetadata>
       <div className="mb-20 flex flex-col md:rs-mt-4 md:flex-row md:gap-32 lg:gap-[7.6rem]">
         <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-col justify-center bg-fog-light px-20 md:hidden">
           <div className="flex flex-row gap-24">
