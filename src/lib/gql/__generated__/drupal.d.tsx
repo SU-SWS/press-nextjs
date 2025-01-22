@@ -2555,6 +2555,8 @@ export type PressPrice = MetaTagInterface & PressInterface & {
   supClothSale?: Maybe<Scalars['Float']['output']>;
   /** Coming Soon */
   supComingSoon?: Maybe<Scalars['Boolean']['output']>;
+  /** Digital Price */
+  supDigitalPrice?: Maybe<Scalars['Float']['output']>;
   /** Has International Cart */
   supIntlCart?: Maybe<Scalars['Boolean']['output']>;
   /** Paper Sale Percent */
@@ -5040,7 +5042,7 @@ export type BookPriceQueryVariables = Exact<{
 }>;
 
 
-export type BookPriceQuery = { __typename?: 'Query', press?: { __typename: 'PressAward' } | { __typename: 'PressPrice', id: string, supClothPrice?: number | null, supClothDiscount?: number | null, supClothSale?: number | null, supComingSoon?: boolean | null, supIntlCart?: boolean | null, supPaperPrice?: number | null, supPaperDiscount?: number | null, supPaperSale?: number | null, supPreorder?: boolean | null, workId: number } | null };
+export type BookPriceQuery = { __typename?: 'Query', press?: { __typename: 'PressAward' } | { __typename: 'PressPrice', id: string, supClothPrice?: number | null, supClothDiscount?: number | null, supClothSale?: number | null, supComingSoon?: boolean | null, supDigitalPrice?: number | null, supIntlCart?: boolean | null, supPaperPrice?: number | null, supPaperDiscount?: number | null, supPaperSale?: number | null, supPreorder?: boolean | null, workId: number } | null };
 
 export type FragmentAwardFragment = { __typename?: 'PressAward', id: string, title: string, supAssociation?: string | null, supPlace?: string | null, supRank?: number | null, supYear?: number | null, supDescription?: { __typename?: 'Text', processed?: any | null } | null };
 

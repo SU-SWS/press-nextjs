@@ -1563,6 +1563,7 @@ export const BookPriceDocument = gql`
       supClothDiscount
       supClothSale
       supComingSoon
+      supDigitalPrice
       supIntlCart
       supPaperPrice
       supPaperDiscount

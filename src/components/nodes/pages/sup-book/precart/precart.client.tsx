@@ -2,10 +2,10 @@
 
 import useIsInternational from "@lib/hooks/useIsInternational"
 import Button from "@components/elements/button"
-import {useEffect, useState} from "react"
+import {HTMLAttributes, useEffect, useState} from "react"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
 import {Maybe, PressPrice} from "@lib/gql/__generated__/drupal.d"
-import {BookOpenIcon as BookOpenIconOutline} from "@heroicons/react/24/outline"
+import {BookOpenIcon as BookOpenIconOutline, DeviceTabletIcon} from "@heroicons/react/24/outline"
 import {BookOpenIcon} from "@heroicons/react/24/solid"
 import {formatCurrency} from "@lib/utils/format-currency"
 import {twMerge} from "tailwind-merge"
@@ -18,11 +18,12 @@ type Props = {
   priceId?: string
   clothIsbn?: Maybe<string>
   paperIsbn?: Maybe<string>
+  ebookIsbn?: Maybe<string>
   bookTitle: string
   hasIntlCart?: Maybe<boolean>
 }
 
-const PrecartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle}: Props) => {
+const PreCartClient = ({priceId, clothIsbn, paperIsbn, ebookIsbn, hasIntlCart, bookTitle}: Props) => {
   const [priceData, setPriceData] = useState<PriceProps>()
 
   useEffect(() => {
@@ -45,18 +46,20 @@ const PrecartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle}: 
         <input name="email" type="email" />
       </label>
 
-      <fieldset className="rs-mb-1">
+      <fieldset className="rs-mb-1 space-y-4">
         <legend className="sr-only">Format</legend>
         {!isIntl && (
           <UsFormatChoices
             clothIsbn={clothIsbn}
-            clothPrice={clothIsbn ? priceData?.supClothSale || priceData?.supClothPrice || false : undefined}
             paperIsbn={paperIsbn}
+            ebookIsbn={ebookIsbn}
+            clothPrice={clothIsbn ? priceData?.supClothSale || priceData?.supClothPrice || false : undefined}
             paperPrice={paperIsbn ? priceData?.supPaperSale || priceData?.supPaperPrice || false : undefined}
+            ebookPrice={ebookIsbn ? priceData?.supDigitalPrice || priceData?.supDigitalPrice || false : undefined}
           />
         )}
 
-        {isIntl && <IntlFormatChoices clothIsbn={clothIsbn} paperIsbn={paperIsbn} />}
+        {isIntl && <IntlFormatChoices clothIsbn={clothIsbn} paperIsbn={paperIsbn} ebookIsbn={ebookIsbn} />}
       </fieldset>
 
       {(hasIntlCart || priceData?.supIntlCart) && (
@@ -157,11 +160,15 @@ const UsFormatChoices = ({
   clothIsbn,
   clothPrice,
   paperIsbn,
+  ebookIsbn,
+  ebookPrice,
   paperPrice,
 }: {
   clothIsbn?: Maybe<string>
-  clothPrice?: Maybe<number | false>
   paperIsbn?: Maybe<string>
+  ebookIsbn?: Maybe<string>
+  clothPrice?: Maybe<number | false>
+  ebookPrice?: Maybe<number | false>
   paperPrice?: Maybe<number | false>
 }) => {
   const defaultChoice = clothIsbn ? "cloth" : "paper"
@@ -169,96 +176,96 @@ const UsFormatChoices = ({
   return (
     <>
       {clothIsbn && clothPrice !== undefined && (
-        <label className="mb-3 block cursor-pointer">
-          <input
-            className="peer sr-only"
-            type="radio"
-            name="format"
-            value={clothIsbn}
-            defaultChecked={defaultChoice === "cloth"}
-          />
-          <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
-            <span className="flex w-full items-center gap-2">
-              <span className="flex w-full flex-col items-center justify-between gap-5 @lg:flex-row @lg:gap-0">
-                <span className="font-semibold group-hover:underline md:text-[0.85em]">Hardcover</span>
-                <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
-                {clothPrice && (
-                  <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(clothPrice)}</span>
-                )}
-              </span>
-              <BookOpenIcon width={24} className="text-fog-dark" />
-            </span>
+        <FormatChoice typeName="cloth" isbn={clothIsbn} defaultChecked={defaultChoice === "cloth"}>
+          <span className="flex w-full flex-col items-center justify-between gap-5 @lg:flex-row @lg:gap-0">
+            <span className="font-semibold group-hover:underline md:text-[0.85em]">Hardcover</span>
+            <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
+            {clothPrice && <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(clothPrice)}</span>}
           </span>
-        </label>
+          <BookOpenIcon width={24} className="text-fog-dark" />
+        </FormatChoice>
       )}
       {paperIsbn && paperPrice !== undefined && (
-        <label className="mb-3 block cursor-pointer">
-          <input
-            className="peer sr-only"
-            type="radio"
-            name="format"
-            value={paperIsbn}
-            defaultChecked={defaultChoice === "paper"}
-          />
-          <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
-            <span className="flex w-full items-center gap-2">
-              <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
-                <span className="font-semibold group-hover:underline md:text-[0.85em]">Paperback</span>
+        <FormatChoice typeName="paper" isbn={paperIsbn} defaultChecked={defaultChoice === "paper"}>
+          <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
+            <span className="font-semibold group-hover:underline md:text-[0.85em]">Paperback</span>
 
-                <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
-                {paperPrice && (
-                  <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(paperPrice)}</span>
-                )}
-              </span>
-              <BookOpenIconOutline width={24} className="text-fog-dark" />
-            </span>
+            <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
+            {paperPrice && <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(paperPrice)}</span>}
           </span>
-        </label>
+          <BookOpenIconOutline width={24} className="text-fog-dark" />
+        </FormatChoice>
+      )}
+      {ebookIsbn && ebookPrice !== undefined && (
+        <FormatChoice typeName="ebook" isbn={ebookIsbn}>
+          <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
+            <span className="font-semibold group-hover:underline md:text-[0.85em]">EBook</span>
+
+            <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
+            {ebookPrice && <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(ebookPrice)}</span>}
+          </span>
+          <DeviceTabletIcon width={24} className="text-fog-dark" />
+        </FormatChoice>
       )}
     </>
   )
 }
 
-const IntlFormatChoices = ({clothIsbn, paperIsbn}: {clothIsbn?: Maybe<string>; paperIsbn?: Maybe<string>}) => {
+const IntlFormatChoices = ({
+  clothIsbn,
+  paperIsbn,
+  ebookIsbn,
+}: {
+  clothIsbn?: Maybe<string>
+  paperIsbn?: Maybe<string>
+  ebookIsbn?: Maybe<string>
+}) => {
   const defaultChoice = clothIsbn ? "cloth" : "paper"
   return (
     <>
       {clothIsbn && (
-        <label className="mb-3 block cursor-pointer">
-          <input
-            className="peer sr-only"
-            type="radio"
-            name="format"
-            value={clothIsbn}
-            defaultChecked={defaultChoice === "cloth"}
-          />
-          <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
-            <span className="flex w-full items-center justify-between font-semibold">
-              <span className="group-hover:underline md:text-[0.85em]">Hardcover</span>
-              <BookOpenIcon width={24} className="text-fog-dark" />
-            </span>
-          </span>
-        </label>
+        <FormatChoice typeName="cloth" isbn={clothIsbn} defaultChecked={defaultChoice === "cloth"}>
+          <span className="font-semibold group-hover:underline md:text-[0.85em]">Hardcover</span>
+          <BookOpenIcon width={24} className="text-fog-dark" />
+        </FormatChoice>
       )}
       {paperIsbn && (
-        <label className="block cursor-pointer">
-          <input
-            className="peer sr-only"
-            type="radio"
-            name="format"
-            value={paperIsbn}
-            defaultChecked={defaultChoice === "paper"}
-          />
-          <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
-            <span className="flex w-full items-center justify-between font-semibold">
-              <span className="group-hover:underline md:text-[0.85em]">Paperback</span>
-              <BookOpenIconOutline width={24} className="text-fog-dark" />
-            </span>
+        <FormatChoice typeName="paper" isbn={paperIsbn} defaultChecked={defaultChoice === "paper"}>
+          <span className="font-semibold group-hover:underline md:text-[0.85em]">Paperback</span>
+          <BookOpenIconOutline width={24} className="text-fog-dark" />
+        </FormatChoice>
+      )}
+      {ebookIsbn && (
+        <FormatChoice typeName="ebook" isbn={ebookIsbn}>
+          <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
+            <span className="font-semibold group-hover:underline md:text-[0.85em]">EBook</span>
           </span>
-        </label>
+          <DeviceTabletIcon width={24} className="text-fog-dark" />
+        </FormatChoice>
       )}
     </>
   )
 }
 
-export default PrecartClient
+const FormatChoice = ({
+  typeName,
+  isbn,
+  defaultChecked,
+  children,
+  ...props
+}: {
+  typeName: string
+  isbn: string
+  defaultChecked?: boolean
+} & HTMLAttributes<HTMLLabelElement>) => {
+  return (
+    <label {...props} className={twMerge("block cursor-pointer", props.className)}>
+      <input className="peer sr-only" type="radio" name="format" value={`${typeName}:${isbn}`} defaultChecked={defaultChecked} />
+      <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
+        <span className="flex w-full items-center justify-between">{children}</span>
+      </span>
+    </label>
+  )
+}
+
+export default PreCartClient
