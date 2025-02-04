@@ -22,9 +22,9 @@ type Props = {
 }
 
 const NodeListItem = ({node, headingLevel}: Props) => {
-  const previewMode = isPreviewMode()
+
   const itemProps: {[key: string]: string} = {}
-  if (previewMode) {
+  if (process.env.NODE_ENV === "development") {
     itemProps["data-type"] = node.__typename || "unknown"
     itemProps["data-id"] = node.id
   }

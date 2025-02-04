@@ -21,7 +21,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 }
 
 const StanfordEventPage = ({node, ...props}: Props) => {
-  if (node.suEventSource?.url && !isPreviewMode()) redirect(node.suEventSource.url)
+  if (node.suEventSource?.url) redirect(node.suEventSource.url)
 
   const startTime = new Date(node.suEventDateTime.value * 1000)
   const endTime = new Date(node.suEventDateTime.end_value * 1000)

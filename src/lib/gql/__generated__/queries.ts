@@ -50,6 +50,7 @@ export const FragmentMetaTagFragmentDoc = gql`
 export const FragmentNodePageFragmentDoc = gql`
     fragment FragmentNodePage on NodeInterface {
   ...FragmentNodeInterface
+  status
   metatag {
     ...FragmentMetaTag
   }

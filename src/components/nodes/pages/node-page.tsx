@@ -12,10 +12,9 @@ import SupBookPage from "@components/nodes/pages/sup-book/sup-book-page"
 import SupBookAncillaryPage from "@components/nodes/pages/sup-book-ancilary/sup-book-ancillary-page"
 
 const NodePage = ({node}: {node: NodeUnion}) => {
-  const previewMode = isPreviewMode()
   const itemProps: {[key: string]: string} = {}
 
-  if (previewMode) {
+  if (process.env.NODE_ENV === "development") {
     itemProps["data-type"] = node.__typename || "unknown"
     itemProps["data-id"] = node.id
   }

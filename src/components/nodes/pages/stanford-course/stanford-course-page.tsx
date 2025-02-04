@@ -12,7 +12,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 }
 
 const StanfordCoursePage = ({node, ...props}: Props) => {
-  if (node.suCourseLink?.url && !isPreviewMode()) redirect(node.suCourseLink?.url)
+  if (node.suCourseLink?.url) redirect(node.suCourseLink?.url)
   return (
     <article className="centered my-32" {...props}>
       <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={node.title} />

@@ -66,7 +66,7 @@ export const getViewPagedItems = cache(
   ): Promise<{items: NodeUnion[]; totalItems: number}> => {
     let items: NodeUnion[] = []
     let totalItems = 0
-    // View filters allow multiples of 3 for page sizes. If the user wants 4, we"ll fetch 6 and then slice it at the end.
+    // View filters allow multiples of 3 for page sizes. If the user wants 4, we'll fetch 6 and then slice it at the end.
     const itemsPerPage = pageSize ? Math.min(Math.ceil(pageSize / 3) * 3, 99) : undefined
     const queryVariables = {pageSize: itemsPerPage, page, offset}
 

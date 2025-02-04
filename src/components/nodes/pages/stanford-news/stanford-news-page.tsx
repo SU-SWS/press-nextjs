@@ -14,7 +14,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 }
 
 const StanfordNewsPage = ({node, ...props}: Props) => {
-  if (node.suNewsSource?.url && !isPreviewMode()) redirect(node.suNewsSource.url)
+  if (node.suNewsSource?.url) redirect(node.suNewsSource.url)
 
   const publishDate = node.suNewsPublishingDate
     ? new Date(node.suNewsPublishingDate.time).toLocaleDateString("en-us", {
