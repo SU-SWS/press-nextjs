@@ -21,7 +21,6 @@ type Props = {
 }
 
 const NodeCard = ({node, headingLevel}: Props) => {
-
   const itemProps: {[key: string]: string} = {}
   if (process.env.NODE_ENV === "development") {
     itemProps["data-type"] = node.__typename || "unknown"

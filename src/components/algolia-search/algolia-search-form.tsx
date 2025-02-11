@@ -48,7 +48,6 @@ const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
   const initialRender = useRef(true)
 
   useEffect(() => {
-    // if (!initialRender) return
     initialRender.current = false
 
     const searchParams = new URLSearchParams(window.location.search)
@@ -79,7 +78,6 @@ const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
   if (initialRender.current) return <ArrowPathIcon className="mx-auto animate-spin" width={50} />
   return (
     <div>
-      {/* @ts-expect-error React types don't match the library. */}
       <InstantSearchNext
         indexName={searchIndex}
         searchClient={searchClient}
