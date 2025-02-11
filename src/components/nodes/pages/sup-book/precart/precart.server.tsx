@@ -9,12 +9,14 @@ export const submitForm = async (formData: FormData) => {
   if (formData.get("email")) return
 
   const bookTitle = formData.get("title") as string
-  const formatIsbn = formData.get("format") as string
+  const [format, isbn] = (formData.get("format") as string).split(":")
   const isIntl = formData.get("intl") !== "us"
+
+  if (format === "ebook") redirect(`https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}_PDF`)
 
   if (isIntl) {
     const title = bookTitle.replaceAll(/[^a-zA-Z\d\s:]/g, "").replaceAll(/\s/g, "-")
-    redirect(`https://www.combinedacademic.co.uk/${formatIsbn}/${title}`)
+    redirect(`https://www.combinedacademic.co.uk/${isbn}/${title}`)
   }
-  redirect(`https://add-to-cart-2.supadu.com/add-to-cart?isbn=${formatIsbn}&client=indiepubs-stanford-university-press`)
+  redirect(`https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}-print`)
 }
