@@ -18,5 +18,5 @@ export const submitForm = async (formData: FormData) => {
     const title = bookTitle.replaceAll(/[^a-zA-Z\d\s:]/g, "").replaceAll(/\s/g, "-")
     redirect(`https://www.combinedacademic.co.uk/${isbn}/${title}`)
   }
-  redirect(`https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}-print`)
+  redirect(`https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}_PRINT`)
 }
