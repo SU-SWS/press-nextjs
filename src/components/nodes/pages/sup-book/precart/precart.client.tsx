@@ -23,7 +23,7 @@ type Props = {
   hasIntlCart?: Maybe<boolean>
 }
 
-const PreCartClient = ({priceId, clothIsbn, paperIsbn, ebookIsbn, hasIntlCart, bookTitle}: Props) => {
+const PreCartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle}: Props) => {
   const [priceData, setPriceData] = useState<PriceProps>()
 
   useEffect(() => {
@@ -52,13 +52,12 @@ const PreCartClient = ({priceId, clothIsbn, paperIsbn, ebookIsbn, hasIntlCart, b
           <UsFormatChoices
             clothIsbn={clothIsbn}
             paperIsbn={paperIsbn}
-            ebookIsbn={ebookIsbn}
             clothPrice={clothIsbn ? priceData?.supClothSale || priceData?.supClothPrice || false : undefined}
             paperPrice={paperIsbn ? priceData?.supPaperSale || priceData?.supPaperPrice || false : undefined}
           />
         )}
 
-        {isIntl && <IntlFormatChoices clothIsbn={clothIsbn} paperIsbn={paperIsbn} ebookIsbn={ebookIsbn} />}
+        {isIntl && <IntlFormatChoices clothIsbn={clothIsbn} paperIsbn={paperIsbn} />}
       </fieldset>
 
       {(hasIntlCart || priceData?.supIntlCart) && (
