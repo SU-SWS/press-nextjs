@@ -6,7 +6,6 @@ import StanfordPolicyPage from "@components/nodes/pages/stanford-policy/stanford
 import StanfordPublicationPage from "@components/nodes/pages/stanford-publication/stanford-publication-page"
 import StanfordCoursePage from "@components/nodes/pages/stanford-course/stanford-course-page"
 import StanfordEventSeriesPage from "@components/nodes/pages/stanford-event-series/stanford-event-series-page"
-import {isPreviewMode} from "@lib/drupal/is-preview-mode"
 import {NodeUnion} from "@lib/gql/__generated__/drupal.d"
 import SupBookPage from "@components/nodes/pages/sup-book/sup-book-page"
 import SupBookAncillaryPage from "@components/nodes/pages/sup-book-ancilary/sup-book-ancillary-page"

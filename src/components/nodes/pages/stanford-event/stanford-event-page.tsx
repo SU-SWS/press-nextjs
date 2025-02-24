@@ -12,7 +12,6 @@ import {NodeStanfordEvent} from "@lib/gql/__generated__/drupal.d"
 import Email from "@components/elements/email"
 import Telephone from "@components/elements/telephone"
 import Link from "@components/elements/link"
-import {isPreviewMode} from "@lib/drupal/is-preview-mode"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
