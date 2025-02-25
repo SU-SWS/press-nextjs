@@ -6,7 +6,6 @@ import StanfordPageListItem from "@components/nodes/list-item/stanford-page/stan
 import StanfordPersonListItem from "@components/nodes/list-item/stanford-person/stanford-person-list-item"
 import StanfordPolicyListItem from "@components/nodes/list-item/stanford-policy/stanford-policy-list-item"
 import StanfordPublicationListItem from "@components/nodes/list-item/stanford-publication/stanford-publication-list-item"
-import {isPreviewMode} from "@lib/drupal/is-preview-mode"
 import {NodeUnion} from "@lib/gql/__generated__/drupal.d"
 import SupBookListItem from "@components/nodes/list-item/sup-book/sup-book-list-item"
 
@@ -22,9 +21,8 @@ type Props = {
 }
 
 const NodeListItem = ({node, headingLevel}: Props) => {
-  const previewMode = isPreviewMode()
   const itemProps: {[key: string]: string} = {}
-  if (previewMode) {
+  if (process.env.NODE_ENV === "development") {
     itemProps["data-type"] = node.__typename || "unknown"
     itemProps["data-id"] = node.id
   }

@@ -33,6 +33,7 @@ import {CheckIcon} from "@heroicons/react/20/solid"
 import clsx from "clsx"
 import {useBoolean} from "usehooks-ts"
 import {twMerge} from "tailwind-merge"
+import {ArrowPathIcon} from "@heroicons/react/16/solid"
 
 type Props = {
   appId: string
@@ -41,15 +42,46 @@ type Props = {
   initialUiState?: IndexUiState
 }
 
-const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey, initialUiState = {}}: Props) => {
+const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
   const searchClient = useMemo(() => liteClient(appId, searchApiKey), [appId, searchApiKey])
+  const [initialState, setInitialState] = useState<IndexUiState>({refinementList: {book_type: ["book"]}})
+  const initialRender = useRef(true)
+
+  useEffect(() => {
+    initialRender.current = false
+
+    const searchParams = new URLSearchParams(window.location.search)
+    const newInitialState: IndexUiState = {refinementList: {book_type: ["book"]}}
+
+    const query = searchParams.get("q")
+    const subjects = searchParams.get("subjects")
+    const onlyBooks = searchParams.get("only-books")
+    const minYear = searchParams.get("published-min")
+    const maxYear = searchParams.get("published-max")
+
+    if (query) newInitialState.query = query
+    if (subjects && newInitialState.refinementList) {
+      newInitialState.refinementList.book_subject = subjects.split(",")
+    }
+
+    if (onlyBooks == "false" && newInitialState.refinementList) {
+      delete newInitialState.refinementList.book_type
+    }
+    if (minYear || maxYear) {
+      newInitialState.range = {
+        book_published: (minYear || "0") + ":" + (maxYear || "3000"),
+      }
+    }
+    setInitialState(newInitialState)
+  }, [])
+
+  if (initialRender.current) return <ArrowPathIcon className="mx-auto animate-spin" width={50} />
   return (
     <div>
-      {/* @ts-expect-error React types don't match the library. */}
       <InstantSearchNext
         indexName={searchIndex}
         searchClient={searchClient}
-        initialUiState={{[searchIndex]: initialUiState}}
+        initialUiState={{[searchIndex]: initialState}}
         future={{preserveSharedStateOnUnmount: true}}
         insights={true}
       >
@@ -62,7 +94,8 @@ const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey, initialUiState = {
 const Form = ({searchIndex}: {searchIndex: string}) => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const {value: onlyBooks, setValue: setOnlyBooks} = useBoolean(true)
+
+  const {items: bookType, refine: refineBookType} = useRefinementList({attribute: "book_type"})
 
   const inputRef = useRef<HTMLInputElement>(null)
   const {query, refine} = useSearchBox({})
@@ -72,7 +105,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     attribute: "book_subject",
     limit: 100,
   })
-  const {refine: refineBookType} = useRefinementList({attribute: "book_type"})
+
   const {
     start: pubYearRange,
     range: pubYearRangeBounds,
@@ -228,11 +261,8 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                   <input
                     className="peer sr-only"
                     type="checkbox"
-                    checked={onlyBooks}
-                    onChange={() => {
-                      setOnlyBooks(!onlyBooks)
-                      refineBookType("book")
-                    }}
+                    checked={bookType.find(item => item.value === "book")?.isRefined || false}
+                    onChange={() => refineBookType("book")}
                   />
                   <div className="h-6 w-16 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
                   <div className="absolute -left-1 -top-2 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-8 outline-press-bay transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline group-hocus:outline" />
@@ -465,7 +495,11 @@ const HitItem = ({
   useLayoutEffect(() => {
     if (focus) {
       const reduceMotion = !!window.matchMedia("(prefers-reduced-motion: reduce)")?.matches
-      ref.current?.scrollIntoView({behavior: reduceMotion ? "instant" : "smooth", block: "end", inline: "nearest"})
+      ref.current?.scrollIntoView({
+        behavior: reduceMotion ? "instant" : "smooth",
+        block: "end",
+        inline: "nearest",
+      })
       ref.current?.focus({preventScroll: true})
     }
   }, [focus])

@@ -41,7 +41,6 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
           {hit.book_subtitle && <div className="card-paragraph mb-8">{hit.book_subtitle}</div>}
           {hit.html && !hit.book_subtitle && (
             <p className="card-paragraph mb-8">
-              {/* @ts-expect-error React types don't match the library. */}
               <Snippet hit={hit} attribute="html" />
             </p>
           )}

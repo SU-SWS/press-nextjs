@@ -13,7 +13,7 @@ const BookPageImage = async ({node}: Props) => {
     <Image
       className="mb-16"
       src={node.supBookImage?.mediaImage.url || "/default-book-image.jpg"}
-      alt={node.supBookImage?.mediaImage.alt || ""}
+      alt={node.supBookImage?.mediaImage.alt || `'${node.title}' Book Cover`}
       height={node.supBookImage?.mediaImage.height || 600}
       width={node.supBookImage?.mediaImage.width || 400}
       sizes="400px"

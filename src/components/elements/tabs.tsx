@@ -12,7 +12,7 @@ import {UseTabsParameters} from "@mui/base/useTabs/useTabs.types"
 import {UseTabsListParameters} from "@mui/base/useTabsList/useTabsList.types"
 import {UseTabPanelParameters} from "@mui/base/useTabPanel/useTabPanel.types"
 import {useRouter, useSearchParams} from "next/navigation"
-import {useScreen} from "usehooks-ts"
+import {useIsClient, useScreen} from "usehooks-ts"
 
 // View the API for all the tab components here: https://mui.com/base-ui/react-tabs/hooks-api/.
 type TabsProps = HTMLAttributes<HTMLDivElement> & {
@@ -145,9 +145,17 @@ type TabPanelProps = UseTabPanelParameters & {
 
 export const TabPanel = ({panelProps, className, children}: TabPanelProps) => {
   const rootRef = useRef<HTMLDivElement>(null)
-  const {getRootProps} = useTabPanel({rootRef})
+  const {getRootProps, hidden} = useTabPanel({rootRef})
+  const isClient = useIsClient()
+
   return (
-    <section {...getRootProps()} {...panelProps} role="tabpanel" className={className}>
+    <section
+      {...getRootProps()}
+      {...panelProps}
+      role="tabpanel"
+      className={className}
+      hidden={isClient ? hidden : false}
+    >
       {children}
     </section>
   )

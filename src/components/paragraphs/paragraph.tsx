@@ -6,7 +6,6 @@ import SpacerParagraph from "@components/paragraphs/stanford-spacer/spacer-parag
 import WysiwygParagraph from "@components/paragraphs/stanford-wysiwyg/wysiwyg-paragraph"
 import BannerParagraph from "@components/paragraphs/stanford-banner/banner-paragraph"
 import ListParagraph from "@components/paragraphs/stanford-lists/list-paragraph"
-import {isPreviewMode} from "@lib/drupal/is-preview-mode"
 import {ParagraphUnion} from "@lib/gql/__generated__/drupal.d"
 import {Suspense} from "react"
 import FileListParagraph from "@components/paragraphs/sup-file-list/file-list-paragraph"
@@ -32,10 +31,9 @@ const Paragraph = async ({paragraph}: Props) => {
   )
 }
 const ParagraphComponent = async ({paragraph}: Props) => {
-  const previewMode = isPreviewMode()
-
   const itemProps: Record<string, string> = {}
-  if (previewMode) {
+
+  if (process.env.NODE_ENV === "development") {
     itemProps["data-type"] = paragraph.__typename || "unknown"
     itemProps["data-id"] = paragraph.id
   }

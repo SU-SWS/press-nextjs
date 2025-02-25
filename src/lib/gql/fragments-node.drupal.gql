@@ -8,6 +8,7 @@ fragment FragmentNodeInterface on NodeInterface {
 
 fragment FragmentNodePage on NodeInterface {
     ...FragmentNodeInterface
+    status
     metatag {
         ...FragmentMetaTag
     }

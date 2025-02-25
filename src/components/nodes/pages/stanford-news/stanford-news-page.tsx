@@ -5,7 +5,6 @@ import SocialIcons from "@components/nodes/pages/stanford-news/social-icons"
 import {H1} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
 import {NodeStanfordNews} from "@lib/gql/__generated__/drupal.d"
-import {isPreviewMode} from "@lib/drupal/is-preview-mode"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -14,7 +13,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 }
 
 const StanfordNewsPage = ({node, ...props}: Props) => {
-  if (node.suNewsSource?.url && !isPreviewMode()) redirect(node.suNewsSource.url)
+  if (node.suNewsSource?.url) redirect(node.suNewsSource.url)
 
   const publishDate = node.suNewsPublishingDate
     ? new Date(node.suNewsPublishingDate.time).toLocaleDateString("en-us", {
