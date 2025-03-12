@@ -3,13 +3,14 @@ query BookPrice($id: ID!) {
         __typename
         ... on PressPrice {
             id
-            supClothPrice
             supClothDiscount
+            supClothPrice
             supClothSale
             supComingSoon
+            supDigitalPrice
             supIntlCart
-            supPaperPrice
             supPaperDiscount
+            supPaperPrice
             supPaperSale
             supPreorder
             workId

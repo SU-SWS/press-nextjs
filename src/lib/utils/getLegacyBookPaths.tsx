@@ -1,4 +1,4 @@
-import {BooksWorkIdQuery, BooksWorkIdQueryVariables} from "@lib/gql/__generated__/drupal.d"
+import {BooksWorkIdQuery, BooksWorkIdQueryVariables, NodeInterface} from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {unstable_cache as nextCache} from "next/cache"
 import {cache} from "react"
@@ -6,7 +6,7 @@ import {cache} from "react"
 export const getLegacyBookPaths = cache(
   nextCache(
     async () => {
-      const nodes: Array<{id: number; path: string}> = []
+      const nodes: Array<{id: number; path: NodeInterface["path"]}> = []
       let fetchMore = true
       let nodeQuery: BooksWorkIdQuery
       const cursors: Omit<BooksWorkIdQueryVariables, "first"> = {}

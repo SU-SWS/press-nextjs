@@ -38,7 +38,7 @@ const StanfordEventListItem = ({node, headingLevel, ...props}: Props) => {
         <div className="flex flex-col">
           <Heading className="type-1 xl:text-26" id={node.id}>
             <Link
-              href={node.suEventSource?.url || node.path}
+              href={node.suEventSource?.url || node.path || "#"}
               className="text-digital-red no-underline hocus:text-black hocus:underline"
             >
               {node.title}

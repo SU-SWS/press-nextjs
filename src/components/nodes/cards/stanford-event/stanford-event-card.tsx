@@ -32,7 +32,7 @@ const StanfordEventCard = ({node, headingLevel, ...props}: Props) => {
 
       <div className="flex flex-col">
         <Heading className="type-1 xl:text-26 [&_a]:text-black [&_a]:hocus:text-digital-red" id={node.id}>
-          <Link href={node.suEventSource?.url || node.path}>{node.title}</Link>
+          <Link href={node.suEventSource?.url || node.path || "#"}>{node.title}</Link>
         </Heading>
 
         {node.suEventType && <div className="su-digital-red order-first">{node.suEventType[0].name}</div>}

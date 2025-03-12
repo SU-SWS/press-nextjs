@@ -1,6 +1,6 @@
 import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/drupal.d"
 import {H1, H2, H3} from "@components/elements/headers"
-import {HTMLAttributes} from "react"
+import {Fragment, HTMLAttributes} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
 import Wysiwyg from "@components/elements/wysiwyg"
 import {ArrowLongLeftIcon, BookmarkIcon, ClipboardIcon} from "@heroicons/react/24/outline"
@@ -36,11 +36,11 @@ const BookPage = async ({node, ...props}: Props) => {
   return (
     <article {...props} className="centered">
       <NodePageMetadata metatags={node.metatag} pageTitle={node.title} backupDescription={node.supBookSubtitle}>
-        {node.supBookAuthors?.map(author => (
-          <>
+        {node.supBookAuthors?.map((author, i) => (
+          <Fragment key={`author-${i}`}>
             <meta property="book:author:profile:first_name" content={author.given || undefined} />
             <meta property="book:author:profile:last_name" content={author.family || undefined} />
-          </>
+          </Fragment>
         ))}
       </NodePageMetadata>
       <div className="mb-20 flex flex-col md:rs-mt-4 md:flex-row md:gap-32 lg:gap-[7.6rem]">
@@ -168,6 +168,8 @@ const BookPage = async ({node, ...props}: Props) => {
                 paperIsbn={node.supBookIsbn13Paper}
                 ebookIsbn={node.supBookIsbn13Digital}
                 hasIntlCart={node.supBookPriceData?.supIntlCart}
+                pdf={node.supBookPdfFormat}
+                epub={node.supBookEpubFormat}
               />
             )}
 
@@ -205,7 +207,7 @@ const BookPage = async ({node, ...props}: Props) => {
             <BookPageImage node={node} />
           </div>
 
-          <ExcerptButton id={node.id} path={node.path} />
+          <ExcerptButton id={node.id} path={node.path || "#"} />
         </div>
       </div>
 

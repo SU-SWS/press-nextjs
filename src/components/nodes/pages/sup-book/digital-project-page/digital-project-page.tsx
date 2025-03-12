@@ -218,7 +218,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
           <div className="hidden md:block">
             <BookPageImage node={node} />
           </div>
-          <ExcerptButton id={node.id} path={node.path} />
+          <ExcerptButton id={node.id} path={node.path || "#"} />
         </div>
       </div>
 

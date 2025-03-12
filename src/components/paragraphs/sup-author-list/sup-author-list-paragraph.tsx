@@ -41,7 +41,12 @@ const SupAuthorListParagraph = async ({...props}: Props) => {
         const authorsBooks = authors.get(authorName) || []
         authors.set(authorName, [
           ...authorsBooks,
-          <Link className="block w-fit font-normal text-digital-red" key={book.id} prefetch={false} href={book.path}>
+          <Link
+            className="block w-fit font-normal text-digital-red"
+            key={book.id}
+            prefetch={false}
+            href={book.path || "#"}
+          >
             {book.title}
             {book.supBookSubtitle && `: ${book.supBookSubtitle}`}
           </Link>,
