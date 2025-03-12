@@ -65,7 +65,7 @@ const PreCartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle, e
             ebookIsbn={ebookIsbn}
             clothPrice={clothIsbn ? priceData?.supClothSale || priceData?.supClothPrice || false : undefined}
             paperPrice={paperIsbn ? priceData?.supPaperSale || priceData?.supPaperPrice || false : undefined}
-            ebookPrice={ebookIsbn ? priceData?.supDigitalPrice || false : undefined}
+            ebookPrice={ebookIsbn && (epub || pdf) ? priceData?.supDigitalPrice || false : undefined}
             onChange={onFormatChange}
           />
         )}
@@ -98,7 +98,11 @@ const PreCartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle, e
           </fieldset>
 
           <div className="text-center text-xl">
-            Read via the <Link href="#" className="text-black font-normal">Academic Reader App</Link>.
+            Read via the{" "}
+            <Link href="http://sup.org/ebooks" className="font-normal text-black">
+              Academic Reader App
+            </Link>
+            .
           </div>
         </div>
       )}

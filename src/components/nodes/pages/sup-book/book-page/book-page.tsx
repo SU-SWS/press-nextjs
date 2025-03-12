@@ -173,25 +173,6 @@ const BookPage = async ({node, ...props}: Props) => {
               />
             )}
 
-            {node.supBookERetailers && (
-              <div className="rs-mb-1 rs-pb-1 border-b-2 border-fog text-18">
-                <H2 className="text-18">Also Available from</H2>
-                <ul className="list-unstyled rs-mt-0 flex flex-col gap-3 [&_a]:font-normal [&_a]:text-digital-red">
-                  {node.supBookERetailers.map((link, i) => (
-                    <li key={`e-book-retailer-${i}`} className="mb-0">
-                      <Link
-                        prefetch={false}
-                        href={link.url || "#"}
-                        className="font-normal underline-offset-[5px] hocus:text-stone-dark hocus:decoration-archway-dark hocus:decoration-2"
-                      >
-                        {link.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
             <Link
               href={node.path + "/desk-examination-copy-requests"}
               className="flex items-start gap-3 text-18 font-normal leading-snug text-stone-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
