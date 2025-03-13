@@ -62,7 +62,15 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
   )
 }
 
-const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouselSlide; isTopHero?: boolean}) => {
+const Slide = async ({
+  slideParagraph,
+  isTopHero,
+  isFirst,
+}: {
+  slideParagraph: ParagraphSupCarouselSlide
+  isTopHero?: boolean
+  isFirst?: boolean
+}) => {
   const slideTitle = slideParagraph.supSlideTitle
   const eyebrow = slideParagraph.supSlideEyebrow
   const subtitle = slideParagraph.supSlideSubtitle
@@ -184,6 +192,7 @@ const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupC
                 {"mx-auto": !leftImage}
               )}
               href={slideParagraph.supSlideButton.url}
+              tabIndex={-1}
             >
               <span className="group-hocus:underline">{slideParagraph.supSlideButton.title}</span>
               <ArrowRightIcon width={20} className="transition-all group-hocus-visible:translate-x-2" />
