@@ -24,7 +24,7 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
   return (
     <section
       {...props}
-      aria-label="Page banner carousel"
+      aria-label={isTopBanner ? "Page banner carousel" : undefined}
       data-top-hero={isTopHero || undefined}
       className={twMerge("relative mb-32", clsx({"lg:-top-[300px] lg:mb-[-300px]": isTopHero}), props?.className)}
     >
