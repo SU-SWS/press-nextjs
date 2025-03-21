@@ -62,15 +62,7 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
   )
 }
 
-const Slide = async ({
-  slideParagraph,
-  isTopHero,
-  isFirst,
-}: {
-  slideParagraph: ParagraphSupCarouselSlide
-  isTopHero?: boolean
-  isFirst?: boolean
-}) => {
+const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouselSlide; isTopHero?: boolean}) => {
   const slideTitle = slideParagraph.supSlideTitle
   const eyebrow = slideParagraph.supSlideEyebrow
   const subtitle = slideParagraph.supSlideSubtitle
