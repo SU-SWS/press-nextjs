@@ -37,7 +37,6 @@ tasks:
       find docroot/sites/ -name 'local*' | xargs rm -rf &&
       export NEXT_PUBLIC_DRUPAL_BASE_URL=`gp url 8001` &&
       export PREVIEW_URL=${NEXT_PUBLIC_DRUPAL_BASE_URL#"https://"} &&
-      blt blt:telemetry:disable --no-interaction &&
       blt settings &&
       echo 'ssh: {options: "-o StrictHostKeyChecking=no"}' > drush/local.drush.yml &&
       if [[ ! -z $SSH_PRIVATE_KEY ]]; then

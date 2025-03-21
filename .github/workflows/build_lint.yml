@@ -70,11 +70,12 @@ jobs:
             docroot/libraries
             docroot/modules/contrib
             frontend/node_modules
-          key: build-${{ hashFiles('blt/blt.yml') }}-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}
+          key: build-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}-${{ hashFiles('frontend/package.lock') }}
           restore-keys: |
-            build-${{ hashFiles('blt/blt.yml') }}-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}
-            build-${{ hashFiles('blt/blt.yml') }}-${{ hashFiles('composer.json') }}-
-            build-${{ hashFiles('blt/blt.yml') }}-
+            build-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}-${{ hashFiles('frontend/package.lock') }}
+            build-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}-
+            build-${{ hashFiles('composer.json') }}-
+            build-
       - name: Sync Site
         run: |
           git config --system --add safe.directory '*' &&
@@ -87,7 +88,9 @@ jobs:
           ln -sL ../default/files/ docroot/sites/supress/files &&
           apachectl stop && apachectl start &&
           composer install -n &&
-          blt drupal:sync --site=supress -n &&
+          drush sql-sync @supress.prod @self -y &&
+          drush eval 'foreach(\Drupal::entityTypeManager()->getStorage("field_validation_rule_set")->loadMultiple() as $e){$e->delete();}' &&
+          drush @supress.local deploy &&
           drush sqlq 'truncate config_pages__su_site_algolia_index; truncate config_pages__su_site_algolia_key; truncate config_pages__su_site_algolia_id'
       - name: Build Frontend
         run: |
