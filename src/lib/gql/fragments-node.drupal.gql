@@ -110,6 +110,8 @@ fragment FragmentNodeSupBook on NodeSupBook {
             supIntlCart
         }
     }
+    supBookEpubFormat
+    supBookPdfFormat
 }
 
 fragment FragmentNodeStanfordPage on NodeStanfordPage {

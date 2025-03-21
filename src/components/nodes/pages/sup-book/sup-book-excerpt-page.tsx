@@ -22,7 +22,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
     <BackToLink
       {...props}
       className={twMerge("centered", props.className)}
-      href={node.path}
+      href={node.path || "#"}
       title={node.title}
       childrenProps={{className: "rs-mt-4 centered"}}
       isArticle
@@ -45,7 +45,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
             <Link
               className="group rs-p-1 rs-mb-3 flex items-center gap-3 border text-stone-dark no-underline shadow last:mb-0 hocus:underline"
               key={page.id}
-              href={page.path}
+              href={page.path || "#"}
             >
               {page.title}
               <ChevronRightIcon

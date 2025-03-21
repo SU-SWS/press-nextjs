@@ -3,7 +3,7 @@ import NodeCard from "@components/nodes/cards/node-card"
 import Button from "@components/elements/button"
 import {H2} from "@components/elements/headers"
 import {ElementType, HtmlHTMLAttributes, Suspense} from "react"
-import {NodeUnion, ParagraphStanfordEntity} from "@lib/gql/__generated__/drupal.d"
+import {NodeInterface, NodeUnion, ParagraphStanfordEntity} from "@lib/gql/__generated__/drupal.d"
 import {twMerge} from "tailwind-merge"
 import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behaviors"
 import {getEntityFromPath} from "@lib/gql/gql-queries"
@@ -57,7 +57,8 @@ const EntityParagraph = async ({paragraph, ...props}: Props) => {
   )
 }
 
-const EntityCard = async ({path, headingLevel}: {path: string; headingLevel: "h3" | "h2"}) => {
+const EntityCard = async ({path, headingLevel}: {path: NodeInterface["path"]; headingLevel: "h3" | "h2"}) => {
+  if (!path) return
   const queryResponse = await getEntityFromPath<NodeUnion>(path, false, true)
   if (!queryResponse.entity) return
   return <NodeCard node={queryResponse.entity} headingLevel={headingLevel} />

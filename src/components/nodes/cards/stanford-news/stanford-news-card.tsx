@@ -28,7 +28,7 @@ const StanfordNewsCard = ({node, headingLevel, ...props}: Props) => {
     <ImageCard {...props} aria-labelledby={node.id} imageUrl={image?.url} imageAlt={image?.alt} isArticle>
       <div className="flex flex-col">
         <Heading className="type-1 xl:text-26 [&_a]:text-black" id={node.id}>
-          <Link href={node.suNewsSource?.url || node.path}>{node.title}</Link>
+          <Link href={node.suNewsSource?.url || node.path || "#"}>{node.title}</Link>
         </Heading>
 
         {publishDate && <div className="order-first">{publishDate}</div>}

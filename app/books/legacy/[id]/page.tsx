@@ -8,7 +8,7 @@ const LegacyBookPage = async (props: {params: Promise<{id: string}>}) => {
   const params = await props.params
   const legacyPaths = await getLegacyBookPaths()
   const legacyBook = legacyPaths.find(book => book.id === parseInt(params.id))
-  if (legacyBook) redirect(legacyBook.path)
+  if (legacyBook?.path) redirect(legacyBook.path)
 
   notFound()
 }

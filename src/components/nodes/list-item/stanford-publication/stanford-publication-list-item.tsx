@@ -20,7 +20,7 @@ const StanfordPublicationListItem = ({node, headingLevel, ...props}: Props) => {
     >
       <div className="flex flex-col">
         <Heading className="type-1 order-first xl:text-26" id={node.id}>
-          <Link href={citationUrl || node.path}>{node.title}</Link>
+          <Link href={citationUrl || node.path || "#"}>{node.title}</Link>
         </Heading>
         <div className="font-bold">Publication</div>
       </div>
