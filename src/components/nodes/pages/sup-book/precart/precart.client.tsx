@@ -100,7 +100,7 @@ const PreCartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle, e
           <div className="text-center text-xl">
             Must be read using the{" "}
             <Link href="/ebooks" className="font-normal text-black">
-              Academic Reader App
+              Academic Reader app
             </Link>
             . After purchasing, you will receive an email with instructions to access your ebook.
           </div>
