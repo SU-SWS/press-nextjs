@@ -6,7 +6,15 @@ import {Suspense} from "react"
 import PagedList from "@components/elements/paged-list"
 import {ViewDisplayProps} from "@components/views/view"
 
-const BookListView = ({items, totalItems, headingLevel, loadPage}: ViewDisplayProps<NodeSupBook>) => {
+const BookListView = ({
+  items,
+  totalItems,
+  headingLevel,
+  loadPage,
+  sortable,
+}: ViewDisplayProps<NodeSupBook> & {
+  sortable: boolean
+}) => {
   const numItems = items.length
 
   return (
@@ -23,6 +31,7 @@ const BookListView = ({items, totalItems, headingLevel, loadPage}: ViewDisplayPr
         }}
         totalPages={Math.ceil(totalItems / 30)}
         loadPage={loadPage}
+        sortable={sortable}
       >
         {items.map(item => (
           <SupBookCard key={item.id} node={item} headingLevel={headingLevel} />

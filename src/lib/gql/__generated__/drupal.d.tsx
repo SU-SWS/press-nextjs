@@ -3074,6 +3074,7 @@ export type QuerySupBooksViewArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  sortKey?: InputMaybe<SupBooksViewSortKeys>;
 };
 
 
@@ -3990,6 +3991,8 @@ export type SupBooksViewContextualFilterInput = {
 export type SupBooksViewFilterInput = {
   /** Catalog Season  */
   season?: InputMaybe<Scalars['String']['input']>;
+  /** Work ID (sup_book_work_id_number)  */
+  work_id?: InputMaybe<Scalars['Float']['input']>;
 };
 
 /** Result for view sup_books display book_list_graphql. */
@@ -4014,6 +4017,17 @@ export type SupBooksViewResult = View & {
   /** The machine name of the view. */
   view: Scalars['String']['output'];
 };
+
+export enum SupBooksViewSortKeys {
+  /** Book Authors (sup_book_authors:family) */
+  AuthorAsc = 'AUTHOR_ASC',
+  /** Book Authors (sup_book_authors:family) */
+  AuthorDesc = 'AUTHOR_DESC',
+  /** Publication Date First (sup_book_pub_date_first) */
+  PubDateDesc = 'PUB_DATE_DESC',
+  /** Title */
+  TitleAsc = 'TITLE_ASC'
+}
 
 /** Broad categories that specify a type of Basic Page. (i.e. Research Projects) */
 export type TermBasicPageType = MetaTagInterface & TermInterface & {
@@ -5189,6 +5203,7 @@ export type SupBooksQueryVariables = Exact<{
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
+  sortKey?: InputMaybe<SupBooksViewSortKeys>;
 }>;
 
 

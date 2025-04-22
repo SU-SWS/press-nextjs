@@ -10,6 +10,8 @@ import {ArrowPathIcon} from "@heroicons/react/16/solid"
 import {twMerge} from "tailwind-merge"
 import useServerAction from "@lib/hooks/useServerAction"
 import clsx from "clsx"
+import {InputMaybe, SupBooksAwardWinnersFilterInput, SupBooksViewSortKeys} from "@lib/gql/__generated__/drupal.d"
+import SelectList from "@components/elements/select-list"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -35,7 +37,12 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
    * Server action to load a page.
    */
-  loadPage?: (_page: number) => Promise<JSX.Element>
+  loadPage?: (
+    _page: number,
+    _filters?: InputMaybe<SupBooksAwardWinnersFilterInput>,
+    _sort?: InputMaybe<SupBooksViewSortKeys>
+  ) => Promise<JSX.Element>
+  sortable?: boolean
 }
 
 const PagedList = ({
@@ -46,6 +53,7 @@ const PagedList = ({
   totalPages,
   pagerSiblingCount = 2,
   loadPage,
+  sortable,
   ...props
 }: Props) => {
   const ref = useRef(false)
@@ -71,13 +79,21 @@ const PagedList = ({
     router.replace(`?${params.toString()}${window.location.hash || ""}`, {scroll: false})
   }, [currentPage, pageKey, router, searchParams])
 
-  const [runAction, isRunning] = useServerAction<[number], JSX.Element>(loadPage, afterAction)
+  const [runAction, isRunning] = useServerAction<
+    [number, InputMaybe<SupBooksAwardWinnersFilterInput> | undefined, InputMaybe<SupBooksViewSortKeys> | undefined],
+    JSX.Element
+  >(loadPage, afterAction)
 
   const focusItemRef = useRef<HTMLLIElement>(null)
 
   const goToPage = useCallback(
-    (page: number, doNotFocusOnResults?: boolean) => {
-      runAction(page - 1)
+    (
+      page: number,
+      doNotFocusOnResults?: boolean,
+      filter?: InputMaybe<SupBooksAwardWinnersFilterInput>,
+      sort?: InputMaybe<SupBooksViewSortKeys>
+    ) => {
+      runAction(page - 1, filter, sort)
         .then(response => {
           if (response) {
             // Set the rendering to the response from the server. If the response has a suspense boundary, it will have a
@@ -109,8 +125,35 @@ const PagedList = ({
 
   const paginationButtons = usePagination(totalPages * items.length, currentPage, items.length, pagerSiblingCount)
 
+  const sortOptions = [
+    {label: "Title, A-Z", value: SupBooksViewSortKeys["TitleAsc"]},
+    {label: "Author, A-Z", value: SupBooksViewSortKeys["AuthorAsc"]},
+    {label: "Author, Z-A", value: SupBooksViewSortKeys["AuthorDesc"]},
+    {label: "Publication Year, Desc", value: SupBooksViewSortKeys["PubDateDesc"]},
+  ]
+
   return (
     <div {...props} className={twMerge("relative", props.className)}>
+      {sortable && (
+        <div className="mb-16 ml-auto flex w-fit items-center gap-3">
+          <div id="sort-by" className="text-16 text-press-sand-dark">
+            Sort By:
+          </div>
+          <div className="min-w-96">
+            <SelectList
+              ariaLabelledby="sort-by"
+              options={sortOptions}
+              required
+              defaultValue={SupBooksViewSortKeys["PubDateDesc"]}
+              borderless
+              onChange={(_e, value) => {
+                goToPage(0, undefined, undefined, value as SupBooksViewSortKeys)
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       {isRunning && (
         <div className="absolute left-0 top-0 z-10 h-full w-full rounded-2xl bg-black-20 bg-opacity-30">
           <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
