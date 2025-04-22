@@ -58,6 +58,7 @@ const PagedList = ({
 }: Props) => {
   const ref = useRef(false)
   const [items, setItems] = useState<JSX.Element[]>(Array.isArray(children) ? children : [children])
+  const [sortKey, setSortKey] = useState<SupBooksViewSortKeys>(SupBooksViewSortKeys["PubDateDesc"])
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -90,10 +91,10 @@ const PagedList = ({
     (
       page: number,
       doNotFocusOnResults?: boolean,
-      filter?: InputMaybe<SupBooksAwardWinnersFilterInput>,
+      _filters?: InputMaybe<SupBooksAwardWinnersFilterInput>,
       sort?: InputMaybe<SupBooksViewSortKeys>
     ) => {
-      runAction(page - 1, filter, sort)
+      runAction(page - 1, undefined, sort || sortKey)
         .then(response => {
           if (response) {
             // Set the rendering to the response from the server. If the response has a suspense boundary, it will have a
@@ -147,6 +148,7 @@ const PagedList = ({
               defaultValue={SupBooksViewSortKeys["PubDateDesc"]}
               borderless
               onChange={(_e, value) => {
+                setSortKey(value as SupBooksViewSortKeys)
                 goToPage(0, undefined, undefined, value as SupBooksViewSortKeys)
               }}
             />
