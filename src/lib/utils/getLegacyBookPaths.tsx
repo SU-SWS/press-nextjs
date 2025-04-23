@@ -31,3 +31,21 @@ export const getLegacyBookPaths = cache(
     {tags: ["legacy-books"]}
   )
 )
+
+export const getNewBookPath = nextCache(
+  async (workId: string, suffix?: string): Promise<string | undefined> => {
+    if (!/^-?\d+(\.\d+)?$/.test(workId)) {
+      return
+    }
+    const legacyPaths = await getLegacyBookPaths()
+    const legacyBook = legacyPaths.find(book => book.id === parseInt(workId))
+    if (legacyBook?.path) return legacyBook.path + (suffix || "")
+
+    // New work id, look up to see if one exists.
+    const bookData = await graphqlClient({cache: "no-cache"}).supBooks({filters: {work_id: parseInt(workId)}})
+    if (bookData.supBooksView?.results[0]?.__typename === "NodeSupBook" && bookData.supBooksView.results[0].path)
+      return bookData.supBooksView.results[0].path + (suffix || "")
+  },
+  [],
+  {tags: ["legacy-books"]}
+)

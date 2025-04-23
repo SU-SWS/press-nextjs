@@ -1,21 +1,13 @@
 import {notFound, redirect} from "next/navigation"
-import {getLegacyBookPaths} from "@lib/utils/getLegacyBookPaths"
-import {graphqlClient} from "@lib/gql/gql-client"
+import {getLegacyBookPaths, getNewBookPath} from "@lib/utils/getLegacyBookPaths"
 
 export const revalidate = false
 export const dynamic = "force-static"
 
 const LegacyBookPage = async (props: {params: Promise<{id: string}>}) => {
   const params = await props.params
-  const legacyPaths = await getLegacyBookPaths()
-  const legacyBook = legacyPaths.find(book => book.id === parseInt(params.id))
-  if (legacyBook?.path) redirect(legacyBook.path)
-
-  // New work id, look up to see if one exists.
-  const bookData = await graphqlClient({cache: "no-cache"}).supBooks({filters: {work_id: parseInt(params.id)}})
-  if (bookData.supBooksView?.results[0]?.__typename === "NodeSupBook" && bookData.supBooksView.results[0].path)
-    redirect(bookData.supBooksView.results[0].path)
-
+  const newPath = await getNewBookPath(params.id)
+  if (newPath) redirect(newPath)
   notFound()
 }
 
