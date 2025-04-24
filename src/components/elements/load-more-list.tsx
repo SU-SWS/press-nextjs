@@ -7,7 +7,7 @@ import useServerAction from "@lib/hooks/useServerAction"
 import {twMerge} from "tailwind-merge"
 import {ArrowPathIcon} from "@heroicons/react/20/solid"
 import Button from "@components/elements/button"
-import {InputMaybe, SupBooksAwardWinnersFilterInput, SupBooksViewSortKeys} from "@lib/gql/__generated__/drupal.d";
+import {InputMaybe, SupBooksAwardWinnersFilterInput, SupBooksViewSortKeys} from "@lib/gql/__generated__/drupal.d"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
