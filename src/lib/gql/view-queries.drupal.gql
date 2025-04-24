@@ -94,8 +94,8 @@ query stanfordSharedTags($contextualFilters: StanfordSharedTagsContextualFilterI
 }
 
 
-query supBooks($contextualFilters: SupBooksViewContextualFilterInput, $filters: SupBooksViewFilterInput, $pageSize: Int = 3, $page: Int $offset: Int) {
-    supBooksView(contextualFilter: $contextualFilters, filter: $filters, pageSize: $pageSize, page: $page, offset: $offset) {
+query supBooks($contextualFilters: SupBooksViewContextualFilterInput, $filters: SupBooksViewFilterInput, $pageSize: Int = 3, $page: Int $offset: Int, $sortKey: SupBooksViewSortKeys) {
+    supBooksView(contextualFilter: $contextualFilters, filter: $filters, pageSize: $pageSize, page: $page, offset: $offset, sortKey: $sortKey) {
         results {
             ...FragmentNodeSupBookTeaser
         }

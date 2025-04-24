@@ -38,7 +38,7 @@ const RelatedBook = async ({path}: {path: NodeInterface["path"]}) => {
   const {entity} = await getEntityFromPath<NodeSupBook>(path)
   if (!entity) return
   return (
-    <li className="mx-auto max-w-3xl w-full">
+    <li className="mx-auto w-full max-w-3xl">
       <SupBookCard node={entity} />
     </li>
   )
