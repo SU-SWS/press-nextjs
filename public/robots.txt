@@ -2,4 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /search
+Disallow: /email-signup
 crawl-delay: 30
