@@ -15,8 +15,6 @@ import {useBoolean} from "usehooks-ts"
 import {ChangeEvent} from "react"
 import Link from "@components/elements/link"
 
-type PriceProps = PressPrice & {}
-
 type Props = {
   priceId?: PressPrice["id"]
   clothIsbn?: NodeSupBook["supBookIsbn13Cloth"]
@@ -26,11 +24,28 @@ type Props = {
   pdf?: NodeSupBook["supBookPdfFormat"]
   bookTitle: NodeSupBook["title"]
   hasIntlCart?: PressPrice["supIntlCart"]
+  firstPub?: NodeSupBook["supBookPubDateFirst"]
 }
 
-const PreCartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle, ebookIsbn, epub, pdf}: Props) => {
-  const [priceData, setPriceData] = useState<PriceProps>()
+const PreCartClient = ({
+  priceId,
+  clothIsbn,
+  paperIsbn,
+  hasIntlCart,
+  bookTitle,
+  ebookIsbn,
+  epub,
+  pdf,
+  firstPub,
+}: Props) => {
+  const [priceData, setPriceData] = useState<PressPrice>()
   const {value: ebookSelected, setValue: setEbookSelected} = useBoolean(false)
+  const {value: shouldShowEbookButton, setTrue: showEbookButton} = useBoolean(false)
+
+  useEffect(() => {
+    // Only show the ebook button if the first published date is in the past. Might allow pre-ordering at some time.
+    if (!firstPub || new Date(firstPub.time) < new Date()) showEbookButton()
+  }, [firstPub, showEbookButton])
 
   useEffect(() => {
     if (priceId) {
@@ -65,7 +80,9 @@ const PreCartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle, e
             ebookIsbn={ebookIsbn}
             clothPrice={clothIsbn ? priceData?.supClothSale || priceData?.supClothPrice || false : undefined}
             paperPrice={paperIsbn ? priceData?.supPaperSale || priceData?.supPaperPrice || false : undefined}
-            ebookPrice={ebookIsbn && (epub || pdf) ? priceData?.supDigitalPrice || false : undefined}
+            ebookPrice={
+              shouldShowEbookButton && ebookIsbn && (epub || pdf) ? priceData?.supDigitalPrice || false : undefined
+            }
             onChange={onFormatChange}
           />
         )}

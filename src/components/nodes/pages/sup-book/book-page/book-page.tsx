@@ -170,6 +170,7 @@ const BookPage = async ({node, ...props}: Props) => {
                 hasIntlCart={node.supBookPriceData?.supIntlCart}
                 pdf={node.supBookPdfFormat}
                 epub={node.supBookEpubFormat}
+                firstPub={node.supBookPubDateFirst}
               />
             )}
 
