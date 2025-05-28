@@ -1,3 +1,14 @@
+1.1.0 2025-05-28
+--------------------------------------------------
+- Display epub button in cart only if the published date has passed
+- Add email signup redirect page
+- Add sortable list displays  (#81)
+- Fix cover widths on related titles list
+- Show related titles from API & maintain sort order for search page
+- Updated readme
+- Update ebook help text
+- Add Epub and PDF buttons to book cart area
+
 1.0.1 2025-02-25
 --------------------------------------------------
 - Dont show ebook button yet

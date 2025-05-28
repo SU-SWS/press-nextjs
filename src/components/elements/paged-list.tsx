@@ -109,7 +109,7 @@ const PagedList = ({
         })
         .catch(() => console.warn("An error occurred fetching more results."))
     },
-    [enableFocusElement, setPage, runAction]
+    [enableFocusElement, setPage, runAction, sortKey]
   )
 
   const setFocusOnItem = useFocusOnRender(focusItemRef, false)
