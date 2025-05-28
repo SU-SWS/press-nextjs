@@ -20,14 +20,7 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
   const displayId = paragraph.suListView?.display
   const {items: viewItems, totalItems} =
     viewId && displayId
-      ? await getViewItems(
-          viewId,
-          displayId,
-          paragraph.suListView?.contextualFilter,
-          undefined,
-          0,
-          paragraph.suListView?.pageSize
-        )
+      ? await getViewItems(viewId, displayId, paragraph.suListView?.contextualFilter, 0, paragraph.suListView?.pageSize)
       : {items: [], totalItems: 0}
   const addLoadMore = (paragraph.suListView?.pageSize || 31) > 30
 

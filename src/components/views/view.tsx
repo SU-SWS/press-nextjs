@@ -12,6 +12,7 @@ import CourseCardView from "@components/views/stanford-courses/course-card-view"
 import PublicationsApaView from "@components/views/stanford-publications/publications-apa-view"
 import PublicationsChicagoView from "@components/views/stanford-publications/publications-chicago-view"
 import {
+  InputMaybe,
   NodeStanfordCourse,
   NodeStanfordEvent,
   NodeStanfordNews,
@@ -20,6 +21,8 @@ import {
   NodeStanfordPublication,
   NodeSupBook,
   NodeUnion,
+  SupBooksAwardWinnersFilterInput,
+  SupBooksViewSortKeys,
 } from "@lib/gql/__generated__/drupal.d"
 import BookListView from "@components/views/sup-books/book-list-view"
 import AwardListView from "@components/views/sup-books/award-list-view/award-list-view"
@@ -40,7 +43,11 @@ export type ViewDisplayProps<T extends NodeUnion = NodeUnion> = {
   /**
    * Server action callback to fetch the next "page" contents.
    */
-  loadPage?: (_page: number) => Promise<JSX.Element>
+  loadPage?: (
+    _page: number,
+    _filters?: InputMaybe<SupBooksAwardWinnersFilterInput>,
+    _sort?: InputMaybe<SupBooksViewSortKeys>
+  ) => Promise<JSX.Element>
 }
 
 type Props = {
@@ -67,7 +74,11 @@ type Props = {
   /**
    * Server action to load a page.
    */
-  loadPage?: (_page: number) => Promise<JSX.Element>
+  loadPage?: (
+    _page: number,
+    _filters?: InputMaybe<SupBooksAwardWinnersFilterInput>,
+    _sort?: InputMaybe<SupBooksViewSortKeys>
+  ) => Promise<JSX.Element>
 }
 
 const View = async ({viewId, displayId, items, totalItems, loadPage, headingLevel = "h3"}: Props) => {
@@ -116,10 +127,12 @@ const View = async ({viewId, displayId, items, totalItems, loadPage, headingLeve
     case "sup_books--book_list":
     case "sup_books--new_releases":
     case "sup_books--seasonal_list":
-      return <BookListView items={items as NodeSupBook[]} {...viewProps} />
+    case "sup_books--book_list_sortable":
+      return <BookListView items={items as NodeSupBook[]} sortable={component.includes("_sortable")} {...viewProps} />
 
     case "sup_books--award_winners":
       return <AwardListView items={items as NodeSupBook[]} {...viewProps} />
   }
+  console.warn(`Unable to display view: ${viewId} display: ${displayId}`)
 }
 export default View

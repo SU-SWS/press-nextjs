@@ -24,7 +24,7 @@ const StanfordPageListItem = ({node, headingLevel, ...props}: Props) => {
       <div className="flex flex-col justify-between gap-20 @4xl:flex-row" {...props}>
         <div className="order-2 @4xl:order-1">
           <Heading className="type-1 xl:text-26" id={node.id}>
-            <Link href={node.path}>{node.title}</Link>
+            <Link href={node.path || "#"}>{node.title}</Link>
           </Heading>
 
           {node.suPageDescription && <p>{node.suPageDescription}</p>}

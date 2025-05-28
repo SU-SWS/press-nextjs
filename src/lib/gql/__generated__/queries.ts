@@ -203,6 +203,8 @@ export const FragmentNodeSupBookFragmentDoc = gql`
       supIntlCart
     }
   }
+  supBookEpubFormat
+  supBookPdfFormat
 }
     ${FragmentNameTypeFragmentDoc}
 ${FragmentAwardFragmentDoc}
@@ -1139,6 +1141,14 @@ export const NodeDocument = gql`
     ${FragmentNodeUnionFragmentDoc}`;
 export const AllNodesDocument = gql`
     query AllNodes($first: Int = 1000, $nodeSupBooks: Cursor, $nodeStanfordCourses: Cursor, $nodeStanfordEventSeriesItems: Cursor, $nodeStanfordEvents: Cursor, $nodeStanfordNewsItems: Cursor, $nodeStanfordPages: Cursor, $nodeStanfordPeople: Cursor, $nodeStanfordPolicies: Cursor, $nodeStanfordPublications: Cursor) {
+  nodeStanfordPages(first: $first, after: $nodeStanfordPages, sortKey: CREATED_AT) {
+    nodes {
+      ...AllNodeInterface
+    }
+    pageInfo {
+      ...FragmentPageInfo
+    }
+  }
   nodeStanfordCourses(
     first: $first
     after: $nodeStanfordCourses
@@ -1180,14 +1190,6 @@ export const AllNodesDocument = gql`
     after: $nodeStanfordNewsItems
     sortKey: CREATED_AT
   ) {
-    nodes {
-      ...AllNodeInterface
-    }
-    pageInfo {
-      ...FragmentPageInfo
-    }
-  }
-  nodeStanfordPages(first: $first, after: $nodeStanfordPages, sortKey: CREATED_AT) {
     nodes {
       ...AllNodeInterface
     }
@@ -1559,13 +1561,14 @@ export const BookPriceDocument = gql`
     __typename
     ... on PressPrice {
       id
-      supClothPrice
       supClothDiscount
+      supClothPrice
       supClothSale
       supComingSoon
+      supDigitalPrice
       supIntlCart
-      supPaperPrice
       supPaperDiscount
+      supPaperPrice
       supPaperSale
       supPreorder
       workId
@@ -1780,13 +1783,14 @@ export const StanfordSharedTagsDocument = gql`
     ${FragmentNodeTeaserUnionFragmentDoc}
 ${FragmentViewPageInfoFragmentDoc}`;
 export const SupBooksDocument = gql`
-    query supBooks($contextualFilters: SupBooksViewContextualFilterInput, $filters: SupBooksViewFilterInput, $pageSize: Int = 3, $page: Int, $offset: Int) {
+    query supBooks($contextualFilters: SupBooksViewContextualFilterInput, $filters: SupBooksViewFilterInput, $pageSize: Int = 3, $page: Int, $offset: Int, $sortKey: SupBooksViewSortKeys) {
   supBooksView(
     contextualFilter: $contextualFilters
     filter: $filters
     pageSize: $pageSize
     page: $page
     offset: $offset
+    sortKey: $sortKey
   ) {
     results {
       ...FragmentNodeSupBookTeaser

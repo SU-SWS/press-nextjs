@@ -11,6 +11,7 @@ import {
   NodeSupBook,
   NodeUnion,
   SupBooksAwardWinnersFilterInput,
+  SupBooksViewSortKeys,
 } from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import View from "@components/views/view"
@@ -21,11 +22,12 @@ export const loadViewPage = async (
   contextualFilter: string[],
   hasHeadline: boolean,
   page: number,
-  filters?: InputMaybe<SupBooksAwardWinnersFilterInput>
+  filters?: InputMaybe<SupBooksAwardWinnersFilterInput>,
+  sort?: InputMaybe<SupBooksViewSortKeys>
 ): Promise<JSX.Element> => {
   "use server"
 
-  const {items, totalItems} = await getViewItems(viewId, displayId, contextualFilter, filters, page)
+  const {items, totalItems} = await getViewItems(viewId, displayId, contextualFilter, page, undefined, filters, sort)
   return (
     <View
       viewId={viewId}
@@ -42,11 +44,12 @@ export const getViewItems = cache(
     viewId: string,
     displayId: string,
     contextualFilter?: Maybe<string[]>,
-    filters?: InputMaybe<SupBooksAwardWinnersFilterInput>,
     page: Maybe<number> = 0,
-    limit?: Maybe<number>
+    limit?: Maybe<number>,
+    filters?: InputMaybe<SupBooksAwardWinnersFilterInput>,
+    sort?: InputMaybe<SupBooksViewSortKeys>
   ): Promise<{items: NodeUnion[]; totalItems: number}> => {
-    const {items, totalItems} = await getViewPagedItems(viewId, displayId, contextualFilter, 30, page, 0, filters)
+    const {items, totalItems} = await getViewPagedItems(viewId, displayId, contextualFilter, 30, page, 0, filters, sort)
     if (limit) {
       return {items: items.slice(0, limit), totalItems}
     }
@@ -62,7 +65,8 @@ export const getViewPagedItems = cache(
     pageSize?: Maybe<number>,
     page?: Maybe<number>,
     offset?: Maybe<number>,
-    filters?: InputMaybe<SupBooksAwardWinnersFilterInput>
+    filters?: InputMaybe<SupBooksAwardWinnersFilterInput>,
+    sort?: InputMaybe<SupBooksViewSortKeys>
   ): Promise<{items: NodeUnion[]; totalItems: number}> => {
     let items: NodeUnion[] = []
     let totalItems = 0
@@ -111,6 +115,7 @@ export const getViewPagedItems = cache(
       case "sup_books--seasonal_list":
       case "sup_books--new_releases":
       case "sup_books--best_sellers":
+      case "sup_books--book_list_sortable":
         tags.push("views:sup_book")
         break
     }
@@ -202,6 +207,7 @@ export const getViewPagedItems = cache(
           fieldFilters = {season: contextualFilter?.[0]}
           contextualFilter = []
 
+        case "sup_books--book_list_sortable":
         case "sup_books--book_list":
           contextualFilters = getContextualFilters(
             [
@@ -213,7 +219,12 @@ export const getViewPagedItems = cache(
             ],
             contextualFilter
           )
-          graphqlResponse = await client.supBooks({contextualFilters, filters: fieldFilters, ...queryVariables})
+          graphqlResponse = await client.supBooks({
+            contextualFilters,
+            filters: fieldFilters,
+            sortKey: sort,
+            ...queryVariables,
+          })
           items = graphqlResponse.supBooksView?.results as unknown as NodeSupBook[]
           totalItems = graphqlResponse.supBooksView?.pageInfo.total || 0
           break

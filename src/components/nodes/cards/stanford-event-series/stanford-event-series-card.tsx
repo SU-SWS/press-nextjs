@@ -14,7 +14,7 @@ const StanfordEventSeriesCard = ({node, headingLevel, ...props}: Props) => {
   return (
     <ImageCard {...props} aria-labelledby={node.id} isArticle>
       <Heading className="type-1 xl:text-26 [&_a]:text-black [&_a]:hocus:text-digital-red" id={node.id}>
-        <Link href={node.path}>{node.title}</Link>
+        <Link href={node.path || "#"}>{node.title}</Link>
       </Heading>
       {node.suEventSeriesDek && <p>{node.suEventSeriesDek}</p>}
     </ImageCard>

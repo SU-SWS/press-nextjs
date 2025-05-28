@@ -49,7 +49,7 @@ const SupBookCard = ({node, headingLevel, darkBg, ...props}: Props) => {
               "stretched-link font-medium text-stone-dark",
               clsx({"text-fog-light hocus:text-fog-light": darkBg})
             )}
-            href={node.path}
+            href={node.path || "#"}
           >
             {node.title}
           </Link>

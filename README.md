@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ### Setup Local Environment Variables:
 1. copy .env.example to .env.local
 2. The only necessary variable is the `NEXT_PUBLIC_DRUPAL_BASE_URL`. Set this to your local drupal installation url.
-  
+
 ### Set Up Drupal Environment (Optional)
 You can configure your Drupal environment to use this as a "preview".
 
@@ -46,7 +46,7 @@ Story book is a great way to edit components without the need for any Drupal con
 ```bash
 yarn storybook
 ```
-This will open a new browser window to [http://localhost:6006](http://localhost:6006). 
+This will open a new browser window to [http://localhost:6006](http://localhost:6006).
 
 View more [Storybook documentation](https://storybook.js.org/).
 
@@ -60,7 +60,7 @@ yarn lint
 
 ## API Connection
 
-This project makes use of both JSON API and GraphQL API endpoints from the Drupal environment. When a user is in "Draft 
+This project makes use of both JSON API and GraphQL API endpoints from the Drupal environment. When a user is in "Draft
 Mode", the APIs will use the `DRUPAL_DRAFT_CLIENT` & `DRUPAL_DRAFT_SECRET` environment variables to fetch an OAuth token.
 This token allows either API to fetch authenticated only data. But while in "draft mode", the pages will be built at
 request time. "Draft mode" should only be used for previewing content when a user is editing. "Draft mode" is only enabled
@@ -72,22 +72,22 @@ from the CMS system. This can have negative performance impacts on both platform
 
 ### JSON API
 
-The JSON API is used for data points that are more simple and don't require very complex data such as paragraph entities. 
-Things like the config pages and the main menu are fetched from JSON API. These APIs also use GET methods. This way they 
+The JSON API is used for data points that are more simple and don't require very complex data such as paragraph entities.
+Things like the config pages and the main menu are fetched from JSON API. These APIs also use GET methods. This way they
 can be easily cached by Drupal/Varnish/CDN services and result in faster data transfer.
 
-JSON API functions are found in the [./src/lib/drupal directory](./src/lib/drupal). 
+JSON API functions are found in the [./src/lib/drupal directory](./src/lib/drupal).
 
 ### GraphQL
 
-GraphQL endpoint `/graphql` accepts POST methods only. GraphQL allows us to create very nested queries using unions. We 
+GraphQL endpoint `/graphql` accepts POST methods only. GraphQL allows us to create very nested queries using unions. We
 can easily fetch every single piece of information in a single request to build out the entire page, except views. Views
-are fetched separately to allow us to make them more dynamic in the future and also to avoid some unwanted errors that 
+are fetched separately to allow us to make them more dynamic in the future and also to avoid some unwanted errors that
 come from the first render in Drupal.
 
-GraphQL types and fetch methods are generated automatically using `yarn graphql`. If a content type, field, vocabulary, 
-paragraph type, etc. are created/edited/deleted in the Drupal environment, the queries in [./src/lib/gql](./src/lib/gql) 
-will need to be updated. Most of the changes can be implemented in the [fragments.drupal.gql](./src/lib/gql/fragments.drupal.gql) 
+GraphQL types and fetch methods are generated automatically using `yarn graphql`. If a content type, field, vocabulary,
+paragraph type, etc. are created/edited/deleted in the Drupal environment, the queries in [./src/lib/gql](./src/lib/gql)
+will need to be updated. Most of the changes can be implemented in the [fragments.drupal.gql](./src/lib/gql/fragments.drupal.gql)
 file. To make it easy, Drupal provides fragments you can copy as a starting point. Navigate to `/admin/config/graphql_compose/fragments`
 to view those fragments. Once the fragments and/or queries have been modified, simply run `yarn graphql` to rebuild the
 typescript types and fetcher queries.
@@ -98,24 +98,22 @@ populate the data in Drupal or make the field optional.
 
 ## Cache
 
-Next.js caches data fetches pretty heavy. On top of that, in production builds, the data and pages are build and cached.
-If you experience any issues during development, delete the `.next` directory and restart your local server.
+This project uses [Next.JS "use cache" directive](https://nextjs.org/docs/app/api-reference/directives/use-cache).
+This allows the caching of data that is fetched, components, pages, and layouts. With some exceptions, we want to cache
+all data indefinitely. Then invalidating that cache upon some action performed in the Drupal application, such as a
+piece of content is updated. The default cache behavior of Next.JS has been overridden to infinite cache. Simply adding
+`"use cache"` on a component, function, or page will then cache it forever. Some pages, such as the [sitemap.xml](app/sitemap.tsx),
+can set their cache to be shorter by using the [cacheLife()](https://nextjs.org/docs/app/api-reference/functions/cacheLife)
+function. It's recommended to use a long of cache life as needed to keep cache read/writes to a minimum.
 
-In the layout and pages, we set the `revalidate` variable to `false`. This caches the page and layout build indefinitely.
+In the layout and pages we set `"use cache"` at the top of the file. This caches the page and layout build indefinitely.
 Layouts and page caches are treated separately and can be invalidated independently of each other, while also allowing
-specific parts of each to be invalidated. A route handler is provided that allows the CMS system to invalidate 
-appropriate areas of the site. Making a `GET` request to `/api/revalidate?secret=[secret]&slug=/[slug]` with the correct
-parameters will accomplish this invalidation. Passing a slug in the form `/tags/foo:bar` will invalidate the cache tags
+specific parts of each to be invalidated. A route handler is provided that allows the CMS system to invalidate
+appropriate areas of the site. Making a `GET` request to `/api/revalidate?secret=[secret]&path=/[path]` with the correct
+parameters will accomplish this invalidation. Passing a path in the form `/tags/foo:bar` will invalidate the cache tags
 for `foo:bar` using the [revalidateTag](https://nextjs.org/docs/app/api-reference/functions/revalidateTag) function. The
-reason for this is the Next.js Drupal module only provides a single API url for on demand invalidation. So we have to 
+reason for this is the Next.js Drupal module only provides a single API url for on demand invalidation. So we have to
 implement our own logic.
-
-See [architecture flowchart](docs/press-architecture.drawio.svg) for content flow cache information.
-
-If there is a page that needs a heavier hammer, use the path `/api/revalidate/page` to clear all caches used for the entire
-page. Use this method with care. It will invalidate the config pages and menu caches that is used to generate the requested
-page. This will cause every page to rebuild. If there are any errors fetching the data from Drupal, it can cause the home
-page to produce a 404 response.
 
 ### Layout
 
@@ -129,8 +127,8 @@ be rebuilt upon the next request. This shouldn't impact the CMS system since the
 ### Page
 
 Page routes are cache separately from Layouts. When invalidating a route or any fetch requests on the route, the layout
-caches will not be impacted. Using the route handler, if we invalidate the slug `/foo/bar` using the [revalidatePath](https://nextjs.org/docs/app/api-reference/functions/revalidatePath)
-function, it will invalidate any `fetch` request that was used to build that single page and no other pages. Requests
+caches will not be impacted. Using the route handler, if we invalidate the path `/foo/bar` using the [revalidatePath](https://nextjs.org/docs/app/api-reference/functions/revalidatePath)
+function, it will invalidate any cache data that was used to build that single page and no other pages. Requests
 like list paragraphs, or external fetches will be re-executed when the page is requested.
 
 Pages may contain list paragraphs. Those paragraphs have a separate `fetch` so they can be invalidated when a content
@@ -149,8 +147,41 @@ has documentation explaining how their cache is handled.
 Files, pdf, txt, etc., assets are referenced directly from the CMS. Their cache is managed by the Drupal hosting provider
 and/or Varnish/CDN/Etc.
 
+### Troubleshooting Cache Issues
 
+If you experience any issues during development, most times opening the browser's inspector tools and reloading the page
+will bypass any cached data. If necessary, delete the `.next` directory and restart your local server.
+
+Cache issues on the front end can be very different from Drupal related cache issues. Although both systems use a form
+of cache tags, there are no relationship between the two caching systems. When a save action is performed in Drupal, a
+revalidation request is made to this platform. Occasionally there can be a communication issue or perhaps the Next.JS
+cache refuses to invalidate the appropriate areas. Here are some ways to attempt to resolve the issue:
+
+1. Resave the page that is outdated.
+   - This will make a second request to the FE and attempt to revalidate it again.
+2. Resave a menu item or a page within the menu.
+   - This will invalidate the menu on all pages.
+   - If resaving a page within the menu, make sure to change some value in the menu area to trigger the invalidation.
+     Changing a weight from 50 to 49 can be the easiest solution.
+3. Resave the configuration page that is outdated.
+   - Resaving a global message or site settings will clear cache for all config pages. This will rebuild all pages.
+4. Enable debugging in the "Next" module in Drupal.
+   - `drush cset next.settings debug 1` will add watchdog logs. These can be streamed in Acquia logs or viewed in the UI
+     if the dblog module is enabled. Errors in the logs will indicate some issue that should be inspected more closely.
+   - Remember to disable the debug once the issue is resolved.
+
+If all of the above fails, there are two quick fixes that can help in a pinch.
+
+1. As stated above making a `GET` request to `/api/revalidate?secret=[secret]&path=/[path/tags]` with the correct
+   parameters will perform a cache invalidation. This will invalidate just a piece of the page(s).
+2. As a last resort, making a `GET` request to `/api/revalidate/page?secret=[secret]&path=/[path]` will invalidate every
+   bit of cached data for that specific path. The system will then refetch the menu, config pages, and the page data to
+   rebuild that one page. This approach will not invalidate cache on any other page and it does not support cache tags.
+   It is very specific to only that single path.
+
+### Cache Documentation
 - [Next.JS cache documentation](https://nextjs.org/docs/app/building-your-application/caching)
+- [Next.JS "use cache" directive](https://nextjs.org/docs/app/api-reference/directives/use-cache)
 - [Vercel Edge Caching](https://vercel.com/docs/edge-network/caching)
 
 ## Learn More
@@ -164,5 +195,6 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-Production version on Vercel uses the `main` branch. `1.x` branch is used for releases and is merged into `main` when a 
-release is to be performed. `dev` and `test` branches have their respective vercel and Acquia environments and are used as sandboxes.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

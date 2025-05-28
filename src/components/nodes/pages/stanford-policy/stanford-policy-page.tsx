@@ -3,7 +3,7 @@ import StanfordPolicyCard from "@components/nodes/cards/stanford-policy/stanford
 import StringWithLines from "@components/elements/string-with-lines"
 import {HtmlHTMLAttributes, Suspense} from "react"
 import {H1, H2, H3} from "@components/elements/headers"
-import {NodeStanfordPolicy} from "@lib/gql/__generated__/drupal.d"
+import {NodeInterface, NodeStanfordPolicy} from "@lib/gql/__generated__/drupal.d"
 import {getEntityFromPath} from "@lib/gql/gql-queries"
 import {ImageCardSkeleton} from "@components/patterns/image-card"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
@@ -89,7 +89,7 @@ const StanfordPolicyPage = async ({node, ...props}: Props) => {
               {node.suPolicyRelated.map(policy => (
                 <li key={policy.id}>
                   <Suspense fallback={<ImageCardSkeleton />}>
-                    <RelatedPolicy path={policy.path} />
+                    <RelatedPolicy path={policy.path || "#"} />
                   </Suspense>
                 </li>
               ))}
@@ -101,7 +101,8 @@ const StanfordPolicyPage = async ({node, ...props}: Props) => {
   )
 }
 
-const RelatedPolicy = async ({path}: {path: string}) => {
+const RelatedPolicy = async ({path}: {path: NodeInterface["path"]}) => {
+  if (!path) return
   const queryResponse = await getEntityFromPath<NodeStanfordPolicy>(path)
   if (!queryResponse.entity) return
   return <StanfordPolicyCard node={queryResponse.entity} />

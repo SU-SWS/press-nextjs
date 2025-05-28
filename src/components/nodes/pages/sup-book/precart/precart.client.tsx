@@ -4,27 +4,48 @@ import useIsInternational from "@lib/hooks/useIsInternational"
 import Button from "@components/elements/button"
 import {HTMLAttributes, useEffect, useState} from "react"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
-import {Maybe, PressPrice} from "@lib/gql/__generated__/drupal.d"
+import {Maybe, NodeSupBook, PressPrice} from "@lib/gql/__generated__/drupal.d"
 import {BookOpenIcon as BookOpenIconOutline, DeviceTabletIcon} from "@heroicons/react/24/outline"
 import {BookOpenIcon} from "@heroicons/react/24/solid"
 import {formatCurrency} from "@lib/utils/format-currency"
 import {twMerge} from "tailwind-merge"
 import {clsx} from "clsx"
 import {submitForm} from "@components/nodes/pages/sup-book/precart/precart.server"
-
-type PriceProps = PressPrice & {}
+import {useBoolean} from "usehooks-ts"
+import {ChangeEvent} from "react"
+import Link from "@components/elements/link"
 
 type Props = {
-  priceId?: string
-  clothIsbn?: Maybe<string>
-  paperIsbn?: Maybe<string>
-  ebookIsbn?: Maybe<string>
-  bookTitle: string
-  hasIntlCart?: Maybe<boolean>
+  priceId?: PressPrice["id"]
+  clothIsbn?: NodeSupBook["supBookIsbn13Cloth"]
+  paperIsbn?: NodeSupBook["supBookIsbn13Paper"]
+  ebookIsbn?: NodeSupBook["supBookIsbn13Digital"]
+  epub?: NodeSupBook["supBookEpubFormat"]
+  pdf?: NodeSupBook["supBookPdfFormat"]
+  bookTitle: NodeSupBook["title"]
+  hasIntlCart?: PressPrice["supIntlCart"]
+  firstPub?: NodeSupBook["supBookPubDateFirst"]
 }
 
-const PreCartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle}: Props) => {
-  const [priceData, setPriceData] = useState<PriceProps>()
+const PreCartClient = ({
+  priceId,
+  clothIsbn,
+  paperIsbn,
+  hasIntlCart,
+  bookTitle,
+  ebookIsbn,
+  epub,
+  pdf,
+  firstPub,
+}: Props) => {
+  const [priceData, setPriceData] = useState<PressPrice>()
+  const {value: ebookSelected, setValue: setEbookSelected} = useBoolean(false)
+  const {value: shouldShowEbookButton, setTrue: showEbookButton} = useBoolean(false)
+
+  useEffect(() => {
+    // Only show the ebook button if the first published date is in the past. Might allow pre-ordering at some time.
+    if (!firstPub || new Date(firstPub.time) < new Date()) showEbookButton()
+  }, [firstPub, showEbookButton])
 
   useEffect(() => {
     if (priceId) {
@@ -36,6 +57,10 @@ const PreCartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle}: 
   }, [priceId])
 
   const [isIntl, setIntl] = useIsInternational()
+
+  const onFormatChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEbookSelected(e.target.value.includes("ebook:"))
+  }
 
   return (
     /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
@@ -52,15 +77,54 @@ const PreCartClient = ({priceId, clothIsbn, paperIsbn, hasIntlCart, bookTitle}: 
           <UsFormatChoices
             clothIsbn={clothIsbn}
             paperIsbn={paperIsbn}
+            ebookIsbn={ebookIsbn}
             clothPrice={clothIsbn ? priceData?.supClothSale || priceData?.supClothPrice || false : undefined}
             paperPrice={paperIsbn ? priceData?.supPaperSale || priceData?.supPaperPrice || false : undefined}
+            ebookPrice={
+              shouldShowEbookButton && ebookIsbn && (epub || pdf) ? priceData?.supDigitalPrice || false : undefined
+            }
+            onChange={onFormatChange}
           />
         )}
 
         {isIntl && <IntlFormatChoices clothIsbn={clothIsbn} paperIsbn={paperIsbn} />}
       </fieldset>
 
-      {(hasIntlCart || priceData?.supIntlCart) && (
+      {ebookSelected && !isIntl && (
+        <div>
+          <fieldset>
+            <legend className="mb-3 text-18 font-semibold">Select Ebook Format</legend>
+            <div className="rs-mb-neg1 flex flex-wrap border-2 border-black-40 p-1">
+              {epub && (
+                <label className="block min-w-fit flex-1 cursor-pointer">
+                  <input className="peer sr-only" type="radio" name="ebook" value="EPUB" defaultChecked />
+                  <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-0 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.8em]">
+                    EPUB
+                  </span>
+                </label>
+              )}
+              {pdf && (
+                <label className="min-w-fit flex-1 cursor-pointer">
+                  <input className="peer sr-only" type="radio" name="ebook" value="PDF" defaultChecked={!epub} />
+                  <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.8em]">
+                    PDF
+                  </span>
+                </label>
+              )}
+            </div>
+          </fieldset>
+
+          <div className="text-center text-xl">
+            Must be read using the{" "}
+            <Link href="/ebooks" className="font-normal text-black">
+              Academic Reader app
+            </Link>
+            . After purchasing, you will receive an email with instructions to access your ebook.
+          </div>
+        </div>
+      )}
+
+      {!ebookSelected && (hasIntlCart || priceData?.supIntlCart) && (
         <fieldset>
           <legend className="mb-3 text-18 font-semibold">Region</legend>
           <div className="rs-mb-neg1 flex flex-wrap border-2 border-black-40 p-1">
@@ -161,20 +225,27 @@ const UsFormatChoices = ({
   ebookIsbn,
   ebookPrice,
   paperPrice,
+  onChange,
 }: {
-  clothIsbn?: Maybe<string>
-  paperIsbn?: Maybe<string>
-  ebookIsbn?: Maybe<string>
+  clothIsbn?: NodeSupBook["supBookIsbn13Cloth"]
+  paperIsbn?: NodeSupBook["supBookIsbn13Paper"]
+  ebookIsbn?: NodeSupBook["supBookIsbn13Digital"]
   clothPrice?: Maybe<number | false>
   ebookPrice?: Maybe<number | false>
   paperPrice?: Maybe<number | false>
+  onChange?: (_e: ChangeEvent<HTMLInputElement>) => void
 }) => {
   const defaultChoice = clothIsbn ? "cloth" : "paper"
 
   return (
     <>
       {clothIsbn && clothPrice !== undefined && (
-        <FormatChoice typeName="cloth" isbn={clothIsbn} defaultChecked={defaultChoice === "cloth"}>
+        <FormatChoice
+          typeName="cloth"
+          isbn={clothIsbn}
+          defaultChecked={defaultChoice === "cloth"}
+          onInputChange={onChange}
+        >
           <span className="flex w-full flex-col items-center justify-between gap-5 @lg:flex-row @lg:gap-0">
             <span className="font-semibold group-hover:underline md:text-[0.85em]">Hardcover</span>
             <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
@@ -184,7 +255,12 @@ const UsFormatChoices = ({
         </FormatChoice>
       )}
       {paperIsbn && paperPrice !== undefined && (
-        <FormatChoice typeName="paper" isbn={paperIsbn} defaultChecked={defaultChoice === "paper"}>
+        <FormatChoice
+          typeName="paper"
+          isbn={paperIsbn}
+          defaultChecked={defaultChoice === "paper"}
+          onInputChange={onChange}
+        >
           <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
             <span className="font-semibold group-hover:underline md:text-[0.85em]">Paperback</span>
 
@@ -195,11 +271,10 @@ const UsFormatChoices = ({
         </FormatChoice>
       )}
       {ebookIsbn && ebookPrice !== undefined && (
-        <FormatChoice typeName="ebook" isbn={ebookIsbn}>
+        <FormatChoice typeName="ebook" isbn={ebookIsbn} onInputChange={onChange}>
           <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
             <span className="font-semibold group-hover:underline md:text-[0.85em]">EBook</span>
 
-            <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
             {ebookPrice && <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(ebookPrice)}</span>}
           </span>
           <DeviceTabletIcon width={24} className="text-fog-dark" />
@@ -212,11 +287,9 @@ const UsFormatChoices = ({
 const IntlFormatChoices = ({
   clothIsbn,
   paperIsbn,
-  ebookIsbn,
 }: {
-  clothIsbn?: Maybe<string>
-  paperIsbn?: Maybe<string>
-  ebookIsbn?: Maybe<string>
+  clothIsbn?: NodeSupBook["supBookIsbn13Cloth"]
+  paperIsbn?: NodeSupBook["supBookIsbn13Paper"]
 }) => {
   const defaultChoice = clothIsbn ? "cloth" : "paper"
   return (
@@ -233,14 +306,6 @@ const IntlFormatChoices = ({
           <BookOpenIconOutline width={24} className="text-fog-dark" />
         </FormatChoice>
       )}
-      {ebookIsbn && (
-        <FormatChoice typeName="ebook" isbn={ebookIsbn}>
-          <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
-            <span className="font-semibold group-hover:underline md:text-[0.85em]">EBook</span>
-          </span>
-          <DeviceTabletIcon width={24} className="text-fog-dark" />
-        </FormatChoice>
-      )}
     </>
   )
 }
@@ -249,12 +314,14 @@ const FormatChoice = ({
   typeName,
   isbn,
   defaultChecked,
+  onInputChange,
   children,
   ...props
 }: {
   typeName: string
   isbn: string
   defaultChecked?: boolean
+  onInputChange?: (_e: ChangeEvent<HTMLInputElement>) => void
 } & HTMLAttributes<HTMLLabelElement>) => {
   return (
     <label {...props} className={twMerge("block cursor-pointer", props.className)}>
@@ -264,6 +331,7 @@ const FormatChoice = ({
         name="format"
         value={`${typeName}:${isbn}`}
         defaultChecked={defaultChecked}
+        onChange={onInputChange}
       />
       <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
         <span className="flex w-full items-center justify-between">{children}</span>

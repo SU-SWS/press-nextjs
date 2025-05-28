@@ -7,6 +7,7 @@ import useServerAction from "@lib/hooks/useServerAction"
 import {twMerge} from "tailwind-merge"
 import {ArrowPathIcon} from "@heroicons/react/20/solid"
 import Button from "@components/elements/button"
+import {InputMaybe, SupBooksAwardWinnersFilterInput, SupBooksViewSortKeys} from "@lib/gql/__generated__/drupal.d"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -32,7 +33,11 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
    * Server action callback to fetch the next "page" contents.
    */
-  loadPage?: (_page: number) => Promise<JSX.Element>
+  loadPage?: (
+    _page: number,
+    _filters?: InputMaybe<SupBooksAwardWinnersFilterInput>,
+    _sort?: InputMaybe<SupBooksViewSortKeys>
+  ) => Promise<JSX.Element>
   /**
    * Count of the total number of items of all pages.
    */

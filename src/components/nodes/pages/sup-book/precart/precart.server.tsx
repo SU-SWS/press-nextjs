@@ -11,8 +11,10 @@ export const submitForm = async (formData: FormData) => {
   const bookTitle = formData.get("title") as string
   const [format, isbn] = (formData.get("format") as string).split(":")
   const isIntl = formData.get("intl") !== "us"
+  const ebookFormat = formData.get("ebook") as string
 
-  if (format === "ebook") redirect(`https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}_PDF`)
+  if (format === "ebook")
+    redirect(`https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}_${ebookFormat}`)
 
   if (isIntl) {
     const title = bookTitle.replaceAll(/[^a-zA-Z\d\s:]/g, "").replaceAll(/\s/g, "-")

@@ -31,7 +31,7 @@ import {
 import DefaultHit, {AlgoliaHit} from "@components/algolia-search/hits/default"
 import {CheckIcon} from "@heroicons/react/20/solid"
 import clsx from "clsx"
-import {useBoolean} from "usehooks-ts"
+import {useBoolean, useLocalStorage, useReadLocalStorage} from "usehooks-ts"
 import {twMerge} from "tailwind-merge"
 import {ArrowPathIcon} from "@heroicons/react/16/solid"
 
@@ -46,6 +46,7 @@ const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
   const searchClient = useMemo(() => liteClient(appId, searchApiKey), [appId, searchApiKey])
   const [initialState, setInitialState] = useState<IndexUiState>({refinementList: {book_type: ["book"]}})
   const initialRender = useRef(true)
+  const sortChoice = useReadLocalStorage<string>("search-sort")
 
   useEffect(() => {
     initialRender.current = false
@@ -79,7 +80,7 @@ const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
   return (
     <div>
       <InstantSearchNext
-        indexName={searchIndex}
+        indexName={sortChoice || searchIndex}
         searchClient={searchClient}
         initialUiState={{[searchIndex]: initialState}}
         future={{preserveSharedStateOnUnmount: true}}
@@ -376,6 +377,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
 }
 
 const HitList = ({searchIndex}: {searchIndex: string}) => {
+  const [, setSortChoice] = useLocalStorage<string>("search-sort", searchIndex)
   const {items: hits} = useHits<HitType<AlgoliaHit>>({})
   const {query} = useSearchBox({})
 
@@ -419,7 +421,10 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
               value={currentSort}
               required
               borderless
-              onChange={(_e, value) => sortBy(value as string)}
+              onChange={(_e, value) => {
+                setSortChoice(value as string)
+                sortBy(value as string)
+              }}
             />
           </div>
         </div>

@@ -30,7 +30,7 @@ const StanfordPageCard = ({node, headingLevel, ...props}: Props) => {
       hasBorder
     >
       <Heading className="type-0 mb-0 xl:text-21 [&_a]:text-stone-dark" id={node.id}>
-        <Link href={node.path} className="group stretched-link flex items-center gap-3 font-semibold">
+        <Link href={node.path || "#"} className="group stretched-link flex items-center gap-3 font-semibold">
           {node.title}
           <ChevronRightIcon width={24} className="shrink-0 text-digital-red transition-all group-hocus:translate-x-2" />
         </Link>

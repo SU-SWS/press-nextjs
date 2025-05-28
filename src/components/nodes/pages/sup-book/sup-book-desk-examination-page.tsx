@@ -19,7 +19,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
     <BackToLink
       {...props}
       className={twMerge("centered", props.className)}
-      href={node.path}
+      href={node.path || "#"}
       title={node.title}
       childrenProps={{className: "rs-mt-4 mx-auto max-w-[800px]"}}
       isArticle

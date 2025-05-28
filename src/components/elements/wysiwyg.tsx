@@ -55,9 +55,6 @@ const options: HTMLReactParserOptions = {
           if (!nodeProps.href) {
             return <span {...nodeProps}>{domToReact(children, options)}</span>
           }
-          delete nodeProps["data-entity-substitution"]
-          delete nodeProps["data-entity-type"]
-          delete nodeProps["data-entity-uuid"]
 
           if (nodeProps.className?.includes("link--action")) {
             return (

@@ -20,7 +20,7 @@ const StanfordCourseListItem = ({node, headingLevel, ...props}: Props) => {
     <article {...props} aria-labelledby={node.id}>
       <div className="flex flex-col">
         <Heading className="type-1 order-last xl:text-26" id={node.id}>
-          <Link href={node.path}>{node.title}</Link>
+          <Link href={node.path || "#"}>{node.title}</Link>
         </Heading>
 
         <div>

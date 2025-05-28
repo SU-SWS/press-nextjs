@@ -75,7 +75,7 @@ const RelatedBook = ({item}: {item: BookHit}) => {
   const imageUrl =
     item.photo && item.photo.replace(new URL(item.photo).origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)
   return (
-    <li className="mx-auto max-w-3xl">
+    <li className="mx-auto w-full max-w-3xl">
       <div className="relative">
         <div className="rs-mb-1 relative aspect-[2/3] w-full">
           <Image

@@ -48,7 +48,7 @@ const StanfordPagePage = ({node, ...props}: Props) => {
       )}
 
       {!fullWidth && (
-        <InteriorPage currentPath={node.path}>
+        <InteriorPage currentPath={node.path || "#"}>
           <Rows components={node.suPageComponents} />
         </InteriorPage>
       )}
