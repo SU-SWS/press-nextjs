@@ -102,7 +102,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
   const {query, refine} = useSearchBox({})
   const {refine: clearRefinements} = useClearRefinements({})
   const {items: bookSubjectRefinementList, refine: refineBookSubjects} = useRefinementList({
-    sortBy: ["count:desc", "name:asc"],
+    sortBy: ["name:asc", "count:desc"],
     attribute: "book_subject",
     limit: 100,
   })
@@ -114,7 +114,11 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     canRefine: canRefinePubYear,
   } = useRange({attribute: "book_published_year"})
   const {min: minYear, max: maxYear} = pubYearRangeBounds
-  const {items: currentRefinements, canRefine: canRefineCurrent, refine: removeRefinement} = useCurrentRefinements({})
+  const {
+    items: currentRefinements,
+    canRefine: canRefineCurrent,
+    refine: removeRefinement,
+  } = useCurrentRefinements({includedAttributes: ["book_subject", "book_type"]})
 
   // State handlers to manage the GET parameters.
   const [rangeChoices, setRangeChoices] = useState<RangeBoundaries>([
@@ -233,22 +237,24 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                   {currentRefinements
                     .filter(refinement => refinement.attribute === "book_subject")
                     .map(refinement => {
-                      return refinement.refinements.map((item, i) => (
-                        <li
-                          key={`refinement-${i}`}
-                          className="mb-4 flex w-fit items-center gap-8 border-2 border-press-sand px-8 pb-5 pt-4 text-18"
-                        >
-                          <span id={`refinement-${i}`}>{item.value}</span>
-                          <button
-                            aria-labelledby={`refinement-${i}`}
-                            disabled={!canRefineCurrent}
-                            onClick={() => removeRefinement(item)}
+                      return refinement.refinements
+                        .sort((a, b) => (a.value > b.value ? 1 : b.value > a.value ? -1 : 0))
+                        .map((item, i) => (
+                          <li
+                            key={`refinement-${i}`}
+                            className="mb-4 flex w-fit items-center gap-8 border-2 border-press-sand px-8 pb-5 pt-4 text-18"
                           >
-                            <span className="sr-only">Clear</span>
-                            <XMarkIcon width={30} />
-                          </button>
-                        </li>
-                      ))
+                            <span id={`refinement-${i}`}>{item.value}</span>
+                            <button
+                              aria-labelledby={`refinement-${i}`}
+                              disabled={!canRefineCurrent}
+                              onClick={() => removeRefinement(item)}
+                            >
+                              <span className="sr-only">Clear</span>
+                              <XMarkIcon width={30} />
+                            </button>
+                          </li>
+                        ))
                     })}
                 </ul>
               )}
