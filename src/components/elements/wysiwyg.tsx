@@ -242,10 +242,10 @@ const cleanMediaMarkup = (node: Element) => {
   if (image) {
     let {src} = image
     const {alt, width, height} = image
-    if (!src) return
+    if (!src || typeof src !== "string") return
 
     if (src?.startsWith("/")) {
-      src = process.env.NEXT_PUBLIC_DRUPAL_BASE_URL + src
+      src = (process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string) + src
     }
     const figCaption = getFigCaption(node)
 

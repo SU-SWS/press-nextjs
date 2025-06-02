@@ -63,7 +63,6 @@ const PreCartClient = ({
   }
 
   return (
-    /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
     <form className="rs-mb-1 rs-pb-1 border-b-2 border-fog @container" action={submitForm}>
       <input type="hidden" name="title" value={bookTitle} />
       <label className="sr-only">
