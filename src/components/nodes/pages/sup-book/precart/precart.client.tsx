@@ -137,7 +137,7 @@ const PreCartClient = ({
                 onChange={() => setIntl(false)}
               />
               <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-0 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.8em]">
-                US/Canada
+                US
               </span>
             </label>
             <label className="min-w-fit flex-1 cursor-pointer">
@@ -159,8 +159,17 @@ const PreCartClient = ({
 
       {isIntl && !priceData?.supComingSoon && (
         <p className="text-[0.8em]">
-          For customer shipments outside the US and Canada, please use the button below to order from our partner,
-          Combined Academic Publishers.
+          For customer shipments outside the US, please use the button below to order from our partner, Combined
+          Academic Publishers.
+        </p>
+      )}
+
+      {!ebookSelected && (
+        <p className="text-center text-xl">
+          Due to a work stoppage involving our parcel delivery service in Canada, we are not able to process orders for
+          hardcover or paperback books destined for Canadian addresses at this time. We sincerely apologize for the
+          inconvenience; we will restore Canadian purchasing absolutely as soon as we are able. Ebooks are not affected,
+          and can still be ordered and delivered to all customers with valid email addresses.
         </p>
       )}
 
@@ -247,7 +256,7 @@ const UsFormatChoices = ({
         >
           <span className="flex w-full flex-col items-center justify-between gap-5 @lg:flex-row @lg:gap-0">
             <span className="font-semibold group-hover:underline md:text-[0.85em]">Hardcover</span>
-            <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
+            <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US</span>
             {clothPrice && <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(clothPrice)}</span>}
           </span>
           <BookOpenIcon width={24} className="text-fog-dark" />
@@ -263,7 +272,7 @@ const UsFormatChoices = ({
           <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
             <span className="font-semibold group-hover:underline md:text-[0.85em]">Paperback</span>
 
-            <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
+            <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US</span>
             {paperPrice && <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(paperPrice)}</span>}
           </span>
           <BookOpenIconOutline width={24} className="text-fog-dark" />
