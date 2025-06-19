@@ -16,7 +16,7 @@ const SupBookPage = async ({node, ...props}: Props) => {
   return (
     <div>
       <BookPage node={node} {...props} />
-      {(node.supBookRelatedTitles && node.supBookRelatedTitles.length > 0) && (
+      {node.supBookRelatedTitles && node.supBookRelatedTitles.length > 0 && (
         <section aria-labelledby={`${node.id}-related`} className="centered mt-64 border-t-2 border-press-sand-dark">
           <H2 id={`${node.id}-related`} className="mb-32 mt-16 font-medium text-stone-dark">
             Explore more
