@@ -8,6 +8,8 @@ query BookPrice($id: ID!) {
             supClothSale
             supComingSoon
             supDigitalPrice
+            supDigitalSale
+            supDigitalDiscount
             supIntlCart
             supPaperDiscount
             supPaperPrice

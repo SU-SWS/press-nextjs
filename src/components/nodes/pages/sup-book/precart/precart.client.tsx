@@ -80,7 +80,9 @@ const PreCartClient = ({
             clothPrice={clothIsbn ? priceData?.supClothSale || priceData?.supClothPrice || false : undefined}
             paperPrice={paperIsbn ? priceData?.supPaperSale || priceData?.supPaperPrice || false : undefined}
             ebookPrice={
-              shouldShowEbookButton && ebookIsbn && (epub || pdf) ? priceData?.supDigitalPrice || false : undefined
+              shouldShowEbookButton && ebookIsbn && (epub || pdf)
+                ? priceData?.supDigitalSale || priceData?.supDigitalPrice || false
+                : undefined
             }
             onChange={onFormatChange}
           />
@@ -218,6 +220,21 @@ const PreCartClient = ({
             Save{" "}
             <ins className="no-underline">
               {formatCurrency(priceData?.supPaperPrice - priceData?.supPaperSale)} ({priceData?.supPaperDiscount}%)
+            </ins>
+          </div>
+        </div>
+      )}
+
+      {!isIntl && priceData?.supDigitalPrice && priceData?.supDigitalSale && (
+        <div className="rs-mt-1 text-18">
+          <div>
+            EBook List Price: <del className="italic">{formatCurrency(priceData?.supDigitalPrice)}</del>
+          </div>
+          <div>
+            Save{" "}
+            <ins className="no-underline">
+              {formatCurrency(priceData?.supDigitalPrice - priceData?.supDigitalSale)} ({priceData?.supDigitalDiscount}
+              %)
             </ins>
           </div>
         </div>
