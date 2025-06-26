@@ -77,13 +77,14 @@ const PreCartClient = ({
             clothIsbn={clothIsbn}
             paperIsbn={paperIsbn}
             ebookIsbn={ebookIsbn}
-            clothPrice={clothIsbn ? priceData?.supClothSale || priceData?.supClothPrice || false : undefined}
-            paperPrice={paperIsbn ? priceData?.supPaperSale || priceData?.supPaperPrice || false : undefined}
+            clothPrice={clothIsbn ? priceData?.supClothPrice || false : undefined}
+            clothSale={priceData?.supClothSale}
+            paperPrice={paperIsbn ? priceData?.supPaperPrice || false : undefined}
+            paperSale={priceData?.supPaperSale}
             ebookPrice={
-              shouldShowEbookButton && ebookIsbn && (epub || pdf)
-                ? priceData?.supDigitalSale || priceData?.supDigitalPrice || false
-                : undefined
+              shouldShowEbookButton && ebookIsbn && (epub || pdf) ? priceData?.supDigitalPrice || false : undefined
             }
+            ebookSale={priceData?.supDigitalSale}
             onChange={onFormatChange}
           />
         )}
@@ -246,18 +247,24 @@ const PreCartClient = ({
 const UsFormatChoices = ({
   clothIsbn,
   clothPrice,
+  clothSale,
   paperIsbn,
   ebookIsbn,
   ebookPrice,
+  ebookSale,
   paperPrice,
+  paperSale,
   onChange,
 }: {
   clothIsbn?: NodeSupBook["supBookIsbn13Cloth"]
   paperIsbn?: NodeSupBook["supBookIsbn13Paper"]
   ebookIsbn?: NodeSupBook["supBookIsbn13Digital"]
   clothPrice?: Maybe<number | false>
+  clothSale?: Maybe<number | false>
   ebookPrice?: Maybe<number | false>
+  ebookSale?: Maybe<number | false>
   paperPrice?: Maybe<number | false>
+  paperSale?: Maybe<number | false>
   onChange?: (_e: ChangeEvent<HTMLInputElement>) => void
 }) => {
   const defaultChoice = clothIsbn ? "cloth" : "paper"
@@ -274,7 +281,12 @@ const UsFormatChoices = ({
           <span className="flex w-full flex-col items-center justify-between gap-5 @lg:flex-row @lg:gap-0">
             <span className="font-semibold group-hover:underline md:text-[0.85em]">Hardcover</span>
             <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US</span>
-            {clothPrice && <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(clothPrice)}</span>}
+            {clothPrice && (
+              <span className="flex flex-col items-center text-press-sand-dark md:text-[0.85em]">
+                {clothSale && <del>{formatCurrency(clothPrice)}</del>}
+                <span>{formatCurrency(clothSale || clothPrice)}</span>
+              </span>
+            )}
           </span>
           <BookOpenIcon width={24} className="text-fog-dark" />
         </FormatChoice>
@@ -290,7 +302,12 @@ const UsFormatChoices = ({
             <span className="font-semibold group-hover:underline md:text-[0.85em]">Paperback</span>
 
             <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US</span>
-            {paperPrice && <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(paperPrice)}</span>}
+            {paperPrice && (
+              <span className="flex flex-col items-center text-press-sand-dark md:text-[0.85em]">
+                {paperSale && <del>{formatCurrency(paperPrice)}</del>}
+                <span>{formatCurrency(paperSale || paperPrice)}</span>
+              </span>
+            )}
           </span>
           <BookOpenIconOutline width={24} className="text-fog-dark" />
         </FormatChoice>
@@ -300,7 +317,12 @@ const UsFormatChoices = ({
           <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
             <span className="font-semibold group-hover:underline md:text-[0.85em]">EBook</span>
 
-            {ebookPrice && <span className="text-press-sand-dark md:text-[0.85em]">{formatCurrency(ebookPrice)}</span>}
+            {ebookPrice && (
+              <span className="flex flex-col items-center text-press-sand-dark md:text-[0.85em]">
+                {ebookSale && <del>{formatCurrency(ebookPrice)}</del>}
+                <span>{formatCurrency(ebookSale || ebookPrice)}</span>
+              </span>
+            )}
           </span>
           <DeviceTabletIcon width={24} className="text-fog-dark" />
         </FormatChoice>
@@ -359,7 +381,7 @@ const FormatChoice = ({
         onChange={onInputChange}
       />
       <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
-        <span className="flex w-full items-center justify-between">{children}</span>
+        <span className="flex w-full items-center justify-between gap-4">{children}</span>
       </span>
     </label>
   )
