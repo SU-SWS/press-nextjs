@@ -378,6 +378,15 @@ export type CitationSuThesi = CitationInterface & {
 /** Entity type citation. */
 export type CitationUnion = CitationSuArticleJournal | CitationSuArticleNewspaper | CitationSuBook | CitationSuOther | CitationSuThesi;
 
+/** Color Field. */
+export type ColorFieldType = {
+  __typename?: 'ColorFieldType';
+  /** Color Hex */
+  color: Scalars['String']['output'];
+  /** Opacity */
+  opacity?: Maybe<Scalars['Float']['output']>;
+};
+
 /** Entity type config_pages. */
 export type ConfigPagesInterface = {
   /** The Universally Unique IDentifier (UUID). */
@@ -479,6 +488,15 @@ export type File = {
   size: Scalars['Int']['output'];
   /** The URL of the file. */
   url: Scalars['String']['output'];
+};
+
+/** FontAwesome Icon. */
+export type FontawesomeIconType = {
+  __typename?: 'FontawesomeIconType';
+  /** Icon Name */
+  iconName: Scalars['String']['output'];
+  /** Icon Style */
+  style: Scalars['String']['output'];
 };
 
 /** A image object to represent an managed file. */
@@ -2576,8 +2594,12 @@ export type PressPrice = MetaTagInterface & PressInterface & {
   supClothSale?: Maybe<Scalars['Float']['output']>;
   /** Coming Soon */
   supComingSoon?: Maybe<Scalars['Boolean']['output']>;
+  /** Digital Sale Precent */
+  supDigitalDiscount?: Maybe<Scalars['Float']['output']>;
   /** Digital Price */
   supDigitalPrice?: Maybe<Scalars['Float']['output']>;
+  /** Digital Sale Price */
+  supDigitalSale?: Maybe<Scalars['Float']['output']>;
   /** Has International Cart */
   supIntlCart?: Maybe<Scalars['Boolean']['output']>;
   /** Paper Sale Percent */
@@ -2892,6 +2914,7 @@ export type QuerySearchArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  sortDir?: InputMaybe<SortDirection>;
 };
 
 
@@ -2984,10 +3007,13 @@ export type QueryStanfordNewsArgs = {
 
 /** The schema's entry-point for queries. */
 export type QueryStanfordOpportunitiesArgs = {
+  contextualFilter?: InputMaybe<StanfordOpportunitiesContextualFilterInput>;
   filter?: InputMaybe<StanfordOpportunitiesFilterInput>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  sortDir?: InputMaybe<SortDirection>;
+  sortKey?: InputMaybe<StanfordOpportunitiesSortKeys>;
 };
 
 
@@ -3659,9 +3685,13 @@ export enum StanfordNewsSortKeys {
   Title = 'TITLE'
 }
 
+export type StanfordOpportunitiesContextualFilterInput = {
+  term_node_taxonomy_name_depth?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type StanfordOpportunitiesFilterInput = {
   /** Filter  */
-  tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  filters?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 /** Result for view stanford_opportunities display graphql. */
@@ -3682,10 +3712,17 @@ export type StanfordOpportunitiesResult = View & {
   /** Information about the page in the view. */
   pageInfo: ViewPageInfo;
   /** The results of the view. */
-  results: Array<UnsupportedType>;
+  results: Array<NodeUnion>;
   /** The machine name of the view. */
   view: Scalars['String']['output'];
 };
+
+export enum StanfordOpportunitiesSortKeys {
+  /** Start Date (su_opp_start_date) */
+  Start = 'START',
+  /** Title */
+  Title = 'TITLE'
+}
 
 export type StanfordPersonContextualFilterInput = {
   term_node_taxonomy_name_depth?: InputMaybe<Scalars['String']['input']>;
@@ -4019,9 +4056,9 @@ export type SupBooksViewResult = View & {
 };
 
 export enum SupBooksViewSortKeys {
-  /** Book Authors (sup_book_authors:family) */
+  /** Sorting Author Name (sup_book_sort_author) */
   AuthorAsc = 'AUTHOR_ASC',
-  /** Book Authors (sup_book_authors:family) */
+  /** Sorting Author Name (sup_book_sort_author) */
   AuthorDesc = 'AUTHOR_DESC',
   /** Publication Date First (sup_book_pub_date_first) */
   PubDateDesc = 'PUB_DATE_DESC',
@@ -5084,7 +5121,7 @@ export type BookPriceQueryVariables = Exact<{
 }>;
 
 
-export type BookPriceQuery = { __typename?: 'Query', press?: { __typename: 'PressAward' } | { __typename: 'PressPrice', id: string, supClothDiscount?: number | null, supClothPrice?: number | null, supClothSale?: number | null, supComingSoon?: boolean | null, supDigitalPrice?: number | null, supIntlCart?: boolean | null, supPaperDiscount?: number | null, supPaperPrice?: number | null, supPaperSale?: number | null, supPreorder?: boolean | null, workId: number } | null };
+export type BookPriceQuery = { __typename?: 'Query', press?: { __typename: 'PressAward' } | { __typename: 'PressPrice', id: string, supClothDiscount?: number | null, supClothPrice?: number | null, supClothSale?: number | null, supComingSoon?: boolean | null, supDigitalPrice?: number | null, supDigitalSale?: number | null, supDigitalDiscount?: number | null, supIntlCart?: boolean | null, supPaperDiscount?: number | null, supPaperPrice?: number | null, supPaperSale?: number | null, supPreorder?: boolean | null, workId: number } | null };
 
 export type FragmentAwardFragment = { __typename?: 'PressAward', id: string, title: string, supAssociation?: string | null, supPlace?: string | null, supRank?: number | null, supYear?: number | null, supDescription?: { __typename?: 'Text', processed?: any | null } | null };
 

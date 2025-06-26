@@ -46,7 +46,9 @@ const NodePageMetadata = async ({pageTitle, metatags, backupDescription, childre
         </>
       )}
 
-      {metatags?.map((tag, i) => <MetaTag key={`metatag-${i}`} tag={tag} />)}
+      {metatags?.map((tag, i) => (
+        <MetaTag key={`metatag-${i}`} tag={tag} />
+      ))}
 
       {children}
     </>
