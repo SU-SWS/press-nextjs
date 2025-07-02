@@ -157,15 +157,20 @@ of cache tags, there are no relationship between the two caching systems. When a
 revalidation request is made to this platform. Occasionally there can be a communication issue or perhaps the Next.JS
 cache refuses to invalidate the appropriate areas. Here are some ways to attempt to resolve the issue:
 
-1. Resave the page that is outdated.
+1. Using your local development environment, change the environment variables to pull data from the production site
+   - Use `yarn dev` and load a page in your browser with the inspector tools open.
+   - This will give you a better indication if the issues is cached in Drupal or in NextJS.
+2. Resave the [GraphQL Compose settings](https://supress.sites-pro.stanford.edu/admin/config/graphql_compose).
+   - This can cause the graphql to clear any stored queries caches.
+3. Resave the page that is outdated.
    - This will make a second request to the FE and attempt to revalidate it again.
-2. Resave a menu item or a page within the menu.
+4. Resave a menu item or a page within the menu.
    - This will invalidate the menu on all pages.
    - If resaving a page within the menu, make sure to change some value in the menu area to trigger the invalidation.
      Changing a weight from 50 to 49 can be the easiest solution.
-3. Resave the configuration page that is outdated.
+5. Resave the configuration page that is outdated.
    - Resaving a global message or site settings will clear cache for all config pages. This will rebuild all pages.
-4. Enable debugging in the "Next" module in Drupal.
+6. Enable debugging in the "Next" module in Drupal.
    - `drush cset next.settings debug 1` will add watchdog logs. These can be streamed in Acquia logs or viewed in the UI
      if the dblog module is enabled. Errors in the logs will indicate some issue that should be inspected more closely.
    - Remember to disable the debug once the issue is resolved.
@@ -174,10 +179,13 @@ If all of the above fails, there are two quick fixes that can help in a pinch.
 
 1. As stated above making a `GET` request to `/api/revalidate?secret=[secret]&path=/[path/tags]` with the correct
    parameters will perform a cache invalidation. This will invalidate just a piece of the page(s).
-2. As a last resort, making a `GET` request to `/api/revalidate/page?secret=[secret]&path=/[path]` will invalidate every
+2. As a last resort, making a `GET` request to `/api/revalidate/page?secret=[secret]&slug=/[path]` will invalidate every
    bit of cached data for that specific path. The system will then refetch the menu, config pages, and the page data to
    rebuild that one page. This approach will not invalidate cache on any other page and it does not support cache tags.
    It is very specific to only that single path.
+
+To verify the cache is fixed, use the page invalidation mentioned above on a random page (try to avoid main menu items).
+Invalidating the entire page's cache will give clear indication if the issue is fixed.
 
 ### Cache Documentation
 - [Next.JS cache documentation](https://nextjs.org/docs/app/building-your-application/caching)
