@@ -10,7 +10,7 @@ export const submitForm = async (formData: FormData) => {
 
   const bookTitle = formData.get("title") as string
   const [format, isbn] = (formData.get("format") as string).split(":")
-  const isIntl = formData.get("intl") !== "us"
+  const isIntl = formData.get("intl") === "intl"
   const ebookFormat = formData.get("ebook") as string
 
   if (format === "ebook")
