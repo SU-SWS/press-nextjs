@@ -23,7 +23,7 @@ const BookPage = async ({node, ...props}: Props) => {
         : -1
   )
 
-  function createLinkParams(subject: TermSupBookSubject) {
+  const createLinkParams = (subject: TermSupBookSubject) => {
     const linkParams = new URLSearchParams({subjects: subject.name})
 
     if (subject.parent?.name) {
