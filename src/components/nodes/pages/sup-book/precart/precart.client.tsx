@@ -72,27 +72,23 @@ const PreCartClient = ({
 
       <fieldset className="rs-mb-1 space-y-4">
         <legend className="sr-only">Format</legend>
-        {!isIntl && (
-          <UsFormatChoices
-            clothIsbn={clothIsbn}
-            paperIsbn={paperIsbn}
-            ebookIsbn={ebookIsbn}
-            clothPrice={clothIsbn ? priceData?.supClothPrice || false : undefined}
-            clothSale={priceData?.supClothSale}
-            paperPrice={paperIsbn ? priceData?.supPaperPrice || false : undefined}
-            paperSale={priceData?.supPaperSale}
-            ebookPrice={
-              shouldShowEbookButton && ebookIsbn && (epub || pdf) ? priceData?.supDigitalPrice || false : undefined
-            }
-            ebookSale={priceData?.supDigitalSale}
-            onChange={onFormatChange}
-          />
-        )}
-
-        {isIntl && <IntlFormatChoices clothIsbn={clothIsbn} paperIsbn={paperIsbn} />}
+        <FormatChoices
+          clothIsbn={clothIsbn}
+          paperIsbn={paperIsbn}
+          ebookIsbn={ebookIsbn}
+          clothPrice={clothIsbn ? (isIntl ? false : priceData?.supClothPrice || false) : undefined}
+          clothSale={priceData?.supClothSale}
+          paperPrice={paperIsbn ? (isIntl ? false : priceData?.supPaperPrice || false) : undefined}
+          paperSale={priceData?.supPaperSale}
+          ebookPrice={
+            shouldShowEbookButton && ebookIsbn && (epub || pdf) ? priceData?.supDigitalPrice || false : undefined
+          }
+          ebookSale={priceData?.supDigitalSale}
+          onChange={onFormatChange}
+        />
       </fieldset>
 
-      {ebookSelected && !isIntl && (
+      {ebookSelected && (
         <div>
           <fieldset>
             <legend className="mb-3 text-18 font-semibold">Select Ebook Format</legend>
@@ -126,7 +122,7 @@ const PreCartClient = ({
         </div>
       )}
 
-      {!ebookSelected && (hasIntlCart || priceData?.supIntlCart) && (
+      {(hasIntlCart || priceData?.supIntlCart) && (
         <fieldset>
           <legend className="mb-3 text-18 font-semibold">Region</legend>
           <div className="rs-mb-neg1 flex flex-wrap border-2 border-black-40 p-1">
@@ -160,7 +156,7 @@ const PreCartClient = ({
         </fieldset>
       )}
 
-      {isIntl && !priceData?.supComingSoon && (
+      {!ebookSelected && isIntl && !priceData?.supComingSoon && (
         <p className="text-[0.8em]">
           For customer shipments outside the US and Canada, please use the button below to order from our partner,
           Combined Academic Publishers.
@@ -179,9 +175,9 @@ const PreCartClient = ({
         disabled={!!priceData?.supComingSoon}
       >
         {!priceData?.supComingSoon && priceData?.supPreorder && !isIntl && "Preorder"}
-        {!priceData?.supComingSoon && !priceData?.supPreorder && !isIntl && "Add to cart"}
-        {!priceData?.supComingSoon && priceData?.supPreorder && isIntl && "Preorder from CAP"}
-        {!priceData?.supComingSoon && !priceData?.supPreorder && isIntl && "Purchase from CAP"}
+        {(ebookSelected || !isIntl) && !priceData?.supComingSoon && !priceData?.supPreorder && "Add to cart"}
+        {!ebookSelected && !priceData?.supComingSoon && priceData?.supPreorder && isIntl && "Preorder from CAP"}
+        {!ebookSelected && !priceData?.supComingSoon && !priceData?.supPreorder && isIntl && "Purchase from CAP"}
         {priceData?.supComingSoon && "Coming Soon"}
 
         {!priceData?.supComingSoon && (
@@ -235,7 +231,7 @@ const PreCartClient = ({
   )
 }
 
-const UsFormatChoices = ({
+const FormatChoices = ({
   clothIsbn,
   clothPrice,
   clothSale,
@@ -316,32 +312,6 @@ const UsFormatChoices = ({
             )}
           </span>
           <DeviceTabletIcon width={24} className="text-fog-dark" />
-        </FormatChoice>
-      )}
-    </>
-  )
-}
-
-const IntlFormatChoices = ({
-  clothIsbn,
-  paperIsbn,
-}: {
-  clothIsbn?: NodeSupBook["supBookIsbn13Cloth"]
-  paperIsbn?: NodeSupBook["supBookIsbn13Paper"]
-}) => {
-  const defaultChoice = clothIsbn ? "cloth" : "paper"
-  return (
-    <>
-      {clothIsbn && (
-        <FormatChoice typeName="cloth" isbn={clothIsbn} defaultChecked={defaultChoice === "cloth"}>
-          <span className="font-semibold group-hover:underline md:text-[0.85em]">Hardcover</span>
-          <BookOpenIcon width={24} className="text-fog-dark" />
-        </FormatChoice>
-      )}
-      {paperIsbn && (
-        <FormatChoice typeName="paper" isbn={paperIsbn} defaultChecked={defaultChoice === "paper"}>
-          <span className="font-semibold group-hover:underline md:text-[0.85em]">Paperback</span>
-          <BookOpenIconOutline width={24} className="text-fog-dark" />
         </FormatChoice>
       )}
     </>
