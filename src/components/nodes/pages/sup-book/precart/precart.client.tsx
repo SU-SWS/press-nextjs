@@ -25,6 +25,8 @@ type Props = {
   bookTitle: NodeSupBook["title"]
   hasIntlCart?: PressPrice["supIntlCart"]
   firstPub?: NodeSupBook["supBookPubDateFirst"]
+  altIsbn?: NodeSupBook["supBookIsbn13Alt"]
+  altFormat?: NodeSupBook["supBookAltFormat"]
 }
 
 const PreCartClient = ({
@@ -37,6 +39,8 @@ const PreCartClient = ({
   epub,
   pdf,
   firstPub,
+  altIsbn,
+  altFormat,
 }: Props) => {
   const [priceData, setPriceData] = useState<PressPrice>()
   const {value: ebookSelected, setValue: setEbookSelected} = useBoolean(false)
@@ -85,6 +89,9 @@ const PreCartClient = ({
           }
           ebookSale={priceData?.supDigitalSale}
           onChange={onFormatChange}
+          altIsbn={altIsbn}
+          altFormat={altFormat}
+          altPrice={altIsbn ? priceData?.supAltPrice || false : undefined}
         />
       </fieldset>
 
@@ -232,6 +239,9 @@ const PreCartClient = ({
 }
 
 const FormatChoices = ({
+  altIsbn,
+  altFormat,
+  altPrice,
   clothIsbn,
   clothPrice,
   clothSale,
@@ -243,9 +253,12 @@ const FormatChoices = ({
   paperSale,
   onChange,
 }: {
+  altIsbn?: NodeSupBook["supBookIsbn13Alt"]
+  altFormat?: NodeSupBook["supBookAltFormat"]
   clothIsbn?: NodeSupBook["supBookIsbn13Cloth"]
   paperIsbn?: NodeSupBook["supBookIsbn13Paper"]
   ebookIsbn?: NodeSupBook["supBookIsbn13Digital"]
+  altPrice?: Maybe<number | false>
   clothPrice?: Maybe<number | false>
   clothSale?: Maybe<number | false>
   ebookPrice?: Maybe<number | false>
@@ -254,7 +267,13 @@ const FormatChoices = ({
   paperSale?: Maybe<number | false>
   onChange?: (_e: ChangeEvent<HTMLInputElement>) => void
 }) => {
-  const defaultChoice = clothIsbn ? "cloth" : "paper"
+  const defaultChoice: "cloth" | "paper" | "ebook" | "alt" = clothIsbn
+    ? "cloth"
+    : paperIsbn
+      ? "paper"
+      : ebookIsbn
+        ? "ebook"
+        : "alt"
 
   return (
     <>
@@ -300,7 +319,12 @@ const FormatChoices = ({
         </FormatChoice>
       )}
       {ebookIsbn && ebookPrice !== undefined && (
-        <FormatChoice typeName="ebook" isbn={ebookIsbn} onInputChange={onChange}>
+        <FormatChoice
+          typeName="ebook"
+          isbn={ebookIsbn}
+          defaultChecked={defaultChoice === "ebook"}
+          onInputChange={onChange}
+        >
           <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
             <span className="font-semibold group-hover:underline md:text-[0.85em]">EBook</span>
 
@@ -313,6 +337,24 @@ const FormatChoices = ({
           </span>
           <DeviceTabletIcon width={24} className="text-fog-dark" />
         </FormatChoice>
+      )}
+
+      {altIsbn && altPrice !== undefined && (
+        <>
+          <input type="hidden" name="alt-format" value={altFormat?.toUpperCase()} />
+          <FormatChoice typeName="alt" isbn={altIsbn} defaultChecked={defaultChoice === "alt"} onInputChange={onChange}>
+            <span className="flex w-full flex-col items-center justify-between gap-5 @lg:flex-row @lg:gap-0">
+              <span className="font-semibold group-hover:underline md:text-[0.85em]">{altFormat}</span>
+              <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
+              {altPrice && (
+                <span className="flex flex-col items-center text-press-sand-dark md:text-[0.85em]">
+                  <span>{formatCurrency(altPrice)}</span>
+                </span>
+              )}
+            </span>
+            <DeviceTabletIcon width={24} className="text-fog-dark" />
+          </FormatChoice>
+        </>
       )}
     </>
   )

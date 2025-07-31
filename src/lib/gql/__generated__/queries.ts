@@ -126,6 +126,7 @@ export const FragmentLinkFragmentDoc = gql`
     `;
 export const FragmentNodeSupBookFragmentDoc = gql`
     fragment FragmentNodeSupBook on NodeSupBook {
+  supBookAltFormat
   supBookAuthorInfo {
     processed
   }
@@ -1561,6 +1562,7 @@ export const BookPriceDocument = gql`
     __typename
     ... on PressPrice {
       id
+      supAltPrice
       supClothDiscount
       supClothPrice
       supClothSale
