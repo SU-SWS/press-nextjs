@@ -33,6 +33,7 @@ fragment FragmentNodeSupBookAncillary on NodeSupBookAncillary {
 }
 
 fragment FragmentNodeSupBook on NodeSupBook {
+    supBookAltFormat
     supBookAuthorInfo {
         processed
     }

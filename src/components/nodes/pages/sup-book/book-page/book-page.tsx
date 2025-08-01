@@ -160,7 +160,7 @@ const BookPage = async ({node, ...props}: Props) => {
           </div>
 
           <div className="lg:w-3/8 xl:min-w-[200px] 2xl:min-w-[320px] 2xl:max-w-[370px]">
-            {!node.supBookNoCart && (node.supBookIsbn13Cloth || node.supBookIsbn13Paper) && (
+            {!node.supBookNoCart && (node.supBookIsbn13Cloth || node.supBookIsbn13Paper || node.supBookIsbn13Alt) && (
               <PreCartClient
                 priceId={node.supBookPriceData?.id}
                 bookTitle={node.title}
@@ -171,6 +171,8 @@ const BookPage = async ({node, ...props}: Props) => {
                 pdf={node.supBookPdfFormat}
                 epub={node.supBookEpubFormat}
                 firstPub={node.supBookPubDateFirst}
+                altIsbn={node.supBookIsbn13Alt}
+                altFormat={node.supBookAltFormat}
               />
             )}
 
