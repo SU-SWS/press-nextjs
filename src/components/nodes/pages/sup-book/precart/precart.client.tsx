@@ -2,7 +2,7 @@
 
 import useIsInternational from "@lib/hooks/useIsInternational"
 import Button from "@components/elements/button"
-import {HTMLAttributes, useEffect, useState} from "react"
+import {HTMLAttributes, ReactNode, useEffect, useState} from "react"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
 import {Maybe, NodeSupBook, PressPrice} from "@lib/gql/__generated__/drupal.d"
 import {BookOpenIcon as BookOpenIconOutline, DeviceTabletIcon} from "@heroicons/react/24/outline"
@@ -77,12 +77,13 @@ const PreCartClient = ({
       <fieldset className="rs-mb-1 space-y-4">
         <legend className="sr-only">Format</legend>
         <FormatChoices
+          isIntl={isIntl}
           clothIsbn={clothIsbn}
           paperIsbn={paperIsbn}
           ebookIsbn={ebookIsbn}
-          clothPrice={clothIsbn ? (isIntl ? false : priceData?.supClothPrice || false) : undefined}
+          clothPrice={clothIsbn ? priceData?.supClothPrice || false : undefined}
           clothSale={priceData?.supClothSale}
-          paperPrice={paperIsbn ? (isIntl ? false : priceData?.supPaperPrice || false) : undefined}
+          paperPrice={paperIsbn ? priceData?.supPaperPrice || false : undefined}
           paperSale={priceData?.supPaperSale}
           ebookPrice={
             shouldShowEbookButton && ebookIsbn && (epub || pdf) ? priceData?.supDigitalPrice || false : undefined
@@ -252,6 +253,7 @@ const FormatChoices = ({
   paperPrice,
   paperSale,
   onChange,
+  isIntl,
 }: {
   altIsbn?: NodeSupBook["supBookIsbn13Alt"]
   altFormat?: NodeSupBook["supBookAltFormat"]
@@ -266,6 +268,7 @@ const FormatChoices = ({
   paperPrice?: Maybe<number | false>
   paperSale?: Maybe<number | false>
   onChange?: (_e: ChangeEvent<HTMLInputElement>) => void
+  isIntl: boolean
 }) => {
   const defaultChoice: "cloth" | "paper" | "ebook" | "alt" = clothIsbn
     ? "cloth"
@@ -277,101 +280,88 @@ const FormatChoices = ({
 
   return (
     <>
+      <input type="hidden" name="alt-format" value={altFormat?.toUpperCase()} />
+
       {clothIsbn && clothPrice !== undefined && (
         <FormatChoice
+          label="Hardcover"
+          isIntl={isIntl}
+          price={clothPrice}
+          salePrice={clothSale}
           typeName="cloth"
           isbn={clothIsbn}
           defaultChecked={defaultChoice === "cloth"}
           onInputChange={onChange}
-        >
-          <span className="flex w-full flex-col items-center justify-between gap-5 @lg:flex-row @lg:gap-0">
-            <span className="font-semibold group-hover:underline md:text-[0.85em]">Hardcover</span>
-            <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
-            {clothPrice && (
-              <span className="flex flex-col items-center text-press-sand-dark md:text-[0.85em]">
-                {clothSale && <del>{formatCurrency(clothPrice)}</del>}
-                <span>{formatCurrency(clothSale || clothPrice)}</span>
-              </span>
-            )}
-          </span>
-          <BookOpenIcon width={24} className="text-fog-dark" />
-        </FormatChoice>
+          icon={<BookOpenIcon width={24} className="text-fog-dark" />}
+        />
       )}
       {paperIsbn && paperPrice !== undefined && (
         <FormatChoice
+          label="Paperback"
+          isIntl={isIntl}
+          price={paperPrice}
+          salePrice={paperSale}
           typeName="paper"
           isbn={paperIsbn}
           defaultChecked={defaultChoice === "paper"}
           onInputChange={onChange}
-        >
-          <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
-            <span className="font-semibold group-hover:underline md:text-[0.85em]">Paperback</span>
-
-            <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
-            {paperPrice && (
-              <span className="flex flex-col items-center text-press-sand-dark md:text-[0.85em]">
-                {paperSale && <del>{formatCurrency(paperPrice)}</del>}
-                <span>{formatCurrency(paperSale || paperPrice)}</span>
-              </span>
-            )}
-          </span>
-          <BookOpenIconOutline width={24} className="text-fog-dark" />
-        </FormatChoice>
+          icon={<BookOpenIconOutline width={24} className="text-fog-dark" />}
+        />
       )}
       {ebookIsbn && ebookPrice !== undefined && (
         <FormatChoice
+          label="EBook"
+          isIntl={false}
+          price={ebookPrice}
+          salePrice={ebookSale}
           typeName="ebook"
           isbn={ebookIsbn}
           defaultChecked={defaultChoice === "ebook"}
           onInputChange={onChange}
-        >
-          <span className="flex w-full flex-col items-center justify-between gap-2 @lg:flex-row @lg:gap-0">
-            <span className="font-semibold group-hover:underline md:text-[0.85em]">EBook</span>
-
-            {ebookPrice && (
-              <span className="flex flex-col items-center text-press-sand-dark md:text-[0.85em]">
-                {ebookSale && <del>{formatCurrency(ebookPrice)}</del>}
-                <span>{formatCurrency(ebookSale || ebookPrice)}</span>
-              </span>
-            )}
-          </span>
-          <DeviceTabletIcon width={24} className="text-fog-dark" />
-        </FormatChoice>
+          removeUsCan
+          icon={<DeviceTabletIcon width={24} className="text-fog-dark" />}
+        />
       )}
 
       {altIsbn && altPrice !== undefined && (
-        <>
-          <input type="hidden" name="alt-format" value={altFormat?.toUpperCase()} />
-          <FormatChoice typeName="alt" isbn={altIsbn} defaultChecked={defaultChoice === "alt"} onInputChange={onChange}>
-            <span className="flex w-full flex-col items-center justify-between gap-5 @lg:flex-row @lg:gap-0">
-              <span className="font-semibold group-hover:underline md:text-[0.85em]">{altFormat}</span>
-              <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
-              {altPrice && (
-                <span className="flex flex-col items-center text-press-sand-dark md:text-[0.85em]">
-                  <span>{formatCurrency(altPrice)}</span>
-                </span>
-              )}
-            </span>
-            <DeviceTabletIcon width={24} className="text-fog-dark" />
-          </FormatChoice>
-        </>
+        <FormatChoice
+          typeName="alt"
+          isbn={altIsbn}
+          defaultChecked={defaultChoice === "alt"}
+          onInputChange={onChange}
+          label={altFormat}
+          isIntl={isIntl}
+          price={altPrice}
+          icon={<DeviceTabletIcon width={24} className="text-fog-dark" />}
+        />
       )}
     </>
   )
 }
 
 const FormatChoice = ({
+  label,
+  isIntl,
+  price,
+  salePrice,
   typeName,
   isbn,
   defaultChecked,
   onInputChange,
-  children,
+  removeUsCan,
+  icon,
   ...props
 }: {
+  label: string | ReactNode
+  isIntl: boolean
+  price?: Maybe<number | false>
+  salePrice?: Maybe<number | false>
   typeName: string
   isbn: string
   defaultChecked?: boolean
   onInputChange?: (_e: ChangeEvent<HTMLInputElement>) => void
+  removeUsCan?: boolean
+  icon: ReactNode
 } & HTMLAttributes<HTMLLabelElement>) => {
   return (
     <label {...props} className={twMerge("block cursor-pointer", props.className)}>
@@ -384,7 +374,23 @@ const FormatChoice = ({
         onChange={onInputChange}
       />
       <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
-        <span className="flex w-full items-center justify-between gap-4">{children}</span>
+        <span className="flex w-full items-center justify-between gap-4">
+          <span className="flex w-full flex-col items-center justify-between gap-5 @lg:flex-row @lg:gap-0">
+            <span className="font-semibold group-hover:underline md:text-[0.85em]">{label}</span>
+
+            {!isIntl && price && !removeUsCan && (
+              <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
+            )}
+
+            {!isIntl && price && (
+              <span className="flex flex-col items-center text-press-sand-dark md:text-[0.85em]">
+                {salePrice && <del>{formatCurrency(price)}</del>}
+                <span>{formatCurrency(salePrice || price)}</span>
+              </span>
+            )}
+          </span>
+          {icon}
+        </span>
       </span>
     </label>
   )
