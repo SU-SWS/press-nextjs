@@ -3,6 +3,7 @@ query BookPrice($id: ID!) {
         __typename
         ... on PressPrice {
             id
+            supAltPrice
             supClothDiscount
             supClothPrice
             supClothSale
