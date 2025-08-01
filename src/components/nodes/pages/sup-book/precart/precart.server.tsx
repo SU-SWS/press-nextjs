@@ -14,7 +14,8 @@ export const submitForm = async (formData: FormData) => {
   const ebookFormat = formData.get("ebook") as string
   const altFormat = formData.get("alt-format") as string
 
-  if (format === "alt") redirect(`https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}_${altFormat}`)
+  if (format === "alt" && !isIntl)
+    redirect(`https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}_${altFormat}`)
 
   if (format === "ebook")
     redirect(`https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}_${ebookFormat}`)
