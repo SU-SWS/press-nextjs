@@ -1,12 +1,14 @@
 "use client"
 
 import {twMerge} from "tailwind-merge"
-import {HTMLAttributes, JSX, useCallback, useEffect, useMemo, useState} from "react"
+import {HTMLAttributes, useCallback, useEffect, useMemo, useState} from "react"
 import PagedList from "@components/elements/paged-list"
 import {useRouter, useSearchParams} from "next/navigation"
+import Link from "@components/elements/link"
+import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 
 type Props = HTMLAttributes<HTMLDivElement> & {
-  authors: Map<string, JSX.Element[]>
+  authors: Map<string, NodeSupBook[]>
 }
 const FilteringAuthorList = ({authors, ...props}: Props) => {
   const searchParams = useSearchParams()
@@ -15,11 +17,11 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
 
   const displayedAuthors = useMemo(() => {
     if (alphaChosen === "") return authors
-    const displayedAuthorMap = new Map<string, JSX.Element[]>()
+    const displayedAuthorMap = new Map<string, NodeSupBook[]>()
     ;[...authors.keys()].map(authorName => {
       let firstLetter = authorName.charAt(0).toUpperCase()
       firstLetter = firstLetter.replace("Ö", "O").replace("Ø", "O")
-      if (firstLetter === alphaChosen) displayedAuthorMap.set(authorName, authors.get(authorName) as JSX.Element[])
+      if (firstLetter === alphaChosen) displayedAuthorMap.set(authorName, authors.get(authorName) as NodeSupBook[])
     })
     return displayedAuthorMap
   }, [authors, alphaChosen])
@@ -106,11 +108,23 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
   )
 }
 
-const AuthorItem = ({authorName, books}: {authorName: string; books?: JSX.Element[]}) => {
+const AuthorItem = ({authorName, books}: {authorName: string; books?: NodeSupBook[]}) => {
   return (
     <div>
       <div className="type-0 pr-4 xl:text-21">{authorName},</div>
-      <div className="ml-20">{books}</div>
+      <div className="ml-20">
+        {books?.map(book => (
+          <Link
+            className="block w-fit font-normal text-digital-red"
+            key={book.id}
+            prefetch={false}
+            href={book.path || "#"}
+          >
+            {book.title}
+            {book.supBookSubtitle && `: ${book.supBookSubtitle}`}
+          </Link>
+        ))}
+      </div>
     </div>
   )
 }
