@@ -1,7 +1,6 @@
-import {HTMLAttributes, JSX} from "react"
+import {HTMLAttributes} from "react"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {BooksAuthorsQuery, NodeSupBook} from "@lib/gql/__generated__/drupal.d"
-import Link from "@components/elements/link"
 import FilteringAuthorList from "@components/paragraphs/sup-author-list/filtering-author-list"
 import {unstable_cache as nextCache} from "next/cache"
 
@@ -16,10 +15,18 @@ const getBookAuthorsData = nextCache(
     let books: NodeSupBook[] = []
 
     while (fetchMore) {
-      query = await graphqlClient({cache: "no-cache"}).BooksAuthors({after: afterCursor})
-      fetchMore = query.nodeSupBooks.pageInfo.hasNextPage
-      afterCursor = query.nodeSupBooks.pageInfo.endCursor
-      books = [...books, ...(query.nodeSupBooks.nodes as NodeSupBook[])]
+      try {
+        query = await graphqlClient({
+          cache: "no-cache",
+          signal: AbortSignal.timeout(5000),
+        }).BooksAuthors({after: afterCursor})
+        fetchMore = query.nodeSupBooks.pageInfo.hasNextPage
+        afterCursor = query.nodeSupBooks.pageInfo.endCursor
+        books = [...books, ...(query.nodeSupBooks.nodes as NodeSupBook[])]
+      } catch (e) {
+        if (e instanceof Error) console.warn(e.message)
+        fetchMore = false
+      }
     }
     return books.filter(book => !!book.supBookAuthors)
   },
@@ -29,7 +36,7 @@ const getBookAuthorsData = nextCache(
 
 const SupAuthorListParagraph = async ({...props}: Props) => {
   const books = await getBookAuthorsData()
-  const authors = new Map<string, JSX.Element[]>()
+  const authors = new Map<string, [NodeSupBook]>()
 
   books.map(book => {
     book.supBookAuthors?.map(author => {
@@ -38,19 +45,16 @@ const SupAuthorListParagraph = async ({...props}: Props) => {
           [author.family, author.given + " " + author.middle].filter(a => !!a).join(", ") + ` [${author.credentials}]`
         ).trim()
 
-        const authorsBooks = authors.get(authorName) || []
-        authors.set(authorName, [
-          ...authorsBooks,
-          <Link
-            className="block w-fit font-normal text-digital-red"
-            key={book.id}
-            prefetch={false}
-            href={book.path || "#"}
-          >
-            {book.title}
-            {book.supBookSubtitle && `: ${book.supBookSubtitle}`}
-          </Link>,
-        ])
+        const newBook = {
+          id: book.id,
+          path: book.path,
+          title: book.title,
+          supBookSubtitle: book.supBookSubtitle,
+        } as NodeSupBook
+
+        const authorsBooks = authors.get(authorName) || ([] as unknown as [NodeSupBook])
+        authorsBooks.push(newBook)
+        authors.set(authorName, authorsBooks)
       }
     })
   })

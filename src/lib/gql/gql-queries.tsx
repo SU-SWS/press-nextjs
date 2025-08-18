@@ -99,7 +99,7 @@ export const getMenu = cache(async (name?: MenuAvailable): Promise<MenuItem[]> =
 
   const getData = nextCache(
     async () => {
-      const menu = await graphqlClient({cache: "no-store"}).Menu({name})
+      const menu = await graphqlClient({cache: "no-cache"}).Menu({name})
       const menuItems = (menu.menu?.items || []) as MenuItem[]
 
       const filterInaccessible = (items: MenuItem[]): MenuItem[] => {
@@ -127,7 +127,7 @@ export const getAllNodes = nextCache(
     const cursors: Omit<AllNodesQueryVariables, "first"> = {}
 
     while (fetchMore) {
-      nodeQuery = await graphqlClient({cache: "no-store"}).AllNodes({first: 1000, ...cursors})
+      nodeQuery = await graphqlClient({cache: "no-cache"}).AllNodes({first: 1000, ...cursors})
       queryKeys = Object.keys(nodeQuery) as (keyof AllNodesQuery)[]
       fetchMore = false
 
