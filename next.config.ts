@@ -73,16 +73,22 @@ const nextConfig: NextConfig = {
         {
           source: "/img/:path*",
           destination: "/not-found",
-        },
-        {
-          source: "/wp-:path*",
-          destination: "/not-found",
-        },
+        }
       ],
     }
   },
   async redirects() {
     return [
+      {
+        source: "/wp-:path",
+        destination: "/not-found",
+        permanent: true,
+      },
+      {
+        source: "/wp-:slug/:path*",
+        destination: "/not-found",
+        permanent: true,
+      },
       {
         source: "/home",
         destination: "/",
