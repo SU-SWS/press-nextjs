@@ -129,13 +129,13 @@
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-17" value="Update Price Entity" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="52.5" y="210" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="gXQ1bGzr18bKDSAEKjB8-19" value="&lt;div&gt;Invalidate price entity API route (slug=/tags/price:[price-entity-uuid]&lt;br&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="gXQ1bGzr18bKDSAEKjB8-19" value="&lt;div&gt;Invalidate price entity API route (path=/tags/price:[price-entity-uuid]&lt;br&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="15" y="315" width="155" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="gXQ1bGzr18bKDSAEKjB8-21" value="&lt;div&gt;Invalidate Node page (slug=/path/to/page) &amp;amp; View Lists (slug=/tags/views:sup_book)&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="gXQ1bGzr18bKDSAEKjB8-21" value="&lt;div&gt;Invalidate Node page (path=/path/to/page) &amp;amp; View Lists (path=/tags/views:sup_book)&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="515" y="315" width="150" height="165" as="geometry" />
         </mxCell>
-        <mxCell id="gXQ1bGzr18bKDSAEKjB8-23" value="Invalidate Node page (slug=/path/to/page) and Excerpt list for respective book (slug=/tags/excerpts:[book-uuid])" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="gXQ1bGzr18bKDSAEKjB8-23" value="Invalidate Node page (path=/path/to/page) and Excerpt list for respective book (path=/tags/excerpts:[book-uuid])" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="262.5" y="310" width="145" height="165" as="geometry" />
         </mxCell>
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-24" value="&lt;div&gt;Search API module sends changed data to Algolia API&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
@@ -204,7 +204,7 @@
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-53" value="Is Basic Page?" style="rhombus;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="290" y="980" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="gXQ1bGzr18bKDSAEKjB8-64" value="&lt;div&gt;Invalidate Node page (slug=/path/to/page) &amp;amp; View Lists (slug=/tags/views:all)&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="gXQ1bGzr18bKDSAEKjB8-64" value="&lt;div&gt;Invalidate Node page (path=/path/to/page) &amp;amp; View Lists (path=/tags/views:all)&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="505" y="937.5" width="150" height="165" as="geometry" />
         </mxCell>
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-121" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="gXQ1bGzr18bKDSAEKjB8-67" target="gXQ1bGzr18bKDSAEKjB8-120" edge="1">
@@ -213,7 +213,7 @@
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-67" value="Config Page is edited via UI" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-200" y="580" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="gXQ1bGzr18bKDSAEKjB8-120" value="&lt;div&gt;Invalidate config pages (slug=/tags/config-pages)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;This will rebuild every page&lt;br&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="gXQ1bGzr18bKDSAEKjB8-120" value="&lt;div&gt;Invalidate config pages (path=/tags/config-pages)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;This will rebuild every page&lt;br&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-215" y="710" width="150" height="165" as="geometry" />
         </mxCell>
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-124" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="gXQ1bGzr18bKDSAEKjB8-122" target="gXQ1bGzr18bKDSAEKjB8-123" edge="1">
@@ -222,7 +222,7 @@
         <mxCell id="gXQ1bGzr18bKDSAEKjB8-122" value="Menu Item is edited via UI" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-30" y="580" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="gXQ1bGzr18bKDSAEKjB8-123" value="&lt;div&gt;Invalidate menus (slug=/tags/menu:main)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;This will rebuild every page&lt;br&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="gXQ1bGzr18bKDSAEKjB8-123" value="&lt;div&gt;Invalidate menus (path=/tags/menu:main)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;This will rebuild every page&lt;br&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-45" y="710" width="150" height="165" as="geometry" />
         </mxCell>
         <mxCell id="cssAWddXi6w2pjBZ18Qd-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;curved=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="cssAWddXi6w2pjBZ18Qd-0" target="cssAWddXi6w2pjBZ18Qd-5">
