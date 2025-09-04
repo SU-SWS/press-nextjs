@@ -130,7 +130,7 @@ const PreCartClient = ({
         </div>
       )}
 
-      {(hasIntlCart || priceData?.supIntlCart) && (
+      {(hasIntlCart || priceData?.supIntlCart) && !ebookSelected && (
         <fieldset>
           <legend className="mb-3 text-18 font-semibold">Region</legend>
           <div className="rs-mb-neg1 flex flex-wrap border-2 border-black-40 p-1">

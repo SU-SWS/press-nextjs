@@ -33,12 +33,12 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     container:
-      image: pookmish/drupal8ci:latest
+      image: pookmish/drupal8ci:php8.3
       env:
         BUILD_PAGES: 100
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:8.0
         env:
           MYSQL_DATABASE: drupal
           MYSQL_USER: drupal
@@ -58,6 +58,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: "SU-SWS/ace-stanfordlagunita"
+          ref: '3.x'
       - uses: actions/checkout@v4
         with:
           path: frontend
@@ -70,12 +71,11 @@ jobs:
             docroot/libraries
             docroot/modules/contrib
             frontend/node_modules
-          key: build-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}-${{ hashFiles('frontend/package.lock') }}
+          key: build-${{ hashFiles('drush/drush.yml') }}-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}
           restore-keys: |
-            build-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}-${{ hashFiles('frontend/package.lock') }}
-            build-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}-
-            build-${{ hashFiles('composer.json') }}-
-            build-
+            build-${{ hashFiles('drush/drush.yml') }}-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}
+            build-${{ hashFiles('drush/drush.yml') }}-${{ hashFiles('composer.json') }}-
+            build-${{ hashFiles('drush/drush.yml') }}-
       - name: Sync Site
         run: |
           git config --system --add safe.directory '*' &&
@@ -88,9 +88,7 @@ jobs:
           ln -sL ../default/files/ docroot/sites/supress/files &&
           apachectl stop && apachectl start &&
           composer install -n &&
-          drush sql-sync @supress.prod @self -y &&
-          drush eval 'foreach(\Drupal::entityTypeManager()->getStorage("field_validation_rule_set")->loadMultiple() as $e){$e->delete();}' &&
-          drush @supress.local deploy &&
+          drush drupal:sync --site=supress -n &&
           drush sqlq 'truncate config_pages__su_site_algolia_index; truncate config_pages__su_site_algolia_key; truncate config_pages__su_site_algolia_id'
       - name: Build Frontend
         run: |

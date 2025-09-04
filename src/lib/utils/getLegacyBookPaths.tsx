@@ -12,17 +12,26 @@ export const getLegacyBookPaths = cache(
       const cursors: Omit<BooksWorkIdQueryVariables, "first"> = {}
 
       while (fetchMore) {
-        nodeQuery = await graphqlClient({cache: "no-cache"}).BooksWorkId({first: 1000, ...cursors})
-        nodeQuery.nodeSupBooks.nodes
-          .filter(node => !!node.supBookWorkIdNumber)
-          .map(node =>
-            nodes.push({
-              id: node.supBookWorkIdNumber as number,
-              path: node.path,
-            })
-          )
-        cursors.after = nodeQuery.nodeSupBooks.pageInfo.endCursor
-        fetchMore = nodeQuery.nodeSupBooks.pageInfo.hasNextPage
+        try {
+          nodeQuery = await graphqlClient({
+            cache: "no-cache",
+            signal: AbortSignal.timeout(10000),
+          }).BooksWorkId({first: 1000, ...cursors})
+
+          nodeQuery.nodeSupBooks.nodes
+            .filter(node => !!node.supBookWorkIdNumber)
+            .map(node =>
+              nodes.push({
+                id: node.supBookWorkIdNumber as number,
+                path: node.path,
+              })
+            )
+          cursors.after = nodeQuery.nodeSupBooks.pageInfo.endCursor
+          fetchMore = nodeQuery.nodeSupBooks.pageInfo.hasNextPage
+        } catch (e) {
+          if (e instanceof Error) console.warn(e.message)
+          fetchMore = false
+        }
       }
 
       return nodes
