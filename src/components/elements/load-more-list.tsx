@@ -1,6 +1,6 @@
 "use client"
 
-import {useLayoutEffect, useRef, HtmlHTMLAttributes, JSX, useId, useState} from "react"
+import {useLayoutEffect, useRef, JSX, useId, useState, HTMLAttributes} from "react"
 import {useBoolean, useCounter} from "usehooks-ts"
 import useFocusOnRender from "@lib/hooks/useFocusOnRender"
 import useServerAction from "@lib/hooks/useServerAction"
@@ -9,7 +9,7 @@ import {ArrowPathIcon} from "@heroicons/react/20/solid"
 import Button from "@components/elements/button"
 import {InputMaybe, SupBooksAwardWinnersFilterInput, SupBooksViewSortKeys} from "@lib/gql/__generated__/drupal.d"
 
-type Props = HtmlHTMLAttributes<HTMLDivElement> & {
+type Props = HTMLAttributes<HTMLDivElement> & {
   /**
    * Load more button text/element.
    */
@@ -17,11 +17,11 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
    * Attributes for the <ul> container.
    */
-  ulProps?: HtmlHTMLAttributes<HTMLUListElement>
+  ulProps?: HTMLAttributes<HTMLUListElement>
   /**
    * Attributes for each <li> element.
    */
-  liProps?: HtmlHTMLAttributes<HTMLLIElement>
+  liProps?: HTMLAttributes<HTMLLIElement>
   /**
    * The number of items per page.
    */
