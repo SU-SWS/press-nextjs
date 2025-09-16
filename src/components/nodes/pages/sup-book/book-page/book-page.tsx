@@ -15,13 +15,18 @@ type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
 }
 const BookPage = async ({node, ...props}: Props) => {
-  const awards = node.supBookAwards?.sort((a, b) =>
-    a.supYear && b.supYear && a.supYear < b.supYear
-      ? 1
-      : a.supYear === b.supYear && a.supRank && b.supRank && a.supRank > b.supRank
-        ? -1
-        : -1
-  )
+  const awards = node.supBookAwards?.sort((a, b) => {
+    // Sort by rank, ascending.
+    if (a.supRank && b.supRank && a.supRank < b.supRank) return -1
+    if (a.supRank && b.supRank && a.supRank > b.supRank) return 1
+
+    // If ranks are equal, compare by year, descending
+    if (a.supYear && b.supYear && a.supYear < b.supYear) return 1
+    if (a.supYear && b.supYear && a.supYear > b.supYear) return -1
+
+    // If both rank and year are equal.
+    return 0
+  })
 
   const createLinkParams = (subject: TermSupBookSubject) => {
     const linkParams = new URLSearchParams({subjects: subject.name})
