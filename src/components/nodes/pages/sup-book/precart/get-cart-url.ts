@@ -6,8 +6,11 @@ export const getCartUrl = (
   isIntl: boolean,
   altFormat: string
 ) => {
+  const cartDomain = process.env.NEXT_PUBLIC_CART_DOMAIN
+  if (!cartDomain) throw new Error("NEXT_PUBLIC_CART_DOMAIN is not defined")
+
   // Ebook go to the same place regardless of international.
-  if (format === "ebook") return `https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}_${ebookFormat}`
+  if (format === "ebook") return `${cartDomain}/?add-to-cart-sku=${isbn}_${ebookFormat}`
 
   // All other international requests go to CAP.
   if (isIntl) {
@@ -16,5 +19,5 @@ export const getCartUrl = (
   }
 
   const glassBoxFormat = format === "alt" ? altFormat.toUpperCase() : "PRINT"
-  return `https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}_${glassBoxFormat}`
+  return `${cartDomain}/?add-to-cart-sku=${isbn}_${glassBoxFormat}`
 }

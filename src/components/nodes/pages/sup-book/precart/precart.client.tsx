@@ -13,9 +13,11 @@ import {clsx} from "clsx"
 import {useBoolean} from "usehooks-ts"
 import {ChangeEvent} from "react"
 import Link from "@components/elements/link"
-import {useRouter} from "next/navigation"
 import {submitForm} from "@components/nodes/pages/sup-book/precart/precart.server"
 import {getCartUrl} from "@components/nodes/pages/sup-book/precart/get-cart-url"
+import {toast} from "react-toastify"
+import useCartCount from "@lib/hooks/useCartCount"
+import {AddToCartResponse} from "@lib/@types/cart-api"
 
 type Props = {
   priceId?: PressPrice["id"]
@@ -44,7 +46,7 @@ const PreCartClient = ({
   altIsbn,
   altFormat,
 }: Props) => {
-  const router = useRouter()
+  const {setCartCount} = useCartCount()
   const [priceData, setPriceData] = useState<PressPrice>()
   const {value: ebookSelected, setValue: setEbookSelected} = useBoolean(false)
   const {value: shouldShowEbookButton, setTrue: showEbookButton} = useBoolean(false)
@@ -82,7 +84,26 @@ const PreCartClient = ({
     const ebookFormat = formData.get("ebook") as string
     const altFormat = formData.get("alt-format") as string
 
-    router.push(getCartUrl(bookTitle, format, isbn, ebookFormat, isIntl, altFormat))
+    const cartUrl = getCartUrl(bookTitle, format, isbn, ebookFormat, isIntl, altFormat)
+    if (cartUrl.includes("combinedacademic")) {
+      window.location.href = cartUrl
+      return
+    }
+
+    fetch(cartUrl, {credentials: "include"})
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
+        return res.json()
+      })
+      .then((message: AddToCartResponse) => {
+        if (!message.success) throw new Error(message.data.message)
+        setCartCount(message.data.summary_qty || 0)
+        toast("Book added to cart")
+      })
+      .catch(e => {
+        console.warn("An error occurred when adding the book to the cart: " + e.toString())
+        window.location.href = cartUrl
+      })
   }
 
   return (
