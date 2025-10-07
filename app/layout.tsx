@@ -7,6 +7,7 @@ import {montserrat} from "../src/styles/fonts"
 import DrupalWindowSync from "@components/elements/drupal-window-sync"
 import UserAnalytics from "@components/elements/user-analytics"
 import Editori11y from "@components/tools/editorially"
+import {ToastMessage} from "@components/elements/toast-message"
 
 const appleIcons: Icon[] = [57, 72, 76, 114, 120, 144, 152, 180].map(size => ({
   url: `/apple-touch-icon-${size}x${size}.png`,
@@ -52,6 +53,7 @@ const RootLayout = ({children, modal}: {children: React.ReactNode; modal: React.
           <main id="main-content" className="mb-32 flex-grow">
             {children}
 
+            <ToastMessage />
             <BackToTop />
           </main>
           <PageFooter />
