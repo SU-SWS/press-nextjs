@@ -2,7 +2,7 @@
 
 import useIsInternational from "@lib/hooks/useIsInternational"
 import Button from "@components/elements/button"
-import {HTMLAttributes, ReactNode, useEffect, useState} from "react"
+import {FormEvent, HTMLAttributes, ReactNode, useEffect, useState} from "react"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
 import {Maybe, NodeSupBook, PressPrice} from "@lib/gql/__generated__/drupal.d"
 import {BookOpenIcon as BookOpenIconOutline, DeviceTabletIcon} from "@heroicons/react/24/outline"
@@ -10,10 +10,12 @@ import {BookOpenIcon} from "@heroicons/react/24/solid"
 import {formatCurrency} from "@lib/utils/format-currency"
 import {twMerge} from "tailwind-merge"
 import {clsx} from "clsx"
-import {submitForm} from "@components/nodes/pages/sup-book/precart/precart.server"
 import {useBoolean} from "usehooks-ts"
 import {ChangeEvent} from "react"
 import Link from "@components/elements/link"
+import {useRouter} from "next/navigation"
+import {submitForm} from "@components/nodes/pages/sup-book/precart/precart.server"
+import {getCartUrl} from "@components/nodes/pages/sup-book/precart/get-cart-url"
 
 type Props = {
   priceId?: PressPrice["id"]
@@ -42,6 +44,7 @@ const PreCartClient = ({
   altIsbn,
   altFormat,
 }: Props) => {
+  const router = useRouter()
   const [priceData, setPriceData] = useState<PressPrice>()
   const {value: ebookSelected, setValue: setEbookSelected} = useBoolean(false)
   const {value: shouldShowEbookButton, setTrue: showEbookButton} = useBoolean(false)
@@ -66,8 +69,24 @@ const PreCartClient = ({
     setEbookSelected(e.target.value.includes("ebook:"))
   }
 
+  // Client side form submission. Fallback to server action form submission.
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault()
+    const formData = new FormData(event.target as HTMLFormElement)
+
+    // Honeypot field.
+    if (formData.get("email")) return
+
+    const bookTitle = formData.get("title") as string
+    const [format, isbn] = (formData.get("format") as string).split(":")
+    const ebookFormat = formData.get("ebook") as string
+    const altFormat = formData.get("alt-format") as string
+
+    router.push(getCartUrl(bookTitle, format, isbn, ebookFormat, isIntl, altFormat))
+  }
+
   return (
-    <form className="rs-mb-1 rs-pb-1 border-b-2 border-fog @container" action={submitForm}>
+    <form className="rs-mb-1 rs-pb-1 border-b-2 border-fog @container" action={submitForm} onSubmit={handleFormSubmit}>
       <input type="hidden" name="title" value={bookTitle} />
       <label className="sr-only">
         Do not fill with any information

@@ -1,10 +1,9 @@
 "use server"
 
 import {redirect} from "next/navigation"
+import {getCartUrl} from "@components/nodes/pages/sup-book/precart/get-cart-url"
 
 export const submitForm = async (formData: FormData) => {
-  "use server"
-
   // Honeypot field.
   if (formData.get("email")) return
 
@@ -14,16 +13,5 @@ export const submitForm = async (formData: FormData) => {
   const ebookFormat = formData.get("ebook") as string
   const altFormat = formData.get("alt-format") as string
 
-  // Ebook go to the same place regardless of international.
-  if (format === "ebook")
-    redirect(`https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}_${ebookFormat}`)
-
-  // All other international requests go to CAP.
-  if (isIntl) {
-    const title = bookTitle.replaceAll(/[^a-zA-Z\d\s:]/g, "").replaceAll(/\s/g, "-")
-    redirect(`https://www.combinedacademic.co.uk/${isbn}/${title}`)
-  }
-
-  const glassBoxFormat = format === "alt" ? altFormat.toUpperCase() : "PRINT"
-  redirect(`https://stanforduniversitypress.glassboxx.com/?add-to-cart-sku=${isbn}_${glassBoxFormat}`)
+  redirect(getCartUrl(bookTitle, format, isbn, ebookFormat, isIntl, altFormat))
 }
