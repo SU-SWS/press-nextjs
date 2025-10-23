@@ -18,7 +18,7 @@ const getBookAuthorsData = nextCache(
       try {
         query = await graphqlClient({
           cache: "no-cache",
-          signal: AbortSignal.timeout(5000),
+          signal: AbortSignal.timeout(10000),
         }).BooksAuthors({after: afterCursor})
         fetchMore = query.nodeSupBooks.pageInfo.hasNextPage
         afterCursor = query.nodeSupBooks.pageInfo.endCursor

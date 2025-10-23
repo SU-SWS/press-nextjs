@@ -44,11 +44,11 @@ export const Tabs = ({paramId = "tab", orientation, defaultTab, children, ...pro
   }
 
   const paramValue = searchParams.get(paramId)
-  const initialTab = useRef(defaultTab || (paramValue && parseInt(paramValue)))
+  const initialTab = defaultTab || (paramValue && parseInt(paramValue))
 
   const {contextValue} = useTabs({
     orientation: isVertical ? "vertical" : "horizontal",
-    defaultValue: initialTab.current || 0,
+    defaultValue: initialTab || 0,
     onChange,
     selectionFollowsFocus: true,
   })
