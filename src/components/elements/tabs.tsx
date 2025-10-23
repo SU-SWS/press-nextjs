@@ -48,7 +48,7 @@ export const Tabs = ({paramId = "tab", orientation, defaultTab, children, ...pro
 
   const {contextValue} = useTabs({
     orientation: isVertical ? "vertical" : "horizontal",
-    defaultValue: initialTab || 0,
+    value: initialTab || 0,
     onChange,
     selectionFollowsFocus: true,
   })
