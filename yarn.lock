@@ -8339,7 +8339,7 @@ __metadata:
     react-focus-lock: "npm:^2.13.6"
     react-instantsearch: "npm:^7.17.0"
     react-instantsearch-nextjs: "npm:^1.0.3"
-    react-slick: "npm:^0.31.0"
+    react-slick: "npm:0.30.3"
     react-tiny-oembed: "npm:^1.1.0"
     react-toastify: "npm:^11.0.5"
     sharp: "npm:^0.34.4"
@@ -8780,6 +8780,13 @@ __metadata:
     graceful-fs: "npm:^4.2.4"
     tapable: "npm:^2.2.0"
   checksum: 10c0/4cffd9b125225184e2abed9fdf0ed3dbd2224c873b165d0838fd066cde32e0918626cba2f1f4bf6860762f13a7e2364fd89a82b99566be2873d813573ac71846
+  languageName: node
+  linkType: hard
+
+"enquire.js@npm:^2.1.6":
+  version: 2.1.6
+  resolution: "enquire.js@npm:2.1.6"
+  checksum: 10c0/3ab739ed0885b5dda973de3fe610d2e3ce261a3ee77321ee4c0c876294c1c37f87f6cccead3ee1de8ead24b31f730586847f89118f083e776677f7c3cd71abaa
   languageName: node
   linkType: hard
 
@@ -13617,18 +13624,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-slick@npm:^0.31.0":
-  version: 0.31.0
-  resolution: "react-slick@npm:0.31.0"
+"react-slick@npm:0.30.3":
+  version: 0.30.3
+  resolution: "react-slick@npm:0.30.3"
   dependencies:
     classnames: "npm:^2.2.5"
+    enquire.js: "npm:^2.1.6"
     json2mq: "npm:^0.2.0"
     lodash.debounce: "npm:^4.0.8"
     resize-observer-polyfill: "npm:^1.5.0"
   peerDependencies:
     react: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/ac006104323c61af6d8e208edb49038485458756b72c9e15622beef2700085bcdb1d21f028be1b3f199ff15616eab9d61a45aa09650c9ae1d72bf2a23be48616
+  checksum: 10c0/7a4cc4f898ede6fd3a0b7ac48921c1021c7ed3bb1eee5d701b7c3d3d53b0d18d20e72aab1dcb8012ff13636b4927c4bcf243fb97258811a9511bed7ab5a6d27d
   languageName: node
   linkType: hard
 
