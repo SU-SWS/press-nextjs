@@ -1,3 +1,16 @@
+1.2.0 2025-11-05
+--------------------------------------------------
+- Update paragraph rows to include row background and stat card component
+- Added cron job to clear legacy book paths
+- fix tab rendering
+- Upgrade to next16
+- Provide a client form submission as well as a server fallback for pre-cart behavior
+- Improved routing for algolia search page
+- Fixed book award sorting by rank
+- Updated architectural workflow
+- Hide region selection if ebook is selected
+
+
 1.1.0 2025-05-28
 --------------------------------------------------
 - Display epub button in cart only if the published date has passed
