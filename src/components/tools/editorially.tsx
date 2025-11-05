@@ -5,9 +5,8 @@ import {useEffect} from "react"
 
 const Editori11y = () => {
   const startEditoria11y = () => {
-    // @ts-expect-error Ed11y is a global class provided by the library.
     if (typeof Ed11y != "undefined") {
-      // @ts-expect-error Ed11y is a global class provided by the library.
+      // @ts-expect-error Ed11y is a global class provided by the external library.
       new Ed11y({
         checkRoots: "#main-content",
         ignoreElements: "nav *, .ed11y-ignore",
@@ -18,7 +17,7 @@ const Editori11y = () => {
   }
 
   useEffect(() => {
-    fetch("/api/draft/disable").catch(_e => console.warn("Unable to disable preview mode."))
+    fetch("/api/draft/disable").catch(_e => console.warn("Disabling preview mode failed"))
   }, [])
 
   return (

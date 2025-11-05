@@ -1,4 +1,10 @@
 {
-  "buildCommand": "yarn build --no-lint",
-  "installCommand": "yarn workspaces focus --production"
+  "buildCommand": "yarn build --webpack",
+  "installCommand": "yarn workspaces focus --production",
+  "crons": [
+    {
+      "path": "/api/book-paths/revalidate",
+      "schedule": "0 0 * * 0,3"
+    }
+  ]
 }

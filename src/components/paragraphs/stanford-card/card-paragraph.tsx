@@ -9,7 +9,7 @@ import ImageCard from "@components/patterns/image-card"
 import BackgroundImageCard from "@components/patterns/background-image-card"
 import {clsx} from "clsx"
 import {twMerge} from "tailwind-merge"
-import {CardParagraphBehaviors} from "@lib/drupal/drupal-jsonapi.d"
+import {CardParagraphBehaviors} from "drupal"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordCard

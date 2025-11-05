@@ -1,7 +1,7 @@
 import {NextResponse} from "next/server"
 import type {NextRequest} from "next/server"
 
-export const middleware = (req: NextRequest) => {
+export const proxy = (req: NextRequest) => {
   if (!isAuthenticated(req)) {
     return new NextResponse("Authentication required", {
       status: 401,
@@ -20,7 +20,9 @@ const isAuthenticated = (req: NextRequest) => {
   const [user, pass] = Buffer.from(authHeader.split(" ")[1], "base64").toString().split(":")
 
   const acceptedCredentials = process.env.HTTP_BASIC_AUTH?.split("|").map(cred => cred.split(":")) || []
-  return !!acceptedCredentials.find(creds => req.nextUrl.pathname.indexOf(`/${creds[0]}/`) > 0 && creds[1] === user && creds[2] === pass)
+  return !!acceptedCredentials.find(
+    creds => req.nextUrl.pathname.indexOf(`/${creds[0]}/`) > 0 && creds[1] === user && creds[2] === pass
+  )
 }
 
 // Step 3. Configure "Matching Paths" below to protect routes with HTTP Basic Auth

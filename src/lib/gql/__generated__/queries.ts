@@ -438,6 +438,40 @@ export const FragmentParagraphStanfordLayoutFragmentDoc = gql`
   ...FragmentParagraphInterface
 }
     ${FragmentParagraphInterfaceFragmentDoc}`;
+export const FragmentParagraphStanfordStatCardFragmentDoc = gql`
+    fragment FragmentParagraphStanfordStatCard on ParagraphStanfordStatCard {
+  suStatBgColor {
+    color
+  }
+  suStatBody {
+    processed
+  }
+  suStatButton {
+    url
+    title
+  }
+  suStatCentered
+  suStatHeadline
+  suStatHeadlineLvl
+  suStatHeadingHide
+  suStatIcon {
+    iconName
+    style
+  }
+  suStatIconColor {
+    color
+  }
+  suStatImage {
+    ...FragmentMediaImage
+  }
+  suStatLinkStyle
+  suStatStat
+  suStatStatColor {
+    color
+  }
+  suStatSuperhead
+}
+    ${FragmentMediaImageFragmentDoc}`;
 export const FragmentParagraphSupCarouselSlideFragmentDoc = gql`
     fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   ...FragmentParagraphInterface
@@ -566,6 +600,7 @@ export const FragmentParagraphUnionFragmentDoc = gql`
   ...FragmentParagraphStanfordSpacer
   ...FragmentParagraphStanfordWysiwyg
   ...FragmentParagraphStanfordLayout
+  ...FragmentParagraphStanfordStatCard
   ...FragmentParagraphSupCarousel
   ...FragmentParagraphSupFileList
   ...FragmentParagraphSupAuthorList
@@ -584,6 +619,7 @@ ${FragmentParagraphStanfordMediaCaptionFragmentDoc}
 ${FragmentParagraphStanfordSpacerFragmentDoc}
 ${FragmentParagraphStanfordWysiwygFragmentDoc}
 ${FragmentParagraphStanfordLayoutFragmentDoc}
+${FragmentParagraphStanfordStatCardFragmentDoc}
 ${FragmentParagraphSupCarouselFragmentDoc}
 ${FragmentParagraphSupFileListFragmentDoc}
 ${FragmentParagraphSupAuthorListFragmentDoc}
@@ -801,6 +837,9 @@ export const FragmentNodeStanfordPageFragmentDoc = gql`
     fragment FragmentNodeStanfordPage on NodeStanfordPage {
   layoutSelection {
     id
+  }
+  body {
+    processed
   }
   suBasicPageType {
     ...FragmentTermInterface

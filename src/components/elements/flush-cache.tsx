@@ -5,7 +5,7 @@ const FlushCache = ({currentPath}: {currentPath: string}) => {
     "use server"
 
     revalidatePath(currentPath)
-    revalidateTag(`paths:${currentPath}`)
+    revalidateTag(`paths:${currentPath}`, "max")
   }
 
   return (

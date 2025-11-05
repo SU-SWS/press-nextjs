@@ -8,7 +8,7 @@ import {twMerge} from "tailwind-merge"
 import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behaviors"
 import {getEntityFromPath} from "@lib/gql/gql-queries"
 import {ImageCardSkeleton} from "@components/patterns/image-card"
-import {TeaserParagraphBehaviors} from "@lib/drupal/drupal-jsonapi.d"
+import {TeaserParagraphBehaviors} from "drupal"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordEntity

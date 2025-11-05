@@ -152,6 +152,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
   useLayoutEffect(() => {
     // If the right side of the submenu is not visible, set the position to be on the left of the menu item.
     const {x, width} = belowListRef.current?.getBoundingClientRect() || {x: 0, width: 0}
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (x + width > window.innerWidth) setPositionRight(false)
   }, [submenuOpen])
 

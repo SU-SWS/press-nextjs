@@ -122,6 +122,40 @@ fragment FragmentParagraphStanfordMediaCaption on ParagraphStanfordMediaCaption 
   }
 }
 
+fragment FragmentParagraphStanfordStatCard on ParagraphStanfordStatCard {
+    suStatBgColor {
+        color
+    }
+    suStatBody {
+        processed
+    }
+    suStatButton {
+        url
+        title
+    }
+    suStatCentered
+    suStatHeadline
+    suStatHeadlineLvl
+    suStatHeadingHide
+    suStatIcon {
+        iconName
+        style
+    }
+    suStatIconColor {
+        color
+    }
+    suStatImage {
+        ...FragmentMediaImage
+    }
+    suStatLinkStyle
+    suStatStat
+    suStatStatColor {
+        color
+    }
+    suStatSuperhead
+}
+
+
 fragment FragmentParagraphStanfordPersonCtum on ParagraphStanfordPersonCtum {
   ...FragmentParagraphInterface
   suPersonCtaName
@@ -270,6 +304,7 @@ fragment FragmentParagraphUnion on ParagraphUnion {
   ...FragmentParagraphStanfordSpacer
   ...FragmentParagraphStanfordWysiwyg
   ...FragmentParagraphStanfordLayout
+  ...FragmentParagraphStanfordStatCard
   ...FragmentParagraphSupCarousel
   ...FragmentParagraphSupFileList
   ...FragmentParagraphSupAuthorList

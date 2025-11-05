@@ -15,7 +15,7 @@ import {InstantSearchNext} from "react-instantsearch-nextjs"
 import {H2} from "@components/elements/headers"
 import {HTMLAttributes, useEffect, useId, useLayoutEffect, useMemo, useRef, useState} from "react"
 import Button from "@components/elements/button"
-import {useRouter, useSearchParams} from "next/navigation"
+import {useSearchParams} from "next/navigation"
 import {Hit as HitType} from "instantsearch.js"
 import SelectList from "@components/elements/select-list"
 import {SelectOptionDefinition} from "@mui/base/useSelect"
@@ -31,7 +31,7 @@ import {
 import DefaultHit, {AlgoliaHit} from "@components/algolia-search/hits/default"
 import {CheckIcon} from "@heroicons/react/20/solid"
 import clsx from "clsx"
-import {useBoolean, useLocalStorage, useReadLocalStorage} from "usehooks-ts"
+import {useBoolean, useIsClient, useLocalStorage, useReadLocalStorage} from "usehooks-ts"
 import {twMerge} from "tailwind-merge"
 import {ArrowPathIcon} from "@heroicons/react/16/solid"
 
@@ -44,47 +44,54 @@ type Props = {
 
 const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
   const searchClient = useMemo(() => liteClient(appId, searchApiKey), [appId, searchApiKey])
-  const [initialState, setInitialState] = useState<IndexUiState>({refinementList: {book_type: ["book"]}})
-  const initialRender = useRef(true)
   const sortChoice = useReadLocalStorage<string>("search-sort")
+  const isClient = useIsClient()
 
-  useEffect(() => {
-    initialRender.current = false
-
-    const searchParams = new URLSearchParams(window.location.search)
-    const newInitialState: IndexUiState = {refinementList: {book_type: ["book"]}}
-
-    const query = searchParams.get("q")
-    const subjects = searchParams.get("subjects")
-    const onlyBooks = searchParams.get("only-books")
-    const minYear = searchParams.get("published-min")
-    const maxYear = searchParams.get("published-max")
-
-    if (query) newInitialState.query = query
-    if (subjects && newInitialState.refinementList) {
-      newInitialState.refinementList.book_subject = subjects.split(",")
-    }
-
-    if (onlyBooks == "false" && newInitialState.refinementList) {
-      delete newInitialState.refinementList.book_type
-    }
-    if (minYear || maxYear) {
-      newInitialState.range = {
-        book_published: (minYear || "0") + ":" + (maxYear || "3000"),
-      }
-    }
-    setInitialState(newInitialState)
-  }, [])
-
-  if (initialRender.current) return <ArrowPathIcon className="mx-auto animate-spin" width={50} />
+  if (!isClient) return <ArrowPathIcon className="mx-auto animate-spin" width={50} />
   return (
     <div>
       <InstantSearchNext
         indexName={sortChoice || searchIndex}
         searchClient={searchClient}
-        initialUiState={{[searchIndex]: initialState}}
         future={{preserveSharedStateOnUnmount: true}}
         insights={true}
+        routing={{
+          router: {cleanUrlOnDispose: false},
+          stateMapping: {
+            stateToRoute(uiState): Record<string, string> {
+              const indexUiState = uiState[sortChoice || searchIndex]
+              const refinements: Record<string, string> = {}
+
+              if (indexUiState.range?.book_published_year) {
+                const [yearMin, yearMax] = indexUiState.range.book_published_year.split(":")
+                if (yearMin) refinements["published-min"] = yearMin
+                if (yearMax) refinements["published-max"] = yearMax
+              }
+
+              if (indexUiState.refinementList?.book_subject)
+                refinements.subjects = indexUiState.refinementList.book_subject.join(",")
+
+              if (!indexUiState.refinementList?.book_type?.includes("book")) refinements["only-books"] = "false"
+
+              if (indexUiState.query) refinements.q = indexUiState.query
+              return refinements
+            },
+            routeToState(routeState: Record<string, string>) {
+              const refinementList: IndexUiState["refinementList"] = {}
+              const range: IndexUiState["range"] = {}
+
+              if (routeState["published-min"]) range.book_published_year = routeState["published-min"] + ":"
+              if (routeState["published-max"])
+                range.book_published_year = (":" + routeState["published-max"]).replace("::", ":")
+              if (routeState["only-books"] !== "false") refinementList["book_type"] = ["book"]
+              if (routeState["subjects"]) refinementList["book_subject"] = routeState["subjects"].split(",")
+
+              return {
+                [sortChoice || searchIndex]: {query: routeState.q, refinementList, range},
+              }
+            },
+          },
+        }}
       >
         <Form searchIndex={searchIndex} />
       </InstantSearchNext>
@@ -93,7 +100,6 @@ const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
 }
 
 const Form = ({searchIndex}: {searchIndex: string}) => {
-  const router = useRouter()
   const searchParams = useSearchParams()
 
   const {items: bookType, refine: refineBookType} = useRefinementList({attribute: "book_type"})
@@ -108,11 +114,11 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
   })
 
   const {
-    start: pubYearRange,
     range: pubYearRangeBounds,
     refine: refineRange,
     canRefine: canRefinePubYear,
   } = useRange({attribute: "book_published_year"})
+
   const {min: minYear, max: maxYear} = pubYearRangeBounds
   const {
     items: currentRefinements,
@@ -139,35 +145,6 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     const rangeTo = rangeChoices[1] && maxYear && rangeChoices[1] < maxYear ? rangeChoices[1] : maxYear
     refineRange([rangeFrom, rangeTo])
   }, [rangeChoices, minYear, maxYear, refineRange])
-
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString())
-    params.delete("published-min")
-    params.delete("published-max")
-    params.delete("subjects")
-    params.delete("only-books")
-    params.delete("q")
-
-    // Keyword search.
-    if (query) params.set("q", query)
-
-    // Publication year range.
-    if (Number.isFinite(pubYearRange[0])) params.set("published-min", `${pubYearRange[0]}`)
-    if (Number.isFinite(pubYearRange[1])) params.set("published-max", `${pubYearRange[1]}`)
-
-    // Books only.
-    if (!currentRefinements.find(refinement => refinement.attribute === "book_type")) params.set("only-books", "false")
-
-    // Book subjects.
-    const chosenSubjects = currentRefinements
-      .find(refinement => refinement.attribute === "book_subject")
-      ?.refinements.map(item => item.value)
-    if (chosenSubjects) params.set("subjects", chosenSubjects.join(","))
-
-    const newSearch = params.toString()
-    if (window.location.search.replace(/^\?/, "") != newSearch)
-      router.replace(`?${newSearch}${window.location.hash || ""}`, {scroll: false})
-  }, [router, searchParams, currentRefinements, query, pubYearRange])
 
   const {value: expanded, toggle: toggleExpanded} = useBoolean(false)
 
