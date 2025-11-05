@@ -10,6 +10,7 @@ import clsx from "clsx"
 import {twMerge} from "tailwind-merge"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 import {getFirstText} from "@lib/utils/text-tools"
+import Wysiwyg from "@components/elements/wysiwyg"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordPage
@@ -46,6 +47,8 @@ const StanfordPagePage = ({node, ...props}: Props) => {
       {node.suPageBanner?.__typename !== "ParagraphStanfordPageTitleBanner" && (
         <H1 className={twMerge("centered mt-32", clsx({"lg:max-w-1200": fullWidth}))}>{node.title}</H1>
       )}
+
+      <Wysiwyg html={node.body?.processed} className="centered mb-32 xl:max-w-[980px]" />
 
       {!fullWidth && (
         <InteriorPage currentPath={node.path || "#"}>

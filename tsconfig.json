@@ -30,7 +30,11 @@
       "@lib/*": [
         "./src/lib/*"
       ]
-    }
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/lib/@types"
+    ]
   },
   "include": [
     "next-env.d.ts",

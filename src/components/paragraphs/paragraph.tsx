@@ -15,6 +15,7 @@ import SupSearchFormParagraph from "@components/paragraphs/sup-search-form/sup-s
 import SupBlogTeaserParagraph from "@components/paragraphs/sup-blog-teaser/sup-blog-teaser-paragraph"
 import UnpublishedBanner from "@components/elements/unpublished-banner"
 import FaqParagraph from "@components/paragraphs/stanford-faq/faq-paragraph"
+import StatCardParagraph from "@components/paragraphs/stanford-stat-card/stat-card-paragraph"
 
 type Props = {
   /**
@@ -53,6 +54,8 @@ const ParagraphComponent = async ({paragraph}: Props) => {
       return <SpacerParagraph paragraph={paragraph} {...itemProps} />
     case "ParagraphStanfordWysiwyg":
       return <WysiwygParagraph paragraph={paragraph} {...itemProps} />
+    case "ParagraphStanfordStatCard":
+      return <StatCardParagraph paragraph={paragraph} {...itemProps} />
     case "ParagraphStanfordList":
       return (
         <Suspense>

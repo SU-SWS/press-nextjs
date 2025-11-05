@@ -1,4 +1,5 @@
 import type {NextConfig} from "next"
+import {INFINITE_CACHE} from "next/dist/lib/constants"
 
 const drupalUrl = new URL(process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)
 
@@ -8,7 +9,16 @@ const nextConfig: NextConfig = {
     // Disable build errors since dev dependencies aren't loaded on prod. Rely on GitHub actions to throw any errors.
     ignoreBuildErrors: process.env.CI !== "true",
   },
+  cacheLife: {
+    default: {
+      stale: undefined,
+      revalidate: INFINITE_CACHE,
+      expire: INFINITE_CACHE,
+    },
+  },
   images: {
+    minimumCacheTTL: 2678400,
+    dangerouslyAllowLocalIP: !!(process.env.CI || process.env.NODE_ENV === "development"),
     remotePatterns: [
       {
         // Allow any stanford domain for images.
@@ -73,7 +83,7 @@ const nextConfig: NextConfig = {
         {
           source: "/img/:path*",
           destination: "/not-found",
-        }
+        },
       ],
     }
   },

@@ -7683,9 +7683,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001579, caniuse-lite@npm:^1.0.30001702, caniuse-lite@npm:^1.0.30001718":
-  version: 1.0.30001720
-  resolution: "caniuse-lite@npm:1.0.30001720"
-  checksum: 10c0/ba9f963364ec4bfc8359d15d7e2cf365185fa1fddc90b4f534c71befedae9b3dd0cd2583a25ffc168a02d7b61b6c18b59bda0a1828ea2a5250fd3e35c2c049e9
+  version: 1.0.30001753
+  resolution: "caniuse-lite@npm:1.0.30001753"
+  checksum: 10c0/730344b6c54769f544f1d4bd7f99a122cd5f6e964e482adbcb18b63cda56e9c40aca1e3ab47c7154098803c9ba3772cca0aba936d1c924e67e8db8345712e5a8
   languageName: node
   linkType: hard
 
@@ -8150,6 +8150,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"countup.js@npm:^2.8.0":
+  version: 2.9.0
+  resolution: "countup.js@npm:2.9.0"
+  checksum: 10c0/41ca03df2dd9f088a949353eb28f4bc6b0b15e5e5b6c93674b72d0e454b8ba4bbe1ce18441ab088e1446221c9197aebc26100812263ff213d62cc811ba0d7952
+  languageName: node
+  linkType: hard
+
 "create-ecdh@npm:^4.0.4":
   version: 4.0.4
   resolution: "create-ecdh@npm:4.0.4"
@@ -8484,6 +8491,7 @@ __metadata:
     prettier-plugin-tailwindcss: "npm:^0.7.1"
     qs: "npm:^6.14.0"
     react: "npm:19.2.0"
+    react-countup: "npm:^6.5.3"
     react-docgen: "npm:^8.0.2"
     react-dom: "npm:19.2.0"
     react-focus-lock: "npm:^2.13.6"
@@ -13510,6 +13518,17 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
   checksum: 10c0/7240cfc64b2b1615d1aa4ea050d8aa9c5a427d871eab94cf7e39dba737d89554edb46a53da26c6096cc04d58a29779222bd3790ffb8d21eaa57a85492eaed31b
+  languageName: node
+  linkType: hard
+
+"react-countup@npm:^6.5.3":
+  version: 6.5.3
+  resolution: "react-countup@npm:6.5.3"
+  dependencies:
+    countup.js: "npm:^2.8.0"
+  peerDependencies:
+    react: ">= 16.3.0"
+  checksum: 10c0/d18beba2a7dc5f2dce346d47c90e76570f862a7f49acb7ad73028acfd584f691c84dde3b1c8743181d158636a20a7b9201ad8c6c8b4d310ff02ca68eaccf997f
   languageName: node
   linkType: hard
 
