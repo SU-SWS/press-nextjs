@@ -68,7 +68,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
         <H2 className="rs-mt-4 type-1 xl:text-26">Review Copy Requests</H2>
         <p>
           If you would like to review one of our titles for a periodical or other publication, please email{" "}
-          <Link href="mailto:publicity@www.sup.org">publicity@www.sup.org</Link> with the following information:
+          <Link href="mailto:publicity@sup.org">publicity@sup.org</Link> with the following information:
         </p>
 
         <ul className="rs-mb-2">
@@ -147,7 +147,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
                 <Link href="http://sup.einspections.eb20.com/Help/">digital comps website help</Link>
               </b>{" "}
               first. If that does not answer your question(s), please contact us at{" "}
-              <Link href="mailto:information@www.sup.org">information@www.sup.org</Link>.
+              <Link href="mailto:info@sup.org">info@sup.org</Link>.
             </p>
             <p>
               If you are requesting a book on behalf of someone else, enter in the name and email of the individual for
