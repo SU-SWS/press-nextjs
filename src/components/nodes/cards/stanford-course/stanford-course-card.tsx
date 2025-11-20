@@ -12,8 +12,8 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 const StanfordCourseCard = ({node, headingLevel, ...props}: Props) => {
   const Heading = headingLevel === "h3" ? H3 : H2
   return (
-    <ImageCard {...props} aria-labelledby={node.id} isArticle>
-      <Heading className="type-1 order-last xl:text-26" id={node.id}>
+    <ImageCard {...props} aria-labelledby={node.uuid} isArticle>
+      <Heading className="type-1 order-last xl:text-26" id={node.uuid}>
         <Link href={node.path || "#"}>{node.title}</Link>
       </Heading>
       <div className="order-first flex gap-5">

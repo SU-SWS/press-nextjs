@@ -17,9 +17,9 @@ type Props = HTMLAttributes<HTMLElement> & {
 const SupBookAncillaryPage = async ({node, ...props}: Props) => {
   const book = node.supAncillaryBook
 
-  const ancillaryPages = await getBookAncillaryContents(node.supAncillaryBook.id)
+  const ancillaryPages = await getBookAncillaryContents(node.supAncillaryBook.uuid)
   const ancillaryMenuItems: MenuItemType[] = ancillaryPages.map(page => ({
-    id: page.id,
+    id: page.uuid,
     children: [],
     url: page.path,
     title: page.title,
@@ -39,7 +39,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
       childrenProps={{className: "centered rs-mt-4 flex gap-[17.1rem]"}}
       isArticle
     >
-      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={`${book.title}: ${node.title}`} />
+      <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={`${book.title}: ${node.title}`} />
       <H1 className="sr-only">
         {node.title} for <em>{book.title}</em>
       </H1>
@@ -53,7 +53,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
             <BookPageImage node={node.supAncillaryBook} />
           </div>
         )}
-        <SideNav menuItems={ancillaryMenuItems} activeTrail={[node.id]} />
+        <SideNav menuItems={ancillaryMenuItems} activeTrail={[node.uuid]} />
       </aside>
 
       <div id="page-content" className="centered flex-grow lg:max-w-[900px]">

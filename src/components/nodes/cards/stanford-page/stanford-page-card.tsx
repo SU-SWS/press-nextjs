@@ -23,13 +23,13 @@ const StanfordPageCard = ({node, headingLevel, ...props}: Props) => {
     <ImageCard
       {...props}
       className="relative"
-      aria-labelledby={node.id}
+      aria-labelledby={node.uuid}
       imageUrl={image?.url}
       imageAlt={image?.alt}
       isArticle
       hasBorder
     >
-      <Heading className="type-0 mb-0 xl:text-21 [&_a]:text-stone-dark" id={node.id}>
+      <Heading className="type-0 mb-0 xl:text-21 [&_a]:text-stone-dark" id={node.uuid}>
         <Link href={node.path || "#"} className="group stretched-link flex items-center gap-3 font-semibold">
           {node.title}
           <ChevronRightIcon width={24} className="shrink-0 text-digital-red transition-all group-hocus:translate-x-2" />

@@ -1,6 +1,6 @@
 fragment FragmentParagraphInterface on ParagraphInterface {
   __typename
-  id
+  uuid
   behaviors
   status
 }
@@ -68,7 +68,7 @@ fragment FragmentParagraphStanfordEntity on ParagraphStanfordEntity {
   }
   suEntityItem {
     ... on NodeInterface {
-      id
+      uuid
       path
     }
   }
@@ -263,7 +263,7 @@ fragment FragmentParagraphSupSearchForm on ParagraphSupSearchForm {
   supSearchBooksOnly
   supSearchSubject {
     ... on TermInterface {
-      id
+      uuid
       name
     }
   }

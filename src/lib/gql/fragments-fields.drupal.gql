@@ -1,7 +1,7 @@
 
 fragment FragmentSuPolicyLog on SuPolicyLog {
     __typename
-    id
+    uuid
     suPolicyDate {
         ...FragmentDateTime
     }
@@ -12,13 +12,13 @@ fragment FragmentSuPolicyLog on SuPolicyLog {
 
 fragment FragmentTermInterface on TermInterface {
     __typename
-    id
+    uuid
     name
     path
     weight
     parent {
         ... on TermInterface {
-            id
+            uuid
         }
     }
 }

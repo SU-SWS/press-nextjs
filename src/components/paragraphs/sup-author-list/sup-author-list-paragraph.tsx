@@ -46,7 +46,7 @@ const SupAuthorListParagraph = async ({...props}: Props) => {
         ).trim()
 
         const newBook = {
-          id: book.id,
+          id: book.uuid,
           path: book.path,
           title: book.title,
           supBookSubtitle: book.supBookSubtitle,

@@ -36,7 +36,7 @@ const ParagraphComponent = async ({paragraph}: Props) => {
 
   if (process.env.NODE_ENV === "development") {
     itemProps["data-type"] = paragraph.__typename || "unknown"
-    itemProps["data-id"] = paragraph.id
+    itemProps["data-id"] = paragraph.uuid
   }
 
   switch (paragraph.__typename) {
@@ -75,6 +75,6 @@ const ParagraphComponent = async ({paragraph}: Props) => {
     case "ParagraphStanfordFaq":
       return <FaqParagraph paragraph={paragraph} {...itemProps} />
   }
-  console.warn(`Unknown paragraph ${paragraph.__typename}. Item ${paragraph.id}.`)
+  console.warn(`Unknown paragraph ${paragraph.__typename}. Item ${paragraph.uuid}.`)
 }
 export default Paragraph

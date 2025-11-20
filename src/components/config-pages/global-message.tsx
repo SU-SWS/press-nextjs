@@ -16,7 +16,7 @@ const GlobalMessage = async ({...props}: HTMLAttributes<HTMLDivElement>) => {
   return (
     <MessageWrapper
       {...props}
-      aria-labelledby={MessageWrapper ? globalMessageConfig.id : undefined}
+      aria-labelledby={MessageWrapper ? globalMessageConfig.uuid : undefined}
       className={twMerge(
         "relative z-[1] py-10",
         clsx({
@@ -36,7 +36,7 @@ const GlobalMessage = async ({...props}: HTMLAttributes<HTMLDivElement>) => {
         </div>
         <div className="[&_a.btn]:border-2 [&_a.btn]:border-white [&_a.btn]:bg-transparent [&_a]:text-white">
           {globalMessageConfig.suGlobalMsgHeader && (
-            <H2 id={globalMessageConfig.id}>{globalMessageConfig.suGlobalMsgHeader}</H2>
+            <H2 id={globalMessageConfig.uuid}>{globalMessageConfig.suGlobalMsgHeader}</H2>
           )}
 
           <Wysiwyg html={globalMessageConfig.suGlobalMsgMessage?.processed} />

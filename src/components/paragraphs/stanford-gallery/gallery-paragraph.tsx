@@ -18,10 +18,10 @@ const GalleryParagraph = ({paragraph, ...props}: Props) => {
     <GalleryWrapper
       {...props}
       className={twMerge("centered mb-20 flex flex-col gap-10 @container lg:max-w-1200", props.className)}
-      aria-labelledby={paragraph.suGalleryHeadline ? paragraph.id : undefined}
+      aria-labelledby={paragraph.suGalleryHeadline ? paragraph.uuid : undefined}
     >
       {paragraph.suGalleryHeadline && (
-        <H2 id={paragraph.id} className="text-center">
+        <H2 id={paragraph.uuid} className="text-center">
           {paragraph.suGalleryHeadline}
         </H2>
       )}
@@ -31,8 +31,8 @@ const GalleryParagraph = ({paragraph, ...props}: Props) => {
       {paragraph.suGalleryImages && paragraph.suGalleryImages?.length > 0 && (
         <ul className="list-unstyled grid gap-20 @3xl:grid-cols-2 @6xl:grid-cols-3">
           {paragraph.suGalleryImages.map(image => (
-            <li key={image.id} className="m-0">
-              <GalleryImage image={image} galleryId={paragraph.id} />
+            <li key={image.uuid} className="m-0">
+              <GalleryImage image={image} galleryId={paragraph.uuid} />
             </li>
           ))}
         </ul>
@@ -61,7 +61,7 @@ const GalleryImage = ({
     <figure>
       <div className="relative aspect-[4/3] w-full">
         <Link
-          href={`/gallery/${galleryId}/${image.id}`}
+          href={`/gallery/${galleryId}/${image.uuid}`}
           className="border-sand-light relative block h-full w-full border"
           rel="nofollow"
           scroll={false}

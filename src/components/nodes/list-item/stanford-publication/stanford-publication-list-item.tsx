@@ -15,11 +15,11 @@ const StanfordPublicationListItem = ({node, headingLevel, ...props}: Props) => {
   return (
     <article
       {...props}
-      aria-labelledby={node.id}
+      aria-labelledby={node.uuid}
       className={twMerge("mx-auto w-full max-w-[500px] border border-black-20 p-10 shadow-xl", props.className)}
     >
       <div className="flex flex-col">
-        <Heading className="type-1 order-first xl:text-26" id={node.id}>
+        <Heading className="type-1 order-first xl:text-26" id={node.uuid}>
           <Link href={citationUrl || node.path || "#"}>{node.title}</Link>
         </Heading>
         <div className="font-bold">Publication</div>
@@ -28,7 +28,7 @@ const StanfordPublicationListItem = ({node, headingLevel, ...props}: Props) => {
       {node.suPublicationTopics && (
         <div>
           {node.suPublicationTopics.map(topic => (
-            <div key={topic.id}>{topic.name}</div>
+            <div key={topic.uuid}>{topic.name}</div>
           ))}
         </div>
       )}

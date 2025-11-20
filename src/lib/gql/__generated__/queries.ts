@@ -12,7 +12,7 @@ export const FragmentPageInfoFragmentDoc = gql`
     `;
 export const AllNodeInterfaceFragmentDoc = gql`
     fragment AllNodeInterface on NodeInterface {
-  id
+  uuid
   path
   changed {
     time
@@ -22,7 +22,7 @@ export const AllNodeInterfaceFragmentDoc = gql`
 export const FragmentNodeInterfaceFragmentDoc = gql`
     fragment FragmentNodeInterface on NodeInterface {
   __typename
-  id
+  uuid
   title
   path
 }
@@ -69,7 +69,7 @@ export const FragmentNameTypeFragmentDoc = gql`
     `;
 export const FragmentAwardFragmentDoc = gql`
     fragment FragmentAward on PressAward {
-  id
+  uuid
   title
   supAssociation
   supDescription {
@@ -83,7 +83,7 @@ export const FragmentAwardFragmentDoc = gql`
 export const FragmentMediaInterfaceFragmentDoc = gql`
     fragment FragmentMediaInterface on MediaInterface {
   __typename
-  id
+  uuid
   name
 }
     `;
@@ -101,13 +101,13 @@ export const FragmentMediaImageFragmentDoc = gql`
 export const FragmentTermInterfaceFragmentDoc = gql`
     fragment FragmentTermInterface on TermInterface {
   __typename
-  id
+  uuid
   name
   path
   weight
   parent {
     ... on TermInterface {
-      id
+      uuid
     }
   }
 }
@@ -180,12 +180,12 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   }
   supBookSubjects {
     __typename
-    id
+    uuid
     name
     weight
     parent {
       ... on TermInterface {
-        id
+        uuid
         name
       }
     }
@@ -199,7 +199,7 @@ export const FragmentNodeSupBookFragmentDoc = gql`
   supBookType
   supBookNoCart
   supBookPriceData {
-    id
+    uuid
     ... on PressPrice {
       supIntlCart
     }
@@ -242,7 +242,7 @@ export const FragmentNodeStanfordCourseFragmentDoc = gql`
 export const FragmentParagraphInterfaceFragmentDoc = gql`
     fragment FragmentParagraphInterface on ParagraphInterface {
   __typename
-  id
+  uuid
   behaviors
   status
 }
@@ -360,7 +360,7 @@ export const FragmentParagraphStanfordEntityFragmentDoc = gql`
   }
   suEntityItem {
     ... on NodeInterface {
-      id
+      uuid
       path
     }
   }
@@ -539,7 +539,7 @@ export const FragmentParagraphSupSearchFormFragmentDoc = gql`
   supSearchBooksOnly
   supSearchSubject {
     ... on TermInterface {
-      id
+      uuid
       name
     }
   }
@@ -924,7 +924,7 @@ ${FragmentTermInterfaceFragmentDoc}`;
 export const FragmentSuPolicyLogFragmentDoc = gql`
     fragment FragmentSuPolicyLog on SuPolicyLog {
   __typename
-  id
+  uuid
   suPolicyDate {
     ...FragmentDateTime
   }
@@ -950,7 +950,7 @@ export const FragmentNodeStanfordPolicyFragmentDoc = gql`
   suPolicyPolicyNum
   suPolicyRelated {
     ... on NodeInterface {
-      id
+      uuid
       path
     }
   }
@@ -1048,7 +1048,7 @@ export const FragmentNodeSupBookTeaserFragmentDoc = gql`
     ...FragmentNameType
   }
   supBookAwards {
-    id
+    uuid
   }
   supBookSubtitle
   supBookWorkIdNumber
@@ -1288,7 +1288,7 @@ export const BooksAuthorsDocument = gql`
     query BooksAuthors($first: Int = 1000, $after: Cursor) {
   nodeSupBooks(first: $first, after: $after, sortKey: CREATED_AT) {
     nodes {
-      id
+      uuid
       title
       path
       supBookSubtitle
@@ -1460,7 +1460,7 @@ export const ConfigPagesDocument = gql`
   stanfordGlobalMessages(first: 1) {
     nodes {
       __typename
-      id
+      uuid
       suGlobalMsgEnabled
       suGlobalMsgHeader
       suGlobalMsgLabel
@@ -1600,7 +1600,7 @@ export const BookPriceDocument = gql`
   press(id: $id) {
     __typename
     ... on PressPrice {
-      id
+      uuid
       supAltPrice
       supClothDiscount
       supClothPrice
@@ -1664,7 +1664,7 @@ export const RedirectsDocument = gql`
     query Redirects($first: Int = 1000, $after: Cursor) {
   redirects(first: $first, after: $after) {
     redirects: nodes {
-      id
+      uuid
       redirectSource {
         url
       }
@@ -1869,7 +1869,7 @@ export const SupBookAncillaryDocument = gql`
   supBookAncillary(contextualFilter: $contextualFilters) {
     results {
       ... on NodeInterface {
-        id
+        uuid
         path
         title
       }

@@ -17,7 +17,7 @@ const StanfordPersonCard = ({node, headingLevel, ...props}: Props) => {
   return (
     <article
       {...props}
-      aria-labelledby={node.id}
+      aria-labelledby={node.uuid}
       className={twMerge("mx-auto overflow-hidden text-center", props.className)}
     >
       {imageUrl && (
@@ -32,7 +32,7 @@ const StanfordPersonCard = ({node, headingLevel, ...props}: Props) => {
         </div>
       )}
 
-      <Heading className="type-1 xl:text-26" id={node.id}>
+      <Heading className="type-1 xl:text-26" id={node.uuid}>
         <Link href={node.path || "#"}>{node.title}</Link>
       </Heading>
 

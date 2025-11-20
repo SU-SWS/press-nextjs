@@ -24,7 +24,7 @@ const Page = async (props: Props) => {
 
   const paragraph = paragraphQuery.paragraph as ParagraphStanfordGallery
   let galleryImages = mediaUuid
-    ? paragraph.suGalleryImages?.filter(image => image.id === mediaUuid)
+    ? paragraph.suGalleryImages?.filter(image => image.uuid === mediaUuid)
     : paragraph.suGalleryImages
 
   galleryImages = galleryImages?.filter(image => !!image.suGalleryImage?.url)
@@ -36,7 +36,7 @@ const Page = async (props: Props) => {
         if (!galleryImage.suGalleryImage?.url) return
 
         return (
-          <figure key={galleryImage.id}>
+          <figure key={galleryImage.uuid}>
             <Image
               src={galleryImage.suGalleryImage.url}
               width={galleryImage.suGalleryImage.width}

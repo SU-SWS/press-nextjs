@@ -33,7 +33,7 @@ const FaqParagraph = ({paragraph, ...props}: Props) => {
     <div {...props} className={twMerge("space-y-20", props.className)}>
       <div className="flex flex-col items-center justify-between gap-20 @3xl:flex-row">
         {heading && (
-          <Header id={paragraph.id} className="mb-0">
+          <Header id={paragraph.uuid} className="mb-0">
             {heading}
           </Header>
         )}
@@ -47,7 +47,7 @@ const FaqParagraph = ({paragraph, ...props}: Props) => {
           <Accordion
             className="border-t border-black-40 last:border-b"
             buttonProps={{className: "mt-6"}}
-            key={question.id}
+            key={question.uuid}
             button={question.suAccordionTitle}
             headingLevel={accordionHeadingLevel}
           >

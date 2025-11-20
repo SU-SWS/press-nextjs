@@ -63,7 +63,7 @@ const StatCardParagraph = ({paragraph, ...props}: Props) => {
         "bg-foggy-light": paragraph.suStatBgColor?.color === "f4f4f4",
         "bg-spirited": paragraph.suStatBgColor?.color === "e04f39",
       })}
-      aria-labelledby={paragraph.suStatHeadline ? paragraph.id : undefined}
+      aria-labelledby={paragraph.suStatHeadline ? paragraph.uuid : undefined}
       imageUrl={paragraph.suStatImage?.mediaImage.url}
       imageAlt={paragraph.suStatImage?.mediaImage.alt}
       isArticle={!!paragraph.suStatHeadline && headerTag !== "div"}
@@ -72,17 +72,17 @@ const StatCardParagraph = ({paragraph, ...props}: Props) => {
         {paragraph.suStatHeadline && (
           <>
             {headerTag === "h2" && (
-              <H2 id={paragraph.id} className={twMerge("mb-0", headerClasses)}>
+              <H2 id={paragraph.uuid} className={twMerge("mb-0", headerClasses)}>
                 {paragraph.suStatHeadline}
               </H2>
             )}
             {headerTag === "h3" && (
-              <H3 id={paragraph.id} className={twMerge("mb-0", headerClasses)}>
+              <H3 id={paragraph.uuid} className={twMerge("mb-0", headerClasses)}>
                 {paragraph.suStatHeadline}
               </H3>
             )}
             {headerTag === "h4" && (
-              <H4 id={paragraph.id} className={twMerge("mb-0", headerClasses)}>
+              <H4 id={paragraph.uuid} className={twMerge("mb-0", headerClasses)}>
                 {paragraph.suStatHeadline}
               </H4>
             )}

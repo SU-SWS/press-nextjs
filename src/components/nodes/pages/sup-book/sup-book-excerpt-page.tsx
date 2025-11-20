@@ -15,7 +15,7 @@ type Props = HTMLAttributes<HTMLElement> & {
 }
 
 const SupBookExcerptPage = async ({node, ...props}: Props) => {
-  const ancillaryPages = await getBookAncillaryContents(node.id)
+  const ancillaryPages = await getBookAncillaryContents(node.uuid)
   if (!ancillaryPages.length) notFound()
 
   return (
@@ -27,7 +27,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
       childrenProps={{className: "rs-mt-4 centered"}}
       isArticle
     >
-      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={`${node.title}: Excerpts & More`} />
+      <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={`${node.title}: Excerpts & More`} />
       <H1>
         Excerpts + more<span className="sr-only">&nbps;{node.title}</span>
       </H1>
@@ -44,7 +44,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
           {ancillaryPages.map(page => (
             <Link
               className="group rs-p-1 rs-mb-3 flex items-center gap-3 border text-stone-dark no-underline shadow last:mb-0 hocus:underline"
-              key={page.id}
+              key={page.uuid}
               href={page.path || "#"}
             >
               {page.title}

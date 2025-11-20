@@ -6,7 +6,7 @@ import {cache} from "react"
 export const getLegacyBookPaths = cache(
   nextCache(
     async () => {
-      const nodes: Array<{id: number; path: NodeInterface["path"]}> = []
+      const nodes: Array<{uuid: number; path: NodeInterface["path"]}> = []
       let fetchMore = true
       let nodeQuery: BooksWorkIdQuery
       const cursors: Omit<BooksWorkIdQueryVariables, "first"> = {}
@@ -22,7 +22,7 @@ export const getLegacyBookPaths = cache(
             .filter(node => !!node.supBookWorkIdNumber)
             .map(node =>
               nodes.push({
-                id: node.supBookWorkIdNumber as number,
+                uuid: node.supBookWorkIdNumber as number,
                 path: node.path,
               })
             )
@@ -47,7 +47,7 @@ export const getNewBookPath = nextCache(
       return
     }
     const legacyPaths = await getLegacyBookPaths()
-    const legacyBook = legacyPaths.find(book => book.id === parseInt(workId))
+    const legacyBook = legacyPaths.find(book => book.uuid === parseInt(workId))
     if (legacyBook?.path) return legacyBook.path + (suffix || "")
 
     // New work id, look up to see if one exists.

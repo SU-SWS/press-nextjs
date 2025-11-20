@@ -7,7 +7,7 @@ const AwardListView = ({items, totalItems, headingLevel, loadPage}: ViewDisplayP
   return (
     <AwardListViewClient totalItems={totalItems} loadPage={loadPage}>
       {items.map(item => (
-        <SupBookCard key={item.id} node={item} headingLevel={headingLevel} />
+        <SupBookCard key={item.uuid} node={item} headingLevel={headingLevel} />
       ))}
     </AwardListViewClient>
   )

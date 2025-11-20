@@ -17,7 +17,7 @@ const StanfordPublicationPage = ({node, ...props}: Props) => {
   if (citationUrl) redirect(citationUrl)
   return (
     <article className="centered pt-32" {...props}>
-      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={node.title} />
+      <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={node.title} />
       <div className="flex flex-col gap-10">
         <H1 className="order-2">{node.title}</H1>
 

@@ -25,7 +25,7 @@ const BannerParagraph = ({paragraph, eagerLoadImage, ...props}: Props) => {
   return (
     <HeroBanner
       {...props}
-      aria-labelledby={paragraph.suBannerHeader ? paragraph.id : undefined}
+      aria-labelledby={paragraph.suBannerHeader ? paragraph.uuid : undefined}
       imageUrl={paragraph.suBannerImage?.mediaImage.url}
       imageAlt={paragraph.suBannerImage?.mediaImage.alt}
       isSection={!!paragraph.suBannerHeader}
@@ -35,7 +35,7 @@ const BannerParagraph = ({paragraph, eagerLoadImage, ...props}: Props) => {
       {hasCard && (
         <>
           {paragraph.suBannerHeader && (
-            <div id={paragraph.id} className={twMerge("order-2", behaviors.hero_pattern?.hide_heading && "sr-only")}>
+            <div id={paragraph.uuid} className={twMerge("order-2", behaviors.hero_pattern?.hide_heading && "sr-only")}>
               {headerTag === "h2" && <H2 className={twMerge(headerClasses, "mb-0")}>{paragraph.suBannerHeader}</H2>}
               {headerTag === "h3" && <H3 className={headerClasses}>{paragraph.suBannerHeader}</H3>}
               {headerTag === "h4" && <H4 className={headerClasses}>{paragraph.suBannerHeader}</H4>}

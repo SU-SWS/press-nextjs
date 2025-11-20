@@ -20,7 +20,7 @@ query Route($path: String!, $teaser: Boolean = false) {
 query Redirects($first: Int = 1000, $after: Cursor) {
     redirects(first: $first, after: $after) {
         redirects: nodes {
-            id
+            uuid
             redirectSource {
                 url
             }

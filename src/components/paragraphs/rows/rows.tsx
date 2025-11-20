@@ -30,7 +30,7 @@ const Rows = async ({components, className, ...props}: Props) => {
     if (item.__typename === "ParagraphStanfordLayout") {
       const behaviors = getParagraphBehaviors(item)
 
-      layouts[item.id] = {
+      layouts[item.uuid] = {
         item,
         layout: behaviors.layout_paragraphs?.layout || "layout_paragraphs_1_column",
         config: behaviors.layout_paragraphs?.config,

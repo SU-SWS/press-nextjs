@@ -27,7 +27,7 @@ const StanfordEventListItem = ({node, headingLevel, ...props}: Props) => {
   return (
     <article
       {...props}
-      aria-labelledby={node.id}
+      aria-labelledby={node.uuid}
       className={twMerge("mx-auto flex w-full gap-10 py-10", props.className)}
     >
       <div aria-hidden className="flex w-fit flex-col items-start">
@@ -36,7 +36,7 @@ const StanfordEventListItem = ({node, headingLevel, ...props}: Props) => {
       </div>
       <div>
         <div className="flex flex-col">
-          <Heading className="type-1 xl:text-26" id={node.id}>
+          <Heading className="type-1 xl:text-26" id={node.uuid}>
             <Link
               href={node.suEventSource?.url || node.path || "#"}
               className="text-digital-red no-underline hocus:text-black hocus:underline"
