@@ -24,14 +24,14 @@ const StanfordEventCard = ({node, headingLevel, ...props}: Props) => {
   const dateTimeString = getEventTimeString(start, end, timeZone).replace(/[^a-zA-Z0-9 ,:\-|]/, " ")
   const Heading = headingLevel === "h3" ? H3 : H2
   return (
-    <ImageCard {...props} aria-labelledby={node.id} isArticle>
+    <ImageCard {...props} aria-labelledby={node.uuid} isArticle>
       <div aria-hidden className="flex w-fit flex-col items-start">
         <div className="type-0 mb-4 w-full text-center font-semibold xl:text-21">{startMonth.toUpperCase()}</div>
         <div className="type-4 w-full text-center font-bold xl:text-[5.1rem]">{startDay}</div>
       </div>
 
       <div className="flex flex-col">
-        <Heading className="type-1 xl:text-26 [&_a]:text-black [&_a]:hocus:text-digital-red" id={node.id}>
+        <Heading className="type-1 xl:text-26 [&_a]:text-black [&_a]:hocus:text-digital-red" id={node.uuid}>
           <Link href={node.suEventSource?.url || node.path || "#"}>{node.title}</Link>
         </Heading>
 

@@ -31,7 +31,7 @@ const CardParagraph = ({paragraph, ...props}: Props) => {
   return (
     <Component
       {...props}
-      aria-labelledby={paragraph.suCardHeader ? paragraph.id : undefined}
+      aria-labelledby={paragraph.suCardHeader ? paragraph.uuid : undefined}
       imageUrl={image?.url}
       imageAlt={image?.alt}
       videoUrl={videoUrl}
@@ -39,7 +39,7 @@ const CardParagraph = ({paragraph, ...props}: Props) => {
       color={behaviors.su_card_styles?.bg_color}
     >
       {paragraph.suCardHeader && (
-        <div id={paragraph.id} className={twMerge("order-2", clsx({"sr-only": hideHeader}))}>
+        <div id={paragraph.uuid} className={twMerge("order-2", clsx({"sr-only": hideHeader}))}>
           {headerTag === "h2" && (
             <H2 className={twMerge("mb-0 flex items-center", headerClasses)}>{paragraph.suCardHeader}</H2>
           )}

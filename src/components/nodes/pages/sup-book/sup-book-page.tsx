@@ -17,18 +17,18 @@ const SupBookPage = async ({node, ...props}: Props) => {
     <div>
       <BookPage node={node} {...props} />
       {node.supBookRelatedTitles && node.supBookRelatedTitles.length > 0 && (
-        <section aria-labelledby={`${node.id}-related`} className="centered mt-64 border-t-2 border-press-sand-dark">
-          <H2 id={`${node.id}-related`} className="mb-32 mt-16 font-medium text-stone-dark">
+        <section aria-labelledby={`${node.uuid}-related`} className="centered mt-64 border-t-2 border-press-sand-dark">
+          <H2 id={`${node.uuid}-related`} className="mb-32 mt-16 font-medium text-stone-dark">
             Explore more
           </H2>
           <ul className="list-unstyled mx-auto grid w-11/12 grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
             {node.supBookRelatedTitles.slice(0, 5).map(relatedBook => (
-              <RelatedBook key={relatedBook.id} path={relatedBook.path} />
+              <RelatedBook key={relatedBook.uuid} path={relatedBook.path} />
             ))}
           </ul>
         </section>
       )}
-      {!node.supBookRelatedTitles && <AlgoliaRelatedBooks objectId={node.id} />}
+      {!node.supBookRelatedTitles && <AlgoliaRelatedBooks objectId={node.uuid} />}
     </div>
   )
 }

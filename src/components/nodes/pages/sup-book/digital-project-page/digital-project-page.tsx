@@ -95,7 +95,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                   </H2>
                   <BookAwards>
                     {awards.map(award => (
-                      <div key={award.id}>
+                      <div key={award.uuid}>
                         <H3 className="type-0 xl:text-21">
                           {award.supYear}: {award.title}
                         </H3>
@@ -180,7 +180,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
           <div className="hidden md:block">
             <BookPageImage node={node} />
           </div>
-          <ExcerptButton id={node.id} path={node.path || "#"} />
+          <ExcerptButton id={node.uuid} path={node.path || "#"} />
         </div>
       </div>
 
@@ -218,7 +218,7 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
           <H2 className="type-0 font-bold xl:text-21">Related Subjects</H2>
           <ul className="list-unstyled flex flex-col md:flex-row md:flex-wrap">
             {node.supBookSubjects.map(subject => (
-              <li key={subject.id} className="min-w-fit flex-1">
+              <li key={subject.uuid} className="min-w-fit flex-1">
                 <Link
                   prefetch={false}
                   href={`/search?${createLinkParams(subject)}`}

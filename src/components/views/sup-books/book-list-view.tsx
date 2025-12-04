@@ -34,7 +34,7 @@ const BookListView = ({
         sortable={sortable}
       >
         {items.map(item => (
-          <SupBookCard key={item.id} node={item} headingLevel={headingLevel} />
+          <SupBookCard key={item.uuid} node={item} headingLevel={headingLevel} />
         ))}
       </PagedList>
     </Suspense>

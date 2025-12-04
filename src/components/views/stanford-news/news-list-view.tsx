@@ -15,7 +15,7 @@ const NewsListView = async ({items, headingLevel, totalItems, loadPage}: ViewDis
       loadPage={loadPage}
     >
       {items.map(item => (
-        <StanfordNewsListItem key={item.id} node={item} headingLevel={headingLevel} />
+        <StanfordNewsListItem key={item.uuid} node={item} headingLevel={headingLevel} />
       ))}
     </PagedList>
   )

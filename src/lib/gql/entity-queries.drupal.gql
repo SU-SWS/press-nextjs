@@ -11,7 +11,7 @@ fragment FragmentPageInfo on ConnectionPageInfo {
 }
 
 fragment AllNodeInterface on NodeInterface {
-    id
+    uuid
     path
     changed {
         time
@@ -96,7 +96,7 @@ query AllNodes($first: Int = 1000, $nodeSupBooks: Cursor, $nodeStanfordCourses: 
 query BooksAuthors($first: Int = 1000, $after: Cursor) {
     nodeSupBooks(first: $first, after: $after, sortKey: CREATED_AT) {
         nodes {
-            id
+            uuid
             title
             path
             supBookSubtitle
@@ -247,7 +247,7 @@ query ConfigPages {
     stanfordGlobalMessages(first: 1) {
         nodes {
             __typename
-            id
+            uuid
             suGlobalMsgEnabled
             suGlobalMsgHeader
             suGlobalMsgLabel

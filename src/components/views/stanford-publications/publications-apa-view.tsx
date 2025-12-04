@@ -19,7 +19,7 @@ const PublicationsApaView = async ({
       loadPage={loadPage}
     >
       {items.map(item => (
-        <StanfordPublicationListItem key={item.id} node={item} headingLevel={headingLevel} />
+        <StanfordPublicationListItem key={item.uuid} node={item} headingLevel={headingLevel} />
       ))}
     </LoadMoreList>
   )

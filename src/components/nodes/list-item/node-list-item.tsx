@@ -24,7 +24,7 @@ const NodeListItem = ({node, headingLevel}: Props) => {
   const itemProps: {[key: string]: string} = {}
   if (process.env.NODE_ENV === "development") {
     itemProps["data-type"] = node.__typename || "unknown"
-    itemProps["data-id"] = node.id
+    itemProps["data-id"] = node.uuid
   }
 
   switch (node.__typename) {

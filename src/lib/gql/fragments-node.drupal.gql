@@ -1,7 +1,7 @@
 
 fragment FragmentNodeInterface on NodeInterface {
     __typename
-    id
+    uuid
     title
     path
 }
@@ -87,12 +87,12 @@ fragment FragmentNodeSupBook on NodeSupBook {
     }
     supBookSubjects {
         __typename
-        id
+        uuid
         name
         weight
         parent {
             ... on TermInterface {
-                id
+                uuid
                 name
             }
         }
@@ -106,7 +106,7 @@ fragment FragmentNodeSupBook on NodeSupBook {
     supBookType
     supBookNoCart
     supBookPriceData {
-        id
+        uuid
         ... on PressPrice {
             supIntlCart
         }
@@ -326,7 +326,7 @@ fragment FragmentNodeStanfordPolicy on NodeStanfordPolicy {
     suPolicyPolicyNum
     suPolicyRelated {
         ... on NodeInterface {
-            id
+            uuid
             path
         }
     }
@@ -376,7 +376,7 @@ fragment FragmentNodeSupBookTeaser on NodeSupBook {
         ...FragmentNameType
     }
     supBookAwards {
-        id
+        uuid
     }
     supBookSubtitle
     supBookWorkIdNumber

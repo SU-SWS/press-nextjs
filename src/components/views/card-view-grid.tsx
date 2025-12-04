@@ -11,7 +11,7 @@ const CardViewGrid = ({items, totalItems, headingLevel, loadPage}: ViewDisplayPr
       loadPage={loadPage}
     >
       {items.map(item => (
-        <NodeCard node={item} key={item.id} headingLevel={headingLevel} />
+        <NodeCard node={item} key={item.uuid} headingLevel={headingLevel} />
       ))}
     </LoadMoreList>
   )

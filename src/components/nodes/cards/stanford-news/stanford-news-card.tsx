@@ -25,9 +25,9 @@ const StanfordNewsCard = ({node, headingLevel, ...props}: Props) => {
     : undefined
 
   return (
-    <ImageCard {...props} aria-labelledby={node.id} imageUrl={image?.url} imageAlt={image?.alt} isArticle>
+    <ImageCard {...props} aria-labelledby={node.uuid} imageUrl={image?.url} imageAlt={image?.alt} isArticle>
       <div className="flex flex-col">
-        <Heading className="type-1 xl:text-26 [&_a]:text-black" id={node.id}>
+        <Heading className="type-1 xl:text-26 [&_a]:text-black" id={node.uuid}>
           <Link href={node.suNewsSource?.url || node.path || "#"}>{node.title}</Link>
         </Heading>
 

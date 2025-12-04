@@ -11,6 +11,6 @@ export const GET = async (_request: NextRequest, {params}: {params: Promise<{id:
   const priceId = (await params).id
   const prices = await graphqlClient({next: {tags: ["all-prices", `prices:${priceId}`]}}).BookPrice({id: priceId})
 
-  if (prices.press?.__typename === "PressPrice" && prices.press?.id) return NextResponse.json(prices.press)
+  if (prices.press?.__typename === "PressPrice" && prices.press?.uuid) return NextResponse.json(prices.press)
   notFound()
 }

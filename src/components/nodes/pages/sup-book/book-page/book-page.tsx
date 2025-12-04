@@ -100,7 +100,7 @@ const BookPage = async ({node, ...props}: Props) => {
                   </H2>
                   <BookAwards>
                     {awards.map(award => (
-                      <div key={award.id}>
+                      <div key={award.uuid}>
                         <H3 className="type-0 xl:text-21">
                           {award.supYear}: {award.title}
                         </H3>
@@ -167,7 +167,7 @@ const BookPage = async ({node, ...props}: Props) => {
           <div className="lg:w-3/8 xl:min-w-[200px] 2xl:min-w-[320px] 2xl:max-w-[370px]">
             {!node.supBookNoCart && (node.supBookIsbn13Cloth || node.supBookIsbn13Paper || node.supBookIsbn13Alt) && (
               <PreCartClient
-                priceId={node.supBookPriceData?.id}
+                priceId={node.supBookPriceData?.uuid}
                 bookTitle={node.title}
                 clothIsbn={node.supBookIsbn13Cloth}
                 paperIsbn={node.supBookIsbn13Paper}
@@ -195,8 +195,7 @@ const BookPage = async ({node, ...props}: Props) => {
           <div className="hidden md:block">
             <BookPageImage node={node} />
           </div>
-
-          <ExcerptButton id={node.id} path={node.path || "#"} />
+          <ExcerptButton id={node.uuid} path={node.path || "#"} />
         </div>
       </div>
 
@@ -236,7 +235,7 @@ const BookPage = async ({node, ...props}: Props) => {
             {node.supBookSubjects.map(subject => {
               const linkParamsString = createLinkParams(subject)
               return (
-                <li key={subject.id} className="min-w-fit">
+                <li key={subject.uuid} className="min-w-fit">
                   <Link
                     prefetch={false}
                     href={`/search?${linkParamsString}`}

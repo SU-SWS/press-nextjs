@@ -116,7 +116,7 @@ const AuthorItem = ({authorName, books}: {authorName: string; books?: NodeSupBoo
         {books?.map(book => (
           <Link
             className="block w-fit font-normal text-digital-red"
-            key={book.id}
+            key={book.uuid}
             prefetch={false}
             href={book.path || "#"}
           >

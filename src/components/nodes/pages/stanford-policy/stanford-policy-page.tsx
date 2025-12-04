@@ -17,7 +17,7 @@ const StanfordPolicyPage = async ({node, ...props}: Props) => {
   const changeLog = node.suPolicyChangelog?.filter(change => change.suPolicyPublic) || []
   return (
     <article className="centered pt-32" {...props}>
-      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={node.title} />
+      <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={node.title} />
       <H1>{node.title}</H1>
       <div className="flex flex-col gap-20">
         {(node.suPolicyAuthority || node.suPolicyUpdated || node.suPolicyEffective) && (
@@ -58,7 +58,7 @@ const StanfordPolicyPage = async ({node, ...props}: Props) => {
             <H2 className="type-0 xl:text-21">Change log:</H2>
 
             {changeLog.map(change => (
-              <div key={change.id}>
+              <div key={change.uuid}>
                 <H3 className="type-0 flex gap-2 xl:text-21">
                   <div>
                     {new Date(change.suPolicyDate.time).toLocaleDateString("en-us", {
@@ -73,7 +73,7 @@ const StanfordPolicyPage = async ({node, ...props}: Props) => {
                 </H3>
 
                 <div>
-                  <StringWithLines text={change.suPolicyNotes} key={change.id} />
+                  <StringWithLines text={change.suPolicyNotes} key={change.uuid} />
                 </div>
               </div>
             ))}
@@ -87,7 +87,7 @@ const StanfordPolicyPage = async ({node, ...props}: Props) => {
             <H2 className="text-center">Related Policies</H2>
             <ul className="list-unstyled grid gap-20 lg:grid-cols-3">
               {node.suPolicyRelated.map(policy => (
-                <li key={policy.id}>
+                <li key={policy.uuid}>
                   <Suspense fallback={<ImageCardSkeleton />}>
                     <RelatedPolicy path={policy.path || "#"} />
                   </Suspense>

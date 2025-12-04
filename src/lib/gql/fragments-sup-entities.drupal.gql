@@ -2,7 +2,7 @@ query BookPrice($id: ID!) {
     press(id: $id) {
         __typename
         ... on PressPrice {
-            id
+            uuid
             supAltPrice
             supClothDiscount
             supClothPrice
@@ -22,7 +22,7 @@ query BookPrice($id: ID!) {
 }
 
 fragment FragmentAward on PressAward {
-    id
+    uuid
     title
     supAssociation
     supDescription {

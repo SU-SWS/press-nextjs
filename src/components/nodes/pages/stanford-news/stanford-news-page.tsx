@@ -35,7 +35,7 @@ const StanfordNewsPage = ({node, ...props}: Props) => {
 
   return (
     <article className="centered mt-32" {...props}>
-      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={node.title} />
+      <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={node.title} />
       <div className="mx-auto mb-48 lg:w-10/12">
         <div className="flex flex-col">
           <H1 className="order-2">{node.title}</H1>

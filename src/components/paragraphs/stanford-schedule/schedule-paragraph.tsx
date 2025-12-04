@@ -33,7 +33,7 @@ const ScheduleParagraph = ({paragraph, ...props}: Props) => {
       {paragraph.suScheduleSpeaker && (
         <div>
           {paragraph.suScheduleSpeaker.map(speaker => (
-            <PersonCtaParagraph paragraph={speaker} key={speaker.id} />
+            <PersonCtaParagraph paragraph={speaker} key={speaker.uuid} />
           ))}
         </div>
       )}

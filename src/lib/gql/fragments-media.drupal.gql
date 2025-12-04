@@ -1,6 +1,6 @@
 fragment FragmentMediaInterface on MediaInterface {
   __typename
-  id
+  uuid
   name
 }
 

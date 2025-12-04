@@ -28,7 +28,7 @@ const StanfordEventPage = ({node, ...props}: Props) => {
 
   return (
     <article className="centered mt-32 flex flex-col gap-20" {...props}>
-      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={node.title} />
+      <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={node.title} />
       <div className="flex flex-col">
         <H1 className="order-2">{node.title}</H1>
 
@@ -40,7 +40,7 @@ const StanfordEventPage = ({node, ...props}: Props) => {
       {node.suEventSponsor && (
         <div>
           {node.suEventSponsor.map((sponsor, i) => (
-            <div key={`${node.id}-sponsor-${i}`}>{sponsor}</div>
+            <div key={`${node.uuid}-sponsor-${i}`}>{sponsor}</div>
           ))}
         </div>
       )}
@@ -94,7 +94,7 @@ const StanfordEventPage = ({node, ...props}: Props) => {
               <div>
                 <H3 className="type-0 xl:text-21">This event is open to:</H3>
                 {node.suEventAudience.map(audience => (
-                  <div key={audience.id}>{audience.name}</div>
+                  <div key={audience.uuid}>{audience.name}</div>
                 ))}
               </div>
             </div>
@@ -117,7 +117,7 @@ const StanfordEventPage = ({node, ...props}: Props) => {
       {node.suEventSchedule && (
         <div>
           {node.suEventSchedule.map(scheduleInstance => (
-            <ScheduleParagraph paragraph={scheduleInstance} key={scheduleInstance.id} />
+            <ScheduleParagraph paragraph={scheduleInstance} key={scheduleInstance.uuid} />
           ))}
         </div>
       )}

@@ -39,13 +39,13 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
         }),
         props.className
       )}
-      aria-labelledby={ListWrapper === "section" ? paragraph.id : undefined}
+      aria-labelledby={ListWrapper === "section" ? paragraph.uuid : undefined}
     >
       <div className="flex w-full flex-col justify-between @3xl:flex-row">
         <div className="flex max-w-1000 flex-col">
           {ListWrapper === "section" && (
             <H2
-              id={paragraph.id}
+              id={paragraph.uuid}
               className={twMerge(
                 "mb-0 pb-0 font-medium",
                 behaviors.list_paragraph?.heading_behavior === "hide" && "sr-only"

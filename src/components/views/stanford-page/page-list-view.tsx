@@ -14,7 +14,7 @@ const PageListView = async ({items, headingLevel, totalItems, loadPage}: ViewDis
       loadPage={loadPage}
     >
       {items.map(item => (
-        <StanfordPageListItem key={item.id} node={item} headingLevel={headingLevel} />
+        <StanfordPageListItem key={item.uuid} node={item} headingLevel={headingLevel} />
       ))}
     </LoadMoreList>
   )

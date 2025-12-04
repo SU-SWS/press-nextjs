@@ -120,7 +120,7 @@ query supBookAncillary($contextualFilters: SupBookAncillaryContextualFilterInput
     supBookAncillary(contextualFilter: $contextualFilters) {
         results {
            ... on NodeInterface {
-                id
+                uuid
                 path
                 title
             }

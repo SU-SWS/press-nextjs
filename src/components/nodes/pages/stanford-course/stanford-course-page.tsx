@@ -14,7 +14,7 @@ const StanfordCoursePage = ({node, ...props}: Props) => {
   if (node.suCourseLink?.url) redirect(node.suCourseLink?.url)
   return (
     <article className="centered my-32" {...props}>
-      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={node.title} />
+      <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={node.title} />
       <H1>{node.title}</H1>
       <div className="flex flex-col gap-10">
         {node.suCourseSubject && <div>{node.suCourseSubject.name}</div>}
@@ -26,7 +26,7 @@ const StanfordCoursePage = ({node, ...props}: Props) => {
         {node.suCourseTags && (
           <div>
             {node.suCourseTags.map(tag => (
-              <div key={tag.id}>{tag.name}</div>
+              <div key={tag.uuid}>{tag.name}</div>
             ))}
           </div>
         )}
@@ -34,7 +34,7 @@ const StanfordCoursePage = ({node, ...props}: Props) => {
         {node.suCourseQuarters && (
           <div>
             {node.suCourseQuarters.map(quarter => (
-              <div key={quarter.id}>{quarter.name}</div>
+              <div key={quarter.uuid}>{quarter.name}</div>
             ))}
           </div>
         )}

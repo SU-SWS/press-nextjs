@@ -19,7 +19,7 @@ const EventsListView = async ({items, headingLevel, totalItems, loadPage}: ViewD
       loadPage={loadPage}
     >
       {items.map(item => (
-        <StanfordEventListItem key={item.id} node={item} headingLevel={headingLevel} />
+        <StanfordEventListItem key={item.uuid} node={item} headingLevel={headingLevel} />
       ))}
     </LoadMoreList>
   )

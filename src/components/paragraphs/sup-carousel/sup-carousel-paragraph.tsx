@@ -45,15 +45,15 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
         >
           {paragraph.supCarouselSlides.map((slide, slideIndex) => (
             <div
-              key={slide.id}
+              key={slide.uuid}
               role="group"
               aria-roledescription="slide"
-              aria-labelledby={slide.supSlideTitle ? slide.id : undefined}
+              aria-labelledby={slide.supSlideTitle ? slide.uuid : undefined}
               aria-label={
                 slide.supSlideTitle ? undefined : `${slideIndex + 1} of ${paragraph.supCarouselSlides.length}`
               }
             >
-              <Slide key={slide.id} slideParagraph={slide} isTopHero={isTopHero} />
+              <Slide key={slide.uuid} slideParagraph={slide} isTopHero={isTopHero} />
             </div>
           ))}
         </Slideshow>
@@ -75,7 +75,7 @@ const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupC
 
   return (
     <SlideTag
-      aria-labelledby={slideTitle ? slideParagraph.id : undefined}
+      aria-labelledby={slideTitle ? slideParagraph.uuid : undefined}
       className={twMerge(
         "centered-container relative flex h-full min-h-full w-full bg-black text-white",
         clsx({
@@ -132,7 +132,7 @@ const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupC
                     "type-4 xl:text-[5.1rem]",
                     clsx({"type-0 xl:text-21": slideParagraph.supSlideTitleSize === "small"})
                   )}
-                  id={slideParagraph.id}
+                  id={slideParagraph.uuid}
                 >
                   {slideTitle}
                 </H2>

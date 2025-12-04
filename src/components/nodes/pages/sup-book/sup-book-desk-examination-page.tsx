@@ -24,7 +24,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
       childrenProps={{className: "rs-mt-4 mx-auto max-w-[800px]"}}
       isArticle
     >
-      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={`${node.title}: Copy Requests`} />
+      <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={`${node.title}: Copy Requests`} />
       <H1>
         Desk, Examination, or Review copy request<span className="sr-only">&nbps;{node.title}</span>
       </H1>

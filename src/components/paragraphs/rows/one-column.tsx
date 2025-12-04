@@ -32,7 +32,7 @@ const OneColumn = ({items, config, className, ...props}: Props) => {
       data-columns="1"
     >
       {items.map(item => (
-        <Paragraph paragraph={item} key={item.id} />
+        <Paragraph paragraph={item} key={item.uuid} />
       ))}
     </div>
   )

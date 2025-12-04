@@ -19,7 +19,7 @@ const CourseListView = async ({items, totalItems, headingLevel, loadPage}: ViewD
       loadPage={loadPage}
     >
       {items.map(item => (
-        <StanfordCourseListItem key={item.id} node={item} headingLevel={headingLevel} />
+        <StanfordCourseListItem key={item.uuid} node={item} headingLevel={headingLevel} />
       ))}
     </LoadMoreList>
   )

@@ -21,7 +21,7 @@ const StanfordPersonPage = ({node, ...props}: Props) => {
 
   return (
     <article className="centered mt-32" {...props}>
-      <NodePageMetadata key={node.id} metatags={node.metatag} pageTitle={node.title} />
+      <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={node.title} />
       <div className="mb-32 flex flex-col gap-20 lg:flex-row">
         {imageUrl && (
           <div className="relative mx-auto aspect-[1/1] w-[250px] shrink-0 lg:mx-0">
@@ -54,7 +54,7 @@ const StanfordPersonPage = ({node, ...props}: Props) => {
             <div className="mb-10">
               <H2 className="type-0 xl:text-21">Education</H2>
               {node.suPersonEducation.map((education, i) => (
-                <div key={`${node.id}-education-${i}`}>{education}</div>
+                <div key={`${node.uuid}-education-${i}`}>{education}</div>
               ))}
             </div>
           )}
@@ -64,7 +64,7 @@ const StanfordPersonPage = ({node, ...props}: Props) => {
               <H2 className="type-0 xl:text-21">Research</H2>
               <div className="grid grid-cols-2 gap-10">
                 {node.suPersonResearch.map((research, i) => (
-                  <Wysiwyg key={`${node.id}-research-${i}`} html={research.processed} />
+                  <Wysiwyg key={`${node.uuid}-research-${i}`} html={research.processed} />
                 ))}
               </div>
             </div>
@@ -75,7 +75,7 @@ const StanfordPersonPage = ({node, ...props}: Props) => {
               <H2 className="type-0 xl:text-21">Stanford Affiliations</H2>
               <div className="grid grid-cols-2 gap-10">
                 {node.suPersonAffiliations.map((affiliation, i) => (
-                  <div key={`${node.id}-affiliation-${i}`}>
+                  <div key={`${node.uuid}-affiliation-${i}`}>
                     <Button href={affiliation.url}>{affiliation.title}</Button>
                   </div>
                 ))}
@@ -148,7 +148,7 @@ const StanfordPersonPage = ({node, ...props}: Props) => {
                 {node.suPersonLinks.map((link, i) => {
                   if (!link.url) return
                   return (
-                    <Link key={`${node.id}-link-${i}`} href={link.url}>
+                    <Link key={`${node.uuid}-link-${i}`} href={link.url}>
                       {link.title}
                     </Link>
                   )

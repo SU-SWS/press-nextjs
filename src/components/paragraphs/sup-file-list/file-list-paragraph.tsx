@@ -12,7 +12,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 
 const FileListParagraph = ({paragraph, ...props}: Props) => {
   const fileOptions = paragraph.supFileListFiles.map(media => ({
-    value: media.id,
+    value: media.uuid,
     label: media.name,
     url:
       media.__typename === "MediaFile"
