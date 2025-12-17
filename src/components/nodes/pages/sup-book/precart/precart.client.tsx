@@ -90,7 +90,7 @@ const PreCartClient = ({
       return
     }
 
-    fetch(cartUrl, {credentials: "include"})
+    fetch(cartUrl, {credentials: "include", headers: {"X-Requested-With": "XMLHttpRequest"}})
       .then(res => {
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
         return res.json()

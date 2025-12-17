@@ -41,7 +41,10 @@ const useCartCount = (): {
     }
 
     if (storage.count === null || storage.expire < Date.now()) {
-      fetch(`${cartDomain}/cart-bridge/cart/qty/`, {credentials: "include"})
+      fetch(`${cartDomain}/cart-bridge/cart/qty/`, {
+        credentials: "include",
+        headers: {"X-Requested-With": "XMLHttpRequest"},
+      })
         .then(res => {
           if (!res.ok) throw new Error(`Cart API HTTP error! status: ${res.status}`)
           return res.json()
