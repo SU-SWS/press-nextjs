@@ -14,7 +14,7 @@ const UserAnalytics = async () => {
   if (!googleAnalytics) return
   return (
     <>
-      <Script async src="//siteimproveanalytics.com/js/siteanalyze_80352.js" />
+      <Script async src="//siteimproveanalytics.com/js/siteanalyze_6343745.js" />
       <GoogleAnalytics gaId={googleAnalytics} />
     </>
   )
