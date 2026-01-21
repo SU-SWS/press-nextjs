@@ -13,6 +13,7 @@ import usePageHasTopBanner from "@lib/hooks/usePageHasTopBanner"
 import getActiveTrail from "@lib/drupal/utils"
 import {ShoppingCartIcon} from "@heroicons/react/24/outline"
 import {twMerge} from "tailwind-merge"
+import useCartCount from "@lib/hooks/useCartCount"
 
 const menuLevelsToShow = 2
 
@@ -123,9 +124,59 @@ const MainMenu = ({menuItems}: Props) => {
               />
             </Link>
           </li>
+
+          <ShoppingCartLink pageHasBanner={pageHasBanner} />
         </ul>
       </div>
     </nav>
+  )
+}
+
+const ShoppingCartLink = ({pageHasBanner}: {pageHasBanner: boolean}) => {
+  const {cartCount, clearCart} = useCartCount()
+
+  if (!process.env.NEXT_PUBLIC_CART_DOMAIN || cartCount === null) return null
+
+  const cartUrl = process.env.NEXT_PUBLIC_CART_DOMAIN + "/cart"
+  return (
+    <li>
+      <Link
+        onClick={e => {
+          e.preventDefault()
+          // Clear the local storage before going off site to the cart. The cart is
+          // on another domain, so we aren't clearing the cart, just the local storage count.
+          clearCart()
+          window.location.href = cartUrl
+        }}
+        href={cartUrl}
+        prefetch={false}
+        className={twMerge(
+          "group rs-ml-5 relative flex h-full min-h-32 items-center border-b border-transparent no-underline lg:rs-ml-2 lg:min-h-0",
+          clsx({
+            "text-white hocus:text-white": pageHasBanner,
+            "text-white hocus:text-white lg:text-stone-dark lg:hocus:text-stone-dark": !pageHasBanner,
+          })
+        )}
+        aria-label="Go to your cart"
+      >
+        <ShoppingCartIcon
+          width={25}
+          className={clsx("border-b-2 border-transparent lg:-translate-y-3", {
+            "group-hocus:border-white": pageHasBanner,
+            "group-hocus:border-stone-dark": !pageHasBanner,
+          })}
+        />
+        {cartCount > 0 && (
+          <span className="absolute left-8 top-2 block lg:-top-3" aria-live="polite" aria-atomic>
+            {cartCount}
+            <span className="sr-only"> items in your cart</span>
+          </span>
+        )}
+        <span className="ml-10 block font-normal group-hocus:underline lg:hidden" aria-hidden>
+          View Cart
+        </span>
+      </Link>
+    </li>
   )
 }
 
