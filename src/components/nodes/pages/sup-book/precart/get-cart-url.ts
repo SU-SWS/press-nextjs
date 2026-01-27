@@ -15,7 +15,7 @@ export const getCartUrl = (
   // All other international requests go to CAP.
   if (isIntl) {
     const title = bookTitle.replaceAll(/[^a-zA-Z\d\s:]/g, "").replaceAll(/\s/g, "-")
-    return `https://www.combinedacademic.co.uk/${isbn}/${title}`
+    return `https://mngbookshop.co.uk/${isbn}/${title}`
   }
 
   const glassBoxFormat = format === "alt" ? altFormat.toUpperCase() : "PRINT"
