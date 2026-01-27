@@ -85,7 +85,7 @@ const PreCartClient = ({
     const altFormat = formData.get("alt-format") as string
 
     const cartUrl = getCartUrl(bookTitle, format, isbn, ebookFormat, isIntl, altFormat)
-    if (cartUrl.includes("combinedacademic")) {
+    if (cartUrl.includes("mngbookshop")) {
       window.location.href = cartUrl
       return
     }
@@ -206,8 +206,8 @@ const PreCartClient = ({
 
       {!ebookSelected && isIntl && !priceData?.supComingSoon && (
         <p className="text-[0.8em]">
-          For customer shipments outside the US and Canada, please use the button below to order from our partner,
-          Combined Academic Publishers.
+          For customer shipments outside the US and Canada, please use the button below to order from our partner, Mare
+          Nostrum Group-University Presses.
         </p>
       )}
 
@@ -224,8 +224,8 @@ const PreCartClient = ({
       >
         {!priceData?.supComingSoon && priceData?.supPreorder && !isIntl && "Preorder"}
         {(ebookSelected || !isIntl) && !priceData?.supComingSoon && !priceData?.supPreorder && "Add to cart"}
-        {!ebookSelected && !priceData?.supComingSoon && priceData?.supPreorder && isIntl && "Preorder from CAP"}
-        {!ebookSelected && !priceData?.supComingSoon && !priceData?.supPreorder && isIntl && "Purchase from CAP"}
+        {!ebookSelected && !priceData?.supComingSoon && priceData?.supPreorder && isIntl && "Preorder from MNG-UP"}
+        {!ebookSelected && !priceData?.supComingSoon && !priceData?.supPreorder && isIntl && "Purchase from MNG-UP"}
         {priceData?.supComingSoon && "Coming Soon"}
 
         {!priceData?.supComingSoon && (
