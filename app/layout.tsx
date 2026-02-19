@@ -8,6 +8,7 @@ import DrupalWindowSync from "@components/elements/drupal-window-sync"
 import UserAnalytics from "@components/elements/user-analytics"
 import Editori11y from "@components/tools/editorially"
 import {ToastMessage} from "@components/elements/toast-message"
+import {Metadata} from "next"
 
 const appleIcons: Icon[] = [57, 72, 76, 114, 120, 144, 152, 180].map(size => ({
   url: `/apple-touch-icon-${size}x${size}.png`,
@@ -17,7 +18,7 @@ const appleIcons: Icon[] = [57, 72, 76, 114, 120, 144, 152, 180].map(size => ({
 /**
  * Metadata that does not change often.
  */
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL("https://sup.org"),
   twitter: {
     card: "summary_large_image",
