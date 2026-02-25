@@ -44,19 +44,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
         {node.title} for <em>{book.title}</em>
       </H1>
 
-      <aside className="hidden w-1/4 shrink-0 lg:block">
-        <a href="#page-content" className="skiplink">
-          Skip secondary navigation
-        </a>
-        {node.supAncillaryBook.supBookImage?.mediaImage && (
-          <div className="rs-mb-3 relative order-first w-full shrink-0">
-            <BookPageImage node={node.supAncillaryBook} />
-          </div>
-        )}
-        <SideNav menuItems={ancillaryMenuItems} activeTrail={[node.uuid]} />
-      </aside>
-
-      <div id="page-content" className="centered flex-grow lg:max-w-[900px]">
+      <div id="page-content" className="centered lg:max-w-[900px]">
         <div className="rs-mb-4 flex flex-col md:flex-row">
           <div className="flex flex-col">
             <div className="type-2 font-medium xl:text-[3.3rem]">{book.title}</div>
@@ -75,6 +63,15 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
         <Wysiwyg html={node.body?.processed} />
         <Rows components={node.supAncillaryParagraphs} />
       </div>
+
+      <aside className="order-first hidden w-1/4 shrink-0 lg:block">
+        {node.supAncillaryBook.supBookImage?.mediaImage && (
+          <div className="rs-mb-3 relative order-first w-full shrink-0">
+            <BookPageImage node={node.supAncillaryBook} />
+          </div>
+        )}
+        <SideNav menuItems={ancillaryMenuItems} activeTrail={[node.uuid]} />
+      </aside>
     </BackToLink>
   )
 }

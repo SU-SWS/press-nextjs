@@ -56,6 +56,10 @@ const options: HTMLReactParserOptions = {
             return <span {...nodeProps}>{domToReact(children, options)}</span>
           }
 
+          if (children[0].type === "text" && children[0].nodeValue.startsWith("http")) {
+            nodeProps.className += " break-all"
+          }
+
           if (nodeProps.className?.includes("link--action")) {
             return (
               <ActionLink {...nodeProps} href={nodeProps.href as string} prefetch={false}>
