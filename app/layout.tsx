@@ -1,3 +1,5 @@
+"use cache"
+
 import "../src/styles/index.css"
 import BackToTop from "@components/elements/back-to-top"
 import PageFooter from "@components/global/page-footer"
@@ -31,10 +33,7 @@ export const metadata: Metadata = {
   },
 }
 
-// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
-export const revalidate = false
-
-const RootLayout = ({children, modal}: {children: React.ReactNode; modal: React.ReactNode}) => {
+const RootLayout = async ({children, modal}: {children: React.ReactNode; modal: React.ReactNode}) => {
   const isDevMode = process.env.NODE_ENV === "development"
   return (
     <html lang="en" className={montserrat.className}>
