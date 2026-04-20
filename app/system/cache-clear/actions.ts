@@ -29,7 +29,7 @@ export async function clearCache(formData: FormData) {
         .trim()
         .split(" ")
         .map(path => {
-          revalidateTag(`paths:/${path.trim}`, "max")
+          revalidateTag(`paths:/${path.trim()}`, "max")
           cleared.push(path)
         })
     }
