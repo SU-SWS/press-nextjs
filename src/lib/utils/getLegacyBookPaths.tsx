@@ -1,60 +1,54 @@
+"use cache"
+
 import {BooksWorkIdQuery, BooksWorkIdQueryVariables, NodeInterface} from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
-import {unstable_cache as nextCache} from "next/cache"
-import {cache} from "react"
+import {cacheTag} from "next/cache"
 
-export const getLegacyBookPaths = cache(
-  nextCache(
-    async () => {
-      const nodes: Array<{uuid: number; path: NodeInterface["path"]}> = []
-      let fetchMore = true
-      let nodeQuery: BooksWorkIdQuery
-      const cursors: Omit<BooksWorkIdQueryVariables, "first"> = {}
+export const getLegacyBookPaths = async () => {
+  cacheTag("legacy-books")
 
-      while (fetchMore) {
-        try {
-          nodeQuery = await graphqlClient({
-            cache: "no-cache",
-            signal: AbortSignal.timeout(10000),
-          }).BooksWorkId({first: 1000, ...cursors})
+  const nodes: Array<{uuid: number; path: NodeInterface["path"]}> = []
+  let fetchMore = true
+  let nodeQuery: BooksWorkIdQuery
+  const cursors: Omit<BooksWorkIdQueryVariables, "first"> = {}
 
-          nodeQuery.nodeSupBooks.nodes
-            .filter(node => !!node.supBookWorkIdNumber)
-            .map(node =>
-              nodes.push({
-                uuid: node.supBookWorkIdNumber as number,
-                path: node.path,
-              })
-            )
-          cursors.after = nodeQuery.nodeSupBooks.pageInfo.endCursor
-          fetchMore = nodeQuery.nodeSupBooks.pageInfo.hasNextPage
-        } catch (e) {
-          if (e instanceof Error) console.warn(e.message)
-          fetchMore = false
-        }
-      }
+  while (fetchMore) {
+    try {
+      nodeQuery = await graphqlClient({
+        cache: "no-cache",
+        signal: AbortSignal.timeout(10000),
+      }).BooksWorkId({first: 1000, ...cursors})
 
-      return nodes
-    },
-    [],
-    {tags: ["legacy-books"]}
-  )
-)
-
-export const getNewBookPath = nextCache(
-  async (workId: string, suffix?: string): Promise<string | undefined> => {
-    if (!/^-?\d+(\.\d+)?$/.test(workId)) {
-      return
+      nodeQuery.nodeSupBooks.nodes
+        .filter(node => !!node.supBookWorkIdNumber)
+        .map(node =>
+          nodes.push({
+            uuid: node.supBookWorkIdNumber as number,
+            path: node.path,
+          })
+        )
+      cursors.after = nodeQuery.nodeSupBooks.pageInfo.endCursor
+      fetchMore = nodeQuery.nodeSupBooks.pageInfo.hasNextPage
+    } catch (e) {
+      if (e instanceof Error) console.warn(e.message)
+      fetchMore = false
     }
-    const legacyPaths = await getLegacyBookPaths()
-    const legacyBook = legacyPaths.find(book => book.uuid === parseInt(workId))
-    if (legacyBook?.path) return legacyBook.path + (suffix || "")
+  }
 
-    // New work id, look up to see if one exists.
-    const bookData = await graphqlClient({cache: "no-cache"}).supBooks({filters: {work_id: parseInt(workId)}})
-    if (bookData.supBooksView?.results[0]?.__typename === "NodeSupBook" && bookData.supBooksView.results[0].path)
-      return bookData.supBooksView.results[0].path + (suffix || "")
-  },
-  [],
-  {tags: ["legacy-books"]}
-)
+  return nodes
+}
+
+export const getNewBookPath = async (workId: string, suffix?: string): Promise<string | undefined> => {
+  cacheTag("legacy-books")
+  if (!/^-?\d+(\.\d+)?$/.test(workId)) {
+    return
+  }
+  const legacyPaths = await getLegacyBookPaths()
+  const legacyBook = legacyPaths.find(book => book.uuid === parseInt(workId))
+  if (legacyBook?.path) return legacyBook.path + (suffix || "")
+
+  // New work id, look up to see if one exists.
+  const bookData = await graphqlClient({cache: "no-cache"}).supBooks({filters: {work_id: parseInt(workId)}})
+  if (bookData.supBooksView?.results[0]?.__typename === "NodeSupBook" && bookData.supBooksView.results[0].path)
+    return bookData.supBooksView.results[0].path + (suffix || "")
+}
