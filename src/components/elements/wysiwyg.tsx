@@ -56,7 +56,7 @@ const options: HTMLReactParserOptions = {
             return <span {...nodeProps}>{domToReact(children, options)}</span>
           }
 
-          if (children[0].type === "text" && children[0].nodeValue.startsWith("http")) {
+          if (children[0]?.type === "text" && children[0].nodeValue.startsWith("http")) {
             nodeProps.className += " break-all"
           }
 

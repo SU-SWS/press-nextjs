@@ -84,7 +84,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
 
         <p className="my-5 border-l-3 border-fog pl-5">
           Please note that submissions from individuals or professors requiring a desk or examination copy cannot be
-          approved though this method.
+          approved through this method.
         </p>
 
         {node.supBookDigitalCompLink && (

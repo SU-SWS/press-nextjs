@@ -34,6 +34,7 @@ import clsx from "clsx"
 import {useBoolean, useIsClient, useLocalStorage, useReadLocalStorage} from "usehooks-ts"
 import {twMerge} from "tailwind-merge"
 import {ArrowPathIcon} from "@heroicons/react/16/solid"
+import type {SendEventForHits} from "instantsearch.js/es/lib/utils"
 
 type Props = {
   appId: string
@@ -361,7 +362,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
 
 const HitList = ({searchIndex}: {searchIndex: string}) => {
   const [, setSortChoice] = useLocalStorage<string>("search-sort", searchIndex)
-  const {items: hits} = useHits<HitType<AlgoliaHit>>({})
+  const {items: hits, sendEvent} = useHits<HitType<AlgoliaHit>>({})
   const {query} = useSearchBox({})
 
   const {currentRefinement: currentPage, pages, nbPages, nbHits, refine: goToPage} = usePagination({padding: 2})
@@ -420,6 +421,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
             focusOnItem={position === 0 && currentPage > 0}
             className="border-sand-light border-b last:border-0"
             hit={hit}
+            sendEvent={sendEvent}
           />
         ))}
       </ul>
@@ -475,8 +477,9 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
 const HitItem = ({
   focusOnItem,
   hit,
+  sendEvent,
   ...props
-}: HTMLAttributes<HTMLLIElement> & {focusOnItem?: boolean; hit: HitType<AlgoliaHit>}) => {
+}: HTMLAttributes<HTMLLIElement> & {focusOnItem?: boolean; hit: HitType<AlgoliaHit>; sendEvent: SendEventForHits}) => {
   const ref = useRef<HTMLLIElement>(null)
   const {value: focus, setFalse: disableFocus} = useBoolean(focusOnItem)
 
@@ -493,7 +496,14 @@ const HitItem = ({
   }, [focus])
 
   return (
-    <li {...props} tabIndex={focus ? 0 : undefined} ref={focus ? ref : undefined} onBlur={disableFocus}>
+    <li
+      {...props}
+      tabIndex={focus ? 0 : undefined}
+      ref={focus ? ref : undefined}
+      onClick={() => sendEvent("click", hit, "Hit Clicked")}
+      onAuxClick={() => sendEvent("click", hit, "Hit Clicked")}
+      onBlur={disableFocus}
+    >
       <DefaultHit hit={hit} />
     </li>
   )
