@@ -55,6 +55,10 @@ const nextConfig: NextConfig = {
       fallback: [],
       beforeFiles: [
         {
+          source: "/files/:site(\\w+)/:slug(.*[txt|rtf|doc|docx|ppt|pptx|xls|xlsx|pdf]$)",
+          destination: `${drupalUrl.protocol}//${drupalUrl.hostname}/sites/:site/files/:slug`,
+        },
+        {
           source: "/books/(title|awards|precart)",
           destination: "/books/legacy/:workId",
           has: [
