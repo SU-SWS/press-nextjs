@@ -4,19 +4,27 @@ import Link from "@components/elements/link"
 import {ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {notFound} from "next/navigation"
+import {cacheTag} from "next/cache"
 
 type Props = {
   params: Promise<{uuid: string[]}>
+}
+
+const getGallery = async (paragraphId: string): Promise<ParagraphStanfordGallery | false> => {
+  "use cache"
+  cacheTag("paragraphs", `paragraphs:${paragraphId}`)
+  const paragraphQuery = await graphqlClient().Paragraph({uuid: paragraphId})
+  if (paragraphQuery.paragraph?.__typename === "ParagraphStanfordGallery")
+    return paragraphQuery.paragraph as ParagraphStanfordGallery
+  return false
 }
 
 const Page = async (props: Props) => {
   const params = await props.params
   const [paragraphId, mediaUuid] = params.uuid
 
-  const paragraphQuery = await graphqlClient().Paragraph({uuid: paragraphId})
-  if (paragraphQuery.paragraph?.__typename !== "ParagraphStanfordGallery") notFound()
-
-  const paragraph = paragraphQuery.paragraph as ParagraphStanfordGallery
+  const paragraph = await getGallery(paragraphId)
+  if (!paragraph) notFound()
 
   const currentImageIndex = paragraph.suGalleryImages?.findIndex(image => image.uuid === mediaUuid) || 0
   const prevImageIndex = paragraph.suGalleryImages?.[currentImageIndex - 1] ? currentImageIndex - 1 : -1

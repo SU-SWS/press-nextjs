@@ -58,7 +58,7 @@ const RootLayout = async ({children, modal}: {children: React.ReactNode; modal: 
           </main>
           <PageFooter />
         </div>
-        {modal}
+        <div>{modal}</div>
       </body>
     </html>
   )
