@@ -7,7 +7,7 @@ export const GET = async (request: NextRequest) => {
   const headers = buildHeaders()
 
   const drupalFilePath = process.env.NEXT_PUBLIC_DRUPAL_BASE_URL + request.nextUrl.pathname
-  const res = await fetch(drupalFilePath, {headers, cache: "no-cache"})
+  const res = await fetch(drupalFilePath, {headers})
 
   if (!res.ok) {
     console.warn(`Unable to fetch file at ${drupalFilePath}`)

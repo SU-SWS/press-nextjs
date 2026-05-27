@@ -15,7 +15,6 @@ export const getLegacyBookPaths = async () => {
   while (fetchMore) {
     try {
       nodeQuery = await graphqlClient({
-        cache: "no-cache",
         signal: AbortSignal.timeout(10000),
       }).BooksWorkId({first: 1000, ...cursors})
 
@@ -40,15 +39,14 @@ export const getLegacyBookPaths = async () => {
 
 export const getNewBookPath = async (workId: string, suffix?: string): Promise<string | undefined> => {
   cacheTag("legacy-books")
-  if (!/^-?\d+(\.\d+)?$/.test(workId)) {
-    return
-  }
+  if (!/^-?\d+(\.\d+)?$/.test(workId)) return
+
   const legacyPaths = await getLegacyBookPaths()
   const legacyBook = legacyPaths.find(book => book.uuid === parseInt(workId))
   if (legacyBook?.path) return legacyBook.path + (suffix || "")
 
   // New work id, look up to see if one exists.
-  const bookData = await graphqlClient({cache: "no-cache"}).supBooks({filters: {work_id: parseInt(workId)}})
+  const bookData = await graphqlClient().supBooks({filters: {work_id: parseInt(workId)}})
   if (bookData.supBooksView?.results[0]?.__typename === "NodeSupBook" && bookData.supBooksView.results[0].path)
     return bookData.supBooksView.results[0].path + (suffix || "")
 }
