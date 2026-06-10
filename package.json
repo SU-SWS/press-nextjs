@@ -44,7 +44,7 @@
     "react-slick": "0.30.3",
     "react-tiny-oembed": "^1.1.0",
     "react-toastify": "^11.1.0",
-    "sharp": "^0.35.0",
+    "sharp": "^0.34.5",
     "tailwind-merge": "^2.6.1",
     "tailwindcss": "^3.4.19",
     "typescript": "^6.0.3",
