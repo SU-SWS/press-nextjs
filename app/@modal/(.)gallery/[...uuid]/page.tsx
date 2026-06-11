@@ -20,7 +20,7 @@ const getGallery = async (paragraphId: string): Promise<ParagraphStanfordGallery
 }
 
 export const generateStaticParams = (): Array<Param> => {
-  return [{uuid: ["/"]}]
+  return [{uuid: ["none"]}]
 }
 
 const Page = async (props: Props) => {

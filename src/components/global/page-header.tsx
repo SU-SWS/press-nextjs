@@ -10,7 +10,7 @@ import {cacheTag} from "next/cache"
 
 const PageHeader = async () => {
   "use cache"
-  cacheTag("config-pages")
+  cacheTag("config-pages", "menus", `menu:${MenuAvailable.Main}`)
   const menuItems = await getMenu(MenuAvailable.Main)
 
   return (
