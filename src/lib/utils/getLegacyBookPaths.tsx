@@ -1,4 +1,4 @@
-"use cache"
+"use cache: remote"
 
 import {BooksWorkIdQuery, BooksWorkIdQueryVariables, NodeInterface} from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"

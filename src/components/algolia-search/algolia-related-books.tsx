@@ -9,7 +9,7 @@ import {RecommendHit} from "algoliasearch/lite"
 import {cacheLife, cacheTag} from "next/cache"
 
 const getRelatedContent = async (objectID: string): Promise<BookHit[]> => {
-  "use cache"
+  "use cache: remote"
   cacheTag("related-books")
   cacheLife("months")
 

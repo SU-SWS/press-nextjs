@@ -7,7 +7,7 @@ import {cacheTag} from "next/cache"
 export const maxDuration = 60
 
 const getBookPrices = async (priceId: string) => {
-  "use cache"
+  "use cache: remote"
   cacheTag("prices", `prices:${priceId}`)
   const prices = await graphqlClient().BookPrice({id: priceId})
 

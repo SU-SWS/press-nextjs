@@ -1,4 +1,4 @@
-"use cache"
+"use cache: remote"
 
 import {getPlaiceholder} from "plaiceholder"
 import {ImageProps} from "next/image"
@@ -9,7 +9,7 @@ type ReturnProps = {
 }
 
 export const getImagePlaceholder = async (src: string): Promise<ReturnProps> => {
-  "use cache"
+  "use cache: remote"
   try {
     const buffer = await fetch(src).then(async res => Buffer.from(await res.arrayBuffer()))
     const {base64: blurDataURL} = await getPlaiceholder(buffer, {size: 10})

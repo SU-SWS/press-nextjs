@@ -6,7 +6,7 @@ import {cacheLife} from "next/cache"
 export const maxDuration = 60
 
 const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
-  "use cache"
+  "use cache: remote"
   cacheLife("weeks")
   const nodes = await getAllNodes()
 

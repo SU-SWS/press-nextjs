@@ -24,7 +24,7 @@ export const generateStaticParams = (): Array<Param> => {
 }
 
 const Page = async (props: Props) => {
-  "use cache"
+  "use cache: remote"
 
   const params = await props.params
   const [paragraphId, mediaUuid] = params.uuid

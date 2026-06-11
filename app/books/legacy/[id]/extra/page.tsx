@@ -1,4 +1,4 @@
-"use cache"
+"use cache: remote"
 
 import {notFound, redirect} from "next/navigation"
 import {getLegacyBookPaths, getNewBookPath} from "@lib/utils/getLegacyBookPaths"
