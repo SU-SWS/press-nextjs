@@ -2,8 +2,6 @@ import {NextRequest, NextResponse} from "next/server"
 import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import {notFound} from "next/navigation"
 
-export const revalidate = false
-export const dynamic = "force-static"
 // https://vercel.com/docs/functions/runtimes#max-duration
 export const maxDuration = 60
 

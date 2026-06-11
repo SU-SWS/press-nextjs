@@ -1,13 +1,14 @@
 "use client"
 
 import Script from "next/script"
-import {useEffect} from "react"
+import {useEffect, useRef} from "react"
 
 const Editori11y = () => {
+  const ref = useRef(null)
   const startEditoria11y = () => {
-    if (typeof Ed11y != "undefined") {
+    if (typeof Ed11y != "undefined" && !ref.current) {
       // @ts-expect-error Ed11y is a global class provided by the external library.
-      new Ed11y({
+      ref.current = new Ed11y({
         checkRoots: "#main-content",
         ignoreElements: "nav *, .ed11y-ignore",
         allowHide: false,
