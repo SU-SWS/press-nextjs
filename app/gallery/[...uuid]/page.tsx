@@ -12,8 +12,10 @@ export const metadata = {
   },
 }
 
+type Param = {uuid: string[]}
+
 type Props = {
-  params: Promise<{uuid: string[]}>
+  params: Promise<Param>
 }
 
 const getGallery = async (paragraphId: string): Promise<ParagraphStanfordGallery | false> => {
@@ -25,9 +27,17 @@ const getGallery = async (paragraphId: string): Promise<ParagraphStanfordGallery
   return false
 }
 
+export const generateStaticParams = (): Array<Param> => {
+  return [{uuid: ["/"]}]
+}
+
 const Page = async (props: Props) => {
+  "use cache"
+
   const params = await props.params
   const [paragraphId, mediaUuid] = params.uuid
+
+  cacheTag("paragraphs", `paragraphs:${paragraphId}`)
 
   const paragraph = await getGallery(paragraphId)
   if (!paragraph) return notFound()

@@ -1,10 +1,7 @@
 import {H1} from "@components/elements/headers"
 import {getAlgoliaCredential} from "@lib/gql/gql-queries"
 import AlgoliaSearchForm from "@components/algolia-search/algolia-search-form"
-
-// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
-export const revalidate = false
-export const dynamic = "force-static"
+import {Suspense} from "react"
 
 export const metadata = {
   title: "Search",
@@ -16,6 +13,8 @@ export const metadata = {
   },
 }
 const Page = async () => {
+  "use cache"
+
   const [appId, indexName, apiKey] = await getAlgoliaCredential()
 
   return (
@@ -26,7 +25,9 @@ const Page = async () => {
         </H1>
 
         {appId && indexName && apiKey && (
-          <AlgoliaSearchForm appId={appId} searchIndex={indexName} searchApiKey={apiKey} />
+          <Suspense>
+            <AlgoliaSearchForm appId={appId} searchIndex={indexName} searchApiKey={apiKey} />
+          </Suspense>
         )}
         <noscript>Please enable javascript to view search results</noscript>
       </div>

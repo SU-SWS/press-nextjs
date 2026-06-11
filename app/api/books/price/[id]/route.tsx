@@ -3,8 +3,6 @@ import {graphqlClient} from "@lib/gql/gql-client"
 import {notFound} from "next/navigation"
 import {cacheTag} from "next/cache"
 
-export const revalidate = false
-export const dynamic = "force-static"
 // https://vercel.com/docs/functions/runtimes#max-duration
 export const maxDuration = 60
 

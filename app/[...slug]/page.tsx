@@ -5,15 +5,17 @@ import {notFound, redirect} from "next/navigation"
 import {getPathFromContext, PageProps, Slug} from "@lib/drupal/utils"
 import SupBookExcerptPage from "@components/nodes/pages/sup-book/sup-book-excerpt-page"
 import SupBookDeskExaminationPage from "@components/nodes/pages/sup-book/sup-book-desk-examination-page"
+import {cacheTag} from "next/cache"
 
-// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
-export const revalidate = false
-export const dynamic = "force-static"
 // https://vercel.com/docs/functions/runtimes#max-duration
 export const maxDuration = 60
 
 const Page = async (props: PageProps) => {
+  "use cache"
+
   const params = await props.params
+  cacheTag("paths:/" + params.slug.join("/"))
+
   const {path, page} = getBookPageRequested(getPathFromContext(params.slug))
 
   const {redirect: redirectPath, entity} = await getEntityFromPath<NodeUnion>(path)
@@ -31,7 +33,7 @@ const Page = async (props: PageProps) => {
 
 export const generateStaticParams = async (): Promise<Array<Slug>> => {
   const pagesToBuild = parseInt(process.env.BUILD_PAGES || "0")
-  if (pagesToBuild === 0) return []
+  if (pagesToBuild === 0) return [{slug: []}]
   const paths = (await getAllNodes()).map(node => node.path).filter(path => !!path) as Array<string>
   const nodePaths = paths.map(path => ({slug: path.split("/").filter(part => !!part)}))
   return pagesToBuild < 0 ? nodePaths : nodePaths.slice(0, pagesToBuild)

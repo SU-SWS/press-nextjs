@@ -6,8 +6,11 @@ import Link from "@components/elements/link"
 import HeaderLogoLg from "@components/images/header-logo-lg"
 import HeaderLogoXs from "@components/images/header-logo-xs"
 import HeaderForCarousel from "@components/global/header-for-carousel"
+import {cacheTag} from "next/cache"
 
 const PageHeader = async () => {
+  "use cache"
+  cacheTag("config-pages")
   const menuItems = await getMenu(MenuAvailable.Main)
 
   return (

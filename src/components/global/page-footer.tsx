@@ -1,7 +1,11 @@
 import LocalFooter from "@components/config-pages/local-footer"
 import SuperFooter from "@components/config-pages/super-footer"
+import {cacheTag} from "next/cache"
 
-const PageFooter = () => {
+const PageFooter = async () => {
+  "use cache"
+  cacheTag("config-pages")
+
   return (
     <footer>
       <SuperFooter />

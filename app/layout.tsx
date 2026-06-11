@@ -1,16 +1,14 @@
-"use cache"
-
 import "../src/styles/index.css"
 import BackToTop from "@components/elements/back-to-top"
 import PageFooter from "@components/global/page-footer"
 import PageHeader from "@components/global/page-header"
 import {Icon} from "next/dist/lib/metadata/types/metadata-types"
 import {montserrat} from "../src/styles/fonts"
-import DrupalWindowSync from "@components/elements/drupal-window-sync"
 import UserAnalytics from "@components/elements/user-analytics"
 import Editori11y from "@components/tools/editorially"
 import {ToastMessage} from "@components/elements/toast-message"
 import {Metadata} from "next"
+import {Suspense} from "react"
 
 const appleIcons: Icon[] = [57, 72, 76, 114, 120, 144, 152, 180].map(size => ({
   url: `/apple-touch-icon-${size}x${size}.png`,
@@ -38,7 +36,6 @@ const RootLayout = async ({children, modal}: {children: React.ReactNode; modal: 
   return (
     <html lang="en" className={montserrat.className}>
       <UserAnalytics />
-      <DrupalWindowSync />
       {isDevMode && <Editori11y />}
 
       <body className="text-stone-dark">
@@ -58,7 +55,7 @@ const RootLayout = async ({children, modal}: {children: React.ReactNode; modal: 
           </main>
           <PageFooter />
         </div>
-        <div>{modal}</div>
+        <Suspense>{modal}</Suspense>
       </body>
     </html>
   )

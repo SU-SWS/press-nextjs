@@ -1,4 +1,4 @@
-import {HTMLAttributes} from "react"
+import {HTMLAttributes, Suspense} from "react"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {BooksAuthorsQuery, NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import FilteringAuthorList from "@components/paragraphs/sup-author-list/filtering-author-list"
@@ -57,6 +57,10 @@ const SupAuthorListParagraph = async ({...props}: Props) => {
     })
   })
 
-  return <FilteringAuthorList authors={authors} {...props} />
+  return (
+    <Suspense>
+      <FilteringAuthorList authors={authors} {...props} />
+    </Suspense>
+  )
 }
 export default SupAuthorListParagraph

@@ -1,12 +1,13 @@
 import {MetadataRoute} from "next"
 import {getAllNodes} from "@lib/gql/gql-queries"
+import {cacheLife} from "next/cache"
 
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
-export const revalidate = 604800
-export const dynamic = "force-static"
 export const maxDuration = 60
 
 const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
+  "use cache"
+  cacheLife("weeks")
   const nodes = await getAllNodes()
 
   const sitemap: MetadataRoute.Sitemap = []

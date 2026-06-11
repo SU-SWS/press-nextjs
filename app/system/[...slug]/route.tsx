@@ -1,8 +1,6 @@
 import {NextRequest, NextResponse} from "next/server"
 import {buildHeaders} from "@lib/drupal/utils"
 
-export const revalidate = 0
-
 export const GET = async (request: NextRequest) => {
   const headers = buildHeaders()
 

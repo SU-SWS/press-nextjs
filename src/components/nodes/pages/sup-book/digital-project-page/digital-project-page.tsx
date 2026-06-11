@@ -1,6 +1,6 @@
 import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/drupal.d"
 import {H1, H2, H3} from "@components/elements/headers"
-import {HTMLAttributes} from "react"
+import {HTMLAttributes, Suspense} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
 import Wysiwyg from "@components/elements/wysiwyg"
 import {ArrowLongLeftIcon, ArrowRightIcon, BookmarkIcon} from "@heroicons/react/24/outline"
@@ -185,32 +185,34 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
       </div>
 
       {(node.body?.processed || node.supBookReviews || node.supBookAuthorInfo) && (
-        <Tabs className="mb-20 border-b border-fog pb-20">
-          <div className="mb-20 border-b border-fog">
-            <TabsList className="mx-auto max-w-5xl">
-              {node.body?.processed && <Tab className="p-10">Description</Tab>}
-              {node.supBookReviews && <Tab className="p-10">Reviews</Tab>}
-              {node.supBookAuthorInfo && <Tab className="p-10">About the Author</Tab>}
-            </TabsList>
-          </div>
-          <div className="mx-auto max-w-5xl">
-            {node.body?.processed && (
-              <TabPanel>
-                <Wysiwyg html={node.body?.processed} />
-              </TabPanel>
-            )}
-            {node.supBookReviews && (
-              <TabPanel>
-                <Wysiwyg html={node.supBookReviews.processed} />
-              </TabPanel>
-            )}
-            {node.supBookAuthorInfo && (
-              <TabPanel>
-                <Wysiwyg html={node.supBookAuthorInfo.processed} />
-              </TabPanel>
-            )}
-          </div>
-        </Tabs>
+        <Suspense>
+          <Tabs className="mb-20 border-b border-fog pb-20">
+            <div className="mb-20 border-b border-fog">
+              <TabsList className="mx-auto max-w-5xl">
+                {node.body?.processed && <Tab className="p-10">Description</Tab>}
+                {node.supBookReviews && <Tab className="p-10">Reviews</Tab>}
+                {node.supBookAuthorInfo && <Tab className="p-10">About the Author</Tab>}
+              </TabsList>
+            </div>
+            <div className="mx-auto max-w-5xl">
+              {node.body?.processed && (
+                <TabPanel>
+                  <Wysiwyg html={node.body?.processed} />
+                </TabPanel>
+              )}
+              {node.supBookReviews && (
+                <TabPanel>
+                  <Wysiwyg html={node.supBookReviews.processed} />
+                </TabPanel>
+              )}
+              {node.supBookAuthorInfo && (
+                <TabPanel>
+                  <Wysiwyg html={node.supBookAuthorInfo.processed} />
+                </TabPanel>
+              )}
+            </div>
+          </Tabs>
+        </Suspense>
       )}
 
       {node.supBookSubjects && (
