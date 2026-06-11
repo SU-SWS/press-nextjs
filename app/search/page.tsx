@@ -13,7 +13,7 @@ export const metadata = {
   },
 }
 const Page = async () => {
-  "use cache"
+  "use cache: remote"
 
   const [appId, indexName, apiKey] = await getAlgoliaCredential()
 

@@ -9,7 +9,7 @@ import HeaderForCarousel from "@components/global/header-for-carousel"
 import {cacheTag} from "next/cache"
 
 const PageHeader = async () => {
-  "use cache"
+  "use cache: remote"
   cacheTag("config-pages", "menus", `menu:${MenuAvailable.Main}`)
   const menuItems = await getMenu(MenuAvailable.Main)
 

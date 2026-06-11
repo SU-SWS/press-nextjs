@@ -11,7 +11,7 @@ import {cacheTag} from "next/cache"
 export const maxDuration = 60
 
 const Page = async (props: PageProps) => {
-  "use cache"
+  "use cache: remote"
 
   const params = await props.params
   cacheTag("paths:/" + params.slug.join("/"))

@@ -3,7 +3,7 @@ import SuperFooter from "@components/config-pages/super-footer"
 import {cacheTag} from "next/cache"
 
 const PageFooter = async () => {
-  "use cache"
+  "use cache: remote"
   cacheTag("config-pages")
 
   return (

@@ -7,7 +7,7 @@ import {cacheLife, cacheTag} from "next/cache"
 type Props = HTMLAttributes<HTMLDivElement>
 
 const getBookAuthorsData = async () => {
-  "use cache"
+  "use cache: remote"
   cacheTag("author-list")
   cacheLife("months")
   // Fetch all the books, sort by authors, and then build pagination and side alpha selection.

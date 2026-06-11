@@ -19,7 +19,7 @@ type Props = {
 }
 
 const getGallery = async (paragraphId: string): Promise<ParagraphStanfordGallery | false> => {
-  "use cache"
+  "use cache: remote"
   cacheTag("paragraphs", `paragraphs:${paragraphId}`)
   const paragraphQuery = await graphqlClient().Paragraph({uuid: paragraphId})
   if (paragraphQuery.paragraph?.__typename === "ParagraphStanfordGallery")
@@ -32,7 +32,7 @@ export const generateStaticParams = (): Array<Param> => {
 }
 
 const Page = async (props: Props) => {
-  "use cache"
+  "use cache: remote"
 
   const params = await props.params
   const [paragraphId, mediaUuid] = params.uuid
