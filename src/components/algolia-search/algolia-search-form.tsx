@@ -31,9 +31,8 @@ import {
 import DefaultHit, {AlgoliaHit} from "@components/algolia-search/hits/default"
 import {CheckIcon} from "@heroicons/react/20/solid"
 import clsx from "clsx"
-import {useBoolean, useIsClient, useLocalStorage, useReadLocalStorage} from "usehooks-ts"
+import {useBoolean, useLocalStorage, useReadLocalStorage} from "usehooks-ts"
 import {twMerge} from "tailwind-merge"
-import {ArrowPathIcon} from "@heroicons/react/16/solid"
 import type {SendEventForHits} from "instantsearch.js/es/lib/utils"
 
 type Props = {
@@ -46,9 +45,6 @@ type Props = {
 const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
   const searchClient = useMemo(() => liteClient(appId, searchApiKey), [appId, searchApiKey])
   const sortChoice = useReadLocalStorage<string>("search-sort")
-  const isClient = useIsClient()
-
-  if (!isClient) return <ArrowPathIcon className="mx-auto animate-spin" width={50} />
   return (
     <div>
       <InstantSearchNext
@@ -148,6 +144,15 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
   }, [rangeChoices, minYear, maxYear, refineRange])
 
   const {value: expanded, toggle: toggleExpanded} = useBoolean(false)
+
+  const loaded = useRef(false)
+  useEffect(() => {
+    // Force the search to submit if no results and it's the first time rendering.
+    if (!loaded.current) {
+      if (!query) refine(query)
+      loaded.current = true
+    }
+  }, [refine, query])
 
   return (
     <div>
