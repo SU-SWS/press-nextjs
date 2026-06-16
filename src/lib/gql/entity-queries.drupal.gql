@@ -362,8 +362,8 @@ query ConfigPages {
         }
     }
     lockupSettings(first: 1) {
-       nodes {
-           __typename
+        nodes {
+            __typename
             suLine1
             suLine2
             suLine3

@@ -57,9 +57,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
           </li>
           <li>
             <b>Desk copies</b> are for instructors who have adopted the book for a class and meet our{" "}
-            <Link href="/requests/?item=deskcopy" prefetch={false}>
-              desk copy requirements.
-            </Link>
+            <Link href="/requests/?item=deskcopy">desk copy requirements.</Link>
           </li>
           <li>
             <b>Examination copies</b> are for instructors who are considering using a text but have not adopted it.
@@ -69,10 +67,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
         <H2 className="rs-mt-4 type-1 xl:text-26">Review Copy Requests</H2>
         <p>
           If you would like to review one of our titles for a periodical or other publication, please email{" "}
-          <Link href="mailto:publicity@sup.org" prefetch={false}>
-            publicity@sup.org
-          </Link>{" "}
-          with the following information:
+          <Link href="mailto:publicity@sup.org">publicity@sup.org</Link> with the following information:
         </p>
 
         <ul className="rs-mb-2">
@@ -100,10 +95,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
               <li>
                 If you are{" "}
                 <b>
-                  <Link
-                    href={`http://sup.ereviews.eb20.com/Requests/EReview/${node.supBookIsbn13Digital}`}
-                    prefetch={false}
-                  >
+                  <Link href={`http://sup.ereviews.eb20.com/Requests/EReview/${node.supBookIsbn13Digital}`}>
                     a periodical or other publication reviewing our content.
                   </Link>
                 </b>
@@ -113,10 +105,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
               <li>
                 If you are{" "}
                 <b>
-                  <Link
-                    href={`http://sup.einspections.eb20.com/Requests/EInspection/${node.supBookIsbn13Digital}`}
-                    prefetch={false}
-                  >
+                  <Link href={`http://sup.einspections.eb20.com/Requests/EInspection/${node.supBookIsbn13Digital}`}>
                     a professor requesting a desk copy or an examination copy.
                   </Link>
                 </b>{" "}
@@ -154,15 +143,10 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
             <p>
               For help accessing your ebook check the{" "}
               <b>
-                <Link href="http://sup.einspections.eb20.com/Help/" prefetch={false}>
-                  digital comps website help
-                </Link>
+                <Link href="http://sup.einspections.eb20.com/Help/">digital comps website help</Link>
               </b>{" "}
               first. If that does not answer your question(s), please contact us at{" "}
-              <Link href="mailto:info@sup.org" prefetch={false}>
-                info@sup.org
-              </Link>
-              .
+              <Link href="mailto:info@sup.org">info@sup.org</Link>.
             </p>
             <p>
               If you are requesting a book on behalf of someone else, enter in the name and email of the individual for
@@ -176,9 +160,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
                 <p>
                   Please{" "}
                   <b>
-                    <Link href={`https://ingramacademic.com/search?q=${isbn}`} prefetch={false}>
-                      follow this link
-                    </Link>
+                    <Link href={`https://ingramacademic.com/search?q=${isbn}`}>follow this link</Link>
                   </b>{" "}
                   to request a print Exam or Desk copy for a small fee.
                 </p>
@@ -202,9 +184,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
                 <p>
                   Please{" "}
                   <b>
-                    <Link href={`https://ingramacademic.com/search?q=${isbn}`} prefetch={false}>
-                      follow this link
-                    </Link>
+                    <Link href={`https://ingramacademic.com/search?q=${isbn}`}>follow this link</Link>
                   </b>{" "}
                   to request a print Exam or Desk copy for a small fee.
                 </p>

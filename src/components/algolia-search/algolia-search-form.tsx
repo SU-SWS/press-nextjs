@@ -15,11 +15,9 @@ import {InstantSearchNext} from "react-instantsearch-nextjs"
 import {H2} from "@components/elements/headers"
 import {HTMLAttributes, useEffect, useId, useLayoutEffect, useMemo, useRef, useState} from "react"
 import Button from "@components/elements/button"
-import {useSearchParams} from "next/navigation"
 import {Hit as HitType} from "instantsearch.js"
 import SelectList from "@components/elements/select-list"
 import {SelectOptionDefinition} from "@mui/base/useSelect"
-import {RangeBoundaries} from "instantsearch.js/es/connectors/range/connectRange"
 import {IndexUiState} from "instantsearch.js/es/types/ui-state"
 import {
   ArrowLongLeftIcon,
@@ -45,60 +43,56 @@ type Props = {
 const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
   const searchClient = useMemo(() => liteClient(appId, searchApiKey), [appId, searchApiKey])
   const sortChoice = useReadLocalStorage<string>("search-sort")
+
   return (
-    <div>
-      <InstantSearchNext
-        indexName={sortChoice || searchIndex}
-        searchClient={searchClient}
-        future={{preserveSharedStateOnUnmount: true}}
-        insights={true}
-        routing={{
-          router: {cleanUrlOnDispose: false},
-          stateMapping: {
-            stateToRoute(uiState): Record<string, string> {
-              const indexUiState = uiState[sortChoice || searchIndex]
-              const refinements: Record<string, string> = {}
+    <InstantSearchNext
+      indexName={sortChoice || searchIndex}
+      searchClient={searchClient}
+      insights={true}
+      routing={{
+        router: {cleanUrlOnDispose: false},
+        stateMapping: {
+          stateToRoute(uiState): Record<string, string> {
+            const indexUiState = uiState[sortChoice || searchIndex]
+            const refinements: Record<string, string> = {}
 
-              if (indexUiState.range?.book_published_year) {
-                const [yearMin, yearMax] = indexUiState.range.book_published_year.split(":")
-                if (yearMin) refinements["published-min"] = yearMin
-                if (yearMax) refinements["published-max"] = yearMax
-              }
+            if (indexUiState.range?.book_published_year) {
+              const [yearMin, yearMax] = indexUiState.range.book_published_year.split(":")
+              if (Number(yearMin) > 0 && Number(yearMin) < 2050) refinements["published-min"] = yearMin
+              if (Number(yearMax) > 0 && Number(yearMin) < 2050) refinements["published-max"] = yearMax
+            }
 
-              if (indexUiState.refinementList?.book_subject)
-                refinements.subjects = indexUiState.refinementList.book_subject.join(",")
+            if (indexUiState.refinementList?.book_subject)
+              refinements.subjects = indexUiState.refinementList.book_subject.join(",")
 
-              if (!indexUiState.refinementList?.book_type?.includes("book")) refinements["only-books"] = "false"
+            if (!indexUiState.refinementList?.book_type?.includes("book")) refinements["only-books"] = "false"
 
-              if (indexUiState.query) refinements.q = indexUiState.query
-              return refinements
-            },
-            routeToState(routeState: Record<string, string>) {
-              const refinementList: IndexUiState["refinementList"] = {}
-              const range: IndexUiState["range"] = {}
-
-              if (routeState["published-min"]) range.book_published_year = routeState["published-min"] + ":"
-              if (routeState["published-max"])
-                range.book_published_year = (":" + routeState["published-max"]).replace("::", ":")
-              if (routeState["only-books"] !== "false") refinementList["book_type"] = ["book"]
-              if (routeState["subjects"]) refinementList["book_subject"] = routeState["subjects"].split(",")
-
-              return {
-                [sortChoice || searchIndex]: {query: routeState.q, refinementList, range},
-              }
-            },
+            if (indexUiState.query) refinements.q = indexUiState.query
+            return refinements
           },
-        }}
-      >
-        <Form searchIndex={searchIndex} />
-      </InstantSearchNext>
-    </div>
+          routeToState(routeState: Record<string, string>) {
+            const refinementList: IndexUiState["refinementList"] = {}
+            const range: IndexUiState["range"] = {}
+
+            const pubRange = [routeState["published-min"], ":", routeState["published-max"]]
+            range.book_published_year = pubRange.filter(Boolean).join("")
+
+            if (routeState["only-books"] !== "false") refinementList["book_type"] = ["book"]
+            if (routeState["subjects"]) refinementList["book_subject"] = routeState["subjects"].split(",")
+
+            return {
+              [sortChoice || searchIndex]: {query: routeState.q, refinementList, range},
+            }
+          },
+        },
+      }}
+    >
+      <Form searchIndex={searchIndex} />
+    </InstantSearchNext>
   )
 }
 
 const Form = ({searchIndex}: {searchIndex: string}) => {
-  const searchParams = useSearchParams()
-
   const {items: bookType, refine: refineBookType} = useRefinementList({attribute: "book_type"})
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -111,23 +105,32 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
   })
 
   const {
+    start: pubYearValues,
     range: pubYearRangeBounds,
-    refine: refineRange,
+    refine: refindPubYear,
     canRefine: canRefinePubYear,
   } = useRange({attribute: "book_published_year"})
-
   const {min: minYear, max: maxYear} = pubYearRangeBounds
+
+  const chosenMinYear = Math.max(
+    Number(minYear),
+    Number(Number.isFinite(pubYearValues[0]) ? pubYearValues[0] : minYear)
+  )
+  const chosenMaxYear = Math.min(
+    maxYear || 3000,
+    Number(Number.isFinite(pubYearValues[1]) ? pubYearValues[1] : maxYear)
+  )
+
+  const [pubYears, setPubYears] = useState<{start?: number; end?: number}>({
+    start: chosenMinYear || undefined,
+    end: chosenMaxYear || undefined,
+  })
+
   const {
     items: currentRefinements,
     canRefine: canRefineCurrent,
     refine: removeRefinement,
   } = useCurrentRefinements({includedAttributes: ["book_subject", "book_type"]})
-
-  // State handlers to manage the GET parameters.
-  const [rangeChoices, setRangeChoices] = useState<RangeBoundaries>([
-    parseInt(searchParams.get("published-min") || "0"),
-    parseInt(searchParams.get("published-max") || "3000"),
-  ])
 
   const yearOptions: SelectOptionDefinition<string>[] = []
 
@@ -137,20 +140,14 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
 
   const id = useId()
 
-  useEffect(() => {
-    const rangeFrom = rangeChoices[0] && minYear && rangeChoices[0] > minYear ? rangeChoices[0] : minYear
-    const rangeTo = rangeChoices[1] && maxYear && rangeChoices[1] < maxYear ? rangeChoices[1] : maxYear
-    refineRange([rangeFrom, rangeTo])
-  }, [rangeChoices, minYear, maxYear, refineRange])
-
   const {value: expanded, toggle: toggleExpanded} = useBoolean(false)
 
   const loaded = useRef(false)
   useEffect(() => {
     // Force the search to submit if no results and it's the first time rendering.
     if (!loaded.current) {
-      if (!query) refine(query)
       loaded.current = true
+      refine(query)
     }
   }, [refine, query])
 
@@ -304,17 +301,16 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                     <span className="sr-only">Minimum&nbps;</span>Year
                   </div>
                   <SelectList
-                    options={yearOptions.filter(
-                      option =>
-                        parseInt(option.value) < (rangeChoices[1] || 3000) && parseInt(option.value) > (minYear || 0)
-                    )}
-                    value={!rangeChoices[0] || !minYear || rangeChoices[0] <= minYear ? null : `${rangeChoices[0]}`}
+                    options={yearOptions.filter(option => parseInt(option.value) <= (pubYears.end || 3000))}
+                    value={!!pubYears.start ? pubYears.start.toString() : null}
+                    onChange={(_e, value) => {
+                      setPubYears({start: value ? Number(value) : undefined, end: pubYears.end})
+                      refindPubYear([value ? Number(value) : undefined, pubYears.end])
+                    }}
                     ariaLabelledby={`${id}-min-year`}
                     disabled={!canRefinePubYear}
                     emptyLabel="Any"
-                    onChange={(_e, value) =>
-                      setRangeChoices(prevState => [parseInt(value as string) || undefined, prevState[1]])
-                    }
+                    className="h-[45px] text-16 *:text-16"
                   />
                 </div>
                 <span aria-hidden className="relative top-5">
@@ -325,17 +321,15 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                     <span className="sr-only">Maximum&nbps;</span>Year
                   </div>
                   <SelectList
-                    options={yearOptions.filter(
-                      option =>
-                        parseInt(option.value) > (rangeChoices[0] || 0) && parseInt(option.value) < (maxYear || 3000)
-                    )}
-                    value={!rangeChoices[1] || !maxYear || rangeChoices[1] >= maxYear ? null : `${rangeChoices[1]}`}
+                    options={yearOptions.filter(option => parseInt(option.value) >= (pubYears.start || 0))}
+                    value={!!pubYears.end ? pubYears.end.toString() : null}
+                    onChange={(_e, value) => {
+                      setPubYears({start: pubYears.start, end: value ? Number(value) : undefined})
+                      refindPubYear([pubYears.start, value ? Number(value) : undefined])
+                    }}
                     ariaLabelledby={`${id}-max-year`}
                     disabled={!canRefinePubYear}
                     emptyLabel="Any"
-                    onChange={(_e, value) =>
-                      setRangeChoices(prevState => [prevState[0], parseInt(value as string) || undefined])
-                    }
                     className="h-[45px] text-16 *:text-16"
                   />
                 </div>
@@ -349,7 +343,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
               onClick={() => {
                 clearRefinements()
                 refine("")
-                setRangeChoices([0, 3000])
+                refindPubYear([-Infinity, Infinity])
                 if (inputRef.current) inputRef.current.value = ""
               }}
             >

@@ -33,7 +33,7 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
       <div className="flex flex-col justify-between gap-20 @2xl:flex-row">
         <div>
           <H3 className="type-0 mb-2 xl:text-21" id={hit.objectID}>
-            <Link className="text-stone-dark hocus:text-digital-red" href={url} prefetch={false}>
+            <Link className="text-stone-dark hocus:text-digital-red" href={url}>
               {hit.title}
             </Link>
           </H3>
@@ -53,7 +53,6 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
             href={url}
             aria-hidden
             tabIndex={-1}
-            prefetch={false}
             className={twMerge(
               "relative block",
               clsx({

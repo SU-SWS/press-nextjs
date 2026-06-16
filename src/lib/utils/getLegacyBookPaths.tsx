@@ -1,5 +1,6 @@
 "use cache: remote"
 
+import {INFINITE_CACHE} from "next/dist/lib/constants"
 import {BooksWorkIdQuery, BooksWorkIdQueryVariables, NodeInterface} from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {cacheTag} from "next/cache"
@@ -15,6 +16,7 @@ export const getLegacyBookPaths = async () => {
   while (fetchMore) {
     try {
       nodeQuery = await graphqlClient({
+        next: {revalidate: INFINITE_CACHE, tags: ["legacy-books"]},
         signal: AbortSignal.timeout(10000),
       }).BooksWorkId({first: 1000, ...cursors})
 
@@ -46,7 +48,9 @@ export const getNewBookPath = async (workId: string, suffix?: string): Promise<s
   if (legacyBook?.path) return legacyBook.path + (suffix || "")
 
   // New work id, look up to see if one exists.
-  const bookData = await graphqlClient().supBooks({filters: {work_id: parseInt(workId)}})
+  const bookData = await graphqlClient({next: {revalidate: INFINITE_CACHE, tags: ["legacy-books"]}}).supBooks({
+    filters: {work_id: parseInt(workId)},
+  })
   if (bookData.supBooksView?.results[0]?.__typename === "NodeSupBook" && bookData.supBooksView.results[0].path)
     return bookData.supBooksView.results[0].path + (suffix || "")
 }

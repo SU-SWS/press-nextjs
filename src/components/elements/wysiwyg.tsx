@@ -62,7 +62,7 @@ const options: HTMLReactParserOptions = {
 
           if (nodeProps.className?.includes("link--action")) {
             return (
-              <ActionLink {...nodeProps} href={nodeProps.href as string} prefetch={false}>
+              <ActionLink {...nodeProps} href={nodeProps.href as string}>
                 {domToReact(children, options)}
               </ActionLink>
             )
@@ -72,7 +72,6 @@ const options: HTMLReactParserOptions = {
             return (
               <Button
                 {...nodeProps}
-                prefetch={false}
                 big={nodeProps.className.includes("button--big")}
                 secondary={nodeProps.className.includes("button--secondary")}
               >
@@ -83,7 +82,7 @@ const options: HTMLReactParserOptions = {
 
           nodeProps.className = twMerge(nodeProps.className, "text-digital-red hocus:text-archway-dark")
           return (
-            <Link href={nodeProps.href as string} prefetch={false} {...nodeProps}>
+            <Link href={nodeProps.href as string} {...nodeProps}>
               {domToReact(children, options)}
             </Link>
           )

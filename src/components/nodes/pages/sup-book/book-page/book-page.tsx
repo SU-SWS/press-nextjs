@@ -142,7 +142,6 @@ const BookPage = async ({node, ...props}: Props) => {
                   Series
                   <br />
                   <Link
-                    prefetch={false}
                     href={node.supBookSeries.supSeriesPage?.url || `/search?q=${node.supBookSeries.name}`}
                     className="text-18 font-normal text-stone-dark"
                   >
@@ -239,7 +238,6 @@ const BookPage = async ({node, ...props}: Props) => {
               return (
                 <li key={subject.uuid} className="min-w-fit">
                   <Link
-                    prefetch={false}
                     href={`/search?${linkParamsString}`}
                     className="text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                   >

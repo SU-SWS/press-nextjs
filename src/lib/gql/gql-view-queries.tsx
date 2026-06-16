@@ -15,6 +15,7 @@ import {
 } from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import View from "@components/views/view"
+import {INFINITE_CACHE} from "next/dist/lib/constants"
 
 export const loadViewPage = async (
   viewId: string,
@@ -120,7 +121,7 @@ export const getViewPagedItems = cache(
         break
     }
 
-    const client = graphqlClient({next: {tags}})
+    const client = graphqlClient({next: {revalidate: INFINITE_CACHE, tags}})
     let contextualFilters = getContextualFilters(["term_node_taxonomy_name_depth"], contextualFilter)
     let fieldFilters: Record<string, string | number | Array<string | number> | undefined> = {}
     let graphqlResponse

@@ -14,7 +14,7 @@ export type LinkProps = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement
     href: string
   }
 
-const DrupalLink = ({href, children, ...props}: LinkProps) => {
+const DrupalLink = ({href, children, prefetch, ...props}: LinkProps) => {
   // Make sure all links have a href.
   href = href || "#"
   const drupalBase: string = (process.env.NEXT_PUBLIC_DRUPAL_BASE_URL || "").replace(/\/$/, "")
@@ -31,7 +31,7 @@ const DrupalLink = ({href, children, ...props}: LinkProps) => {
 
   if (props.className?.includes("link--action")) {
     return (
-      <ActionLink href={href} {...props}>
+      <ActionLink href={href} prefetch={prefetch ?? false} {...props}>
         {children}
       </ActionLink>
     )
@@ -41,6 +41,7 @@ const DrupalLink = ({href, children, ...props}: LinkProps) => {
     return (
       <Button
         {...props}
+        prefetch={prefetch ?? false}
         href={href}
         big={props.className.includes("--big")}
         secondary={props.className.includes("--secondary")}
@@ -51,7 +52,12 @@ const DrupalLink = ({href, children, ...props}: LinkProps) => {
   }
 
   return (
-    <Link {...props} href={href} className={twMerge("group text-digital-red hocus:text-archway-dark", props.className)}>
+    <Link
+      {...props}
+      prefetch={prefetch ?? false}
+      href={href}
+      className={twMerge("group text-digital-red hocus:text-archway-dark", props.className)}
+    >
       {children}
       {href.startsWith("mailto") && (
         <EnvelopeIcon width={20} className="ml-4 inline-block text-digital-red group-hocus:text-archway-dark" />

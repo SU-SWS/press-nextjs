@@ -5,6 +5,7 @@ import {ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {notFound} from "next/navigation"
 import {cacheTag} from "next/cache"
+import {INFINITE_CACHE} from "next/dist/lib/constants"
 
 type Param = {uuid: string[]}
 
@@ -13,7 +14,7 @@ type Props = {
 }
 
 const getGallery = async (paragraphId: string): Promise<ParagraphStanfordGallery | false> => {
-  const paragraphQuery = await graphqlClient().Paragraph({uuid: paragraphId})
+  const paragraphQuery = await graphqlClient({next: {revalidate: INFINITE_CACHE}}).Paragraph({uuid: paragraphId})
   if (paragraphQuery.paragraph?.__typename === "ParagraphStanfordGallery")
     return paragraphQuery.paragraph as ParagraphStanfordGallery
   return false

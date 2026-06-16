@@ -132,7 +132,6 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
                   Series
                   <br />
                   <Link
-                    prefetch={false}
                     href={
                       node.supBookSeries.supSeriesPage?.url || `/search?q=${node.supBookSeries.name}&only-books=false`
                     }
@@ -222,7 +221,6 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
             {node.supBookSubjects.map(subject => (
               <li key={subject.uuid} className="min-w-fit flex-1">
                 <Link
-                  prefetch={false}
                   href={`/search?${createLinkParams(subject)}`}
                   className="text-18 font-normal text-stone-dark decoration-fog-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
                 >

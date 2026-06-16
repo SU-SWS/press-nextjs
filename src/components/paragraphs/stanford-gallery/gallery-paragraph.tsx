@@ -65,7 +65,6 @@ const GalleryImage = ({
           className="border-sand-light relative block h-full w-full border"
           rel="nofollow"
           scroll={false}
-          prefetch={false}
         >
           <Image
             className="object-cover"

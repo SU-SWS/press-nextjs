@@ -4,6 +4,7 @@ import {notFound} from "next/navigation"
 import {ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d"
 import Image from "next/image"
 import {cacheTag} from "next/cache"
+import {INFINITE_CACHE} from "next/dist/lib/constants"
 
 export const metadata = {
   title: "Gallery Image",
@@ -20,8 +21,9 @@ type Props = {
 
 const getGallery = async (paragraphId: string): Promise<ParagraphStanfordGallery | false> => {
   "use cache: remote"
-  cacheTag("paragraphs", `paragraphs:${paragraphId}`)
-  const paragraphQuery = await graphqlClient().Paragraph({uuid: paragraphId})
+  const tags = ["paragraphs", `paragraphs:${paragraphId}`]
+  cacheTag(...tags)
+  const paragraphQuery = await graphqlClient({next: {revalidate: INFINITE_CACHE, tags}}).Paragraph({uuid: paragraphId})
   if (paragraphQuery.paragraph?.__typename === "ParagraphStanfordGallery")
     return paragraphQuery.paragraph as ParagraphStanfordGallery
   return false

@@ -8,7 +8,8 @@ type Props = HTMLAttributes<HTMLDivElement>
 
 const getBookAuthorsData = async () => {
   "use cache: remote"
-  cacheTag("author-list")
+  const tags = ["author-list"]
+  cacheTag(...tags)
   cacheLife("months")
   // Fetch all the books, sort by authors, and then build pagination and side alpha selection.
   let fetchMore = true
@@ -19,6 +20,7 @@ const getBookAuthorsData = async () => {
   while (fetchMore) {
     try {
       query = await graphqlClient({
+        next: {revalidate: 60 * 60 * 24 * 30, tags},
         signal: AbortSignal.timeout(10000),
       }).BooksAuthors({after: afterCursor})
       fetchMore = query.nodeSupBooks.pageInfo.hasNextPage

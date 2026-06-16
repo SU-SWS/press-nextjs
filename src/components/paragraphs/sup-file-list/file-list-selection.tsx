@@ -34,7 +34,6 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
       {chosenItem && (
         <Button
           href={chosenItem.url}
-          prefetch={false}
           className="type-0 flex items-center gap-10 py-[1.2rem] pl-[2.1rem] pr-[1.8rem] xl:text-21"
         >
           Download {chosenItem.label} <DocumentArrowDownIcon width={28} />

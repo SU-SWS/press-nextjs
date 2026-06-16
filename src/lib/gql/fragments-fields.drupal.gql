@@ -1,4 +1,3 @@
-
 fragment FragmentSuPolicyLog on SuPolicyLog {
     __typename
     uuid

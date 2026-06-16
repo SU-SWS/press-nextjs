@@ -13,8 +13,6 @@ export const metadata = {
   },
 }
 const Page = async () => {
-  "use cache: remote"
-
   const [appId, indexName, apiKey] = await getAlgoliaCredential()
 
   return (
@@ -23,12 +21,13 @@ const Page = async () => {
         <H1 className="rs-mb-2" id="page-title">
           Search our site
         </H1>
-
-        {appId && indexName && apiKey && (
-          <Suspense>
-            <AlgoliaSearchForm appId={appId} searchIndex={indexName} searchApiKey={apiKey} />
-          </Suspense>
-        )}
+        <div>
+          {appId && indexName && apiKey && (
+            <Suspense>
+              <AlgoliaSearchForm appId={appId} searchIndex={indexName} searchApiKey={apiKey} />
+            </Suspense>
+          )}
+        </div>
         <noscript>Please enable javascript to view search results</noscript>
       </div>
     </div>

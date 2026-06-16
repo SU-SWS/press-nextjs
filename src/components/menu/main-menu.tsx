@@ -106,12 +106,7 @@ const MainMenu = ({menuItems}: Props) => {
             <MenuItem key={item.id} {...item} activeTrail={activeTrail} level={0} />
           ))}
           <li>
-            <Link
-              prefetch={false}
-              href="/search"
-              className="group rs-ml-2 hidden h-full items-center lg:flex"
-              title="Search Site"
-            >
+            <Link href="/search" className="group rs-ml-2 hidden h-full items-center lg:flex" title="Search Site">
               <MagnifyingGlassIcon
                 width={25}
                 className={twMerge(
@@ -149,7 +144,6 @@ const ShoppingCartLink = ({pageHasBanner}: {pageHasBanner: boolean}) => {
           window.location.href = cartUrl
         }}
         href={cartUrl}
-        prefetch={false}
         className={twMerge(
           "group rs-ml-5 relative flex h-full min-h-32 items-center border-b border-transparent no-underline lg:rs-ml-2 lg:min-h-0",
           clsx({
@@ -273,7 +267,13 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
       )}
     >
       <div className="flex items-center justify-between lg:justify-end">
-        <Link id={linkId} href={url || "#"} className={linkStyles} aria-current={isCurrent ? "true" : undefined}>
+        <Link
+          prefetch={level === 0}
+          id={linkId}
+          href={url || "#"}
+          className={linkStyles}
+          aria-current={isCurrent ? "true" : undefined}
+        >
           {title}
           {title === "Cart" && (
             <ShoppingCartIcon width={20} className={clsx({"text-press-sand-dark": !pageHasBanner})} />

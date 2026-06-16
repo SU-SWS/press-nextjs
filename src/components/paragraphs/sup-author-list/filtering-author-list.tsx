@@ -114,12 +114,7 @@ const AuthorItem = ({authorName, books}: {authorName: string; books?: NodeSupBoo
       <div className="type-0 pr-4 xl:text-21">{authorName},</div>
       <div className="ml-20">
         {books?.map(book => (
-          <Link
-            className="block w-fit font-normal text-digital-red"
-            key={book.uuid}
-            prefetch={false}
-            href={book.path || "#"}
-          >
+          <Link className="block w-fit font-normal text-digital-red" key={book.uuid} href={book.path || "#"}>
             {book.title}
             {book.supBookSubtitle && `: ${book.supBookSubtitle}`}
           </Link>

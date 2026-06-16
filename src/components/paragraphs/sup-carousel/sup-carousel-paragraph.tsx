@@ -215,7 +215,6 @@ const CarouselImageLink = ({
   if (href) {
     return (
       <Link
-        prefetch={false}
         href={href}
         title={title || undefined}
         aria-hidden
