@@ -346,6 +346,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                 clearRefinements()
                 refine("")
                 refindPubYear([-Infinity, Infinity])
+                setPubYears({})
                 if (inputRef.current) inputRef.current.value = ""
               }}
             >
