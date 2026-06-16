@@ -1,15 +1,13 @@
 "use client"
 
 import {HtmlHTMLAttributes, useId, useState} from "react"
-
-import SelectList from "@components/elements/select-list"
-import {SelectOptionDefinition} from "@mui/base/useSelect"
 import {DocumentArrowDownIcon} from "@heroicons/react/24/outline"
 import Button from "@components/elements/button"
 import {twMerge} from "tailwind-merge"
+import SelectList, {SelectOption} from "@components/elements/inputs/select-list"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
-  fileOptions: (SelectOptionDefinition<string> & {url: string})[]
+  fileOptions: (SelectOption & {url: string})[]
   label: string
 }
 
@@ -24,11 +22,11 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
         <div id={id} className="type-0 mb-3 font-medium xl:text-21">
           {label}
         </div>
-        <SelectList
-          options={fileOptions}
+        <SelectList<false>
+          items={fileOptions}
           ariaLabelledby={id}
           emptyLabel="Choose"
-          onChange={(_e, v) => setChosenFile(v as string)}
+          onValueChange={v => setChosenFile(v as string)}
         />
       </div>
       {chosenItem && (

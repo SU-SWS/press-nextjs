@@ -16,8 +16,6 @@ import {H2} from "@components/elements/headers"
 import {HTMLAttributes, useEffect, useId, useLayoutEffect, useMemo, useRef, useState} from "react"
 import Button from "@components/elements/button"
 import {Hit as HitType} from "instantsearch.js"
-import SelectList from "@components/elements/select-list"
-import {SelectOptionDefinition} from "@mui/base/useSelect"
 import {IndexUiState} from "instantsearch.js/es/types/ui-state"
 import {
   ArrowLongLeftIcon,
@@ -32,6 +30,7 @@ import clsx from "clsx"
 import {useBoolean, useLocalStorage, useReadLocalStorage} from "usehooks-ts"
 import {twMerge} from "tailwind-merge"
 import type {SendEventForHits} from "instantsearch.js/es/lib/utils"
+import SelectList, {SelectOption} from "@components/elements/inputs/select-list"
 
 type Props = {
   appId: string
@@ -132,7 +131,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
     refine: removeRefinement,
   } = useCurrentRefinements({includedAttributes: ["book_subject", "book_type"]})
 
-  const yearOptions: SelectOptionDefinition<string>[] = []
+  const yearOptions: SelectOption[] = []
 
   for (let i = maxYear || new Date().getFullYear(); i >= (minYear || 1990); i--) {
     yearOptions.push({value: `${i}`, label: `${i}`})
@@ -300,10 +299,10 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                   <div id={`${id}-min-year`} className="mb-2 text-18 text-press-sand-dark">
                     <span className="sr-only">Minimum&nbps;</span>Year
                   </div>
-                  <SelectList
-                    options={yearOptions.filter(option => parseInt(option.value) <= (pubYears.end || 3000))}
+                  <SelectList<false>
+                    items={yearOptions.filter(option => parseInt(option.value) <= (pubYears.end || 3000))}
                     value={!!pubYears.start ? pubYears.start.toString() : null}
-                    onChange={(_e, value) => {
+                    onValueChange={value => {
                       setPubYears({start: value ? Number(value) : undefined, end: pubYears.end})
                       refindPubYear([value ? Number(value) : undefined, pubYears.end])
                     }}
@@ -320,10 +319,10 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                   <div id={`${id}-max-year`} className="mb-2 text-18 text-press-sand-dark">
                     <span className="sr-only">Maximum&nbps;</span>Year
                   </div>
-                  <SelectList
-                    options={yearOptions.filter(option => parseInt(option.value) >= (pubYears.start || 0))}
+                  <SelectList<false>
+                    items={yearOptions.filter(option => parseInt(option.value) >= (pubYears.start || 0))}
                     value={!!pubYears.end ? pubYears.end.toString() : null}
-                    onChange={(_e, value) => {
+                    onValueChange={value => {
                       setPubYears({start: pubYears.start, end: value ? Number(value) : undefined})
                       refindPubYear([pubYears.start, value ? Number(value) : undefined])
                     }}
@@ -398,15 +397,15 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
             Sort By:
           </div>
           <div className="w-full flex-grow sm:w-auto sm:min-w-96">
-            <SelectList
+            <SelectList<false>
               ariaLabelledby="sort-by"
-              options={sortOptions}
+              items={sortOptions}
               value={currentSort}
               required
               borderless
-              onChange={(_e, value) => {
-                setSortChoice(value as string)
-                sortBy(value as string)
+              onValueChange={value => {
+                if (value) setSortChoice(value)
+                if (value) sortBy(value)
               }}
             />
           </div>

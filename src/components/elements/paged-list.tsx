@@ -11,7 +11,7 @@ import {twMerge} from "tailwind-merge"
 import useServerAction from "@lib/hooks/useServerAction"
 import clsx from "clsx"
 import {InputMaybe, SupBooksAwardWinnersFilterInput, SupBooksViewSortKeys} from "@lib/gql/__generated__/drupal.d"
-import SelectList from "@components/elements/select-list"
+import SelectList from "@components/elements/inputs/select-list"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -141,13 +141,13 @@ const PagedList = ({
             Sort By:
           </div>
           <div className="min-w-96">
-            <SelectList
+            <SelectList<false>
               ariaLabelledby="sort-by"
-              options={sortOptions}
+              items={sortOptions}
               required
               defaultValue={SupBooksViewSortKeys["PubDateDesc"]}
               borderless
-              onChange={(_e, value) => {
+              onValueChange={value => {
                 setSortKey(value as SupBooksViewSortKeys)
                 goToPage(0, undefined, undefined, value as SupBooksViewSortKeys)
               }}

@@ -185,27 +185,43 @@ const DigitalProjectPage = async ({node, ...props}: Props) => {
 
       {(node.body?.processed || node.supBookReviews || node.supBookAuthorInfo) && (
         <Suspense>
-          <Tabs className="mb-20 border-b border-fog pb-20">
+          <Tabs
+            className="mb-20 border-b border-fog pb-20"
+            queryKey="tab"
+            defaultValue={node.body?.processed ? "description" : node.supBookReviews ? "reviews" : "author"}
+          >
             <div className="mb-20 border-b border-fog">
               <TabsList className="mx-auto max-w-5xl">
-                {node.body?.processed && <Tab className="p-10">Description</Tab>}
-                {node.supBookReviews && <Tab className="p-10">Reviews</Tab>}
-                {node.supBookAuthorInfo && <Tab className="p-10">About the Author</Tab>}
+                {node.body?.processed && (
+                  <Tab className="p-10" value="description">
+                    Description
+                  </Tab>
+                )}
+                {node.supBookReviews && (
+                  <Tab className="p-10" value="reviews">
+                    Reviews
+                  </Tab>
+                )}
+                {node.supBookAuthorInfo && (
+                  <Tab className="p-10" value="author">
+                    About the Author
+                  </Tab>
+                )}
               </TabsList>
             </div>
             <div className="mx-auto max-w-5xl">
               {node.body?.processed && (
-                <TabPanel>
+                <TabPanel value="description">
                   <Wysiwyg html={node.body?.processed} />
                 </TabPanel>
               )}
               {node.supBookReviews && (
-                <TabPanel>
+                <TabPanel value="reviews">
                   <Wysiwyg html={node.supBookReviews.processed} />
                 </TabPanel>
               )}
               {node.supBookAuthorInfo && (
-                <TabPanel>
+                <TabPanel value="author">
                   <Wysiwyg html={node.supBookAuthorInfo.processed} />
                 </TabPanel>
               )}
