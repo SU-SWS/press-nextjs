@@ -18,7 +18,7 @@ fragment AllNodeInterface on NodeInterface {
     }
 }
 
-query AllNodes($first: Int = 1000, $nodeSupBooks: Cursor, $nodeStanfordCourses: Cursor, $nodeStanfordEventSeriesItems: Cursor, $nodeStanfordEvents: Cursor, $nodeStanfordNewsItems: Cursor, $nodeStanfordPages: Cursor, $nodeStanfordPeople: Cursor, $nodeStanfordPolicies: Cursor, $nodeStanfordPublications: Cursor) {
+query AllNodes($first: Int = 1000, $nodeSupBooks: Cursor, $nodeStanfordCourses: Cursor, $nodeStanfordEventSeriesItems: Cursor, $nodeStanfordEvents: Cursor, $nodeStanfordNewsItems: Cursor, $nodeStanfordPages: Cursor, $nodeStanfordPeople: Cursor, $nodeStanfordPolicies: Cursor, $nodeStanfordPublications: Cursor, $nodeSupBookAncillaries: Cursor) {
     nodeStanfordPages(first: $first, after: $nodeStanfordPages, sortKey: CREATED_AT) {
         nodes {
             ...AllNodeInterface
@@ -84,6 +84,14 @@ query AllNodes($first: Int = 1000, $nodeSupBooks: Cursor, $nodeStanfordCourses: 
         }
     }
     nodeSupBooks(first: $first, after: $nodeSupBooks, sortKey: CREATED_AT) {
+        nodes {
+            ...AllNodeInterface
+        }
+        pageInfo {
+            ...FragmentPageInfo
+        }
+    }
+    nodeSupBookAncillaries(first: $first, after: $nodeSupBookAncillaries, sortKey: CREATED_AT) {
         nodes {
             ...AllNodeInterface
         }

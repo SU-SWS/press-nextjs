@@ -4,7 +4,6 @@ import Link from "@components/elements/link"
 import {ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {notFound} from "next/navigation"
-import {cacheTag} from "next/cache"
 import {INFINITE_CACHE} from "next/dist/lib/constants"
 
 type Param = {uuid: string[]}
@@ -29,8 +28,6 @@ const Page = async (props: Props) => {
 
   const params = await props.params
   const [paragraphId, mediaUuid] = params.uuid
-
-  cacheTag("paragraphs", `paragraphs:${paragraphId}`)
 
   const paragraph = await getGallery(paragraphId)
   if (!paragraph) notFound()

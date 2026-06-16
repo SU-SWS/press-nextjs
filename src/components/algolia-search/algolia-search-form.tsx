@@ -31,6 +31,7 @@ import {useBoolean, useLocalStorage, useReadLocalStorage} from "usehooks-ts"
 import {twMerge} from "tailwind-merge"
 import type {SendEventForHits} from "instantsearch.js/es/lib/utils"
 import SelectList, {SelectOption} from "@components/elements/inputs/select-list"
+import {usePathname} from "next/navigation"
 
 type Props = {
   appId: string
@@ -40,11 +41,13 @@ type Props = {
 }
 
 const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
+  const pathName = usePathname()
   const searchClient = useMemo(() => liteClient(appId, searchApiKey), [appId, searchApiKey])
   const sortChoice = useReadLocalStorage<string>("search-sort")
 
   return (
     <InstantSearchNext
+      key={pathName}
       indexName={sortChoice || searchIndex}
       searchClient={searchClient}
       insights={true}

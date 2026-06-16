@@ -116,7 +116,10 @@ export const getAllNodes = async () => {
   const cursors: Omit<AllNodesQueryVariables, "first"> = {}
 
   while (fetchMore) {
-    nodeQuery = await graphqlClient({next: {revalidate: 60 * 60 * 24 * 7}}).AllNodes({first: 1000, ...cursors})
+    nodeQuery = await graphqlClient({next: {revalidate: 60 * 60 * 24 * 7}}).AllNodes({
+      first: 500,
+      ...cursors,
+    })
     queryKeys = Object.keys(nodeQuery) as (keyof AllNodesQuery)[]
     fetchMore = false
 
