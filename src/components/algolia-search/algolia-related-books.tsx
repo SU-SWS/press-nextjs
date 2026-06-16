@@ -18,7 +18,7 @@ const getRelatedContent = async (objectID: string): Promise<BookHit[]> => {
 
   const options: RequestInit = {
     method: "POST",
-    cache: "no-store",
+    next: {revalidate: 60 * 60 * 24 * 30, tags: ["related-books"]},
     headers: {
       "Content-Type": "application/json",
       "X-Algolia-Application-Id": appID,
