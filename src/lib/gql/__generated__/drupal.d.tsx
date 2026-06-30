@@ -399,11 +399,7 @@ export type CitationSuThesi = CitationInterface & {
 
 /** Entity type citation. */
 export type CitationUnion =
-  | CitationSuArticleJournal
-  | CitationSuArticleNewspaper
-  | CitationSuBook
-  | CitationSuOther
-  | CitationSuThesi
+  CitationSuArticleJournal | CitationSuArticleNewspaper | CitationSuBook | CitationSuOther | CitationSuThesi
 
 /** Color Field. */
 export type ColorFieldType = {
@@ -426,11 +422,7 @@ export type ConfigPagesInterface = {
 
 /** Entity type config_pages. */
 export type ConfigPagesUnion =
-  | LockupSetting
-  | StanfordBasicSiteSetting
-  | StanfordGlobalMessage
-  | StanfordLocalFooter
-  | StanfordSuperFooter
+  LockupSetting | StanfordBasicSiteSetting | StanfordGlobalMessage | StanfordLocalFooter | StanfordSuperFooter
 
 /** A paginated set of results. */
 export type Connection = {
@@ -1969,9 +1961,7 @@ export type NodeStanfordPageEdge = Edge & {
  * a page title within the banner image.
  */
 export type NodeStanfordPageSuPageBannerUnion =
-  | ParagraphStanfordBanner
-  | ParagraphStanfordPageTitleBanner
-  | ParagraphSupCarousel
+  ParagraphStanfordBanner | ParagraphStanfordPageTitleBanner | ParagraphSupCarousel
 
 /** Paragraphs */
 export type NodeStanfordPageSuPageComponentsUnion =
@@ -2255,11 +2245,7 @@ export type NodeStanfordPublicationEdge = Edge & {
 
 /** Choose a type of publication item to display. */
 export type NodeStanfordPublicationSuPublicationCitationUnion =
-  | CitationSuArticleJournal
-  | CitationSuArticleNewspaper
-  | CitationSuBook
-  | CitationSuOther
-  | CitationSuThesi
+  CitationSuArticleJournal | CitationSuArticleNewspaper | CitationSuBook | CitationSuOther | CitationSuThesi
 
 /** Paragraphs */
 export type NodeStanfordPublicationSuPublicationComponentsUnion =
@@ -8473,16 +8459,7 @@ export type AllNodeInterfaceFragment =
 
 export type AllNodesQueryVariables = Exact<{
   first?: InputMaybe<Scalars["Int"]["input"]>
-  nodeSupBooks?: InputMaybe<Scalars["Cursor"]["input"]>
-  nodeStanfordCourses?: InputMaybe<Scalars["Cursor"]["input"]>
-  nodeStanfordEventSeriesItems?: InputMaybe<Scalars["Cursor"]["input"]>
-  nodeStanfordEvents?: InputMaybe<Scalars["Cursor"]["input"]>
-  nodeStanfordNewsItems?: InputMaybe<Scalars["Cursor"]["input"]>
   nodeStanfordPages?: InputMaybe<Scalars["Cursor"]["input"]>
-  nodeStanfordPeople?: InputMaybe<Scalars["Cursor"]["input"]>
-  nodeStanfordPolicies?: InputMaybe<Scalars["Cursor"]["input"]>
-  nodeStanfordPublications?: InputMaybe<Scalars["Cursor"]["input"]>
-  nodeSupBookAncillaries?: InputMaybe<Scalars["Cursor"]["input"]>
 }>
 
 export type AllNodesQuery = {
@@ -8491,96 +8468,6 @@ export type AllNodesQuery = {
     __typename?: "NodeStanfordPageConnection"
     nodes: Array<{
       __typename?: "NodeStanfordPage"
-      uuid: string
-      path?: string | null
-      changed: {__typename?: "DateTime"; time: any}
-    }>
-    pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
-  }
-  nodeStanfordCourses: {
-    __typename?: "NodeStanfordCourseConnection"
-    nodes: Array<{
-      __typename?: "NodeStanfordCourse"
-      uuid: string
-      path?: string | null
-      changed: {__typename?: "DateTime"; time: any}
-    }>
-    pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
-  }
-  nodeStanfordEventSeriesItems: {
-    __typename?: "NodeStanfordEventSeriesConnection"
-    nodes: Array<{
-      __typename?: "NodeStanfordEventSeries"
-      uuid: string
-      path?: string | null
-      changed: {__typename?: "DateTime"; time: any}
-    }>
-    pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
-  }
-  nodeStanfordEvents: {
-    __typename?: "NodeStanfordEventConnection"
-    nodes: Array<{
-      __typename?: "NodeStanfordEvent"
-      uuid: string
-      path?: string | null
-      changed: {__typename?: "DateTime"; time: any}
-    }>
-    pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
-  }
-  nodeStanfordNewsItems: {
-    __typename?: "NodeStanfordNewsConnection"
-    nodes: Array<{
-      __typename?: "NodeStanfordNews"
-      uuid: string
-      path?: string | null
-      changed: {__typename?: "DateTime"; time: any}
-    }>
-    pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
-  }
-  nodeStanfordPeople: {
-    __typename?: "NodeStanfordPersonConnection"
-    nodes: Array<{
-      __typename?: "NodeStanfordPerson"
-      uuid: string
-      path?: string | null
-      changed: {__typename?: "DateTime"; time: any}
-    }>
-    pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
-  }
-  nodeStanfordPolicies: {
-    __typename?: "NodeStanfordPolicyConnection"
-    nodes: Array<{
-      __typename?: "NodeStanfordPolicy"
-      uuid: string
-      path?: string | null
-      changed: {__typename?: "DateTime"; time: any}
-    }>
-    pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
-  }
-  nodeStanfordPublications: {
-    __typename?: "NodeStanfordPublicationConnection"
-    nodes: Array<{
-      __typename?: "NodeStanfordPublication"
-      uuid: string
-      path?: string | null
-      changed: {__typename?: "DateTime"; time: any}
-    }>
-    pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
-  }
-  nodeSupBooks: {
-    __typename?: "NodeSupBookConnection"
-    nodes: Array<{
-      __typename?: "NodeSupBook"
-      uuid: string
-      path?: string | null
-      changed: {__typename?: "DateTime"; time: any}
-    }>
-    pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
-  }
-  nodeSupBookAncillaries: {
-    __typename?: "NodeSupBookAncillaryConnection"
-    nodes: Array<{
-      __typename?: "NodeSupBookAncillary"
       uuid: string
       path?: string | null
       changed: {__typename?: "DateTime"; time: any}
