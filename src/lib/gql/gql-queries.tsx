@@ -1,6 +1,5 @@
 "use cache: remote"
 
-import {INFINITE_CACHE} from "next/dist/lib/constants"
 import {
   NodeSupBookAncillary,
   AllNodesQuery,
@@ -29,8 +28,7 @@ export const getEntityFromPath = async <T extends NodeUnion>(
   entity?: T
   redirect?: RouteRedirect["url"]
 }> => {
-  const tags = ["all-entities", `paths:${path}`]
-  cacheTag(...tags)
+  cacheTag("all-entities", `paths:${path}`)
 
   // Paths that start with /node/ should not be used.
   if (path.startsWith("/node/")) return {}
@@ -38,7 +36,7 @@ export const getEntityFromPath = async <T extends NodeUnion>(
   let query: RouteQuery
 
   try {
-    query = await graphqlClient({next: {revalidate: INFINITE_CACHE, tags}}, previewMode).Route({
+    query = await graphqlClient(undefined, previewMode).Route({
       path,
       teaser: !!teaser,
     })
@@ -62,11 +60,10 @@ export const getEntityFromPath = async <T extends NodeUnion>(
 export const getConfigPage = async <T extends ConfigPagesUnion>(
   configPageType: ConfigPagesUnion["__typename"]
 ): Promise<T | undefined> => {
-  const tags = ["config-pages"]
-  cacheTag(...tags)
+  cacheTag("config-pages")
   let query: ConfigPagesQuery
   try {
-    query = await graphqlClient({next: {revalidate: INFINITE_CACHE, tags}}).ConfigPages()
+    query = await graphqlClient().ConfigPages()
   } catch (e) {
     console.warn("Unable to fetch config pages: " + (e instanceof Error && e.stack))
     return
@@ -92,10 +89,9 @@ export const getConfigPageField = async <T extends ConfigPagesUnion, F>(
 
 export const getMenu = async (name?: MenuAvailable): Promise<MenuItem[]> => {
   const menuName = name?.toLowerCase() || "main"
-  const tags = ["menu", `menu:${menuName}`]
-  cacheTag(...tags)
+  cacheTag("menu", `menu:${menuName}`)
 
-  const menu = await graphqlClient({next: {revalidate: INFINITE_CACHE, tags}}).Menu({name})
+  const menu = await graphqlClient().Menu({name})
   const menuItems = (menu.menu?.items || []) as MenuItem[]
 
   const filterInaccessible = (items: MenuItem[]): MenuItem[] => {
@@ -107,7 +103,7 @@ export const getMenu = async (name?: MenuAvailable): Promise<MenuItem[]> => {
 }
 
 export const getAllNodes = async () => {
-  cacheLife("weeks")
+  cacheLife("months")
 
   const nodes: NodeUnion[] = []
   let fetchMore = true
@@ -116,7 +112,7 @@ export const getAllNodes = async () => {
   const cursors: Omit<AllNodesQueryVariables, "first"> = {}
 
   while (fetchMore) {
-    nodeQuery = await graphqlClient({next: {revalidate: 60 * 60 * 24 * 7}}).AllNodes({
+    nodeQuery = await graphqlClient().AllNodes({
       first: 500,
       ...cursors,
     })
@@ -143,9 +139,8 @@ export const getAllNodes = async () => {
  *   Parent book node UUID.
  */
 export const getBookAncillaryContents = async (uuid: string): Promise<NodeSupBookAncillary[]> => {
-  const tags = ["ancillary-pages", `excerpts:${uuid}`]
-  cacheTag(...tags)
-  const ancillaryPages = await graphqlClient({next: {revalidate: INFINITE_CACHE, tags}}).supBookAncillary({
+  cacheTag("ancillary-pages", `excerpts:${uuid}`)
+  const ancillaryPages = await graphqlClient().supBookAncillary({
     contextualFilters: {uuid},
   })
   return (ancillaryPages.supBookAncillary?.results as NodeSupBookAncillary[]) || []

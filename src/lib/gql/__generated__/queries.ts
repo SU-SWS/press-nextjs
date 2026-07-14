@@ -1180,8 +1180,28 @@ export const NodeDocument = gql`
 }
     ${FragmentNodeUnionFragmentDoc}`;
 export const AllNodesDocument = gql`
-    query AllNodes($first: Int = 1000, $nodeStanfordPages: Cursor) {
+    query AllNodes($first: Int = 1000, $nodeSupBooks: Cursor, $nodeStanfordPages: Cursor, $nodeSupBookAncillaries: Cursor) {
   nodeStanfordPages(first: $first, after: $nodeStanfordPages, sortKey: CREATED_AT) {
+    nodes {
+      ...AllNodeInterface
+    }
+    pageInfo {
+      ...FragmentPageInfo
+    }
+  }
+  nodeSupBooks(first: $first, after: $nodeSupBooks, sortKey: CREATED_AT) {
+    nodes {
+      ...AllNodeInterface
+    }
+    pageInfo {
+      ...FragmentPageInfo
+    }
+  }
+  nodeSupBookAncillaries(
+    first: $first
+    after: $nodeSupBookAncillaries
+    sortKey: CREATED_AT
+  ) {
     nodes {
       ...AllNodeInterface
     }

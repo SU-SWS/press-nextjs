@@ -8459,7 +8459,9 @@ export type AllNodeInterfaceFragment =
 
 export type AllNodesQueryVariables = Exact<{
   first?: InputMaybe<Scalars["Int"]["input"]>
+  nodeSupBooks?: InputMaybe<Scalars["Cursor"]["input"]>
   nodeStanfordPages?: InputMaybe<Scalars["Cursor"]["input"]>
+  nodeSupBookAncillaries?: InputMaybe<Scalars["Cursor"]["input"]>
 }>
 
 export type AllNodesQuery = {
@@ -8468,6 +8470,26 @@ export type AllNodesQuery = {
     __typename?: "NodeStanfordPageConnection"
     nodes: Array<{
       __typename?: "NodeStanfordPage"
+      uuid: string
+      path?: string | null
+      changed: {__typename?: "DateTime"; time: any}
+    }>
+    pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
+  }
+  nodeSupBooks: {
+    __typename?: "NodeSupBookConnection"
+    nodes: Array<{
+      __typename?: "NodeSupBook"
+      uuid: string
+      path?: string | null
+      changed: {__typename?: "DateTime"; time: any}
+    }>
+    pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
+  }
+  nodeSupBookAncillaries: {
+    __typename?: "NodeSupBookAncillaryConnection"
+    nodes: Array<{
+      __typename?: "NodeSupBookAncillary"
       uuid: string
       path?: string | null
       changed: {__typename?: "DateTime"; time: any}

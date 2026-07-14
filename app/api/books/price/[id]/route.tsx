@@ -9,9 +9,8 @@ export const maxDuration = 60
 
 const getBookPrices = async (priceId: string) => {
   "use cache: remote"
-  const tags = ["prices", `prices:${priceId}`]
-  cacheTag(...tags)
-  const prices = await graphqlClient({next: {revalidate: INFINITE_CACHE, tags}}).BookPrice({id: priceId})
+  cacheTag("prices", `prices:${priceId}`)
+  const prices = await graphqlClient().BookPrice({id: priceId})
 
   if (prices.press?.__typename === "PressPrice" && prices.press?.uuid) return prices.press
 }

@@ -1,5 +1,3 @@
-"use cache: remote"
-
 import Rows from "@components/paragraphs/rows/rows"
 import {notFound} from "next/navigation"
 import {getEntityFromPath} from "@lib/gql/gql-queries"

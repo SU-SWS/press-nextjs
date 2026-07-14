@@ -10,8 +10,6 @@ import SupBookDeskExaminationPage from "@components/nodes/pages/sup-book/sup-boo
 export const maxDuration = 60
 
 const Page = async (props: PageProps) => {
-  "use cache: remote"
-
   const params = await props.params
 
   const {path, page} = getBookPageRequested(getPathFromContext(params.slug))
@@ -31,6 +29,7 @@ const Page = async (props: PageProps) => {
 
 export const generateStaticParams = async (): Promise<Array<Slug>> => {
   const pagesToBuild = parseInt(process.env.BUILD_PAGES || "0")
+
   if (pagesToBuild === 0) return [{slug: []}]
   const paths = (await getAllNodes()).map(node => node.path).filter(path => !!path) as Array<string>
   const nodePaths = paths.map(path => ({slug: path.split("/").filter(Boolean)}))
