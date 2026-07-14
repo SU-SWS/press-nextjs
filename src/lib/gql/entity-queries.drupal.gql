@@ -20,7 +20,7 @@ fragment AllNodeInterface on NodeInterface {
 
 query AllNodes(
     $first: Int = 1000,
-    $nodeSupBooks: Cursor,
+#    $nodeSupBooks: Cursor,
 #    $nodeStanfordCourses: Cursor,
 #    $nodeStanfordEventSeriesItems: Cursor,
 #    $nodeStanfordEvents: Cursor,
@@ -29,7 +29,7 @@ query AllNodes(
 #    $nodeStanfordPeople: Cursor,
 #    $nodeStanfordPolicies: Cursor,
 #    $nodeStanfordPublications: Cursor,
-    $nodeSupBookAncillaries: Cursor
+#    $nodeSupBookAncillaries: Cursor
 ) {
     nodeStanfordPages(first: $first, after: $nodeStanfordPages, sortKey: CREATED_AT) {
         nodes {
@@ -95,22 +95,22 @@ query AllNodes(
 #            ...FragmentPageInfo
 #        }
 #    }
-    nodeSupBooks(first: $first, after: $nodeSupBooks, sortKey: CREATED_AT) {
-        nodes {
-            ...AllNodeInterface
-        }
-        pageInfo {
-            ...FragmentPageInfo
-        }
-    }
-    nodeSupBookAncillaries(first: $first, after: $nodeSupBookAncillaries, sortKey: CREATED_AT) {
-        nodes {
-            ...AllNodeInterface
-        }
-        pageInfo {
-            ...FragmentPageInfo
-        }
-    }
+#    nodeSupBooks(first: $first, after: $nodeSupBooks, sortKey: CREATED_AT) {
+#        nodes {
+#            ...AllNodeInterface
+#        }
+#        pageInfo {
+#            ...FragmentPageInfo
+#        }
+#    }
+#    nodeSupBookAncillaries(first: $first, after: $nodeSupBookAncillaries, sortKey: CREATED_AT) {
+#        nodes {
+#            ...AllNodeInterface
+#        }
+#        pageInfo {
+#            ...FragmentPageInfo
+#        }
+#    }
 }
 
 query BooksAuthors($first: Int = 1000, $after: Cursor) {
