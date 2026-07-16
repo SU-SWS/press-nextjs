@@ -2,6 +2,15 @@ import {NextResponse} from "next/server"
 import type {NextRequest} from "next/server"
 
 export const proxy = (req: NextRequest) => {
+  const pathname = req.nextUrl.pathname
+
+  if (pathname.startsWith("/preview")) {
+    if (req.cookies.get("preview")?.value !== process.env.DRUPAL_PREVIEW_SECRET) {
+      return NextResponse.rewrite(new URL("/404", req.url))
+    }
+    return NextResponse.next()
+  }
+
   if (!isAuthenticated(req)) {
     return new NextResponse("Authentication required", {
       status: 401,
@@ -44,5 +53,5 @@ export const checkCacheClearAuth = (username: string, password: string): boolean
 
 // Step 3. Configure "Matching Paths" below to protect routes with HTTP Basic Auth
 export const config = {
-  matcher: "/system/:path*",
+  matcher: ["/preview/:path*", "/system/:path*"],
 }

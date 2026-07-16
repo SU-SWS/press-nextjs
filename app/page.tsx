@@ -5,8 +5,8 @@ import {NodeStanfordPage} from "@lib/gql/__generated__/drupal.d"
 import SupCarouselParagraph from "@components/paragraphs/sup-carousel/sup-carousel-paragraph"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
-const Home = async () => {
-  const {entity} = await getEntityFromPath<NodeStanfordPage>("/")
+const Home = async ({inPreview}: {inPreview?: boolean}) => {
+  const {entity} = await getEntityFromPath<NodeStanfordPage>("/", inPreview)
 
   if (!entity) notFound()
 
