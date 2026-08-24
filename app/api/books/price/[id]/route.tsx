@@ -2,7 +2,6 @@ import {NextRequest, NextResponse} from "next/server"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {notFound} from "next/navigation"
 import {cacheTag} from "next/cache"
-import {INFINITE_CACHE} from "next/dist/lib/constants"
 
 // https://vercel.com/docs/functions/runtimes#max-duration
 export const maxDuration = 60

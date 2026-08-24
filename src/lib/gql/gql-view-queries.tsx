@@ -15,7 +15,6 @@ import {
 } from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import View from "@components/views/view"
-import {INFINITE_CACHE} from "next/dist/lib/constants"
 import {cacheTag} from "next/cache"
 
 export const loadViewPage = async (

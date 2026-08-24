@@ -4,7 +4,6 @@ import {notFound} from "next/navigation"
 import {ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d"
 import Image from "next/image"
 import {cacheTag} from "next/cache"
-import {INFINITE_CACHE} from "next/dist/lib/constants"
 
 export const metadata = {
   title: "Gallery Image",
