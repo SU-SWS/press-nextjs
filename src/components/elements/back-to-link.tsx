@@ -1,15 +1,15 @@
 import Link from "next/link"
-import React, {ElementType, HTMLAttributes, HtmlHTMLAttributes} from "react"
+import React, {ElementType, HTMLAttributes, HtmlHTMLAttributes, ReactNode} from "react"
 import {ArrowLongLeftIcon} from "@heroicons/react/24/outline"
 import {twMerge} from "tailwind-merge"
 import {getLinkHref} from "@components/elements/link"
 
-type BackToLinkProps = HtmlHTMLAttributes<HTMLDivElement> & {
+type BackToLinkProps = Omit<HtmlHTMLAttributes<HTMLDivElement>, "title"> & {
   isArticle?: boolean
   childrenProps?: HTMLAttributes<HTMLDivElement>
   linkClasses?: string
   href: string
-  title?: string
+  title?: ReactNode
 }
 
 const BackToLink = ({

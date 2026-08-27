@@ -308,6 +308,6 @@ const WysiwygImage = ({
   )
 }
 
-const formatHtml = (html: string) => parse(html || "", options)
+export const formatHtml = (html: string) => parse(html || "", options)
 
 export default Wysiwyg

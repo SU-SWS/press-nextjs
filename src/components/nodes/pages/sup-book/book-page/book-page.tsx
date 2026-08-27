@@ -2,7 +2,7 @@ import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/drupal.d"
 import {H1, H2, H3} from "@components/elements/headers"
 import {Fragment, HTMLAttributes, Suspense} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
-import Wysiwyg from "@components/elements/wysiwyg"
+import Wysiwyg, {formatHtml} from "@components/elements/wysiwyg"
 import {ArrowLongLeftIcon, BookmarkIcon, ClipboardIcon} from "@heroicons/react/24/outline"
 import Link from "@components/elements/link"
 import BookAwards from "@components/nodes/pages/sup-book/book-awards"
@@ -52,9 +52,11 @@ const BookPage = async ({node, ...props}: Props) => {
         <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-col justify-center bg-fog-light px-20 md:hidden">
           <div className="flex flex-row gap-24">
             <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
-              <H1 className="type-2 mb-0 xl:text-[3.3rem]">{node.title}</H1>
+              <H1 className="type-2 mb-0 xl:text-[3.3rem]">{formatHtml(node.title)}</H1>
 
-              {node.supBookSubtitle && <div className="type-1 mt-5 font-medium xl:text-26">{node.supBookSubtitle}</div>}
+              {node.supBookSubtitle && (
+                <div className="type-1 mt-5 font-medium xl:text-26">{formatHtml(node.supBookSubtitle)}</div>
+              )}
 
               {node.supBookAuthorsFull && (
                 <div className="type-1 mt-5 text-press-sand-dark xl:text-26">{node.supBookAuthorsFull}</div>
@@ -81,10 +83,10 @@ const BookPage = async ({node, ...props}: Props) => {
           <div className="lg:w-5/8 2xl:w-full">
             <div className="rs-mb-0 rs-pb-3 flex flex-col border-b-2 border-fog">
               <div className="mt-7 flex flex-col sm:mt-0 sm:hidden md:flex">
-                <H1 className="type-2 mb-0 xl:text-[3.3rem]">{node.title}</H1>
+                <H1 className="type-2 mb-0 xl:text-[3.3rem]">{formatHtml(node.title)}</H1>
 
                 {node.supBookSubtitle && (
-                  <div className="type-1 mt-5 font-medium xl:text-26">{node.supBookSubtitle}</div>
+                  <div className="type-1 mt-5 font-medium xl:text-26">{formatHtml(node.supBookSubtitle)}</div>
                 )}
 
                 {node.supBookAuthorsFull && (

@@ -6,6 +6,7 @@ import BackToLink from "@components/elements/back-to-link"
 import {twMerge} from "tailwind-merge"
 import BookPageImage from "./book-page-image"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
+import {formatHtml} from "@components/elements/wysiwyg"
 
 type Props = HTMLAttributes<HTMLElement> & {
   node: NodeSupBook
@@ -19,19 +20,21 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
       {...props}
       className={twMerge("centered", props.className)}
       href={node.path || "#"}
-      title={node.title}
+      title={formatHtml(node.title)}
       childrenProps={{className: "rs-mt-4 mx-auto max-w-[800px]"}}
       isArticle
     >
       <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={`${node.title}: Copy Requests`} />
       <H1>
-        Desk, Examination, or Review copy request<span className="sr-only">&nbps;{node.title}</span>
+        Desk, Examination, or Review copy request<span className="sr-only">&nbps;{formatHtml(node.title)}</span>
       </H1>
       <div className="rs-mb-0 flex flex-col md:flex-row">
         <div className="flex flex-col md:rs-ml-1">
-          <div className="type-2 font-medium xl:text-[3.3rem]">{node.title}</div>
+          <div className="type-2 font-medium xl:text-[3.3rem]">{formatHtml(node.title)}</div>
 
-          {node.supBookSubtitle && <div className="type-1 mt-5 font-medium xl:text-26">{node.supBookSubtitle}</div>}
+          {node.supBookSubtitle && (
+            <div className="type-1 mt-5 font-medium xl:text-26">{formatHtml(node.supBookSubtitle)}</div>
+          )}
 
           {node.supBookAuthorsFull && (
             <div className="type-0 mt-5 text-press-sand-dark xl:text-21">{node.supBookAuthorsFull}</div>

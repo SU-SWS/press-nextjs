@@ -108,7 +108,7 @@ const PreCartClient = ({
 
   return (
     <form className="rs-mb-1 rs-pb-1 border-b-2 border-fog @container" action={submitForm} onSubmit={handleFormSubmit}>
-      <input type="hidden" name="title" value={bookTitle} />
+      <input type="hidden" name="title" value={bookTitle.replace(/<[^>]*>/g, "")} />
       <label className="sr-only">
         Do not fill with any information
         <input name="email" type="email" />
