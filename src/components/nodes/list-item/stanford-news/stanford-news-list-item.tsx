@@ -3,7 +3,7 @@ import Link from "@components/elements/link"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
 import {NodeStanfordNews, TermStanfordNewsTopic} from "@lib/gql/__generated__/drupal.d"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordNews
@@ -26,7 +26,7 @@ const StanfordNewsListItem = ({node, headingLevel, ...props}: Props) => {
     : undefined
 
   return (
-    <article {...props} aria-labelledby={node.uuid} className={twMerge("@container", props.className)}>
+    <article {...props} aria-labelledby={node.uuid} className={cn("@container", props.className)}>
       <div className="flex w-full flex-col justify-between py-10 @3xl:flex-row">
         <div className="@3xl::order-1 order-2">
           <div className="flex flex-col gap-10">

@@ -4,7 +4,7 @@ import {HTMLAttributes} from "react"
 import Rows from "@components/paragraphs/rows/rows"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
 import BackToLink from "@components/elements/back-to-link"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import Wysiwyg from "@components/elements/wysiwyg"
 import SideNav from "@components/menu/side-nav"
 import {getBookAncillaryContents} from "@lib/gql/gql-queries"
@@ -33,7 +33,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
     <BackToLink
       {...props}
       href={book.path + "/excerpts"}
-      className={twMerge("centered", props.className)}
+      className={cn("centered", props.className)}
       linkClasses="flex w-fit items-center gap-5"
       title="Excerpts + more"
       childrenProps={{className: "centered rs-mt-4 flex gap-[17.1rem]"}}

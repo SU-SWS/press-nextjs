@@ -1,15 +1,20 @@
 "use client"
 
-import {twMerge} from "tailwind-merge"
 import {HTMLAttributes, useCallback, useEffect, useMemo, useState} from "react"
 import PagedList from "@components/elements/paged-list"
 import {useRouter, useSearchParams} from "next/navigation"
 import Link from "@components/elements/link"
-import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
+import cn from "@lib/utils/className"
+import {AuthorBook} from "@components/paragraphs/sup-author-list/sup-author-list-paragraph"
 
 type Props = HTMLAttributes<HTMLDivElement> & {
-  authors: Map<string, NodeSupBook[]>
+  authors: Map<string, AuthorBook[]>
 }
+
+// Group Ö/Ø under O so they land in the correct spot alphabetically instead of sorting after Z.
+const normalizeFirstLetter = (authorName: string) =>
+  authorName.charAt(0).toUpperCase().replace("Ö", "O").replace("Ø", "O")
+
 const FilteringAuthorList = ({authors, ...props}: Props) => {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -17,23 +22,22 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
 
   const displayedAuthors = useMemo(() => {
     if (alphaChosen === "") return authors
-    const displayedAuthorMap = new Map<string, NodeSupBook[]>()
-    ;[...authors.keys()].map(authorName => {
-      let firstLetter = authorName.charAt(0).toUpperCase()
-      firstLetter = firstLetter.replace("Ö", "O").replace("Ø", "O")
-      if (firstLetter === alphaChosen) displayedAuthorMap.set(authorName, authors.get(authorName) as NodeSupBook[])
+    const displayedAuthorMap = new Map<string, AuthorBook[]>()
+    authors.forEach((books, authorName) => {
+      if (normalizeFirstLetter(authorName) === alphaChosen) displayedAuthorMap.set(authorName, books)
     })
     return displayedAuthorMap
   }, [authors, alphaChosen])
 
   const alphaChoices = useMemo(() => {
-    let choices: string[] = []
-    ;[...authors.keys()].map(authorName => {
-      choices.push(authorName.charAt(0).toUpperCase().replace("Ö", "O").replace("Ø", "O"))
-    })
-    choices = [...new Set(choices)].sort((a, b) => a.localeCompare(b))
-    return choices
+    const letters = new Set([...authors.keys()].map(normalizeFirstLetter))
+    return [...letters].sort((a, b) => a.localeCompare(b))
   }, [authors])
+
+  const sortedAuthorNames = useMemo(
+    () => [...displayedAuthors.keys()].sort((a, b) => a.localeCompare(b)),
+    [displayedAuthors]
+  )
 
   useEffect(() => {
     // Use search params to retain any other parameters.
@@ -50,20 +54,17 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
     async (page: number) => {
       return (
         <>
-          {[...displayedAuthors.keys()]
-            .sort()
-            .slice(page * 25, (page + 1) * 25)
-            .map(authorName => (
-              <AuthorItem key={authorName} authorName={authorName} books={authors.get(authorName)} />
-            ))}
+          {sortedAuthorNames.slice(page * 25, (page + 1) * 25).map(authorName => (
+            <AuthorItem key={authorName} authorName={authorName} books={displayedAuthors.get(authorName)} />
+          ))}
         </>
       )
     },
-    [displayedAuthors, authors]
+    [sortedAuthorNames, displayedAuthors]
   )
 
   return (
-    <div {...props} className={twMerge("mx-auto flex max-w-[900px] justify-between gap-20", props?.className)}>
+    <div {...props} className={cn("mx-auto flex max-w-[900px] justify-between gap-20", props?.className)}>
       <div className="sr-only" aria-live="polite" aria-atomic>
         Showing authors that start with {alphaChosen}
       </div>
@@ -73,19 +74,16 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
 
       <PagedList
         className="flex-grow"
-        totalPages={Math.ceil([...displayedAuthors.keys()].length / 25)}
+        totalPages={Math.ceil(sortedAuthorNames.length / 25)}
         ulProps={{className: "list-unstyled mb-36"}}
         pageKey={false}
         key={alphaChosen}
         pagerSiblingCount={2}
         loadPage={loadPage}
       >
-        {[...displayedAuthors.keys()]
-          .sort()
-          .slice(0, 25)
-          .map(authorName => (
-            <AuthorItem key={authorName} authorName={authorName} books={authors.get(authorName)} />
-          ))}
+        {sortedAuthorNames.slice(0, 25).map(authorName => (
+          <AuthorItem key={authorName} authorName={authorName} books={displayedAuthors.get(authorName)} />
+        ))}
       </PagedList>
 
       <form role="search" id="author-filter" aria-label="Author name filtering">
@@ -108,7 +106,7 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
   )
 }
 
-const AuthorItem = ({authorName, books}: {authorName: string; books?: NodeSupBook[]}) => {
+const AuthorItem = ({authorName, books}: {authorName: string; books?: AuthorBook[]}) => {
   return (
     <div>
       <div className="type-0 pr-4 xl:text-21">{authorName},</div>

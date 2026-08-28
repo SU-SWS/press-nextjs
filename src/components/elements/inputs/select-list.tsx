@@ -3,9 +3,8 @@
 import {Select} from "@base-ui/react/select"
 import {ReactNode} from "react"
 import {ChevronDownIcon, CheckIcon} from "@heroicons/react/20/solid"
-import twMerge from "@lib/utils/twMergeConfig"
+import cn from "@lib/utils/className"
 import {SelectRootProps} from "@base-ui/react/select"
-import {clsx} from "clsx"
 
 export type SelectOption = {
   value: string
@@ -38,12 +37,12 @@ const SelectList = <T extends boolean = true>({
 }: Props<string, T>) => {
   const options = !required && emptyLabel ? [{value: emptyValue || "", label: emptyLabel}, ...items] : [...items]
   return (
-    <div className={twMerge("m-2 w-full max-w-[350px]", className)}>
+    <div className={cn("m-2 w-full max-w-[350px]", className)}>
       <Select.Root items={options} required={required} {...props}>
         {label && <Select.Label className="text-4xl font-semibold">{label}</Select.Label>}
         <Select.Trigger
           aria-labelledby={ariaLabelledby}
-          className={clsx("flex w-full items-center p-4 text-4xl", {
+          className={cn("flex w-full items-center p-4 text-4xl", {
             "rounded border border-black-50 shadow-lg": !borderless,
           })}
         >

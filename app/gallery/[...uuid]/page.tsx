@@ -18,6 +18,8 @@ type Props = {
   params: Promise<Param>
 }
 
+export const instant = false
+
 const getGallery = async (paragraphId: string): Promise<ParagraphStanfordGallery | false> => {
   "use cache: remote"
   cacheTag("paragraphs", `paragraphs:${paragraphId}`)

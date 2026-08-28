@@ -5,8 +5,7 @@ import {H2} from "@components/elements/headers"
 import Wysiwyg from "@components/elements/wysiwyg"
 import Link from "@components/elements/link"
 import Image from "next/image"
-import {clsx} from "clsx"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
 import {getImagePlaceholder} from "@lib/utils/placeholder-image"
 
@@ -26,7 +25,7 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
       {...props}
       aria-label={isTopBanner ? "Page banner carousel" : undefined}
       data-top-hero={isTopHero || undefined}
-      className={twMerge("relative mb-32", clsx({"lg:-top-[300px] lg:mb-[-300px]": isTopHero}), props?.className)}
+      className={cn("relative mb-32", {"lg:-top-[300px] lg:mb-[-300px]": isTopHero}, props?.className)}
     >
       {paragraph.supCarouselSlides.length === 1 && (
         <div className="relative left-1/2 w-screen -translate-x-1/2">
@@ -37,8 +36,8 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
       {paragraph.supCarouselSlides.length > 1 && (
         <Slideshow
           slideshowProps={{
-            nextArrow: <NextArrow customClassName={clsx({"lg:mt-[150px]": isTopHero})} />,
-            prevArrow: <PrevArrow customClassName={clsx({"lg:mt-[150px]": isTopHero})} />,
+            nextArrow: <NextArrow customClassName={cn({"lg:mt-[150px]": isTopHero})} />,
+            prevArrow: <PrevArrow customClassName={cn({"lg:mt-[150px]": isTopHero})} />,
             slidesToShow: 1,
           }}
           className="overflow-hidden"
@@ -76,14 +75,11 @@ const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupC
   return (
     <SlideTag
       aria-labelledby={slideTitle ? slideParagraph.uuid : undefined}
-      className={twMerge(
-        "centered-container relative flex h-full min-h-full w-full bg-black text-white",
-        clsx({
-          "text-center": !leftImage,
-          "text-center lg:text-left": leftImage,
-          "lg:pt-[300px]": isTopHero,
-        })
-      )}
+      className={cn("centered-container relative flex h-full min-h-full w-full bg-black text-white", {
+        "text-center": !leftImage,
+        "text-center lg:text-left": leftImage,
+        "lg:pt-[300px]": isTopHero,
+      })}
     >
       <figure className="absolute left-0 top-0 h-full w-full overflow-hidden">
         <Image
@@ -96,42 +92,32 @@ const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupC
         />
       </figure>
       <div
-        className={twMerge(
-          "absolute left-0 top-0 block h-full w-full bg-opacity-80",
-          clsx({
-            "bg-plum": color === "magenta",
-            "bg-press-grass": color === "grass",
-            "bg-black-true": color === "steel",
-            "bg-press-indigo": color === "indigo",
-          })
-        )}
+        className={cn("absolute left-0 top-0 block h-full w-full bg-opacity-80", {
+          "bg-plum": color === "magenta",
+          "bg-press-grass": color === "grass",
+          "bg-black-true": color === "steel",
+          "bg-press-indigo": color === "indigo",
+        })}
       />
 
       <div
-        className={twMerge(
-          "relative mx-auto flex w-full max-w-1000 flex-col items-center py-32 lg:justify-center",
-          clsx({
-            "gap-20 lg:flex-row": leftImage,
-          })
-        )}
+        className={cn("relative mx-auto flex w-full max-w-1000 flex-col items-center py-32 lg:justify-center", {
+          "gap-20 lg:flex-row": leftImage,
+        })}
       >
         <div className="rs-px-8 w-full lg:px-0">
           {(slideTitle || (!leftImage && image) || eyebrow || subtitle) && (
             <div
-              className={twMerge(
-                "flex flex-col",
-                clsx({
-                  "text-left": leftImage,
-                  "text-center": !leftImage,
-                })
-              )}
+              className={cn("flex flex-col", {
+                "text-left": leftImage,
+                "text-center": !leftImage,
+              })}
             >
               {slideTitle && (
                 <H2
-                  className={twMerge(
-                    "type-4 xl:text-[5.1rem]",
-                    clsx({"type-0 xl:text-21": slideParagraph.supSlideTitleSize === "small"})
-                  )}
+                  className={cn("type-4 xl:text-[5.1rem]", {
+                    "type-0 xl:text-21": slideParagraph.supSlideTitleSize === "small",
+                  })}
                   id={slideParagraph.uuid}
                 >
                   {slideTitle}
@@ -168,21 +154,17 @@ const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupC
           )}
           <Wysiwyg
             html={body}
-            className={twMerge(
-              "rs-mb-3",
-              clsx({
-                "text-left": leftImage,
-                "text-center": !leftImage,
-              })
-            )}
+            className={cn("rs-mb-3", {
+              "text-left": leftImage,
+              "text-center": !leftImage,
+            })}
           />
 
           {slideParagraph.supSlideButton?.url && (
             <Link
-              className={clsx(
-                "group flex w-fit items-center gap-5 border p-6 text-white no-underline hocus:text-white",
-                {"mx-auto": !leftImage}
-              )}
+              className={cn("group flex w-fit items-center gap-5 border p-6 text-white no-underline hocus:text-white", {
+                "mx-auto": !leftImage,
+              })}
               href={slideParagraph.supSlideButton.url}
               tabIndex={-1}
             >

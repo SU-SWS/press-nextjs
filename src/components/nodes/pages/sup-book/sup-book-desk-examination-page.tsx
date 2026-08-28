@@ -3,7 +3,7 @@ import {H1, H2, H3} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import Link from "@components/elements/link"
 import BackToLink from "@components/elements/back-to-link"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import BookPageImage from "./book-page-image"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 import {formatHtml} from "@components/elements/wysiwyg"
@@ -18,7 +18,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
   return (
     <BackToLink
       {...props}
-      className={twMerge("centered", props.className)}
+      className={cn("centered", props.className)}
       href={node.path || "#"}
       title={formatHtml(node.title)}
       childrenProps={{className: "rs-mt-4 mx-auto max-w-[800px]"}}

@@ -3,7 +3,7 @@
 import {HtmlHTMLAttributes, useId, useState} from "react"
 import {DocumentArrowDownIcon} from "@heroicons/react/24/outline"
 import Button from "@components/elements/button"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import SelectList, {SelectOption} from "@components/elements/inputs/select-list"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -17,7 +17,7 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
 
   const chosenItem = fileOptions.find(option => option.value === chosenFile)
   return (
-    <div {...props} className={twMerge("centered max-w-800", props.className)}>
+    <div {...props} className={cn("centered max-w-800", props.className)}>
       <div className="rs-mb-1 max-w-4xl">
         <div id={id} className="type-0 mb-3 font-medium xl:text-21">
           {label}

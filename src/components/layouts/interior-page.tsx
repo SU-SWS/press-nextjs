@@ -2,7 +2,7 @@ import {getMenu} from "@lib/gql/gql-queries"
 import SideNav from "@components/menu/side-nav"
 import {HtmlHTMLAttributes} from "react"
 import {MenuAvailable} from "@lib/gql/__generated__/drupal.d"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import getActiveTrail from "@lib/drupal/utils"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -21,7 +21,7 @@ const InteriorPage = async ({children, currentPath, ...props}: Props) => {
   const subTree = topMenuItem ? topMenuItem.children : []
 
   return (
-    <div {...props} className={twMerge("centered flex gap-[17.1rem]", props.className)}>
+    <div {...props} className={cn("centered flex gap-[17.1rem]", props.className)}>
       {(subTree.length > 1 || subTree[0]?.children) && (
         <aside className="hidden w-1/4 shrink-0 lg:block">
           <a href="#page-content" className="skiplink">

@@ -5,14 +5,13 @@ import SiteSearchForm from "@components/search/site-search-form"
 import useOutsideClick from "@lib/hooks/useOutsideClick"
 import {ChevronDownIcon, MagnifyingGlassIcon} from "@heroicons/react/20/solid"
 import {MenuItem as MenuItemType} from "@lib/gql/__generated__/drupal.d"
-import {clsx} from "clsx"
 import {useBoolean, useEventListener} from "usehooks-ts"
 import {RefObject, useCallback, useEffect, useId, useLayoutEffect, useRef, useState} from "react"
 import {usePathname} from "next/navigation"
 import usePageHasTopBanner from "@lib/hooks/usePageHasTopBanner"
 import getActiveTrail from "@lib/drupal/utils"
 import {ShoppingCartIcon} from "@heroicons/react/24/outline"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import useCartCount from "@lib/hooks/useCartCount"
 
 const menuLevelsToShow = 2
@@ -60,31 +59,22 @@ const MainMenu = ({menuItems}: Props) => {
       >
         <span className="mb-3 flex h-[30px] w-[30px] flex-col items-center justify-center">
           <span
-            className={twMerge(
-              "block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out",
-              clsx({
-                "translate-y-4 rotate-45": menuOpen,
-                "-translate-y-0.5": !menuOpen,
-              })
-            )}
+            className={cn("block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
+              "translate-y-4 rotate-45": menuOpen,
+              "-translate-y-0.5": !menuOpen,
+            })}
           />
           <span
-            className={twMerge(
-              "my-3 block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out",
-              clsx({
-                "opacity-0": menuOpen,
-                "opacity-100": !menuOpen,
-              })
-            )}
+            className={cn("my-3 block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
+              "opacity-0": menuOpen,
+              "opacity-100": !menuOpen,
+            })}
           />
           <span
-            className={twMerge(
-              "block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out",
-              clsx({
-                "-translate-y-4 -rotate-45": menuOpen,
-                "translate-y-0.5": !menuOpen,
-              })
-            )}
+            className={cn("block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
+              "-translate-y-4 -rotate-45": menuOpen,
+              "translate-y-0.5": !menuOpen,
+            })}
           />
         </span>
         <span className="group-hocus-visible:underline" aria-hidden>
@@ -93,11 +83,11 @@ const MainMenu = ({menuItems}: Props) => {
       </button>
 
       <div
-        className={twMerge(
+        className={cn(
           "absolute left-0 top-full z-10 hidden w-full items-center bg-black lg:relative lg:flex lg:bg-transparent",
-          clsx({
+          {
             block: menuOpen,
-          })
+          }
         )}
       >
         <SiteSearchForm className="px-10 lg:hidden" />
@@ -109,13 +99,10 @@ const MainMenu = ({menuItems}: Props) => {
             <Link href="/search" className="group rs-ml-2 hidden h-full items-center lg:flex" title="Search Site">
               <MagnifyingGlassIcon
                 width={25}
-                className={twMerge(
-                  "-translate-y-2 border-b border-transparent",
-                  clsx({
-                    "text-white group-hocus-visible:border-b-white": pageHasBanner,
-                    "text-stone-dark group-hocus-visible:border-b-stone-dark": !pageHasBanner,
-                  })
-                )}
+                className={cn("-translate-y-2 border-b border-transparent", {
+                  "text-white group-hocus-visible:border-b-white": pageHasBanner,
+                  "text-stone-dark group-hocus-visible:border-b-stone-dark": !pageHasBanner,
+                })}
               />
             </Link>
           </li>
@@ -144,18 +131,18 @@ const ShoppingCartLink = ({pageHasBanner}: {pageHasBanner: boolean}) => {
           window.location.href = cartUrl
         }}
         href={cartUrl}
-        className={twMerge(
+        className={cn(
           "group rs-ml-5 relative flex h-full min-h-32 items-center border-b border-transparent no-underline lg:rs-ml-2 lg:min-h-0",
-          clsx({
+          {
             "text-white hocus:text-white": pageHasBanner,
             "text-white hocus:text-white lg:text-stone-dark lg:hocus:text-stone-dark": !pageHasBanner,
-          })
+          }
         )}
         aria-label="Go to your cart"
       >
         <ShoppingCartIcon
           width={25}
-          className={clsx("border-b-2 border-transparent lg:-translate-y-3", {
+          className={cn("border-b-2 border-transparent lg:-translate-y-3", {
             "group-hocus:border-white": pageHasBanner,
             "group-hocus:border-stone-dark": !pageHasBanner,
           })}
@@ -223,7 +210,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
   const isCurrent = activeTrail.at(-1) === id
   const inTrail = activeTrail.includes(id) && !isCurrent
 
-  const linkStyles = clsx(
+  const linkStyles = cn(
     "font-normal w-full relative inline-block text-white hocus:text-white no-underline hocus-visible:underline pt-5 rs-pb-0 lg:pl-0 border-l-[4px]",
     leftPadding[level],
     // Top menu item styles.
@@ -245,7 +232,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
     }
   )
 
-  const subMenuStyles = clsx(
+  const subMenuStyles = cn(
     "list-unstyled w-full min-w-[300px] lg:bg-white lg:shadow-2xl px-0 lg:hidden lg:absolute",
     zIndexes[level],
     {
@@ -261,7 +248,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
   return (
     <li
       ref={menuItemRef}
-      className={clsx(
+      className={cn(
         "relative m-0 border-b border-cool-grey py-2 text-09em lg:rs-ml-2 2xl:rs-ml-3 first:border-t last:border-0 lg:relative lg:border-black-20 lg:py-0 first:lg:ml-0",
         {"first:border-t-0 lg:border-b-0": level === 0}
       )}
@@ -275,9 +262,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
           aria-current={isCurrent ? "true" : undefined}
         >
           {title}
-          {title === "Cart" && (
-            <ShoppingCartIcon width={20} className={clsx({"text-press-sand-dark": !pageHasBanner})} />
-          )}
+          {title === "Cart" && <ShoppingCartIcon width={20} className={cn({"text-press-sand-dark": !pageHasBanner})} />}
         </Link>
 
         {children.length > 0 && level < menuLevelsToShow && (
@@ -294,12 +279,9 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
             >
               <ChevronDownIcon
                 height={35}
-                className={twMerge(
-                  "transition duration-300 group-hocus:scale-125 group-hocus-visible:text-black",
-                  clsx({
-                    "rotate-180": submenuOpen,
-                  })
-                )}
+                className={cn("transition duration-300 group-hocus:scale-125 group-hocus-visible:text-black", {
+                  "rotate-180": submenuOpen,
+                })}
               />
             </button>
           </>

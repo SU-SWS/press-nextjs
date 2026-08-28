@@ -4,7 +4,7 @@ import {H2, H3, H4} from "@components/elements/headers"
 import Wysiwyg from "@components/elements/wysiwyg"
 import Button from "@components/elements/button"
 import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behaviors"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import HeroBanner from "@components/patterns/hero-banner"
 import {BannerParagraphBehaviors} from "drupal"
 
@@ -35,8 +35,8 @@ const BannerParagraph = ({paragraph, eagerLoadImage, ...props}: Props) => {
       {hasCard && (
         <>
           {paragraph.suBannerHeader && (
-            <div id={paragraph.uuid} className={twMerge("order-2", behaviors.hero_pattern?.hide_heading && "sr-only")}>
-              {headerTag === "h2" && <H2 className={twMerge(headerClasses, "mb-0")}>{paragraph.suBannerHeader}</H2>}
+            <div id={paragraph.uuid} className={cn("order-2", behaviors.hero_pattern?.hide_heading && "sr-only")}>
+              {headerTag === "h2" && <H2 className={cn(headerClasses, "mb-0")}>{paragraph.suBannerHeader}</H2>}
               {headerTag === "h3" && <H3 className={headerClasses}>{paragraph.suBannerHeader}</H3>}
               {headerTag === "h4" && <H4 className={headerClasses}>{paragraph.suBannerHeader}</H4>}
               {headerTag === "div" && <div className={headerClasses}>{paragraph.suBannerHeader}</div>}

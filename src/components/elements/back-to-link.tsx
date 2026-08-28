@@ -1,8 +1,8 @@
 import Link from "next/link"
 import React, {ElementType, HTMLAttributes, HtmlHTMLAttributes, ReactNode} from "react"
 import {ArrowLongLeftIcon} from "@heroicons/react/24/outline"
-import {twMerge} from "tailwind-merge"
 import {getLinkHref} from "@components/elements/link"
+import cn from "@lib/utils/className"
 
 type BackToLinkProps = Omit<HtmlHTMLAttributes<HTMLDivElement>, "title"> & {
   isArticle?: boolean
@@ -23,11 +23,11 @@ const BackToLink = ({
 }: BackToLinkProps) => {
   const Wrapper: ElementType = isArticle ? "article" : "div"
   return (
-    <Wrapper {...props} className={twMerge("flex flex-col", props.className)}>
+    <Wrapper {...props} className={cn("flex flex-col", props.className)}>
       <div {...childrenProps}>{children}</div>
       <Link
         href={getLinkHref(href)}
-        className={twMerge(
+        className={cn(
           "group rs-pt-1 order-first flex w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6",
           linkClasses
         )}

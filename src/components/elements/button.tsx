@@ -1,8 +1,7 @@
 import Link from "@components/elements/link"
-import {twMerge} from "tailwind-merge"
 import {HtmlHTMLAttributes, MouseEventHandler} from "react"
 import {Maybe} from "@lib/gql/__generated__/drupal.d"
-import {clsx} from "clsx"
+import cn from "@lib/utils/className"
 import {LinkProps as NextLinkProps} from "next/dist/client/link"
 
 type Props = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement> & {
@@ -54,7 +53,7 @@ export const Button = ({
   className,
   ...props
 }: Props) => {
-  const standardClasses = clsx({
+  const standardClasses = cn({
     "flex items-center w-fit mx-auto": centered,
     "inline-block text-center w-fit": !centered,
     "btn btn--big transition text-5xl text-white [&_svg]:text-white hocus:text-white bg-digital-red hocus:bg-cardinal-red no-underline hocus:underline py-6 px-12 font-normal border-2 border-cardinal-red":
@@ -69,14 +68,14 @@ export const Button = ({
 
   if (!href || buttonElem) {
     return (
-      <button className={twMerge(standardClasses, className)} type="button" {...props}>
+      <button className={cn(standardClasses, className)} type="button" {...props}>
         {children}
       </button>
     )
   }
 
   return (
-    <Link href={href} className={twMerge(standardClasses, className?.replace("button", ""))} {...props}>
+    <Link href={href} className={cn(standardClasses, className?.replace("button", ""))} {...props}>
       {children}
     </Link>
   )

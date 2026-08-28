@@ -4,7 +4,7 @@ import Button from "@components/elements/button"
 import {H2} from "@components/elements/headers"
 import {ElementType, HtmlHTMLAttributes, Suspense} from "react"
 import {NodeInterface, NodeUnion, ParagraphStanfordEntity} from "@lib/gql/__generated__/drupal.d"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behaviors"
 import {getEntityFromPath} from "@lib/gql/gql-queries"
 import {ImageCardSkeleton} from "@components/patterns/image-card"
@@ -26,13 +26,13 @@ const EntityParagraph = async ({paragraph, ...props}: Props) => {
   return (
     <EntityWrapper
       {...props}
-      className={twMerge("lg:max-w-1200] centered mb-20 flex flex-col gap-10", props.className)}
+      className={cn("lg:max-w-1200] centered mb-20 flex flex-col gap-10", props.className)}
       aria-labelledby={EntityWrapper === "section" ? paragraph.uuid : undefined}
     >
       {EntityWrapper === "section" && (
         <H2
           id={paragraph.uuid}
-          className={twMerge("mb-0 text-center", behaviors.stanford_teaser?.heading_behavior === "hide" && "sr-only")}
+          className={cn("mb-0 text-center", behaviors.stanford_teaser?.heading_behavior === "hide" && "sr-only")}
         >
           {paragraph.suEntityHeadline}
         </H2>
@@ -40,7 +40,7 @@ const EntityParagraph = async ({paragraph, ...props}: Props) => {
 
       <Wysiwyg html={paragraph.suEntityDescription?.processed} />
 
-      <div className={twMerge("mb-20 grid gap-20 [&>*]:w-full", gridClass)}>
+      <div className={cn("mb-20 grid gap-20 [&>*]:w-full", gridClass)}>
         {entities.map(entity => (
           <Suspense key={`${paragraph.uuid}-${entity.uuid}`} fallback={<ImageCardSkeleton />}>
             <EntityCard path={entity.path} headingLevel={paragraph.suEntityHeadline ? "h3" : "h2"} />

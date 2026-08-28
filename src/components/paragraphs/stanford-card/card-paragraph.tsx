@@ -7,8 +7,7 @@ import ActionLink from "@components/elements/action-link"
 import Button from "@components/elements/button"
 import ImageCard from "@components/patterns/image-card"
 import BackgroundImageCard from "@components/patterns/background-image-card"
-import {clsx} from "clsx"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import {CardParagraphBehaviors} from "drupal"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -39,9 +38,9 @@ const CardParagraph = ({paragraph, ...props}: Props) => {
       color={behaviors.su_card_styles?.bg_color}
     >
       {paragraph.suCardHeader && (
-        <div id={paragraph.uuid} className={twMerge("order-2", clsx({"sr-only": hideHeader}))}>
+        <div id={paragraph.uuid} className={cn("order-2", {"sr-only": hideHeader})}>
           {headerTag === "h2" && (
-            <H2 className={twMerge("mb-0 flex items-center", headerClasses)}>{paragraph.suCardHeader}</H2>
+            <H2 className={cn("mb-0 flex items-center", headerClasses)}>{paragraph.suCardHeader}</H2>
           )}
           {headerTag === "h3" && <H3 className={headerClasses}>{paragraph.suCardHeader}</H3>}
           {headerTag === "h4" && <H4 className={headerClasses}>{paragraph.suCardHeader}</H4>}

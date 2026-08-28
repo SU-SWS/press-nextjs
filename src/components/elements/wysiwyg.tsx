@@ -3,13 +3,12 @@ import Image from "next/image"
 import Oembed from "@components/elements/ombed"
 import React, {ComponentProps, HtmlHTMLAttributes} from "react"
 import {H2, H3, H4, H5, H6} from "@components/elements/headers"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import {Maybe} from "@lib/gql/__generated__/drupal.d"
 import Mathjax from "@components/tools/mathjax"
 import Script from "next/script"
 import Button from "@components/elements/button"
 import ActionLink from "@components/elements/action-link"
-import clsx from "clsx"
 import Link from "@components/elements/link"
 import Blockquote from "@components/elements/blockquote"
 import Iframe from "@components/elements/iframe"
@@ -29,7 +28,7 @@ const Wysiwyg = ({html, className, ...props}: Props) => {
   const addMathJax = html.match(/\$\$.*\$\$/) || html.match(/\\\[.*\\\]/) || html.match(/\\\(.*\\\)/)
   return (
     <div
-      className={twMerge(
+      className={cn(
         "[&_a]:not(.btn):text-digital-red hocus:[&_a]:not(.btn):text-archway-dark wysiwyg leading",
         className
       )}
@@ -80,7 +79,7 @@ const options: HTMLReactParserOptions = {
             )
           }
 
-          nodeProps.className = twMerge(nodeProps.className, "text-digital-red hocus:text-archway-dark")
+          nodeProps.className = cn(nodeProps.className, "text-digital-red hocus:text-archway-dark")
           return (
             <Link href={nodeProps.href as string} {...nodeProps}>
               {domToReact(children, options)}
@@ -110,11 +109,9 @@ const options: HTMLReactParserOptions = {
           if (nodeProps?.className.includes("blockquote")) {
             return <Blockquote>{domToReact(children, options)}</Blockquote>
           }
-          nodeProps.className = twMerge(
-            nodeProps.className,
-            "max-w-[100ch]",
-            clsx({"type-0 xl:text-21": !nodeProps.className.includes("type-")})
-          )
+          nodeProps.className = cn(nodeProps.className, "max-w-[100ch]", {
+            "type-0 xl:text-21": !nodeProps.className.includes("type-"),
+          })
           return <NodeName {...nodeProps}>{domToReact(children, options)}</NodeName>
 
         case "blockquote":
@@ -135,7 +132,7 @@ const options: HTMLReactParserOptions = {
           return <H6 {...nodeProps}>{domToReact(children, options)}</H6>
 
         case "hr":
-          nodeProps.className = twMerge(nodeProps.className, "border-t border-press-sand-light")
+          nodeProps.className = cn(nodeProps.className, "border-t border-press-sand-light")
           return <hr {...nodeProps} />
 
         case "iframe":
@@ -178,7 +175,7 @@ const fixClasses = (classes?: string | boolean): string => {
     .filter(className => className.trim().length >= 1)
     .join(" ")
 
-  return twMerge(classes.trim())
+  return cn(classes.trim())
 }
 
 const cleanMediaMarkup = (node: Element) => {
@@ -253,7 +250,7 @@ const cleanMediaMarkup = (node: Element) => {
     const figCaption = getFigCaption(node)
 
     if (figCaption) {
-      nodeProps.className = twMerge("table", nodeProps.className)
+      nodeProps.className = cn("table", nodeProps.className)
       if (nodeProps.className?.includes("mx-auto")) nodeProps.className += " w-full"
       delete nodeProps.role
       return (
@@ -287,7 +284,7 @@ const WysiwygImage = ({
   if (width && height) {
     return (
       <Image
-        className={twMerge(fixClasses(className), "mb-10")}
+        className={cn(fixClasses(className), "mb-10")}
         src={src.trim()}
         alt={alt ? alt.trim() : ""}
         height={parseInt(`${height}`)}

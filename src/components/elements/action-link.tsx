@@ -1,12 +1,12 @@
 import Link, {LinkProps} from "@components/elements/link"
 import {ArrowLongRightIcon} from "@heroicons/react/20/solid"
-import clsx from "clsx"
+import cn from "@lib/utils/className"
 
 const ActionLink = ({children, className, ...props}: LinkProps) => {
   return (
     <Link
       {...props}
-      className={clsx(
+      className={cn(
         "group relative flex w-fit flex-row items-center",
         {
           "text-digital-red hocus:text-archway-dark": !className?.includes("button"),

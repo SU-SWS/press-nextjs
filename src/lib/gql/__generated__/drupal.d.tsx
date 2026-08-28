@@ -8477,32 +8477,45 @@ export type AllNodesQuery = {
 }
 
 export type BooksAuthorsQueryVariables = Exact<{
-  first?: InputMaybe<Scalars["Int"]["input"]>
-  after?: InputMaybe<Scalars["Cursor"]["input"]>
+  page?: InputMaybe<Scalars["Int"]["input"]>
+  pageSize?: InputMaybe<Scalars["Int"]["input"]>
 }>
 
 export type BooksAuthorsQuery = {
   __typename?: "Query"
-  nodeSupBooks: {
-    __typename?: "NodeSupBookConnection"
-    nodes: Array<{
-      __typename?: "NodeSupBook"
-      uuid: string
-      title: string
-      path?: string | null
-      supBookSubtitle?: string | null
-      supBookAuthors?: Array<{
-        __typename?: "NameType"
-        title?: string | null
-        given?: string | null
-        middle?: string | null
-        family?: string | null
-        generational?: string | null
-        credentials?: string | null
-      }> | null
-    }>
-    pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
-  }
+  supBooksView?: {
+    __typename?: "SupBooksViewResult"
+    results: Array<
+      | {__typename?: "NodeStanfordCourse"}
+      | {__typename?: "NodeStanfordEvent"}
+      | {__typename?: "NodeStanfordEventSeries"}
+      | {__typename?: "NodeStanfordMedia"}
+      | {__typename?: "NodeStanfordNews"}
+      | {__typename?: "NodeStanfordOpportunity"}
+      | {__typename?: "NodeStanfordPage"}
+      | {__typename?: "NodeStanfordPerson"}
+      | {__typename?: "NodeStanfordPolicy"}
+      | {__typename?: "NodeStanfordPublication"}
+      | {
+          __typename?: "NodeSupBook"
+          uuid: string
+          title: string
+          path?: string | null
+          supBookSubtitle?: string | null
+          supBookAuthors?: Array<{
+            __typename?: "NameType"
+            title?: string | null
+            given?: string | null
+            middle?: string | null
+            family?: string | null
+            generational?: string | null
+            credentials?: string | null
+          }> | null
+        }
+      | {__typename?: "NodeSupBookAncillary"}
+    >
+    pageInfo: {__typename?: "ViewPageInfo"; page: number; pageSize: number; total: number}
+  } | null
 }
 
 export type BooksWorkIdQueryVariables = Exact<{

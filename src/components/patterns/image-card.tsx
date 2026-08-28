@@ -1,9 +1,8 @@
-import {twMerge} from "tailwind-merge"
 import Image from "next/image"
 import Oembed from "@components/elements/ombed"
 import {ElementType, HTMLAttributes} from "react"
 import {Maybe} from "@lib/gql/__generated__/drupal.d"
-import clsx from "clsx"
+import cn from "@lib/utils/className"
 
 type Props = HTMLAttributes<HTMLElement | HTMLDivElement> & {
   /**
@@ -34,7 +33,7 @@ const ImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children, hasBorder
   return (
     <CardWrapper
       {...props}
-      className={twMerge("centered w-full lg:max-w-[980px]", clsx({"border shadow": hasBorder}), props.className)}
+      className={cn("centered w-full lg:max-w-[980px]", {"border shadow": hasBorder}, props.className)}
     >
       {imageUrl && (
         <div className="relative aspect-[16/9] w-full">
@@ -50,9 +49,7 @@ const ImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children, hasBorder
 
       {videoUrl && <Oembed url={videoUrl} />}
 
-      <div className={twMerge("flex flex-col gap-5", clsx({"rs-p-1": hasBorder, "rs-pr-2 rs-py-2": !hasBorder}))}>
-        {children}
-      </div>
+      <div className={cn("flex flex-col gap-5", {"rs-p-1": hasBorder, "rs-pr-2 rs-py-2": !hasBorder})}>{children}</div>
     </CardWrapper>
   )
 }

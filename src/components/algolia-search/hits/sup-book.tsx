@@ -4,8 +4,7 @@ import Link from "@components/elements/link"
 import {Snippet} from "react-instantsearch"
 import Image from "next/image"
 import {AlgoliaHit} from "@components/algolia-search/hits/default"
-import clsx from "clsx"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 
 export type BookHit = AlgoliaHit & {
   book_published?: number
@@ -53,13 +52,10 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
             href={url}
             aria-hidden
             tabIndex={-1}
-            className={twMerge(
-              "relative block",
-              clsx({
-                "aspect-[2/3] w-[150px]": hit.book_type === "book",
-                "aspect-[4/3] h-[150px]": hit.book_type !== "book",
-              })
-            )}
+            className={cn("relative block", {
+              "aspect-[2/3] w-[150px]": hit.book_type === "book",
+              "aspect-[4/3] h-[150px]": hit.book_type !== "book",
+            })}
           >
             <Image className="object-cover" src={imageUrl} alt="" fill sizes="300px" />
           </Link>

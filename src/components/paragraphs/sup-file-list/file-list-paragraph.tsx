@@ -4,7 +4,7 @@ import FileListSelection from "@components/paragraphs/sup-file-list/file-list-se
 import {H2} from "@components/elements/headers"
 import {DocumentTextIcon} from "@heroicons/react/24/outline"
 import {LockClosedIcon} from "@heroicons/react/24/solid"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphSupFileList
@@ -29,7 +29,7 @@ const FileListParagraph = ({paragraph, ...props}: Props) => {
   }
 
   return (
-    <div {...props} className={twMerge("centered max-w-800", props.className)}>
+    <div {...props} className={cn("centered max-w-800", props.className)}>
       {paragraph.supFileListLabel && <H2>{paragraph.supFileListLabel}</H2>}
       <ul className="list-unstyled">
         {fileOptions.map(media => (

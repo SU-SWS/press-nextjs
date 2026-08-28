@@ -12,8 +12,8 @@ export const instant = false
 
 const Page = async (props: PageProps) => {
   const params = await props.params
-
-  const {path, page} = getBookPageRequested(getPathFromContext(params.slug))
+  const requestedPath = getPathFromContext(params.slug || "/")
+  const {path, page} = getBookPageRequested(requestedPath)
 
   const {redirect: redirectPath, entity} = await getEntityFromPath<NodeUnion>(path)
 
@@ -25,7 +25,7 @@ const Page = async (props: PageProps) => {
     if (page === "copy-requests") return <SupBookDeskExaminationPage node={entity} />
   }
 
-  return <NodePage node={entity} />
+  return <NodePage node={entity} isHome={requestedPath === "/"} />
 }
 
 export const generateStaticParams = async (): Promise<Array<Slug>> => {

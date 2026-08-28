@@ -8,8 +8,7 @@ import {Maybe, NodeSupBook, PressPrice} from "@lib/gql/__generated__/drupal.d"
 import {BookOpenIcon as BookOpenIconOutline, DeviceTabletIcon} from "@heroicons/react/24/outline"
 import {BookOpenIcon} from "@heroicons/react/24/solid"
 import {formatCurrency} from "@lib/utils/format-currency"
-import {twMerge} from "tailwind-merge"
-import {clsx} from "clsx"
+import cn from "@lib/utils/className"
 import {useBoolean} from "usehooks-ts"
 import {ChangeEvent} from "react"
 import Link from "@components/elements/link"
@@ -214,12 +213,9 @@ const PreCartClient = ({
       <Button
         buttonElem
         type="submit"
-        className={twMerge(
-          "group mt-5 flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]",
-          clsx({
-            "border-0 bg-black-70 hocus:bg-black-80": priceData?.supComingSoon,
-          })
-        )}
+        className={cn("group mt-5 flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]", {
+          "border-0 bg-black-70 hocus:bg-black-80": priceData?.supComingSoon,
+        })}
         disabled={!!priceData?.supComingSoon}
       >
         {!priceData?.supComingSoon && priceData?.supPreorder && !isIntl && "Preorder"}
@@ -404,7 +400,7 @@ const FormatChoice = ({
   icon: ReactNode
 } & HTMLAttributes<HTMLLabelElement>) => {
   return (
-    <label {...props} className={twMerge("block cursor-pointer", props.className)}>
+    <label {...props} className={cn("block cursor-pointer", props.className)}>
       <input
         className="peer sr-only"
         type="radio"

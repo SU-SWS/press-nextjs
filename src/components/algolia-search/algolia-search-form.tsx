@@ -26,9 +26,8 @@ import {
 } from "@heroicons/react/20/solid"
 import DefaultHit, {AlgoliaHit} from "@components/algolia-search/hits/default"
 import {CheckIcon} from "@heroicons/react/20/solid"
-import clsx from "clsx"
 import {useBoolean, useLocalStorage, useReadLocalStorage} from "usehooks-ts"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import type {SendEventForHits} from "instantsearch.js/es/lib/utils"
 import SelectList, {SelectOption} from "@components/elements/inputs/select-list"
 import {usePathname} from "next/navigation"
@@ -200,15 +199,12 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             aria-label={expanded ? "Close Filters" : "Open Filters"}
           >
             Filter by
-            <ChevronDownIcon
-              width={20}
-              className={twMerge("transition duration-300", clsx({"rotate-180": expanded}))}
-            />
+            <ChevronDownIcon width={20} className={cn("transition duration-300", {"rotate-180": expanded})} />
           </button>
 
           <div
             id="advanced-filters"
-            className={twMerge("md:float-left md:w-1/4", clsx({"hidden md:block": !expanded}))}
+            className={cn("md:float-left md:w-1/4", {"hidden md:block": !expanded})}
             aria-labelledby="advanced-filters-toggle"
           >
             <div className="rs-mb-2 rs-pb-3 border-b border-black-30">
@@ -444,13 +440,10 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
               <li
                 key={`page-${pageNum}`}
                 aria-current={currentPage === pageNum}
-                className={twMerge(
-                  "h-fit border-b-2 px-4 pb-3",
-                  clsx({
-                    "border-transparent": currentPage !== pageNum,
-                    "border-press-sand-dark": currentPage === pageNum,
-                  })
-                )}
+                className={cn("h-fit border-b-2 px-4 pb-3", {
+                  "border-transparent": currentPage !== pageNum,
+                  "border-press-sand-dark": currentPage === pageNum,
+                })}
               >
                 <button className="no-underline hocus:underline" onClick={() => goToPage(pageNum)}>
                   {pageNum + 1}

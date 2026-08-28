@@ -6,18 +6,17 @@ import {NodeStanfordPage} from "@lib/gql/__generated__/drupal.d"
 import BannerParagraph from "@components/paragraphs/stanford-banner/banner-paragraph"
 import PageTitleBannerParagraph from "@components/paragraphs/stanford-page-title-banner/page-title-banner-paragraph"
 import SupCarouselParagraph from "@components/paragraphs/sup-carousel/sup-carousel-paragraph"
-import clsx from "clsx"
-import {twMerge} from "tailwind-merge"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 import {getFirstText} from "@lib/utils/text-tools"
 import Wysiwyg from "@components/elements/wysiwyg"
+import cn from "@lib/utils/className"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordPage
-  headingLevel?: "h2" | "h3"
+  isHome?: boolean
 }
 
-const StanfordPagePage = ({node, ...props}: Props) => {
+const StanfordPagePage = ({node, isHome, ...props}: Props) => {
   const fullWidth = node.layoutSelection?.id === "stanford_basic_page_full"
 
   return (
@@ -35,7 +34,7 @@ const StanfordPagePage = ({node, ...props}: Props) => {
           )}
 
           {node.suPageBanner?.__typename === "ParagraphStanfordPageTitleBanner" && (
-            <PageTitleBannerParagraph paragraph={node.suPageBanner} pageTitle={node.title} />
+            <PageTitleBannerParagraph paragraph={node.suPageBanner} pageTitle={node.title} isHome={isHome} />
           )}
 
           {node.suPageBanner?.__typename === "ParagraphSupCarousel" && (
@@ -45,7 +44,7 @@ const StanfordPagePage = ({node, ...props}: Props) => {
       )}
 
       {node.suPageBanner?.__typename !== "ParagraphStanfordPageTitleBanner" && (
-        <H1 className={twMerge("centered mt-32", clsx({"lg:max-w-1200": fullWidth}))}>{node.title}</H1>
+        <H1 className={cn("centered mt-32", {"lg:max-w-1200": fullWidth, "sr-only": isHome})}>{node.title}</H1>
       )}
 
       <Wysiwyg html={node.body?.processed} className="centered mb-32 xl:max-w-[980px]" />

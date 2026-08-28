@@ -1,5 +1,5 @@
 import Link from "@components/elements/link"
-import {clsx} from "clsx"
+import cn from "@lib/utils/className"
 import {MenuItem as MenuItemType} from "@lib/gql/__generated__/drupal.d"
 import {HTMLAttributes} from "react"
 
@@ -35,7 +35,7 @@ const MenuItem = ({id, url, title, children, activeTrail, level, expanded}: Menu
   // Need to list them out each so tailwind will include each for styling.
   const leftPadding = ["pl-8", "pl-16", "pl-24", "pl-40"]
 
-  const linkClasses = clsx(
+  const linkClasses = cn(
     leftPadding[level],
     // Normal styles.
     "w-full inline-block relative no-underline hocus:underline pl-10 py-5 my-1",

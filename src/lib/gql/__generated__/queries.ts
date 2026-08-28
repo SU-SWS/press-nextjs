@@ -1193,24 +1193,32 @@ export const AllNodesDocument = gql`
     ${AllNodeInterfaceFragmentDoc}
 ${FragmentPageInfoFragmentDoc}`;
 export const BooksAuthorsDocument = gql`
-    query BooksAuthors($first: Int = 1000, $after: Cursor) {
-  nodeSupBooks(first: $first, after: $after, sortKey: CREATED_AT) {
-    nodes {
-      uuid
-      title
-      path
-      supBookSubtitle
-      supBookAuthors {
-        ...FragmentNameType
+    query BooksAuthors($page: Int = 0, $pageSize: Int = 1000) {
+  supBooksView(page: $page, pageSize: $pageSize, sortKey: TITLE_ASC) {
+    results {
+      ... on NodeSupBook {
+        uuid
+        title
+        path
+        supBookSubtitle
+        supBookAuthors {
+          title
+          given
+          middle
+          family
+          generational
+          credentials
+        }
       }
     }
     pageInfo {
-      ...FragmentPageInfo
+      page
+      pageSize
+      total
     }
   }
 }
-    ${FragmentNameTypeFragmentDoc}
-${FragmentPageInfoFragmentDoc}`;
+    `;
 export const BooksWorkIdDocument = gql`
     query BooksWorkId($first: Int = 1000, $after: Cursor) {
   nodeSupBooks(first: $first, after: $after, sortKey: CREATED_AT) {

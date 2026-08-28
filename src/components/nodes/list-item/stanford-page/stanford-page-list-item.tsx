@@ -3,7 +3,7 @@ import Image from "next/image"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
 import {NodeStanfordPage} from "@lib/gql/__generated__/drupal.d"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordPage
@@ -20,7 +20,7 @@ const StanfordPageListItem = ({node, headingLevel, ...props}: Props) => {
 
   const Heading = headingLevel === "h3" ? H3 : H2
   return (
-    <article {...props} aria-labelledby={node.uuid} className={twMerge("py-10 @container", props.className)}>
+    <article {...props} aria-labelledby={node.uuid} className={cn("py-10 @container", props.className)}>
       <div className="flex flex-col justify-between gap-20 @4xl:flex-row" {...props}>
         <div className="order-2 @4xl:order-1">
           <Heading className="type-1 xl:text-26" id={node.uuid}>

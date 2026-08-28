@@ -2,12 +2,12 @@
 
 import usePageHasTopBanner from "@lib/hooks/usePageHasTopBanner"
 import {HTMLAttributes} from "react"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 
 const HeaderForCarousel = ({children, ...props}: HTMLAttributes<HTMLDivElement>) => {
   const pageHasBanner = usePageHasTopBanner()
   return (
-    <div {...props} className={twMerge(props.className, pageHasBanner ? "lg:bg-black" : undefined)}>
+    <div {...props} className={cn(props.className, pageHasBanner ? "lg:bg-black" : undefined)}>
       {children}
     </div>
   )

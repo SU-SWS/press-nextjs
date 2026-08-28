@@ -6,7 +6,7 @@ import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 import {notFound} from "next/navigation"
 import BookPageImage from "@components/nodes/pages/sup-book/book-page-image"
 import BackToLink from "@components/elements/back-to-link"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import {ChevronRightIcon} from "@heroicons/react/24/outline"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 import {formatHtml} from "@components/elements/wysiwyg"
@@ -22,7 +22,7 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
   return (
     <BackToLink
       {...props}
-      className={twMerge("centered", props.className)}
+      className={cn("centered", props.className)}
       href={node.path || "#"}
       title={formatHtml(node.title)}
       childrenProps={{className: "rs-mt-4 centered"}}

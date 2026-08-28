@@ -2,11 +2,10 @@ import {BellIcon, CheckCircleIcon, ExclamationTriangleIcon, InformationCircleIco
 import {H2} from "@components/elements/headers"
 import Wysiwyg from "@components/elements/wysiwyg"
 import Link from "@components/elements/link"
-import {clsx} from "clsx"
 import {StanfordGlobalMessage} from "@lib/gql/__generated__/drupal.d"
 import {getConfigPage} from "@lib/gql/gql-queries"
 import {HTMLAttributes} from "react"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 
 const GlobalMessage = async ({...props}: HTMLAttributes<HTMLDivElement>) => {
   const globalMessageConfig = await getConfigPage<StanfordGlobalMessage>("StanfordGlobalMessage")
@@ -17,15 +16,15 @@ const GlobalMessage = async ({...props}: HTMLAttributes<HTMLDivElement>) => {
     <MessageWrapper
       {...props}
       aria-labelledby={MessageWrapper ? globalMessageConfig.uuid : undefined}
-      className={twMerge(
+      className={cn(
         "relative z-[1] py-10",
-        clsx({
+        {
           "bg-digital-blue-dark text-white": globalMessageConfig.suGlobalMsgType === "info",
           "bg-illuminating-dark": globalMessageConfig.suGlobalMsgType === "warning",
           "bg-digital-green text-white": globalMessageConfig.suGlobalMsgType === "success",
           "bg-foggy-light": globalMessageConfig.suGlobalMsgType === "plain",
           "bg-digital-red text-white": globalMessageConfig.suGlobalMsgType === "error",
-        }),
+        },
         props.className
       )}
     >

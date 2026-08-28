@@ -10,7 +10,7 @@ import {NodeUnion} from "@lib/gql/__generated__/drupal.d"
 import SupBookPage from "@components/nodes/pages/sup-book/sup-book-page"
 import SupBookAncillaryPage from "@components/nodes/pages/sup-book-ancilary/sup-book-ancillary-page"
 
-const NodePage = ({node}: {node: NodeUnion}) => {
+const NodePage = ({node, isHome}: {node: NodeUnion; isHome?: boolean}) => {
   const itemProps: {[key: string]: string} = {}
 
   if (process.env.NODE_ENV === "development") {
@@ -28,7 +28,7 @@ const NodePage = ({node}: {node: NodeUnion}) => {
     case "NodeStanfordNews":
       return <StanfordNewsPage node={node} {...itemProps} />
     case "NodeStanfordPage":
-      return <StanfordPagePage node={node} {...itemProps} />
+      return <StanfordPagePage node={node} isHome={isHome} {...itemProps} />
     case "NodeStanfordPerson":
       return <StanfordPersonPage node={node} {...itemProps} />
     case "NodeStanfordPolicy":

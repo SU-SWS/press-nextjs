@@ -4,9 +4,8 @@ import {H2} from "@components/elements/headers"
 import {ElementType, HtmlHTMLAttributes} from "react"
 import {ParagraphStanfordList} from "@lib/gql/__generated__/drupal.d"
 import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behaviors"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import {ListParagraphBehaviors} from "drupal"
-import clsx from "clsx"
 import ActionLink from "@components/elements/action-link"
 import {getViewItems, loadViewPage} from "@lib/gql/gql-view-queries"
 
@@ -32,11 +31,11 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
   return (
     <ListWrapper
       {...props}
-      className={twMerge(
+      className={cn(
         "rs-mb-4 centered flex flex-col gap-[5.5rem] border-t border-press-sand pt-14",
-        clsx({
+        {
           "border-0": !paragraph.suListHeadline,
-        }),
+        },
         props.className
       )}
       aria-labelledby={ListWrapper === "section" ? paragraph.uuid : undefined}
@@ -46,7 +45,7 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
           {ListWrapper === "section" && (
             <H2
               id={paragraph.uuid}
-              className={twMerge(
+              className={cn(
                 "mb-0 pb-0 font-medium",
                 behaviors.list_paragraph?.heading_behavior === "hide" && "sr-only"
               )}

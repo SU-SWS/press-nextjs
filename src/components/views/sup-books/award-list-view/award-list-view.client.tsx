@@ -3,8 +3,7 @@ import {useCallback, useState, JSX, HTMLAttributes} from "react"
 import {useCounter} from "usehooks-ts"
 import useServerAction from "@lib/hooks/useServerAction"
 import PagedList from "@components/elements/paged-list"
-import {twMerge} from "tailwind-merge"
-import {clsx} from "clsx"
+import cn from "@lib/utils/className"
 import {ArrowPathIcon} from "@heroicons/react/16/solid"
 
 type Props = HTMLAttributes<HTMLDivElement> & {
@@ -114,13 +113,10 @@ const AwardListViewClient = ({totalItems, loadPage, children, ...props}: Props) 
       <PagedList
         key={minYear}
         ulProps={{
-          className: twMerge(
-            "list-unstyled grid @lg:grid-cols-2 @5xl:grid-cols-3 @7xl:grid-cols-4 gap-20",
-            clsx({
-              "max-w-1200 mx-auto": numItems < 5,
-              "@10xl:grid-cols-5": numItems >= 5,
-            })
-          ),
+          className: cn("list-unstyled grid @lg:grid-cols-2 @5xl:grid-cols-3 @7xl:grid-cols-4 gap-20", {
+            "max-w-1200 mx-auto": numItems < 5,
+            "@10xl:grid-cols-5": numItems >= 5,
+          }),
         }}
         pagerSiblingCount={3}
         pageKey={false}

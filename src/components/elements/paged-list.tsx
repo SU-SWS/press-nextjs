@@ -7,9 +7,8 @@ import usePagination from "@lib/hooks/usePagination"
 import useFocusOnRender from "@lib/hooks/useFocusOnRender"
 import {ArrowLongLeftIcon, ArrowLongRightIcon} from "@heroicons/react/20/solid"
 import {ArrowPathIcon} from "@heroicons/react/16/solid"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 import useServerAction from "@lib/hooks/useServerAction"
-import clsx from "clsx"
 import {InputMaybe, SupBooksAwardWinnersFilterInput, SupBooksViewSortKeys} from "@lib/gql/__generated__/drupal.d"
 import SelectList from "@components/elements/inputs/select-list"
 
@@ -134,7 +133,7 @@ const PagedList = ({
   ]
 
   return (
-    <div {...props} className={twMerge("relative", props.className)}>
+    <div {...props} className={cn("relative", props.className)}>
       {sortable && (
         <div className="mb-16 ml-auto flex w-fit items-center gap-3">
           <div id="sort-by" className="text-16 text-press-sand-dark">
@@ -231,12 +230,9 @@ const PaginationButton = ({
   return (
     <li className="m-0 flex items-center">
       <button
-        className={twMerge(
-          "group type-1 font-medium hocus:text-stone-dark hocus:underline xl:text-26",
-          clsx({
-            "p-4 hocus:rounded-full hocus:bg-cardinal-red": page === "leftArrow" || page === "rightArrow",
-          })
-        )}
+        className={cn("group type-1 font-medium hocus:text-stone-dark hocus:underline xl:text-26", {
+          "p-4 hocus:rounded-full hocus:bg-cardinal-red": page === "leftArrow" || page === "rightArrow",
+        })}
         onClick={handleClick}
         aria-current={isCurrent ? "page" : undefined}
         disabled={disabled}

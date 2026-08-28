@@ -2,7 +2,7 @@ import Link from "@components/elements/link"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
 import {NodeStanfordPolicy} from "@lib/gql/__generated__/drupal.d"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordPolicy
@@ -15,7 +15,7 @@ const StanfordPolicyListItem = ({node, headingLevel, ...props}: Props) => {
     <article
       {...props}
       aria-labelledby={node.uuid}
-      className={twMerge("mx-auto w-full max-w-[500px] border border-black-20 p-10 shadow-xl", props.className)}
+      className={cn("mx-auto w-full max-w-[500px] border border-black-20 p-10 shadow-xl", props.className)}
     >
       <Heading className="type-1 xl:text-26" id={node.uuid}>
         <Link href={node.path || "#"}>{node.title}</Link>

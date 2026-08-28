@@ -1,10 +1,9 @@
 import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import SupBookCard from "@components/nodes/cards/sup-book/sup-book-card"
-import {clsx} from "clsx"
-import {twMerge} from "tailwind-merge"
 import {Suspense} from "react"
 import PagedList from "@components/elements/paged-list"
 import {ViewDisplayProps} from "@components/views/view"
+import cn from "@lib/utils/className"
 
 const BookListView = ({
   items,
@@ -21,13 +20,10 @@ const BookListView = ({
     <Suspense fallback={<BookListSkeleton />}>
       <PagedList
         ulProps={{
-          className: twMerge(
-            "list-unstyled grid @lg:grid-cols-2 @5xl:grid-cols-3 @7xl:grid-cols-4 gap-20",
-            clsx({
-              "max-w-1200 mx-auto": numItems < 5,
-              "@10xl:grid-cols-5": numItems >= 5,
-            })
-          ),
+          className: cn("list-unstyled grid @lg:grid-cols-2 @5xl:grid-cols-3 @7xl:grid-cols-4 gap-20", {
+            "max-w-1200 mx-auto": numItems < 5,
+            "@10xl:grid-cols-5": numItems >= 5,
+          }),
         }}
         totalPages={Math.ceil(totalItems / 30)}
         loadPage={loadPage}

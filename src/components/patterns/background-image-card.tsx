@@ -1,9 +1,8 @@
-import {twMerge} from "tailwind-merge"
 import Image from "next/image"
 import Oembed from "@components/elements/ombed"
 import {ElementType, HTMLAttributes} from "react"
 import {Maybe} from "@lib/gql/__generated__/drupal.d"
-import {clsx} from "clsx"
+import cn from "@lib/utils/className"
 
 type Props = HTMLAttributes<HTMLElement | HTMLDivElement> & {
   /**
@@ -34,18 +33,15 @@ const BackgroundImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children,
   return (
     <CardWrapper
       {...props}
-      className={twMerge("centered relative w-full border border-black-10 shadow-lg lg:max-w-[980px]", props.className)}
+      className={cn("centered relative w-full border border-black-10 shadow-lg lg:max-w-[980px]", props.className)}
     >
       <div
-        className={twMerge(
-          "absolute left-0 top-0 -z-10 h-full w-full",
-          clsx({
-            "bg-plum": color === "magenta",
-            "bg-press-grass": color === "grass",
-            "bg-black-true bg-opacity-70": color === "steel",
-            "bg-press-indigo": color === "indigo",
-          })
-        )}
+        className={cn("absolute left-0 top-0 -z-10 h-full w-full", {
+          "bg-plum": color === "magenta",
+          "bg-press-grass": color === "grass",
+          "bg-black-true bg-opacity-70": color === "steel",
+          "bg-press-indigo": color === "indigo",
+        })}
       >
         {imageUrl && (
           <Image
@@ -60,7 +56,7 @@ const BackgroundImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children,
 
       {videoUrl && <Oembed url={videoUrl} />}
 
-      <div className={twMerge("p-20", clsx({"text-white": !!color}))}>{children}</div>
+      <div className={cn("p-20", {"text-white": !!color})}>{children}</div>
     </CardWrapper>
   )
 }

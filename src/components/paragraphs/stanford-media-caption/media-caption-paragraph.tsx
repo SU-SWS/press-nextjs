@@ -4,7 +4,7 @@ import Image from "next/image"
 import Oembed from "@components/elements/ombed"
 import Link from "@components/elements/link"
 import Wysiwyg from "@components/elements/wysiwyg"
-import {twMerge} from "tailwind-merge"
+import cn from "@lib/utils/className"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordMediaCaption
@@ -17,7 +17,7 @@ const MediaCaptionParagraph = ({paragraph, ...props}: Props) => {
     paragraph.suMediaCaptionMedia?.__typename === "MediaVideo" && paragraph.suMediaCaptionMedia.mediaOembedVideo
 
   return (
-    <figure {...props} className={twMerge("centered lg:max-w-1200", props.className)}>
+    <figure {...props} className={cn("centered lg:max-w-1200", props.className)}>
       {image?.url && (
         <div className="relative aspect-[16/9] w-full">
           <Image

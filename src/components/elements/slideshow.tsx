@@ -3,8 +3,7 @@
 import {HTMLAttributes, JSX, useEffect, useRef} from "react"
 import Slider, {CustomArrowProps, Settings} from "react-slick"
 import {ArrowLongRightIcon, ArrowLongLeftIcon} from "@heroicons/react/24/outline"
-import {twMerge} from "tailwind-merge"
-import {clsx} from "clsx"
+import cn from "@lib/utils/className"
 
 export const NextArrow = ({
   customClassName,
@@ -14,16 +13,15 @@ export const NextArrow = ({
   const slickDisabled = slickClassNames?.includes("slick-disabled")
   return (
     <button
-      className={twMerge("group absolute right-5 top-1/2 z-[1] h-16 w-16 sm:h-20 sm:w-20 lg:right-20", customClassName)}
+      className={cn("group absolute right-5 top-1/2 z-[1] h-16 w-16 sm:h-20 sm:w-20 lg:right-20", customClassName)}
       onClick={onClick}
       aria-label="Next"
       disabled={slickDisabled}
     >
       <ArrowLongRightIcon
-        className={twMerge(
-          "text-white transition-all group-hocus-visible:translate-x-2",
-          clsx({"text-fog-dark": slickDisabled})
-        )}
+        className={cn("text-white transition-all group-hocus-visible:translate-x-2", {
+          "text-fog-dark": slickDisabled,
+        })}
       />
     </button>
   )
@@ -37,16 +35,15 @@ export const PrevArrow = ({
   const slickDisabled = slickClassNames?.includes("slick-disabled")
   return (
     <button
-      className={twMerge("group absolute left-5 top-1/2 z-[1] h-16 w-16 sm:h-20 sm:w-20 lg:left-20", customClassName)}
+      className={cn("group absolute left-5 top-1/2 z-[1] h-16 w-16 sm:h-20 sm:w-20 lg:left-20", customClassName)}
       onClick={onClick}
       aria-label="Previous"
       disabled={slickDisabled}
     >
       <ArrowLongLeftIcon
-        className={twMerge(
-          "text-white transition-all group-hocus-visible:-translate-x-2",
-          clsx({"text-fog-dark": slickDisabled})
-        )}
+        className={cn("text-white transition-all group-hocus-visible:-translate-x-2", {
+          "text-fog-dark": slickDisabled,
+        })}
       />
     </button>
   )
@@ -104,12 +101,7 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
     ...slideshowProps,
   }
   return (
-    <section
-      ref={slideShowRef}
-      {...props}
-      aria-roledescription="carousel"
-      className={twMerge("relative", props.className)}
-    >
+    <section ref={slideShowRef} {...props} aria-roledescription="carousel" className={cn("relative", props.className)}>
       <Slider {...settings}>{children}</Slider>
     </section>
   )

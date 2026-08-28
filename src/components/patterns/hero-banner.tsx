@@ -1,7 +1,7 @@
 import React, {ElementType, HtmlHTMLAttributes} from "react"
 import Image from "next/image"
-import {twMerge} from "tailwind-merge"
 import {Maybe} from "@lib/gql/__generated__/drupal.d"
+import cn from "@lib/utils/className"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   /**
@@ -30,7 +30,7 @@ const HeroBanner = ({imageUrl, imageAlt, eagerLoadImage, isSection, overlayPosit
   const BannerWrapper: ElementType = isSection ? "section" : "div"
 
   return (
-    <BannerWrapper {...props} className={twMerge("rs-mb-5 @container md:min-h-[400px]", props.className)}>
+    <BannerWrapper {...props} className={cn("rs-mb-5 @container md:min-h-[400px]", props.className)}>
       <div className="@6xl:aspect-auto relative aspect-[16/9] w-full bg-cool-grey @6xl:absolute @6xl:h-full">
         {imageUrl && (
           <Image
@@ -46,7 +46,7 @@ const HeroBanner = ({imageUrl, imageAlt, eagerLoadImage, isSection, overlayPosit
 
       {children && (
         <div
-          className={twMerge(
+          className={cn(
             "rs-p-2 relative flex w-full flex-col gap-10 shadow-lg @6xl:z-10 @6xl:my-24 @6xl:max-w-[550px] @6xl:bg-white",
             overlayPosition === "right" ? "@6xl:ml-auto @6xl:mr-20" : "@6xl:ml-20 @6xl:mr-auto"
           )}
