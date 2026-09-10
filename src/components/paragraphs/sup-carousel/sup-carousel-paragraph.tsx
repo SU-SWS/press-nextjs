@@ -7,7 +7,7 @@ import Link from "@components/elements/link"
 import Image from "next/image"
 import cn from "@lib/utils/className"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
-import {getImagePlaceholder} from "@lib/utils/placeholder-image"
+import BlurImage from "@components/images/blur-image"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphSupCarousel
@@ -61,7 +61,7 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
   )
 }
 
-const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouselSlide; isTopHero?: boolean}) => {
+const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouselSlide; isTopHero?: boolean}) => {
   const slideTitle = slideParagraph.supSlideTitle
   const eyebrow = slideParagraph.supSlideEyebrow
   const subtitle = slideParagraph.supSlideSubtitle
@@ -82,14 +82,7 @@ const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupC
       })}
     >
       <figure className="absolute left-0 top-0 h-full w-full overflow-hidden">
-        <Image
-          className="ed11y-ignore relative object-cover"
-          src={bgImage.url}
-          alt=""
-          fill
-          sizes="100vw"
-          {...await getImagePlaceholder(bgImage.url)}
-        />
+        <BlurImage className="ed11y-ignore relative object-cover" src={bgImage.url} alt="" fill sizes="100vw" />
       </figure>
       <div
         className={cn("absolute left-0 top-0 block h-full w-full bg-opacity-80", {
@@ -134,14 +127,13 @@ const Slide = async ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupC
                         href={slideParagraph.supSlideButton?.url}
                         title={slideParagraph.supSlideButton?.title}
                       >
-                        <Image
+                        <BlurImage
                           className="object-contain"
                           src={image.url}
                           alt={image.alt || ""}
                           sizes="(max-width: 768px) 100vw, 1200px"
                           height={image.height}
                           width={image.width}
-                          {...await getImagePlaceholder(image.url)}
                         />
                       </CarouselImageLink>
                     </div>

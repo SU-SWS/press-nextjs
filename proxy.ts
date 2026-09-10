@@ -1,11 +1,12 @@
 import {NextResponse} from "next/server"
 import type {NextRequest} from "next/server"
+import {parseBasicAuth, secretMatches} from "@lib/utils/request-guards"
 
 export const proxy = (req: NextRequest) => {
   const pathname = req.nextUrl.pathname
 
   if (pathname.startsWith("/preview")) {
-    if (req.cookies.get("preview")?.value !== process.env.DRUPAL_PREVIEW_SECRET) {
+    if (!secretMatches(req.cookies.get("preview")?.value, process.env.DRUPAL_PREVIEW_SECRET)) {
       return NextResponse.rewrite(new URL("/404", req.url))
     }
     return NextResponse.next()
@@ -22,11 +23,10 @@ export const proxy = (req: NextRequest) => {
 }
 
 const isAuthenticated = (req: NextRequest) => {
-  const authHeader = req.headers.get("authorization") || req.headers.get("Authorization")
+  const credentials = parseBasicAuth(req.headers.get("authorization") || req.headers.get("Authorization"))
 
-  if (!authHeader) return false
-
-  const [user, pass] = Buffer.from(authHeader.split(" ")[1], "base64").toString().split(":")
+  if (!credentials) return false
+  const {user, pass} = credentials
 
   // Check for cache-clear specific route
   if (req.nextUrl.pathname.startsWith("/system/cache-clear")) {
@@ -35,7 +35,10 @@ const isAuthenticated = (req: NextRequest) => {
 
   const acceptedCredentials = process.env.HTTP_BASIC_AUTH?.split("|").map(cred => cred.split(":")) || []
   return !!acceptedCredentials.find(
-    creds => req.nextUrl.pathname.indexOf(`/${creds[0]}/`) > 0 && creds[1] === user && creds[2] === pass
+    creds =>
+      req.nextUrl.pathname.indexOf(`/${creds[0]}/`) > 0 &&
+      secretMatches(user, creds[1]) &&
+      secretMatches(pass, creds[2])
   )
 }
 
@@ -48,7 +51,7 @@ export const checkCacheClearAuth = (username: string, password: string): boolean
     return false
   }
 
-  return username === validUsername && password === validPassword
+  return secretMatches(username, validUsername) && secretMatches(password, validPassword)
 }
 
 // Step 3. Configure "Matching Paths" below to protect routes with HTTP Basic Auth

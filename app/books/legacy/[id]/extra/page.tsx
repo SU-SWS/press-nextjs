@@ -1,10 +1,12 @@
-import {notFound, redirect} from "next/navigation"
+import {notFound, permanentRedirect} from "next/navigation"
 import {getLegacyBookPaths, getNewBookPath} from "@lib/utils/getLegacyBookPaths"
+
+export const instant = false
 
 const LegacyBookPage = async (props: {params: Promise<{id: string}>}) => {
   const params = await props.params
   const newPath = await getNewBookPath(params.id, "/excerpts")
-  if (newPath) redirect(newPath)
+  if (newPath) permanentRedirect(newPath)
   notFound()
 }
 

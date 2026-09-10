@@ -1220,18 +1220,23 @@ export const BooksAuthorsDocument = gql`
 }
     `;
 export const BooksWorkIdDocument = gql`
-    query BooksWorkId($first: Int = 1000, $after: Cursor) {
-  nodeSupBooks(first: $first, after: $after, sortKey: CREATED_AT) {
-    nodes {
-      path
-      supBookWorkIdNumber
+    query BooksWorkId($page: Int = 0, $pageSize: Int = 1000) {
+  supBooksView(page: $page, pageSize: $pageSize, sortKey: TITLE_ASC) {
+    results {
+      __typename
+      ... on NodeSupBook {
+        path
+        supBookWorkIdNumber
+      }
     }
     pageInfo {
-      ...FragmentPageInfo
+      page
+      pageSize
+      total
     }
   }
 }
-    ${FragmentPageInfoFragmentDoc}`;
+    `;
 export const CoursesDocument = gql`
     query Courses($first: Int = 1000, $after: Cursor) {
   nodeStanfordCourses(first: $first, after: $after, sortKey: CREATED_AT) {

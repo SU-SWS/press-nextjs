@@ -23,22 +23,28 @@ const nextConfig: NextConfig = {
   },
   images: {
     minimumCacheTTL: 2678400,
-    dangerouslyAllowLocalIP: true,
+    // Local addresses are only reachable from a developer machine. Allowing them in production turns the optimizer
+    // into an SSRF probe against the deployment's own network.
+    dangerouslyAllowLocalIP: !process.env.VERCEL_ENV,
+    // Every pattern pins `search: ""` so the optimizer rejects query strings. Without it, `?v=1`, `?v=2`, ... are each
+    // treated as a distinct source image, which lets anyone run up unbounded billed transformations.
     remotePatterns: [
       {
         // Allow any stanford domain for images.
+        protocol: "https",
         hostname: "**.stanford.edu",
+        search: "",
       },
       {
         protocol: drupalUrl.protocol.replace(":", "") === "http" ? "http" : "https",
         hostname: drupalUrl.hostname,
+        pathname: "/sites/**",
+        search: "",
       },
       {
         protocol: "https",
         hostname: "localist-images.azureedge.net",
-      },
-      {
-        hostname: "**.gitpod.io",
+        search: "",
       },
     ],
   },

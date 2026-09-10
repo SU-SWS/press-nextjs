@@ -2,6 +2,7 @@ import {MetadataRoute} from "next"
 import {getAllNodes} from "@lib/gql/gql-queries"
 import {cacheLife} from "next/cache"
 
+// Kept at 60s: a cold cache walks every node in the site in pages of 500.
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
 export const maxDuration = 60
 

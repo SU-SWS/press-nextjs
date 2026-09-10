@@ -2,4 +2,13 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /search
+Disallow: /gallery/
+Disallow: /books/legacy/
+Disallow: /books/title
+Disallow: /books/comp
+Disallow: /books/extra
+Disallow: /books/awards
+Disallow: /books/precart
+Disallow: /preview/
+Disallow: /system/
 crawl-delay: 30

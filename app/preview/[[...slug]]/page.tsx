@@ -7,8 +7,10 @@ import {getPathFromContext, PageProps, Slug} from "@lib/drupal/utils"
 import NodePageSkeleton from "@components/nodes/pages/node-page-skeleton"
 import {Suspense} from "react"
 
+// A cold render is a single Route query against Drupal. The ceiling exists to cap a hung upstream, not to
+// accommodate a slow one.
 // https://vercel.com/docs/functions/runtimes#max-duration
-export const maxDuration = 60
+export const maxDuration = 30
 
 const PreviewPage = (props: PageProps) => {
   return (
