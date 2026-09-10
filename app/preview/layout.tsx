@@ -1,11 +1,13 @@
-import Editori11y from "@components/tools/editorially"
 import UnpublishedBanner from "@components/elements/unpublished-banner"
-import {ReactNode} from "react"
+import {ReactNode, Suspense} from "react"
+import PreviewTools from "./preview-tools"
 
 const Layout = async ({children}: {children: ReactNode}) => {
   return (
     <UnpublishedBanner status={false} message="Preview Mode">
-      <Editori11y />
+      <Suspense>
+        <PreviewTools />
+      </Suspense>
 
       {children}
     </UnpublishedBanner>

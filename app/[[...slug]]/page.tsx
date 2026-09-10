@@ -5,13 +5,26 @@ import {notFound, redirect} from "next/navigation"
 import {getPathFromContext, PageProps, Slug} from "@lib/drupal/utils"
 import SupBookExcerptPage from "@components/nodes/pages/sup-book/sup-book-excerpt-page"
 import SupBookDeskExaminationPage from "@components/nodes/pages/sup-book/sup-book-desk-examination-page"
+import NodePageSkeleton from "@components/nodes/pages/node-page-skeleton"
+import {Suspense} from "react"
 
 // https://vercel.com/docs/functions/runtimes#max-duration
 export const maxDuration = 60
-export const instant = false
 
-const Page = async (props: PageProps) => {
-  const params = await props.params
+const Page = (props: PageProps) => {
+  return (
+    <Suspense fallback={<NodePageSkeleton />}>
+      <NodeContents params={props.params} />
+    </Suspense>
+  )
+}
+
+/**
+ * Everything below depends on the requested path, so it streams in behind the
+ * suspense boundary above and keeps the navigation into this route instant.
+ */
+const NodeContents = async ({params: paramsPromise}: {params: PageProps["params"]}) => {
+  const params = await paramsPromise
   const requestedPath = getPathFromContext(params.slug || "/")
   const {path, page} = getBookPageRequested(requestedPath)
 

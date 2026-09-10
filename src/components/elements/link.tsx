@@ -41,12 +41,12 @@ export const getLinkHref = (href: string = "#") => {
   return href
 }
 
-const DrupalLink = ({href, children, prefetch, ...props}: LinkProps) => {
+const DrupalLink = ({href, children, ...props}: LinkProps) => {
   href = getLinkHref(href)
 
   if (props.className?.includes("link--action")) {
     return (
-      <ActionLink href={href} prefetch={prefetch ?? false} {...props}>
+      <ActionLink href={href} {...props}>
         {children}
       </ActionLink>
     )
@@ -56,7 +56,6 @@ const DrupalLink = ({href, children, prefetch, ...props}: LinkProps) => {
     return (
       <Button
         {...props}
-        prefetch={prefetch ?? false}
         href={href}
         big={props.className.includes("--big")}
         secondary={props.className.includes("--secondary")}
@@ -67,12 +66,7 @@ const DrupalLink = ({href, children, prefetch, ...props}: LinkProps) => {
   }
 
   return (
-    <Link
-      {...props}
-      prefetch={prefetch ?? false}
-      href={href}
-      className={cn("group text-digital-red hocus:text-archway-dark", props.className)}
-    >
+    <Link {...props} href={href} className={cn("group text-digital-red hocus:text-archway-dark", props.className)}>
       {children}
       {href.startsWith("mailto") && (
         <EnvelopeIcon width={20} className="ml-4 inline-block text-digital-red group-hocus:text-archway-dark" />

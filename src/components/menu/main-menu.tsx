@@ -254,13 +254,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
       )}
     >
       <div className="flex items-center justify-between lg:justify-end">
-        <Link
-          prefetch={level === 0}
-          id={linkId}
-          href={url || "#"}
-          className={linkStyles}
-          aria-current={isCurrent ? "true" : undefined}
-        >
+        <Link id={linkId} href={url || "#"} className={linkStyles} aria-current={isCurrent ? "true" : undefined}>
           {title}
           {title === "Cart" && <ShoppingCartIcon width={20} className={cn({"text-press-sand-dark": !pageHasBanner})} />}
         </Link>

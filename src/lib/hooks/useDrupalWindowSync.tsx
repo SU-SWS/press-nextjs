@@ -3,7 +3,7 @@
 import {usePathname} from "next/navigation"
 import {useIsClient} from "usehooks-ts"
 
-const DrupalWindowSync = () => {
+const useDrupalWindowSync = () => {
   const pathname = usePathname()
   if (!useIsClient()) return
 
@@ -25,4 +25,4 @@ const DrupalWindowSync = () => {
   return null
 }
 
-export default DrupalWindowSync
+export default useDrupalWindowSync
