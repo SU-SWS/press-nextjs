@@ -34,9 +34,9 @@ const NodePageMetadata = async ({pageTitle, metatags, backupDescription, childre
 
   return (
     <>
-      <title>{title}</title>
-      <meta property="og:title" content={title} />
-      <meta name="twitter:title" content={title} />
+      <title>{title.replace(/<[^>]*>/g, "")}</title>
+      <meta property="og:title" content={title.replace(/<[^>]*>/g, "")} />
+      <meta name="twitter:title" content={title.replace(/<[^>]*>/g, "")} />
 
       {!hasDescription && backupDescription && (
         <>
