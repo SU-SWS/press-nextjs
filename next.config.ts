@@ -39,7 +39,6 @@ const nextConfig: NextConfig = {
         protocol: drupalUrl.protocol.replace(":", "") === "http" ? "http" : "https",
         hostname: drupalUrl.hostname,
         pathname: "/sites/**",
-        search: "",
       },
       {
         protocol: "https",
