@@ -5,20 +5,16 @@ import {notFound, redirect} from "next/navigation"
 import {getPathFromContext, PageProps, Slug} from "@lib/drupal/utils"
 import SupBookExcerptPage from "@components/nodes/pages/sup-book/sup-book-excerpt-page"
 import SupBookDeskExaminationPage from "@components/nodes/pages/sup-book/sup-book-desk-examination-page"
-import NodePageSkeleton from "@components/nodes/pages/node-page-skeleton"
-import {Suspense} from "react"
 
 // A cold render is a single Route query against Drupal. The ceiling exists to cap a hung upstream, not to
 // accommodate a slow one.
 // https://vercel.com/docs/functions/runtimes#max-duration
 export const maxDuration = 30
+export const instant = false
 
 const Page = (props: PageProps) => {
-  return (
-    <Suspense fallback={<NodePageSkeleton />}>
-      <NodeContents params={props.params} />
-    </Suspense>
-  )
+  // If enabling instant navigation, wrap this in `<Suspense fallback={<NodePageSkeleton/>}>`
+  return <NodeContents params={props.params} />
 }
 
 /**
