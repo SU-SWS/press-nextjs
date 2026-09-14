@@ -1,30 +1,29 @@
 "use cache: remote"
 
-import {BooksWorkIdQuery, NodeInterface} from "@lib/gql/__generated__/drupal.d"
+import {NodeInterface} from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {cacheTag} from "next/cache"
 
 /**
- * The books view only honours specific page sizes. Asking for anything else silently falls back to a handful of
+ * The books view only honors specific page sizes. Asking for anything else silently falls back to a handful of
  * results per page, so this value cannot be tuned without checking the view configuration in Drupal.
  */
 const PAGE_SIZE = 1000
 
-const fetchBookPage = (page: number, pageSize = PAGE_SIZE): Promise<BooksWorkIdQuery> =>
-  graphqlClient({signal: AbortSignal.timeout(10000)}).BooksWorkId({page, pageSize})
-
 export const getLegacyBookPaths = async () => {
   cacheTag("legacy-books")
+  const nodes: Array<{uuid: number; path: NodeInterface["path"]}> = []
 
   // A single cheap request establishes how many pages there are. Cursor pagination forced every page to wait on the
   // one before it; the view exposes a total up front, so the pages can all be in flight at once.
-  const countQuery = await fetchBookPage(0, 1)
+  const countQuery = await graphqlClient().BooksWorkId({pageSize: 1})
   const total = countQuery.supBooksView?.pageInfo.total || 0
   const pages = Math.ceil(total / PAGE_SIZE)
 
-  const results = await Promise.all(Array.from({length: pages}, (_, page) => fetchBookPage(page)))
+  const results = await Promise.all(
+    Array.from({length: pages}, (_, page) => graphqlClient().BooksWorkId({page, pageSize: PAGE_SIZE}))
+  )
 
-  const nodes: Array<{uuid: number; path: NodeInterface["path"]}> = []
   results.forEach(result =>
     result.supBooksView?.results.forEach(node => {
       if (node.__typename !== "NodeSupBook" || !node.supBookWorkIdNumber) return
