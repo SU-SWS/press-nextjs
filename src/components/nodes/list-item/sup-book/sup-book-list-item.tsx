@@ -3,6 +3,7 @@ import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
 import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import cn from "@lib/utils/className"
+import {formatHtml} from "@components/elements/wysiwyg"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeSupBook
@@ -19,7 +20,7 @@ const SupBookListItem = ({node, headingLevel, ...props}: Props) => {
     >
       <div className="flex flex-col">
         <Heading className="type-1 order-first xl:text-26" id={node.uuid}>
-          <Link href={node.path || "#"}>{node.title}</Link>
+          <Link href={node.path || "#"}>{formatHtml(node.title)}</Link>
         </Heading>
         <div className="font-bold">Publication</div>
       </div>

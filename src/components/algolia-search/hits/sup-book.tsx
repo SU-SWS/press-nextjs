@@ -5,6 +5,7 @@ import {Snippet} from "react-instantsearch"
 import Image from "next/image"
 import {AlgoliaHit} from "@components/algolia-search/hits/default"
 import cn from "@lib/utils/className"
+import {formatHtml} from "@components/elements/wysiwyg"
 
 export type BookHit = AlgoliaHit & {
   book_published?: number
@@ -33,11 +34,11 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
         <div>
           <H3 className="type-0 mb-2 xl:text-21" id={hit.objectID}>
             <Link className="text-stone-dark hocus:text-digital-red" href={url}>
-              {hit.title}
+              {formatHtml(hit.title)}
             </Link>
           </H3>
 
-          {hit.book_subtitle && <div className="card-paragraph mb-8">{hit.book_subtitle}</div>}
+          {hit.book_subtitle && <div className="card-paragraph mb-8">{formatHtml(hit.book_subtitle)}</div>}
           {hit.html && !hit.book_subtitle && (
             <p className="card-paragraph mb-8">
               <Snippet hit={hit} attribute="html" />
