@@ -30,12 +30,6 @@ const nextConfig: NextConfig = {
     // treated as a distinct source image, which lets anyone run up unbounded billed transformations.
     remotePatterns: [
       {
-        // Allow any stanford domain for images.
-        protocol: "https",
-        hostname: "**.stanford.edu",
-        search: "",
-      },
-      {
         protocol: drupalUrl.protocol.replace(":", "") === "http" ? "http" : "https",
         hostname: drupalUrl.hostname,
         pathname: "/sites/**",

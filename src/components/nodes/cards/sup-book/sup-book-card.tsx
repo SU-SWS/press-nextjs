@@ -5,6 +5,7 @@ import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
 import Image from "next/image"
 import {BookmarkIcon} from "@heroicons/react/24/outline"
 import cn from "@lib/utils/className"
+import {formatHtml} from "@components/elements/wysiwyg"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeSupBook
@@ -48,14 +49,14 @@ const SupBookCard = ({node, headingLevel, darkBg, ...props}: Props) => {
             })}
             href={node.path || "#"}
           >
-            {node.title}
+            {formatHtml(node.title)}
           </Link>
         </Heading>
       </div>
 
       {node.supBookSubtitle && (
         <div className={cn("rs-mb-0 text-[0.8em] text-press-sand-dark", {"text-press-sand-light": darkBg})}>
-          {node.supBookSubtitle}
+          {formatHtml(node.supBookSubtitle)}
         </div>
       )}
 
