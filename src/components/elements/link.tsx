@@ -17,6 +17,9 @@ export type LinkProps = HtmlHTMLAttributes<HTMLAnchorElement | HTMLButtonElement
 export const getLinkHref = (href: string = "#") => {
   const drupalBase: string = (process.env.NEXT_PUBLIC_DRUPAL_BASE_URL || "").replace(/\/$/, "")
 
+  // Keep /system/ paths relative so they are handled by this app, not Drupal.
+  if (href.match(/^\/system\//)) return href
+
   if (href.match(/^\//)) href = `${drupalBase}${href}`
 
   // Make sure links to images go to the Drupal origin.
