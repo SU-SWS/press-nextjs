@@ -3320,12 +3320,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^26.6.0":
-  version: 26.6.0
-  resolution: "@types/node@npm:26.6.0"
+"@types/node@npm:^26.6.1":
+  version: 26.6.1
+  resolution: "@types/node@npm:26.6.1"
   dependencies:
     undici-types: "npm:~8.9.0"
-  checksum: 10c0/147a3ad48c8deab7ba55b323be868b5ff9df950803a7a61662f70a50e703739c98041b68142363a7eef7a1e4b61b5d5c3d802cf2d9982125eecebe768d677bb9
+  checksum: 10c0/c90d3db40e7c9c92f0854ecdcaabd9c1923b7e2a43cf2c97cf147a5aba7e18a1c80034088edfb1bb2153ceffdd87be7ce0a256b80ec7cd92e619c564133ae5fe
   languageName: node
   linkType: hard
 
@@ -4937,7 +4937,7 @@ __metadata:
     "@heroicons/react": "npm:^2.2.0"
     "@next/third-parties": "npm:16.3.5"
     "@tailwindcss/container-queries": "npm:^0.1.1"
-    "@types/node": "npm:^26.6.0"
+    "@types/node": "npm:^26.6.1"
     "@types/react": "npm:19.3.0"
     "@types/react-dom": "npm:19.3.0"
     "@types/react-slick": "npm:^0.23.13"
@@ -4960,7 +4960,7 @@ __metadata:
     next: "npm:16.3.5"
     plaiceholder: "npm:^3.0.0"
     postcss: "npm:^8.5.28"
-    prettier: "npm:^3.9.6"
+    prettier: "npm:^3.9.7"
     prettier-plugin-tailwindcss: "npm:^0.8.1"
     qs: "npm:^6.16.0"
     react: "npm:19.3.0"
@@ -8486,12 +8486,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.9.6":
-  version: 3.9.6
-  resolution: "prettier@npm:3.9.6"
+"prettier@npm:^3.9.7":
+  version: 3.9.7
+  resolution: "prettier@npm:3.9.7"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/9f7ddae234035868f3daab3dc34e6de7e54622185afb017378029f0c09a9c023248ccf6f34def0b17a0538e18c47aa1b3188bab72965d1bf735919baa0747e99
+  checksum: 10c0/3bb72e3fd0292695fe1b808a7a3b67a0d68842c780f01ebca7ff1cf2fe05055478dccb513a8d022be59b3494497b4a3b6dc059baee116c1debe69bded535567b
   languageName: node
   linkType: hard
 
