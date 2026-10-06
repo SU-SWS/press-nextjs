@@ -1,5 +1,5 @@
 import Link from "@components/elements/link"
-import Image from "next/image"
+import Image from "@components/images/image"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
 import {NodeStanfordPage} from "@lib/gql/__generated__/drupal.d"

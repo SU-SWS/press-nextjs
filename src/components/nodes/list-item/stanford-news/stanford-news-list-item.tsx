@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "@components/images/image"
 import Link from "@components/elements/link"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"

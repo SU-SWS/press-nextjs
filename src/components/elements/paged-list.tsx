@@ -2,7 +2,7 @@
 
 import {useLayoutEffect, useRef, HtmlHTMLAttributes, useEffect, JSX, useState, useCallback} from "react"
 import {useBoolean, useCounter} from "usehooks-ts"
-import {useRouter, useSearchParams} from "next/navigation"
+import {useSearchParams} from "next/navigation"
 import usePagination from "@lib/hooks/usePagination"
 import useFocusOnRender from "@lib/hooks/useFocusOnRender"
 import {ArrowLongLeftIcon, ArrowLongRightIcon} from "@heroicons/react/20/solid"
@@ -58,7 +58,6 @@ const PagedList = ({
   const ref = useRef(false)
   const [items, setItems] = useState<JSX.Element[]>(Array.isArray(children) ? children : [children])
   const [sortKey, setSortKey] = useState<SupBooksViewSortKeys>(SupBooksViewSortKeys["PubDateDesc"])
-  const router = useRouter()
   const searchParams = useSearchParams()
 
   // Use the GET param for page, but make sure that it is between 1 and the last page. If it's a string or a number
@@ -76,8 +75,10 @@ const PagedList = ({
     params.delete(pageKey)
     if (currentPage > 1) params.set(pageKey, `${currentPage}`)
 
-    router.replace(`?${params.toString()}${window.location.hash || ""}`, {scroll: false})
-  }, [currentPage, pageKey, router, searchParams])
+    // The native History API syncs with useSearchParams without a router navigation, which would request the page's
+    // RSC payload from the server for a change that is only reflected client side.
+    window.history.replaceState(null, "", `?${params.toString()}${window.location.hash || ""}`)
+  }, [currentPage, pageKey, searchParams])
 
   const [runAction, isRunning] = useServerAction<
     [number, InputMaybe<SupBooksAwardWinnersFilterInput> | undefined, InputMaybe<SupBooksViewSortKeys> | undefined],

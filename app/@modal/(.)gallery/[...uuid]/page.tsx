@@ -1,10 +1,11 @@
-import Image from "next/image"
+import Image from "@components/images/image"
 import InterceptionModal from "@components/elements/interception-modal"
 import Link from "@components/elements/link"
 import {ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {notFound} from "next/navigation"
 import {cacheTag} from "next/cache"
+import {isUuid} from "@lib/utils/request-guards"
 
 type Param = {uuid: string[]}
 
@@ -28,6 +29,9 @@ export const generateStaticParams = (): Array<Param> => {
 const Page = async (props: Props) => {
   const params = await props.params
   const [paragraphId, mediaUuid] = params.uuid
+
+  // Reject malformed ids before they reach Drupal or create a cache entry.
+  if (!isUuid(paragraphId) || (mediaUuid && !isUuid(mediaUuid))) notFound()
 
   const paragraph = await getGallery(paragraphId)
   if (!paragraph) notFound()
@@ -55,6 +59,7 @@ const Page = async (props: Props) => {
                   src={galleryImage.suGalleryImage.url}
                   width={galleryImage.suGalleryImage.width}
                   height={galleryImage.suGalleryImage.height}
+                  sizes="(max-width: 1200px) 100vw, 1200px"
                   alt={galleryImage.suGalleryImage.alt || ""}
                   className="m-0 h-auto max-w-full p-0"
                 />

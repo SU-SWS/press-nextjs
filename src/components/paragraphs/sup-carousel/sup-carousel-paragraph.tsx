@@ -4,7 +4,7 @@ import Slideshow, {NextArrow, PrevArrow} from "@components/elements/slideshow"
 import {H2} from "@components/elements/headers"
 import Wysiwyg from "@components/elements/wysiwyg"
 import Link from "@components/elements/link"
-import Image from "next/image"
+import Image from "@components/images/image"
 import cn from "@lib/utils/className"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
 import BlurImage from "@components/images/blur-image"
@@ -82,7 +82,14 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
       })}
     >
       <figure className="absolute left-0 top-0 h-full w-full overflow-hidden">
-        <BlurImage className="ed11y-ignore relative object-cover" src={bgImage.url} alt="" fill sizes="100vw" />
+        <BlurImage
+          className="ed11y-ignore relative object-cover"
+          src={bgImage.url}
+          blurSrc={bgImage.variations?.[0]?.url}
+          alt=""
+          fill
+          sizes="100vw"
+        />
       </figure>
       <div
         className={cn("absolute left-0 top-0 block h-full w-full bg-opacity-80", {
@@ -130,6 +137,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
                         <BlurImage
                           className="object-contain"
                           src={image.url}
+                          blurSrc={image.variations?.[0]?.url}
                           alt={image.alt || ""}
                           sizes="(max-width: 768px) 100vw, 1200px"
                           height={image.height}

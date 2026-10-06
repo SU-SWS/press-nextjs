@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "@components/images/image"
 import Oembed from "@components/elements/ombed"
 import {ElementType, HTMLAttributes} from "react"
 import {Maybe} from "@lib/gql/__generated__/drupal.d"

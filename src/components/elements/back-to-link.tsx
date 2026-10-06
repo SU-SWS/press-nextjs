@@ -27,6 +27,7 @@ const BackToLink = ({
       <div {...childrenProps}>{children}</div>
       <Link
         href={getLinkHref(href)}
+        prefetch={false}
         className={cn(
           "group rs-pt-1 order-first flex w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6",
           linkClasses

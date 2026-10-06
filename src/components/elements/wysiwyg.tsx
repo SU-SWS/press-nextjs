@@ -1,5 +1,4 @@
 import parse, {HTMLReactParserOptions, Element, domToReact, attributesToProps, DOMNode} from "html-react-parser"
-import Image from "next/image"
 import Oembed from "@components/elements/ombed"
 import React, {ComponentProps, HtmlHTMLAttributes, ImgHTMLAttributes} from "react"
 import {H2, H3, H4, H5, H6} from "@components/elements/headers"

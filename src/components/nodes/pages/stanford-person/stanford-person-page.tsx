@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "@components/images/image"
 import Wysiwyg from "@components/elements/wysiwyg"
 import Rows from "@components/paragraphs/rows/rows"
 import Button from "@components/elements/button"

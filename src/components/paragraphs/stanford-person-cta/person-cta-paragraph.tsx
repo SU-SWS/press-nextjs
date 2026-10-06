@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "@components/images/image"
 import Link from "@components/elements/link"
 import {HtmlHTMLAttributes} from "react"
 import {ParagraphStanfordPersonCtum} from "@lib/gql/__generated__/drupal.d"
