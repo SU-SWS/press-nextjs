@@ -98,7 +98,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
               <li>
                 If you are{" "}
                 <b>
-                  <Link href={`http://sup.ereviews.eb20.com/Requests/EReview/${node.supBookIsbn13Digital}`}>
+                  <Link href={`https://ereviews.eb20.com/sup/Requests/EReview/${node.supBookIsbn13Digital}`}>
                     a periodical or other publication reviewing our content.
                   </Link>
                 </b>
@@ -108,7 +108,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
               <li>
                 If you are{" "}
                 <b>
-                  <Link href={`http://sup.einspections.eb20.com/Requests/EInspection/${node.supBookIsbn13Digital}`}>
+                  <Link href={`https://einspections.eb20.com/sup/Requests/EInspection/${node.supBookIsbn13Digital}`}>
                     a professor requesting a desk copy or an examination copy.
                   </Link>
                 </b>{" "}
@@ -146,7 +146,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
             <p>
               For help accessing your ebook check the{" "}
               <b>
-                <Link href="http://sup.einspections.eb20.com/Help/">digital comps website help</Link>
+                <Link href="https://einspections.eb20.com/sup/Help/">digital comps website help</Link>
               </b>{" "}
               first. If that does not answer your question(s), please contact us at{" "}
               <Link href="mailto:info@sup.org">info@sup.org</Link>.
