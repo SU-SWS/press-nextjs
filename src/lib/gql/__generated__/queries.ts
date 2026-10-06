@@ -95,6 +95,9 @@ export const FragmentMediaImageFragmentDoc = gql`
     alt
     height
     width
+    variations(styles: [TINY_BLUR]) {
+      url
+    }
   }
 }
     ${FragmentMediaInterfaceFragmentDoc}`;

@@ -1,6 +1,6 @@
 import Wysiwyg from "@components/elements/wysiwyg"
 import Button from "@components/elements/button"
-import Image from "next/image"
+import Image from "@components/images/image"
 import {H2} from "@components/elements/headers"
 import {ElementType, HtmlHTMLAttributes} from "react"
 import {MediaStanfordGalleryImage, ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d"

@@ -12,7 +12,8 @@ export async function clearCache(formData: FormData) {
 
     const cleared = []
     if (clearAllPrices) {
-      revalidateTag("all-prices", "max")
+      // Matches the tag set in app/api/books/price/[id]/route.tsx.
+      revalidateTag("prices", "max")
       cleared.push("all prices")
     }
     if (clearMenu) {

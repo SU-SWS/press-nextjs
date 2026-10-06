@@ -26,6 +26,10 @@ const NodeContents = async ({params: paramsPromise}: {params: PageProps["params"
   const requestedPath = getPathFromContext(params.slug || "/")
   const {path, page} = getBookPageRequested(requestedPath)
 
+  // Drupal node aliases never contain a file extension or a dot segment, but scanner probes (`/.env`, `/wp-login.php`)
+  // do. Rejecting them here skips the Drupal query and the cache entry each new junk path would otherwise create.
+  if (/(^|\/)\.|\.[a-z0-9]{1,5}$/i.test(path)) notFound()
+
   const {redirect: redirectPath, entity} = await getEntityFromPath<NodeUnion>(path)
 
   if (redirectPath) redirect(redirectPath)

@@ -1,7 +1,7 @@
 import React, {HtmlHTMLAttributes} from "react"
 import {ParagraphStanfordPageTitleBanner} from "@lib/gql/__generated__/drupal.d"
 import {H1} from "@components/elements/headers"
-import Image from "next/image"
+import Image from "@components/images/image"
 import cn from "@lib/utils/className"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {

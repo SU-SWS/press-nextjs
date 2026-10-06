@@ -44,12 +44,14 @@ export const getLinkHref = (href: string = "#") => {
   return href
 }
 
-const DrupalLink = ({href, children, ...props}: LinkProps) => {
+// Prefetching is disabled by default. Every in-viewport link prefetch is a request to Vercel, and prefetching a page
+// that hasn't been rendered yet triggers a background render and cache write.
+const DrupalLink = ({href, children, prefetch = false, ...props}: LinkProps) => {
   href = getLinkHref(href)
 
   if (props.className?.includes("link--action")) {
     return (
-      <ActionLink href={href} {...props}>
+      <ActionLink href={href} prefetch={prefetch} {...props}>
         {children}
       </ActionLink>
     )
@@ -60,6 +62,7 @@ const DrupalLink = ({href, children, ...props}: LinkProps) => {
       <Button
         {...props}
         href={href}
+        prefetch={prefetch}
         big={props.className.includes("--big")}
         secondary={props.className.includes("--secondary")}
       >
@@ -69,7 +72,12 @@ const DrupalLink = ({href, children, ...props}: LinkProps) => {
   }
 
   return (
-    <Link {...props} href={href} className={cn("group text-digital-red hocus:text-archway-dark", props.className)}>
+    <Link
+      {...props}
+      href={href}
+      prefetch={prefetch}
+      className={cn("group text-digital-red hocus:text-archway-dark", props.className)}
+    >
       {children}
       {href.startsWith("mailto") && (
         <EnvelopeIcon width={20} className="ml-4 inline-block text-digital-red group-hocus:text-archway-dark" />

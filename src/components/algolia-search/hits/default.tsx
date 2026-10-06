@@ -2,7 +2,7 @@ import {Hit as HitType, AlgoliaHit as BaseAlgliaHit} from "instantsearch.js/es/t
 import {H3} from "@components/elements/headers"
 import Link from "@components/elements/link"
 import {Snippet} from "react-instantsearch"
-import Image from "next/image"
+import Image from "@components/images/image"
 import SupBookHit from "@components/algolia-search/hits/sup-book"
 
 export type AlgoliaHit = BaseAlgliaHit & {

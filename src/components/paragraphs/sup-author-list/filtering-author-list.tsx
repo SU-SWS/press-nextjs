@@ -2,7 +2,7 @@
 
 import {HTMLAttributes, useCallback, useEffect, useMemo, useState} from "react"
 import PagedList from "@components/elements/paged-list"
-import {useRouter, useSearchParams} from "next/navigation"
+import {useSearchParams} from "next/navigation"
 import Link from "@components/elements/link"
 import cn from "@lib/utils/className"
 import {AuthorBook} from "@components/paragraphs/sup-author-list/sup-author-list-paragraph"
@@ -17,7 +17,6 @@ const normalizeFirstLetter = (authorName: string) =>
 
 const FilteringAuthorList = ({authors, ...props}: Props) => {
   const searchParams = useSearchParams()
-  const router = useRouter()
   const [alphaChosen, setAlphaChosen] = useState<string>(searchParams.get("author") || "")
 
   const displayedAuthors = useMemo(() => {
@@ -46,9 +45,10 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
     if (alphaChosen !== "") params.set("author", alphaChosen)
 
     const newSearch = params.toString()
+    // Native History API instead of router.replace, so a filter change doesn't fetch the page from the server.
     if (window.location.search.replace(/^\?/, "") !== newSearch)
-      router.replace(`?${newSearch}${window.location.hash || ""}`, {scroll: false})
-  }, [router, searchParams, alphaChosen])
+      window.history.replaceState(null, "", `?${newSearch}${window.location.hash || ""}`)
+  }, [searchParams, alphaChosen])
 
   const loadPage = useCallback(
     async (page: number) => {

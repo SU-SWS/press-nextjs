@@ -6280,7 +6280,14 @@ export type NodeQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
             }
           | {
@@ -6297,7 +6304,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -6390,7 +6404,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -6558,7 +6579,14 @@ export type NodeQuery = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             } | null
           }> | null
         }> | null
@@ -6676,7 +6704,14 @@ export type NodeQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
             }
           | {
@@ -6693,7 +6728,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -6786,7 +6828,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -6969,7 +7018,14 @@ export type NodeQuery = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -6987,7 +7043,14 @@ export type NodeQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
             }
           | {
@@ -7004,7 +7067,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -7097,7 +7167,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -7123,7 +7200,14 @@ export type NodeQuery = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
         suNewsPublishingDate?: {__typename?: "DateTime"; timezone: any; time: any} | null
         suNewsSource?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
@@ -7262,7 +7346,14 @@ export type NodeQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
             }
           | {
@@ -7275,7 +7366,14 @@ export type NodeQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               }
             }
           | {
@@ -7301,13 +7399,27 @@ export type NodeQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 } | null
                 supSlideBgImage: {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               }>
             }
@@ -7326,7 +7438,14 @@ export type NodeQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
             }
           | {
@@ -7343,7 +7462,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -7437,7 +7563,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -7476,7 +7609,14 @@ export type NodeQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
                 supBlogUrl: {__typename?: "Link"; title?: string | null; url?: string | null}
               }> | null
@@ -7505,13 +7645,27 @@ export type NodeQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 } | null
                 supSlideBgImage: {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               }>
             }
@@ -7545,7 +7699,14 @@ export type NodeQuery = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -7599,7 +7760,14 @@ export type NodeQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
             }
           | {
@@ -7616,7 +7784,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -7709,7 +7884,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -7738,7 +7920,14 @@ export type NodeQuery = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
         suPersonProfileLink?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
         suPersonResearch?: Array<{__typename?: "Text"; processed?: any | null}> | null
@@ -7852,7 +8041,14 @@ export type NodeQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
         }> | null
         suPublicationComponents?: Array<
@@ -7869,7 +8065,14 @@ export type NodeQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
             }
           | {
@@ -7886,7 +8089,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -7979,7 +8189,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -8006,7 +8223,14 @@ export type NodeQuery = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
         suPublicationTopics?: Array<{
           __typename: "TermStanfordPublicationTopic"
@@ -8115,7 +8339,14 @@ export type NodeQuery = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
         supBookImprint?: {
           __typename: "TermSupImprint"
@@ -8275,7 +8506,14 @@ export type NodeQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
         }
         supAncillaryParagraphs?: Array<
@@ -8293,7 +8531,14 @@ export type NodeQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -8709,7 +8954,14 @@ export type EventSeriesQuery = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             } | null
           }
         | {
@@ -8726,7 +8978,14 @@ export type EventSeriesQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
               | null
@@ -8819,7 +9078,14 @@ export type EventSeriesQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
               | null
@@ -9027,7 +9293,14 @@ export type EventsQuery = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             } | null
           }
         | {
@@ -9044,7 +9317,14 @@ export type EventsQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
               | null
@@ -9137,7 +9417,14 @@ export type EventsQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
               | null
@@ -9305,7 +9592,14 @@ export type EventsQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
         }> | null
       }> | null
@@ -9411,7 +9705,14 @@ export type NewsQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           }
         | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
         | null
@@ -9429,7 +9730,14 @@ export type NewsQuery = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             } | null
           }
         | {
@@ -9446,7 +9754,14 @@ export type NewsQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
               | null
@@ -9539,7 +9854,14 @@ export type NewsQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
               | null
@@ -9565,7 +9887,14 @@ export type NewsQuery = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       } | null
       suNewsPublishingDate?: {__typename?: "DateTime"; timezone: any; time: any} | null
       suNewsSource?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
@@ -9678,7 +10007,14 @@ export type BasicPagesQuery = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             } | null
           }
         | {
@@ -9691,7 +10027,14 @@ export type BasicPagesQuery = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           }
         | {
@@ -9717,13 +10060,27 @@ export type BasicPagesQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
               supSlideBgImage: {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               }
             }>
           }
@@ -9742,7 +10099,14 @@ export type BasicPagesQuery = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             } | null
           }
         | {
@@ -9759,7 +10123,14 @@ export type BasicPagesQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
               | null
@@ -9853,7 +10224,14 @@ export type BasicPagesQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
               | null
@@ -9892,7 +10270,14 @@ export type BasicPagesQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               }
               supBlogUrl: {__typename?: "Link"; title?: string | null; url?: string | null}
             }> | null
@@ -9921,13 +10306,27 @@ export type BasicPagesQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
               supSlideBgImage: {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               }
             }>
           }
@@ -9961,7 +10360,14 @@ export type BasicPagesQuery = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       } | null
     }>
     pageInfo: {__typename?: "ConnectionPageInfo"; hasNextPage: boolean; endCursor?: any | null}
@@ -10010,7 +10416,14 @@ export type PeopleQuery = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             } | null
           }
         | {
@@ -10027,7 +10440,14 @@ export type PeopleQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
               | null
@@ -10120,7 +10540,14 @@ export type PeopleQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
               | null
@@ -10149,7 +10576,14 @@ export type PeopleQuery = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       } | null
       suPersonProfileLink?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
       suPersonResearch?: Array<{__typename?: "Text"; processed?: any | null}> | null
@@ -10253,7 +10687,14 @@ export type PublicationsQuery = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }> | null
       suPublicationComponents?: Array<
@@ -10270,7 +10711,14 @@ export type PublicationsQuery = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             } | null
           }
         | {
@@ -10287,7 +10735,14 @@ export type PublicationsQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
               | null
@@ -10380,7 +10835,14 @@ export type PublicationsQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
               | null
@@ -10407,7 +10869,14 @@ export type PublicationsQuery = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       } | null
       suPublicationTopics?: Array<{
         __typename: "TermStanfordPublicationTopic"
@@ -10472,7 +10941,14 @@ export type MediaQuery = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       }
     | {
         __typename: "MediaStanfordGalleryImage"
@@ -11626,7 +12102,14 @@ export type ParagraphQuery = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -11643,7 +12126,14 @@ export type ParagraphQuery = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -11737,7 +12227,14 @@ export type ParagraphQuery = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -11775,7 +12272,14 @@ export type ParagraphQuery = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
         suStatStatColor?: {__typename?: "ColorFieldType"; color: string} | null
       }
@@ -11805,7 +12309,14 @@ export type ParagraphQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           }
           supBlogUrl: {__typename?: "Link"; title?: string | null; url?: string | null}
         }> | null
@@ -11834,13 +12345,27 @@ export type ParagraphQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
           supSlideBgImage: {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           }
         }>
       }
@@ -13278,7 +13803,14 @@ export type FragmentMediaImageFragment = {
   __typename: "MediaImage"
   uuid: string
   name: string
-  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+  mediaImage: {
+    __typename?: "Image"
+    url: string
+    alt?: string | null
+    height: number
+    width: number
+    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+  }
 }
 
 export type FragmentMediaStanfordGalleryImageFragment = {
@@ -13322,7 +13854,14 @@ type FragmentMediaUnion_MediaImage_Fragment = {
   __typename: "MediaImage"
   uuid: string
   name: string
-  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+  mediaImage: {
+    __typename?: "Image"
+    url: string
+    alt?: string | null
+    height: number
+    width: number
+    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+  }
 }
 
 type FragmentMediaUnion_MediaStanfordGalleryImage_Fragment = {
@@ -13741,7 +14280,14 @@ export type FragmentNodeSupBookAncillaryFragment = {
       __typename: "MediaImage"
       uuid: string
       name: string
-      mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+      mediaImage: {
+        __typename?: "Image"
+        url: string
+        alt?: string | null
+        height: number
+        width: number
+        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+      }
     } | null
   }
   supAncillaryParagraphs?: Array<
@@ -13759,7 +14305,14 @@ export type FragmentNodeSupBookAncillaryFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -13871,7 +14424,14 @@ export type FragmentNodeSupBookFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   supBookImprint?: {
     __typename: "TermSupImprint"
@@ -14052,7 +14612,14 @@ export type FragmentNodeStanfordPageFragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -14065,7 +14632,14 @@ export type FragmentNodeStanfordPageFragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         }
       }
     | {
@@ -14091,13 +14665,27 @@ export type FragmentNodeStanfordPageFragment = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
           supSlideBgImage: {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           }
         }>
       }
@@ -14116,7 +14704,14 @@ export type FragmentNodeStanfordPageFragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -14133,7 +14728,14 @@ export type FragmentNodeStanfordPageFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -14227,7 +14829,14 @@ export type FragmentNodeStanfordPageFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -14266,7 +14875,14 @@ export type FragmentNodeStanfordPageFragment = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           }
           supBlogUrl: {__typename?: "Link"; title?: string | null; url?: string | null}
         }> | null
@@ -14295,13 +14911,27 @@ export type FragmentNodeStanfordPageFragment = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
           supSlideBgImage: {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           }
         }>
       }
@@ -14335,7 +14965,14 @@ export type FragmentNodeStanfordPageFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
 }
 
@@ -14526,7 +15163,14 @@ export type FragmentNodeStanfordEventFragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -14543,7 +15187,14 @@ export type FragmentNodeStanfordEventFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -14636,7 +15287,14 @@ export type FragmentNodeStanfordEventFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -14804,7 +15462,14 @@ export type FragmentNodeStanfordEventFragment = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       } | null
     }> | null
   }> | null
@@ -14905,7 +15570,14 @@ export type FragmentNodeStanfordEventSeriesFragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -14922,7 +15594,14 @@ export type FragmentNodeStanfordEventSeriesFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -15015,7 +15694,14 @@ export type FragmentNodeStanfordEventSeriesFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -15160,7 +15846,14 @@ export type FragmentNodeStanfordNewsFragment = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       }
     | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
     | null
@@ -15178,7 +15871,14 @@ export type FragmentNodeStanfordNewsFragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -15195,7 +15895,14 @@ export type FragmentNodeStanfordNewsFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -15288,7 +15995,14 @@ export type FragmentNodeStanfordNewsFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -15314,7 +16028,14 @@ export type FragmentNodeStanfordNewsFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   suNewsPublishingDate?: {__typename?: "DateTime"; timezone: any; time: any} | null
   suNewsSource?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
@@ -15391,7 +16112,14 @@ export type FragmentNodeStanfordPersonFragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -15408,7 +16136,14 @@ export type FragmentNodeStanfordPersonFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -15501,7 +16236,14 @@ export type FragmentNodeStanfordPersonFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -15530,7 +16272,14 @@ export type FragmentNodeStanfordPersonFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   suPersonProfileLink?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
   suPersonResearch?: Array<{__typename?: "Text"; processed?: any | null}> | null
@@ -15610,7 +16359,14 @@ export type FragmentNodeStanfordPublicationFragment = {
       __typename: "MediaImage"
       uuid: string
       name: string
-      mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+      mediaImage: {
+        __typename?: "Image"
+        url: string
+        alt?: string | null
+        height: number
+        width: number
+        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+      }
     } | null
   }> | null
   suPublicationComponents?: Array<
@@ -15627,7 +16383,14 @@ export type FragmentNodeStanfordPublicationFragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -15644,7 +16407,14 @@ export type FragmentNodeStanfordPublicationFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -15737,7 +16507,14 @@ export type FragmentNodeStanfordPublicationFragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -15764,7 +16541,14 @@ export type FragmentNodeStanfordPublicationFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   suPublicationTopics?: Array<{
     __typename: "TermStanfordPublicationTopic"
@@ -16029,7 +16813,14 @@ type FragmentNodeUnion_NodeStanfordEvent_Fragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -16046,7 +16837,14 @@ type FragmentNodeUnion_NodeStanfordEvent_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -16139,7 +16937,14 @@ type FragmentNodeUnion_NodeStanfordEvent_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -16307,7 +17112,14 @@ type FragmentNodeUnion_NodeStanfordEvent_Fragment = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       } | null
     }> | null
   }> | null
@@ -16426,7 +17238,14 @@ type FragmentNodeUnion_NodeStanfordEventSeries_Fragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -16443,7 +17262,14 @@ type FragmentNodeUnion_NodeStanfordEventSeries_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -16536,7 +17362,14 @@ type FragmentNodeUnion_NodeStanfordEventSeries_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -16721,7 +17554,14 @@ type FragmentNodeUnion_NodeStanfordNews_Fragment = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       }
     | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
     | null
@@ -16739,7 +17579,14 @@ type FragmentNodeUnion_NodeStanfordNews_Fragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -16756,7 +17603,14 @@ type FragmentNodeUnion_NodeStanfordNews_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -16849,7 +17703,14 @@ type FragmentNodeUnion_NodeStanfordNews_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -16875,7 +17736,14 @@ type FragmentNodeUnion_NodeStanfordNews_Fragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   suNewsPublishingDate?: {__typename?: "DateTime"; timezone: any; time: any} | null
   suNewsSource?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
@@ -17016,7 +17884,14 @@ type FragmentNodeUnion_NodeStanfordPage_Fragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -17029,7 +17904,14 @@ type FragmentNodeUnion_NodeStanfordPage_Fragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         }
       }
     | {
@@ -17055,13 +17937,27 @@ type FragmentNodeUnion_NodeStanfordPage_Fragment = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
           supSlideBgImage: {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           }
         }>
       }
@@ -17080,7 +17976,14 @@ type FragmentNodeUnion_NodeStanfordPage_Fragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -17097,7 +18000,14 @@ type FragmentNodeUnion_NodeStanfordPage_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -17191,7 +18101,14 @@ type FragmentNodeUnion_NodeStanfordPage_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -17230,7 +18147,14 @@ type FragmentNodeUnion_NodeStanfordPage_Fragment = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           }
           supBlogUrl: {__typename?: "Link"; title?: string | null; url?: string | null}
         }> | null
@@ -17259,13 +18183,27 @@ type FragmentNodeUnion_NodeStanfordPage_Fragment = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
           supSlideBgImage: {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           }
         }>
       }
@@ -17299,7 +18237,14 @@ type FragmentNodeUnion_NodeStanfordPage_Fragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
 }
 
@@ -17354,7 +18299,14 @@ type FragmentNodeUnion_NodeStanfordPerson_Fragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -17371,7 +18323,14 @@ type FragmentNodeUnion_NodeStanfordPerson_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -17464,7 +18423,14 @@ type FragmentNodeUnion_NodeStanfordPerson_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -17493,7 +18459,14 @@ type FragmentNodeUnion_NodeStanfordPerson_Fragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   suPersonProfileLink?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
   suPersonResearch?: Array<{__typename?: "Text"; processed?: any | null}> | null
@@ -17609,7 +18582,14 @@ type FragmentNodeUnion_NodeStanfordPublication_Fragment = {
       __typename: "MediaImage"
       uuid: string
       name: string
-      mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+      mediaImage: {
+        __typename?: "Image"
+        url: string
+        alt?: string | null
+        height: number
+        width: number
+        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+      }
     } | null
   }> | null
   suPublicationComponents?: Array<
@@ -17626,7 +18606,14 @@ type FragmentNodeUnion_NodeStanfordPublication_Fragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -17643,7 +18630,14 @@ type FragmentNodeUnion_NodeStanfordPublication_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -17736,7 +18730,14 @@ type FragmentNodeUnion_NodeStanfordPublication_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -17763,7 +18764,14 @@ type FragmentNodeUnion_NodeStanfordPublication_Fragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   suPublicationTopics?: Array<{
     __typename: "TermStanfordPublicationTopic"
@@ -17873,7 +18881,14 @@ type FragmentNodeUnion_NodeSupBook_Fragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   supBookImprint?: {
     __typename: "TermSupImprint"
@@ -18029,7 +19044,14 @@ type FragmentNodeUnion_NodeSupBookAncillary_Fragment = {
       __typename: "MediaImage"
       uuid: string
       name: string
-      mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+      mediaImage: {
+        __typename?: "Image"
+        url: string
+        alt?: string | null
+        height: number
+        width: number
+        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+      }
     } | null
   }
   supAncillaryParagraphs?: Array<
@@ -18047,7 +19069,14 @@ type FragmentNodeUnion_NodeSupBookAncillary_Fragment = {
               __typename: "MediaImage"
               uuid: string
               name: string
-              mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+              mediaImage: {
+                __typename?: "Image"
+                url: string
+                alt?: string | null
+                height: number
+                width: number
+                variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+              }
             }
           | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
           | null
@@ -18146,7 +19175,14 @@ export type FragmentNodeSupBookTeaserFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
 }
 
@@ -18287,7 +19323,14 @@ export type FragmentNodeStanfordNewsTeaserFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   suNewsTopics?: Array<{
     __typename: "TermStanfordNewsTopic"
@@ -18341,7 +19384,14 @@ export type FragmentNodeStanfordPageTeaserFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   suPageBanner?:
     | {
@@ -18357,7 +19407,14 @@ export type FragmentNodeStanfordPageTeaserFragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -18370,7 +19427,14 @@ export type FragmentNodeStanfordPageTeaserFragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         }
       }
     | {
@@ -18396,13 +19460,27 @@ export type FragmentNodeStanfordPageTeaserFragment = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
           supSlideBgImage: {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           }
         }>
       }
@@ -18420,7 +19498,14 @@ export type FragmentNodeStanfordPersonTeaserFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
 }
 
@@ -18621,7 +19706,14 @@ type FragmentNodeTeaserUnion_NodeStanfordNews_Fragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   suNewsTopics?: Array<{
     __typename: "TermStanfordNewsTopic"
@@ -18682,7 +19774,14 @@ type FragmentNodeTeaserUnion_NodeStanfordPage_Fragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   suPageBanner?:
     | {
@@ -18698,7 +19797,14 @@ type FragmentNodeTeaserUnion_NodeStanfordPage_Fragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         } | null
       }
     | {
@@ -18711,7 +19817,14 @@ type FragmentNodeTeaserUnion_NodeStanfordPage_Fragment = {
           __typename: "MediaImage"
           uuid: string
           name: string
-          mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+          mediaImage: {
+            __typename?: "Image"
+            url: string
+            alt?: string | null
+            height: number
+            width: number
+            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+          }
         }
       }
     | {
@@ -18737,13 +19850,27 @@ type FragmentNodeTeaserUnion_NodeStanfordPage_Fragment = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
           supSlideBgImage: {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           }
         }>
       }
@@ -18761,7 +19888,14 @@ type FragmentNodeTeaserUnion_NodeStanfordPerson_Fragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
 }
 
@@ -18841,7 +19975,14 @@ type FragmentNodeTeaserUnion_NodeSupBook_Fragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
 }
 
@@ -19091,7 +20232,14 @@ export type FragmentParagraphStanfordBannerFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
 }
 
@@ -19109,7 +20257,14 @@ export type FragmentParagraphStanfordCardFragment = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       }
     | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
     | null
@@ -19183,7 +20338,14 @@ export type FragmentParagraphStanfordMediaCaptionFragment = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       }
     | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
     | null
@@ -19209,7 +20371,14 @@ export type FragmentParagraphStanfordStatCardFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   suStatStatColor?: {__typename?: "ColorFieldType"; color: string} | null
 }
@@ -19226,7 +20395,14 @@ export type FragmentParagraphStanfordPersonCtumFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
 }
 
@@ -19274,7 +20450,14 @@ export type FragmentParagraphStanfordScheduleFragment = {
       __typename: "MediaImage"
       uuid: string
       name: string
-      mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+      mediaImage: {
+        __typename?: "Image"
+        url: string
+        alt?: string | null
+        height: number
+        width: number
+        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+      }
     } | null
   }> | null
 }
@@ -19312,7 +20495,14 @@ export type FragmentParagraphStanfordPageTitleBannerFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   }
 }
 
@@ -19351,13 +20541,27 @@ export type FragmentParagraphSupCarouselSlideFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   supSlideBgImage: {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   }
 }
 
@@ -19384,13 +20588,27 @@ export type FragmentParagraphSupCarouselFragment = {
       __typename: "MediaImage"
       uuid: string
       name: string
-      mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+      mediaImage: {
+        __typename?: "Image"
+        url: string
+        alt?: string | null
+        height: number
+        width: number
+        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+      }
     } | null
     supSlideBgImage: {
       __typename: "MediaImage"
       uuid: string
       name: string
-      mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+      mediaImage: {
+        __typename?: "Image"
+        url: string
+        alt?: string | null
+        height: number
+        width: number
+        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+      }
     }
   }>
 }
@@ -19422,7 +20640,14 @@ export type FragmentParagraphSupBlogFragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   }
   supBlogUrl: {__typename?: "Link"; title?: string | null; url?: string | null}
 }
@@ -19444,7 +20669,14 @@ export type FragmentParagraphSupBlogTeaserFragment = {
       __typename: "MediaImage"
       uuid: string
       name: string
-      mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+      mediaImage: {
+        __typename?: "Image"
+        url: string
+        alt?: string | null
+        height: number
+        width: number
+        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+      }
     }
     supBlogUrl: {__typename?: "Link"; title?: string | null; url?: string | null}
   }> | null
@@ -19473,7 +20705,14 @@ type FragmentParagraphUnion_ParagraphStanfordBanner_Fragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
 }
 
@@ -19491,7 +20730,14 @@ type FragmentParagraphUnion_ParagraphStanfordCard_Fragment = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       }
     | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
     | null
@@ -19596,7 +20842,14 @@ type FragmentParagraphUnion_ParagraphStanfordMediaCaption_Fragment = {
         __typename: "MediaImage"
         uuid: string
         name: string
-        mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+        mediaImage: {
+          __typename?: "Image"
+          url: string
+          alt?: string | null
+          height: number
+          width: number
+          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+        }
       }
     | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
     | null
@@ -19654,7 +20907,14 @@ type FragmentParagraphUnion_ParagraphStanfordStatCard_Fragment = {
     __typename: "MediaImage"
     uuid: string
     name: string
-    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+    mediaImage: {
+      __typename?: "Image"
+      url: string
+      alt?: string | null
+      height: number
+      width: number
+      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+    }
   } | null
   suStatStatColor?: {__typename?: "ColorFieldType"; color: string} | null
 }
@@ -19698,7 +20958,14 @@ type FragmentParagraphUnion_ParagraphSupBlogTeaser_Fragment = {
       __typename: "MediaImage"
       uuid: string
       name: string
-      mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+      mediaImage: {
+        __typename?: "Image"
+        url: string
+        alt?: string | null
+        height: number
+        width: number
+        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+      }
     }
     supBlogUrl: {__typename?: "Link"; title?: string | null; url?: string | null}
   }> | null
@@ -19728,13 +20995,27 @@ type FragmentParagraphUnion_ParagraphSupCarousel_Fragment = {
       __typename: "MediaImage"
       uuid: string
       name: string
-      mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+      mediaImage: {
+        __typename?: "Image"
+        url: string
+        alt?: string | null
+        height: number
+        width: number
+        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+      }
     } | null
     supSlideBgImage: {
       __typename: "MediaImage"
       uuid: string
       name: string
-      mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+      mediaImage: {
+        __typename?: "Image"
+        url: string
+        alt?: string | null
+        height: number
+        width: number
+        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+      }
     }
   }>
 }
@@ -20140,6 +21421,7 @@ export type RouteQuery = {
                         alt?: string | null
                         height: number
                         width: number
+                        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                       }
                     } | null
                   }
@@ -20163,6 +21445,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -20262,6 +21545,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -20430,7 +21714,14 @@ export type RouteQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   } | null
                 }> | null
               }> | null
@@ -20558,6 +21849,7 @@ export type RouteQuery = {
                         alt?: string | null
                         height: number
                         width: number
+                        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                       }
                     } | null
                   }
@@ -20581,6 +21873,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -20680,6 +21973,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -20871,7 +22165,14 @@ export type RouteQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
                 | null
@@ -20895,6 +22196,7 @@ export type RouteQuery = {
                         alt?: string | null
                         height: number
                         width: number
+                        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                       }
                     } | null
                   }
@@ -20918,6 +22220,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -21017,6 +22320,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -21043,7 +22347,14 @@ export type RouteQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
               suNewsPublishingDate?: {__typename?: "DateTime"; timezone: any; time: any} | null
               suNewsSource?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
@@ -21196,6 +22507,7 @@ export type RouteQuery = {
                         alt?: string | null
                         height: number
                         width: number
+                        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                       }
                     } | null
                   }
@@ -21215,6 +22527,7 @@ export type RouteQuery = {
                         alt?: string | null
                         height: number
                         width: number
+                        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                       }
                     }
                   }
@@ -21247,6 +22560,7 @@ export type RouteQuery = {
                           alt?: string | null
                           height: number
                           width: number
+                          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                         }
                       } | null
                       supSlideBgImage: {
@@ -21259,6 +22573,7 @@ export type RouteQuery = {
                           alt?: string | null
                           height: number
                           width: number
+                          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                         }
                       }
                     }>
@@ -21284,6 +22599,7 @@ export type RouteQuery = {
                         alt?: string | null
                         height: number
                         width: number
+                        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                       }
                     } | null
                   }
@@ -21307,6 +22623,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -21412,6 +22729,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -21457,6 +22775,7 @@ export type RouteQuery = {
                           alt?: string | null
                           height: number
                           width: number
+                          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                         }
                       }
                       supBlogUrl: {__typename?: "Link"; title?: string | null; url?: string | null}
@@ -21492,6 +22811,7 @@ export type RouteQuery = {
                           alt?: string | null
                           height: number
                           width: number
+                          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                         }
                       } | null
                       supSlideBgImage: {
@@ -21504,6 +22824,7 @@ export type RouteQuery = {
                           alt?: string | null
                           height: number
                           width: number
+                          variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                         }
                       }
                     }>
@@ -21543,7 +22864,14 @@ export type RouteQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
             }
           | {
@@ -21607,6 +22935,7 @@ export type RouteQuery = {
                         alt?: string | null
                         height: number
                         width: number
+                        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                       }
                     } | null
                   }
@@ -21630,6 +22959,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -21729,6 +23059,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -21758,7 +23089,14 @@ export type RouteQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
               suPersonProfileLink?: {__typename?: "Link"; url?: string | null; title?: string | null} | null
               suPersonResearch?: Array<{__typename?: "Text"; processed?: any | null}> | null
@@ -21880,7 +23218,14 @@ export type RouteQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 } | null
               }> | null
               suPublicationComponents?: Array<
@@ -21903,6 +23248,7 @@ export type RouteQuery = {
                         alt?: string | null
                         height: number
                         width: number
+                        variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                       }
                     } | null
                   }
@@ -21926,6 +23272,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -22025,6 +23372,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -22052,7 +23400,14 @@ export type RouteQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
               suPublicationTopics?: Array<{
                 __typename: "TermStanfordPublicationTopic"
@@ -22165,7 +23520,14 @@ export type RouteQuery = {
                 __typename: "MediaImage"
                 uuid: string
                 name: string
-                mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                mediaImage: {
+                  __typename?: "Image"
+                  url: string
+                  alt?: string | null
+                  height: number
+                  width: number
+                  variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                }
               } | null
               supBookImprint?: {
                 __typename: "TermSupImprint"
@@ -22329,7 +23691,14 @@ export type RouteQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 } | null
               }
               supAncillaryParagraphs?: Array<
@@ -22353,6 +23722,7 @@ export type RouteQuery = {
                             alt?: string | null
                             height: number
                             width: number
+                            variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
                           }
                         }
                       | {__typename: "MediaVideo"; mediaOembedVideo: string; uuid: string; name: string}
@@ -22477,7 +23847,14 @@ export type StanfordBasicPagesQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
           suPageBanner?:
             | {
@@ -22493,7 +23870,14 @@ export type StanfordBasicPagesQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 } | null
               }
             | {
@@ -22506,7 +23890,14 @@ export type StanfordBasicPagesQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               }
             | {
@@ -22532,13 +23923,27 @@ export type StanfordBasicPagesQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   } | null
                   supSlideBgImage: {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 }>
               }
@@ -22932,7 +24337,14 @@ export type StanfordNewsQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
           suNewsTopics?: Array<{
             __typename: "TermStanfordNewsTopic"
@@ -23017,7 +24429,14 @@ export type StanfordPersonQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
         }
       | {__typename?: "NodeStanfordPolicy"}
@@ -23248,7 +24667,14 @@ export type StanfordSharedTagsQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
           suNewsTopics?: Array<{
             __typename: "TermStanfordNewsTopic"
@@ -23302,7 +24728,14 @@ export type StanfordSharedTagsQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
           suPageBanner?:
             | {
@@ -23318,7 +24751,14 @@ export type StanfordSharedTagsQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 } | null
               }
             | {
@@ -23331,7 +24771,14 @@ export type StanfordSharedTagsQuery = {
                   __typename: "MediaImage"
                   uuid: string
                   name: string
-                  mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                  mediaImage: {
+                    __typename?: "Image"
+                    url: string
+                    alt?: string | null
+                    height: number
+                    width: number
+                    variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                  }
                 }
               }
             | {
@@ -23357,13 +24804,27 @@ export type StanfordSharedTagsQuery = {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   } | null
                   supSlideBgImage: {
                     __typename: "MediaImage"
                     uuid: string
                     name: string
-                    mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+                    mediaImage: {
+                      __typename?: "Image"
+                      url: string
+                      alt?: string | null
+                      height: number
+                      width: number
+                      variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+                    }
                   }
                 }>
               }
@@ -23380,7 +24841,14 @@ export type StanfordSharedTagsQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
         }
       | {
@@ -23457,7 +24925,14 @@ export type StanfordSharedTagsQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
         }
       | {__typename: "NodeSupBookAncillary"; uuid: string; title: string; path?: string | null}
@@ -23513,7 +24988,14 @@ export type SupBooksQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
         }
       | {__typename?: "NodeSupBookAncillary"}
@@ -23568,7 +25050,14 @@ export type SupBooksAwardWinnersQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
         }
       | {__typename?: "NodeSupBookAncillary"}
@@ -23646,7 +25135,14 @@ export type SupBooksBestSellersQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
         }
       | {__typename?: "NodeSupBookAncillary"}
@@ -23699,7 +25195,14 @@ export type SupBooksNewReleasesQuery = {
             __typename: "MediaImage"
             uuid: string
             name: string
-            mediaImage: {__typename?: "Image"; url: string; alt?: string | null; height: number; width: number}
+            mediaImage: {
+              __typename?: "Image"
+              url: string
+              alt?: string | null
+              height: number
+              width: number
+              variations?: Array<{__typename?: "ImageStyleDerivative"; url: string}> | null
+            }
           } | null
         }
       | {__typename?: "NodeSupBookAncillary"}

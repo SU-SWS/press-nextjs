@@ -5196,7 +5196,6 @@ __metadata:
     html-entities: "npm:^2.6.0"
     html-react-parser: "npm:^6.1.8"
     next: "npm:16.3.8"
-    plaiceholder: "npm:^3.0.0"
     postcss: "npm:^8.5.29"
     prettier: "npm:^3.9.9"
     prettier-plugin-tailwindcss: "npm:^0.8.1"
@@ -8500,15 +8499,6 @@ __metadata:
   version: 4.0.7
   resolution: "pirates@npm:4.0.7"
   checksum: 10c0/a51f108dd811beb779d58a76864bbd49e239fa40c7984cd11596c75a121a8cc789f1c8971d8bb15f0dbf9d48b76c05bb62fcbce840f89b688c0fa64b37e8478a
-  languageName: node
-  linkType: hard
-
-"plaiceholder@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "plaiceholder@npm:3.0.0"
-  peerDependencies:
-    sharp: ">= 0.30.6"
-  checksum: 10c0/b85879ac06f89f6229786237a9f64c920509d6cda7b0dfb8f984edb5c576b170c08bf401ab7e2be428694fd8978791e2ee8458d2cefa41f67f8c5935964a0639
   languageName: node
   linkType: hard
 
