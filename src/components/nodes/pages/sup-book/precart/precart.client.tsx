@@ -2,7 +2,7 @@
 
 import useIsInternational from "@lib/hooks/useIsInternational"
 import Button from "@components/elements/button"
-import {FormEvent, HTMLAttributes, ReactNode, useEffect, useState} from "react"
+import {FormEvent, HTMLAttributes, ReactNode, useCallback, useEffect, useRef, useState} from "react"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
 import {Maybe, NodeSupBook, PressPrice} from "@lib/gql/__generated__/drupal.d"
 import {BookOpenIcon as BookOpenIconOutline, DeviceTabletIcon} from "@heroicons/react/24/outline"
@@ -16,6 +16,7 @@ import {submitForm} from "@components/nodes/pages/sup-book/precart/precart.serve
 import {getCartUrl} from "@components/nodes/pages/sup-book/precart/get-cart-url"
 import {toast} from "react-toastify"
 import useCartCount from "@lib/hooks/useCartCount"
+import useUserInteracted from "@lib/hooks/useUserInteracted"
 import {AddToCartResponse} from "@lib/@types/cart-api"
 
 type Props = {
@@ -55,14 +56,31 @@ const PreCartClient = ({
     if (!firstPub || new Date(firstPub.time) < new Date()) showEbookButton()
   }, [firstPub, showEbookButton])
 
-  useEffect(() => {
-    if (priceId) {
-      fetch(`/api/books/price/${priceId}`)
-        .then(res => res.json())
-        .then((data: PressPrice) => setPriceData(data))
-        .catch(_e => console.warn(`Something went wrong fetching ${priceId}`))
-    }
+  // Prices are only requested once the visitor interacts with the page. Every book page view used to fetch them, and
+  // most of those views come from crawlers that never interact, so this keeps them off the function budget.
+  const userInteracted = useUserInteracted()
+  const pricePromise = useRef<Promise<PressPrice | undefined>>(undefined)
+
+  const loadPrice = useCallback((): Promise<PressPrice | undefined> => {
+    if (!priceId) return Promise.resolve(undefined)
+    pricePromise.current ??= fetch(`/api/books/price/${priceId}`)
+      .then(res => res.json())
+      .then((data: PressPrice) => {
+        setPriceData(data)
+        return data
+      })
+      .catch(_e => {
+        console.warn(`Something went wrong fetching ${priceId}`)
+        // Allow a later interaction to try again.
+        pricePromise.current = undefined
+        return undefined
+      })
+    return pricePromise.current
   }, [priceId])
+
+  useEffect(() => {
+    if (userInteracted) loadPrice()
+  }, [userInteracted, loadPrice])
 
   const [isIntl, setIntl] = useIsInternational()
 
@@ -78,6 +96,15 @@ const PreCartClient = ({
     // Honeypot field.
     if (formData.get("email")) return
 
+    // The button's state depends on the price data, so make sure it has loaded before adding anything to the cart.
+    // A book that is coming soon can't be purchased.
+    loadPrice().then(prices => {
+      if (prices?.supComingSoon) return
+      addToCart(formData)
+    })
+  }
+
+  const addToCart = (formData: FormData) => {
     const bookTitle = formData.get("title") as string
     const [format, isbn] = (formData.get("format") as string).split(":")
     const ebookFormat = formData.get("ebook") as string

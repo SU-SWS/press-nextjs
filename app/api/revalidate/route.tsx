@@ -3,6 +3,11 @@ import {revalidateTag} from "next/cache"
 import {getEntityFromPath, getHomePagePath} from "@lib/gql/gql-queries"
 import {bearerMatches, secretMatches} from "@lib/utils/request-guards"
 
+// Prices are cached until Drupal revalidates them, so a stale price must never be served after a change. Other content
+// uses stale-while-revalidate: the next visitor gets the previous version while the fresh one renders in the background.
+const revalidate = (tag: string) =>
+  revalidateTag(tag, tag === "prices" || tag.startsWith("prices:") ? {expire: 0} : "max")
+
 export const GET = async (request: NextRequest) => {
   const secret = request.nextUrl.searchParams.get("secret")
   if (!secretMatches(secret, process.env.DRUPAL_REVALIDATE_SECRET))
@@ -29,7 +34,7 @@ export const GET = async (request: NextRequest) => {
   // the home page path.
   if ((await getHomePagePath()) === path) tagsInvalidated.push("paths:/")
 
-  tagsInvalidated.map(tag => revalidateTag(tag, "max"))
+  tagsInvalidated.map(revalidate)
 
   return NextResponse.json({revalidated: true, tags: tagsInvalidated})
 }
@@ -41,6 +46,6 @@ export const POST = async (request: NextRequest) => {
   // Parse the incoming JSON body
   const {paths, tags} = (await request.json()) as {paths?: string[]; tags?: string[]}
   paths?.map(path => revalidateTag(`paths:${path}`, "max"))
-  tags?.map(tag => revalidateTag(tag, "max"))
+  tags?.map(revalidate)
   return NextResponse.json({revalidated: true, paths, tags})
 }
