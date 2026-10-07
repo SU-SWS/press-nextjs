@@ -27,10 +27,10 @@ const StanfordNewsListItem = ({node, headingLevel, ...props}: Props) => {
 
   return (
     <article {...props} aria-labelledby={node.uuid} className={cn("@container", props.className)}>
-      <div className="flex w-full flex-col justify-between py-10 @3xl:flex-row">
+      <div className="flex w-full flex-col justify-between py-25 @3xl:flex-row">
         <div className="@3xl::order-1 order-2">
-          <div className="flex flex-col gap-10">
-            <Heading className="type-1 order-last font-bold xl:text-26" id={node.uuid}>
+          <div className="flex flex-col gap-25">
+            <Heading className="order-last type-1 font-bold xl:text-26" id={node.uuid}>
               <Link
                 href={node.suNewsSource?.url || node.path || "#"}
                 className="order-2 text-digital-red no-underline hocus:text-black hocus:underline"
@@ -48,7 +48,7 @@ const StanfordNewsListItem = ({node, headingLevel, ...props}: Props) => {
         </div>
 
         {image?.url && (
-          <div className="relative order-1 mb-10 aspect-[16/9] shrink-0 @3xl:order-2 @3xl:mb-0 @3xl:w-1/4">
+          <div className="relative order-1 mb-25 aspect-video shrink-0 @3xl:order-2 @3xl:mb-0 @3xl:w-1/4">
             <Image
               className="object-cover"
               src={image.url}

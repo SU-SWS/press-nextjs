@@ -16,10 +16,10 @@ const SupBookListItem = ({node, headingLevel, ...props}: Props) => {
     <article
       {...props}
       aria-labelledby={node.uuid}
-      className={cn("mx-auto w-full max-w-[500px] border border-black-20 p-10 shadow-xl", props.className)}
+      className={cn("mx-auto w-full max-w-[500px] border border-black-20 p-25 shadow-xl", props.className)}
     >
       <div className="flex flex-col">
-        <Heading className="type-1 order-first xl:text-26" id={node.uuid}>
+        <Heading className="order-first type-1 xl:text-26" id={node.uuid}>
           <Link href={node.path || "#"}>{formatHtml(node.title)}</Link>
         </Heading>
         <div className="font-bold">Publication</div>

@@ -64,7 +64,7 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
   )
 
   return (
-    <div {...props} className={cn("mx-auto flex max-w-[900px] justify-between gap-20", props?.className)}>
+    <div {...props} className={cn("mx-auto flex max-w-[900px] justify-between gap-50", props?.className)}>
       <div className="sr-only" aria-live="polite" aria-atomic>
         Showing authors that start with {alphaChosen}
       </div>
@@ -73,9 +73,9 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
       </a>
 
       <PagedList
-        className="flex-grow"
+        className="grow"
         totalPages={Math.ceil(sortedAuthorNames.length / 25)}
-        ulProps={{className: "list-unstyled mb-36"}}
+        ulProps={{className: "list-unstyled mb-90"}}
         pageKey={false}
         key={alphaChosen}
         pagerSiblingCount={2}
@@ -109,8 +109,8 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
 const AuthorItem = ({authorName, books}: {authorName: string; books?: AuthorBook[]}) => {
   return (
     <div>
-      <div className="type-0 pr-4 xl:text-21">{authorName},</div>
-      <div className="ml-20">
+      <div className="pr-10 type-0 xl:text-21">{authorName},</div>
+      <div className="ml-50">
         {books?.map(book => (
           <Link className="block w-fit font-normal text-digital-red" key={book.uuid} href={book.path || "#"}>
             {book.title}
@@ -132,7 +132,7 @@ const RadioOption = ({
   onChange: () => void
 }) => {
   return (
-    <label className="mb-8 block cursor-pointer">
+    <label className="mb-20 block cursor-pointer">
       <input
         className="peer sr-only"
         type="radio"
@@ -141,7 +141,7 @@ const RadioOption = ({
         value={value}
         onChange={onChange}
       />
-      <span className="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-fog-light font-semibold text-press-sand-dark hover:underline peer-checked:bg-digital-red peer-checked:text-white peer-focus:underline peer-focus-visible:outline peer-focus-visible:outline-press-sand-dark">
+      <span className="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-fog-light font-semibold text-press-sand-dark peer-checked:bg-digital-red peer-checked:text-white peer-focus:underline peer-focus-visible:outline-press-sand-dark peer-focus-visible:outline-solid hover:underline">
         {value}
       </span>
     </label>

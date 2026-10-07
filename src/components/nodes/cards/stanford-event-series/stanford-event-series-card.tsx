@@ -13,7 +13,7 @@ const StanfordEventSeriesCard = ({node, headingLevel, ...props}: Props) => {
   const Heading = headingLevel === "h3" ? H3 : H2
   return (
     <ImageCard {...props} aria-labelledby={node.uuid} isArticle>
-      <Heading className="type-1 xl:text-26 [&_a]:text-black [&_a]:hocus:text-digital-red" id={node.uuid}>
+      <Heading className="type-1 xl:text-26 [&_a]:text-black hocus:[&_a]:text-digital-red" id={node.uuid}>
         <Link href={node.path || "#"}>{node.title}</Link>
       </Heading>
       {node.suEventSeriesDek && <p>{node.suEventSeriesDek}</p>}

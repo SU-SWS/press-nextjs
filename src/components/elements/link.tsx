@@ -80,7 +80,7 @@ const DrupalLink = ({href, children, prefetch = false, ...props}: LinkProps) => 
     >
       {children}
       {href.startsWith("mailto") && (
-        <EnvelopeIcon width={20} className="ml-4 inline-block text-digital-red group-hocus:text-archway-dark" />
+        <EnvelopeIcon width={20} className="ml-10 inline-block text-digital-red group-hocus:text-archway-dark" />
       )}
     </Link>
   )

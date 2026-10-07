@@ -15,7 +15,7 @@ const StanfordPublicationCard = ({node, headingLevel, ...props}: Props) => {
   return (
     <ImageCard {...props} aria-labelledby={node.uuid} isArticle>
       <div className="flex flex-col">
-        <Heading className="type-1 order-last xl:text-26 [&_a]:text-black [&_a]:hocus:text-digital-red" id={node.uuid}>
+        <Heading className="order-last type-1 xl:text-26 [&_a]:text-black hocus:[&_a]:text-digital-red" id={node.uuid}>
           <Link href={citationUrl || node.path || "#"}>{node.title}</Link>
         </Heading>
         <div className="order-first font-bold">Publication</div>

@@ -32,28 +32,28 @@ const SupBookExcerptPage = async ({node, ...props}: Props) => {
       <H1>
         Excerpts + more<span className="sr-only">&nbps;{formatHtml(node.title)}</span>
       </H1>
-      <div className="rs-mb-0 centered flex flex-col md:flex-row md:gap-[17.1rem]">
-        <div className="centered flex-grow lg:max-w-[900px]">
+      <div className="centered rs-mb-0 flex flex-col md:flex-row md:gap-[17.1rem]">
+        <div className="centered grow lg:max-w-[900px]">
           <div className="type-2 font-medium xl:text-[3.3rem]">{formatHtml(node.title)}</div>
 
           {node.supBookSubtitle && (
-            <div className="type-1 mt-5 font-medium xl:text-26">{formatHtml(node.supBookSubtitle)}</div>
+            <div className="mt-12.5 type-1 font-medium xl:text-26">{formatHtml(node.supBookSubtitle)}</div>
           )}
 
           {node.supBookAuthorsFull && (
-            <div className="rs-mb-4 type-0 mt-5 text-press-sand-dark xl:text-21">{node.supBookAuthorsFull}</div>
+            <div className="mt-12.5 rs-mb-4 type-0 text-press-sand-dark xl:text-21">{node.supBookAuthorsFull}</div>
           )}
 
           {ancillaryPages.map(page => (
             <Link
-              className="group rs-p-1 rs-mb-3 flex items-center gap-3 border text-stone-dark no-underline shadow last:mb-0 hocus:underline"
+              className="group rs-mb-3 flex items-center gap-7.5 border rs-p-1 text-stone-dark no-underline shadow-sm last:mb-0 hocus:underline"
               key={page.uuid}
               href={page.path || "#"}
             >
               {page.title}
               <ChevronRightIcon
                 width={24}
-                className="shrink-0 text-digital-red transition-all group-hocus-visible:translate-x-2"
+                className="shrink-0 text-digital-red transition-all group-hocus-visible:translate-x-5"
               />
             </Link>
           ))}

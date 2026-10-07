@@ -13,13 +13,13 @@ export const NextArrow = ({
   const slickDisabled = slickClassNames?.includes("slick-disabled")
   return (
     <button
-      className={cn("group absolute right-5 top-1/2 z-[1] h-16 w-16 sm:h-20 sm:w-20 lg:right-20", customClassName)}
+      className={cn("group absolute top-1/2 right-12.5 z-1 h-40 w-40 sm:h-50 sm:w-50 lg:right-50", customClassName)}
       onClick={onClick}
       aria-label="Next"
       disabled={slickDisabled}
     >
       <ArrowLongRightIcon
-        className={cn("text-white transition-all group-hocus-visible:translate-x-2", {
+        className={cn("text-white transition-all group-hocus-visible:translate-x-5", {
           "text-fog-dark": slickDisabled,
         })}
       />
@@ -35,13 +35,13 @@ export const PrevArrow = ({
   const slickDisabled = slickClassNames?.includes("slick-disabled")
   return (
     <button
-      className={cn("group absolute left-5 top-1/2 z-[1] h-16 w-16 sm:h-20 sm:w-20 lg:left-20", customClassName)}
+      className={cn("group absolute top-1/2 left-12.5 z-1 h-40 w-40 sm:h-50 sm:w-50 lg:left-50", customClassName)}
       onClick={onClick}
       aria-label="Previous"
       disabled={slickDisabled}
     >
       <ArrowLongLeftIcon
-        className={cn("text-white transition-all group-hocus-visible:-translate-x-2", {
+        className={cn("text-white transition-all group-hocus-visible:-translate-x-5", {
           "text-fog-dark": slickDisabled,
         })}
       />

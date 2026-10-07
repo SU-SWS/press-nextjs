@@ -33,11 +33,11 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
           <div className="type-2 font-medium xl:text-[3.3rem]">{formatHtml(node.title)}</div>
 
           {node.supBookSubtitle && (
-            <div className="type-1 mt-5 font-medium xl:text-26">{formatHtml(node.supBookSubtitle)}</div>
+            <div className="mt-12.5 type-1 font-medium xl:text-26">{formatHtml(node.supBookSubtitle)}</div>
           )}
 
           {node.supBookAuthorsFull && (
-            <div className="type-0 mt-5 text-press-sand-dark xl:text-21">{node.supBookAuthorsFull}</div>
+            <div className="mt-12.5 type-0 text-press-sand-dark xl:text-21">{node.supBookAuthorsFull}</div>
           )}
         </div>
 
@@ -50,7 +50,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
 
       <div>
         {node.supBookAvailDesc && (
-          <div className="type-0 mb-16 font-semibold text-archway-dark xl:text-21">{node.supBookAvailDesc}</div>
+          <div className="mb-40 type-0 font-semibold text-archway-dark xl:text-21">{node.supBookAvailDesc}</div>
         )}
 
         <H2 className="rs-mt-4 type-1 xl:text-26">Request Types</H2>
@@ -80,7 +80,7 @@ const SupBookDeskExaminationPage = ({node, ...props}: Props) => {
           <li>Mailing address (if a print book is requested)</li>
         </ul>
 
-        <p className="my-5 border-l-3 border-fog pl-5">
+        <p className="my-12.5 border-l-3 border-fog pl-12.5">
           Please note that submissions from individuals or professors requiring a desk or examination copy cannot be
           approved through this method.
         </p>

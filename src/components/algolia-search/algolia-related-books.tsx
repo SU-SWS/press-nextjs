@@ -58,11 +58,11 @@ const AlgoliaRelatedBooks = async ({objectId}: {objectId: NodeSupBook["id"]}) =>
   if (recommendations.length === 0) return
 
   return (
-    <section aria-labelledby={`${objectId}-related`} className="centered mt-64 border-t-2 border-press-sand-dark">
-      <H2 id={`${objectId}-related`} className="mb-32 mt-16 font-medium text-stone-dark">
+    <section aria-labelledby={`${objectId}-related`} className="mt-160 centered border-t-2 border-press-sand-dark">
+      <H2 id={`${objectId}-related`} className="mt-40 mb-80 font-medium text-stone-dark">
         Explore more
       </H2>
-      <ul className="list-unstyled mx-auto grid w-11/12 grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+      <ul className="list-unstyled mx-auto grid w-11/12 grid-cols-1 gap-25 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {recommendations.map(rec => (
           <RelatedBook key={rec.objectID} item={rec} />
         ))}
@@ -77,7 +77,7 @@ const RelatedBook = ({item}: {item: BookHit}) => {
   return (
     <li className="mx-auto w-full max-w-3xl">
       <div className="relative">
-        <div className="rs-mb-1 relative aspect-[2/3] w-full">
+        <div className="relative rs-mb-1 aspect-2/3 w-full">
           <Image
             className="ed11y-ignore object-cover"
             src={imageUrl || "/default-book-image.jpg"}
@@ -86,14 +86,14 @@ const RelatedBook = ({item}: {item: BookHit}) => {
             sizes="400px"
           />
           {item.book_award_winner && (
-            <div className="absolute left-5 top-0 flex max-w-[90%] items-center gap-3 bg-fog py-2 pl-3 pr-5">
+            <div className="absolute top-0 left-12.5 flex max-w-[90%] items-center gap-7.5 bg-fog py-5 pr-12.5 pl-7.5">
               <BookmarkIcon width={20} className="fill-stone-dark" />
               Award winner
             </div>
           )}
         </div>
 
-        <H3 className="type-0 mb-5 font-normal xl:text-21">
+        <H3 className="mb-12.5 type-0 font-normal xl:text-21">
           <Link
             className="stretched-link font-medium text-stone-dark"
             href={item.url.replace(new URL(item.url).origin, "")}

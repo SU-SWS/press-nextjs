@@ -44,10 +44,10 @@ const StanfordPagePage = ({node, isHome, ...props}: Props) => {
       )}
 
       {node.suPageBanner?.__typename !== "ParagraphStanfordPageTitleBanner" && (
-        <H1 className={cn("centered mt-32", {"lg:max-w-1200": fullWidth, "sr-only": isHome})}>{node.title}</H1>
+        <H1 className={cn("mt-80 centered", {"lg:max-w-1200": fullWidth, "sr-only": isHome})}>{node.title}</H1>
       )}
 
-      <Wysiwyg html={node.body?.processed} className="centered mb-32 xl:max-w-[980px]" />
+      <Wysiwyg html={node.body?.processed} className="centered mb-80 xl:max-w-[980px]" />
 
       {!fullWidth && (
         <InteriorPage currentPath={node.path || "#"}>

@@ -4,7 +4,7 @@ import Script from "next/script"
 import {GoogleAnalytics} from "@next/third-parties/google"
 
 const UserAnalytics = async () => {
-  if (process.env.NODE_ENV === "development") return
+  if (process.env.VERCEL_ENV !== "production") return
 
   const googleAnalytics = await getConfigPageField<
     StanfordBasicSiteSetting,

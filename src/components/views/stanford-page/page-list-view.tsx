@@ -6,9 +6,9 @@ import {ViewDisplayProps} from "@components/views/view"
 const PageListView = async ({items, headingLevel, totalItems, loadPage}: ViewDisplayProps<NodeStanfordPage>) => {
   return (
     <LoadMoreList
-      ulProps={{className: "list-unstyled mb-20"}}
+      ulProps={{className: "list-unstyled mb-50"}}
       liProps={{
-        className: "border-b border-black-20 last-of-type:border-0 pb-10 last:pb-0 pt-10 first:pt-0",
+        className: "border-b border-black-20 last-of-type:border-0 pb-25 last:pb-0 pt-25 first:pt-0",
       }}
       totalItems={totalItems}
       loadPage={loadPage}

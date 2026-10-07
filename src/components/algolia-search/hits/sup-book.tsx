@@ -29,18 +29,18 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
     hit.photo?.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string) || "/default-book-image.jpg"
 
   return (
-    <article className="py-12 @container">
-      <div className="flex flex-col justify-between gap-20 @2xl:flex-row">
+    <article className="@container py-30">
+      <div className="flex flex-col justify-between gap-50 @2xl:flex-row">
         <div>
-          <H3 className="type-0 mb-2 xl:text-21" id={hit.objectID}>
+          <H3 className="mb-5 type-0 xl:text-21" id={hit.objectID}>
             <Link className="text-stone-dark hocus:text-digital-red" href={url}>
               {formatHtml(hit.title)}
             </Link>
           </H3>
 
-          {hit.book_subtitle && <div className="card-paragraph mb-8">{formatHtml(hit.book_subtitle)}</div>}
+          {hit.book_subtitle && <div className="mb-20 card-paragraph">{formatHtml(hit.book_subtitle)}</div>}
           {hit.html && !hit.book_subtitle && (
-            <p className="card-paragraph mb-8">
+            <p className="mb-20 card-paragraph">
               <Snippet hit={hit} attribute="html" />
             </p>
           )}
@@ -54,8 +54,8 @@ const SupBookHit = ({hit}: {hit: HitType<BookHit>}) => {
             aria-hidden
             tabIndex={-1}
             className={cn("relative block", {
-              "aspect-[2/3] w-[150px]": hit.book_type === "book",
-              "aspect-[4/3] h-[150px]": hit.book_type !== "book",
+              "aspect-2/3 w-[150px]": hit.book_type === "book",
+              "aspect-4/3 h-[150px]": hit.book_type !== "book",
             })}
           >
             <Image className="object-cover" src={imageUrl} alt="" fill sizes="300px" />

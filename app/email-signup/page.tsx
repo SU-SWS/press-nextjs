@@ -3,7 +3,7 @@ import RedirectSignup from "./redirect-signup"
 
 const Page = () => {
   return (
-    <article className="centered mt-32">
+    <article className="mt-80 centered">
       <title>Newsletter Signup | Stanford University Press</title>
       <meta name="robots" content="noindex" />
       <div className="mx-auto 3xl:w-10/12">

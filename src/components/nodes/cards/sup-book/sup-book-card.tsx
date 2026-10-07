@@ -23,8 +23,8 @@ const SupBookCard = ({node, headingLevel, darkBg, ...props}: Props) => {
     <div {...props} className={cn("mx-auto max-w-3xl", props.className)}>
       <div className="relative">
         <div
-          className={cn("rs-mb-1 relative aspect-[2/3] w-full", {
-            "aspect-[3/2]": node.supBookType === "digital_project",
+          className={cn("relative rs-mb-1 aspect-2/3 w-full", {
+            "aspect-3/2": node.supBookType === "digital_project",
           })}
         >
           <Image
@@ -35,14 +35,14 @@ const SupBookCard = ({node, headingLevel, darkBg, ...props}: Props) => {
             sizes="400px"
           />
           {node.supBookAwards && (
-            <div className="absolute left-5 top-0 flex max-w-[90%] items-center justify-between gap-3 bg-fog py-2 pl-3 pr-5 text-[0.65em]">
+            <div className="absolute top-0 left-12.5 flex max-w-[90%] items-center justify-between gap-7.5 bg-fog py-5 pr-12.5 pl-7.5 text-[0.65em]">
               <BookmarkIcon width={20} className={cn("fill-stone-dark", {"text-fog": darkBg})} />
               Award winner
             </div>
           )}
         </div>
 
-        <Heading className="type-0 mb-5 font-normal xl:text-21">
+        <Heading className="mb-12.5 type-0 font-normal xl:text-21">
           <Link
             className={cn("stretched-link font-medium text-stone-dark", {
               "text-fog-light hocus:text-fog-light": darkBg,

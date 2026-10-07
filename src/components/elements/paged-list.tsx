@@ -136,11 +136,11 @@ const PagedList = ({
   return (
     <div {...props} className={cn("relative", props.className)}>
       {sortable && (
-        <div className="mb-16 ml-auto flex w-fit items-center gap-3">
+        <div className="mb-40 ml-auto flex w-fit items-center gap-7.5">
           <div id="sort-by" className="text-16 text-press-sand-dark">
             Sort By:
           </div>
-          <div className="min-w-96">
+          <div className="min-w-240">
             <SelectList<false>
               ariaLabelledby="sort-by"
               items={sortOptions}
@@ -157,8 +157,8 @@ const PagedList = ({
       )}
 
       {isRunning && (
-        <div className="absolute left-0 top-0 z-10 h-full w-full rounded-2xl bg-black-20 bg-opacity-30">
-          <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
+        <div className="absolute top-0 left-0 z-10 h-full w-full rounded-2xl bg-black-20/30">
+          <div className="absolute bottom-50 left-1/2 -translate-x-1/2">
             <ArrowPathIcon className="animate-spin" width={50} />
           </div>
         </div>
@@ -178,8 +178,8 @@ const PagedList = ({
       </ul>
 
       {loadPage && paginationButtons.length > 1 && (
-        <nav aria-label="Pager" className="rs-mt-4 mx-auto w-fit">
-          <ul className="list-unstyled flex items-center gap-5">
+        <nav aria-label="Pager" className="mx-auto rs-mt-4 w-fit">
+          <ul className="list-unstyled flex items-center gap-12.5">
             {paginationButtons.map((pageNum, i) => (
               <PaginationButton
                 key={`page-button-${pageNum}--${i}`}
@@ -231,8 +231,8 @@ const PaginationButton = ({
   return (
     <li className="m-0 flex items-center">
       <button
-        className={cn("group type-1 font-medium hocus:text-stone-dark hocus:underline xl:text-26", {
-          "p-4 hocus:rounded-full hocus:bg-cardinal-red": page === "leftArrow" || page === "rightArrow",
+        className={cn("group type-1 font-medium xl:text-26 hocus:text-stone-dark hocus:underline", {
+          "p-10 hocus:rounded-full hocus:bg-cardinal-red": page === "leftArrow" || page === "rightArrow",
         })}
         onClick={handleClick}
         aria-current={isCurrent ? "page" : undefined}
@@ -247,7 +247,7 @@ const PaginationButton = ({
           aria-hidden
           className={
             (isCurrent ? "border-stone-dark text-stone-dark" : "border-transparent text-cardinal-red") +
-            " block h-fit border-b-2 px-4"
+            " block h-fit border-b-2 px-10"
           }
         >
           {page === "leftArrow" && <ArrowLongLeftIcon width={30} className="text-stone-dark group-hocus:text-white" />}

@@ -2,7 +2,7 @@ import {CitationUnion} from "@lib/gql/__generated__/drupal.d"
 
 const Citation = ({citation}: {citation: CitationUnion}) => {
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-25">
       {citation.suAuthor && (
         <div>
           <strong>Author{citation.suAuthor.length > 1 ? "s" : ""}</strong>

@@ -21,7 +21,7 @@ const StanfordPersonCard = ({node, headingLevel, ...props}: Props) => {
       className={cn("mx-auto overflow-hidden text-center", props.className)}
     >
       {imageUrl && (
-        <div className="relative mx-auto mb-20 aspect-[1/1] w-3/5">
+        <div className="relative mx-auto mb-50 aspect-square w-3/5">
           <Image
             className="rounded-full object-cover"
             src={imageUrl}

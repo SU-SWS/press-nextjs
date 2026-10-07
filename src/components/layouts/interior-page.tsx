@@ -31,7 +31,7 @@ const InteriorPage = async ({children, currentPath, ...props}: Props) => {
         </aside>
       )}
 
-      <div className="flex-grow" id="page-content">
+      <div className="grow" id="page-content">
         {children}
       </div>
     </div>

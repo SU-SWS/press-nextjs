@@ -162,13 +162,13 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           document.getElementById("result-summary")?.focus()
         }}
       >
-        <div className="mx-auto mb-20 flex items-center justify-center gap-6 md:w-2/3 md:gap-8">
+        <div className="mx-auto mb-50 flex items-center justify-center gap-15 md:w-2/3 md:gap-20">
           <label className="sr-only" htmlFor="search-input">
             Keywords Search
           </label>
           <input
             id="search-input"
-            className="rs-pr-1 rs-pl-1 card-paragraph max-w-[80%] flex-grow border-0 border-b-2 border-black-30 pb-10 pt-8 md:rs-pr-2 md:rs-pl-3 md:max-w-full md:py-12"
+            className="max-w-[80%] grow border-0 border-b-2 border-black-30 pt-20 rs-pr-1 pb-25 rs-pl-1 card-paragraph md:max-w-full md:py-30 md:rs-pr-2 md:rs-pl-3"
             ref={inputRef}
             autoComplete="on"
             autoCorrect="on"
@@ -183,19 +183,19 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             <span className="sr-only">Submit Search</span>
             <MagnifyingGlassIcon
               width={40}
-              className="block rounded-full bg-digital-red p-3 text-white group-hocus:bg-cardinal-red"
+              className="block rounded-full bg-digital-red p-7.5 text-white group-hocus:bg-cardinal-red"
             />
           </button>
         </div>
 
-        <div className="mb-10 border-2 border-press-sand p-4 sm:p-8 md:mb-0 md:border-0 md:p-0">
+        <div className="mb-25 border-2 border-press-sand p-10 sm:p-20 md:mb-0 md:border-0 md:p-0">
           <button
             id="advanced-filters-toggle"
             type="button"
             aria-controls="advanced-filters"
             aria-expanded={expanded}
             onClick={toggleExpanded}
-            className="type-0 flex w-full items-center justify-between gap-5 font-medium hocus:underline md:hidden xl:text-21"
+            className="flex w-full items-center justify-between gap-12.5 type-0 font-medium md:hidden xl:text-21 hocus:underline"
             aria-label={expanded ? "Close Filters" : "Open Filters"}
           >
             Filter by
@@ -207,11 +207,11 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             className={cn("md:float-left md:w-1/4", {"hidden md:block": !expanded})}
             aria-labelledby="advanced-filters-toggle"
           >
-            <div className="rs-mb-2 rs-pb-3 border-b border-black-30">
-              <H2 className="type-0 mb-0 hidden md:block xl:text-21">Filter by</H2>
+            <div className="rs-mb-2 border-b border-black-30 rs-pb-3">
+              <H2 className="mb-0 hidden type-0 md:block xl:text-21">Filter by</H2>
 
               {currentRefinements.filter(refinement => refinement.attribute === "book_subject").length > 0 && (
-                <ul className="list-unstyled first:children:rs-mt-0">
+                <ul className="list-unstyled *:first:rs-mt-0">
                   {currentRefinements
                     .filter(refinement => refinement.attribute === "book_subject")
                     .map(refinement => {
@@ -220,7 +220,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                         .map((item, i) => (
                           <li
                             key={`refinement-${i}`}
-                            className="mb-4 flex w-fit items-center gap-8 border-2 border-press-sand px-8 pb-5 pt-4 text-18"
+                            className="mb-10 flex w-fit items-center gap-20 border-2 border-press-sand px-20 pt-10 pb-12.5 text-18"
                           >
                             <span id={`refinement-${i}`}>{item.value}</span>
                             <button
@@ -238,8 +238,8 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
               )}
             </div>
 
-            <div className="rs-mb-1 rs-pb-2 border-b border-black-30">
-              <label className="flex cursor-pointer items-center justify-between gap-10">
+            <div className="rs-mb-1 border-b border-black-30 rs-pb-2">
+              <label className="flex cursor-pointer items-center justify-between gap-25">
                 <span className="text-18">Search only books</span>
 
                 <div className="group relative">
@@ -249,18 +249,18 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                     checked={bookType.find(item => item.value === "book")?.isRefined || false}
                     onChange={() => refineBookType("book")}
                   />
-                  <div className="h-6 w-16 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
-                  <div className="absolute -left-1 -top-2 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-8 outline-press-bay transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline group-hocus:outline" />
+                  <div className="h-15 w-40 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
+                  <div className="absolute -top-5 -left-2.5 h-25 w-25 rounded-full border border-fog-dark bg-white shadow-sm outline-8 outline-press-bay transition outline-none group-hocus:outline-solid peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline-solid" />
                 </div>
               </label>
             </div>
 
-            <fieldset className="rs-mb-1 rs-pb-2 border-b border-black-30">
+            <fieldset className="rs-mb-1 border-b border-black-30 rs-pb-2">
               <legend className="rs-mb-0 card-paragraph font-medium">Subject</legend>
               {bookSubjectRefinementList.map(refinementOption => (
                 <label
                   key={refinementOption.value}
-                  className="group mx-5 flex cursor-pointer items-center gap-5 text-16"
+                  className="group mx-12.5 flex cursor-pointer items-center gap-12.5 text-16"
                 >
                   <div className="group relative">
                     <input
@@ -270,9 +270,9 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                       name="subject"
                       onChange={() => refineBookSubjects(refinementOption.value)}
                     />
-                    <div className="h-14 w-14 rounded-full peer-focus-visible:bg-press-bay group-hocus:bg-press-bay/60" />
-                    <div className="absolute left-3 top-3 h-8 w-8 rounded border-2 border-press-sand-light peer-checked:border-press-grass peer-checked:bg-press-bay-dark peer-focus-visible:border-press-grass group-hocus:border-press-grass" />
-                    <CheckIcon width={15} className="absolute left-4 top-4 hidden text-white peer-checked:block" />
+                    <div className="h-35 w-35 rounded-full group-hocus:bg-press-bay/60 peer-focus-visible:bg-press-bay peer-focus-visible:group-hocus:bg-press-bay/60" />
+                    <div className="absolute top-7.5 left-7.5 h-20 w-20 rounded-[0.3rem] border-2 border-press-sand-light group-hocus:border-press-grass peer-checked:border-press-grass peer-checked:bg-press-bay-dark peer-focus-visible:border-press-grass" />
+                    <CheckIcon width={15} className="absolute top-10 left-10 hidden text-white peer-checked:block" />
                   </div>
                   <span
                     id={
@@ -293,9 +293,9 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             <fieldset>
               <legend className="rs-mb-1 card-paragraph font-medium">Published Date</legend>
 
-              <div className="flex items-center gap-5">
-                <div className="flex-1 flex-grow">
-                  <div id={`${id}-min-year`} className="mb-2 text-18 text-press-sand-dark">
+              <div className="flex items-center gap-12.5">
+                <div className="flex-1 grow">
+                  <div id={`${id}-min-year`} className="mb-5 text-18 text-press-sand-dark">
                     <span className="sr-only">Minimum&nbps;</span>Year
                   </div>
                   <SelectList<false>
@@ -311,11 +311,11 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                     className="h-[45px] text-16 *:text-16"
                   />
                 </div>
-                <span aria-hidden className="relative top-5">
+                <span aria-hidden className="relative top-12.5">
                   to
                 </span>
-                <div className="flex-1 flex-grow">
-                  <div id={`${id}-max-year`} className="mb-2 text-18 text-press-sand-dark">
+                <div className="flex-1 grow">
+                  <div id={`${id}-max-year`} className="mb-5 text-18 text-press-sand-dark">
                     <span className="sr-only">Maximum&nbps;</span>Year
                   </div>
                   <SelectList<false>
@@ -335,7 +335,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
             </fieldset>
 
             <Button
-              className="my-16"
+              className="my-40"
               centered
               buttonElem
               onClick={() => {
@@ -351,7 +351,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
           </div>
         </div>
       </form>
-      <div className="md:float-right md:ml-20 md:w-[calc(70%-5rem)]">
+      <div className="md:float-right md:ml-50 md:w-[calc(70%-5rem)]">
         <HitList searchIndex={searchIndex} />
       </div>
     </div>
@@ -387,16 +387,21 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
 
   return (
     <div>
-      <div className="border-sand-light rs-pb-1 flex flex-col items-start justify-between border-b sm:flex-row sm:items-center">
-        <h2 id="result-summary" tabIndex={-1} aria-live="polite" className="type-0 ml-5 font-medium md:ml-0 xl:text-21">
+      <div className="border-sand-light flex flex-col items-start justify-between border-b rs-pb-1 sm:flex-row sm:items-center">
+        <h2
+          id="result-summary"
+          tabIndex={-1}
+          aria-live="polite"
+          className="ml-12.5 type-0 font-medium md:ml-0 xl:text-21"
+        >
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
         </h2>
 
-        <div className="flex w-full flex-col items-center gap-3 sm:w-fit sm:flex-row">
-          <div id="sort-by" className="ml-10 w-full text-16 text-press-sand-dark sm:ml-0 sm:w-fit">
+        <div className="flex w-full flex-col items-center gap-7.5 sm:w-fit sm:flex-row">
+          <div id="sort-by" className="ml-25 w-full text-16 text-press-sand-dark sm:ml-0 sm:w-fit">
             Sort By:
           </div>
-          <div className="w-full flex-grow sm:w-auto sm:min-w-96">
+          <div className="w-full grow sm:w-auto sm:min-w-240">
             <SelectList<false>
               ariaLabelledby="sort-by"
               items={sortOptions}
@@ -426,10 +431,10 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
 
       {pages.length > 1 && (
         <nav aria-label="Search results pager">
-          <ul className="list-unstyled mx-auto flex w-fit items-end gap-8 *:mb-0 *:text-press-sand-dark">
+          <ul className="list-unstyled mx-auto flex w-fit items-end gap-20 *:mb-0 *:text-press-sand-dark">
             {pages[0] > 0 && (
               <li>
-                <button onClick={() => goToPage(0)} className="group p-4 hocus:rounded-full hocus:bg-cardinal-red">
+                <button onClick={() => goToPage(0)} className="group p-10 hocus:rounded-full hocus:bg-cardinal-red">
                   <span className="sr-only">Go to first page</span>
                   <ArrowLongLeftIcon width={30} className="text-stone-dark group-hocus:text-white" />
                 </button>
@@ -440,7 +445,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
               <li
                 key={`page-${pageNum}`}
                 aria-current={currentPage === pageNum}
-                className={cn("h-fit border-b-2 px-4 pb-3", {
+                className={cn("h-fit border-b-2 px-10 pb-7.5", {
                   "border-transparent": currentPage !== pageNum,
                   "border-press-sand-dark": currentPage === pageNum,
                 })}
@@ -455,7 +460,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
               <li>
                 <button
                   onClick={() => goToPage(nbPages - 1)}
-                  className="group p-4 hocus:rounded-full hocus:bg-cardinal-red"
+                  className="group p-10 hocus:rounded-full hocus:bg-cardinal-red"
                 >
                   <span className="sr-only">Go to last page</span>
                   <ArrowLongRightIcon width={30} className="text-stone-dark group-hocus:text-white" />

@@ -25,7 +25,7 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
       {...props}
       aria-label={isTopBanner ? "Page banner carousel" : undefined}
       data-top-hero={isTopHero || undefined}
-      className={cn("relative mb-32", {"lg:-top-[300px] lg:mb-[-300px]": isTopHero}, props?.className)}
+      className={cn("relative mb-80", {"lg:top-[-300px] lg:mb-[-300px]": isTopHero}, props?.className)}
     >
       {paragraph.supCarouselSlides.length === 1 && (
         <div className="relative left-1/2 w-screen -translate-x-1/2">
@@ -81,7 +81,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
         "lg:pt-[300px]": isTopHero,
       })}
     >
-      <figure className="absolute left-0 top-0 h-full w-full overflow-hidden">
+      <figure className="absolute top-0 left-0 h-full w-full overflow-hidden">
         <BlurImage
           className="ed11y-ignore relative object-cover"
           src={bgImage.url}
@@ -92,20 +92,20 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
         />
       </figure>
       <div
-        className={cn("absolute left-0 top-0 block h-full w-full bg-opacity-80", {
-          "bg-plum": color === "magenta",
-          "bg-press-grass": color === "grass",
-          "bg-black-true": color === "steel",
-          "bg-press-indigo": color === "indigo",
+        className={cn("absolute top-0 left-0 block h-full w-full", {
+          "bg-plum/80": color === "magenta",
+          "bg-press-grass/80": color === "grass",
+          "bg-black-true/80": color === "steel",
+          "bg-press-indigo/80": color === "indigo",
         })}
       />
 
       <div
-        className={cn("relative mx-auto flex w-full max-w-1000 flex-col items-center py-32 lg:justify-center", {
-          "gap-20 lg:flex-row": leftImage,
+        className={cn("relative mx-auto flex w-full max-w-1000 flex-col items-center py-80 lg:justify-center", {
+          "gap-50 lg:flex-row": leftImage,
         })}
       >
-        <div className="rs-px-8 w-full lg:px-0">
+        <div className="w-full rs-px-8 lg:px-0">
           {(slideTitle || (!leftImage && image) || eyebrow || subtitle) && (
             <div
               className={cn("flex flex-col", {
@@ -129,7 +129,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
               {((!leftImage && image) || eyebrow) && (
                 <div className="order-first">
                   {!leftImage && image && (
-                    <div className="rs-mb-3 relative mx-auto w-fit">
+                    <div className="relative mx-auto rs-mb-3 w-fit">
                       <CarouselImageLink
                         href={slideParagraph.supSlideButton?.url}
                         title={slideParagraph.supSlideButton?.title}
@@ -147,7 +147,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
                     </div>
                   )}
 
-                  {eyebrow && <div className="type-1 mb-5 xl:text-26">{eyebrow}</div>}
+                  {eyebrow && <div className="mb-12.5 type-1 xl:text-26">{eyebrow}</div>}
                 </div>
               )}
             </div>
@@ -162,19 +162,22 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
 
           {slideParagraph.supSlideButton?.url && (
             <Link
-              className={cn("group flex w-fit items-center gap-5 border p-6 text-white no-underline hocus:text-white", {
-                "mx-auto": !leftImage,
-              })}
+              className={cn(
+                "group flex w-fit items-center gap-12.5 border p-15 text-white no-underline hocus:text-white",
+                {
+                  "mx-auto": !leftImage,
+                }
+              )}
               href={slideParagraph.supSlideButton.url}
               tabIndex={-1}
             >
               <span className="group-hocus:underline">{slideParagraph.supSlideButton.title}</span>
-              <ArrowRightIcon width={20} className="transition-all group-hocus-visible:translate-x-2" />
+              <ArrowRightIcon width={20} className="transition-all group-hocus-visible:translate-x-5" />
             </Link>
           )}
         </div>
         {leftImage && image && (
-          <div className="order-first aspect-[11/16] h-auto w-full max-w-[21rem] shrink-0 md:w-1/2 md:max-w-[34rem]">
+          <div className="order-first aspect-11/16 h-auto w-full max-w-210 shrink-0 md:w-1/2 md:max-w-340">
             <CarouselImageLink href={slideParagraph.supSlideButton?.url} title={slideParagraph.supSlideButton?.title}>
               <Image className="object-contain" src={image.url} alt={image.alt || ""} fill sizes="500px" />
             </CarouselImageLink>
@@ -201,7 +204,7 @@ const CarouselImageLink = ({
         title={title || undefined}
         aria-hidden
         tabIndex={-1}
-        className="relative mx-auto block h-full w-full *:transition hover:*:scale-[1.02]"
+        className="relative mx-auto block h-full w-full *:transition *:hover:scale-[1.02]"
       >
         {children}
       </Link>

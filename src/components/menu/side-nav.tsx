@@ -33,12 +33,12 @@ type MenuItemProps = MenuItemType & {
 
 const MenuItem = ({id, url, title, children, activeTrail, level, expanded}: MenuItemProps) => {
   // Need to list them out each so tailwind will include each for styling.
-  const leftPadding = ["pl-8", "pl-16", "pl-24", "pl-40"]
+  const leftPadding = ["pl-20", "pl-40", "pl-60", "pl-100"]
 
   const linkClasses = cn(
     leftPadding[level],
     // Normal styles.
-    "w-full inline-block relative no-underline hocus:underline pl-10 py-5 my-1",
+    "w-full inline-block relative no-underline hocus:underline pl-25 py-12.5 my-2.5",
     {
       // Non-active state.
       "font-normal text-stone-dark hocus:text-archway-dark hocus:font-medium":

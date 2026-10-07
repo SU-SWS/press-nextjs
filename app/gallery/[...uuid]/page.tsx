@@ -55,7 +55,7 @@ const Page = async ({params: paramsPromise}: Props) => {
   galleryImages = galleryImages?.filter(image => !!image.suGalleryImage?.url)
 
   return (
-    <div className="centered mt-32">
+    <div className="mt-80 centered">
       <H1>{paragraph.suGalleryHeadline || "Media"}</H1>
       {galleryImages?.map(galleryImage => {
         if (!galleryImage.suGalleryImage?.url) return

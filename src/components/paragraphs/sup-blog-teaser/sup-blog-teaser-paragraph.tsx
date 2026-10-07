@@ -18,7 +18,7 @@ const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
         {paragraph.supBlogTeaserLink?.url && (
           <Link
             href={paragraph.supBlogTeaserLink.url}
-            className="group flex items-center gap-5 font-normal text-archway-dark no-underline"
+            className="group flex items-center gap-12.5 font-normal text-archway-dark no-underline"
           >
             <span className="group-hocus:underline">{paragraph.supBlogTeaserLink.title}</span>
             <ArrowRightIcon width={20} />
@@ -27,17 +27,17 @@ const SupBlogTeaserParagraph = ({paragraph, ...props}: Props) => {
       </div>
 
       {paragraph.supBlogTeaserItems && (
-        <ul className="list-unstyled grid gap-10 @7xl:grid-cols-2">
+        <ul className="list-unstyled grid gap-25 @7xl:grid-cols-2">
           {paragraph.supBlogTeaserItems.map(blogItem => (
             <li key={blogItem.uuid} className="relative h-full min-h-[400px] w-full">
-              <div className="relative h-full w-full bg-black-true/80 p-20">
+              <div className="relative h-full w-full bg-black-true/80 p-50">
                 {/* URL will always be populated. */}
                 <Link
                   href={blogItem.supBlogUrl.url || "#"}
                   className="group stretched-link no-underline"
                   aria-labelledby={blogItem.uuid}
                 >
-                  <H3 id={blogItem.uuid} className="border-t border-white pt-10 text-white group-hocus:underline">
+                  <H3 id={blogItem.uuid} className="border-t border-white pt-25 text-white group-hocus:underline">
                     {blogItem.supBlogTitle}
                   </H3>
                 </Link>

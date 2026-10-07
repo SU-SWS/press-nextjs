@@ -20,7 +20,7 @@ const BookListView = ({
     <Suspense fallback={<BookListSkeleton />}>
       <PagedList
         ulProps={{
-          className: cn("list-unstyled grid @lg:grid-cols-2 @5xl:grid-cols-3 @7xl:grid-cols-4 gap-20", {
+          className: cn("list-unstyled grid @lg:grid-cols-2 @5xl:grid-cols-3 @7xl:grid-cols-4 gap-50", {
             "max-w-1200 mx-auto": numItems < 5,
             "@10xl:grid-cols-5": numItems >= 5,
           }),
@@ -39,18 +39,18 @@ const BookListView = ({
 
 const BookListSkeleton = () => {
   return (
-    <div className="grid gap-20 @lg:grid-cols-2 @5xl:grid-cols-3 @7xl:grid-cols-4">
+    <div className="grid gap-50 @lg:grid-cols-2 @5xl:grid-cols-3 @7xl:grid-cols-4">
       {[1, 2, 3, 4].map(item => (
-        <div key={`book-list-skeleton-${item}`} className="mx-auto min-w-72 max-w-3xl">
+        <div key={`book-list-skeleton-${item}`} className="mx-auto max-w-3xl min-w-180">
           <div className="relative">
-            <div className="rs-mb-1 relative aspect-[2/3] w-full bg-black-10 bg-opacity-50" />
+            <div className="relative rs-mb-1 aspect-2/3 w-full bg-black-10/50" />
 
-            <div className="mb-5 h-[30px] bg-black-10 bg-opacity-50" />
+            <div className="mb-12.5 h-[30px] bg-black-10/50" />
           </div>
 
-          <div className="rs-mb-3 h-[100px] bg-black-10 bg-opacity-50" />
+          <div className="rs-mb-3 h-[100px] bg-black-10/50" />
 
-          <div className="mb-0 h-[30px] bg-black-10 bg-opacity-50" />
+          <div className="mb-0 h-[30px] bg-black-10/50" />
         </div>
       ))}
     </div>

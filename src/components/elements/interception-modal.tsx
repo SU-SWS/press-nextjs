@@ -35,7 +35,7 @@ const InterceptionModal = ({children, ...props}: HtmlHTMLAttributes<HTMLDialogEl
     <dialog
       ref={overlay}
       className={cn(
-        "modal fixed left-0 top-0 z-[10000] flex h-full w-screen items-center justify-center overflow-x-hidden overflow-y-scroll overscroll-contain bg-black-true bg-opacity-90",
+        "modal fixed top-0 left-0 z-10000 flex h-full w-screen items-center justify-center overflow-x-hidden overflow-y-scroll overscroll-contain bg-black-true/90",
         props.className
       )}
       onClick={onClick}
@@ -44,7 +44,7 @@ const InterceptionModal = ({children, ...props}: HtmlHTMLAttributes<HTMLDialogEl
       <ReactFocusLock returnFocus>
         <div
           ref={wrapper}
-          className="rs-p-2 absolute left-1/2 top-0 w-11/12 -translate-x-1/2 sm:w-10/12 md:w-8/12 lg:w-1/2"
+          className="absolute top-0 left-1/2 w-11/12 -translate-x-1/2 rs-p-2 sm:w-10/12 md:w-8/12 lg:w-1/2"
         >
           {children}
         </div>
@@ -52,10 +52,10 @@ const InterceptionModal = ({children, ...props}: HtmlHTMLAttributes<HTMLDialogEl
         <button
           type="button"
           onClick={onDismiss}
-          className="rs-py-0 rs-px-1 absolute right-[20px] top-[20px] flex bg-black text-press-sand-light hocus:underline"
+          className="absolute top-[20px] right-[20px] flex bg-black rs-py-0 rs-px-1 text-press-sand-light hocus:underline"
         >
           Close<span className="sr-only"> Overlay</span>
-          <XMarkIcon className="ml-2 text-press-sand-light" width={25} />
+          <XMarkIcon className="ml-5 text-press-sand-light" width={25} />
         </button>
       </ReactFocusLock>
     </dialog>

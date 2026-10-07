@@ -196,6 +196,7 @@ yarn lint
   - stanford font for wordmark
 - Spacing:
   - Responsive spacing provided by decanter library
+  - Decanter (v8) spacing scale: numeric utilities are pixels, e.g. `p-10` = 10px, `gap-25` = 25px (not the stock Tailwind 0.25rem scale)
 - Tailwind merge:
   - Whenever merging styles, make sure to use the custom merge function `src/lib/utils/className`
   - Example: `className={cn("text-black", {"text-blue": blueText}, props.className)}`

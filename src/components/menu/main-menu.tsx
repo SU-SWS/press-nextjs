@@ -52,28 +52,28 @@ const MainMenu = ({menuItems}: Props) => {
     <nav id={navId} className="shrink-0" aria-label="Main Navigation" ref={menuRef}>
       <button
         ref={buttonRef}
-        className="group absolute right-12 top-16 flex flex-col items-center sm:top-8 lg:hidden"
+        className="group absolute top-40 right-30 flex flex-col items-center sm:top-20 lg:hidden"
         onClick={toggleMenu}
         aria-expanded={menuOpen}
         aria-label={menuOpen ? "Close Main Navigation Menu" : "Open Main Navigation Menu"}
       >
-        <span className="mb-3 flex h-[30px] w-[30px] flex-col items-center justify-center">
+        <span className="mb-7.5 flex h-[30px] w-[30px] flex-col items-center justify-center">
           <span
-            className={cn("block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
-              "translate-y-4 rotate-45": menuOpen,
-              "-translate-y-0.5": !menuOpen,
+            className={cn("block h-[3px] w-full rounded-xs bg-stone-dark transition-all duration-300 ease-out", {
+              "translate-y-10 rotate-45": menuOpen,
+              "-translate-y-1.25": !menuOpen,
             })}
           />
           <span
-            className={cn("my-3 block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
+            className={cn("my-7.5 block h-[3px] w-full rounded-xs bg-stone-dark transition-all duration-300 ease-out", {
               "opacity-0": menuOpen,
               "opacity-100": !menuOpen,
             })}
           />
           <span
-            className={cn("block h-[3px] w-full rounded-sm bg-stone-dark transition-all duration-300 ease-out", {
-              "-translate-y-4 -rotate-45": menuOpen,
-              "translate-y-0.5": !menuOpen,
+            className={cn("block h-[3px] w-full rounded-xs bg-stone-dark transition-all duration-300 ease-out", {
+              "-translate-y-10 -rotate-45": menuOpen,
+              "translate-y-1.25": !menuOpen,
             })}
           />
         </span>
@@ -84,14 +84,14 @@ const MainMenu = ({menuItems}: Props) => {
 
       <div
         className={cn(
-          "absolute left-0 top-full z-10 hidden w-full items-center bg-black lg:relative lg:flex lg:bg-transparent",
+          "absolute top-full left-0 z-10 hidden w-full items-center bg-black lg:relative lg:flex lg:bg-transparent",
           {
             block: menuOpen,
           }
         )}
       >
-        <SiteSearchForm className="px-10 lg:hidden" />
-        <ul className="list-unstyled m-0 ml-auto mt-4 flex-wrap p-0 lg:flex lg:justify-end">
+        <SiteSearchForm className="px-25 lg:hidden" />
+        <ul className="list-unstyled m-0 mt-10 ml-auto flex-wrap p-0 lg:flex lg:justify-end">
           {menuItems.map(item => (
             <MenuItem key={item.id} {...item} activeTrail={activeTrail} level={0} />
           ))}
@@ -99,7 +99,7 @@ const MainMenu = ({menuItems}: Props) => {
             <Link href="/search" className="group rs-ml-2 hidden h-full items-center lg:flex" title="Search Site">
               <MagnifyingGlassIcon
                 width={25}
-                className={cn("-translate-y-2 border-b border-transparent", {
+                className={cn("-translate-y-5 border-b border-transparent", {
                   "text-white group-hocus-visible:border-b-white": pageHasBanner,
                   "text-stone-dark group-hocus-visible:border-b-stone-dark": !pageHasBanner,
                 })}
@@ -132,28 +132,28 @@ const ShoppingCartLink = ({pageHasBanner}: {pageHasBanner: boolean}) => {
         }}
         href={cartUrl}
         className={cn(
-          "group rs-ml-5 relative flex h-full min-h-32 items-center border-b border-transparent no-underline lg:rs-ml-2 lg:min-h-0",
+          "group relative rs-ml-5 flex h-full min-h-80 items-center border-b border-transparent no-underline lg:rs-ml-2 lg:min-h-0",
           {
             "text-white hocus:text-white": pageHasBanner,
-            "text-white hocus:text-white lg:text-stone-dark lg:hocus:text-stone-dark": !pageHasBanner,
+            "text-white lg:text-stone-dark hocus:text-white lg:hocus:text-stone-dark": !pageHasBanner,
           }
         )}
         aria-label="Go to your cart"
       >
         <ShoppingCartIcon
           width={25}
-          className={cn("border-b-2 border-transparent lg:-translate-y-3", {
+          className={cn("border-b-2 border-transparent lg:-translate-y-7.5", {
             "group-hocus:border-white": pageHasBanner,
             "group-hocus:border-stone-dark": !pageHasBanner,
           })}
         />
         {cartCount > 0 && (
-          <span className="absolute left-8 top-2 block lg:-top-3" aria-live="polite" aria-atomic>
+          <span className="absolute top-5 left-20 block lg:-top-7.5" aria-live="polite" aria-atomic>
             {cartCount}
             <span className="sr-only"> items in your cart</span>
           </span>
         )}
-        <span className="ml-10 block font-normal group-hocus:underline lg:hidden" aria-hidden>
+        <span className="ml-25 block font-normal group-hocus:underline lg:hidden" aria-hidden>
           View Cart
         </span>
       </Link>
@@ -184,7 +184,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
   useLayoutEffect(() => {
     // If the right side of the submenu is not visible, set the position to be on the left of the menu item.
     const {x, width} = belowListRef.current?.getBoundingClientRect() || {x: 0, width: 0}
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+
     if (x + width > window.innerWidth) setPositionRight(false)
   }, [submenuOpen])
 
@@ -203,30 +203,30 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
   const pageHasBanner = usePageHasTopBanner()
 
   // List out the specific classes so tailwind will include them. Dynamic classes values don"t get compiled.
-  const zIndexes = ["z-[1]", "z-[2]", "z-[3]", "z-[4]", "z-[5]"]
-  const leftPadding = ["pl-10", "pl-20", "pl-28", "pl-48"]
+  const zIndexes = ["z-1", "z-2", "z-3", "z-4", "z-5"]
+  const leftPadding = ["pl-25", "pl-50", "pl-70", "pl-120"]
 
   // The last item in the current trail would be the current item id if the user is on that page.
   const isCurrent = activeTrail.at(-1) === id
   const inTrail = activeTrail.includes(id) && !isCurrent
 
   const linkStyles = cn(
-    "font-normal w-full relative inline-block text-white hocus:text-white no-underline hocus-visible:underline pt-5 rs-pb-0 lg:pl-0 border-l-[4px]",
+    "font-normal w-full relative inline-block text-white hocus:text-white no-underline hocus-visible:underline pt-12.5 rs-pb-0 lg:pl-0 border-l-4",
     leftPadding[level],
     // Top menu item styles.
     {
       "lg:text-stone-dark lg:hocus:text-stone-dark": !pageHasBanner,
-      "lg:border-l-0 lg:border-b-[6px] ml-5 lg:ml-0": level === 0,
+      "lg:border-l-0 lg:border-b-[6px] ml-12.5 lg:ml-0": level === 0,
       "border-digital-red lg:border-black": !pageHasBanner && level === 0 && isCurrent,
-      "border-transparent lg:border-foggy-dark": !pageHasBanner && level === 0 && !isCurrent && inTrail,
+      "border-transparent lg:border-fog-dark": !pageHasBanner && level === 0 && !isCurrent && inTrail,
       "lg:border-white": pageHasBanner && level === 0 && isCurrent,
       "lg:border-fog": pageHasBanner && level === 0 && !isCurrent && inTrail,
       "border-transparent": level === 0 && !isCurrent && !inTrail,
-      "flex items-center gap-3": title === "Cart",
+      "flex items-center gap-7.5": title === "Cart",
     },
     // Child menu item styles.
     {
-      "ml-5 lg:ml-0 lg:pl-5": level !== 0,
+      "ml-12.5 lg:ml-0 lg:pl-12.5": level !== 0,
       "border-digital-red": level !== 0 && isCurrent,
       "border-transparent": level !== 0 && !isCurrent,
     }
@@ -249,7 +249,7 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
     <li
       ref={menuItemRef}
       className={cn(
-        "relative m-0 border-b border-cool-grey py-2 text-09em lg:rs-ml-2 2xl:rs-ml-3 first:border-t last:border-0 lg:relative lg:border-black-20 lg:py-0 first:lg:ml-0",
+        "relative m-0 border-b border-cool-grey py-5 text-[.9em] first:border-t last:border-0 lg:relative lg:rs-ml-2 lg:border-black-20 lg:py-0 lg:first:ml-0 2xl:rs-ml-3",
         {"first:border-t-0 lg:border-b-0": level === 0}
       )}
     >
@@ -262,11 +262,11 @@ const MenuItem = ({id, url, title, activeTrail, children, level}: MenuItemProps)
         {children.length > 0 && level < menuLevelsToShow && (
           <>
             {level === 0 && (
-              <div className="mb-[6px] ml-5 block h-[25px] w-[1px] shrink-0 bg-archway-light lg:hidden" />
+              <div className="mb-[6px] ml-12.5 block h-[25px] w-px shrink-0 bg-archway-light lg:hidden" />
             )}
             <button
               ref={buttonRef}
-              className="group relative right-10 shrink-0 rounded-full border-b border-transparent bg-digital-red text-white hocus-visible:border-black hocus-visible:bg-white lg:right-0 lg:hidden lg:rounded-none lg:bg-transparent lg:text-digital-red"
+              className="group relative right-25 shrink-0 rounded-full border-b border-transparent bg-digital-red text-white lg:right-0 lg:hidden lg:rounded-none lg:bg-transparent lg:text-digital-red hocus-visible:border-black hocus-visible:bg-white"
               onClick={toggleSubmenu}
               aria-expanded={submenuOpen}
               aria-labelledby={linkId}

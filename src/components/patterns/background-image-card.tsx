@@ -33,13 +33,13 @@ const BackgroundImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children,
   return (
     <CardWrapper
       {...props}
-      className={cn("centered relative w-full border border-black-10 shadow-lg lg:max-w-[980px]", props.className)}
+      className={cn("relative centered w-full border border-black-10 shadow-lg lg:max-w-[980px]", props.className)}
     >
       <div
-        className={cn("absolute left-0 top-0 -z-10 h-full w-full", {
+        className={cn("absolute top-0 left-0 -z-10 h-full w-full", {
           "bg-plum": color === "magenta",
           "bg-press-grass": color === "grass",
-          "bg-black-true bg-opacity-70": color === "steel",
+          "bg-black-true/70": color === "steel",
           "bg-press-indigo": color === "indigo",
         })}
       >
@@ -56,7 +56,7 @@ const BackgroundImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children,
 
       {videoUrl && <Oembed url={videoUrl} />}
 
-      <div className={cn("p-20", {"text-white": !!color})}>{children}</div>
+      <div className={cn("p-50", {"text-white": !!color})}>{children}</div>
     </CardWrapper>
   )
 }

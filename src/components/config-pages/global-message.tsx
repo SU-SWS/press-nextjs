@@ -17,23 +17,23 @@ const GlobalMessage = async ({...props}: HTMLAttributes<HTMLDivElement>) => {
       {...props}
       aria-labelledby={MessageWrapper ? globalMessageConfig.uuid : undefined}
       className={cn(
-        "relative z-[1] py-10",
+        "relative z-1 py-25",
         {
           "bg-digital-blue-dark text-white": globalMessageConfig.suGlobalMsgType === "info",
           "bg-illuminating-dark": globalMessageConfig.suGlobalMsgType === "warning",
           "bg-digital-green text-white": globalMessageConfig.suGlobalMsgType === "success",
-          "bg-foggy-light": globalMessageConfig.suGlobalMsgType === "plain",
+          "bg-fog-light": globalMessageConfig.suGlobalMsgType === "plain",
           "bg-digital-red text-white": globalMessageConfig.suGlobalMsgType === "error",
         },
         props.className
       )}
     >
-      <div className="centered flex flex-col gap-10 lg:flex-row">
+      <div className="centered flex flex-col gap-25 lg:flex-row">
         <div className="flex shrink-0 items-center leading-none">
           <MessageIcon messageType={globalMessageConfig.suGlobalMsgType} />
           {globalMessageConfig.suGlobalMsgLabel}:
         </div>
-        <div className="[&_a.btn]:border-2 [&_a.btn]:border-white [&_a.btn]:bg-transparent [&_a]:text-white">
+        <div className="[&_a]:text-white [&_a.btn]:border-2 [&_a.btn]:border-white [&_a.btn]:bg-transparent">
           {globalMessageConfig.suGlobalMsgHeader && (
             <H2 id={globalMessageConfig.uuid}>{globalMessageConfig.suGlobalMsgHeader}</H2>
           )}

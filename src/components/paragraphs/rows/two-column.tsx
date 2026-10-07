@@ -15,14 +15,14 @@ const TwoColumn = ({items, config}: Props) => {
 
   return (
     <div
-      className={cn("mb-32", {
+      className={cn("mb-80", {
         gutters: !config?.bg_color,
-        "px-5 pb-20 pt-20": !!config?.bg_color,
+        "px-12.5 pt-50 pb-50": !!config?.bg_color,
         "pt-0": config?.top_padding === "none",
-        "pt-40": config?.top_padding === "more",
+        "pt-100": config?.top_padding === "more",
         "mb-0": config?.bottom_margin === "none",
         "pb-0": config?.bottom_padding === "none",
-        "bg-foggy-light": config?.bg_color === "f4f4f4",
+        "bg-fog-light": config?.bg_color === "f4f4f4",
         "bg-[#ebeae4]": config?.bg_color === "ebeae5",
         "bg-[#dcecef]": config?.bg_color === "dcecef",
         "bg-[#dcefec]": config?.bg_color === "dcefec",
@@ -32,7 +32,7 @@ const TwoColumn = ({items, config}: Props) => {
       data-columns="2"
     >
       <div
-        className={cn("centered grid gap-10 @6xl:grid-cols-2 @6xl:gap-20", {
+        className={cn("centered grid gap-25 @6xl:grid-cols-2 @6xl:gap-50", {
           "@6xl:grid-cols-1-2": config?.column_widths === "33-67",
           "@6xl:grid-cols-2-1": config?.column_widths === "67-33",
         })}
@@ -41,7 +41,7 @@ const TwoColumn = ({items, config}: Props) => {
           items={leftItems}
           config={{top_padding: "none", bottom_margin: "none"}}
           className={cn({
-            "after:contents('') relative after:absolute after:-right-10 after:top-0 after:h-full after:w-[1px] after:bg-black":
+            "after:contents('') relative after:absolute after:top-0 after:-right-25 after:h-full after:w-px after:bg-black":
               config?.vertical_dividers,
           })}
         />

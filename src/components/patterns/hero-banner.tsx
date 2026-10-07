@@ -30,8 +30,8 @@ const HeroBanner = ({imageUrl, imageAlt, eagerLoadImage, isSection, overlayPosit
   const BannerWrapper: ElementType = isSection ? "section" : "div"
 
   return (
-    <BannerWrapper {...props} className={cn("rs-mb-5 @container md:min-h-[400px]", props.className)}>
-      <div className="@6xl:aspect-auto relative aspect-[16/9] w-full bg-cool-grey @6xl:absolute @6xl:h-full">
+    <BannerWrapper {...props} className={cn("@container rs-mb-5 md:min-h-[400px]", props.className)}>
+      <div className="relative aspect-video w-full bg-cool-grey @6xl:absolute @6xl:h-full">
         {imageUrl && (
           <Image
             className="ed11y-ignore object-cover"
@@ -47,8 +47,8 @@ const HeroBanner = ({imageUrl, imageAlt, eagerLoadImage, isSection, overlayPosit
       {children && (
         <div
           className={cn(
-            "rs-p-2 relative flex w-full flex-col gap-10 shadow-lg @6xl:z-10 @6xl:my-24 @6xl:max-w-[550px] @6xl:bg-white",
-            overlayPosition === "right" ? "@6xl:ml-auto @6xl:mr-20" : "@6xl:ml-20 @6xl:mr-auto"
+            "relative flex w-full flex-col gap-25 rs-p-2 shadow-lg @6xl:z-10 @6xl:my-60 @6xl:max-w-[550px] @6xl:bg-white",
+            overlayPosition === "right" ? "@6xl:mr-50 @6xl:ml-auto" : "@6xl:mr-auto @6xl:ml-50"
           )}
         >
           {children}

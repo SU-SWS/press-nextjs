@@ -26,28 +26,28 @@ const StanfordEventCard = ({node, headingLevel, ...props}: Props) => {
   return (
     <ImageCard {...props} aria-labelledby={node.uuid} isArticle>
       <div aria-hidden className="flex w-fit flex-col items-start">
-        <div className="type-0 mb-4 w-full text-center font-semibold xl:text-21">{startMonth.toUpperCase()}</div>
-        <div className="type-4 w-full text-center font-bold xl:text-[5.1rem]">{startDay}</div>
+        <div className="mb-10 w-full text-center type-0 font-semibold xl:text-21">{startMonth.toUpperCase()}</div>
+        <div className="w-full text-center type-4 font-bold xl:text-[5.1rem]">{startDay}</div>
       </div>
 
       <div className="flex flex-col">
-        <Heading className="type-1 xl:text-26 [&_a]:text-black [&_a]:hocus:text-digital-red" id={node.uuid}>
+        <Heading className="type-1 xl:text-26 [&_a]:text-black hocus:[&_a]:text-digital-red" id={node.uuid}>
           <Link href={node.suEventSource?.url || node.path || "#"}>{node.title}</Link>
         </Heading>
 
         {node.suEventType && <div className="su-digital-red order-first">{node.suEventType[0].name}</div>}
       </div>
 
-      {node.suEventSubheadline && <div className="type-0 mb-5 font-bold xl:text-21">{node.suEventSubheadline}</div>}
+      {node.suEventSubheadline && <div className="mb-12.5 type-0 font-bold xl:text-21">{node.suEventSubheadline}</div>}
 
-      <time className="flex items-center gap-5" dateTime={start.toISOString()}>
+      <time className="flex items-center gap-12.5" dateTime={start.toISOString()}>
         <CalendarDaysIcon width={30} className="shrink-0" />
         {dateTimeString}
       </time>
 
       {node.suEventLocation && (
         <div>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-12.5">
             <MapPinIcon width={30} className="shrink-0" />
             <Address {...node.suEventLocation} />
           </div>
@@ -55,7 +55,7 @@ const StanfordEventCard = ({node, headingLevel, ...props}: Props) => {
       )}
 
       {node.suEventAltLoc && (
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-12.5">
           <MapPinIcon width={30} className="shrink-0" />
           {node.suEventAltLoc}
         </div>

@@ -10,7 +10,7 @@ const SuperFooter = async () => {
   if (!superFooterConfig?.suSuperFootEnabled) return
 
   return (
-    <div className="border-b border-black-20 bg-foggy-light py-20">
+    <div className="border-b border-black-20 bg-fog-light py-50">
       <div className="centered flex justify-between">
         <div className="flex-1">
           {superFooterConfig.suSuperFootTitle && (
@@ -30,7 +30,7 @@ const SuperFooter = async () => {
                     <Link
                       key={`super-footer-link-${index}`}
                       href={link.url}
-                      className="mb-5 block border border-black-20 bg-white p-10 text-digital-red no-underline shadow-lg transition last:mb-0 hocus:bg-black hocus:text-white hocus:underline"
+                      className="mb-12.5 block border border-black-20 bg-white p-25 text-digital-red no-underline shadow-lg transition last:mb-0 hocus:bg-black hocus:text-white hocus:underline"
                     >
                       {link.title}
                     </Link>
@@ -45,7 +45,7 @@ const SuperFooter = async () => {
                 className="flex items-center text-digital-red no-underline hocus:text-black hocus:underline"
               >
                 {superFooterConfig.suSuperFootIntranet.title}
-                <LockClosedIcon width={20} className="ml-2" />
+                <LockClosedIcon width={20} className="ml-5" />
               </Link>
             )}
           </div>
