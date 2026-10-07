@@ -1,4 +1,4 @@
-import {MenuItem as MenuItemType, NodeSupBookAncillary} from "@lib/gql/__generated__/drupal.d"
+import {MenuItem as MenuItemType, NodeSupBookAncillary} from "@lib/gql/__generated__/graphql"
 import {H1} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import Rows from "@components/paragraphs/rows/rows"

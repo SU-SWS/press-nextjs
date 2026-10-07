@@ -1,5 +1,5 @@
 import {HTMLAttributes, useId} from "react"
-import {ParagraphSupSearchForm} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphSupSearchForm} from "@lib/gql/__generated__/graphql"
 import {MagnifyingGlassIcon} from "@heroicons/react/20/solid"
 
 type Props = HTMLAttributes<HTMLDivElement> & {

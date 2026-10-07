@@ -9,7 +9,7 @@ import {ArrowLongLeftIcon, ArrowLongRightIcon} from "@heroicons/react/20/solid"
 import {ArrowPathIcon} from "@heroicons/react/16/solid"
 import cn from "@lib/utils/className"
 import useServerAction from "@lib/hooks/useServerAction"
-import {InputMaybe, SupBooksAwardWinnersFilterInput, SupBooksViewSortKeys} from "@lib/gql/__generated__/drupal.d"
+import {InputMaybe, SupBooksAwardWinnersFilterInput, SupBooksViewSortKeys} from "@lib/gql/__generated__/graphql"
 import SelectList from "@components/elements/inputs/select-list"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {

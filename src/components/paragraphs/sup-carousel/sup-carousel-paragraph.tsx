@@ -1,5 +1,5 @@
 import {JSX, HtmlHTMLAttributes} from "react"
-import {Maybe, ParagraphSupCarousel, ParagraphSupCarouselSlide} from "@lib/gql/__generated__/drupal.d"
+import {Maybe, ParagraphSupCarousel, ParagraphSupCarouselSlide} from "@lib/gql/__generated__/graphql"
 import Slideshow, {NextArrow, PrevArrow} from "@components/elements/slideshow"
 import {H2} from "@components/elements/headers"
 import Wysiwyg from "@components/elements/wysiwyg"

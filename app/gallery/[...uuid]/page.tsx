@@ -1,7 +1,7 @@
 import {H1} from "@components/elements/headers"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {notFound} from "next/navigation"
-import {ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphStanfordGallery, ParagraphDocument, ParagraphQuery} from "@lib/gql/__generated__/graphql"
 import Image from "@components/images/image"
 import {cacheTag} from "next/cache"
 import {isUuid} from "@lib/utils/request-guards"
@@ -24,7 +24,7 @@ type Props = {
 const getGallery = async (paragraphId: string): Promise<ParagraphStanfordGallery | false> => {
   "use cache: remote"
   cacheTag("paragraphs", `paragraphs:${paragraphId}`)
-  const paragraphQuery = await graphqlClient().Paragraph({uuid: paragraphId})
+  const paragraphQuery = await graphqlClient().request<ParagraphQuery>(ParagraphDocument, {uuid: paragraphId})
   if (paragraphQuery.paragraph?.__typename === "ParagraphStanfordGallery")
     return paragraphQuery.paragraph as ParagraphStanfordGallery
   return false

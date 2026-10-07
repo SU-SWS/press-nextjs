@@ -12,7 +12,31 @@ import {
   NodeUnion,
   SupBooksAwardWinnersFilterInput,
   SupBooksViewSortKeys,
-} from "@lib/gql/__generated__/drupal.d"
+  StanfordBasicPagesDocument,
+  StanfordBasicPagesQuery,
+  StanfordCoursesDocument,
+  StanfordCoursesQuery,
+  StanfordEventsDocument,
+  StanfordEventsQuery,
+  StanfordEventsPastEventsDocument,
+  StanfordEventsPastEventsQuery,
+  StanfordNewsDocument,
+  StanfordNewsQuery,
+  StanfordPersonDocument,
+  StanfordPersonQuery,
+  StanfordPublicationsDocument,
+  StanfordPublicationsQuery,
+  StanfordSharedTagsDocument,
+  StanfordSharedTagsQuery,
+  SupBooksDocument,
+  SupBooksQuery,
+  SupBooksAwardWinnersDocument,
+  SupBooksAwardWinnersQuery,
+  SupBooksBestSellersDocument,
+  SupBooksBestSellersQuery,
+  SupBooksNewReleasesDocument,
+  SupBooksNewReleasesQuery,
+} from "@lib/gql/__generated__/graphql"
 import {graphqlClient} from "@lib/gql/gql-client"
 import View from "@components/views/view"
 import {cacheTag} from "next/cache"
@@ -134,14 +158,20 @@ export const getViewPagedItems = cache(
         case "stanford_basic_pages--basic_page_type_list":
         case "stanford_basic_pages--viewfield_block_1":
           contextualFilters = getContextualFilters(["term_node_taxonomy_name_depth"], contextualFilter)
-          graphqlResponse = await client.stanfordBasicPages({contextualFilters, ...queryVariables})
+          graphqlResponse = await client.request<StanfordBasicPagesQuery>(StanfordBasicPagesDocument, {
+            contextualFilters,
+            ...queryVariables,
+          })
           items = graphqlResponse.stanfordBasicPages?.results as unknown as NodeStanfordPage[]
           totalItems = graphqlResponse.stanfordBasicPages?.pageInfo.total || 0
           break
 
         case "stanford_courses--default_list_viewfield_block":
         case "stanford_courses--vertical_teaser_viewfield_block":
-          graphqlResponse = await client.stanfordCourses({contextualFilters, ...queryVariables})
+          graphqlResponse = await client.request<StanfordCoursesQuery>(StanfordCoursesDocument, {
+            contextualFilters,
+            ...queryVariables,
+          })
           items = graphqlResponse.stanfordCourses?.results as unknown as NodeStanfordCourse[]
           totalItems = graphqlResponse.stanfordCourses?.pageInfo.total || 0
           break
@@ -157,52 +187,74 @@ export const getViewPagedItems = cache(
             ],
             contextualFilter
           )
-          graphqlResponse = await client.stanfordEvents({contextualFilters, ...queryVariables})
+          graphqlResponse = await client.request<StanfordEventsQuery>(StanfordEventsDocument, {
+            contextualFilters,
+            ...queryVariables,
+          })
           items = graphqlResponse.stanfordEvents?.results as unknown as NodeStanfordEvent[]
           totalItems = graphqlResponse.stanfordEvents?.pageInfo.total || 0
           break
 
         case "stanford_events--past_events_list_block":
-          graphqlResponse = await client.stanfordEventsPastEvents({contextualFilters, ...queryVariables})
+          graphqlResponse = await client.request<StanfordEventsPastEventsQuery>(StanfordEventsPastEventsDocument, {
+            contextualFilters,
+            ...queryVariables,
+          })
           items = graphqlResponse.stanfordEventsPastEvents?.results as unknown as NodeStanfordEvent[]
           totalItems = graphqlResponse.stanfordEventsPastEvents?.pageInfo.total || 0
           break
 
         case "stanford_news--block_1":
         case "stanford_news--vertical_cards":
-          graphqlResponse = await client.stanfordNews({contextualFilters, ...queryVariables})
+          graphqlResponse = await client.request<StanfordNewsQuery>(StanfordNewsDocument, {
+            contextualFilters,
+            ...queryVariables,
+          })
           items = graphqlResponse.stanfordNews?.results as unknown as NodeStanfordNews[]
           totalItems = graphqlResponse.stanfordNews?.pageInfo.total || 0
           break
 
         case "stanford_person--grid_list_all":
-          graphqlResponse = await client.stanfordPerson({contextualFilters, ...queryVariables})
+          graphqlResponse = await client.request<StanfordPersonQuery>(StanfordPersonDocument, {
+            contextualFilters,
+            ...queryVariables,
+          })
           items = graphqlResponse.stanfordPerson?.results as unknown as NodeStanfordPerson[]
           totalItems = graphqlResponse.stanfordPerson?.pageInfo.total || 0
           break
 
         case "stanford_publications--apa_list":
         case "stanford_publications--chicago_list":
-          graphqlResponse = await client.stanfordPublications({contextualFilters, ...queryVariables})
+          graphqlResponse = await client.request<StanfordPublicationsQuery>(StanfordPublicationsDocument, {
+            contextualFilters,
+            ...queryVariables,
+          })
           items = graphqlResponse.stanfordPublications?.results as unknown as NodeStanfordPublication[]
           totalItems = graphqlResponse.stanfordPublications?.pageInfo.total || 0
           break
 
         case "stanford_shared_tags--card_grid":
           contextualFilters = getContextualFilters(["term_node_taxonomy_name_depth", "type"], contextualFilter)
-          graphqlResponse = await client.stanfordSharedTags({contextualFilters, ...queryVariables})
+          graphqlResponse = await client.request<StanfordSharedTagsQuery>(StanfordSharedTagsDocument, {
+            contextualFilters,
+            ...queryVariables,
+          })
           items = graphqlResponse.stanfordSharedTags?.results as unknown as NodeUnion[]
           totalItems = graphqlResponse.stanfordSharedTags?.pageInfo.total || 0
           break
 
         case "sup_books--new_releases":
-          graphqlResponse = await client.supBooksNewReleases({...queryVariables})
+          graphqlResponse = await client.request<SupBooksNewReleasesQuery>(SupBooksNewReleasesDocument, {
+            ...queryVariables,
+          })
           items = graphqlResponse.supBooksNewReleases?.results as unknown as NodeSupBook[]
           totalItems = graphqlResponse.supBooksNewReleases?.pageInfo.total || 0
           break
 
         case "sup_books--best_sellers":
-          graphqlResponse = await client.supBooksBestSellers({...queryVariables})
+          graphqlResponse = await client.request<SupBooksBestSellersQuery>(SupBooksBestSellersDocument, {
+            ...queryVariables,
+          })
           items = graphqlResponse.supBooksBestSellers?.results as unknown as NodeSupBook[]
           totalItems = graphqlResponse.supBooksBestSellers?.pageInfo.total || 0
           break
@@ -223,7 +275,7 @@ export const getViewPagedItems = cache(
             ],
             contextualFilter
           )
-          graphqlResponse = await client.supBooks({
+          graphqlResponse = await client.request<SupBooksQuery>(SupBooksDocument, {
             contextualFilters,
             filters: fieldFilters,
             sortKey: sort,
@@ -244,7 +296,11 @@ export const getViewPagedItems = cache(
             ],
             contextualFilter
           )
-          graphqlResponse = await client.supBooksAwardWinners({contextualFilters, filters, ...queryVariables})
+          graphqlResponse = await client.request<SupBooksAwardWinnersQuery>(SupBooksAwardWinnersDocument, {
+            contextualFilters,
+            filters,
+            ...queryVariables,
+          })
           items = graphqlResponse.supBooksAwardWinners?.results as unknown as NodeSupBook[]
           totalItems = graphqlResponse.supBooksAwardWinners?.pageInfo.total || 0
           break

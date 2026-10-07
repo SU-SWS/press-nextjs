@@ -1,7 +1,7 @@
 "use client"
 
 import Script from "next/script"
-import {useEffect, useRef} from "react"
+import {useRef} from "react"
 
 const Editori11y = () => {
   const ref = useRef(null)
@@ -16,10 +16,6 @@ const Editori11y = () => {
       })
     }
   }
-
-  useEffect(() => {
-    fetch("/api/draft/disable").catch(_e => console.warn("Disabling preview mode failed"))
-  }, [])
 
   return (
     <Script

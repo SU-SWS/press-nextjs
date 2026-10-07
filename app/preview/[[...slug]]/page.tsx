@@ -1,7 +1,7 @@
 import NodePage from "@components/nodes/pages/node-page"
 import UnpublishedBanner from "@components/elements/unpublished-banner"
-import {NodeUnion} from "@lib/gql/__generated__/drupal.d"
-import {getEntityFromPath} from "@lib/gql/gql-queries"
+import {NodeUnion} from "@lib/gql/__generated__/graphql"
+import {getEntityFromPath, getHomePagePath} from "@lib/gql/gql-queries"
 import {notFound} from "next/navigation"
 import {getPathFromContext, PageProps, Slug} from "@lib/drupal/utils"
 import NodePageSkeleton from "@components/nodes/pages/node-page-skeleton"
@@ -30,10 +30,12 @@ const PreviewContents = async ({params: paramsPromise}: {params: PageProps["para
   const {entity} = await getEntityFromPath<NodeUnion>(path, true)
 
   if (!entity) notFound()
+  // Drupal links to the home page by its alias, e.g. `/home`, so compare against that rather than `/`.
+  const homePath = await getHomePagePath()
 
   return (
     <UnpublishedBanner status={entity.status} message="Unpublished Page">
-      <NodePage node={entity} isHome={path === "/"} />
+      <NodePage node={entity} isHome={path === "/" || path === homePath} />
     </UnpublishedBanner>
   )
 }

@@ -2,7 +2,7 @@ import {redirect} from "next/navigation"
 import Wysiwyg from "@components/elements/wysiwyg"
 import {H1} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordCourse} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordCourse} from "@lib/gql/__generated__/graphql"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {

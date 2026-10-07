@@ -1,4 +1,4 @@
-import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
+import {NodeSupBook} from "@lib/gql/__generated__/graphql"
 import {H1, H2, H3} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import Link from "@components/elements/link"

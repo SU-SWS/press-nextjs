@@ -1,6 +1,6 @@
 import Link from "@components/elements/link"
 import {HtmlHTMLAttributes, MouseEventHandler} from "react"
-import {Maybe} from "@lib/gql/__generated__/drupal.d"
+import {Maybe} from "@lib/gql/__generated__/graphql"
 import cn from "@lib/utils/className"
 import {LinkProps as NextLinkProps} from "next/dist/client/link"
 

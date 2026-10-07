@@ -105,7 +105,7 @@ src/components/paragraphs/paragraph.tsx
 - `Route`: Fetches any Drupal node, redirect, or other entity for the provided path url.
 - `Menu`: Fetches the menu links for the desired menu.
 
-**GraphQL Client**: graphql-request
+**GraphQL Client**: Fetch based client in `src/lib/gql/gql-client.ts`. Types and typed documents are generated with `@graphql-codegen/client-preset` into `src/lib/gql/__generated__/graphql.ts`. See `src/lib/gql/README.md`.
 
 **GraphQL Compiler Command**: `yarn graphql` 
 
@@ -209,7 +209,7 @@ yarn lint
 
 ```typescript
 // Example pattern for fetching content
-graphqlClient().request<TypescriptType>(QueryDocument, {variables})
+graphqlClient().request<RouteQuery>(RouteDocument, {path, teaser: false})
 ```
 
 ### Rendering Paragraphs
