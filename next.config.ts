@@ -22,6 +22,7 @@ const nextConfig: NextConfig = {
     },
   },
   cacheComponents: true,
+  partialPrefetching: false,
   typescript: {
     // Disable build errors since dev dependencies aren't loaded on prod. Rely on GitHub actions to throw any errors.
     ignoreBuildErrors: process.env.CI !== "true",

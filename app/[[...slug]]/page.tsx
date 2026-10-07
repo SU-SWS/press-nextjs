@@ -12,6 +12,9 @@ import SupBookDeskExaminationPage from "@components/nodes/pages/sup-book/sup-boo
 export const maxDuration = 30
 export const instant = false
 
+// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config/ensureStatic
+export const ensureStatic = "navigation"
+
 const Page = (props: PageProps) => {
   // If enabling instant navigation, wrap this in `<Suspense fallback={<NodePageSkeleton/>}>`
   return <NodeContents params={props.params} />
