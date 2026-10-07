@@ -13,7 +13,8 @@ export async function clearCache(formData: FormData) {
     const cleared = []
     if (clearAllPrices) {
       // Matches the tag set in app/api/books/price/[id]/route.tsx.
-      revalidateTag("prices", "max")
+      // Expire immediately rather than serving stale prices while they refresh.
+      revalidateTag("prices", {expire: 0})
       cleared.push("all prices")
     }
     if (clearMenu) {

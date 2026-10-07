@@ -1,22 +1,20 @@
-"use client"
-
 import Link from "@components/elements/link"
 import {DocumentDuplicateIcon} from "@heroicons/react/24/outline"
-import {useEffect, useState} from "react"
+import {getBookAncillaryContents} from "@lib/gql/gql-queries"
 
 type Props = {
   id: string
   path: string
 }
-const ExcerptButton = ({id, path}: Props) => {
-  const [excerpts, setExcerpts] = useState([])
-  useEffect(() => {
-    fetch(`/api/books/excerpts/${id}`)
-      .then(res => res.json())
-      .then(data => setExcerpts(data))
-      .catch(_e => console.warn("An error occurred fetching excerpt data"))
-  }, [id])
 
+/**
+ * Link to the book's excerpts when it has any.
+ *
+ * Rendered on the server so the answer is part of the cached book page, instead of every page view fetching it from an
+ * API route. The lookup is tagged `excerpts:<uuid>`, so saving an excerpt only re-renders that book's page.
+ */
+const ExcerptButton = async ({id, path}: Props) => {
+  const excerpts = await getBookAncillaryContents(id)
   if (excerpts.length === 0) return
 
   return (

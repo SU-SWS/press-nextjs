@@ -182,7 +182,9 @@ export const getAllNodes = async () => {
 export const getBookAncillaryContents = async (uuid: string): Promise<NodeSupBookAncillary[]> => {
   "use cache: remote"
 
-  cacheTag("ancillary-pages", `excerpts:${uuid}`)
+  // Only the per-book tag. Book pages render this to decide whether to link to excerpts, so a broad tag here would let
+  // one invalidation mark every book page stale. Drupal sends `excerpts:<book uuid>` when an ancillary page is saved.
+  cacheTag(`excerpts:${uuid}`)
   const ancillaryPages = await graphqlClient().supBookAncillary({
     contextualFilters: {uuid},
   })
