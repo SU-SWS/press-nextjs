@@ -1,4 +1,4 @@
-import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
+import {NodeSupBook} from "@lib/gql/__generated__/graphql"
 import {BookHit} from "@components/algolia-search/hits/sup-book"
 import {H2, H3} from "@components/elements/headers"
 import Image from "@components/images/image"

@@ -1,7 +1,7 @@
 import StanfordEventListItem from "@components/nodes/list-item/stanford-event/stanford-event-list-item"
 import {H1} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordEventSeries} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordEventSeries} from "@lib/gql/__generated__/graphql"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {

@@ -1,7 +1,7 @@
 import Link from "@components/elements/link"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordCourse} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordCourse} from "@lib/gql/__generated__/graphql"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   node: NodeStanfordCourse
@@ -11,7 +11,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 const StanfordCourseListItem = ({node, headingLevel, ...props}: Props) => {
   const Heading = headingLevel === "h3" ? H3 : H2
   const body = node.body?.processed
-    .replace(/<\/?[^>]+(>|$)/g, " ")
+    ?.replace(/<\/?[^>]+(>|$)/g, " ")
     .replace(/ +/, " ")
     .replace("&nbsp;", " ")
     .split(" ")

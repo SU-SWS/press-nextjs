@@ -1,4 +1,4 @@
-import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
+import {NodeSupBook} from "@lib/gql/__generated__/graphql"
 import BlurImage from "@components/images/blur-image"
 
 type Props = {

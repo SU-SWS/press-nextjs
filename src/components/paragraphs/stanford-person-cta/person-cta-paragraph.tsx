@@ -1,7 +1,7 @@
 import Image from "@components/images/image"
 import Link from "@components/elements/link"
 import {HtmlHTMLAttributes} from "react"
-import {ParagraphStanfordPersonCtum} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphStanfordPersonCtum} from "@lib/gql/__generated__/graphql"
 import cn from "@lib/utils/className"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {

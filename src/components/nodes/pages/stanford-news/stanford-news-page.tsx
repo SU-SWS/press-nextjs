@@ -4,7 +4,7 @@ import Rows from "@components/paragraphs/rows/rows"
 import SocialIcons from "@components/nodes/pages/stanford-news/social-icons"
 import {H1} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordNews} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordNews} from "@lib/gql/__generated__/graphql"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {

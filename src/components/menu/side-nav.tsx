@@ -1,6 +1,6 @@
 import Link from "@components/elements/link"
 import cn from "@lib/utils/className"
-import {MenuItem as MenuItemType} from "@lib/gql/__generated__/drupal.d"
+import {MenuItem as MenuItemType} from "@lib/gql/__generated__/graphql"
 import {HTMLAttributes} from "react"
 
 type Props = HTMLAttributes<HTMLElement> & {

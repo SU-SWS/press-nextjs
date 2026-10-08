@@ -3,7 +3,7 @@ import {CalendarDaysIcon, MapPinIcon} from "@heroicons/react/20/solid"
 import Address from "@components/elements/address"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordEvent} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordEvent} from "@lib/gql/__generated__/graphql"
 import {getEventTimeString} from "@components/nodes/cards/stanford-event/stanford-event-card"
 import cn from "@lib/utils/className"
 
@@ -14,8 +14,8 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 
 const StanfordEventListItem = ({node, headingLevel, ...props}: Props) => {
   const timeZone = node.suEventDateTime.timezone || "America/Los_Angeles"
-  const start = new Date(node.suEventDateTime.value * 1000)
-  const end = new Date(node.suEventDateTime.end_value * 1000)
+  const start = new Date(parseInt(node.suEventDateTime.value) * 1000)
+  const end = new Date(parseInt(node.suEventDateTime.end_value) * 1000)
 
   const startMonth = start.toLocaleDateString("en-US", {month: "short", timeZone})
   const startDay = parseInt(start.toLocaleDateString("en-US", {day: "numeric", timeZone}))

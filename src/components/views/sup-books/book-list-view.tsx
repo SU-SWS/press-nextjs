@@ -1,4 +1,4 @@
-import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
+import {NodeSupBook} from "@lib/gql/__generated__/graphql"
 import SupBookCard from "@components/nodes/cards/sup-book/sup-book-card"
 import {Suspense} from "react"
 import PagedList from "@components/elements/paged-list"

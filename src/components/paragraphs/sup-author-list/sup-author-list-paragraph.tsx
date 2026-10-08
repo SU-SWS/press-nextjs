@@ -1,9 +1,8 @@
 import {HTMLAttributes, Suspense} from "react"
 import {graphqlClient} from "@lib/gql/gql-client"
-import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
+import {NodeSupBook, BooksAuthorsDocument, BooksAuthorsQuery} from "@lib/gql/__generated__/graphql"
 import FilteringAuthorList from "@components/paragraphs/sup-author-list/filtering-author-list"
 import {cacheLife, cacheTag} from "next/cache"
-import * as DrupalTypes from "@lib/gql/__generated__/drupal.d"
 
 type Props = HTMLAttributes<HTMLDivElement>
 
@@ -15,12 +14,12 @@ const getBookAuthorsData = async () => {
   cacheLife("months")
 
   const pageSize = 1000
-  const firstPage = await graphqlClient().BooksAuthors({pageSize, page: 0})
+  const firstPage = await graphqlClient().request<BooksAuthorsQuery>(BooksAuthorsDocument, {pageSize, page: 0})
   const total = firstPage.supBooksView?.pageInfo.total || 0
   const pages = Math.ceil(total / pageSize)
-  const requests: Array<Promise<DrupalTypes.BooksAuthorsQuery>> = []
+  const requests: Array<Promise<BooksAuthorsQuery>> = []
   for (let page = 0; page < pages; page++) {
-    requests.push(graphqlClient().BooksAuthors({pageSize, page}))
+    requests.push(graphqlClient().request<BooksAuthorsQuery>(BooksAuthorsDocument, {pageSize, page}))
   }
   const results = await Promise.all(requests)
   return results.flatMap(result => (result.supBooksView?.results || []) as NodeSupBook[])

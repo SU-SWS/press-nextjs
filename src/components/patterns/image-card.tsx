@@ -1,7 +1,7 @@
 import Image from "@components/images/image"
 import Oembed from "@components/elements/ombed"
 import {ElementType, HTMLAttributes} from "react"
-import {Maybe} from "@lib/gql/__generated__/drupal.d"
+import {Maybe} from "@lib/gql/__generated__/graphql"
 import cn from "@lib/utils/className"
 
 type Props = HTMLAttributes<HTMLElement | HTMLDivElement> & {

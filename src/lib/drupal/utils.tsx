@@ -1,5 +1,5 @@
 import {stringify} from "qs"
-import {TermUnion, MenuItem} from "@lib/gql/__generated__/drupal.d"
+import {TermUnion, MenuItem} from "@lib/gql/__generated__/graphql"
 
 export const buildUrl = (path: string, params?: string | Record<string, string> | URLSearchParams): URL => {
   const url = new URL(path.charAt(0) === "/" ? `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}${path}` : path)
@@ -7,24 +7,6 @@ export const buildUrl = (path: string, params?: string | Record<string, string> 
   // Use instead URLSearchParams for nested params.
   if (params) url.search = stringify(params)
   return url
-}
-
-export const buildHeaders = (headers?: HeadersInit, isPreviewMode?: boolean): Headers => {
-  const requestHeaders = new Headers(headers)
-
-  if (process.env.DRUPAL_REQUEST_HEADERS) {
-    const envRequestHeaders: Record<string, string> = JSON.parse(process.env.DRUPAL_REQUEST_HEADERS)
-    Object.keys(envRequestHeaders).map(key => {
-      requestHeaders.set(key, envRequestHeaders[key])
-    })
-  }
-
-  const authCreds = (
-    isPreviewMode ? process.env.DRUPAL_BASIC_AUTH_ADMIN || process.env.DRUPAL_BASIC_AUTH : process.env.DRUPAL_BASIC_AUTH
-  ) as string
-
-  requestHeaders.set("Authorization", "Basic " + Buffer.from(authCreds).toString("base64"))
-  return requestHeaders
 }
 
 export type Slug = {slug: string[]}

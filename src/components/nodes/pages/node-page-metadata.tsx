@@ -3,7 +3,7 @@ import {
   MetaTagValue as MetaTagValueType,
   MetaTagProperty as MetaTagPropertyType,
   Maybe,
-} from "@lib/gql/__generated__/drupal.d"
+} from "@lib/gql/__generated__/graphql"
 import {JSX} from "react"
 
 type Props = {

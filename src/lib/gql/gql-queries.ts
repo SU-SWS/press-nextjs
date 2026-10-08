@@ -10,13 +10,16 @@ import {
   RouteQuery,
   RouteRedirect,
   StanfordBasicSiteSetting,
-} from "@lib/gql/__generated__/drupal.d"
-import {graphqlClient} from "@lib/gql/gql-client"
-import {ClientError} from "graphql-request"
-import {GraphQLError} from "graphql/error"
+  AllNodesDocument,
+  ConfigPagesDocument,
+  MenuDocument,
+  MenuQuery,
+  RouteDocument,
+  SupBookAncillaryDocument,
+  SupBookAncillaryQuery,
+} from "@lib/gql/__generated__/graphql"
+import {ClientError, graphqlClient} from "@lib/gql/gql-client"
 import {cacheLife, cacheTag} from "next/cache"
-
-type DrupalGraphqlError = GraphQLError & {debugMessage: string}
 
 type RouteResult<T extends NodeUnion> = {
   entity?: T
@@ -58,14 +61,14 @@ const requestEntityFromPath = async <T extends NodeUnion>(
   let query: RouteQuery
 
   try {
-    query = await graphqlClient(undefined, previewMode).Route({
+    query = await graphqlClient(undefined, previewMode).request<RouteQuery>(RouteDocument, {
       path,
       teaser: !!teaser,
     })
   } catch (e) {
     if (e instanceof ClientError) {
-      // @ts-expect-error Client error type doesn't define the debugMessage, but it's there.
-      const messages = e.response.errors?.map((error: DrupalGraphqlError) => error.debugMessage || error.message)
+      // The Drupal GraphQL module attaches a human-readable `debugMessage` alongside the standard `message`.
+      const messages = e.response.errors?.map(error => error.debugMessage || error.message)
       console.warn([...new Set(messages)].join(" "))
     } else {
       console.warn(e instanceof Error ? e.message : "An error occurred")
@@ -91,7 +94,7 @@ const getAllConfigPages = async (): Promise<ConfigPagesQuery | undefined> => {
 
   cacheTag("config-pages")
   try {
-    return await graphqlClient().ConfigPages()
+    return await graphqlClient().request<ConfigPagesQuery>(ConfigPagesDocument)
   } catch (e) {
     console.warn("Unable to fetch config pages: " + (e instanceof Error && e.stack))
   }
@@ -124,7 +127,7 @@ const fetchMenu = async (name?: MenuAvailable): Promise<MenuItem[]> => {
   "use cache: remote"
 
   cacheTag("menu", `menu:${name?.toLowerCase() || "main"}`)
-  const menu = await graphqlClient().Menu({name})
+  const menu = await graphqlClient().request<MenuQuery>(MenuDocument, {name})
   return (menu.menu?.items || []) as MenuItem[]
 }
 
@@ -153,7 +156,7 @@ export const getAllNodes = async () => {
   const cursors: Omit<AllNodesQueryVariables, "first"> = {}
 
   while (fetchMore) {
-    nodeQuery = await graphqlClient().AllNodes({
+    nodeQuery = await graphqlClient().request<AllNodesQuery>(AllNodesDocument, {
       first: 500,
       ...cursors,
     })
@@ -185,7 +188,7 @@ export const getBookAncillaryContents = async (uuid: string): Promise<NodeSupBoo
   // Only the per-book tag. Book pages render this to decide whether to link to excerpts, so a broad tag here would let
   // one invalidation mark every book page stale. Drupal sends `excerpts:<book uuid>` when an ancillary page is saved.
   cacheTag(`excerpts:${uuid}`)
-  const ancillaryPages = await graphqlClient().supBookAncillary({
+  const ancillaryPages = await graphqlClient().request<SupBookAncillaryQuery>(SupBookAncillaryDocument, {
     contextualFilters: {uuid},
   })
   return (ancillaryPages.supBookAncillary?.results as NodeSupBookAncillary[]) || []
