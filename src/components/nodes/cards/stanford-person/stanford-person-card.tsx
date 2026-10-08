@@ -2,7 +2,7 @@ import Image from "@components/images/image"
 import Link from "@components/elements/link"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordPerson} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordPerson} from "@lib/gql/__generated__/graphql"
 import cn from "@lib/utils/className"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -21,7 +21,7 @@ const StanfordPersonCard = ({node, headingLevel, ...props}: Props) => {
       className={cn("mx-auto overflow-hidden text-center", props.className)}
     >
       {imageUrl && (
-        <div className="relative mx-auto mb-20 aspect-[1/1] w-3/5">
+        <div className="relative mx-auto mb-50 aspect-square w-3/5">
           <Image
             className="rounded-full object-cover"
             src={imageUrl}

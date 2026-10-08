@@ -1,6 +1,12 @@
 "use cache: remote"
 
-import {NodeInterface} from "@lib/gql/__generated__/drupal.d"
+import {
+  NodeInterface,
+  BooksWorkIdDocument,
+  BooksWorkIdQuery,
+  SupBooksDocument,
+  SupBooksQuery,
+} from "@lib/gql/__generated__/graphql"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {cacheTag} from "next/cache"
 
@@ -16,12 +22,14 @@ export const getLegacyBookPaths = async () => {
 
   // A single cheap request establishes how many pages there are. Cursor pagination forced every page to wait on the
   // one before it; the view exposes a total up front, so the pages can all be in flight at once.
-  const countQuery = await graphqlClient().BooksWorkId({pageSize: 1})
+  const countQuery = await graphqlClient().request<BooksWorkIdQuery>(BooksWorkIdDocument, {pageSize: 1})
   const total = countQuery.supBooksView?.pageInfo.total || 0
   const pages = Math.ceil(total / PAGE_SIZE)
 
   const results = await Promise.all(
-    Array.from({length: pages}, (_, page) => graphqlClient().BooksWorkId({page, pageSize: PAGE_SIZE}))
+    Array.from({length: pages}, (_, page) =>
+      graphqlClient().request<BooksWorkIdQuery>(BooksWorkIdDocument, {page, pageSize: PAGE_SIZE})
+    )
   )
 
   results.forEach(result =>
@@ -58,7 +66,7 @@ export const getNewBookPath = async (workId: string, suffix?: string): Promise<s
   if (requestedId > highestKnownId + WORK_ID_LOOKAHEAD) return
 
   // New work id, look up to see if one exists.
-  const bookData = await graphqlClient().supBooks({
+  const bookData = await graphqlClient().request<SupBooksQuery>(SupBooksDocument, {
     filters: {work_id: requestedId},
   })
   if (bookData.supBooksView?.results[0]?.__typename === "NodeSupBook" && bookData.supBooksView.results[0].path)

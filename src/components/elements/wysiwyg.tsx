@@ -3,7 +3,7 @@ import Oembed from "@components/elements/ombed"
 import React, {ComponentProps, HtmlHTMLAttributes, ImgHTMLAttributes} from "react"
 import {H2, H3, H4, H5, H6} from "@components/elements/headers"
 import cn from "@lib/utils/className"
-import {Maybe} from "@lib/gql/__generated__/drupal.d"
+import {Maybe} from "@lib/gql/__generated__/graphql"
 import Mathjax from "@components/tools/mathjax"
 import Script from "next/script"
 import Button from "@components/elements/button"
@@ -144,6 +144,9 @@ const options: HTMLReactParserOptions = {
   },
 }
 
+// Spacing classes that can be in the Drupal content, written for the Tailwind default spacing scale.
+const legacySpacing = ["mb-2", "mb-3", "mb-4", "pl-10", "pl-20", "pr-10", "pr-5", "pr-7"]
+
 const fixClasses = (classes?: string | boolean): string => {
   if (!classes) return ""
   // Pad the classes so that we can easily replace a whole class instead of parts of them.
@@ -154,17 +157,21 @@ const fixClasses = (classes?: string | boolean): string => {
     .replaceAll(" text-align-center ", " text-center *:mx-auto ")
     .replace(" text-align-right ", " text-right ")
     .replaceAll(" align-center ", " mx-auto ")
-    .replaceAll(" align-left ", " float-left mr-10 mb-10 ")
-    .replaceAll(" align-right ", " float-right ml-10 mb-10 ")
+    .replaceAll(" align-left ", " float-left mr-25 mb-25 ")
+    .replaceAll(" align-right ", " float-right ml-25 mb-25 ")
     .replaceAll(" visually-hidden ", " sr-only ")
     .replaceAll(" font-splash ", " splash-text type-4 xl:text-[5.1rem] ")
     .replaceAll(" callout-text ", " font-bold type-3 xl:text-[4.1rem] ")
-    .replaceAll(" related-text ", " shadow-lg border border-black-20 p-16 ")
+    .replaceAll(" related-text ", " shadow-lg border border-black-20 p-40 ")
     .replaceAll(
       " drop-cap ",
-      " type-2 xl:text-[3.3rem] first-letter:font-bold first-letter:type-6 first-letter:float-left first-letter:my-2 first-letter:mr-4 "
+      " type-2 xl:text-[3.3rem] first-letter:font-bold first-letter:type-6 first-letter:float-left first-letter:my-5 first-letter:mr-10 "
     )
     .replaceAll(" intro-text ", " type-1 xl:text-26 ")
+    // Convert legacy Tailwind spacing classes in the content to the decanter spacing scale.
+    .replace(/ (mb|pl|pr)-(2|3|4|5|7|10|20)(?= )/g, (match, prop: string, size: string) =>
+      legacySpacing.includes(`${prop}-${size}`) ? ` ${prop}-${parseInt(size) * 2.5}` : match
+    )
     .replace(/ tablesaw.*? /g, " ")
     .replace(/ +/g, " ")
     .trim()

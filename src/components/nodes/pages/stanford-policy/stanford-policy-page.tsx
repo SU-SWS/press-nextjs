@@ -3,7 +3,7 @@ import StanfordPolicyCard from "@components/nodes/cards/stanford-policy/stanford
 import StringWithLines from "@components/elements/string-with-lines"
 import {HtmlHTMLAttributes, Suspense} from "react"
 import {H1, H2, H3} from "@components/elements/headers"
-import {NodeInterface, NodeStanfordPolicy} from "@lib/gql/__generated__/drupal.d"
+import {NodeInterface, NodeStanfordPolicy} from "@lib/gql/__generated__/graphql"
 import {getEntityFromPath} from "@lib/gql/gql-queries"
 import {ImageCardSkeleton} from "@components/patterns/image-card"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
@@ -16,10 +16,10 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 const StanfordPolicyPage = async ({node, ...props}: Props) => {
   const changeLog = node.suPolicyChangelog?.filter(change => change.suPolicyPublic) || []
   return (
-    <article className="centered pt-32" {...props}>
+    <article className="centered pt-80" {...props}>
       <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={node.title} />
       <H1>{node.title}</H1>
-      <div className="flex flex-col gap-20">
+      <div className="flex flex-col gap-50">
         {(node.suPolicyAuthority || node.suPolicyUpdated || node.suPolicyEffective) && (
           <div>
             {node.suPolicyAuthority && (
@@ -54,12 +54,12 @@ const StanfordPolicyPage = async ({node, ...props}: Props) => {
         )}
 
         {changeLog.length > 0 && (
-          <div className="mb-10 border border-black-40 bg-black-10 p-20">
+          <div className="mb-25 border border-black-40 bg-black-10 p-50">
             <H2 className="type-0 xl:text-21">Change log:</H2>
 
             {changeLog.map(change => (
               <div key={change.uuid}>
-                <H3 className="type-0 flex gap-2 xl:text-21">
+                <H3 className="flex gap-5 type-0 xl:text-21">
                   <div>
                     {new Date(change.suPolicyDate.time).toLocaleDateString("en-us", {
                       month: "long",
@@ -85,7 +85,7 @@ const StanfordPolicyPage = async ({node, ...props}: Props) => {
         {node.suPolicyRelated && (
           <div>
             <H2 className="text-center">Related Policies</H2>
-            <ul className="list-unstyled grid gap-20 lg:grid-cols-3">
+            <ul className="list-unstyled grid gap-50 lg:grid-cols-3">
               {node.suPolicyRelated.map(policy => (
                 <li key={policy.uuid}>
                   <Suspense fallback={<ImageCardSkeleton />}>

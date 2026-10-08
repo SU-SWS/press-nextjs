@@ -1,4 +1,4 @@
-import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/drupal.d"
+import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/graphql"
 import {H1, H2, H3} from "@components/elements/headers"
 import {Fragment, HTMLAttributes, Suspense} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
@@ -48,55 +48,55 @@ const BookPage = async ({node, ...props}: Props) => {
           </Fragment>
         ))}
       </NodePageMetadata>
-      <div className="mb-20 flex flex-col md:rs-mt-4 md:flex-row md:gap-32 lg:gap-[7.6rem]">
-        <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-col justify-center bg-fog-light px-20 md:hidden">
-          <div className="flex flex-row gap-24">
-            <div className="mb-16 hidden w-8/12 flex-col sm:flex md:hidden">
-              <H1 className="type-2 mb-0 xl:text-[3.3rem]">{formatHtml(node.title)}</H1>
+      <div className="mb-50 flex flex-col md:rs-mt-4 md:flex-row md:gap-80 lg:gap-[7.6rem]">
+        <div className="relative left-1/2 flex w-screen -translate-x-1/2 flex-col justify-center bg-fog-light px-50 md:hidden">
+          <div className="flex flex-row gap-60">
+            <div className="mb-40 hidden w-8/12 flex-col sm:flex md:hidden">
+              <H1 className="mb-0 type-2 xl:text-[3.3rem]">{formatHtml(node.title)}</H1>
 
               {node.supBookSubtitle && (
-                <div className="type-1 mt-5 font-medium xl:text-26">{formatHtml(node.supBookSubtitle)}</div>
+                <div className="mt-12.5 type-1 font-medium xl:text-26">{formatHtml(node.supBookSubtitle)}</div>
               )}
 
               {node.supBookAuthorsFull && (
-                <div className="type-1 mt-5 text-press-sand-dark xl:text-26">{node.supBookAuthorsFull}</div>
+                <div className="mt-12.5 type-1 text-press-sand-dark xl:text-26">{node.supBookAuthorsFull}</div>
               )}
             </div>
             <div className="order-first sm:w-5/12">
               <BookPageImage node={node} />
             </div>
           </div>
-          <div className="order-first py-8 sm:pb-28 sm:pt-16">
+          <div className="order-first py-20 sm:pt-40 sm:pb-70">
             <Link
               href="/books"
-              className="group flex w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6"
+              className="group flex w-fit items-center gap-12.5 font-normal text-stone-dark no-underline md:gap-15 hocus:text-archway-dark hocus:underline"
             >
               <ArrowLongLeftIcon
                 width={25}
-                className="text-stone-dark transition-all group-hocus:-translate-x-2 group-hocus:text-archway-dark"
+                className="text-stone-dark transition-all group-hocus:-translate-x-5 group-hocus:text-archway-dark"
               />
               <span className="text-18">Back to Books</span>
             </Link>
           </div>
         </div>
-        <div className="flex flex-col justify-between md:w-[78%] md:gap-32 lg:flex-row lg:gap-[7.6rem]">
-          <div className="lg:w-5/8 2xl:w-full">
-            <div className="rs-mb-0 rs-pb-3 flex flex-col border-b-2 border-fog">
-              <div className="mt-7 flex flex-col sm:mt-0 sm:hidden md:flex">
-                <H1 className="type-2 mb-0 xl:text-[3.3rem]">{formatHtml(node.title)}</H1>
+        <div className="flex flex-col justify-between md:w-[78%] md:gap-80 lg:flex-row lg:gap-[7.6rem]">
+          <div className="2xl:w-full">
+            <div className="rs-mb-0 flex flex-col border-b-2 border-fog rs-pb-3">
+              <div className="mt-17.5 flex flex-col sm:mt-0 sm:hidden md:flex">
+                <H1 className="mb-0 type-2 xl:text-[3.3rem]">{formatHtml(node.title)}</H1>
 
                 {node.supBookSubtitle && (
-                  <div className="type-1 mt-5 font-medium xl:text-26">{formatHtml(node.supBookSubtitle)}</div>
+                  <div className="mt-12.5 type-1 font-medium xl:text-26">{formatHtml(node.supBookSubtitle)}</div>
                 )}
 
                 {node.supBookAuthorsFull && (
-                  <div className="type-0 mt-5 text-press-sand-dark xl:text-21">{node.supBookAuthorsFull}</div>
+                  <div className="mt-12.5 type-0 text-press-sand-dark xl:text-21">{node.supBookAuthorsFull}</div>
                 )}
               </div>
 
               {awards && (
                 <div className="rs-mt-1 border-t-2 border-fog">
-                  <H2 className="flex w-fit items-center gap-2 bg-fog p-3 text-18 font-semibold">
+                  <H2 className="flex w-fit items-center gap-5 bg-fog p-7.5 text-18 font-semibold">
                     <BookmarkIcon width={20} className="fill-archway" />
                     Award Winner
                   </H2>
@@ -106,7 +106,7 @@ const BookPage = async ({node, ...props}: Props) => {
                         <H3 className="type-0 xl:text-21">
                           {award.supYear}: {award.title}
                         </H3>
-                        <Wysiwyg html={award.supDescription?.processed} className="ml-10" />
+                        <Wysiwyg html={award.supDescription?.processed} className="ml-25" />
                       </div>
                     ))}
                   </BookAwards>
@@ -114,7 +114,7 @@ const BookPage = async ({node, ...props}: Props) => {
               )}
             </div>
 
-            <div className="rs-mb-0 rs-pb-3 flex flex-col gap-2 border-b-2 border-fog">
+            <div className="rs-mb-0 flex flex-col gap-5 border-b-2 border-fog rs-pb-3">
               {node.supBookImprint && (
                 <div className="rs-mb-0 text-18 font-semibold text-press-sand-dark">
                   Imprint: {node.supBookImprint.name}
@@ -152,7 +152,7 @@ const BookPage = async ({node, ...props}: Props) => {
                 </div>
               )}
             </div>
-            <div className="rs-mb-2 flex flex-col gap-2">
+            <div className="rs-mb-2 flex flex-col gap-5">
               {node.supBookIsbn13Cloth && (
                 <div className="text-18 text-stone-dark">Hardcover ISBN: {node.supBookIsbn13Cloth}</div>
               )}
@@ -165,7 +165,7 @@ const BookPage = async ({node, ...props}: Props) => {
             </div>
           </div>
 
-          <div className="lg:w-3/8 xl:min-w-[200px] 2xl:min-w-[320px] 2xl:max-w-[370px]">
+          <div className="xl:min-w-[200px] 2xl:max-w-[370px] 2xl:min-w-[320px]">
             {!node.supBookNoCart && (node.supBookIsbn13Cloth || node.supBookIsbn13Paper || node.supBookIsbn13Alt) && (
               <PreCartClient
                 priceId={node.supBookPriceData?.uuid}
@@ -184,9 +184,9 @@ const BookPage = async ({node, ...props}: Props) => {
 
             <Link
               href={node.path + "/desk-examination-copy-requests"}
-              className="flex items-start gap-3 text-18 font-normal leading-snug text-stone-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
+              className="flex items-start gap-7.5 text-18 leading-snug font-normal text-stone-dark underline-offset-[5px] hocus:text-archway-dark hocus:decoration-archway-dark hocus:decoration-2"
             >
-              <ClipboardIcon width={24} className="mt-1 shrink-0 text-fog-dark" /> Desk, Examination, or Review Copy
+              <ClipboardIcon width={24} className="mt-2.5 shrink-0 text-fog-dark" /> Desk, Examination, or Review Copy
               Requests
             </Link>
           </div>
@@ -203,24 +203,24 @@ const BookPage = async ({node, ...props}: Props) => {
       {(node.body?.processed || node.supBookReviews || node.supBookAuthorInfo) && (
         <Suspense>
           <Tabs
-            className="mb-20 border-b border-fog pb-20"
+            className="mb-50 flex-col border-b border-fog pb-50"
             queryKey="tab"
             defaultValue={node.body?.processed ? "description" : node.supBookReviews ? "reviews" : "author"}
           >
-            <div className="mb-20 border-b border-fog">
+            <div className="mb-50 border-b border-fog">
               <TabsList className="mx-auto max-w-5xl">
                 {node.body?.processed && (
-                  <Tab className="p-10" value="description">
+                  <Tab className="p-25" value="description">
                     Description
                   </Tab>
                 )}
                 {node.supBookReviews && (
-                  <Tab className="p-10" value="reviews">
+                  <Tab className="p-25" value="reviews">
                     Reviews
                   </Tab>
                 )}
                 {node.supBookAuthorInfo && (
-                  <Tab className="p-10" value="author">
+                  <Tab className="p-25" value="author">
                     About the Author
                   </Tab>
                 )}
@@ -250,7 +250,7 @@ const BookPage = async ({node, ...props}: Props) => {
       {node.supBookSubjects && (
         <div className="mx-auto max-w-5xl">
           <H2 className="type-0 font-bold xl:text-21">Related Subjects</H2>
-          <ul className="list-unstyled flex flex-col gap-x-10 md:flex-row md:flex-wrap">
+          <ul className="list-unstyled flex flex-col gap-x-25 md:flex-row md:flex-wrap">
             {node.supBookSubjects.map(subject => {
               const linkParamsString = createLinkParams(subject)
               return (

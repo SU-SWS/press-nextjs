@@ -1,10 +1,10 @@
 import {getConfigPageField} from "@lib/gql/gql-queries"
-import {StanfordBasicSiteSetting} from "@lib/gql/__generated__/drupal.d"
+import {StanfordBasicSiteSetting} from "@lib/gql/__generated__/graphql"
 import Script from "next/script"
 import {GoogleAnalytics} from "@next/third-parties/google"
 
 const UserAnalytics = async () => {
-  if (process.env.NODE_ENV === "development") return
+  if (process.env.VERCEL_ENV !== "production") return
 
   const googleAnalytics = await getConfigPageField<
     StanfordBasicSiteSetting,

@@ -1,7 +1,7 @@
 import {getMenu} from "@lib/gql/gql-queries"
 import SideNav from "@components/menu/side-nav"
 import {HtmlHTMLAttributes} from "react"
-import {MenuAvailable} from "@lib/gql/__generated__/drupal.d"
+import {MenuAvailable} from "@lib/gql/__generated__/graphql"
 import cn from "@lib/utils/className"
 import getActiveTrail from "@lib/drupal/utils"
 
@@ -31,7 +31,7 @@ const InteriorPage = async ({children, currentPath, ...props}: Props) => {
         </aside>
       )}
 
-      <div className="flex-grow" id="page-content">
+      <div className="grow" id="page-content">
         {children}
       </div>
     </div>

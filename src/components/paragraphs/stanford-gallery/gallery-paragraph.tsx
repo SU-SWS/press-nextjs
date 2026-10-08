@@ -3,7 +3,7 @@ import Button from "@components/elements/button"
 import Image from "@components/images/image"
 import {H2} from "@components/elements/headers"
 import {ElementType, HtmlHTMLAttributes} from "react"
-import {MediaStanfordGalleryImage, ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d"
+import {MediaStanfordGalleryImage, ParagraphStanfordGallery} from "@lib/gql/__generated__/graphql"
 import Link from "@components/elements/link"
 import cn from "@lib/utils/className"
 
@@ -17,7 +17,7 @@ const GalleryParagraph = ({paragraph, ...props}: Props) => {
   return (
     <GalleryWrapper
       {...props}
-      className={cn("centered mb-20 flex flex-col gap-10 @container lg:max-w-1200", props.className)}
+      className={cn("@container centered mb-50 flex flex-col gap-25 lg:max-w-1200", props.className)}
       aria-labelledby={paragraph.suGalleryHeadline ? paragraph.uuid : undefined}
     >
       {paragraph.suGalleryHeadline && (
@@ -29,7 +29,7 @@ const GalleryParagraph = ({paragraph, ...props}: Props) => {
       <Wysiwyg html={paragraph.suGalleryDescription?.processed} />
 
       {paragraph.suGalleryImages && paragraph.suGalleryImages?.length > 0 && (
-        <ul className="list-unstyled grid gap-20 @3xl:grid-cols-2 @6xl:grid-cols-3">
+        <ul className="list-unstyled grid gap-50 @3xl:grid-cols-2 @6xl:grid-cols-3">
           {paragraph.suGalleryImages.map(image => (
             <li key={image.uuid} className="m-0">
               <GalleryImage image={image} galleryId={paragraph.uuid} />
@@ -59,7 +59,7 @@ const GalleryImage = ({
 
   return (
     <figure>
-      <div className="relative aspect-[4/3] w-full">
+      <div className="relative aspect-4/3 w-full">
         <Link
           href={`/gallery/${galleryId}/${image.uuid}`}
           className="border-sand-light relative block h-full w-full border"
@@ -77,7 +77,7 @@ const GalleryImage = ({
         </Link>
       </div>
 
-      {image.suGalleryCaption && <figcaption className="basefont-19 text-right">{image.suGalleryCaption}</figcaption>}
+      {image.suGalleryCaption && <figcaption className="text-right basefont-19">{image.suGalleryCaption}</figcaption>}
     </figure>
   )
 }

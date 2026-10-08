@@ -17,7 +17,7 @@ const ActionLink = ({children, className, ...props}: LinkProps) => {
       {children}
       <ArrowLongRightIcon
         height={20}
-        className="ml-2 text-digital-red transition-all group-hocus:translate-x-2 group-hocus:text-archway-dark"
+        className="ml-5 text-digital-red transition-all group-hocus:translate-x-5 group-hocus:text-archway-dark"
       />
     </Link>
   )

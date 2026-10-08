@@ -1,4 +1,4 @@
-import {MenuItem as MenuItemType, NodeSupBookAncillary} from "@lib/gql/__generated__/drupal.d"
+import {MenuItem as MenuItemType, NodeSupBookAncillary} from "@lib/gql/__generated__/graphql"
 import {H1} from "@components/elements/headers"
 import {HTMLAttributes} from "react"
 import Rows from "@components/paragraphs/rows/rows"
@@ -34,7 +34,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
       {...props}
       href={book.path + "/excerpts"}
       className={cn("centered", props.className)}
-      linkClasses="flex w-fit items-center gap-5"
+      linkClasses="flex w-fit items-center gap-12.5"
       title="Excerpts + more"
       childrenProps={{className: "centered rs-mt-4 flex gap-[17.1rem]"}}
       isArticle
@@ -49,11 +49,11 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
           <div className="flex flex-col">
             <div className="type-2 font-medium xl:text-[3.3rem]">{book.title}</div>
             {node.supAncillaryBook.supBookSubtitle && (
-              <div className="type-1 mt-5 font-medium xl:text-26">{node.supAncillaryBook.supBookSubtitle}</div>
+              <div className="mt-12.5 type-1 font-medium xl:text-26">{node.supAncillaryBook.supBookSubtitle}</div>
             )}
 
             {node.supAncillaryBook.supBookAuthorsFull && (
-              <div className="type-0 mt-5 text-press-sand-dark xl:text-21">
+              <div className="mt-12.5 type-0 text-press-sand-dark xl:text-21">
                 {node.supAncillaryBook.supBookAuthorsFull}
               </div>
             )}
@@ -66,7 +66,7 @@ const SupBookAncillaryPage = async ({node, ...props}: Props) => {
 
       <aside className="order-first hidden w-1/4 shrink-0 lg:block">
         {node.supAncillaryBook.supBookImage?.mediaImage && (
-          <div className="rs-mb-3 relative order-first w-full shrink-0">
+          <div className="relative order-first rs-mb-3 w-full shrink-0">
             <BookPageImage node={node.supAncillaryBook} />
           </div>
         )}

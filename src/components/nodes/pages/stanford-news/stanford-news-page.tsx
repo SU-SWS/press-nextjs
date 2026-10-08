@@ -4,7 +4,7 @@ import Rows from "@components/paragraphs/rows/rows"
 import SocialIcons from "@components/nodes/pages/stanford-news/social-icons"
 import {H1} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordNews} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordNews} from "@lib/gql/__generated__/graphql"
 import NodePageMetadata from "@components/nodes/pages/node-page-metadata"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -34,18 +34,18 @@ const StanfordNewsPage = ({node, ...props}: Props) => {
   const topics = node.suNewsTopics?.slice(0, 3)
 
   return (
-    <article className="centered mt-32" {...props}>
+    <article className="mt-80 centered" {...props}>
       <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={node.title} />
-      <div className="mx-auto mb-48 lg:w-10/12">
+      <div className="mx-auto mb-120 lg:w-10/12">
         <div className="flex flex-col">
           <H1 className="order-2">{node.title}</H1>
 
-          {topics && <div className="order-1 flex gap-2">{topics.map(topic => topic.name).join(", ")}</div>}
+          {topics && <div className="order-1 flex gap-5">{topics.map(topic => topic.name).join(", ")}</div>}
         </div>
 
-        {node.suNewsDek && <div className="mb-10">{node.suNewsDek}</div>}
+        {node.suNewsDek && <div className="mb-25">{node.suNewsDek}</div>}
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-12.5">
           {node.suNewsPublishingDate && (
             <time dateTime={new Date(node.suNewsPublishingDate.time).toISOString().substring(0, 10)}>
               {publishDate}
@@ -53,13 +53,13 @@ const StanfordNewsPage = ({node, ...props}: Props) => {
           )}
           {node.suNewsByline && <div>{node.suNewsByline}</div>}
 
-          {!node.suNewsHideSocial && <SocialIcons className="flex gap-4" />}
+          {!node.suNewsHideSocial && <SocialIcons className="flex gap-10" />}
         </div>
       </div>
 
       {bannerImageUrl && (
-        <figure className="mb-32">
-          <div className="relative aspect-[16/9] w-full">
+        <figure className="mb-80">
+          <div className="relative aspect-video w-full">
             <Image
               className="object-cover"
               src={bannerImageUrl}
@@ -70,7 +70,7 @@ const StanfordNewsPage = ({node, ...props}: Props) => {
             />
           </div>
           {node.suNewsBannerMediaCaption && (
-            <figcaption className="px-20 text-center">{node.suNewsBannerMediaCaption}</figcaption>
+            <figcaption className="px-50 text-center">{node.suNewsBannerMediaCaption}</figcaption>
           )}
         </figure>
       )}

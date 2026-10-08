@@ -1,5 +1,5 @@
 import React, {HtmlHTMLAttributes} from "react"
-import {ParagraphStanfordBanner} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphStanfordBanner} from "@lib/gql/__generated__/graphql"
 import {H2, H3, H4} from "@components/elements/headers"
 import Wysiwyg from "@components/elements/wysiwyg"
 import Button from "@components/elements/button"
@@ -44,10 +44,10 @@ const BannerParagraph = ({paragraph, eagerLoadImage, ...props}: Props) => {
           )}
 
           {paragraph.suBannerSupHeader && (
-            <div className="order-1 text-09em font-semibold">{paragraph.suBannerSupHeader}</div>
+            <div className="order-1 text-[.9em] font-semibold">{paragraph.suBannerSupHeader}</div>
           )}
 
-          <Wysiwyg html={paragraph.suBannerBody?.processed} className="type-0 order-3 xl:text-21" />
+          <Wysiwyg html={paragraph.suBannerBody?.processed} className="order-3 type-0 xl:text-21" />
 
           {paragraph.suBannerButton?.url && (
             <div className="order-4">

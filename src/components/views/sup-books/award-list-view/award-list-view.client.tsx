@@ -61,17 +61,17 @@ const AwardListViewClient = ({totalItems, loadPage, children, ...props}: Props) 
   return (
     <div {...props}>
       {isPending && (
-        <div className="absolute left-0 top-0 z-10 h-full w-full rounded-2xl bg-black-20 bg-opacity-30">
-          <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
+        <div className="absolute top-0 left-0 z-10 h-full w-full rounded-2xl bg-black-20/30">
+          <div className="absolute bottom-50 left-1/2 -translate-x-1/2">
             <ArrowPathIcon className="animate-spin" width={50} />
           </div>
         </div>
       )}
       <form>
-        <fieldset className="mb-20 flex flex-wrap gap-14 *:min-w-fit">
+        <fieldset className="mb-50 flex flex-wrap gap-35 *:min-w-fit">
           <legend className="sr-only">Filter by year</legend>
 
-          <label className="flex cursor-pointer items-center gap-10">
+          <label className="flex cursor-pointer items-center gap-25">
             <div className="group relative">
               <input
                 className="peer sr-only"
@@ -80,14 +80,14 @@ const AwardListViewClient = ({totalItems, loadPage, children, ...props}: Props) 
                 defaultChecked
                 onChange={() => onYearChosen()}
               />
-              <div className="h-6 w-16 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
-              <div className="absolute -top-2 right-7 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-8 outline-press-bay/60 transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline group-hocus:outline" />
+              <div className="h-15 w-40 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
+              <div className="absolute -top-5 right-17.5 h-25 w-25 rounded-full border border-fog-dark bg-white shadow-sm outline-8 outline-press-bay/60 transition outline-none group-hocus:outline-solid peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline-solid" />
             </div>
             <span>All Winners</span>
           </label>
 
           {yearChoices.map(year => (
-            <label key={"award-winner-year-" + year} className="flex cursor-pointer items-center gap-10">
+            <label key={"award-winner-year-" + year} className="flex cursor-pointer items-center gap-25">
               <div className="group relative">
                 <input
                   className="peer sr-only"
@@ -96,8 +96,8 @@ const AwardListViewClient = ({totalItems, loadPage, children, ...props}: Props) 
                   value={year}
                   onChange={() => onYearChosen(year)}
                 />
-                <div className="h-6 w-16 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
-                <div className="absolute -top-2 right-7 h-10 w-10 rounded-full border border-fog-dark bg-white shadow outline-8 outline-press-bay/60 transition peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline group-hocus:outline" />
+                <div className="h-15 w-40 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
+                <div className="absolute -top-5 right-17.5 h-25 w-25 rounded-full border border-fog-dark bg-white shadow-sm outline-8 outline-press-bay/60 transition outline-none group-hocus:outline-solid peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline-solid" />
               </div>
 
               <span>
@@ -113,7 +113,7 @@ const AwardListViewClient = ({totalItems, loadPage, children, ...props}: Props) 
       <PagedList
         key={minYear}
         ulProps={{
-          className: cn("list-unstyled grid @lg:grid-cols-2 @5xl:grid-cols-3 @7xl:grid-cols-4 gap-20", {
+          className: cn("list-unstyled grid @lg:grid-cols-2 @5xl:grid-cols-3 @7xl:grid-cols-4 gap-50", {
             "max-w-1200 mx-auto": numItems < 5,
             "@10xl:grid-cols-5": numItems >= 5,
           }),

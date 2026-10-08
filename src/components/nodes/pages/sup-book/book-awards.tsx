@@ -22,7 +22,7 @@ const BookAwards = ({children}: {children: JSX.Element[]}) => {
     <div>
       <ul className="list-unstyled">
         {top.map((item, i) => (
-          <li className="mb-10" key={`top-award-${i}`}>
+          <li className="mb-25" key={`top-award-${i}`}>
             {item}
           </li>
         ))}
@@ -30,7 +30,7 @@ const BookAwards = ({children}: {children: JSX.Element[]}) => {
           <>
             {bottom.map((item, i) => (
               <li
-                className="mb-10"
+                className="mb-25"
                 key={`bottom-award-${i}`}
                 ref={i === 0 ? firstBottomRef : undefined}
                 tabIndex={i === 0 ? 0 : undefined}
@@ -45,7 +45,7 @@ const BookAwards = ({children}: {children: JSX.Element[]}) => {
 
       {bottom.length > 0 && !showingMore && (
         <button
-          className="flex items-center gap-3"
+          className="flex items-center gap-7.5"
           onClick={() => {
             enableFocusElement()
             showMore()

@@ -19,7 +19,7 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
   return (
     <div {...props} className={cn("centered max-w-800", props.className)}>
       <div className="rs-mb-1 max-w-4xl">
-        <div id={id} className="type-0 mb-3 font-medium xl:text-21">
+        <div id={id} className="mb-7.5 type-0 font-medium xl:text-21">
           {label}
         </div>
         <SelectList<false>
@@ -32,7 +32,7 @@ const FileListSelection = ({fileOptions, label, ...props}: Props) => {
       {chosenItem && (
         <Button
           href={chosenItem.url}
-          className="type-0 flex items-center gap-10 py-[1.2rem] pl-[2.1rem] pr-[1.8rem] xl:text-21"
+          className="flex items-center gap-25 py-[1.2rem] pr-[1.8rem] pl-[2.1rem] type-0 xl:text-21"
           prefetch={false}
         >
           Download {chosenItem.label} <DocumentArrowDownIcon width={28} />

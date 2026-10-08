@@ -1,7 +1,7 @@
 import Image from "@components/images/image"
 import InterceptionModal from "@components/elements/interception-modal"
 import Link from "@components/elements/link"
-import {ParagraphStanfordGallery} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphStanfordGallery, ParagraphDocument, ParagraphQuery} from "@lib/gql/__generated__/graphql"
 import {graphqlClient} from "@lib/gql/gql-client"
 import {notFound} from "next/navigation"
 import {cacheTag} from "next/cache"
@@ -16,7 +16,7 @@ type Props = {
 const getGallery = async (paragraphId: string): Promise<ParagraphStanfordGallery | false> => {
   "use cache: remote"
   cacheTag("paragraphs", `paragraphs:${paragraphId}`)
-  const paragraphQuery = await graphqlClient().Paragraph({uuid: paragraphId})
+  const paragraphQuery = await graphqlClient().request<ParagraphQuery>(ParagraphDocument, {uuid: paragraphId})
   if (paragraphQuery.paragraph?.__typename === "ParagraphStanfordGallery")
     return paragraphQuery.paragraph as ParagraphStanfordGallery
   return false
@@ -65,7 +65,10 @@ const Page = async (props: Props) => {
                 />
               </picture>
               {galleryImage.suGalleryCaption && (
-                <figcaption id={mediaUuid} className="m-0 table-caption w-full caption-bottom bg-white p-5 text-right">
+                <figcaption
+                  id={mediaUuid}
+                  className="m-0 table-caption w-full caption-bottom bg-white p-12.5 text-right"
+                >
                   {galleryImage.suGalleryCaption}
                 </figcaption>
               )}
@@ -76,7 +79,7 @@ const Page = async (props: Props) => {
                   {prevImageIndex >= 0 && (
                     <li className="mr-auto">
                       <Link
-                        className="mt-5 font-medium text-press-sand-light no-underline hocus:text-white hocus:underline"
+                        className="mt-12.5 font-medium text-press-sand-light no-underline hocus:text-white hocus:underline"
                         href={`/gallery/${paragraph.uuid}/${paragraph.suGalleryImages?.[prevImageIndex].uuid}`}
                         replace={true}
                         scroll={false}
@@ -88,7 +91,7 @@ const Page = async (props: Props) => {
                   {nextImageIndex >= 0 && (
                     <li className="ml-auto">
                       <Link
-                        className="mt-5 font-medium text-press-sand-light no-underline hocus:text-white hocus:underline"
+                        className="mt-12.5 font-medium text-press-sand-light no-underline hocus:text-white hocus:underline"
                         href={`/gallery/${paragraph.uuid}/${paragraph.suGalleryImages?.[nextImageIndex].uuid}`}
                         replace={true}
                         scroll={false}

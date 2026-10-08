@@ -1,5 +1,5 @@
 import {HtmlHTMLAttributes} from "react"
-import {ParagraphSupFileList} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphSupFileList} from "@lib/gql/__generated__/graphql"
 import FileListSelection from "@components/paragraphs/sup-file-list/file-list-selection"
 import {H2} from "@components/elements/headers"
 import {DocumentTextIcon} from "@heroicons/react/24/outline"
@@ -36,13 +36,13 @@ const FileListParagraph = ({paragraph, ...props}: Props) => {
           <li key={media.value} className="rs-mb-2">
             <a
               href={media.url}
-              className="group type-0 flex w-fit items-center gap-7 font-normal text-stone-dark xl:text-21"
+              className="group flex w-fit items-center gap-17.5 type-0 font-normal text-stone-dark xl:text-21"
             >
               <span className="relative block">
                 <DocumentTextIcon width={44} className="text-press-sand-light group-hocus:text-archway-dark" />
 
                 {media.url.startsWith("/system/") && (
-                  <LockClosedIcon width={26} className="absolute bottom-0 right-0" />
+                  <LockClosedIcon width={26} className="absolute right-0 bottom-0" />
                 )}
               </span>
               {media.label}

@@ -1,5 +1,5 @@
 import {HtmlHTMLAttributes} from "react"
-import {ParagraphStanfordStatCard} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphStanfordStatCard} from "@lib/gql/__generated__/graphql"
 import {H2, H3, H4} from "@components/elements/headers"
 import Wysiwyg from "@components/elements/wysiwyg"
 import Link from "@components/elements/link"
@@ -59,7 +59,7 @@ const StatCardParagraph = ({paragraph, ...props}: Props) => {
         "bg-lagunita": paragraph.suStatBgColor?.color === "007c92",
         "bg-palo-alto": paragraph.suStatBgColor?.color === "175e54",
         "bg-poppy": paragraph.suStatBgColor?.color === "e98300",
-        "bg-foggy-light": paragraph.suStatBgColor?.color === "f4f4f4",
+        "bg-fog-light": paragraph.suStatBgColor?.color === "f4f4f4",
         "bg-spirited": paragraph.suStatBgColor?.color === "e04f39",
       })}
       aria-labelledby={paragraph.suStatHeadline ? paragraph.uuid : undefined}
@@ -131,8 +131,8 @@ const StatCardParagraph = ({paragraph, ...props}: Props) => {
       <Wysiwyg html={paragraph.suStatBody?.processed} />
       {paragraph.suStatButton?.url && (
         <Link
-          className={cn("group flex w-fit items-center gap-3 text-black no-underline hocus:underline", {
-            "border border-black px-7 py-5": paragraph.suStatLinkStyle === "button",
+          className={cn("group flex w-fit items-center gap-7.5 text-black no-underline hocus:underline", {
+            "border border-black px-17.5 py-12.5": paragraph.suStatLinkStyle === "button",
             "border-white text-white hocus:text-white": whiteText,
             "mx-auto": paragraph.suStatCentered,
           })}
@@ -141,7 +141,7 @@ const StatCardParagraph = ({paragraph, ...props}: Props) => {
           {paragraph.suStatButton.title}
 
           {paragraph.suStatLinkStyle !== "button" && (
-            <ChevronRightIcon className="shrink-0 transition-all group-hocus:translate-x-1.5" width={20} />
+            <ChevronRightIcon className="shrink-0 transition-all group-hocus:translate-x-3.75" width={20} />
           )}
         </Link>
       )}

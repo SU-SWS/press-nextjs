@@ -1,7 +1,7 @@
 import Link from "@components/elements/link"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeSupBook} from "@lib/gql/__generated__/drupal.d"
+import {NodeSupBook} from "@lib/gql/__generated__/graphql"
 import cn from "@lib/utils/className"
 import {formatHtml} from "@components/elements/wysiwyg"
 
@@ -16,10 +16,10 @@ const SupBookListItem = ({node, headingLevel, ...props}: Props) => {
     <article
       {...props}
       aria-labelledby={node.uuid}
-      className={cn("mx-auto w-full max-w-[500px] border border-black-20 p-10 shadow-xl", props.className)}
+      className={cn("mx-auto w-full max-w-[500px] border border-black-20 p-25 shadow-xl", props.className)}
     >
       <div className="flex flex-col">
-        <Heading className="type-1 order-first xl:text-26" id={node.uuid}>
+        <Heading className="order-first type-1 xl:text-26" id={node.uuid}>
           <Link href={node.path || "#"}>{formatHtml(node.title)}</Link>
         </Heading>
         <div className="font-bold">Publication</div>

@@ -1,5 +1,5 @@
 import NodePage from "@components/nodes/pages/node-page"
-import {NodeUnion} from "@lib/gql/__generated__/drupal.d"
+import {NodeUnion} from "@lib/gql/__generated__/graphql"
 import {getAllNodes, getEntityFromPath} from "@lib/gql/gql-queries"
 import {notFound, redirect} from "next/navigation"
 import {getPathFromContext, PageProps, Slug} from "@lib/drupal/utils"
@@ -11,6 +11,9 @@ import SupBookDeskExaminationPage from "@components/nodes/pages/sup-book/sup-boo
 // https://vercel.com/docs/functions/runtimes#max-duration
 export const maxDuration = 30
 export const instant = false
+
+// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config/ensureStatic
+export const ensureStatic = "navigation"
 
 const Page = (props: PageProps) => {
   // If enabling instant navigation, wrap this in `<Suspense fallback={<NodePageSkeleton/>}>`

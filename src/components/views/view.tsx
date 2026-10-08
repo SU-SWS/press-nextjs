@@ -23,7 +23,7 @@ import {
   NodeUnion,
   SupBooksAwardWinnersFilterInput,
   SupBooksViewSortKeys,
-} from "@lib/gql/__generated__/drupal.d"
+} from "@lib/gql/__generated__/graphql"
 import BookListView from "@components/views/sup-books/book-list-view"
 import AwardListView from "@components/views/sup-books/award-list-view/award-list-view"
 

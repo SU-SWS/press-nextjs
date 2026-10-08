@@ -8,7 +8,7 @@ import Rows from "@components/paragraphs/rows/rows"
 import {H1, H2, H3} from "@components/elements/headers"
 import ScheduleParagraph from "@components/paragraphs/stanford-schedule/schedule-paragraph"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordEvent} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordEvent} from "@lib/gql/__generated__/graphql"
 import Email from "@components/elements/email"
 import Telephone from "@components/elements/telephone"
 import Link from "@components/elements/link"
@@ -22,12 +22,12 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 const StanfordEventPage = ({node, ...props}: Props) => {
   if (node.suEventSource?.url) redirect(node.suEventSource.url)
 
-  const startTime = new Date(node.suEventDateTime.value * 1000)
-  const endTime = new Date(node.suEventDateTime.end_value * 1000)
+  const startTime = new Date(parseInt(node.suEventDateTime.value) * 1000)
+  const endTime = new Date(parseInt(node.suEventDateTime.end_value) * 1000)
   const timeZone = node.suEventDateTime.timezone || "America/Los_Angeles"
 
   return (
-    <article className="centered mt-32 flex flex-col gap-20" {...props}>
+    <article className="mt-80 centered flex flex-col gap-50" {...props}>
       <NodePageMetadata key={node.uuid} metatags={node.metatag} pageTitle={node.title} />
       <div className="flex flex-col">
         <H1 className="order-2">{node.title}</H1>
@@ -45,10 +45,10 @@ const StanfordEventPage = ({node, ...props}: Props) => {
         </div>
       )}
 
-      <div className="mx-auto border border-black-40 px-10 py-20 lg:w-3/4 lg:px-48">
+      <div className="mx-auto border border-black-40 px-25 py-50 lg:w-3/4 lg:px-120">
         <H2 className="type-1 xl:text-26">Event Details:</H2>
-        <div className="grid items-start gap-20 lg:grid-cols-2">
-          <time className="flex items-center gap-5" dateTime={startTime.toISOString()}>
+        <div className="grid items-start gap-50 lg:grid-cols-2">
+          <time className="flex items-center gap-12.5" dateTime={startTime.toISOString()}>
             <CalendarDaysIcon width={30} className="shrink-0" />
             {getEventTimeString(startTime, endTime, timeZone)}
           </time>
@@ -74,7 +74,7 @@ const StanfordEventPage = ({node, ...props}: Props) => {
           )}
 
           {(node.suEventLocation || node.suEventMapLink) && (
-            <div className="flex-col-2 flex items-start gap-5">
+            <div className="flex-col-2 flex items-start gap-12.5">
               <MapPinIcon width={30} className="shrink-0" />
               <div>
                 <H3 className="type-0 xl:text-21">Location</H3>
@@ -89,7 +89,7 @@ const StanfordEventPage = ({node, ...props}: Props) => {
           )}
 
           {node.suEventAudience && (
-            <div className="flex-col-2 flex items-start gap-5">
+            <div className="flex-col-2 flex items-start gap-12.5">
               <UserGroupIcon width={30} className="shrink-0" />
               <div>
                 <H3 className="type-0 xl:text-21">This event is open to:</H3>
@@ -102,7 +102,7 @@ const StanfordEventPage = ({node, ...props}: Props) => {
         </div>
 
         {node.suEventCta && (
-          <div className="mt-20">
+          <div className="mt-50">
             <Button href={node.suEventCta.url} centered>
               {node.suEventCta.title}
             </Button>

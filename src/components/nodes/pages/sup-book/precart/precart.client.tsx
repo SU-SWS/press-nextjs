@@ -4,7 +4,7 @@ import useIsInternational from "@lib/hooks/useIsInternational"
 import Button from "@components/elements/button"
 import {FormEvent, HTMLAttributes, ReactNode, useCallback, useEffect, useRef, useState} from "react"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
-import {Maybe, NodeSupBook, PressPrice} from "@lib/gql/__generated__/drupal.d"
+import {Maybe, NodeSupBook, PressPrice} from "@lib/gql/__generated__/graphql"
 import {BookOpenIcon as BookOpenIconOutline, DeviceTabletIcon} from "@heroicons/react/24/outline"
 import {BookOpenIcon} from "@heroicons/react/24/solid"
 import {formatCurrency} from "@lib/utils/format-currency"
@@ -133,14 +133,14 @@ const PreCartClient = ({
   }
 
   return (
-    <form className="rs-mb-1 rs-pb-1 border-b-2 border-fog @container" action={submitForm} onSubmit={handleFormSubmit}>
+    <form className="@container rs-mb-1 border-b-2 border-fog rs-pb-1" action={submitForm} onSubmit={handleFormSubmit}>
       <input type="hidden" name="title" value={bookTitle.replace(/<[^>]*>/g, "")} />
       <label className="sr-only">
         Do not fill with any information
         <input name="email" type="email" />
       </label>
 
-      <fieldset className="rs-mb-1 space-y-4">
+      <fieldset className="rs-mb-1 [&>:not([hidden])~:not([hidden])]:mt-10 [&>:not([hidden])~:not([hidden])]:mb-0">
         <legend className="sr-only">Format</legend>
         <FormatChoices
           isIntl={isIntl}
@@ -165,12 +165,12 @@ const PreCartClient = ({
       {ebookSelected && (
         <div>
           <fieldset>
-            <legend className="mb-3 text-18 font-semibold">Select Ebook Format</legend>
-            <div className="rs-mb-neg1 flex flex-wrap border-2 border-black-40 p-1">
+            <legend className="mb-7.5 text-18 font-semibold">Select Ebook Format</legend>
+            <div className="mb-11 flex flex-wrap border-2 border-black-40 p-2.5 md:mb-12 2xl:mb-13">
               {epub && (
                 <label className="block min-w-fit flex-1 cursor-pointer">
                   <input className="peer sr-only" type="radio" name="ebook" value="EPUB" defaultChecked />
-                  <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-0 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.8em]">
+                  <span className="block rs-py-0 rs-px-1 text-center peer-checked:border-0 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline hover:underline peer-not-checked:hover:bg-fog-light md:text-[0.8em]">
                     EPUB
                   </span>
                 </label>
@@ -178,7 +178,7 @@ const PreCartClient = ({
               {pdf && (
                 <label className="min-w-fit flex-1 cursor-pointer">
                   <input className="peer sr-only" type="radio" name="ebook" value="PDF" defaultChecked={!epub} />
-                  <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.8em]">
+                  <span className="block rs-py-0 rs-px-1 text-center peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline hover:underline peer-not-checked:hover:bg-fog-light md:text-[0.8em]">
                     PDF
                   </span>
                 </label>
@@ -198,8 +198,8 @@ const PreCartClient = ({
 
       {(hasIntlCart || priceData?.supIntlCart) && !ebookSelected && (
         <fieldset>
-          <legend className="mb-3 text-18 font-semibold">Region</legend>
-          <div className="rs-mb-neg1 flex flex-wrap border-2 border-black-40 p-1">
+          <legend className="mb-7.5 text-18 font-semibold">Region</legend>
+          <div className="mb-11 flex flex-wrap border-2 border-black-40 p-2.5 md:mb-12 2xl:mb-13">
             <label className="block min-w-fit flex-1 cursor-pointer">
               <input
                 className="peer sr-only"
@@ -209,7 +209,7 @@ const PreCartClient = ({
                 checked={!isIntl}
                 onChange={() => setIntl(false)}
               />
-              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:border-0 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.8em]">
+              <span className="block rs-py-0 rs-px-1 text-center peer-checked:border-0 peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline hover:underline peer-not-checked:hover:bg-fog-light md:text-[0.8em]">
                 US/Canada
               </span>
             </label>
@@ -222,7 +222,7 @@ const PreCartClient = ({
                 checked={isIntl}
                 onChange={() => setIntl(true)}
               />
-              <span className="rs-py-0 rs-px-1 block text-center hover:bg-fog-light hover:underline peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline md:text-[0.8em]">
+              <span className="block rs-py-0 rs-px-1 text-center peer-checked:bg-cardinal-red-dark peer-checked:text-white peer-focus-visible:underline hover:underline peer-not-checked:hover:bg-fog-light md:text-[0.8em]">
                 International
               </span>
             </label>
@@ -240,7 +240,7 @@ const PreCartClient = ({
       <Button
         buttonElem
         type="submit"
-        className={cn("group mt-5 flex w-full items-center justify-center gap-2 text-white md:text-[0.85em]", {
+        className={cn("group mt-12.5 flex w-full items-center justify-center gap-5 text-white md:text-[0.85em]", {
           "border-0 bg-black-70 hocus:bg-black-80": priceData?.supComingSoon,
         })}
         disabled={!!priceData?.supComingSoon}
@@ -252,7 +252,7 @@ const PreCartClient = ({
         {priceData?.supComingSoon && "Coming Soon"}
 
         {!priceData?.supComingSoon && (
-          <ArrowRightIcon width={24} className="transition-all group-hocus:translate-x-2" />
+          <ArrowRightIcon width={24} className="transition-all group-hocus:translate-x-5" />
         )}
       </Button>
 
@@ -436,13 +436,13 @@ const FormatChoice = ({
         defaultChecked={defaultChecked}
         onChange={onInputChange}
       />
-      <span className="group rs-py-0 rs-px-1 flex items-center border-4 hover:bg-fog-light peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline">
-        <span className="flex w-full items-center justify-between gap-4">
-          <span className="flex w-full flex-col items-center justify-between gap-5 @lg:flex-row @lg:gap-0">
+      <span className="group flex items-center border-4 rs-py-0 rs-px-1 peer-checked:border-digital-red peer-focus-visible:bg-fog-light peer-focus-visible:underline hover:bg-fog-light">
+        <span className="flex w-full items-center justify-between gap-10">
+          <span className="flex w-full flex-col items-center justify-between gap-12.5 @lg:flex-row @lg:gap-0">
             <span className="font-semibold group-hover:underline md:text-[0.85em]">{label}</span>
 
             {!isIntl && price && !removeUsCan && (
-              <span className="mr-2 text-press-sand-dark @lg:ml-2 @lg:text-center md:text-[0.85em]">US/CAN</span>
+              <span className="mr-5 text-press-sand-dark md:text-[0.85em] @lg:ml-5 @lg:text-center">US/CAN</span>
             )}
 
             {!isIntl && price && (

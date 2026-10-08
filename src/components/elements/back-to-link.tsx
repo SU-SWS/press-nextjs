@@ -29,13 +29,13 @@ const BackToLink = ({
         href={getLinkHref(href)}
         prefetch={false}
         className={cn(
-          "group rs-pt-1 order-first flex w-fit items-center gap-5 font-normal text-stone-dark no-underline hocus:text-archway-dark hocus:underline md:gap-6",
+          "group order-first flex w-fit items-center gap-12.5 rs-pt-1 font-normal text-stone-dark no-underline md:gap-15 hocus:text-archway-dark hocus:underline",
           linkClasses
         )}
       >
         <ArrowLongLeftIcon
           width={25}
-          className="text-stone-dark transition-all group-hocus:text-archway-dark group-hocus-visible:-translate-x-2"
+          className="text-stone-dark transition-all group-hocus:text-archway-dark group-hocus-visible:-translate-x-5"
         />
         <span className="text-18">Back to {title}</span>
       </Link>

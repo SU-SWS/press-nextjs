@@ -1,7 +1,7 @@
 import Image from "@components/images/image"
 import Oembed from "@components/elements/ombed"
 import {ElementType, HTMLAttributes} from "react"
-import {Maybe} from "@lib/gql/__generated__/drupal.d"
+import {Maybe} from "@lib/gql/__generated__/graphql"
 import cn from "@lib/utils/className"
 
 type Props = HTMLAttributes<HTMLElement | HTMLDivElement> & {
@@ -33,10 +33,10 @@ const ImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children, hasBorder
   return (
     <CardWrapper
       {...props}
-      className={cn("centered w-full lg:max-w-[980px]", {"border shadow": hasBorder}, props.className)}
+      className={cn("centered w-full lg:max-w-[980px]", {"border shadow-sm": hasBorder}, props.className)}
     >
       {imageUrl && (
-        <div className="relative aspect-[16/9] w-full">
+        <div className="relative aspect-video w-full">
           <Image
             className="object-cover object-center"
             src={imageUrl}
@@ -49,15 +49,17 @@ const ImageCard = ({imageUrl, imageAlt, videoUrl, isArticle, children, hasBorder
 
       {videoUrl && <Oembed url={videoUrl} />}
 
-      <div className={cn("flex flex-col gap-5", {"rs-p-1": hasBorder, "rs-pr-2 rs-py-2": !hasBorder})}>{children}</div>
+      <div className={cn("flex flex-col gap-12.5", {"rs-p-1": hasBorder, "rs-py-2 rs-pr-2": !hasBorder})}>
+        {children}
+      </div>
     </CardWrapper>
   )
 }
 
 export const ImageCardSkeleton = () => {
   return (
-    <div className="centered w-full border border-black-10 pb-20 shadow-lg lg:max-w-[980px]">
-      <div className="aspect-[16/9] w-full bg-black-10"></div>
+    <div className="centered w-full border border-black-10 pb-50 shadow-lg lg:max-w-[980px]">
+      <div className="aspect-video w-full bg-black-10"></div>
     </div>
   )
 }

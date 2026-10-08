@@ -7,7 +7,7 @@ import useServerAction from "@lib/hooks/useServerAction"
 import cn from "@lib/utils/className"
 import {ArrowPathIcon} from "@heroicons/react/20/solid"
 import Button from "@components/elements/button"
-import {InputMaybe, SupBooksAwardWinnersFilterInput, SupBooksViewSortKeys} from "@lib/gql/__generated__/drupal.d"
+import {InputMaybe, SupBooksAwardWinnersFilterInput, SupBooksViewSortKeys} from "@lib/gql/__generated__/graphql"
 
 type Props = HTMLAttributes<HTMLDivElement> & {
   /**
@@ -76,8 +76,8 @@ const LoadMoreList = ({buttonText, children, ulProps, liProps, totalItems, loadP
   return (
     <div {...props} className={cn("relative", props.className)}>
       {isPending && (
-        <div className="absolute left-0 top-0 z-20 h-full w-full bg-black-30 bg-opacity-80">
-          <div className="absolute bottom-20 left-1/2 -translate-x-[25px]">
+        <div className="absolute top-0 left-0 z-20 h-full w-full bg-black-30/80">
+          <div className="absolute bottom-50 left-1/2 translate-x-[-25px]">
             <ArrowPathIcon className="animate-spin" width={50} />
           </div>
         </div>

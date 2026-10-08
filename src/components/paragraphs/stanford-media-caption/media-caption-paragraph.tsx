@@ -1,5 +1,5 @@
 import {HtmlHTMLAttributes} from "react"
-import {ParagraphStanfordMediaCaption} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphStanfordMediaCaption} from "@lib/gql/__generated__/graphql"
 import Image from "@components/images/image"
 import Oembed from "@components/elements/ombed"
 import Link from "@components/elements/link"
@@ -19,7 +19,7 @@ const MediaCaptionParagraph = ({paragraph, ...props}: Props) => {
   return (
     <figure {...props} className={cn("centered lg:max-w-1200", props.className)}>
       {image?.url && (
-        <div className="relative aspect-[16/9] w-full">
+        <div className="relative aspect-video w-full">
           <Image
             className="object-cover"
             src={image.url}
@@ -35,13 +35,13 @@ const MediaCaptionParagraph = ({paragraph, ...props}: Props) => {
         {paragraph.suMediaCaptionLink?.url && (
           <Link
             href={paragraph.suMediaCaptionLink.url}
-            className="link--action text-18 font-normal text-stone-dark decoration-2 underline-offset-[5px] *:text-stone-dark hocus:text-black *:hocus:text-black"
+            className="link--action text-18 font-normal text-stone-dark decoration-2 underline-offset-[5px] *:text-stone-dark hocus:text-black hocus:*:text-black"
           >
             {paragraph.suMediaCaptionLink.title}
           </Link>
         )}
 
-        <Wysiwyg html={paragraph.suMediaCaptionCaption?.processed} className="rs-mb-4 children:text-18" />
+        <Wysiwyg html={paragraph.suMediaCaptionCaption?.processed} className="rs-mb-4 *:text-18" />
       </figcaption>
     </figure>
   )

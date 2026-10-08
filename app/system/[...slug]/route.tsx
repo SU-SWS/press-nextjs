@@ -1,5 +1,5 @@
 import {NextRequest, NextResponse} from "next/server"
-import {buildHeaders} from "@lib/drupal/utils"
+import {buildHeaders} from "@lib/gql/gql-client"
 
 export const GET = async (request: NextRequest) => {
   const headers = buildHeaders()

@@ -6,16 +6,16 @@
  */
 const NodePageSkeleton = () => {
   return (
-    <div className="centered mt-32" role="status" aria-label="Loading page content">
+    <div className="mt-80 centered" role="status" aria-label="Loading page content">
       <div className="rs-mb-4 h-[60px] w-full max-w-[800px] bg-black-10" aria-hidden />
 
-      <div className="flex flex-col gap-10 xl:max-w-[980px]">
+      <div className="flex flex-col gap-25 xl:max-w-[980px]">
         <div className="h-[20px] w-full bg-black-10" aria-hidden />
         <div className="h-[20px] w-full bg-black-10" aria-hidden />
         <div className="h-[20px] w-10/12 bg-black-10" aria-hidden />
       </div>
 
-      <div className="rs-mt-4 aspect-[16/9] w-full bg-black-10 xl:max-w-[980px]" aria-hidden />
+      <div className="rs-mt-4 aspect-video w-full bg-black-10 xl:max-w-[980px]" aria-hidden />
     </div>
   )
 }

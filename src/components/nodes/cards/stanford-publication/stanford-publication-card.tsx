@@ -1,7 +1,7 @@
 import Link from "@components/elements/link"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordPublication} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordPublication} from "@lib/gql/__generated__/graphql"
 import ImageCard from "@components/patterns/image-card"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -15,7 +15,7 @@ const StanfordPublicationCard = ({node, headingLevel, ...props}: Props) => {
   return (
     <ImageCard {...props} aria-labelledby={node.uuid} isArticle>
       <div className="flex flex-col">
-        <Heading className="type-1 order-last xl:text-26 [&_a]:text-black [&_a]:hocus:text-digital-red" id={node.uuid}>
+        <Heading className="order-last type-1 xl:text-26 [&_a]:text-black hocus:[&_a]:text-digital-red" id={node.uuid}>
           <Link href={citationUrl || node.path || "#"}>{node.title}</Link>
         </Heading>
         <div className="order-first font-bold">Publication</div>

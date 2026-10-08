@@ -2,7 +2,7 @@ import Rows from "@components/paragraphs/rows/rows"
 import InteriorPage from "@components/layouts/interior-page"
 import {H1} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordPage} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordPage} from "@lib/gql/__generated__/graphql"
 import BannerParagraph from "@components/paragraphs/stanford-banner/banner-paragraph"
 import PageTitleBannerParagraph from "@components/paragraphs/stanford-page-title-banner/page-title-banner-paragraph"
 import SupCarouselParagraph from "@components/paragraphs/sup-carousel/sup-carousel-paragraph"
@@ -44,10 +44,10 @@ const StanfordPagePage = ({node, isHome, ...props}: Props) => {
       )}
 
       {node.suPageBanner?.__typename !== "ParagraphStanfordPageTitleBanner" && (
-        <H1 className={cn("centered mt-32", {"lg:max-w-1200": fullWidth, "sr-only": isHome})}>{node.title}</H1>
+        <H1 className={cn("mt-80 centered", {"lg:max-w-1200": fullWidth, "sr-only": isHome})}>{node.title}</H1>
       )}
 
-      <Wysiwyg html={node.body?.processed} className="centered mb-32 xl:max-w-[980px]" />
+      <Wysiwyg html={node.body?.processed} className="centered mb-80 xl:max-w-[980px]" />
 
       {!fullWidth && (
         <InteriorPage currentPath={node.path || "#"}>

@@ -32,11 +32,10 @@ export const metadata: Metadata = {
 }
 
 const RootLayout = async ({children, modal}: {children: React.ReactNode; modal: React.ReactNode}) => {
-  const isDevMode = process.env.NODE_ENV === "development"
   return (
     <html lang="en" className={montserrat.className}>
       <UserAnalytics />
-      {isDevMode && <Editori11y />}
+      {!!process.env.VERCEL_ENV && <Editori11y />}
 
       <body className="text-stone-dark">
         <nav aria-label="Skip Links">
@@ -47,7 +46,7 @@ const RootLayout = async ({children, modal}: {children: React.ReactNode; modal: 
 
         <div className="flex min-h-screen flex-col">
           <PageHeader />
-          <main id="main-content" className="mb-32 flex-grow">
+          <main id="main-content" className="mb-80 grow">
             {children}
 
             <ToastMessage />

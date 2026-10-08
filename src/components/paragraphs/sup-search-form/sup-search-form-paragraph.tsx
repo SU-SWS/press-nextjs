@@ -1,5 +1,5 @@
 import {HTMLAttributes, useId} from "react"
-import {ParagraphSupSearchForm} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphSupSearchForm} from "@lib/gql/__generated__/graphql"
 import {MagnifyingGlassIcon} from "@heroicons/react/20/solid"
 
 type Props = HTMLAttributes<HTMLDivElement> & {
@@ -12,13 +12,13 @@ const SupSearchFormParagraph = ({paragraph, ...props}: Props) => {
   return (
     <div {...props}>
       <form className="mx-auto max-w-6xl" aria-label="Site Search" action="/search">
-        <div className="mt-10 flex items-center gap-5">
+        <div className="mt-25 flex items-center gap-12.5">
           <label htmlFor={inputId} className="sr-only">
             Search all books by title, author, subject, keywords, or ISBNs
           </label>
 
           <input
-            className="lg:w-100 rs-pr-1 rs-pl-1 card-paragraph w-full border-0 border-b-2 border-stone pb-10 pt-8 placeholder:card-paragraph md:rs-pr-2 md:rs-pl-3 md:py-12"
+            className="w-full border-0 border-b-2 border-stone pt-20 rs-pr-1 pb-25 rs-pl-1 card-paragraph placeholder:card-paragraph md:py-30 md:rs-pr-2 md:rs-pl-3"
             type="text"
             placeholder="Search all books by title, author, subject, keywords, ISBNs..."
             id={inputId}
@@ -35,7 +35,7 @@ const SupSearchFormParagraph = ({paragraph, ...props}: Props) => {
             <span className="sr-only">Submit Search</span>
             <MagnifyingGlassIcon
               width={40}
-              className="block rounded-full bg-digital-red p-3 text-white group-hocus:bg-cardinal-red"
+              className="block rounded-full bg-digital-red p-7.5 text-white group-hocus:bg-cardinal-red"
             />
           </button>
         </div>

@@ -1,5 +1,5 @@
 import {HtmlHTMLAttributes} from "react"
-import {ParagraphStanfordCard} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphStanfordCard} from "@lib/gql/__generated__/graphql"
 import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behaviors"
 import {H2, H3, H4} from "@components/elements/headers"
 import Wysiwyg from "@components/elements/wysiwyg"
@@ -50,7 +50,7 @@ const CardParagraph = ({paragraph, ...props}: Props) => {
 
       {paragraph.suCardSuperHeader && <div className="order-1 font-semibold">{paragraph.suCardSuperHeader}</div>}
 
-      <Wysiwyg html={paragraph.suCardBody?.processed} className="rs-pb-2 order-3 *:text-21" />
+      <Wysiwyg html={paragraph.suCardBody?.processed} className="order-3 rs-pb-2 *:text-21" />
 
       {paragraph.suCardLink?.url && (
         <div className="order-4">

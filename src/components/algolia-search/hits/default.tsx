@@ -21,8 +21,8 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
   const hitUrl = new URL(hit.url)
 
   return (
-    <article className="py-12 @container">
-      <div className="flex flex-col justify-between gap-20 @3xl:flex-row">
+    <article className="@container py-30">
+      <div className="flex flex-col justify-between gap-50 @3xl:flex-row">
         <div>
           <H3 className="type-0 xl:text-21">
             <Link className="text-stone-dark hocus:text-digital-red" href={hit.url.replace(hitUrl.origin, "")}>
@@ -30,9 +30,9 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
             </Link>
           </H3>
 
-          {hit.summary && <p className="mb-10">{hit.summary}</p>}
+          {hit.summary && <p className="mb-25">{hit.summary}</p>}
           {hit.html && !hit.summary && (
-            <p className="mb-10">
+            <p className="mb-25">
               <Snippet hit={hit} attribute="html" />
             </p>
           )}
@@ -51,7 +51,7 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
         </div>
 
         {hit.photo && (
-          <div className="relative aspect-[2/3] w-[150px] shrink-0">
+          <div className="relative aspect-2/3 w-[150px] shrink-0">
             <Image className="object-cover" src={hit.photo} alt="" fill sizes="300px" />
           </div>
         )}

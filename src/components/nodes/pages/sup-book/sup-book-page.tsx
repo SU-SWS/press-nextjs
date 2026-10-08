@@ -1,4 +1,4 @@
-import {NodeInterface, NodeSupBook} from "@lib/gql/__generated__/drupal.d"
+import {NodeInterface, NodeSupBook} from "@lib/gql/__generated__/graphql"
 import {HTMLAttributes} from "react"
 import BookPage from "@components/nodes/pages/sup-book/book-page/book-page"
 import DigitalProjectPage from "@components/nodes/pages/sup-book/digital-project-page/digital-project-page"
@@ -17,11 +17,11 @@ const SupBookPage = async ({node, ...props}: Props) => {
     <div>
       <BookPage node={node} {...props} />
       {node.supBookRelatedTitles && node.supBookRelatedTitles.length > 0 && (
-        <section aria-labelledby={`${node.uuid}-related`} className="centered mt-64 border-t-2 border-press-sand-dark">
-          <H2 id={`${node.uuid}-related`} className="mb-32 mt-16 font-medium text-stone-dark">
+        <section aria-labelledby={`${node.uuid}-related`} className="mt-160 centered border-t-2 border-press-sand-dark">
+          <H2 id={`${node.uuid}-related`} className="mt-40 mb-80 font-medium text-stone-dark">
             Explore more
           </H2>
-          <ul className="list-unstyled mx-auto grid w-11/12 grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+          <ul className="list-unstyled mx-auto grid w-11/12 grid-cols-1 gap-25 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
             {node.supBookRelatedTitles.slice(0, 5).map(relatedBook => (
               <RelatedBook key={relatedBook.uuid} path={relatedBook.path} />
             ))}

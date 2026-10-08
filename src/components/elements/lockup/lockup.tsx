@@ -3,8 +3,8 @@ import LockupLogo from "@components/elements/lockup/lockup-logo"
 
 export const Lockup = () => {
   return (
-    <div className="py-10">
-      <Link href="/" className="flex flex-col gap-4 no-underline lg:flex-row">
+    <div className="py-25">
+      <Link href="/" className="flex flex-col gap-10 no-underline lg:flex-row">
         <LockupLogo />
       </Link>
     </div>

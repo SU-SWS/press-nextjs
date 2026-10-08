@@ -6,7 +6,7 @@ import TwitterIcon from "@components/elements/icons/TwitterIcon"
 import YoutubeIcon from "@components/elements/icons/YoutubeIcon"
 import FacebookIcon from "@components/elements/icons/FacebookIcon"
 import InstagramIcon from "@components/elements/icons/InstagramIcon"
-import {StanfordLocalFooter} from "@lib/gql/__generated__/drupal.d"
+import {StanfordLocalFooter} from "@lib/gql/__generated__/graphql"
 import {getConfigPage} from "@lib/gql/gql-queries"
 import BlueSkyIcon from "@components/elements/icons/BlueSkyIcon"
 import LinkedInIcon from "@components/elements/icons/LinkedInIcon"
@@ -16,13 +16,13 @@ const LocalFooter = async () => {
   if (!localFooterConfig?.suFooterEnabled) return
 
   return (
-    <div className="rs-py-6 local-footer bg-stone-dark">
-      <div className="rs-mb-6 centered">
+    <div className="local-footer bg-stone-dark rs-py-6">
+      <div className="centered rs-mb-6">
         <div className="rs-mb-3">
           <FooterLockup />
         </div>
-        <div className="grid grid-cols-1 sm:rs-ml-4 sm:grid-cols-2 2xl:grid-cols-4 [&_a:focus]:text-[#A1C4B1] [&_a:hover]:text-[#A1C4B1] [&_a:hover]:decoration-[#A1C4B1] [&_a:hover]:decoration-2 [&_a]:text-white [&_a]:decoration-fog-dark [&_a]:decoration-1 [&_a]:underline-offset-[5px] [&_a]:transition [&_h2_a]:font-medium [&_h2_a]:underline [&_h2_a]:decoration-fog-dark [&_h2_a]:decoration-1 [&_h2_strong]:font-medium [&_li]:mb-4 [&_li]:text-[0.9em] [&_li_a]:font-normal [&_p]:text-[0.9em]">
-          <div className="list-unstyled rs-pb-1 rs-pt-4 sm:border-r sm:border-fog-dark">
+        <div className="grid grid-cols-1 sm:rs-ml-4 sm:grid-cols-2 2xl:grid-cols-4 [&_a]:text-white [&_a]:decoration-fog-dark [&_a]:decoration-1 [&_a]:underline-offset-[5px] [&_a]:transition [&_a:focus]:text-[#A1C4B1] [&_a:hover]:text-[#A1C4B1] [&_a:hover]:decoration-[#A1C4B1] [&_a:hover]:decoration-2 [&_h2_a]:font-medium [&_h2_a]:underline [&_h2_a]:decoration-fog-dark [&_h2_a]:decoration-1 [&_h2_strong]:font-medium [&_li]:mb-10 [&_li]:text-[0.9em] [&_li_a]:font-normal [&_p]:text-[0.9em]">
+          <div className="list-unstyled rs-pt-4 rs-pb-1 sm:border-r sm:border-fog-dark">
             {/* Content block 1 */}
             <Wysiwyg html={localFooterConfig.suLocalFootPrCo?.processed} className="max-w-[250px]" />
 
@@ -41,7 +41,7 @@ const LocalFooter = async () => {
             )}
           </div>
 
-          <div className="list-unstyled rs-pb-1 rs-pt-4 2xl:rs-pl-4 sm:order-4 sm:border-r sm:border-fog-dark">
+          <div className="list-unstyled rs-pt-4 rs-pb-1 sm:order-4 sm:border-r sm:border-fog-dark 2xl:rs-pl-4">
             {/* Content block 3 */}
             <Wysiwyg html={localFooterConfig.suLocalFootTr2Co?.processed} className="max-w-[250px]" />
             {/* Primary Links */}
@@ -62,7 +62,7 @@ const LocalFooter = async () => {
             )}
           </div>
 
-          <div className="list-unstyled rs-pb-1 rs-pt-4 sm:rs-pl-4 2xl:rs-pl-4 sm:border-r sm:border-fog-dark">
+          <div className="list-unstyled rs-pt-4 rs-pb-1 sm:border-r sm:border-fog-dark sm:rs-pl-4 2xl:rs-pl-4">
             {/* Content block 2 */}
             <Wysiwyg html={localFooterConfig.suLocalFootSeCo?.processed} className="max-w-[250px]" />
             {/* Secondary links */}
@@ -84,7 +84,7 @@ const LocalFooter = async () => {
             )}
           </div>
 
-          <div className="list-unstyled rs-pb-1 rs-pt-4 order-4 sm:rs-pl-4 2xl:rs-pl-4 sm:border-r sm:border-fog-dark 2xl:border-0">
+          <div className="list-unstyled order-4 rs-pt-4 rs-pb-1 sm:border-r sm:border-fog-dark sm:rs-pl-4 2xl:border-0 2xl:rs-pl-4">
             {/* Content block 4 */}
             <Wysiwyg html={localFooterConfig.suLocalFootTrCo?.processed} className="max-w-[250px]" />
           </div>
@@ -101,7 +101,7 @@ const LocalFooter = async () => {
         <div className="lg:w-1/2">
           {/* Social Links */}
           {localFooterConfig.suLocalFootSocial && (
-            <ul className="list-unstyled rs-mb-0 mx-auto flex w-fit">
+            <ul className="list-unstyled mx-auto rs-mb-0 flex w-fit">
               {localFooterConfig.suLocalFootSocial.map((link, index) => {
                 if (!link.url) return
                 return (
@@ -133,10 +133,10 @@ const SocialIcon = ({url}: {url: string}) => {
 
 const FooterLockup = () => {
   return (
-    <div className="py-10">
+    <div className="py-25">
       <Link
         href="/"
-        className="flex flex-col gap-4 no-underline lg:flex-row"
+        className="flex flex-col gap-10 no-underline lg:flex-row"
         aria-label="Stanford University Press Home"
       >
         <LockupLogo />

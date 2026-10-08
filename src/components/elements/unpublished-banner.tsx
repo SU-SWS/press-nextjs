@@ -16,8 +16,8 @@ const UnpublishedBanner = ({status, message, children, ...props}: Props) => {
   if (status !== false) return <>{children}</>
   return (
     <div className="border-dotted border-illuminating">
-      <div {...props} className={cn("bg-illuminating p-5 text-4xl font-bold", props.className)}>
-        <div className="centered flex items-center gap-10">
+      <div {...props} className={cn("bg-illuminating p-12.5 text-4xl font-bold", props.className)}>
+        <div className="centered flex items-center gap-25">
           <ExclamationTriangleIcon width={30} />
           {message}
         </div>

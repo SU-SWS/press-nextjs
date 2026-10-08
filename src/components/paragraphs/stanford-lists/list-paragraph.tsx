@@ -2,12 +2,12 @@ import Wysiwyg from "@components/elements/wysiwyg"
 import View from "@components/views/view"
 import {H2} from "@components/elements/headers"
 import {ElementType, HtmlHTMLAttributes} from "react"
-import {ParagraphStanfordList} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphStanfordList} from "@lib/gql/__generated__/graphql"
 import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behaviors"
 import cn from "@lib/utils/className"
 import {ListParagraphBehaviors} from "drupal"
 import ActionLink from "@components/elements/action-link"
-import {getViewItems, loadViewPage} from "@lib/gql/gql-view-queries"
+import {getViewItems, loadViewPage} from "@lib/gql/gql-views"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordList
@@ -32,7 +32,7 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
     <ListWrapper
       {...props}
       className={cn(
-        "rs-mb-4 centered flex flex-col gap-[5.5rem] border-t border-press-sand pt-14",
+        "centered rs-mb-4 flex flex-col gap-55 border-t border-press-sand pt-35",
         {
           "border-0": !paragraph.suListHeadline,
         },
@@ -55,7 +55,7 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
           )}
 
           {paragraph.supListEyebrow && (
-            <div className="rs-mb-neg2 type-0 order-first text-press-sand-dark xl:text-21">
+            <div className="order-first mb-8 type-0 text-press-sand-dark md:mb-9 xl:text-21 2xl:mb-10">
               {paragraph.supListEyebrow}
             </div>
           )}

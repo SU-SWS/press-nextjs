@@ -60,7 +60,7 @@ const TabsInner = ({
   return (
     <BaseTabs.Root
       {...props}
-      className={cn("centered flex gap-5", {"flex-col": !isVertical}, className)}
+      className={cn("centered flex gap-12.5", {"flex-col": !isVertical}, className)}
       value={activeTab}
       orientation={isVertical ? "vertical" : "horizontal"}
       onValueChange={handleValueChange}
@@ -95,7 +95,7 @@ export const Tab = ({className, children, ...props}: TabProps) => {
     <BaseTabs.Tab
       {...props}
       className={cn(
-        "w-fit border-transparent p-5 aria-selected:border-[#6AA083] data-[orientation=horizontal]:border-b-3 data-[orientation=vertical]:border-l-3 hocus:underline",
+        "w-fit border-transparent p-12.5 aria-selected:border-[#6AA083] data-[orientation=horizontal]:border-b-3 data-[orientation=vertical]:border-l-3 hocus:underline",
         {
           "bg-black-10": props.disabled,
         },

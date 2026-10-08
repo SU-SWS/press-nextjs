@@ -3,7 +3,7 @@ import cn from "@lib/utils/className"
 
 type Props = HtmlHTMLAttributes<HTMLHeadingElement>
 
-const headingLinkClasses = "[&_a]:hocus:underline"
+const headingLinkClasses = "hocus:[&_a]:underline"
 
 const handleHeadingClasses = (classes: string | undefined, headingClasses: string): string[] => {
   if (!classes) {

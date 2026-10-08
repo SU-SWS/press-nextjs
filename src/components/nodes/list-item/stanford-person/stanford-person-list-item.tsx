@@ -2,7 +2,7 @@ import Image from "@components/images/image"
 import Link from "@components/elements/link"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordPerson} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordPerson} from "@lib/gql/__generated__/graphql"
 import cn from "@lib/utils/className"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -18,10 +18,10 @@ const StanfordPersonListItem = ({node, headingLevel, ...props}: Props) => {
     <article
       {...props}
       aria-labelledby={node.uuid}
-      className={cn("mx-auto w-full max-w-[500px] p-20 text-center shadow-lg", props.className)}
+      className={cn("mx-auto w-full max-w-[500px] p-50 text-center shadow-lg", props.className)}
     >
       {imageUrl && (
-        <div className="relative mx-auto mb-20 aspect-[1/1] w-full">
+        <div className="relative mx-auto mb-50 aspect-square w-full">
           <Image
             className="rounded-full object-cover"
             src={imageUrl}

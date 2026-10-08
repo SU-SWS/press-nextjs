@@ -16,7 +16,7 @@ const Page = async () => {
   const [appId, indexName, apiKey] = await getAlgoliaCredential()
 
   return (
-    <div className="centered mt-32">
+    <div className="mt-80 centered">
       <div className="mx-auto 3xl:w-10/12">
         <H1 className="rs-mb-2" id="page-title">
           Search our site
