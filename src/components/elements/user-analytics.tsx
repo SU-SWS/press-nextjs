@@ -1,5 +1,5 @@
 import {getConfigPageField} from "@lib/gql/gql-queries"
-import {StanfordBasicSiteSetting} from "@lib/gql/__generated__/drupal.d"
+import {StanfordBasicSiteSetting} from "@lib/gql/__generated__/graphql"
 import Script from "next/script"
 import {GoogleAnalytics} from "@next/third-parties/google"
 

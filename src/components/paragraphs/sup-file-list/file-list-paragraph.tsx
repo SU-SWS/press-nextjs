@@ -1,5 +1,5 @@
 import {HtmlHTMLAttributes} from "react"
-import {ParagraphSupFileList} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphSupFileList} from "@lib/gql/__generated__/graphql"
 import FileListSelection from "@components/paragraphs/sup-file-list/file-list-selection"
 import {H2} from "@components/elements/headers"
 import {DocumentTextIcon} from "@heroicons/react/24/outline"

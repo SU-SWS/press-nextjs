@@ -1,29 +1,18 @@
 import {NextRequest, NextResponse} from "next/server"
-import {redirect} from "next/navigation"
-import {cookies} from "next/headers"
-import {secretMatches} from "@lib/utils/request-guards"
 
-export const GET = async (request: NextRequest) => {
-  const secret = request.nextUrl.searchParams.get("secret")
-  const slug = request.nextUrl.searchParams.get("slug")
+/**
+ * Legacy preview entry point. Forward Drupal's `/api/draft?secret=...&slug=...` link to `/preview`, where proxy.ts
+ * checks the secret and the slug before sending the editor to the page.
+ */
+export const GET = (request: NextRequest) => {
+  const destination = new URL("/preview", request.url)
+  // Set the parameters rather than interpolating them so they are always escaped.
+  destination.searchParams.set("secret", request.nextUrl.searchParams.get("secret") || "")
+  destination.searchParams.set("slug", request.nextUrl.searchParams.get("slug") || "")
 
-  // Check the secret and next parameters
-  // This secret should only be known to this route handler and the CMS
-  if (!secretMatches(secret, process.env.DRUPAL_PREVIEW_SECRET))
-    return NextResponse.json({message: "Invalid token"}, {status: 401})
-
-  if (!slug) return NextResponse.json({message: "Invalid slug path"}, {status: 401})
-
-  const cookieValues = await cookies()
-  cookieValues.set("preview", secret, {
-    maxAge: 60 * 60,
-    httpOnly: true,
-    sameSite: "none",
-    secure: true,
-    partitioned: true,
-  })
-
-  // Redirect to the path from the fetched post
-  // We don't redirect to searchParams.slug as that might lead to open redirect vulnerabilities
-  redirect(`/preview${slug === "/home" ? "" : slug}`)
+  const response = NextResponse.redirect(destination)
+  // The url carries the preview secret, so keep it out of caches and outbound Referer headers.
+  response.headers.set("Cache-Control", "no-store, max-age=0")
+  response.headers.set("Referrer-Policy", "no-referrer")
+  return response
 }

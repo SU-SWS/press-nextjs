@@ -2,12 +2,12 @@ import Wysiwyg from "@components/elements/wysiwyg"
 import View from "@components/views/view"
 import {H2} from "@components/elements/headers"
 import {ElementType, HtmlHTMLAttributes} from "react"
-import {ParagraphStanfordList} from "@lib/gql/__generated__/drupal.d"
+import {ParagraphStanfordList} from "@lib/gql/__generated__/graphql"
 import {getParagraphBehaviors} from "@components/paragraphs/get-paragraph-behaviors"
 import cn from "@lib/utils/className"
 import {ListParagraphBehaviors} from "drupal"
 import ActionLink from "@components/elements/action-link"
-import {getViewItems, loadViewPage} from "@lib/gql/gql-view-queries"
+import {getViewItems, loadViewPage} from "@lib/gql/gql-views"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordList

@@ -2,7 +2,7 @@ import Link from "@components/elements/link"
 import Wysiwyg from "@components/elements/wysiwyg"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
-import {NodeStanfordPolicy} from "@lib/gql/__generated__/drupal.d"
+import {NodeStanfordPolicy} from "@lib/gql/__generated__/graphql"
 import ImageCard from "@components/patterns/image-card"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -13,7 +13,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 const StanfordPolicyCard = ({node, headingLevel, ...props}: Props) => {
   const Heading = headingLevel === "h3" ? H3 : H2
   const trimmedBodyText = node.body?.processed
-    .replace(/(<([^>]+)>)/gi, " ")
+    ?.replace(/(<([^>]+)>)/gi, " ")
     .split(" ")
     .slice(0, 50)
     .filter((word: string) => !!word)

@@ -1,7 +1,7 @@
 import {getMenu} from "@lib/gql/gql-queries"
 import SideNav from "@components/menu/side-nav"
 import {HtmlHTMLAttributes} from "react"
-import {MenuAvailable} from "@lib/gql/__generated__/drupal.d"
+import {MenuAvailable} from "@lib/gql/__generated__/graphql"
 import cn from "@lib/utils/className"
 import getActiveTrail from "@lib/drupal/utils"
 

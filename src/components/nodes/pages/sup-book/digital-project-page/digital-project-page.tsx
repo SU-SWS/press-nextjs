@@ -1,4 +1,4 @@
-import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/drupal.d"
+import {NodeSupBook, TermSupBookSubject} from "@lib/gql/__generated__/graphql"
 import {H1, H2, H3} from "@components/elements/headers"
 import {HTMLAttributes, Suspense} from "react"
 import {Tab, TabPanel, Tabs, TabsList} from "@components/elements/tabs"
