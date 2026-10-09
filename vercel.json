@@ -1,6 +1,7 @@
 {
   "buildCommand": "yarn build --webpack",
   "installCommand": "yarn workspaces focus --production",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)*.md' ':(exclude)docs' ':(exclude).github' ':(exclude).githooks' ':(exclude).vscode' ':(exclude).gitpod.yml'",
   "crons": [
     {
       "path": "/api/book-paths/revalidate",
