@@ -6,6 +6,7 @@ import {graphqlClient} from "@lib/gql/gql-client"
 import {notFound} from "next/navigation"
 import {cacheTag} from "next/cache"
 import {isUuid} from "@lib/utils/request-guards"
+import {cacheFailure} from "@lib/gql/gql-queries"
 
 type Param = {uuid: string[]}
 
@@ -16,9 +17,13 @@ type Props = {
 const getGallery = async (paragraphId: string): Promise<ParagraphStanfordGallery | false> => {
   "use cache: remote"
   cacheTag("paragraphs", `paragraphs:${paragraphId}`)
-  const paragraphQuery = await graphqlClient().request<ParagraphQuery>(ParagraphDocument, {uuid: paragraphId})
-  if (paragraphQuery.paragraph?.__typename === "ParagraphStanfordGallery")
-    return paragraphQuery.paragraph as ParagraphStanfordGallery
+  try {
+    const paragraphQuery = await graphqlClient().request<ParagraphQuery>(ParagraphDocument, {uuid: paragraphId})
+    if (paragraphQuery.paragraph?.__typename === "ParagraphStanfordGallery")
+      return paragraphQuery.paragraph as ParagraphStanfordGallery
+  } catch (e) {
+    cacheFailure(`Unable to fetch gallery ${paragraphId}`, e)
+  }
   return false
 }
 

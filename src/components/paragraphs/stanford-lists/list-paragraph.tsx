@@ -8,6 +8,7 @@ import cn from "@lib/utils/className"
 import {ListParagraphBehaviors} from "drupal"
 import ActionLink from "@components/elements/action-link"
 import {getViewItems, loadViewPage} from "@lib/gql/gql-views"
+import {signViewConfig} from "@lib/utils/view-config"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphStanfordList
@@ -24,6 +25,17 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
   const addLoadMore = (paragraph.suListView?.pageSize || 31) > 30
 
   if (behaviors.list_paragraph?.hide_empty && viewItems.length === 0) return null
+
+  // Signed so the public "load more" action can't be called with arbitrary views or filters.
+  const signedConfig =
+    addLoadMore && viewId && displayId
+      ? signViewConfig({
+          viewId,
+          displayId,
+          contextualFilter: paragraph.suListView?.contextualFilter || [],
+          hasHeadline: !!paragraph.suListHeadline,
+        })
+      : undefined
 
   const ListWrapper: ElementType =
     paragraph.suListHeadline && behaviors.list_paragraph?.heading_behavior !== "remove" ? "section" : "div"
@@ -80,17 +92,7 @@ const ListParagraph = async ({paragraph, ...props}: Props) => {
             displayId={displayId}
             items={viewItems}
             headingLevel={paragraph.suListHeadline ? "h3" : "h2"}
-            loadPage={
-              addLoadMore
-                ? loadViewPage.bind(
-                    null,
-                    viewId,
-                    displayId,
-                    paragraph.suListView?.contextualFilter || [],
-                    !!paragraph.suListHeadline
-                  )
-                : undefined
-            }
+            loadPage={signedConfig ? loadViewPage.bind(null, signedConfig) : undefined}
             totalItems={totalItems}
           />
         </div>

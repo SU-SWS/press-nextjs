@@ -39,26 +39,98 @@ import {
 } from "@lib/gql/__generated__/graphql"
 import {graphqlClient} from "@lib/gql/gql-client"
 import View from "@components/views/view"
-import {cacheTag} from "next/cache"
+import {cacheLife, cacheTag} from "next/cache"
+import {cacheFailure} from "@lib/gql/gql-queries"
+import {verifyViewConfig} from "@lib/utils/view-config"
 
+/** Every view display this site queries. Anything else is rejected before it reaches Drupal or the cache. */
+const SUPPORTED_DISPLAYS = new Set([
+  "stanford_basic_pages--basic_page_type_list",
+  "stanford_basic_pages--viewfield_block_1",
+  "stanford_courses--default_list_viewfield_block",
+  "stanford_courses--vertical_teaser_viewfield_block",
+  "stanford_events--cards",
+  "stanford_events--list_page",
+  "stanford_events--past_events_list_block",
+  "stanford_news--block_1",
+  "stanford_news--vertical_cards",
+  "stanford_person--grid_list_all",
+  "stanford_publications--apa_list",
+  "stanford_publications--chicago_list",
+  "stanford_shared_tags--card_grid",
+  "sup_books--book_list",
+  "sup_books--book_list_sortable",
+  "sup_books--award_winners",
+  "sup_books--seasonal_list",
+  "sup_books--new_releases",
+  "sup_books--best_sellers",
+])
+
+const SORT_KEYS = new Set<unknown>(Object.values(SupBooksViewSortKeys))
+const MAX_PAGE = 100
+const MAX_CONTEXTUAL_FILTERS = 5
+const MAX_TEXT_LENGTH = 100
+
+const toInt = (value: unknown, min: number, max: number) =>
+  typeof value === "number" && Number.isFinite(value) ? Math.min(Math.max(Math.trunc(value), min), max) : undefined
+
+/**
+ * Server action that fetches one page of a Drupal view and renders it.
+ *
+ * Bound by list paragraphs to load subsequent pages on the client. Server actions are public POST endpoints that any
+ * caller can send any arguments to, and every distinct argument set is a Drupal query and a cache entry. So the list's
+ * configuration (view, display, contextual filters, headline) arrives signed by the server (see signViewConfig), and
+ * only the page number, filters and sort come from the browser, all of which are validated.
+ *
+ * @param signedConfig - The list configuration from {@link signViewConfig}.
+ * @param page - Zero-based page index to fetch.
+ * @param filters - Award winner year range.
+ * @param sort - Sort key for sortable book lists.
+ * @returns A rendered `<View>` element for the requested page, or nothing for an invalid request.
+ */
 export const loadViewPage = async (
-  viewId: string,
-  displayId: string,
-  contextualFilter: string[],
-  hasHeadline: boolean,
+  signedConfig: string,
   page: number,
   filters?: InputMaybe<SupBooksAwardWinnersFilterInput>,
   sort?: InputMaybe<SupBooksViewSortKeys>
 ): Promise<JSX.Element> => {
   "use server"
 
-  const {items, totalItems} = await getViewItems(viewId, displayId, contextualFilter, page, undefined, filters, sort)
+  const config = verifyViewConfig(signedConfig)
+  if (!config || !SUPPORTED_DISPLAYS.has(`${config.viewId}--${config.displayId}`)) return <></>
+
+  const contextualFilter = Array.isArray(config.contextualFilter)
+    ? config.contextualFilter
+        .slice(0, MAX_CONTEXTUAL_FILTERS)
+        .filter((value): value is string => typeof value === "string")
+        .map(value => value.trim().slice(0, MAX_TEXT_LENGTH))
+    : []
+
+  // Only the award winners display takes a year range, and only its two known keys are kept.
+  let cleanFilters: SupBooksAwardWinnersFilterInput | undefined
+  if (config.displayId === "award_winners" && filters && typeof filters === "object") {
+    const yearMin = toInt(filters.year_min, 0, 9999)
+    const yearMax = toInt(filters.year_max, 0, 9999)
+    cleanFilters = {}
+    if (yearMin !== undefined) cleanFilters.year_min = yearMin
+    if (yearMax !== undefined) cleanFilters.year_max = yearMax
+  }
+
+  const {items, totalItems} = await getViewItems(
+    config.viewId,
+    config.displayId,
+    contextualFilter,
+    toInt(page, 0, MAX_PAGE) ?? 0,
+    undefined,
+    cleanFilters,
+    SORT_KEYS.has(sort) ? sort : undefined
+  )
   return (
     <View
-      viewId={viewId}
-      displayId={displayId}
+      viewId={config.viewId}
+      displayId={config.displayId}
       items={items}
-      headingLevel={hasHeadline ? "h3" : "h2"}
+      headingLevel={config.hasHeadline ? "h3" : "h2"}
       totalItems={totalItems}
     />
   )
@@ -310,9 +382,12 @@ export const getViewPagedItems = cache(
           break
       }
     } catch (e) {
-      if (e instanceof Error) console.warn(e.message)
+      cacheFailure(`Unable to fetch view ${viewId}--${displayId}`, e)
       return {items: [], totalItems: 0}
     }
+
+    // A visitor's year range choices have too many combinations to keep forever: cache them for hours.
+    if (filters?.year_min || filters?.year_max) cacheLife("hours")
     return {items, totalItems}
   }
 )

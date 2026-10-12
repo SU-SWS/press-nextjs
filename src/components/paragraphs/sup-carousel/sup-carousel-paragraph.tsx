@@ -1,6 +1,6 @@
 import {JSX, HtmlHTMLAttributes} from "react"
 import {Maybe, ParagraphSupCarousel, ParagraphSupCarouselSlide} from "@lib/gql/__generated__/graphql"
-import Slideshow, {NextArrow, PrevArrow} from "@components/elements/slideshow"
+import Slideshow from "@components/elements/slideshow"
 import {H2} from "@components/elements/headers"
 import Wysiwyg from "@components/elements/wysiwyg"
 import Link from "@components/elements/link"
@@ -35,11 +35,8 @@ const SupCarouselParagraph = ({paragraph, isTopBanner, ...props}: Props) => {
 
       {paragraph.supCarouselSlides.length > 1 && (
         <Slideshow
-          slideshowProps={{
-            nextArrow: <NextArrow customClassName={cn({"lg:mt-[150px]": isTopHero})} />,
-            prevArrow: <PrevArrow customClassName={cn({"lg:mt-[150px]": isTopHero})} />,
-            slidesToShow: 1,
-          }}
+          slideshowProps={{slidesToShow: 1}}
+          arrowClassName={cn({"lg:mt-[150px]": isTopHero})}
           className="overflow-hidden"
         >
           {paragraph.supCarouselSlides.map((slide, slideIndex) => (

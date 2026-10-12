@@ -102,8 +102,10 @@ const query = await graphqlClient().request<RouteQuery>(RouteDocument, {path: "/
 const draft = await graphqlClient({}, true).request<RouteQuery>(RouteDocument, {path: "/about", teaser: false})
 ```
 
-- `request()` returns the `data` payload and throws a `ClientError` (exported from `gql-client.ts`) when the response
-  is not 2xx or carries GraphQL `errors`. `e.response.errors[].debugMessage` holds Drupal's readable message.
+- `request()` returns the `data` payload. Requests are abandoned after 15 seconds. Failures throw a subclass of
+  `ClientError` (exported from `gql-client.ts`): `NetworkError` (unreachable or timed out), `HttpError` (error status
+  or non-JSON body, e.g. a WAF page) or `GraphqlError` (GraphQL `errors` or no data). `describeError(e)` gives a log
+  friendly summary that prefers Drupal's `debugMessage`.
 - `buildHeaders(headers?, isPreviewMode?)` is exported for other Drupal requests (e.g. the `/system` file proxy).
   Preview mode prefers `DRUPAL_BASIC_AUTH_ADMIN`; `DRUPAL_REQUEST_HEADERS` entries are merged in first.
 
@@ -133,7 +135,15 @@ Cached functions use `"use cache: remote"` with `cacheTag()` so Drupal can reval
   `viewId--displayId` to the matching view query and returns `{items, totalItems}`. Tagged `views` plus
   `views:<bundle>` (e.g. `views:sup_book`).
 - `getViewItems(...)` wraps it with a 30 item page size and an optional limit.
-- `loadViewPage(...)` is a server action returning a rendered `<View>` for client-side paging.
+- `loadViewPage(signedConfig, page, filters?, sort?)` is a server action returning a rendered `<View>` for client-side paging.
+  Server actions are public POST endpoints, so the list's view, display, contextual filters and headline are signed
+  with `signViewConfig()` (`src/lib/utils/view-config.ts`, an HMAC keyed from `DRUPAL_REVALIDATE_SECRET`) and bound to
+  the action. Requests without a valid signature render nothing. Only `page`, `filters` and `sort` come from the
+  browser: the display must be supported, `page` is clamped (max 100), only the award winners year range is kept, and
+  only known sort keys are passed through. Without `DRUPAL_REVALIDATE_SECRET`, lists render without load more.
+- Failed requests inside a `use cache` scope call `cacheFailure()` (gql-queries.ts), which logs and drops the entry to
+  `cacheLife("minutes")` so an outage isn't cached forever. A failed full route lookup throws instead, so a cached page
+  keeps being served rather than replaced by a 404.
 
 ---
 

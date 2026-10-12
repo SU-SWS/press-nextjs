@@ -52,9 +52,14 @@ export const PrevArrow = ({
 type SlideshowProps = HTMLAttributes<HTMLDivElement> & {
   children: JSX.Element | JSX.Element[]
   slideshowProps?: Omit<Settings, "children">
+  /**
+   * Extra classes for the previous/next arrows. Server components should use this rather than passing arrow elements
+   * in slideshowProps, which can arrive unresolved on the first render.
+   */
+  arrowClassName?: string
 }
 
-const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
+const Slideshow = ({children, slideshowProps, arrowClassName, ...props}: SlideshowProps) => {
   const slideShowRef = useRef<HTMLDivElement>(null)
 
   const adjustSlideLinks = () => {
@@ -83,8 +88,8 @@ const Slideshow = ({children, slideshowProps, ...props}: SlideshowProps) => {
     dots: false,
     infinite: false,
     initialSlide: 0,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow customClassName={arrowClassName} />,
+    prevArrow: <PrevArrow customClassName={arrowClassName} />,
     slidesToScroll: 1,
     slidesToShow: 3,
     speed: 500,

@@ -1,4 +1,4 @@
-import {timingSafeEqual} from "node:crypto"
+import {createHash, timingSafeEqual} from "node:crypto"
 
 /**
  * Compare a caller supplied secret against a configured one in constant time.
@@ -11,14 +11,12 @@ export const secretMatches = (
   provided: string | null | undefined,
   expected: string | undefined
 ): provided is string => {
-  if (!provided || !expected) return false
+  if (typeof provided !== "string" || !provided || !expected) return false
 
-  const providedBytes = Buffer.from(provided)
-  const expectedBytes = Buffer.from(expected)
-
-  // timingSafeEqual throws on length mismatch, so the lengths are compared first.
-  if (providedBytes.length !== expectedBytes.length) return false
-  return timingSafeEqual(providedBytes, expectedBytes)
+  // Hashing first gives two fixed-length values, so neither the length nor the contents of the expected secret affect
+  // how long the comparison takes. Comparing raw bytes would need an early length check, which leaks the length.
+  const hash = (value: string) => createHash("sha256").update(value).digest()
+  return timingSafeEqual(hash(provided), hash(expected))
 }
 
 /**

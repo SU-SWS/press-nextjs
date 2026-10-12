@@ -30,8 +30,9 @@ const PreviewContents = async ({params: paramsPromise}: {params: PageProps["para
   const {entity} = await getEntityFromPath<NodeUnion>(path, true)
 
   if (!entity) notFound()
-  // Drupal links to the home page by its alias, e.g. `/home`, so compare against that rather than `/`.
-  const homePath = await getHomePagePath()
+  // Drupal links to the home page by its alias, e.g. `/home`, so compare against that rather than `/`. The draft still
+  // renders when the published home page can't be resolved; it just isn't styled as the home page.
+  const homePath = await getHomePagePath().catch(() => undefined)
 
   return (
     <UnpublishedBanner status={entity.status} message="Unpublished Page">
