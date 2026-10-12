@@ -4,53 +4,71 @@ import {H2, H3} from "@components/elements/headers"
 import Image from "@components/images/image"
 import {BookmarkIcon} from "@heroicons/react/24/outline"
 import Link from "@components/elements/link"
-import {getAlgoliaCredential} from "@lib/gql/gql-queries"
+import {cacheFailure, getAlgoliaCredential} from "@lib/gql/gql-queries"
 import {RecommendHit} from "algoliasearch/lite"
 import {cacheLife, cacheTag} from "next/cache"
 
-const getRelatedContent = async (objectID: string): Promise<BookHit[]> => {
+// Only the fields the related book card renders. Requesting just these keeps the Algolia response, and the months-long
+// remote cache entry built from it, small instead of carrying each book's full indexed html.
+const RELATED_BOOK_ATTRIBUTES = ["title", "url", "photo", "book_subtitle", "book_authors", "book_award_winner"] as const
+
+type RelatedBookHit = Pick<BookHit, "objectID" | (typeof RELATED_BOOK_ATTRIBUTES)[number]>
+
+const getRelatedContent = async (objectID: string): Promise<RelatedBookHit[]> => {
   "use cache: remote"
-  cacheTag("related-books")
+  cacheTag("related-books", `related-books:${objectID}`)
   cacheLife("months")
 
   const [appID, indexName, apiKey, useRelatedContent] = await getAlgoliaCredential()
   if (!appID || !indexName || !apiKey || !useRelatedContent) return []
 
-  const options: RequestInit = {
-    method: "POST",
-    next: {revalidate: 60 * 60 * 24 * 30, tags: ["related-books"]},
-    headers: {
-      "Content-Type": "application/json",
-      "X-Algolia-Application-Id": appID,
-      "X-Algolia-API-Key": apiKey,
-    },
-    body: JSON.stringify({
-      requests: [
-        {
-          indexName: indexName,
-          model: "related-products",
-          maxRecommendations: 5,
-          threshold: 0,
-          objectID,
-          queryParameters: {
-            filters: "book_type:book",
+  try {
+    const response = await fetch(`https://${appID}-dsn.algolia.net/1/indexes/*/recommendations`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Algolia-Application-Id": appID,
+        "X-Algolia-API-Key": apiKey,
+      },
+      body: JSON.stringify({
+        requests: [
+          {
+            indexName,
+            model: "related-products",
+            maxRecommendations: 5,
+            threshold: 0,
+            objectID,
+            queryParameters: {
+              filters: "book_type:book",
+              attributesToRetrieve: RELATED_BOOK_ATTRIBUTES,
+              attributesToHighlight: [],
+              attributesToSnippet: [],
+            },
           },
-        },
-      ],
-    }),
+        ],
+      }),
+    })
+    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
+
+    const recommendations: {results?: {hits?: RecommendHit[]}[]} = await response.json()
+    const hits = (recommendations.results?.[0]?.hits || []) as BookHit[]
+
+    return hits
+      .filter(hit => hit.url && hit.title)
+      .map(hit => ({
+        objectID: hit.objectID,
+        title: hit.title,
+        url: hit.url,
+        photo: hit.photo,
+        book_subtitle: hit.book_subtitle,
+        book_authors: hit.book_authors,
+        book_award_winner: hit.book_award_winner,
+      }))
+  } catch (e) {
+    // Keep a failed lookup out of the months-long cache so the next request after an Algolia hiccup retries it.
+    cacheFailure(`Unable to fetch related books for ${objectID}`, e)
+    return []
   }
-
-  const recommendations: {results: RecommendHit[]} = await fetch(
-    `https://${appID}-dsn.algolia.net/1/indexes/*/recommendations`,
-    options
-  ).then(res => res.json())
-
-  const hits = (recommendations?.results?.[0].hits as BookHit[]) || []
-  hits.map(hit => {
-    delete hit._highlightResult
-    delete hit._snippetResult
-  })
-  return hits
 }
 
 const AlgoliaRelatedBooks = async ({objectId}: {objectId: NodeSupBook["id"]}) => {
@@ -71,7 +89,7 @@ const AlgoliaRelatedBooks = async ({objectId}: {objectId: NodeSupBook["id"]}) =>
   )
 }
 
-const RelatedBook = ({item}: {item: BookHit}) => {
+const RelatedBook = ({item}: {item: RelatedBookHit}) => {
   const imageUrl =
     item.photo && item.photo.replace(new URL(item.photo).origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string)
   return (

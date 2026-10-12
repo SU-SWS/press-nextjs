@@ -1,7 +1,6 @@
 import {H1} from "@components/elements/headers"
 import {getAlgoliaCredential} from "@lib/gql/gql-queries"
 import AlgoliaSearchForm from "@components/algolia-search/algolia-search-form"
-import {Suspense} from "react"
 
 export const metadata = {
   title: "Search",
@@ -23,9 +22,7 @@ const Page = async () => {
         </H1>
         <div>
           {appId && indexName && apiKey && (
-            <Suspense>
-              <AlgoliaSearchForm appId={appId} searchIndex={indexName} searchApiKey={apiKey} />
-            </Suspense>
+            <AlgoliaSearchForm appId={appId} searchIndex={indexName} searchApiKey={apiKey} />
           )}
         </div>
         <noscript>Please enable javascript to view search results</noscript>

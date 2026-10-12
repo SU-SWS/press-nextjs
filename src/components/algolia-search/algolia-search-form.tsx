@@ -1,6 +1,6 @@
 "use client"
 
-import {liteClient} from "algoliasearch/lite"
+import {liteClient, type LiteClient} from "algoliasearch/lite"
 import {
   useHits,
   useSearchBox,
@@ -10,10 +10,14 @@ import {
   useClearRefinements,
   usePagination,
   useSortBy,
+  useInstantSearch,
+  InstantSearch,
 } from "react-instantsearch"
-import {InstantSearchNext} from "react-instantsearch-nextjs"
+import {history} from "instantsearch.js/es/lib/routers"
+import type {RouterProps} from "instantsearch.js/es/middlewares"
+import type {UiState} from "instantsearch.js"
 import {H2} from "@components/elements/headers"
-import {HTMLAttributes, useEffect, useId, useLayoutEffect, useMemo, useRef, useState} from "react"
+import {HTMLAttributes, useEffect, useId, useLayoutEffect, useMemo, useRef} from "react"
 import Button from "@components/elements/button"
 import {Hit as HitType} from "instantsearch.js"
 import {IndexUiState} from "instantsearch.js/es/types/ui-state"
@@ -26,70 +30,123 @@ import {
 } from "@heroicons/react/20/solid"
 import DefaultHit, {AlgoliaHit} from "@components/algolia-search/hits/default"
 import {CheckIcon} from "@heroicons/react/20/solid"
-import {useBoolean, useLocalStorage, useReadLocalStorage} from "usehooks-ts"
+import {useBoolean, useLocalStorage} from "usehooks-ts"
 import cn from "@lib/utils/className"
 import type {SendEventForHits} from "instantsearch.js/es/lib/utils"
 import SelectList, {SelectOption} from "@components/elements/inputs/select-list"
-import {usePathname} from "next/navigation"
 
 type Props = {
   appId: string
   searchIndex: string
   searchApiKey: string
-  initialUiState?: IndexUiState
 }
 
+type RouteState = Record<string, string | undefined>
+
+const SORT_STORAGE_KEY = "search-sort"
+
+const readStoredSort = (): string | undefined => {
+  try {
+    const stored = window.localStorage.getItem(SORT_STORAGE_KEY)
+    return stored ? JSON.parse(stored) : undefined
+  } catch {
+    return undefined
+  }
+}
+
+/**
+ * Defer building the Algolia client until the first search. `liteClient()` shuffles its hosts with `Math.random()`,
+ * which blocks prerendering this page. Searches only run in the browser, so the server render never builds it.
+ */
+const createLazySearchClient = (appId: string, apiKey: string) => {
+  let client: LiteClient | undefined
+  // InstantSearch registers its user agents during render, before any search runs.
+  const agents: [string, string | undefined][] = []
+
+  const getClient = () => {
+    if (!client) {
+      client = liteClient(appId, apiKey)
+      agents.forEach(([segment, version]) => client?.addAlgoliaAgent(segment, version))
+    }
+    return client
+  }
+
+  return {
+    // The insights middleware reads these to send click events.
+    appId,
+    apiKey,
+    addAlgoliaAgent: (segment: string, version?: string) => {
+      if (client) client.addAlgoliaAgent(segment, version)
+      else agents.push([segment, version])
+    },
+    search: ((...args) => getClient().search(...args)) as LiteClient["search"],
+  }
+}
+
+/**
+ * Search runs entirely in the browser. InstantSearch doesn't query Algolia while the server renders, so the page
+ * stays static and bots crawling /search don't spend Algolia operations.
+ */
 const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
-  const pathName = usePathname()
-  const searchClient = useMemo(() => liteClient(appId, searchApiKey), [appId, searchApiKey])
-  const sortChoice = useReadLocalStorage<string>("search-sort")
+  const searchClient = useMemo(() => createLazySearchClient(appId, searchApiKey), [appId, searchApiKey])
+
+  // The routing config has to stay referentially stable. A new object on each render makes InstantSearch rebuild its
+  // router.
+  const routing = useMemo<RouterProps<UiState, RouteState>>(
+    () => ({
+      router: history({cleanUrlOnDispose: false}),
+      stateMapping: {
+        stateToRoute(uiState) {
+          const indexUiState = uiState[searchIndex] || {}
+          const route: RouteState = {}
+
+          if (indexUiState.range?.book_published_year) {
+            const [yearMin, yearMax] = indexUiState.range.book_published_year.split(":")
+            if (Number(yearMin) > 0 && Number(yearMin) < 2050) route["published-min"] = yearMin
+            if (Number(yearMax) > 0 && Number(yearMax) < 2050) route["published-max"] = yearMax
+          }
+
+          if (indexUiState.refinementList?.book_subject?.length)
+            route.subjects = indexUiState.refinementList.book_subject.join(",")
+
+          if (!indexUiState.refinementList?.book_type?.includes("book")) route["only-books"] = "false"
+          if (indexUiState.query) route.q = indexUiState.query
+          if (indexUiState.page && indexUiState.page > 1) route.page = `${indexUiState.page}`
+          if (indexUiState.sortBy && indexUiState.sortBy !== searchIndex) route.sort = indexUiState.sortBy
+          return route
+        },
+        routeToState(route) {
+          const refinementList: IndexUiState["refinementList"] = {}
+          const range: IndexUiState["range"] = {}
+
+          if (route["published-min"] || route["published-max"])
+            range.book_published_year = `${route["published-min"] || ""}:${route["published-max"] || ""}`
+
+          if (route["only-books"] !== "false") refinementList.book_type = ["book"]
+          if (route.subjects) refinementList.book_subject = route.subjects.split(",")
+
+          // A keyword search defaults to relevance. Browsing without one falls back to the visitor's last sort choice.
+          const sortBy = route.sort || (route.q ? undefined : readStoredSort())
+
+          return {
+            [searchIndex]: {
+              query: route.q,
+              refinementList,
+              range,
+              page: route.page ? Number(route.page) : undefined,
+              sortBy: sortBy && sortBy.startsWith(searchIndex) ? sortBy : undefined,
+            },
+          }
+        },
+      },
+    }),
+    [searchIndex]
+  )
 
   return (
-    <InstantSearchNext
-      key={pathName}
-      indexName={sortChoice || searchIndex}
-      searchClient={searchClient}
-      insights={true}
-      routing={{
-        router: {cleanUrlOnDispose: false},
-        stateMapping: {
-          stateToRoute(uiState): Record<string, string> {
-            const indexUiState = uiState[sortChoice || searchIndex]
-            const refinements: Record<string, string> = {}
-
-            if (indexUiState.range?.book_published_year) {
-              const [yearMin, yearMax] = indexUiState.range.book_published_year.split(":")
-              if (Number(yearMin) > 0 && Number(yearMin) < 2050) refinements["published-min"] = yearMin
-              if (Number(yearMax) > 0 && Number(yearMin) < 2050) refinements["published-max"] = yearMax
-            }
-
-            if (indexUiState.refinementList?.book_subject)
-              refinements.subjects = indexUiState.refinementList.book_subject.join(",")
-
-            if (!indexUiState.refinementList?.book_type?.includes("book")) refinements["only-books"] = "false"
-
-            if (indexUiState.query) refinements.q = indexUiState.query
-            return refinements
-          },
-          routeToState(routeState: Record<string, string>) {
-            const refinementList: IndexUiState["refinementList"] = {}
-            const range: IndexUiState["range"] = {}
-
-            const pubRange = [routeState["published-min"], ":", routeState["published-max"]]
-            range.book_published_year = pubRange.filter(Boolean).join("")
-
-            if (routeState["only-books"] !== "false") refinementList["book_type"] = ["book"]
-            if (routeState["subjects"]) refinementList["book_subject"] = routeState["subjects"].split(",")
-
-            return {
-              [sortChoice || searchIndex]: {query: routeState.q, refinementList, range},
-            }
-          },
-        },
-      }}
-    >
+    <InstantSearch indexName={searchIndex} searchClient={searchClient} insights routing={routing}>
       <Form searchIndex={searchIndex} />
-    </InstantSearchNext>
+    </InstantSearch>
   )
 }
 
@@ -113,19 +170,11 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
   } = useRange({attribute: "book_published_year"})
   const {min: minYear, max: maxYear} = pubYearRangeBounds
 
-  const chosenMinYear = Math.max(
-    Number(minYear),
-    Number(Number.isFinite(pubYearValues[0]) ? pubYearValues[0] : minYear)
-  )
-  const chosenMaxYear = Math.min(
-    maxYear || 3000,
-    Number(Number.isFinite(pubYearValues[1]) ? pubYearValues[1] : maxYear)
-  )
-
-  const [pubYears, setPubYears] = useState<{start?: number; end?: number}>({
-    start: chosenMinYear || undefined,
-    end: chosenMaxYear || undefined,
-  })
+  // Read the chosen years straight from the refinement so they follow the URL, the back button and "Reset".
+  const pubYears = {
+    start: Number.isFinite(pubYearValues[0]) ? Number(pubYearValues[0]) : undefined,
+    end: Number.isFinite(pubYearValues[1]) ? Number(pubYearValues[1]) : undefined,
+  }
 
   const {
     items: currentRefinements,
@@ -143,14 +192,10 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
 
   const {value: expanded, toggle: toggleExpanded} = useBoolean(false)
 
-  const loaded = useRef(false)
+  // Keep the uncontrolled input in step when the query changes from outside it, like the back button or "Reset".
   useEffect(() => {
-    // Force the search to submit if no results and it's the first time rendering.
-    if (!loaded.current) {
-      loaded.current = true
-      refine(query)
-    }
-  }, [refine, query])
+    if (inputRef.current && document.activeElement !== inputRef.current) inputRef.current.value = query
+  }, [query])
 
   return (
     <div>
@@ -296,13 +341,12 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
               <div className="flex items-center gap-12.5">
                 <div className="flex-1 grow">
                   <div id={`${id}-min-year`} className="mb-5 text-18 text-press-sand-dark">
-                    <span className="sr-only">Minimum&nbps;</span>Year
+                    <span className="sr-only">Minimum&nbsp;</span>Year
                   </div>
                   <SelectList<false>
                     items={yearOptions.filter(option => parseInt(option.value) <= (pubYears.end || 3000))}
                     value={!!pubYears.start ? pubYears.start.toString() : null}
                     onValueChange={value => {
-                      setPubYears({start: value ? Number(value) : undefined, end: pubYears.end})
                       refindPubYear([value ? Number(value) : undefined, pubYears.end])
                     }}
                     ariaLabelledby={`${id}-min-year`}
@@ -316,13 +360,12 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                 </span>
                 <div className="flex-1 grow">
                   <div id={`${id}-max-year`} className="mb-5 text-18 text-press-sand-dark">
-                    <span className="sr-only">Maximum&nbps;</span>Year
+                    <span className="sr-only">Maximum&nbsp;</span>Year
                   </div>
                   <SelectList<false>
                     items={yearOptions.filter(option => parseInt(option.value) >= (pubYears.start || 0))}
                     value={!!pubYears.end ? pubYears.end.toString() : null}
                     onValueChange={value => {
-                      setPubYears({start: pubYears.start, end: value ? Number(value) : undefined})
                       refindPubYear([pubYears.start, value ? Number(value) : undefined])
                     }}
                     ariaLabelledby={`${id}-max-year`}
@@ -342,7 +385,6 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                 clearRefinements()
                 refine("")
                 refindPubYear([-Infinity, Infinity])
-                setPubYears({})
                 if (inputRef.current) inputRef.current.value = ""
               }}
             >
@@ -359,8 +401,9 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
 }
 
 const HitList = ({searchIndex}: {searchIndex: string}) => {
-  const [, setSortChoice] = useLocalStorage<string>("search-sort", searchIndex)
-  const {items: hits, sendEvent} = useHits<HitType<AlgoliaHit>>({})
+  const [, setSortChoice] = useLocalStorage<string>(SORT_STORAGE_KEY, searchIndex)
+  const {items: hits, results, sendEvent} = useHits<HitType<AlgoliaHit>>({})
+  const {status} = useInstantSearch()
   const {query} = useSearchBox({})
 
   const {currentRefinement: currentPage, pages, nbPages, nbHits, refine: goToPage} = usePagination({padding: 2})
@@ -377,9 +420,18 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
     ],
   })
 
+  // A new keyword search switches back to relevance. Skip the first render so a sort that came in on the URL sticks.
+  const previousQuery = useRef(query)
   useEffect(() => {
-    if (query) sortBy(searchIndex)
+    if (query && query !== previousQuery.current) sortBy(searchIndex)
+    previousQuery.current = query
   }, [sortBy, searchIndex, query])
+
+  // Until the first response arrives the results are a placeholder. Don't announce "no results" for a search that
+  // hasn't run yet.
+  if (results?.__isArtificial || (hits.length === 0 && (status === "loading" || status === "stalled"))) {
+    return <p className="rs-mt-6">Loading results&hellip;</p>
+  }
 
   if (hits.length === 0) {
     return <p className="rs-mt-6">No results for your search. Please try another search.</p>
@@ -444,7 +496,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
             {pages.map(pageNum => (
               <li
                 key={`page-${pageNum}`}
-                aria-current={currentPage === pageNum}
+                aria-current={currentPage === pageNum ? "page" : undefined}
                 className={cn("h-fit border-b-2 px-10 pb-7.5", {
                   "border-transparent": currentPage !== pageNum,
                   "border-press-sand-dark": currentPage === pageNum,
@@ -456,7 +508,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
               </li>
             ))}
 
-            {pages[pages.length - 1] !== nbPages && (
+            {pages[pages.length - 1] < nbPages - 1 && (
               <li>
                 <button
                   onClick={() => goToPage(nbPages - 1)}
