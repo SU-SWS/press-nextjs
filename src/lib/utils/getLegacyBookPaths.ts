@@ -16,9 +16,33 @@ import {cacheTag} from "next/cache"
  */
 const PAGE_SIZE = 1000
 
-export const getLegacyBookPaths = async () => {
+type LegacyBookPath = {uuid: number; path: NodeInterface["path"]}
+
+/**
+ * Work id to book path mapping for the `/api/book-paths` endpoint. The cron at /api/book-paths/revalidate refreshes it
+ * by revalidating `legacy-books`.
+ */
+export const getLegacyBookPaths = async (): Promise<LegacyBookPath[]> => {
   cacheTag("legacy-books")
-  const nodes: Array<{uuid: number; path: NodeInterface["path"]}> = []
+  return fetchLegacyBookPaths()
+}
+
+/**
+ * The same mapping for the legacy redirect pages, cached under its own tag.
+ *
+ * Tags propagate from nested caches to the pages that read them, so if the redirects shared `getLegacyBookPaths`,
+ * every cron run would mark all of them stale and each would re-render on its next request. Old-site urls don't
+ * change, and every deploy rebuilds this list, so nothing revalidates `legacy-redirects` on a schedule.
+ */
+const getLegacyRedirectPaths = async (): Promise<LegacyBookPath[]> => {
+  "use cache: remote"
+  cacheTag("legacy-redirects")
+  return fetchLegacyBookPaths()
+}
+
+// Not exported, so the file level `use cache: remote` doesn't apply: each caller above caches the result under its tag.
+const fetchLegacyBookPaths = async (): Promise<LegacyBookPath[]> => {
+  const nodes: LegacyBookPath[] = []
 
   // A single cheap request establishes how many pages there are. Cursor pagination forced every page to wait on the
   // one before it; the view exposes a total up front, so the pages can all be in flight at once.
@@ -50,13 +74,13 @@ export const getLegacyBookPaths = async () => {
 const WORK_ID_LOOKAHEAD = 5000
 
 export const getNewBookPath = async (workId: string, suffix?: string): Promise<string | undefined> => {
-  cacheTag("legacy-books")
+  cacheTag("legacy-redirects")
   // Reject anything that is not a plain positive integer. This route is reachable unauthenticated through the
   // /books/title?id= rewrite, and every distinct value becomes its own cache entry.
   if (!/^\d{1,7}$/.test(workId)) return
 
   const requestedId = parseInt(workId)
-  const legacyPaths = await getLegacyBookPaths()
+  const legacyPaths = await getLegacyRedirectPaths()
   const legacyBook = legacyPaths.find(book => book.uuid === requestedId)
   if (legacyBook?.path) return legacyBook.path + (suffix || "")
 
