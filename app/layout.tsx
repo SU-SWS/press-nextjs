@@ -5,7 +5,6 @@ import PageHeader from "@components/global/page-header"
 import {Icon} from "next/dist/lib/metadata/types/metadata-types"
 import {montserrat} from "../src/styles/fonts"
 import UserAnalytics from "@components/elements/user-analytics"
-import Editori11y from "@components/tools/editorially"
 import {ToastMessage} from "@components/elements/toast-message"
 import {Metadata} from "next"
 import {Suspense} from "react"
@@ -35,7 +34,6 @@ const RootLayout = async ({children, modal}: {children: React.ReactNode; modal: 
   return (
     <html lang="en" className={montserrat.className}>
       <UserAnalytics />
-      {!!process.env.VERCEL_ENV && <Editori11y />}
 
       <body className="text-stone-dark">
         <nav aria-label="Skip Links">
