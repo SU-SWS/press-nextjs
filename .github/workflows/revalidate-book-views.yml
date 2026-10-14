@@ -1,0 +1,42 @@
+name: Revalidate Book Listings
+# Drupal no longer sends the `views:sup_book` and `views:all` tags on every book save, since one changed book marked
+# every listing page (series, subjects, new releases, home) stale on each import run. This refreshes them on a schedule
+# instead, so a new or changed book can take up to two days to appear in listings. Its own page updates right away.
+on:
+  schedule:
+    # 09:00 UTC (early morning Pacific) on odd days of the month. Runs back to back across a 31-day month boundary.
+    - cron: "0 9 */2 * *"
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+jobs:
+  revalidate:
+    name: Revalidate listing tags
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Revalidate views:sup_book and views:all
+        env:
+          # The same secret Drupal uses. Sent as a Bearer token, it also satisfies the firewall's bot protection bypass
+          # rule, so the request isn't answered with a challenge.
+          REVALIDATE_SECRET: ${{ secrets.DRUPAL_REVALIDATE_SECRET }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://www.sup.org' }}
+        run: |
+          if [ -z "$REVALIDATE_SECRET" ]; then
+            echo "::error::The DRUPAL_REVALIDATE_SECRET repository secret is not set."
+            exit 1
+          fi
+
+          response=$(curl --silent --show-error --fail-with-body --max-time 30 \
+            -X POST "$SITE_URL/api/revalidate" \
+            -H "Authorization: Bearer $REVALIDATE_SECRET" \
+            -H "Content-Type: application/json" \
+            -d '{"tags":["views:sup_book","views:all"]}')
+          echo "$response"
+
+          # A firewall challenge or an unexpected page can still come back as HTML, so confirm the JSON reply.
+          if ! echo "$response" | grep -q '"revalidated":true'; then
+            echo "::error::Revalidation did not succeed."
+            exit 1
+          fi
