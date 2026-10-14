@@ -3,7 +3,7 @@ import UnpublishedBanner from "@components/elements/unpublished-banner"
 import {NodeUnion} from "@lib/gql/__generated__/graphql"
 import {getEntityFromPath, getHomePagePath} from "@lib/gql/gql-queries"
 import {notFound} from "next/navigation"
-import {getPathFromContext, PageProps, Slug} from "@lib/drupal/utils"
+import {getPathFromContext, PageProps} from "@lib/drupal/utils"
 import NodePageSkeleton from "@components/nodes/pages/node-page-skeleton"
 import {Suspense} from "react"
 
@@ -39,10 +39,6 @@ const PreviewContents = async ({params: paramsPromise}: {params: PageProps["para
       <NodePage node={entity} isHome={path === "/" || path === homePath} />
     </UnpublishedBanner>
   )
-}
-
-export const generateStaticParams = (): Array<Slug> => {
-  return [{slug: ["/"]}]
 }
 
 export default PreviewPage
