@@ -17,7 +17,7 @@ import {history} from "instantsearch.js/es/lib/routers"
 import type {RouterProps} from "instantsearch.js/es/middlewares"
 import type {UiState} from "instantsearch.js"
 import {H2} from "@components/elements/headers"
-import {HTMLAttributes, useEffect, useId, useLayoutEffect, useMemo, useRef} from "react"
+import {HTMLAttributes, useEffect, useId, useLayoutEffect, useMemo, useRef, useState} from "react"
 import Button from "@components/elements/button"
 import {Hit as HitType} from "instantsearch.js"
 import {IndexUiState} from "instantsearch.js/es/types/ui-state"
@@ -44,15 +44,6 @@ type Props = {
 type RouteState = Record<string, string | undefined>
 
 const SORT_STORAGE_KEY = "search-sort"
-
-const readStoredSort = (): string | undefined => {
-  try {
-    const stored = window.localStorage.getItem(SORT_STORAGE_KEY)
-    return stored ? JSON.parse(stored) : undefined
-  } catch {
-    return undefined
-  }
-}
 
 /**
  * Defer building the Algolia client until the first search. `liteClient()` shuffles its hosts with `Math.random()`,
@@ -88,7 +79,30 @@ const createLazySearchClient = (appId: string, apiKey: string) => {
  * stays static and bots crawling /search don't spend Algolia operations.
  */
 const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
+  // With Cache Components, Next.js keeps a visited route mounted inside a hidden React <Activity> and reveals it on
+  // back/forward or a link back to /search. Hiding the route disposes the InstantSearch instance and its router, and
+  // restarting that disposed instance leaves the form unable to search. Mount a fresh instance each time the route is
+  // revealed again so it reads the current URL and starts clean. Effects re-run on reveal, but refs persist.
+  const [instanceKey, setInstanceKey] = useState(0)
+  const hasActivatedRef = useRef(false)
+  useLayoutEffect(() => {
+    if (hasActivatedRef.current) setInstanceKey(key => key + 1)
+    hasActivatedRef.current = true
+  }, [])
+
+  return <AlgoliaInstantSearch key={instanceKey} appId={appId} searchIndex={searchIndex} searchApiKey={searchApiKey} />
+}
+
+const AlgoliaInstantSearch = ({appId, searchIndex, searchApiKey}: Props) => {
   const searchClient = useMemo(() => createLazySearchClient(appId, searchApiKey), [appId, searchApiKey])
+
+  // The visitor's last sort choice, saved by HitList. `routeToState` reads it on start and on back/forward, so it goes
+  // through a ref to keep the routing config stable when the choice changes.
+  const [storedSort] = useLocalStorage<string>(SORT_STORAGE_KEY, searchIndex)
+  const storedSortRef = useRef(storedSort)
+  useEffect(() => {
+    storedSortRef.current = storedSort
+  }, [storedSort])
 
   // The routing config has to stay referentially stable. A new object on each render makes InstantSearch rebuild its
   // router.
@@ -126,7 +140,7 @@ const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
           if (route.subjects) refinementList.book_subject = route.subjects.split(",")
 
           // A keyword search defaults to relevance. Browsing without one falls back to the visitor's last sort choice.
-          const sortBy = route.sort || (route.q ? undefined : readStoredSort())
+          const sortBy = route.sort || (route.q ? undefined : storedSortRef.current)
 
           return {
             [searchIndex]: {
@@ -434,7 +448,11 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
   }
 
   if (hits.length === 0) {
-    return <p className="rs-mt-6">No results for your search. Please try another search.</p>
+    return (
+      <p className="rs-mt-6" aria-live="polite" aria-atomic>
+        No results for your search. Please try another search.
+      </p>
+    )
   }
 
   return (
@@ -444,6 +462,7 @@ const HitList = ({searchIndex}: {searchIndex: string}) => {
           id="result-summary"
           tabIndex={-1}
           aria-live="polite"
+          aria-atomic
           className="ml-12.5 type-0 font-medium md:ml-0 xl:text-21"
         >
           {nbHits} {nbHits > 1 ? "Results" : "Result"}
