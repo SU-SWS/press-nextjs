@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
   },
   cacheComponents: true,
   partialPrefetching: false,
+  // With Cache Components, requests from the default HTML-limited bots (Bingbot, Baiduspider, Yandex, Applebot,
+  // Slackbot, ...) skip the CDN cache for a blocking render, about 5k function invocations a day. Every page here is
+  // prerendered with its metadata already in <head>, so those bots get the cached HTML instead. Matches no user agent.
+  htmlLimitedBots: /^\b$/,
   typescript: {
     // Disable build errors since dev dependencies aren't loaded on prod. Rely on GitHub actions to throw any errors.
     ignoreBuildErrors: process.env.CI !== "true",

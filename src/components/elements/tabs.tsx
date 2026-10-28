@@ -1,7 +1,6 @@
 "use client"
 
 import {useCallback, useState} from "react"
-import {useSearchParams} from "next/navigation"
 import {
   Tabs as BaseTabs,
   type TabsRootProps,
@@ -13,6 +12,7 @@ import {
 } from "@base-ui/react/tabs"
 import {useScreen} from "usehooks-ts"
 import cn from "@lib/utils/className"
+import useSearchParamAfterHydration from "@lib/hooks/useSearchParamAfterHydration"
 
 type TabsProps = TabsRootProps & {
   className?: string
@@ -31,21 +31,17 @@ const TabsInner = ({
 }: TabsProps) => {
   const screen = useScreen({initializeWithValue: false})
   const isVertical = (screen && screen.width < 768) || orientation === "vertical"
-  const searchParams = useSearchParams()
+  const queryValue = useSearchParamAfterHydration(queryKey)
 
-  const queryValue = queryKey ? (searchParams.get(queryKey) ?? undefined) : undefined
-
-  // When queryKey is set, manage controlled state initialized from the URL (or defaultValue).
-  // This avoids "changing defaultValue of an uncontrolled component" since queryValue changes
-  // on every tab click as the URL updates.
-  const [activeTab, setActiveTab] = useState<TabsTab.Value | undefined>(
-    queryKey ? queryValue || defaultValue : defaultValue
-  )
+  // Controlled state, so a tab chosen from the URL doesn't change the defaultValue of an uncontrolled component. Until
+  // a tab is clicked, the URL's tab (or the default) is active.
+  const [chosenTab, setActiveTab] = useState<TabsTab.Value | undefined>()
+  const activeTab = chosenTab ?? queryValue ?? defaultValue
 
   const handleValueChange = useCallback(
     (newValue: TabsTab.Value, eventDetails: TabsRoot.ChangeEventDetails) => {
       if (queryKey && newValue) {
-        const params = new URLSearchParams(searchParams.toString())
+        const params = new URLSearchParams(window.location.search)
         params.delete(queryKey)
         if (newValue !== defaultValue) params.set(queryKey, String(newValue))
         // Native History API instead of router.replace, so a tab change doesn't fetch the page from the server.
@@ -54,7 +50,7 @@ const TabsInner = ({
       }
       onValueChange?.(newValue, eventDetails)
     },
-    [queryKey, onValueChange, searchParams, defaultValue]
+    [queryKey, onValueChange, defaultValue]
   )
 
   return (

@@ -1,10 +1,10 @@
 "use client"
 
-import {HTMLAttributes, useCallback, useEffect, useMemo, useState} from "react"
+import {HTMLAttributes, useCallback, useMemo, useState} from "react"
 import PagedList from "@components/elements/paged-list"
-import {useSearchParams} from "next/navigation"
 import Link from "@components/elements/link"
 import cn from "@lib/utils/className"
+import useSearchParamAfterHydration from "@lib/hooks/useSearchParamAfterHydration"
 import {AuthorBook} from "@components/paragraphs/sup-author-list/sup-author-list-paragraph"
 
 type Props = HTMLAttributes<HTMLDivElement> & {
@@ -16,8 +16,21 @@ const normalizeFirstLetter = (authorName: string) =>
   authorName.charAt(0).toUpperCase().replace("Ö", "O").replace("Ø", "O")
 
 const FilteringAuthorList = ({authors, ...props}: Props) => {
-  const searchParams = useSearchParams()
-  const [alphaChosen, setAlphaChosen] = useState<string>(searchParams.get("author") || "")
+  const authorParam = useSearchParamAfterHydration("author")
+  // Until a letter is clicked, the URL's letter (or all authors) is shown.
+  const [chosenAlpha, setAlphaChosen] = useState<string>()
+  const alphaChosen = chosenAlpha ?? authorParam ?? ""
+
+  const chooseAlpha = useCallback((choice: string) => {
+    setAlphaChosen(choice)
+
+    // Use search params to retain any other parameters.
+    const params = new URLSearchParams(window.location.search)
+    params.delete("author")
+    if (choice !== "") params.set("author", choice)
+    // Native History API instead of router.replace, so a filter change doesn't fetch the page from the server.
+    window.history.replaceState(null, "", `?${params.toString()}${window.location.hash || ""}`)
+  }, [])
 
   const displayedAuthors = useMemo(() => {
     if (alphaChosen === "") return authors
@@ -37,18 +50,6 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
     () => [...displayedAuthors.keys()].sort((a, b) => a.localeCompare(b)),
     [displayedAuthors]
   )
-
-  useEffect(() => {
-    // Use search params to retain any other parameters.
-    const params = new URLSearchParams(searchParams.toString())
-    params.delete("author")
-    if (alphaChosen !== "") params.set("author", alphaChosen)
-
-    const newSearch = params.toString()
-    // Native History API instead of router.replace, so a filter change doesn't fetch the page from the server.
-    if (window.location.search.replace(/^\?/, "") !== newSearch)
-      window.history.replaceState(null, "", `?${newSearch}${window.location.hash || ""}`)
-  }, [searchParams, alphaChosen])
 
   const loadPage = useCallback(
     async (page: number) => {
@@ -90,14 +91,14 @@ const FilteringAuthorList = ({authors, ...props}: Props) => {
         <fieldset className="list-unstyled">
           <legend className="sr-only">Filter by first letter of authors last name</legend>
 
-          <RadioOption value="All" defaultChecked={alphaChosen === ""} onChange={() => setAlphaChosen("")} />
+          <RadioOption value="All" checked={alphaChosen === ""} onChange={() => chooseAlpha("")} />
 
           {alphaChoices.map(choice => (
             <RadioOption
               key={choice}
               value={choice}
-              defaultChecked={alphaChosen === choice}
-              onChange={() => setAlphaChosen(choice)}
+              checked={alphaChosen === choice}
+              onChange={() => chooseAlpha(choice)}
             />
           ))}
         </fieldset>
@@ -122,25 +123,10 @@ const AuthorItem = ({authorName, books}: {authorName: string; books?: AuthorBook
   )
 }
 
-const RadioOption = ({
-  value,
-  defaultChecked,
-  onChange,
-}: {
-  value: string
-  defaultChecked?: boolean
-  onChange: () => void
-}) => {
+const RadioOption = ({value, checked, onChange}: {value: string; checked: boolean; onChange: () => void}) => {
   return (
     <label className="mb-20 block cursor-pointer">
-      <input
-        className="peer sr-only"
-        type="radio"
-        defaultChecked={defaultChecked}
-        name="alpha"
-        value={value}
-        onChange={onChange}
-      />
+      <input className="peer sr-only" type="radio" checked={checked} name="alpha" value={value} onChange={onChange} />
       <span className="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-fog-light font-semibold text-press-sand-dark peer-checked:bg-digital-red peer-checked:text-white peer-focus:underline peer-focus-visible:outline-press-sand-dark peer-focus-visible:outline-solid hover:underline">
         {value}
       </span>
