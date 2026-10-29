@@ -301,16 +301,16 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
               <label className="flex cursor-pointer items-center justify-between gap-25">
                 <span className="text-18">Search only books</span>
 
-                <div className="group relative">
+                <span className="group relative">
                   <input
                     className="peer sr-only"
                     type="checkbox"
                     checked={bookType.find(item => item.value === "book")?.isRefined || false}
                     onChange={() => refineBookType("book")}
                   />
-                  <div className="h-15 w-40 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
-                  <div className="absolute -top-5 -left-2.5 h-25 w-25 rounded-full border border-fog-dark bg-white shadow-sm outline-8 outline-press-bay transition outline-none group-hocus:outline-solid peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline-solid" />
-                </div>
+                  <span className="block h-15 w-40 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
+                  <span className="absolute -top-5 -left-2.5 h-25 w-25 rounded-full border border-fog-dark bg-white shadow-sm outline-8 outline-press-bay transition outline-none group-hocus:outline-solid peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline-solid" />
+                </span>
               </label>
             </div>
 
@@ -321,7 +321,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                   key={refinementOption.value}
                   className="group mx-12.5 flex cursor-pointer items-center gap-12.5 text-16"
                 >
-                  <div className="group relative">
+                  <span className="group relative">
                     <input
                       className="peer sr-only"
                       type="checkbox"
@@ -329,10 +329,10 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                       name="subject"
                       onChange={() => refineBookSubjects(refinementOption.value)}
                     />
-                    <div className="h-35 w-35 rounded-full group-hocus:bg-press-bay/60 peer-focus-visible:bg-press-bay peer-focus-visible:group-hocus:bg-press-bay/60" />
-                    <div className="absolute top-7.5 left-7.5 h-20 w-20 rounded-[0.3rem] border-2 border-press-sand-light group-hocus:border-press-grass peer-checked:border-press-grass peer-checked:bg-press-bay-dark peer-focus-visible:border-press-grass" />
+                    <span className="block h-35 w-35 rounded-full group-hocus:bg-press-bay/60 peer-focus-visible:bg-press-bay peer-focus-visible:group-hocus:bg-press-bay/60" />
+                    <span className="absolute top-7.5 left-7.5 h-20 w-20 rounded-[0.3rem] border-2 border-press-sand-light group-hocus:border-press-grass peer-checked:border-press-grass peer-checked:bg-press-bay-dark peer-focus-visible:border-press-grass" />
                     <CheckIcon width={15} className="absolute top-10 left-10 hidden text-white peer-checked:block" />
-                  </div>
+                  </span>
                   <span
                     id={
                       "subject-" +

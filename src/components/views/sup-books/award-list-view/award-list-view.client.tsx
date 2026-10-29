@@ -72,7 +72,7 @@ const AwardListViewClient = ({totalItems, loadPage, children, ...props}: Props) 
           <legend className="sr-only">Filter by year</legend>
 
           <label className="flex cursor-pointer items-center gap-25">
-            <div className="group relative">
+            <span className="group relative">
               <input
                 className="peer sr-only"
                 type="radio"
@@ -80,15 +80,15 @@ const AwardListViewClient = ({totalItems, loadPage, children, ...props}: Props) 
                 defaultChecked
                 onChange={() => onYearChosen()}
               />
-              <div className="h-15 w-40 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
-              <div className="absolute -top-5 right-17.5 h-25 w-25 rounded-full border border-fog-dark bg-white shadow-sm outline-8 outline-press-bay/60 transition outline-none group-hocus:outline-solid peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline-solid" />
-            </div>
+              <span className="block h-15 w-40 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
+              <span className="absolute -top-5 right-17.5 h-25 w-25 rounded-full border border-fog-dark bg-white shadow-sm outline-8 outline-press-bay/60 transition outline-none group-hocus:outline-solid peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline-solid" />
+            </span>
             <span>All Winners</span>
           </label>
 
           {yearChoices.map(year => (
             <label key={"award-winner-year-" + year} className="flex cursor-pointer items-center gap-25">
-              <div className="group relative">
+              <span className="group relative">
                 <input
                   className="peer sr-only"
                   type="radio"
@@ -96,9 +96,9 @@ const AwardListViewClient = ({totalItems, loadPage, children, ...props}: Props) 
                   value={year}
                   onChange={() => onYearChosen(year)}
                 />
-                <div className="h-15 w-40 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
-                <div className="absolute -top-5 right-17.5 h-25 w-25 rounded-full border border-fog-dark bg-white shadow-sm outline-8 outline-press-bay/60 transition outline-none group-hocus:outline-solid peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline-solid" />
-              </div>
+                <span className="block h-15 w-40 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
+                <span className="absolute -top-5 right-17.5 h-25 w-25 rounded-full border border-fog-dark bg-white shadow-sm outline-8 outline-press-bay/60 transition outline-none group-hocus:outline-solid peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline-solid" />
+              </span>
 
               <span>
                 {year} - {year === Math.max(...yearChoices) ? "Current" : year + 10}
