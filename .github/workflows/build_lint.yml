@@ -80,6 +80,7 @@ jobs:
         run: |
           git config --system --add safe.directory '*' &&
           mysql -h mysql -P 3306 -u root -pdrupal -e 'SET GLOBAL max_allowed_packet=67108864;' &&
+          printf '[client]\nskip-ssl-verify-server-cert\n' > /etc/mysql/conf.d/ci.cnf &&
           rm -rf /var/www/html &&
           ln -snf $GITHUB_WORKSPACE /var/www/html &&
           mkdir -p docroot/sites/default/files &&
