@@ -240,6 +240,14 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
     supSlideTitleSize
     supSlideImage {
         ...FragmentMediaImage
+        mediaImage {
+            # Width-scaled derivative for the side image so slides don't load the original upload.
+            slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+                url
+                width
+                height
+            }
+        }
     }
     supSlideBgImage {
         ...FragmentMediaImage

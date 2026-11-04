@@ -6043,7 +6043,7 @@ export type NodeQuery = { __typename?: 'Query', node?:
          | null }> | null, suPageBanner?:
         | { __typename: 'ParagraphStanfordBanner', suBannerHeader?: string | null, suBannerSupHeader?: string | null, uuid: string, behaviors?: string | null, status: boolean, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
         | { __typename: 'ParagraphStanfordPageTitleBanner', supTitleBannerColor: string, uuid: string, behaviors?: string | null, status: boolean, suTitleBannerImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }
-        | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+        | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
        | null, suPageComponents?: Array<
         | { __typename: 'ParagraphStanfordBanner', uuid: string, behaviors?: string | null, status: boolean, suBannerHeader?: string | null, suBannerSupHeader?: string | null, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
         | { __typename: 'ParagraphStanfordCard', uuid: string, behaviors?: string | null, status: boolean, suCardHeader?: string | null, suCardSuperHeader?: string | null, suCardBody?: { __typename?: 'Text', processed?: string | null } | null, suCardLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suCardMedia?:
@@ -6076,7 +6076,7 @@ export type NodeQuery = { __typename?: 'Query', node?:
         | { __typename: 'ParagraphStanfordWysiwyg', uuid: string, behaviors?: string | null, status: boolean, suWysiwygText?: { __typename?: 'Text', processed?: string | null } | null }
         | { __typename: 'ParagraphSupAuthorList', uuid: string, behaviors?: string | null, status: boolean }
         | { __typename: 'ParagraphSupBlogTeaser', uuid: string, behaviors?: string | null, status: boolean, supBlogTeaserHeader?: string | null, supBlogTeaserItems?: Array<{ __typename: 'ParagraphSupBlog', supBlogBody: string, supBlogTitle: string, uuid: string, behaviors?: string | null, status: boolean, supBlogImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } }, supBlogUrl: { __typename?: 'Link', title?: string | null, url: string } }> | null, supBlogTeaserLink?: { __typename?: 'Link', title?: string | null, url: string } | null }
-        | { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+        | { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
         | { __typename: 'ParagraphSupFileList', uuid: string, behaviors?: string | null, status: boolean, supFileListLabel?: string | null, supFileListDisplay?: string | null, supFileListFiles: Array<
             | { __typename: 'MediaFile', uuid: string, name: string, mediaFile: { __typename?: 'File', url: string } }
             | { __typename: 'MediaSupProtectedFile', uuid: string, name: string, supMediaFile: { __typename?: 'File', url: string } }
@@ -6159,7 +6159,7 @@ export type NodeQuery = { __typename?: 'Query', node?:
         | { __typename: 'MetaTagProperty', tag: string, attributes: { __typename?: 'MetaTagPropertyAttributes', property?: string | null, content?: string | null } }
         | { __typename?: 'MetaTagScript' }
         | { __typename: 'MetaTagValue', tag: string, attributes: { __typename?: 'MetaTagValueAttributes', name?: string | null, content?: string | null } }
-      >, suPublicationAuthorRef?: Array<{ __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }> | null, suPublicationComponents?: Array<
+      >, suPublicationAuthorRef?: Array<{ __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, cardStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }> | null, suPublicationComponents?: Array<
         | { __typename: 'ParagraphStanfordBanner', uuid: string, behaviors?: string | null, status: boolean, suBannerHeader?: string | null, suBannerSupHeader?: string | null, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
         | { __typename: 'ParagraphStanfordCard', uuid: string, behaviors?: string | null, status: boolean, suCardHeader?: string | null, suCardSuperHeader?: string | null, suCardBody?: { __typename?: 'Text', processed?: string | null } | null, suCardLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suCardMedia?:
             | { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } }
@@ -6224,7 +6224,7 @@ export type NodeQuery = { __typename?: 'Query', node?:
         | { __typename: 'MetaTagProperty', tag: string, attributes: { __typename?: 'MetaTagPropertyAttributes', property?: string | null, content?: string | null } }
         | { __typename?: 'MetaTagScript' }
         | { __typename: 'MetaTagValue', tag: string, attributes: { __typename?: 'MetaTagValueAttributes', name?: string | null, content?: string | null } }
-      >, supBookAuthorInfo?: { __typename?: 'Text', processed?: string | null } | null, supBookAuthors?: Array<{ __typename?: 'NameType', title?: string | null, given?: string | null, middle?: string | null, family?: string | null, generational?: string | null, credentials?: string | null }> | null, supBookAwards?: Array<{ __typename?: 'PressAward', uuid: string, title: string, supAssociation?: string | null, supPlace?: string | null, supRank?: number | null, supYear?: number | null, supDescription?: { __typename?: 'Text', processed?: string | null } | null }> | null, body?: { __typename?: 'TextSummary', processed?: string | null } | null, supBookImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supBookImprint?: { __typename: 'TermSupImprint', uuid: string, name: string, path?: string | null, weight: number, parent?:
+      >, supBookAuthorInfo?: { __typename?: 'Text', processed?: string | null } | null, supBookAuthors?: Array<{ __typename?: 'NameType', title?: string | null, given?: string | null, middle?: string | null, family?: string | null, generational?: string | null, credentials?: string | null }> | null, supBookAwards?: Array<{ __typename?: 'PressAward', uuid: string, title: string, supAssociation?: string | null, supPlace?: string | null, supRank?: number | null, supYear?: number | null, supDescription?: { __typename?: 'Text', processed?: string | null } | null }> | null, body?: { __typename?: 'TextSummary', processed?: string | null } | null, supBookImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, pageStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supBookImprint?: { __typename: 'TermSupImprint', uuid: string, name: string, path?: string | null, weight: number, parent?:
           | { __typename?: 'TermBasicPageType', uuid: string }
           | { __typename?: 'TermCourseFilter', uuid: string }
           | { __typename?: 'TermEventAudience', uuid: string }
@@ -6918,7 +6918,7 @@ export type BasicPagesQuery = { __typename?: 'Query', nodeStanfordPages: { __typ
          | null }> | null, suPageBanner?:
         | { __typename: 'ParagraphStanfordBanner', suBannerHeader?: string | null, suBannerSupHeader?: string | null, uuid: string, behaviors?: string | null, status: boolean, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
         | { __typename: 'ParagraphStanfordPageTitleBanner', supTitleBannerColor: string, uuid: string, behaviors?: string | null, status: boolean, suTitleBannerImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }
-        | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+        | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
        | null, suPageComponents?: Array<
         | { __typename: 'ParagraphStanfordBanner', uuid: string, behaviors?: string | null, status: boolean, suBannerHeader?: string | null, suBannerSupHeader?: string | null, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
         | { __typename: 'ParagraphStanfordCard', uuid: string, behaviors?: string | null, status: boolean, suCardHeader?: string | null, suCardSuperHeader?: string | null, suCardBody?: { __typename?: 'Text', processed?: string | null } | null, suCardLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suCardMedia?:
@@ -6951,7 +6951,7 @@ export type BasicPagesQuery = { __typename?: 'Query', nodeStanfordPages: { __typ
         | { __typename: 'ParagraphStanfordWysiwyg', uuid: string, behaviors?: string | null, status: boolean, suWysiwygText?: { __typename?: 'Text', processed?: string | null } | null }
         | { __typename: 'ParagraphSupAuthorList', uuid: string, behaviors?: string | null, status: boolean }
         | { __typename: 'ParagraphSupBlogTeaser', uuid: string, behaviors?: string | null, status: boolean, supBlogTeaserHeader?: string | null, supBlogTeaserItems?: Array<{ __typename: 'ParagraphSupBlog', supBlogBody: string, supBlogTitle: string, uuid: string, behaviors?: string | null, status: boolean, supBlogImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } }, supBlogUrl: { __typename?: 'Link', title?: string | null, url: string } }> | null, supBlogTeaserLink?: { __typename?: 'Link', title?: string | null, url: string } | null }
-        | { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+        | { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
         | { __typename: 'ParagraphSupFileList', uuid: string, behaviors?: string | null, status: boolean, supFileListLabel?: string | null, supFileListDisplay?: string | null, supFileListFiles: Array<
             | { __typename: 'MediaFile', uuid: string, name: string, mediaFile: { __typename?: 'File', url: string } }
             | { __typename: 'MediaSupProtectedFile', uuid: string, name: string, supMediaFile: { __typename?: 'File', url: string } }
@@ -7040,7 +7040,7 @@ export type PublicationsQueryVariables = Exact<{
 }>;
 
 
-export type PublicationsQuery = { __typename?: 'Query', nodeStanfordPublications: { __typename?: 'NodeStanfordPublicationConnection', nodes: Array<{ __typename?: 'NodeStanfordPublication', suPublicationAuthorRef?: Array<{ __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }> | null, suPublicationComponents?: Array<
+export type PublicationsQuery = { __typename?: 'Query', nodeStanfordPublications: { __typename?: 'NodeStanfordPublicationConnection', nodes: Array<{ __typename?: 'NodeStanfordPublication', suPublicationAuthorRef?: Array<{ __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, cardStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }> | null, suPublicationComponents?: Array<
         | { __typename: 'ParagraphStanfordBanner', uuid: string, behaviors?: string | null, status: boolean, suBannerHeader?: string | null, suBannerSupHeader?: string | null, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
         | { __typename: 'ParagraphStanfordCard', uuid: string, behaviors?: string | null, status: boolean, suCardHeader?: string | null, suCardSuperHeader?: string | null, suCardBody?: { __typename?: 'Text', processed?: string | null } | null, suCardLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suCardMedia?:
             | { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } }
@@ -8066,7 +8066,7 @@ export type ParagraphQuery = { __typename?: 'Query', paragraph?:
     | { __typename: 'ParagraphSupAuthorList', uuid: string, behaviors?: string | null, status: boolean }
     | { __typename: 'ParagraphSupBlog', uuid: string, behaviors?: string | null, status: boolean }
     | { __typename: 'ParagraphSupBlogTeaser', uuid: string, behaviors?: string | null, status: boolean, supBlogTeaserHeader?: string | null, supBlogTeaserItems?: Array<{ __typename: 'ParagraphSupBlog', supBlogBody: string, supBlogTitle: string, uuid: string, behaviors?: string | null, status: boolean, supBlogImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } }, supBlogUrl: { __typename?: 'Link', title?: string | null, url: string } }> | null, supBlogTeaserLink?: { __typename?: 'Link', title?: string | null, url: string } | null }
-    | { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+    | { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
     | { __typename: 'ParagraphSupCarouselSlide', uuid: string, behaviors?: string | null, status: boolean }
     | { __typename: 'ParagraphSupFileList', uuid: string, behaviors?: string | null, status: boolean, supFileListLabel?: string | null, supFileListDisplay?: string | null, supFileListFiles: Array<
         | { __typename: 'MediaFile', uuid: string, name: string, mediaFile: { __typename?: 'File', url: string } }
@@ -9282,7 +9282,7 @@ export type FragmentNodeSupBookAncillaryFragment = { __typename?: 'NodeSupBookAn
       > }
   > | null };
 
-export type FragmentNodeSupBookFragment = { __typename?: 'NodeSupBook', supBookAltFormat?: string | null, supBookAuthorsFull?: string | null, supBookAvailDesc?: string | null, supBookCatalogSeasonYyyy?: string | null, supBookPublisher?: string | null, supBookCopublisherName?: string | null, supBookDigitalCompLink?: boolean | null, supBookIsbn13Alt?: string | null, supBookIsbn13Cloth?: string | null, supBookIsbn13Digital?: string | null, supBookIsbn13Isw?: string | null, supBookIsbn13Paper?: string | null, supBookPages?: number | null, supBookPrintDeskCopies?: boolean | null, supBookPubYearFirst?: string | null, supBookSalesRank?: number | null, supBookSubtitle?: string | null, supBookUrlIsw?: string | null, supBookWorkIdNumber?: number | null, supBookType: string, supBookNoCart?: boolean | null, supBookEpubFormat?: boolean | null, supBookPdfFormat?: boolean | null, supBookAuthorInfo?: { __typename?: 'Text', processed?: string | null } | null, supBookAuthors?: Array<{ __typename?: 'NameType', title?: string | null, given?: string | null, middle?: string | null, family?: string | null, generational?: string | null, credentials?: string | null }> | null, supBookAwards?: Array<{ __typename?: 'PressAward', uuid: string, title: string, supAssociation?: string | null, supPlace?: string | null, supRank?: number | null, supYear?: number | null, supDescription?: { __typename?: 'Text', processed?: string | null } | null }> | null, body?: { __typename?: 'TextSummary', processed?: string | null } | null, supBookImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supBookImprint?: { __typename: 'TermSupImprint', uuid: string, name: string, path?: string | null, weight: number, parent?:
+export type FragmentNodeSupBookFragment = { __typename?: 'NodeSupBook', supBookAltFormat?: string | null, supBookAuthorsFull?: string | null, supBookAvailDesc?: string | null, supBookCatalogSeasonYyyy?: string | null, supBookPublisher?: string | null, supBookCopublisherName?: string | null, supBookDigitalCompLink?: boolean | null, supBookIsbn13Alt?: string | null, supBookIsbn13Cloth?: string | null, supBookIsbn13Digital?: string | null, supBookIsbn13Isw?: string | null, supBookIsbn13Paper?: string | null, supBookPages?: number | null, supBookPrintDeskCopies?: boolean | null, supBookPubYearFirst?: string | null, supBookSalesRank?: number | null, supBookSubtitle?: string | null, supBookUrlIsw?: string | null, supBookWorkIdNumber?: number | null, supBookType: string, supBookNoCart?: boolean | null, supBookEpubFormat?: boolean | null, supBookPdfFormat?: boolean | null, supBookAuthorInfo?: { __typename?: 'Text', processed?: string | null } | null, supBookAuthors?: Array<{ __typename?: 'NameType', title?: string | null, given?: string | null, middle?: string | null, family?: string | null, generational?: string | null, credentials?: string | null }> | null, supBookAwards?: Array<{ __typename?: 'PressAward', uuid: string, title: string, supAssociation?: string | null, supPlace?: string | null, supRank?: number | null, supYear?: number | null, supDescription?: { __typename?: 'Text', processed?: string | null } | null }> | null, body?: { __typename?: 'TextSummary', processed?: string | null } | null, supBookImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, pageStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supBookImprint?: { __typename: 'TermSupImprint', uuid: string, name: string, path?: string | null, weight: number, parent?:
       | { __typename?: 'TermBasicPageType', uuid: string }
       | { __typename?: 'TermCourseFilter', uuid: string }
       | { __typename?: 'TermEventAudience', uuid: string }
@@ -9407,7 +9407,7 @@ export type FragmentNodeStanfordPageFragment = { __typename?: 'NodeStanfordPage'
      | null }> | null, suPageBanner?:
     | { __typename: 'ParagraphStanfordBanner', suBannerHeader?: string | null, suBannerSupHeader?: string | null, uuid: string, behaviors?: string | null, status: boolean, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
     | { __typename: 'ParagraphStanfordPageTitleBanner', supTitleBannerColor: string, uuid: string, behaviors?: string | null, status: boolean, suTitleBannerImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }
-    | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+    | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
    | null, suPageComponents?: Array<
     | { __typename: 'ParagraphStanfordBanner', uuid: string, behaviors?: string | null, status: boolean, suBannerHeader?: string | null, suBannerSupHeader?: string | null, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
     | { __typename: 'ParagraphStanfordCard', uuid: string, behaviors?: string | null, status: boolean, suCardHeader?: string | null, suCardSuperHeader?: string | null, suCardBody?: { __typename?: 'Text', processed?: string | null } | null, suCardLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suCardMedia?:
@@ -9440,7 +9440,7 @@ export type FragmentNodeStanfordPageFragment = { __typename?: 'NodeStanfordPage'
     | { __typename: 'ParagraphStanfordWysiwyg', uuid: string, behaviors?: string | null, status: boolean, suWysiwygText?: { __typename?: 'Text', processed?: string | null } | null }
     | { __typename: 'ParagraphSupAuthorList', uuid: string, behaviors?: string | null, status: boolean }
     | { __typename: 'ParagraphSupBlogTeaser', uuid: string, behaviors?: string | null, status: boolean, supBlogTeaserHeader?: string | null, supBlogTeaserItems?: Array<{ __typename: 'ParagraphSupBlog', supBlogBody: string, supBlogTitle: string, uuid: string, behaviors?: string | null, status: boolean, supBlogImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } }, supBlogUrl: { __typename?: 'Link', title?: string | null, url: string } }> | null, supBlogTeaserLink?: { __typename?: 'Link', title?: string | null, url: string } | null }
-    | { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+    | { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
     | { __typename: 'ParagraphSupFileList', uuid: string, behaviors?: string | null, status: boolean, supFileListLabel?: string | null, supFileListDisplay?: string | null, supFileListFiles: Array<
         | { __typename: 'MediaFile', uuid: string, name: string, mediaFile: { __typename?: 'File', url: string } }
         | { __typename: 'MediaSupProtectedFile', uuid: string, name: string, supMediaFile: { __typename?: 'File', url: string } }
@@ -9939,7 +9939,7 @@ export type FragmentNodeStanfordPersonFragment = { __typename?: 'NodeStanfordPer
 
 export type FragmentNodeStanfordPolicyFragment = { __typename?: 'NodeStanfordPolicy', suPolicyAuthority?: string | null, suPolicyAutoPrefix?: boolean | null, suPolicyChapter?: string | null, suPolicyPolicyNum?: string | null, suPolicySubchapter?: string | null, suPolicyTitle: string, body?: { __typename?: 'TextSummary', processed?: string | null } | null, suPolicyChangelog?: Array<{ __typename: 'SuPolicyLog', uuid: string, suPolicyNotes: string, suPolicyPublic?: boolean | null, suPolicyTitle: string, suPolicyDate: { __typename?: 'DateTime', timezone: string, time: string } }> | null, suPolicyEffective?: { __typename?: 'DateTime', timezone: string, time: string } | null, suPolicyRelated?: Array<{ __typename?: 'NodeStanfordPolicy', uuid: string, path: string }> | null, suPolicyUpdated?: { __typename?: 'DateTime', timezone: string, time: string } | null };
 
-export type FragmentNodeStanfordPublicationFragment = { __typename?: 'NodeStanfordPublication', suPublicationAuthorRef?: Array<{ __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }> | null, suPublicationComponents?: Array<
+export type FragmentNodeStanfordPublicationFragment = { __typename?: 'NodeStanfordPublication', suPublicationAuthorRef?: Array<{ __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, cardStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }> | null, suPublicationComponents?: Array<
     | { __typename: 'ParagraphStanfordBanner', uuid: string, behaviors?: string | null, status: boolean, suBannerHeader?: string | null, suBannerSupHeader?: string | null, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
     | { __typename: 'ParagraphStanfordCard', uuid: string, behaviors?: string | null, status: boolean, suCardHeader?: string | null, suCardSuperHeader?: string | null, suCardBody?: { __typename?: 'Text', processed?: string | null } | null, suCardLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suCardMedia?:
         | { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } }
@@ -10500,7 +10500,7 @@ type FragmentNodeUnion_NodeStanfordPage_Fragment = { __typename: 'NodeStanfordPa
      | null }> | null, suPageBanner?:
     | { __typename: 'ParagraphStanfordBanner', suBannerHeader?: string | null, suBannerSupHeader?: string | null, uuid: string, behaviors?: string | null, status: boolean, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
     | { __typename: 'ParagraphStanfordPageTitleBanner', supTitleBannerColor: string, uuid: string, behaviors?: string | null, status: boolean, suTitleBannerImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }
-    | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+    | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
    | null, suPageComponents?: Array<
     | { __typename: 'ParagraphStanfordBanner', uuid: string, behaviors?: string | null, status: boolean, suBannerHeader?: string | null, suBannerSupHeader?: string | null, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
     | { __typename: 'ParagraphStanfordCard', uuid: string, behaviors?: string | null, status: boolean, suCardHeader?: string | null, suCardSuperHeader?: string | null, suCardBody?: { __typename?: 'Text', processed?: string | null } | null, suCardLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suCardMedia?:
@@ -10533,7 +10533,7 @@ type FragmentNodeUnion_NodeStanfordPage_Fragment = { __typename: 'NodeStanfordPa
     | { __typename: 'ParagraphStanfordWysiwyg', uuid: string, behaviors?: string | null, status: boolean, suWysiwygText?: { __typename?: 'Text', processed?: string | null } | null }
     | { __typename: 'ParagraphSupAuthorList', uuid: string, behaviors?: string | null, status: boolean }
     | { __typename: 'ParagraphSupBlogTeaser', uuid: string, behaviors?: string | null, status: boolean, supBlogTeaserHeader?: string | null, supBlogTeaserItems?: Array<{ __typename: 'ParagraphSupBlog', supBlogBody: string, supBlogTitle: string, uuid: string, behaviors?: string | null, status: boolean, supBlogImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } }, supBlogUrl: { __typename?: 'Link', title?: string | null, url: string } }> | null, supBlogTeaserLink?: { __typename?: 'Link', title?: string | null, url: string } | null }
-    | { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+    | { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
     | { __typename: 'ParagraphSupFileList', uuid: string, behaviors?: string | null, status: boolean, supFileListLabel?: string | null, supFileListDisplay?: string | null, supFileListFiles: Array<
         | { __typename: 'MediaFile', uuid: string, name: string, mediaFile: { __typename?: 'File', url: string } }
         | { __typename: 'MediaSupProtectedFile', uuid: string, name: string, supMediaFile: { __typename?: 'File', url: string } }
@@ -10619,7 +10619,7 @@ type FragmentNodeUnion_NodeStanfordPublication_Fragment = { __typename: 'NodeSta
     | { __typename: 'MetaTagProperty', tag: string, attributes: { __typename?: 'MetaTagPropertyAttributes', property?: string | null, content?: string | null } }
     | { __typename?: 'MetaTagScript' }
     | { __typename: 'MetaTagValue', tag: string, attributes: { __typename?: 'MetaTagValueAttributes', name?: string | null, content?: string | null } }
-  >, suPublicationAuthorRef?: Array<{ __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }> | null, suPublicationComponents?: Array<
+  >, suPublicationAuthorRef?: Array<{ __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, cardStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }> | null, suPublicationComponents?: Array<
     | { __typename: 'ParagraphStanfordBanner', uuid: string, behaviors?: string | null, status: boolean, suBannerHeader?: string | null, suBannerSupHeader?: string | null, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
     | { __typename: 'ParagraphStanfordCard', uuid: string, behaviors?: string | null, status: boolean, suCardHeader?: string | null, suCardSuperHeader?: string | null, suCardBody?: { __typename?: 'Text', processed?: string | null } | null, suCardLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suCardMedia?:
         | { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } }
@@ -10685,7 +10685,7 @@ type FragmentNodeUnion_NodeSupBook_Fragment = { __typename: 'NodeSupBook', statu
     | { __typename: 'MetaTagProperty', tag: string, attributes: { __typename?: 'MetaTagPropertyAttributes', property?: string | null, content?: string | null } }
     | { __typename?: 'MetaTagScript' }
     | { __typename: 'MetaTagValue', tag: string, attributes: { __typename?: 'MetaTagValueAttributes', name?: string | null, content?: string | null } }
-  >, supBookAuthorInfo?: { __typename?: 'Text', processed?: string | null } | null, supBookAuthors?: Array<{ __typename?: 'NameType', title?: string | null, given?: string | null, middle?: string | null, family?: string | null, generational?: string | null, credentials?: string | null }> | null, supBookAwards?: Array<{ __typename?: 'PressAward', uuid: string, title: string, supAssociation?: string | null, supPlace?: string | null, supRank?: number | null, supYear?: number | null, supDescription?: { __typename?: 'Text', processed?: string | null } | null }> | null, body?: { __typename?: 'TextSummary', processed?: string | null } | null, supBookImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supBookImprint?: { __typename: 'TermSupImprint', uuid: string, name: string, path?: string | null, weight: number, parent?:
+  >, supBookAuthorInfo?: { __typename?: 'Text', processed?: string | null } | null, supBookAuthors?: Array<{ __typename?: 'NameType', title?: string | null, given?: string | null, middle?: string | null, family?: string | null, generational?: string | null, credentials?: string | null }> | null, supBookAwards?: Array<{ __typename?: 'PressAward', uuid: string, title: string, supAssociation?: string | null, supPlace?: string | null, supRank?: number | null, supYear?: number | null, supDescription?: { __typename?: 'Text', processed?: string | null } | null }> | null, body?: { __typename?: 'TextSummary', processed?: string | null } | null, supBookImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, pageStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supBookImprint?: { __typename: 'TermSupImprint', uuid: string, name: string, path?: string | null, weight: number, parent?:
       | { __typename?: 'TermBasicPageType', uuid: string }
       | { __typename?: 'TermCourseFilter', uuid: string }
       | { __typename?: 'TermEventAudience', uuid: string }
@@ -10915,10 +10915,10 @@ export type FragmentNodeStanfordNewsTeaserFragment = { __typename: 'NodeStanford
 export type FragmentNodeStanfordPageTeaserFragment = { __typename: 'NodeStanfordPage', suPageDescription?: string | null, uuid: string, title: string, path: string, suPageImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, suPageBanner?:
     | { __typename: 'ParagraphStanfordBanner', suBannerHeader?: string | null, suBannerSupHeader?: string | null, uuid: string, behaviors?: string | null, status: boolean, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
     | { __typename: 'ParagraphStanfordPageTitleBanner', supTitleBannerColor: string, uuid: string, behaviors?: string | null, status: boolean, suTitleBannerImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }
-    | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+    | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
    | null };
 
-export type FragmentNodeStanfordPersonTeaserFragment = { __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null };
+export type FragmentNodeStanfordPersonTeaserFragment = { __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, cardStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null };
 
 export type FragmentNodeStanfordPolicyTeaserFragment = { __typename: 'NodeStanfordPolicy', uuid: string, title: string, path: string, body?: { __typename?: 'TextSummary', processed?: string | null, summary?: string | null } | null };
 
@@ -11059,10 +11059,10 @@ type FragmentNodeTeaserUnion_NodeStanfordOpportunity_Fragment = { __typename: 'N
 type FragmentNodeTeaserUnion_NodeStanfordPage_Fragment = { __typename: 'NodeStanfordPage', uuid: string, title: string, path: string, suPageDescription?: string | null, suPageImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, suPageBanner?:
     | { __typename: 'ParagraphStanfordBanner', suBannerHeader?: string | null, suBannerSupHeader?: string | null, uuid: string, behaviors?: string | null, status: boolean, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
     | { __typename: 'ParagraphStanfordPageTitleBanner', supTitleBannerColor: string, uuid: string, behaviors?: string | null, status: boolean, suTitleBannerImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }
-    | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+    | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
    | null };
 
-type FragmentNodeTeaserUnion_NodeStanfordPerson_Fragment = { __typename: 'NodeStanfordPerson', uuid: string, title: string, path: string, suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null };
+type FragmentNodeTeaserUnion_NodeStanfordPerson_Fragment = { __typename: 'NodeStanfordPerson', uuid: string, title: string, path: string, suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, cardStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null };
 
 type FragmentNodeTeaserUnion_NodeStanfordPolicy_Fragment = { __typename: 'NodeStanfordPolicy', uuid: string, title: string, path: string, body?: { __typename?: 'TextSummary', processed?: string | null, summary?: string | null } | null };
 
@@ -11242,9 +11242,9 @@ export type FragmentParagraphSupFileListFragment = { __typename: 'ParagraphSupFi
     | { __typename: 'MediaSupProtectedFile', uuid: string, name: string, supMediaFile: { __typename?: 'File', url: string } }
   > };
 
-export type FragmentParagraphSupCarouselSlideFragment = { __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } };
+export type FragmentParagraphSupCarouselSlideFragment = { __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } };
 
-export type FragmentParagraphSupCarouselFragment = { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> };
+export type FragmentParagraphSupCarouselFragment = { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> };
 
 export type FragmentParagraphSupAuthorListFragment = { __typename: 'ParagraphSupAuthorList', uuid: string, behaviors?: string | null, status: boolean };
 
@@ -11310,7 +11310,7 @@ type FragmentParagraphUnion_ParagraphSupBlog_Fragment = { __typename: 'Paragraph
 
 type FragmentParagraphUnion_ParagraphSupBlogTeaser_Fragment = { __typename: 'ParagraphSupBlogTeaser', uuid: string, behaviors?: string | null, status: boolean, supBlogTeaserHeader?: string | null, supBlogTeaserItems?: Array<{ __typename: 'ParagraphSupBlog', supBlogBody: string, supBlogTitle: string, uuid: string, behaviors?: string | null, status: boolean, supBlogImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } }, supBlogUrl: { __typename?: 'Link', title?: string | null, url: string } }> | null, supBlogTeaserLink?: { __typename?: 'Link', title?: string | null, url: string } | null };
 
-type FragmentParagraphUnion_ParagraphSupCarousel_Fragment = { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> };
+type FragmentParagraphUnion_ParagraphSupCarousel_Fragment = { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> };
 
 type FragmentParagraphUnion_ParagraphSupCarouselSlide_Fragment = { __typename: 'ParagraphSupCarouselSlide', uuid: string, behaviors?: string | null, status: boolean };
 
@@ -11871,7 +11871,7 @@ export type RouteQuery = { __typename?: 'Query', route?:
              | null }> | null, suPageBanner?:
             | { __typename: 'ParagraphStanfordBanner', suBannerHeader?: string | null, suBannerSupHeader?: string | null, uuid: string, behaviors?: string | null, status: boolean, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
             | { __typename: 'ParagraphStanfordPageTitleBanner', supTitleBannerColor: string, uuid: string, behaviors?: string | null, status: boolean, suTitleBannerImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }
-            | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', url: string, title?: string | null } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+            | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', url: string, title?: string | null } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
            | null, suPageComponents?: Array<
             | { __typename: 'ParagraphStanfordBanner', uuid: string, behaviors?: string | null, status: boolean, suBannerHeader?: string | null, suBannerSupHeader?: string | null, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
             | { __typename: 'ParagraphStanfordCard', uuid: string, behaviors?: string | null, status: boolean, suCardHeader?: string | null, suCardSuperHeader?: string | null, suCardBody?: { __typename?: 'Text', processed?: string | null } | null, suCardLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suCardMedia?:
@@ -11904,7 +11904,7 @@ export type RouteQuery = { __typename?: 'Query', route?:
             | { __typename: 'ParagraphStanfordWysiwyg', uuid: string, behaviors?: string | null, status: boolean, suWysiwygText?: { __typename?: 'Text', processed?: string | null } | null }
             | { __typename: 'ParagraphSupAuthorList', uuid: string, behaviors?: string | null, status: boolean }
             | { __typename: 'ParagraphSupBlogTeaser', uuid: string, behaviors?: string | null, status: boolean, supBlogTeaserHeader?: string | null, supBlogTeaserItems?: Array<{ __typename: 'ParagraphSupBlog', supBlogBody: string, supBlogTitle: string, uuid: string, behaviors?: string | null, status: boolean, supBlogImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } }, supBlogUrl: { __typename?: 'Link', title?: string | null, url: string } }> | null, supBlogTeaserLink?: { __typename?: 'Link', title?: string | null, url: string } | null }
-            | { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+            | { __typename: 'ParagraphSupCarousel', uuid: string, behaviors?: string | null, status: boolean, supCarouselTopHero?: boolean | null, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
             | { __typename: 'ParagraphSupFileList', uuid: string, behaviors?: string | null, status: boolean, supFileListLabel?: string | null, supFileListDisplay?: string | null, supFileListFiles: Array<
                 | { __typename: 'MediaFile', uuid: string, name: string, mediaFile: { __typename?: 'File', url: string } }
                 | { __typename: 'MediaSupProtectedFile', uuid: string, name: string, supMediaFile: { __typename?: 'File', url: string } }
@@ -11945,7 +11945,7 @@ export type RouteQuery = { __typename?: 'Query', route?:
                | null, suMediaCaptionLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suMediaCaptionCaption?: { __typename?: 'Text', processed?: string | null } | null }
             | { __typename: 'ParagraphStanfordSpacer', uuid: string, behaviors?: string | null, status: boolean, suSpacerSize?: string | null }
             | { __typename: 'ParagraphStanfordWysiwyg', uuid: string, behaviors?: string | null, status: boolean, suWysiwygText?: { __typename?: 'Text', processed?: string | null } | null }
-          > | null, suPersonLinks?: Array<{ __typename?: 'Link', url: string, title?: string | null }> | null, suPersonLocationAddress?: { __typename?: 'Text', processed?: string | null } | null, suPersonMapUrl?: { __typename?: 'Link', url: string, title?: string | null } | null, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, suPersonProfileLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suPersonResearch?: Array<{ __typename?: 'Text', processed?: string | null }> | null, suPersonScholarlyInterests?: { __typename?: 'Text', processed?: string | null } | null, suPersonTypeGroup?: Array<{ __typename: 'TermStanfordPersonType', uuid: string, name: string, path?: string | null, weight: number, parent?:
+          > | null, suPersonLinks?: Array<{ __typename?: 'Link', url: string, title?: string | null }> | null, suPersonLocationAddress?: { __typename?: 'Text', processed?: string | null } | null, suPersonMapUrl?: { __typename?: 'Link', url: string, title?: string | null } | null, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, cardStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, suPersonProfileLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suPersonResearch?: Array<{ __typename?: 'Text', processed?: string | null }> | null, suPersonScholarlyInterests?: { __typename?: 'Text', processed?: string | null } | null, suPersonTypeGroup?: Array<{ __typename: 'TermStanfordPersonType', uuid: string, name: string, path?: string | null, weight: number, parent?:
               | { __typename?: 'TermBasicPageType', uuid: string }
               | { __typename?: 'TermCourseFilter', uuid: string }
               | { __typename?: 'TermEventAudience', uuid: string }
@@ -11987,7 +11987,7 @@ export type RouteQuery = { __typename?: 'Query', route?:
             | { __typename: 'MetaTagProperty', tag: string, attributes: { __typename?: 'MetaTagPropertyAttributes', property?: string | null, content?: string | null } }
             | { __typename?: 'MetaTagScript' }
             | { __typename: 'MetaTagValue', tag: string, attributes: { __typename?: 'MetaTagValueAttributes', name?: string | null, content?: string | null } }
-          >, suPublicationAuthorRef?: Array<{ __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }> | null, suPublicationComponents?: Array<
+          >, suPublicationAuthorRef?: Array<{ __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, cardStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }> | null, suPublicationComponents?: Array<
             | { __typename: 'ParagraphStanfordBanner', uuid: string, behaviors?: string | null, status: boolean, suBannerHeader?: string | null, suBannerSupHeader?: string | null, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
             | { __typename: 'ParagraphStanfordCard', uuid: string, behaviors?: string | null, status: boolean, suCardHeader?: string | null, suCardSuperHeader?: string | null, suCardBody?: { __typename?: 'Text', processed?: string | null } | null, suCardLink?: { __typename?: 'Link', url: string, title?: string | null } | null, suCardMedia?:
                 | { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } }
@@ -12052,7 +12052,7 @@ export type RouteQuery = { __typename?: 'Query', route?:
             | { __typename: 'MetaTagProperty', tag: string, attributes: { __typename?: 'MetaTagPropertyAttributes', property?: string | null, content?: string | null } }
             | { __typename?: 'MetaTagScript' }
             | { __typename: 'MetaTagValue', tag: string, attributes: { __typename?: 'MetaTagValueAttributes', name?: string | null, content?: string | null } }
-          >, supBookAuthorInfo?: { __typename?: 'Text', processed?: string | null } | null, supBookAuthors?: Array<{ __typename?: 'NameType', title?: string | null, given?: string | null, middle?: string | null, family?: string | null, generational?: string | null, credentials?: string | null }> | null, supBookAwards?: Array<{ __typename?: 'PressAward', uuid: string, title: string, supAssociation?: string | null, supPlace?: string | null, supRank?: number | null, supYear?: number | null, supDescription?: { __typename?: 'Text', processed?: string | null } | null }> | null, body?: { __typename?: 'TextSummary', processed?: string | null } | null, supBookImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, cardStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supBookImprint?: { __typename: 'TermSupImprint', uuid: string, name: string, path?: string | null, weight: number, parent?:
+          >, supBookAuthorInfo?: { __typename?: 'Text', processed?: string | null } | null, supBookAuthors?: Array<{ __typename?: 'NameType', title?: string | null, given?: string | null, middle?: string | null, family?: string | null, generational?: string | null, credentials?: string | null }> | null, supBookAwards?: Array<{ __typename?: 'PressAward', uuid: string, title: string, supAssociation?: string | null, supPlace?: string | null, supRank?: number | null, supYear?: number | null, supDescription?: { __typename?: 'Text', processed?: string | null } | null }> | null, body?: { __typename?: 'TextSummary', processed?: string | null } | null, supBookImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, pageStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, cardStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supBookImprint?: { __typename: 'TermSupImprint', uuid: string, name: string, path?: string | null, weight: number, parent?:
               | { __typename?: 'TermBasicPageType', uuid: string }
               | { __typename?: 'TermCourseFilter', uuid: string }
               | { __typename?: 'TermEventAudience', uuid: string }
@@ -12196,7 +12196,7 @@ export type StanfordBasicPagesQuery = { __typename?: 'Query', stanfordBasicPages
       | { __typename: 'NodeStanfordPage', suPageDescription?: string | null, uuid: string, title: string, path: string, suPageImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, suPageBanner?:
           | { __typename: 'ParagraphStanfordBanner', suBannerHeader?: string | null, suBannerSupHeader?: string | null, uuid: string, behaviors?: string | null, status: boolean, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
           | { __typename: 'ParagraphStanfordPageTitleBanner', supTitleBannerColor: string, uuid: string, behaviors?: string | null, status: boolean, suTitleBannerImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }
-          | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+          | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
          | null }
       | { __typename?: 'NodeStanfordPerson' }
       | { __typename?: 'NodeStanfordPolicy' }
@@ -12493,7 +12493,7 @@ export type StanfordPersonQuery = { __typename?: 'Query', stanfordPerson?: { __t
       | { __typename?: 'NodeStanfordNews' }
       | { __typename?: 'NodeStanfordOpportunity' }
       | { __typename?: 'NodeStanfordPage' }
-      | { __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
+      | { __typename: 'NodeStanfordPerson', suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, uuid: string, title: string, path: string, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, cardStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
       | { __typename?: 'NodeStanfordPolicy' }
       | { __typename?: 'NodeStanfordPublication' }
       | { __typename?: 'NodeSupBook' }
@@ -12661,9 +12661,9 @@ export type StanfordSharedTagsQuery = { __typename?: 'Query', stanfordSharedTags
       | { __typename: 'NodeStanfordPage', uuid: string, title: string, path: string, suPageDescription?: string | null, suPageImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, suPageBanner?:
           | { __typename: 'ParagraphStanfordBanner', suBannerHeader?: string | null, suBannerSupHeader?: string | null, uuid: string, behaviors?: string | null, status: boolean, suBannerBody?: { __typename?: 'Text', processed?: string | null } | null, suBannerButton?: { __typename?: 'Link', url: string, title?: string | null } | null, suBannerImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
           | { __typename: 'ParagraphStanfordPageTitleBanner', supTitleBannerColor: string, uuid: string, behaviors?: string | null, status: boolean, suTitleBannerImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }
-          | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
+          | { __typename: 'ParagraphSupCarousel', supCarouselTopHero?: boolean | null, uuid: string, behaviors?: string | null, status: boolean, supCarouselSlides: Array<{ __typename: 'ParagraphSupCarouselSlide', supSlideColor?: string | null, supSlideEyebrow?: string | null, supSlideOrientation: string, supSlideSubtitle?: string | null, supSlideTitle?: string | null, supSlideTitleSize: string, uuid: string, behaviors?: string | null, status: boolean, supSlideBody?: { __typename?: 'Text', processed?: string | null } | null, supSlideButton?: { __typename?: 'Link', title?: string | null, url: string } | null, supSlideImage?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, slideStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null, supSlideBgImage: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } }> }
          | null }
-      | { __typename: 'NodeStanfordPerson', uuid: string, title: string, path: string, suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
+      | { __typename: 'NodeStanfordPerson', uuid: string, title: string, path: string, suPersonFullTitle?: string | null, suPersonShortTitle?: string | null, suPersonPhoto?: { __typename: 'MediaImage', uuid: string, name: string, mediaImage: { __typename?: 'Image', url: string, alt?: string | null, height: number, width: number, cardStyle?: Array<{ __typename?: 'ImageStyleDerivative', url: string, width: number, height: number }> | null, variations?: Array<{ __typename?: 'ImageStyleDerivative', url: string }> | null } } | null }
       | { __typename: 'NodeStanfordPolicy', uuid: string, title: string, path: string, body?: { __typename?: 'TextSummary', processed?: string | null, summary?: string | null } | null }
       | { __typename: 'NodeStanfordPublication', uuid: string, title: string, path: string, suPublicationTopics?: Array<{ __typename: 'TermStanfordPublicationTopic', uuid: string, name: string, path?: string | null, weight: number, parent?:
             | { __typename?: 'TermBasicPageType', uuid: string }
@@ -13003,6 +13003,13 @@ export const FragmentNodeSupBookFragmentDoc = new TypedDocumentString(`
   supBookDigitalCompLink
   supBookImage {
     ...FragmentMediaImage
+    mediaImage {
+      pageStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supBookImprint {
     ...FragmentTermInterface
@@ -13676,6 +13683,13 @@ export const FragmentParagraphSupCarouselSlideFragmentDoc = new TypedDocumentStr
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -13759,6 +13773,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -14219,6 +14240,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -14782,6 +14810,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -15237,6 +15272,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -15595,6 +15637,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -15985,6 +16034,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -16368,6 +16424,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -16495,6 +16558,13 @@ export const FragmentNodeStanfordPersonTeaserFragmentDoc = new TypedDocumentStri
   ...FragmentNodeInterface
   suPersonPhoto {
     ...FragmentMediaImage
+    mediaImage {
+      cardStyle: variations(styles: [LARGE_SQUARE]) {
+        url
+        width
+        height
+      }
+    }
   }
   suPersonFullTitle
   suPersonShortTitle
@@ -16628,6 +16698,13 @@ fragment FragmentNodeStanfordPersonTeaser on NodeStanfordPerson {
   ...FragmentNodeInterface
   suPersonPhoto {
     ...FragmentMediaImage
+    mediaImage {
+      cardStyle: variations(styles: [LARGE_SQUARE]) {
+        url
+        width
+        height
+      }
+    }
   }
   suPersonFullTitle
   suPersonShortTitle
@@ -16817,6 +16894,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -17156,6 +17240,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -17429,6 +17520,13 @@ fragment FragmentNodeSupBook on NodeSupBook {
   supBookDigitalCompLink
   supBookImage {
     ...FragmentMediaImage
+    mediaImage {
+      pageStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supBookImprint {
     ...FragmentTermInterface
@@ -17745,6 +17843,13 @@ fragment FragmentNodeStanfordPersonTeaser on NodeStanfordPerson {
   ...FragmentNodeInterface
   suPersonPhoto {
     ...FragmentMediaImage
+    mediaImage {
+      cardStyle: variations(styles: [LARGE_SQUARE]) {
+        url
+        width
+        height
+      }
+    }
   }
   suPersonFullTitle
   suPersonShortTitle
@@ -17973,6 +18078,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -18283,6 +18395,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -18509,6 +18628,13 @@ fragment FragmentNodeStanfordPersonTeaser on NodeStanfordPerson {
   ...FragmentNodeInterface
   suPersonPhoto {
     ...FragmentMediaImage
+    mediaImage {
+      cardStyle: variations(styles: [LARGE_SQUARE]) {
+        url
+        width
+        height
+      }
+    }
   }
   suPersonFullTitle
   suPersonShortTitle
@@ -18570,6 +18696,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -18795,6 +18928,13 @@ fragment FragmentNodeSupBook on NodeSupBook {
   supBookDigitalCompLink
   supBookImage {
     ...FragmentMediaImage
+    mediaImage {
+      pageStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supBookImprint {
     ...FragmentTermInterface
@@ -19124,6 +19264,13 @@ fragment FragmentNodeStanfordPersonTeaser on NodeStanfordPerson {
   ...FragmentNodeInterface
   suPersonPhoto {
     ...FragmentMediaImage
+    mediaImage {
+      cardStyle: variations(styles: [LARGE_SQUARE]) {
+        url
+        width
+        height
+      }
+    }
   }
   suPersonFullTitle
   suPersonShortTitle
@@ -19352,6 +19499,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -19886,6 +20040,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -20337,6 +20498,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -20709,6 +20877,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -21082,6 +21257,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -21479,6 +21661,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -21720,6 +21909,13 @@ fragment FragmentNodeStanfordPersonTeaser on NodeStanfordPerson {
   ...FragmentNodeInterface
   suPersonPhoto {
     ...FragmentMediaImage
+    mediaImage {
+      cardStyle: variations(styles: [LARGE_SQUARE]) {
+        url
+        width
+        height
+      }
+    }
   }
   suPersonFullTitle
   suPersonShortTitle
@@ -21909,6 +22105,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -22310,6 +22513,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -22791,6 +23001,13 @@ fragment FragmentNodeSupBook on NodeSupBook {
   supBookDigitalCompLink
   supBookImage {
     ...FragmentMediaImage
+    mediaImage {
+      pageStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supBookImprint {
     ...FragmentTermInterface
@@ -23183,6 +23400,13 @@ fragment FragmentNodeStanfordPersonTeaser on NodeStanfordPerson {
   ...FragmentNodeInterface
   suPersonPhoto {
     ...FragmentMediaImage
+    mediaImage {
+      cardStyle: variations(styles: [LARGE_SQUARE]) {
+        url
+        width
+        height
+      }
+    }
   }
   suPersonFullTitle
   suPersonShortTitle
@@ -23436,6 +23660,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -23633,6 +23864,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage
@@ -23987,6 +24225,13 @@ fragment FragmentNodeStanfordPersonTeaser on NodeStanfordPerson {
   ...FragmentNodeInterface
   suPersonPhoto {
     ...FragmentMediaImage
+    mediaImage {
+      cardStyle: variations(styles: [LARGE_SQUARE]) {
+        url
+        width
+        height
+      }
+    }
   }
   suPersonFullTitle
   suPersonShortTitle
@@ -24217,6 +24462,13 @@ fragment FragmentNodeStanfordPersonTeaser on NodeStanfordPerson {
   ...FragmentNodeInterface
   suPersonPhoto {
     ...FragmentMediaImage
+    mediaImage {
+      cardStyle: variations(styles: [LARGE_SQUARE]) {
+        url
+        width
+        height
+      }
+    }
   }
   suPersonFullTitle
   suPersonShortTitle
@@ -24290,6 +24542,13 @@ fragment FragmentParagraphSupCarouselSlide on ParagraphSupCarouselSlide {
   supSlideTitleSize
   supSlideImage {
     ...FragmentMediaImage
+    mediaImage {
+      slideStyle: variations(styles: [BREAKPOINT_SM1X]) {
+        url
+        width
+        height
+      }
+    }
   }
   supSlideBgImage {
     ...FragmentMediaImage

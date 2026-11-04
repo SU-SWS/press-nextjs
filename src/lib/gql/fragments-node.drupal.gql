@@ -53,6 +53,14 @@ fragment FragmentNodeSupBook on NodeSupBook {
     supBookDigitalCompLink
     supBookImage {
         ...FragmentMediaImage
+        mediaImage {
+            # Width-scaled derivative so the book page doesn't load the original upload.
+            pageStyle: variations(styles: [BREAKPOINT_SM1X]) {
+                url
+                width
+                height
+            }
+        }
     }
     supBookImprint {
         ...FragmentTermInterface
@@ -462,6 +470,14 @@ fragment FragmentNodeStanfordPersonTeaser on NodeStanfordPerson {
     ...FragmentNodeInterface
     suPersonPhoto {
         ...FragmentMediaImage
+        mediaImage {
+            # Square derivative so person cards don't load the original upload.
+            cardStyle: variations(styles: [LARGE_SQUARE]) {
+                url
+                width
+                height
+            }
+        }
     }
     suPersonFullTitle
     suPersonShortTitle
