@@ -2,6 +2,7 @@ import Link from "@components/elements/link"
 import {H2, H3} from "@components/elements/headers"
 import {HtmlHTMLAttributes} from "react"
 import {NodeSupBook} from "@lib/gql/__generated__/graphql"
+import {getImageStyle} from "@lib/utils/image-style"
 import Image from "@components/images/image"
 import {BookmarkIcon} from "@heroicons/react/24/outline"
 import cn from "@lib/utils/className"
@@ -18,21 +19,26 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 
 const SupBookCard = ({node, headingLevel, darkBg, ...props}: Props) => {
   const Heading = headingLevel === "h3" ? H3 : H2
+  const mediaImage = node.supBookImage?.mediaImage
+  const cardImage = getImageStyle(mediaImage, "cardStyle")
+  const imageUrl = cardImage?.url || mediaImage?.url
 
   return (
     <div {...props} className={cn("mx-auto max-w-3xl", props.className)}>
       <div className="relative">
         <div
-          className={cn("relative rs-mb-1 aspect-2/3 w-full", {
-            "aspect-3/2": node.supBookType === "digital_project",
+          className={cn("relative rs-mb-1 w-full", {
+            "aspect-2/3": !imageUrl,
           })}
         >
           <Image
-            className="ed11y-ignore object-cover"
-            src={node.supBookImage?.mediaImage.url || "/default-book-image.jpg"}
+            className={cn("ed11y-ignore", {"object-cover": !imageUrl})}
+            src={imageUrl || "/default-book-image.jpg"}
             alt=""
-            fill
-            sizes="400px"
+            fill={!imageUrl}
+            width={cardImage?.width || mediaImage?.width}
+            height={cardImage?.height || mediaImage?.height}
+            unoptimized={true}
           />
           {node.supBookAwards && (
             <div className="absolute top-0 left-12.5 flex max-w-[90%] items-center justify-between gap-7.5 bg-fog py-5 pr-12.5 pl-7.5 text-[0.65em]">

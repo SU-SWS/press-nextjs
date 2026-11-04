@@ -6,9 +6,12 @@ import NextImage, {ImageProps} from "next/image"
  * Each distinct source url is a separately billed Vercel image transformation, so `?v=1`, `?v=2`, ... would each be
  * transformed again. `images.remotePatterns` rejects any source with a query string, and stripping it here keeps
  * urls that arrive with one (e.g. Drupal image style `?itok=` tokens) rendering instead of failing.
+ *
+ * Unoptimized images skip the optimizer and load straight from Drupal, so their url is kept intact. Drupal needs the
+ * `itok` token to generate an image style derivative that doesn't exist yet.
  */
 const Image = ({src, alt, ...props}: ImageProps) => (
-  <NextImage alt={alt} {...props} src={typeof src === "string" ? src.split(/[?#]/)[0] : src} />
+  <NextImage alt={alt} {...props} src={typeof src === "string" && !props.unoptimized ? src.split(/[?#]/)[0] : src} />
 )
 
 export default Image

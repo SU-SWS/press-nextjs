@@ -8,6 +8,7 @@ import Image from "@components/images/image"
 import cn from "@lib/utils/className"
 import {ArrowRightIcon} from "@heroicons/react/16/solid"
 import BlurImage from "@components/images/blur-image"
+import {getImageStyle} from "@lib/utils/image-style"
 
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
   paragraph: ParagraphSupCarousel
@@ -64,6 +65,7 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
   const subtitle = slideParagraph.supSlideSubtitle
   const bgImage = slideParagraph.supSlideBgImage.mediaImage
   const image = slideParagraph.supSlideImage?.mediaImage
+  const sideImage = getImageStyle(image, "slideStyle")
   const body = slideParagraph.supSlideBody?.processed
   const color = slideParagraph.supSlideColor
   const leftImage = slideParagraph.supSlideOrientation === "left_image"
@@ -176,7 +178,14 @@ const Slide = ({slideParagraph, isTopHero}: {slideParagraph: ParagraphSupCarouse
         {leftImage && image && (
           <div className="order-first aspect-11/16 h-auto w-full max-w-210 shrink-0 md:w-1/2 md:max-w-340">
             <CarouselImageLink href={slideParagraph.supSlideButton?.url} title={slideParagraph.supSlideButton?.title}>
-              <Image className="object-contain" src={image.url} alt={image.alt || ""} fill sizes="500px" />
+              <Image
+                className="object-contain"
+                src={sideImage?.url || image.url}
+                alt={image.alt || ""}
+                fill
+                sizes="500px"
+                unoptimized={!!sideImage}
+              />
             </CarouselImageLink>
           </div>
         )}
