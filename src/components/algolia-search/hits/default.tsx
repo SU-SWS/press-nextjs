@@ -19,6 +19,10 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
   if (hit.type === "Book") return <SupBookHit hit={hit} />
 
   const hitUrl = new URL(hit.url)
+  const url = hit.url.replace(hitUrl.origin, "")
+
+  const imageUrl =
+    hit.photo?.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string) || "/default-book-image.jpg"
 
   return (
     <article className="@container py-30">
@@ -50,9 +54,9 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
           )}
         </div>
 
-        {hit.photo && (
+        {imageUrl && (
           <div className="relative aspect-2/3 w-[150px] shrink-0">
-            <Image className="object-cover" src={hit.photo} alt="" fill sizes="300px" />
+            <Image className="object-cover" src={imageUrl} alt="" fill sizes="300px" />
           </div>
         )}
       </div>

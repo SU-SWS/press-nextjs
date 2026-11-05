@@ -12,6 +12,7 @@ import {
   useSortBy,
   useInstantSearch,
   InstantSearch,
+  Configure,
 } from "react-instantsearch"
 import {history} from "instantsearch.js/es/lib/routers"
 import type {RouterProps} from "instantsearch.js/es/middlewares"
@@ -39,11 +40,21 @@ type Props = {
   appId: string
   searchIndex: string
   searchApiKey: string
+  /**
+   * Send search analytics and click events to Algolia. Only the production site should, so test traffic stays out of
+   * the reports.
+   */
+  analytics?: boolean
 }
 
 type RouteState = Record<string, string | undefined>
 
 const SORT_STORAGE_KEY = "search-sort"
+
+/**
+ * `book_type` values included by the "Search only books" filter. Digital projects are listed alongside books.
+ */
+const BOOK_TYPES = ["book", "digital_project"]
 
 /**
  * Defer building the Algolia client until the first search. `liteClient()` shuffles its hosts with `Math.random()`,
@@ -78,7 +89,7 @@ const createLazySearchClient = (appId: string, apiKey: string) => {
  * Search runs entirely in the browser. InstantSearch doesn't query Algolia while the server renders, so the page
  * stays static and bots crawling /search don't spend Algolia operations.
  */
-const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
+const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey, analytics}: Props) => {
   // With Cache Components, Next.js keeps a visited route mounted inside a hidden React <Activity> and reveals it on
   // back/forward or a link back to /search. Hiding the route disposes the InstantSearch instance and its router, and
   // restarting that disposed instance leaves the form unable to search. Mount a fresh instance each time the route is
@@ -90,10 +101,18 @@ const AlgoliaSearchForm = ({appId, searchIndex, searchApiKey}: Props) => {
     hasActivatedRef.current = true
   }, [])
 
-  return <AlgoliaInstantSearch key={instanceKey} appId={appId} searchIndex={searchIndex} searchApiKey={searchApiKey} />
+  return (
+    <AlgoliaInstantSearch
+      key={instanceKey}
+      appId={appId}
+      searchIndex={searchIndex}
+      searchApiKey={searchApiKey}
+      analytics={analytics}
+    />
+  )
 }
 
-const AlgoliaInstantSearch = ({appId, searchIndex, searchApiKey}: Props) => {
+const AlgoliaInstantSearch = ({appId, searchIndex, searchApiKey, analytics = false}: Props) => {
   const searchClient = useMemo(() => createLazySearchClient(appId, searchApiKey), [appId, searchApiKey])
 
   // The visitor's last sort choice, saved by HitList. `routeToState` reads it on start and on back/forward, so it goes
@@ -136,7 +155,7 @@ const AlgoliaInstantSearch = ({appId, searchIndex, searchApiKey}: Props) => {
           if (route["published-min"] || route["published-max"])
             range.book_published_year = `${route["published-min"] || ""}:${route["published-max"] || ""}`
 
-          if (route["only-books"] !== "false") refinementList.book_type = ["book"]
+          if (route["only-books"] !== "false") refinementList.book_type = [...BOOK_TYPES]
           if (route.subjects) refinementList.book_subject = route.subjects.split(",")
 
           // A keyword search defaults to relevance. Browsing without one falls back to the visitor's last sort choice.
@@ -158,14 +177,26 @@ const AlgoliaInstantSearch = ({appId, searchIndex, searchApiKey}: Props) => {
   )
 
   return (
-    <InstantSearch indexName={searchIndex} searchClient={searchClient} insights routing={routing}>
+    <InstantSearch indexName={searchIndex} searchClient={searchClient} insights={analytics} routing={routing}>
+      {/* Without this, Algolia still records every query in search analytics even with insights off. */}
+      {!analytics && <Configure analytics={false} />}
       <Form searchIndex={searchIndex} />
     </InstantSearch>
   )
 }
 
 const Form = ({searchIndex}: {searchIndex: string}) => {
-  const {items: bookType, refine: refineBookType} = useRefinementList({attribute: "book_type"})
+  const {items: bookType} = useRefinementList({attribute: "book_type"})
+  const {setIndexUiState} = useInstantSearch()
+  const onlyBooks = bookType.find(item => item.value === "book")?.isRefined || false
+
+  // Set every book type in a single state change so the filter runs one search instead of one per value.
+  const toggleOnlyBooks = () =>
+    setIndexUiState(state => ({
+      ...state,
+      page: undefined,
+      refinementList: {...state.refinementList, book_type: onlyBooks ? [] : [...BOOK_TYPES]},
+    }))
 
   const inputRef = useRef<HTMLInputElement>(null)
   const {query, refine} = useSearchBox({})
@@ -302,12 +333,7 @@ const Form = ({searchIndex}: {searchIndex: string}) => {
                 <span className="text-18">Search only books</span>
 
                 <span className="group relative">
-                  <input
-                    className="peer sr-only"
-                    type="checkbox"
-                    checked={bookType.find(item => item.value === "book")?.isRefined || false}
-                    onChange={() => refineBookType("book")}
-                  />
+                  <input className="peer sr-only" type="checkbox" checked={onlyBooks} onChange={toggleOnlyBooks} />
                   <span className="block h-15 w-40 rounded-full bg-press-sand-light shadow-inner peer-checked:bg-press-bay-light" />
                   <span className="absolute -top-5 -left-2.5 h-25 w-25 rounded-full border border-fog-dark bg-white shadow-sm outline-8 outline-press-bay transition outline-none group-hocus:outline-solid peer-checked:translate-x-full peer-checked:bg-press-grass peer-focus-visible:outline-solid" />
                 </span>

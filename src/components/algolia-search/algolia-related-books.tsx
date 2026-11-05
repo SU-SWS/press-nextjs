@@ -40,6 +40,8 @@ const getRelatedContent = async (objectID: string): Promise<RelatedBookHit[]> =>
             objectID,
             queryParameters: {
               filters: "book_type:book",
+              // Keep preview and local requests out of Algolia's analytics.
+              analytics: process.env.VERCEL_ENV === "production",
               attributesToRetrieve: RELATED_BOOK_ATTRIBUTES,
               attributesToHighlight: [],
               attributesToSnippet: [],
