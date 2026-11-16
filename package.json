@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint ./src ./app && tsc",
     "validate:html": "node scripts/validate-html.mjs",
+    "validate:a11y": "node scripts/validate-a11y.mjs",
     "graphql": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen --config codegen.ts -r dotenv/config",
     "postinstall": "git config --local core.hooksPath .githooks/; exit 0"
   },
@@ -47,6 +48,7 @@
     "usehooks-ts": "^3.1.1"
   },
   "devDependencies": {
+    "@axe-core/webdriverjs": "4.14.0",
     "@graphql-codegen/add": "^6.0.1",
     "@graphql-codegen/cli": "^6.3.1",
     "@graphql-codegen/client-preset": "^5.3.0",
@@ -61,6 +63,7 @@
     "prettier": "^3.9.10",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "react-docgen": "^8.0.4",
+    "selenium-webdriver": "4.52.0",
     "tsconfig-paths-webpack-plugin": "^4.2.0",
     "typescript-eslint": "8.72.1"
   },

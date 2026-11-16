@@ -19,7 +19,6 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
   if (hit.type === "Book") return <SupBookHit hit={hit} />
 
   const hitUrl = new URL(hit.url)
-  const url = hit.url.replace(hitUrl.origin, "")
 
   const imageUrl =
     hit.photo?.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string) || "/default-book-image.jpg"

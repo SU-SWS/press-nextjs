@@ -167,7 +167,14 @@ yarn graphql
 
 # Lint and typescript check
 yarn lint
+
+# Validate prerendered HTML and accessibility (after `yarn build`; a11y needs `yarn start` and Selenium)
+yarn validate:html
+yarn validate:a11y
 ```
+
+`validate:a11y` reads `A11Y_BASE_URL` (default `http://localhost:3000`), `SELENIUM_URL` (default `http://localhost:4444`)
+and `A11Y_REPORT` (default `a11y-report.json`).
 
 ### Adding New Content Types
 
@@ -255,7 +262,7 @@ graphqlClient().request<RouteQuery>(RouteDocument, {path, teaser: false})
 
 ## Testing
 
-**Testing Framework**: None
+**Testing Framework**: No unit tests. CI (`build_lint.yml`) runs `yarn lint`, builds against a real Drupal, then runs `yarn validate:html` and `yarn validate:a11y` (axe-core in Chrome over a Selenium service container) against the prerendered pages.
 
 ## Deployment
 
