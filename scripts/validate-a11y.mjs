@@ -20,8 +20,12 @@ const PAGE_TIMEOUT = 30_000
 // and everything inside them.
 const EXCLUDE_SELECTORS = [".wysiwyg", ".oembed"]
 
-// Routes behind a login. In the browser they redirect to the basic auth prompt, not to the page itself.
-const SKIP_ROUTES = ["/system/cache-clear"]
+// Routes that don't stay on a page of this site: behind a login they redirect to the basic auth prompt, and the email
+// signup page sends the browser to the newsletter provider after a short countdown.
+const SKIP_ROUTES = ["/system/cache-clear", "/email-signup"]
+
+// Only pages on this site are checked. Anything that ends up on another origin, ie a redirect to a third party, is skipped.
+const BASE_ORIGIN = new URL(BASE_URL).origin
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -91,15 +95,31 @@ let driver = await retry("Selenium", buildDriver)
 await driver.manage().setTimeouts({pageLoad: PAGE_TIMEOUT, script: PAGE_TIMEOUT})
 
 const pages = []
+const skippedPages = []
+
+/**
+ * Skip `route` if the browser is no longer on this site, ie a redirect to a third party.
+ */
+const skipIfOffSite = async route => {
+  const currentUrl = await driver.getCurrentUrl()
+  if (new URL(currentUrl).origin === BASE_ORIGIN) return false
+  skippedPages.push({route, redirectedTo: currentUrl})
+  console.log(`- ${route} skipped, it left the site for ${currentUrl}`)
+  return true
+}
+
 for (const route of routes) {
   const url = BASE_URL + route
   try {
     await driver.get(url)
     await driver.wait(() => driver.executeScript("return document.readyState === 'complete'"), PAGE_TIMEOUT)
     await waitForSettledDom(driver)
+    if (await skipIfOffSite(route)) continue
     const axe = new AxeBuilder(driver).withTags(WCAG_TAGS)
     EXCLUDE_SELECTORS.forEach(selector => axe.exclude(selector))
     const {violations} = await axe.analyze()
+    // A delayed redirect can also land while axe is running, leaving results from the other site.
+    if (await skipIfOffSite(route)) continue
     pages.push({route, violations})
     console.log(`${violations.length ? "✖" : "✔"} ${route}${violations.length ? ` (${violations.length} rules)` : ""}`)
   } catch (error) {
@@ -152,7 +172,15 @@ for (const {route, error} of erroredPages) console.log(`Could not check ${route}
 writeFileSync(
   REPORT_PATH,
   JSON.stringify(
-    {baseUrl: BASE_URL, tags: WCAG_TAGS, excluded: EXCLUDE_SELECTORS, checked: pages.length, rules: sortedRules, errors: erroredPages},
+    {
+      baseUrl: BASE_URL,
+      tags: WCAG_TAGS,
+      excluded: EXCLUDE_SELECTORS,
+      checked: pages.length,
+      rules: sortedRules,
+      errors: erroredPages,
+      skipped: skippedPages,
+    },
     null,
     2
   )
@@ -160,7 +188,8 @@ writeFileSync(
 
 console.log(
   `Checked ${pages.length} pages: ${sortedRules.length} rules violated on ${failingPages.length} pages, ` +
-    `${erroredPages.length} pages could not be checked. Report written to ${REPORT_PATH}.`
+    `${erroredPages.length} pages could not be checked, ${skippedPages.length} pages left the site and were skipped. ` +
+    `Report written to ${REPORT_PATH}.`
 )
 
 process.exit(sortedRules.length || erroredPages.length ? 1 : 0)
