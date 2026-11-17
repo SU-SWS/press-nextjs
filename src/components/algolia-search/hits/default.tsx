@@ -20,6 +20,9 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
 
   const hitUrl = new URL(hit.url)
 
+  const imageUrl =
+    hit.photo?.replace(hitUrl.origin, process.env.NEXT_PUBLIC_DRUPAL_BASE_URL as string) || "/default-book-image.jpg"
+
   return (
     <article className="@container py-30">
       <div className="flex flex-col justify-between gap-50 @3xl:flex-row">
@@ -50,9 +53,9 @@ const DefaultHit = ({hit}: {hit: HitType<AlgoliaHit>}) => {
           )}
         </div>
 
-        {hit.photo && (
+        {imageUrl && (
           <div className="relative aspect-2/3 w-[150px] shrink-0">
-            <Image className="object-cover" src={hit.photo} alt="" fill sizes="300px" />
+            <Image className="object-cover" src={imageUrl} alt="" fill sizes="300px" />
           </div>
         )}
       </div>

@@ -22,7 +22,12 @@ const Page = async () => {
         </H1>
         <div>
           {appId && indexName && apiKey && (
-            <AlgoliaSearchForm appId={appId} searchIndex={indexName} searchApiKey={apiKey} />
+            <AlgoliaSearchForm
+              appId={appId}
+              searchIndex={indexName}
+              searchApiKey={apiKey}
+              analytics={process.env.VERCEL_ENV === "production"}
+            />
           )}
         </div>
         <noscript>Please enable javascript to view search results</noscript>
