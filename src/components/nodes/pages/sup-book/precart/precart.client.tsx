@@ -19,6 +19,9 @@ import useCartCount from "@lib/hooks/useCartCount"
 import useUserInteracted from "@lib/hooks/useUserInteracted"
 import {AddToCartResponse} from "@lib/@types/cart-api"
 
+// Allows the cart to be turned off when the vendor's cart service is having issues.
+const cartDisabled = process.env.NEXT_PUBLIC_CART_DISABLED === "true"
+
 type Props = {
   priceId?: PressPrice["id"]
   clothIsbn?: NodeSupBook["supBookIsbn13Cloth"]
@@ -84,6 +87,10 @@ const PreCartClient = ({
 
   const [isIntl, setIntl] = useIsInternational()
 
+  // The international (non-ebook) purchase goes to the MNG-UP partner site, which doesn't use the cart.
+  const usesCart = ebookSelected || !isIntl
+  const cartUnavailable = cartDisabled && usesCart
+
   const onFormatChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEbookSelected(e.target.value.includes("ebook:"))
   }
@@ -95,6 +102,7 @@ const PreCartClient = ({
 
     // Honeypot field.
     if (formData.get("email")) return
+    if (cartUnavailable) return
 
     // The button's state depends on the price data, so make sure it has loaded before adding anything to the cart.
     // A book that is coming soon can't be purchased.
@@ -241,9 +249,10 @@ const PreCartClient = ({
         buttonElem
         type="submit"
         className={cn("group mt-12.5 flex w-full items-center justify-center gap-5 text-white md:text-[0.85em]", {
-          "border-0 bg-black-70 hocus:bg-black-80": priceData?.supComingSoon,
+          "border-0 bg-black-70 hocus:bg-black-80": priceData?.supComingSoon || cartUnavailable,
         })}
-        disabled={!!priceData?.supComingSoon}
+        disabled={!!priceData?.supComingSoon || cartUnavailable}
+        aria-describedby={cartUnavailable ? "cart-unavailable" : undefined}
       >
         {!priceData?.supComingSoon && priceData?.supPreorder && !isIntl && "Preorder"}
         {(ebookSelected || !isIntl) && !priceData?.supComingSoon && !priceData?.supPreorder && "Add to cart"}
@@ -251,10 +260,16 @@ const PreCartClient = ({
         {!ebookSelected && !priceData?.supComingSoon && !priceData?.supPreorder && isIntl && "Purchase from MNG-UP"}
         {priceData?.supComingSoon && "Coming Soon"}
 
-        {!priceData?.supComingSoon && (
+        {!priceData?.supComingSoon && !cartUnavailable && (
           <ArrowRightIcon width={24} className="transition-all group-hocus:translate-x-5" />
         )}
       </Button>
+
+      {cartUnavailable && (
+        <p id="cart-unavailable" className="mt-10 text-[0.8em]">
+          Our shopping cart is temporarily unavailable. Please check back soon.
+        </p>
+      )}
 
       {!isIntl && priceData?.supClothPrice && priceData?.supClothSale && (
         <div className="rs-mt-1 text-18">

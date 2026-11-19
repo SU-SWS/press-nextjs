@@ -13,5 +13,8 @@ export const submitForm = async (formData: FormData) => {
   const ebookFormat = formData.get("ebook") as string
   const altFormat = formData.get("alt-format") as string
 
+  // The cart is turned off, but international orders go to the MNG-UP partner site and can continue.
+  if (process.env.NEXT_PUBLIC_CART_DISABLED === "true" && (format === "ebook" || !isIntl)) return
+
   redirect(getCartUrl(bookTitle, format, isbn, ebookFormat, isIntl, altFormat))
 }
