@@ -4393,9 +4393,9 @@ __metadata:
     react-slick: "npm:0.30.3"
     react-tiny-oembed: "npm:^1.1.0"
     react-toastify: "npm:^11.2.0"
-    selenium-webdriver: "npm:4.52.0"
+    selenium-webdriver: "npm:4.53.0"
     sharp: "npm:^0.35.5"
-    tailwind-merge: "npm:^3.7.0"
+    tailwind-merge: "npm:^3.7.1"
     tailwindcss: "npm:^4.3.5"
     tsconfig-paths-webpack-plugin: "npm:^4.2.0"
     typescript: "npm:^6.0.3"
@@ -7950,15 +7950,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"selenium-webdriver@npm:4.52.0":
-  version: 4.52.0
-  resolution: "selenium-webdriver@npm:4.52.0"
+"selenium-webdriver@npm:4.53.0":
+  version: 4.53.0
+  resolution: "selenium-webdriver@npm:4.53.0"
   dependencies:
     "@bazel/runfiles": "npm:^6.5.0"
     jszip: "npm:^3.10.2"
     tmp: "npm:^0.2.7"
-    ws: "npm:^8.22.0"
-  checksum: 10c0/00aa7dcd1f1f3a696d88691baf388ffb116a6a81cc5bbcb0fbb0bfd0e0859bceaa340408546f88fb510593e223e845f88c8c6de7fe7e457593735d0e2f2b9fd4
+    ws: "npm:^8.23.0"
+  checksum: 10c0/01b0284675c0dc826f7166d3aa39e622316eff1ee51f535ee38df3f579603d96f1caba835550cb93d278ff223743503cdffd3340fc32b09a128c10a5ee750adb
   languageName: node
   linkType: hard
 
@@ -8599,10 +8599,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-merge@npm:^3.7.0":
-  version: 3.7.0
-  resolution: "tailwind-merge@npm:3.7.0"
-  checksum: 10c0/1b1439fe30b6ee63fc3abc1c985bf9beb8529eb2db21cc321bd8c7cf73f36cd4ec80846ea10af8ae09175810f385336c22a6ce355a0b5cce69432d49672f90c1
+"tailwind-merge@npm:^3.7.1":
+  version: 3.7.1
+  resolution: "tailwind-merge@npm:3.7.1"
+  checksum: 10c0/ff35907809ab2712a652fc9a9dfa89a215bb0f7a8065071cffc806076d7a143dc2ed8271be84b98d31004984b5dfdca7ec2276d121085322e55abe68b4e80ac5
   languageName: node
   linkType: hard
 
@@ -9254,7 +9254,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.22.0":
+"ws@npm:^8.23.0":
   version: 8.23.0
   resolution: "ws@npm:8.23.0"
   peerDependencies:
