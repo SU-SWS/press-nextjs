@@ -42,7 +42,7 @@
     "react-tiny-oembed": "^1.1.0",
     "react-toastify": "^11.2.0",
     "sharp": "^0.35.5",
-    "tailwind-merge": "^3.7.0",
+    "tailwind-merge": "^3.7.1",
     "tailwindcss": "^4.3.5",
     "typescript": "^6.0.3",
     "usehooks-ts": "^3.1.1"
@@ -63,7 +63,7 @@
     "prettier": "^3.10.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "react-docgen": "^8.0.4",
-    "selenium-webdriver": "4.52.0",
+    "selenium-webdriver": "4.53.0",
     "tsconfig-paths-webpack-plugin": "^4.2.0",
     "typescript-eslint": "8.73.0"
   },
